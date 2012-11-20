@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<div class="section">
+		<div class="title">Responsibility</div>
+	</div>
+
+
+	<xp:this.data>
+		<xp:dominoDocument var="docResp" formName="fResponsibility" action="editDocument"
+			documentId="#{javascript:viewScope.docId}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:table>
+		<xp:tr>
+			<xp:td><xp:label value="Role" id="label1" for="radioGroup1"></xp:label></xp:td>
+			<xp:td>
+				<xp:radioGroup id="radioGroup1" value="#{docResp.roleId}"
+					defaultValue="#{javascript:viewScope.roleId}">
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwRoles", 2);}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:radioGroup>
+			</xp:td>
+		</xp:tr>
+	
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Title:" id="title_Label1" for="title1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docResp.title}" id="title1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Description:" id="description_Label1" for="description1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docResp.description}" id="description1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		
+	</xp:table>
+	<xp:br></xp:br>
+	<xp:button value="Save" id="button1">
+
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+			refreshId="dynamicContent1">
+			<xp:this.action>
+
+				<xp:actionGroup>
+					<xp:saveDocument var="docResp"></xp:saveDocument>
+
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:docResp.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+docResp.save();
+
+getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	
+	<xc:ccTasks parentUnid="#{javascript:docResp.getDocument().getUniversalID()}"
+		rendered="#{javascript:!docResp.isNewNote()}">
+	</xc:ccTasks>
+
+</xp:view>

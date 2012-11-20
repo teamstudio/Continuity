@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"
+			keysExactMatch="true" keys="#{javascript:sessionScope.roleId}">
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xc:mLayout addBackButton="false">
+
+		<div data-role="header">
+			<a href="mDashboard.xsp" data-icon="grid" data-direction="reverse">Home</a>
+			<h1>
+				<xp:text escape="true">
+					<xp:this.value><![CDATA[#{javascript:sessionScope.get("roleName")}]]></xp:this.value>
+				</xp:text>
+			</h1>
+
+
+		</div>
+
+		<div data-role="content">
+
+			<!-- list of responsibilities -->
+			<xp:repeat id="repeat1" rows="30" value="#{vwResponsibilitiesByRole}" var="rowEntry"
+				disableOutputTag="true">
+
+				<xp:this.facets>
+					<xp:text xp:key="header" disableTheme="true" escape="false">
+						<xp:this.value><![CDATA[<ul data-role="listview" data-inset="true">]]></xp:this.value>
+					</xp:text>
+					<xp:text xp:key="footer" disableTheme="true" escape="false">
+						<xp:this.value><![CDATA[</ul>]]></xp:this.value>
+					</xp:text>
+				</xp:this.facets>
+
+				<li>
+
+					<xp:link escape="false" id="link1" style="white-space: normal;">
+
+						<xp:this.value><![CDATA[#{javascript:"mTasks.xsp?respId=" + rowEntry.getUniversalID()}]]></xp:this.value>
+						<xp:this.text><![CDATA[#{javascript://get number of tasks
+var numTasks = rowEntry.getDocument().getResponses().getCount();
+
+
+rowEntry.getColumnValue("title")
+// +"<span class=\"ui-li-count\">" + numTasks + "</span>"
+}]]></xp:this.text>
+					</xp:link>
+				</li>
+
+			</xp:repeat>
+
+		</div>
+
+	</xc:mLayout>
+
+</xp:view>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="C1257AA000374D6A" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="7aa" sequence="6" unid="6B0CA8289FD941F7C1257AAF003B96AF">
+<created><datetime>20121107T115051,99+01</datetime></created>
+<modified><datetime>20121118T212417,06+01</datetime></modified>
+<revised><datetime>20121118T212417,05+01</datetime></revised>
+<lastaccessed><datetime>20121118T212417,05+01</datetime></lastaccessed>
+<addedtofile><datetime>20121107T115052,03+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$TITLE" sign="true"><text>mobileFunctions.js</text></item>
+<item name="$Flags"><text>h534Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+<item name="$POID"><datetime>20121108T153138,36+01</datetime></item></note>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='C1257AA000374D6A'>
+<noteinfo noteid='206' unid='0B74030C95800BB8C1257AA1004CE86E' sequence='16'>
+<created><datetime dst='true'>20121024T160002,38+02</datetime></created>
+<modified><datetime>20121118T212417,50+01</datetime></modified>
+<revised><datetime>20121118T212417,49+01</datetime></revised>
+<lastaccessed><datetime>20121118T212417,49+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20121024T160002,41+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwResponsibilitiesByRole</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+XAAFACgAJAAEAAYABQAJAAQAcm9sZUlkdGl0bGUkQ29uZmxpY3QkUkVGBAAEAAAAJAAFAAQARm9y
+bQEADwBmUmVzcG9uc2liaWxpdHkACgIDAAcACgAEAAlMMVM=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+HwACAABECGYHAAAGAIBmAAYABQByb2xlSWR0aXRsZQ==
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAIACAAAAFZDAwAGAAYAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMBAAUABQAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAAByb2xlSWRyb2xlSWR0aXRsZXRpdGxlJgABAAAAAQEACQEAAAoBAQ4K
+AAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAA
+AAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIA
+AAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAAB
+AAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

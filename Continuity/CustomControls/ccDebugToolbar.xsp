@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoTheme="true">
+
+	<!--
+		<<
+		XPage Debug Toolbar
+		Copyright 2012 Mark Leusink
+		Licensed under the Apache License, Version 2.0 (the "License"); you may not use this 
+		file except in compliance with the License. You may obtain a copy of the License at
+		
+		http://www.apache.org/licenses/LICENSE-2.0
+		
+		Unless required by applicable law or agreed to in writing, software distributed under
+		the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+		ANY KIND, either express or implied. See the License for the specific language governing
+		permissions and limitations under the License
+		>> 
+	-->
+
+	<xp:this.resources>
+		<xp:script src="/xpDebugToolbar.jss" clientSide="false"></xp:script>
+		<xp:dojoModule name="dijit.form.Textarea"></xp:dojoModule>
+	</xp:this.resources>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if (typeof dBar != "undefined") {
+	dBar.init(compositeData.defaultCollapsed, compositeData.toolbarColor);
+} 
+	}]]></xp:this.beforePageLoad>
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:if( typeof dBar != "undefined" && dBar.getActiveTab().equals("APIInspector") ) {
+	APIInspector.beforeRenderResponse();
+}}]]></xp:this.beforeRenderResponse>
+	
+	<xp:panel rendered="#{dBar.enabled}">
+		<xp:this.loaded><![CDATA[${javascript:typeof dBar != "undefined"}]]></xp:this.loaded>
+
+		<style type="text/css">
+
+			div.debugToolbar { position: absolute; z-index: 10000;
+			color: #ffffff; font-size: 11px; width: 100%; top: 0; left:
+			0; }
+
+			div.debugToolbar a { text-decoration: none; }
+			div.debugToolbar tr { vertical-align: top !important; }
+
+			div.debugToolbar .showToolbar { position: absolute; left: 0;
+			} div.debugToolbar .toolbar { width: 100%; }
+			div.debugToolbar .hideContent { padding-left: 3px; color:
+			#ffffff; } div.debugToolbar .hideContent a { color: #fff;
+			font-weight: bold; line-height: 20px; }
+
+			div.debugToolbar .highlight { background: #FCFFB5;
+			font-style: italic; }
+
+			div.debugToolbar ul.links { display: block; list-style: none
+			outside none; margin: 0; padding: 0; } div.debugToolbar
+			ul.links li { display: inline-block; line-height: 21px;
+			padding: 0; position: relative; vertical-align: top;
+			margin-right: 1px;
+
+			} div.debugToolbar ul.links a { color: #ffffff; font-weight:
+			bold; border-left: 1px solid transparent; border-right: 1px
+			solid transparent; display: block; padding: 0 5px; position:
+			relative; } div.debugToolbar ul.links a:hover,
+			div.debugToolbar ul.links a.selected { background: #B7B7B7;
+			text-decoration: none; }
+
+			div.debugToolbar .contentWrapper { background: #B7B7B7;
+			color: #000000; padding: 5px;
+
+			} div.debugToolbar .contentWrapper td { padding: 2px 2px 2px
+			0; } div.debugToolbar .content { margin: 0; padding: 6px;
+			background: #ffffff; }
+
+			div.debugToolbar table.grid { border-collapse: collapse; }
+			div.debugToolbar table.grid th { background: #eeeeee;
+			padding: 2px; text-align: left !important; font-weight:bold
+			!important; } div.debugToolbar table.grid > tbody > tr > td, div.debugToolbar table.grid > thead > tr > th
+			{ border: 1px solid #CECECE; padding: 2px 4px; }
+
+			div.debugToolbar td.label div.clear {float:right; width:
+			30px;}
+
+			div.debugToolbar table.grid td.small { width: 50px;
+			white-space: nowrap } div.debugToolbar table.grid td.label {
+			background: #eeeeee; font-weight: bold; width: 270px;}
+			div.debugToolbar table.grid td.title { background: #cccccc;
+			font-weight: bold; padding-top: 5px; text-transform:
+			uppercase }
+
+			div.debugToolbar table.messages { border-collapse: collapse; }
+			div.debugToolbar table.messages tr.divider {background:
+			black; } div.debugToolbar table.messages td { padding:2px; }
+			div.debugToolbar table.messages tr.divider td {padding: 0
+			!important; line-height: 2px;} div.debugToolbar
+			table.messages td.time { width: 50px; white-space: nowrap;
+			padding-right: 10px; }
+			
+			div.debugToolbar table.errorDetails td {padding: 1px 3px 1px 0; }
+
+			div.debugToolbar .error { color: red; } div.debugToolbar
+			.warning { color: #D3AC10; } div.debugToolbar .debug {
+			font-style: italic; } div.debugToolbar .odd { background:
+			#eeeeee; } div.debugToolbar table.dumped { margin:0;
+			padding:0; border:0; border-collapse:collapse; }
+			div.debugToolbar table.dumped td { border-top: 1px solid
+			#CECECE; padding:1px 6px 1px 1px; margin:0;}
+			div.debugToolbar table.dumped td.first { border-top: 0;}
+
+			div.debugToolbar img { -khtml-opacity:.40; -moz-opacity:.40;
+			-ms-filter:”alpha(opacity=40)”; filter:alpha(opacity=40);
+			opacity:.40; }
+
+			div.debugToolbar img:hover { -khtml-opacity:.90;
+			-moz-opacity:.90; -ms-filter:”alpha(opacity=90)”;
+			filter:alpha(opacity=90); opacity:.90; }
+
+
+			/** * Style sheet for API Inspector components */
+			.api-inspector { background: #fff; border-bottom: 1px solid
+			#ccc; padding: 5px; }
+
+			.api-inspector table { border: none; border-collapse:
+			collapse; } .api-inspector td { background: #fff;
+			line-height: 1.5em; padding: 10px; }
+
+			.api-inspector .more-info { background: no-repeat 12px 1px;
+			padding-left: 25px; }
+
+			.api-inspector .google { background-image: url(
+			/icons/vwicn008.gif ); }
+
+			.api-inspector .java,.api-inspector .jsf, .api-inspector
+			.ibm { background-image: url( /icons/vwicn011.gif ); }
+
+			.api-inspector ul { margin: 0; padding: 2px; list-style: none;
+			}
+
+			.api-inspector dt { font-weight: bold; } .api-inspector dd {
+			margin-left: 10px; padding: 3px; }
+
+			.api-inspector .xspMessage { cursor: pointer; height: 1em;
+			overflow: hidden; } .api-inspector .xspMessage:active {
+			height: auto; }
+
+		</style>
+
+		<xp:text escape="false" disableTheme="true">
+			<xp:this.value><![CDATA[#{javascript:"<style type=\"text/css\">div.debugToolbar .bg { background: " + dBar.color + ";}</style>"}]]></xp:this.value>
+		</xp:text>
+
+		<xp:div id="debugToolbar" styleClass="debugToolbar">
+
+			<xp:div styleClass="bg" rendered="#{dBar.collapsed}">
+				<xp:this.style><![CDATA[#{javascript:"position: absolute; " +
+(compositeData.collapseTo == "right" ? "right: 0;" : "left: 0;")}]]></xp:this.style>
+				<ul class="links">
+
+					<!-- expand link -->
+					<li>
+						<xp:link escape="false" id="link8"
+							style="font-weight: normal" title="expand the debug toolbar">
+							<xp:this.text><![CDATA[#{javascript:(compositeData.collapseTo == "right" ? "<<" : ">>")}]]></xp:this.text>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								immediate="true" execMode="partial" execId="debugToolbar">
+								<xp:this.action><![CDATA[#{javascript:dBar.setCollapsed(false)}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+				</ul>
+			</xp:div>
+
+			<!-- toolbar -->
+			<xp:div rendered="#{!dBar.collapsed}"
+				styleClass="toolbar bg">
+
+				<div style="float:right">
+					<ul class="links">
+
+						<!-- about the toolbar -->
+						<li>
+							<xp:link escape="false" id="link12"
+								style="font-weight: normal" text="about">
+								<xp:this.styleClass><![CDATA[#{javascript:(dBar.getActiveTab().equals("about") ? "selected" : "")}]]></xp:this.styleClass>
+
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="partial" refreshId="debugToolbar"
+									immediate="true" execMode="partial" execId="debugToolbar">
+									<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("about");}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</li>
+
+						<!-- remove the toolbar -->
+						<li>
+							<xp:link escape="false" id="link23"
+								style="font-weight: normal"
+								title="remove the toolbar for the current session"
+								text="remove">
+
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete" immediate="true"
+									execMode="partial"  execId="debugToolbar">
+									<xp:this.action><![CDATA[#{javascript:dBar.setEnabled(false);}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</li>
+					</ul>
+				</div>
+
+				<!-- toolbar links -->
+				<ul class="links">
+
+					<!-- collapse -->
+					<li>
+						<xp:link escape="false" id="linkCollapse"
+							style="font-weight: normal" title="collapse the debug toolbar">
+							<xp:this.text><![CDATA[#{javascript:(compositeData.collapseTo == "right" ? ">>" : "<<")}]]></xp:this.text>
+
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								immediate="true" execMode="partial" execId="debugToolbar">
+								<xp:this.action><![CDATA[#{javascript:dBar.setCollapsed(true);
+								dBar.setActiveTab("");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+
+					<li>
+						<xp:link escape="false" id="linkTabMessages">
+							<xp:this.styleClass><![CDATA[#{javascript:("messages".equals( dBar.getActiveTab() ) ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:this.text><![CDATA[#{javascript:"messages (" + dBar.getMessages().size() + ")"}]]></xp:this.text>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								execMode="partial" execId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("messages");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="false" id="linkTabTimers">
+							<xp:this.styleClass><![CDATA[#{javascript:("timers".equals( dBar.getActiveTab() ) ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:this.text><![CDATA[#{javascript:"timers (" + dBar.getNumTimers() + ")"}]]></xp:this.text>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								execMode="partial"  execId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("timers");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="true" text="applicationScope"
+							id="link3">
+							<xp:this.styleClass><![CDATA[#{javascript:("applicationScope".equals( dBar.getActiveTab() ) ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" 
+								execMode="partial"  execId="debugToolbar" refreshId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("applicationScope");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="true" text="sessionScope"
+							id="link2">
+							<xp:this.styleClass><![CDATA[#{javascript:("sessionScope".equals( dBar.getActiveTab() ) ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial"  execId="debugToolbar"
+								execMode="partial" refreshId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("sessionScope");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="true" text="viewScope"
+							id="link5">
+							<xp:this.styleClass><![CDATA[#{javascript:("viewScope".equals( dBar.getActiveTab() ) ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial"  execId="debugToolbar"
+								execMode="partial" refreshId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("viewScope");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="true" text="requestScope"
+							id="link6">
+							<xp:this.styleClass><![CDATA[#{javascript:("requestScope".equals( dBar.getActiveTab() ) ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" execId="debugToolbar"
+								execMode="partial" refreshId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("requestScope");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="true" id="link11">
+							<xp:this.styleClass><![CDATA[#{javascript:( dBar.getActiveTab().equals("customVars") ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:this.text><![CDATA[Java & custom variables]]></xp:this.text>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" execId="debugToolbar"
+								execMode="partial" refreshId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("customVars");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+					<li>
+						<xp:link escape="true" text="API Inspector"
+							id="link9">
+							<xp:this.styleClass><![CDATA[#{javascript:( dBar.getActiveTab().equals("APIInspector") ? "selected" : "")}]]></xp:this.styleClass>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" execId="debugToolbar"
+								execMode="partial" refreshId="debugToolbar" immediate="true">
+								<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("APIInspector");
+								}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+				</ul>
+			</xp:div>
+
+			<!--  toolbar contents -->
+			<xp:div styleClass="contentWrapper" id="toolbarContents">
+				<xp:this.rendered><![CDATA[#{javascript:dBar.getActiveTab().length>0 && !dBar.isCollapsed()}]]></xp:this.rendered>
+
+				<!-- messages -->
+				<xp:div styleClass="content">
+					<xp:this.rendered><![CDATA[#{javascript:"messages".equals( dBar.getActiveTab() )}]]></xp:this.rendered>
+
+					<!-- messages actions -->
+					<xp:link escape="true" text="refresh" id="link19">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" execId="debugToolbar"
+							execMode="partial">
+						</xp:eventHandler>
+					</xp:link>
+					&#160;|&#160;
+					<xp:link escape="true" text="add divider"
+						id="link24">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" execId="debugToolbar"
+							execMode="partial">
+							<xp:this.action><![CDATA[#{javascript:dBar.addDivider();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					&#160;|&#160;
+					<xp:link escape="true" text="clear messages"
+						id="link20">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" execId="debugToolbar"
+							execMode="partial">
+							<xp:this.action><![CDATA[#{javascript:dBar.clearMessages();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					&#160;|&#160;
+					<xp:link escape="false" id="link21"
+						text="open in external window">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" execId="debugToolbar"
+							execMode="partial">
+							<xp:this.script><![CDATA[var url = "#{javascript:dBar.getConsolePath()}"; 
+								window.open(url,'logMessages',
+	'width=600,height=500,scrollbars=yes,resizable,toolbar=yes,location=yes,top=20,left=20')]]></xp:this.script>
+							<xp:this.action><![CDATA[#{javascript:dBar.close();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<!-- show all messages -->
+					<xp:repeat id="dtMessages" rows="10000"
+						indexVar="messageIndex" var="message" value="#{dBar.messages}">
+
+						<xp:this.facets>
+							<xp:text xp:key="header" disableTheme="true"
+								escape="false">
+								<xp:this.value><![CDATA[<table class="messages" style="width:100%; margin-top: 5px"><tbody>]]></xp:this.value>
+							</xp:text>
+							<xp:text xp:key="footer" disableTheme="true"
+								escape="false">
+								<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+							</xp:text>
+						</xp:this.facets>
+
+						<xp:tr styleClass="divider">
+							<xp:this.rendered><![CDATA[#{javascript:message.type == "divider"}]]></xp:this.rendered>
+							<xp:td colspan="2">&#160;</xp:td>
+						</xp:tr>
+
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:message.type != "divider"}]]></xp:this.rendered>
+							<xp:this.styleClass><![CDATA[#{javascript:(messageIndex % 2 == 0 ? "even" : "odd")}]]></xp:this.styleClass>
+							<xp:td styleClass="time">
+								<xp:text escape="false"
+									disableTheme="true">
+									<xp:this.converter>
+										<xp:convertDateTime
+											type="time">
+										</xp:convertDateTime>
+									</xp:this.converter>
+									<xp:this.value><![CDATA[#{message.date}]]></xp:this.value>
+								</xp:text>
+							</xp:td>
+
+							<xp:td>
+								<xp:text escape="false"
+									disableTheme="true" styleClass="#{message.styleclass}">
+									<xp:this.value><![CDATA[#{javascript:(message.context != null ? "(" + message.context + ") " : "")}]]></xp:this.value>
+								</xp:text>
+								<xp:text escape="false"
+									disableTheme="true" styleClass="#{message.styleclass}"
+									value="#{message.text}">
+								</xp:text>
+
+								<!-- stacktrace for errors -->
+								<xp:div	rendered="#{javascript:message.hasStackTrace()}" id="stackTrace">
+
+									<xp:link escape="true" text="show stacktrace" id="link27"
+										rendered="#{!message.showStackTrace}">
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="partial" refreshId="stackTrace"
+											execMode="partial" execId="debugToolbar">
+											<xp:this.action><![CDATA[#{javascript:message.setShowStackTrace(true);}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:link>
+									<xp:link escape="true" text="hide stacktrace" id="link29"
+										rendered="#{message.showStackTrace}">
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="partial" refreshId="stackTrace"
+											 execId="debugToolbar" execMode="partial">
+											<xp:this.action><![CDATA[#{javascript:message.setShowStackTrace(false);}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:link>
+									<br />
+
+									<xp:text escape="false"
+										id="computedField5" value="#{message.stackTrace}"
+										rendered="#{message.showStackTrace}" styleClass="#{message.styleclass}">
+										<xp:this.converter>
+											<xp:customConverter
+												getAsObject="#{javascript:value;}">
+												<xp:this.getAsString><![CDATA[#{javascript:@ReplaceSubstring(value, "\n", "<br />")}]]></xp:this.getAsString>
+											</xp:customConverter>
+										</xp:this.converter>
+									</xp:text>
+
+								</xp:div>
+							</xp:td>
+
+						</xp:tr>
+
+					</xp:repeat>
+
+					<xp:text escape="true" disableTheme="true"
+						style="margin-top: 5px;">
+						<xp:this.value><![CDATA[No messages found]]></xp:this.value>
+						<xp:this.rendered><![CDATA[#{javascript:getComponent("dtMessages").getRowCount() ==0}]]></xp:this.rendered>
+					</xp:text>
+
+				</xp:div>
+
+				<!-- timers -->
+				<xp:div styleClass="content">
+					<xp:this.rendered><![CDATA[#{javascript:dBar.getActiveTab().equals("timers")}]]></xp:this.rendered>
+
+					<xp:text escape="true" id="computedField3"
+						rendered="#{javascript:!dBar.hasTimers()}"
+						value="No timers found">
+					</xp:text>
+
+					<xp:div>
+
+						<!-- actions -->
+						<xp:this.rendered><![CDATA[#{javascript:dBar.hasTimers()}]]></xp:this.rendered>
+						<xp:link escape="true" text="clear all timers"
+							id="link15">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								execMode="partial" execId="debugToolbar">
+								<xp:this.action><![CDATA[#{javascript:dBar.clearTimers();}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+						
+						<div style="margin-top:5px;">
+							<xp:text escape="false" disableTheme="true"
+								value="#{dBar.timersDump}">
+							</xp:text>
+						</div>
+
+					</xp:div>
+
+				</xp:div>
+
+				<!-- scope dump -->
+				<xp:div styleClass="content">
+					<xp:this.rendered><![CDATA[#{javascript:@Contains( dBar.getActiveTab(), "Scope") }]]></xp:this.rendered>
+
+					<!--  refresh -->
+					<xp:link escape="true" id="link18" text="refresh">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" immediate="true"
+							execMode="partial">
+							<xp:this.action><![CDATA[#{javascript:dBar.readScopeContents();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<!-- clear scope action -->
+					<xp:span>
+						<xp:this.rendered><![CDATA[#{javascript:(dBar.getActiveTab().equals("applicationScope") || dBar.getActiveTab().equals("sessionScope") ) && dBar.scopeHasValues()}]]></xp:this.rendered>
+
+						&#160;|&#160;
+						<xp:link escape="true" id="link17">
+							<xp:this.text><![CDATA[#{javascript:"clear " + dBar.getActiveTab() }]]></xp:this.text>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								immediate="true" execMode="partial">
+								<xp:this.action><![CDATA[#{javascript:dBar.clearScopeContents( dBar.getActiveTab());}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+						&#160;|&#160;
+						<xp:link escape="true" id="link22"
+							text="clear application- and sessionScope">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								immediate="true" execMode="partial">
+								<xp:this.action><![CDATA[#{javascript:dBar.clearScopeContents("both");}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</xp:span>
+
+					&#160;|&#160;
+
+					<!-- hide lists -->
+					<xp:link escape="true" id="link14" rendered="#{dBar.showLists}" text="hide lists">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" immediate="true"
+							execMode="partial">
+							<xp:this.action><![CDATA[#{javascript:dBar.setShowLists(false);}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<!-- show lists -->
+					<xp:link escape="true" id="link16" rendered="#{!dBar.showLists}" text="show lists">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="debugToolbar" immediate="true"
+							execMode="partial">
+							<xp:this.action><![CDATA[#{javascript:dBar.setShowLists(true);}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<xp:div style="margin-top: 5px;">
+						<xp:this.rendered><![CDATA[#{javascript:!dBar.scopeHasValues()}]]></xp:this.rendered>
+						No values found
+					</xp:div>
+
+					<xp:repeat id="repeat1" rows="10000"
+						var="scopeEntry" style="margin-top: 5px;"
+						value="#{javascript:dBar.getScopeContents()}">
+						<xp:this.rendered><![CDATA[#{javascript:dBar.scopeHasValues()}]]></xp:this.rendered>
+
+
+						<xp:this.facets>
+							<xp:text xp:key="header" escape="false"
+								disableTheme="true">
+								<xp:this.value><![CDATA[<table class="grid"><tbody>]]></xp:this.value>
+							</xp:text>
+							<xp:text xp:key="footer" escape="false"
+								disableTheme="true">
+								<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+							</xp:text>
+						</xp:this.facets>
+
+						<tr>
+							<td class="label">
+
+								<div class="clear">
+
+									<xp:link escape="true" text=""
+										id="link26">
+										<xp:this.title><![CDATA[#{javascript:"Inspect " + scopeEntry + " using API inspector"}]]></xp:this.title>
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="partial" refreshId="debugToolbar"
+											execMode="partial" immediate="true">
+											<xp:this.action><![CDATA[#{javascript:dBar.setActiveTab("APIInspector");
+											viewScope.put("expression", scopeEntry);
+										}]]></xp:this.action>
+										</xp:eventHandler>
+										<xp:image id="image2"
+											disableTheme="true"
+											url="/.ibmxspres/domino/icons/vwicn011.gif"
+											title="#{javascript:this.getAlt()}">
+											<xp:this.alt><![CDATA[#{javascript:"Inspect " + scopeEntry + " using API inspector"}]]></xp:this.alt>
+										</xp:image>
+									</xp:link>
+
+									<xp:link escape="true" text=""
+										id="link25"
+										rendered="#{javascript:!scopeEntry.equals( eu.linqed.debugtoolbar.DebugToolbar.BEAN_NAME )}">
+										<xp:this.title><![CDATA[#{javascript:"Remove variable \"" + scopeEntry + "\" from this scope"}]]></xp:this.title>
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="partial" refreshId="repeat1"
+											execMode="partial" immediate="true">
+											<xp:this.action><![CDATA[#{javascript:dBar.clearScopeEntry(scopeEntry);}]]></xp:this.action>
+										</xp:eventHandler>
+										<xp:image id="image1"
+											disableTheme="true"
+											url="/.ibmxspres/domino/icons/vwicn081.gif"
+											title="#{javascript:this.getAlt()}"
+											style="margin-right:4px;">
+											<xp:this.alt><![CDATA[#{javascript:"Remove " + scopeEntry + " from this scope"}]]></xp:this.alt>
+										</xp:image>
+									</xp:link>
+								</div>
+
+								<xp:text escape="true"
+									disableTheme="true" value="#{javascript:scopeEntry}">
+								</xp:text>
+
+							</td>
+
+							<td>
+								<xp:text escape="false"
+									disableTheme="true">
+									<xp:this.value><![CDATA[#{javascript:dBarHelper.getScopeEntry(scopeEntry)}]]></xp:this.value>
+								</xp:text>
+							</td>
+						</tr>
+
+					</xp:repeat>
+
+				</xp:div>
+
+				<!-- custom variabless -->
+				<xp:div styleClass="content">
+					<xp:this.rendered><![CDATA[#{javascript:dBar.getActiveTab().equals("customVars")}]]></xp:this.rendered>
+
+					<xp:div id="java" style="margin-bottom: 10px">
+						<div
+							style="font-weight:bold; margin-bottom: 3px">
+							Java memory usage
+						</div>
+						<xp:text escape="false" disableTheme="true">
+							<xp:this.value><![CDATA[#{javascript:var rt = java.lang.Runtime.getRuntime();
+var free = rt.freeMemory();
+var total = rt.totalMemory();
+var max = rt.maxMemory();
+var used = total-free;
+
+var barWidth = 600;
+
+totalW = (total/max) * barWidth;
+maxW = barWidth - totalW.toFixed(0);
+usedW = (used/total) * totalW.toFixed(0);
+freeW = totalW - usedW.toFixed(0);
+
+"<div style=\"border: 1px solid silver; padding: 2px; height: 13px; width: " + barWidth + "px; float: left; margin-bottom:5px\">" +
+"<div style=\"height: 12px; width:" + usedW.toFixed(0) + "px; background: #D33939; float: left;\"></div>" +
+"<div style=\"height: 12px; width:" + freeW.toFixed(0) + "px; background: #039B03; float: left;\"></div>" +
+"<div style=\"height: 12px; width:" + maxW.toFixed(0) + "px; background: #FFFF6D; float: left;\"></div>" + 
+"</div><div style=\"margin-left: 5px; float: left;\">(maximum heap size: " + dBar.getReadableSize(max) + ")</div>"
+
+}]]></xp:this.value>
+
+						</xp:text>
+						<br style="clear:both" />
+
+						<div style="float:left; margin-right: 15px">
+
+							<table class="grid"
+								style="margin-bottom: 5px;">
+								<tbody>
+
+									<xp:text escape="false"
+										disableTheme="true">
+										<xp:this.value><![CDATA[#{javascript:var rt = java.lang.Runtime.getRuntime();
+	var free = rt.freeMemory();
+	var total = rt.totalMemory();
+	var max = rt.maxMemory();
+	var used = total-free;
+	
+	"<tr><td class=\"label\" style=\"width: 150px;\"><div style=\"float:right; background: #D33939; width: 14px; height: 9px;\"></div>used</td><td>" + dBar.getReadableSize(used) + "</td></tr>" +
+	"<tr><td class=\"label\" style=\"width: 150px;\"><div style=\"float:right; background: #039B03; width: 14px; height: 9px;\"></div>free</td><td>" + dBar.getReadableSize(free) + "</td></tr>" +
+	"<tr><td class=\"label\" style=\"width: 150px;\"><div style=\"float:right; background: #D33939; width: 7px; height: 9px;\"></div><div style=\"float:right; background: #039B03; width: 7px; height: 9px;\"></div>total allocated</td><td>" + dBar.getReadableSize(total) + "</td></tr>"
+	}]]></xp:this.value>
+									</xp:text>
+								</tbody>
+							</table>
+
+						</div>
+
+						<div style="float: left">
+
+							<xp:link escape="true"
+								text="Run garbage collector" id="link28">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="partial" immediate="true"
+									execMode="partial" refreshId="java">
+									<xp:this.action><![CDATA[#{javascript:java.lang.Runtime.getRuntime().gc();}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</div>
+					</xp:div>
+					<br style="clear:both" />
+
+					<xp:repeat id="repeat2" rows="10000"
+						var="customEntry">
+						<xp:this.value><![CDATA[#{javascript:dBar.getCustomVars()}]]></xp:this.value>
+
+						<xp:this.facets>
+							<xp:text xp:key="header" escape="false"
+								disableTheme="true">
+								<xp:this.value><![CDATA[<table class="grid"><tbody>]]></xp:this.value>
+							</xp:text>
+							<xp:text xp:key="footer" escape="false"
+								disableTheme="true">
+								<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+							</xp:text>
+						</xp:this.facets>
+
+						<!-- section titles -->
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:customEntry.key.equals("title")}]]></xp:this.rendered>
+
+							<td class="title" colspan="2">
+								<xp:text escape="true"
+									disableTheme="true" value="#{javascript:customEntry.value}">
+								</xp:text>
+							</td>
+						</xp:tr>
+
+						<!-- values -->
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:!customEntry.key.equals("title")}]]></xp:this.rendered>
+
+							<td class="label">
+								<xp:text escape="true"
+									disableTheme="true" value="#{javascript:customEntry.key}">
+								</xp:text>
+							</td>
+
+							<td>
+								<xp:text escape="false"
+									disableTheme="true" value="#{javascript:customEntry.value}">
+								</xp:text>
+							</td>
+						</xp:tr>
+					</xp:repeat>
+
+				</xp:div>
+
+				<!--  api inspector -->
+				<xp:div>
+					<xp:this.rendered><![CDATA[#{javascript:dBar.getActiveTab().equals("APIInspector")}]]></xp:this.rendered>
+
+					<!--
+						<< Copyright 2011 Tommy Valand Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+						file except in compliance with the License. You may obtain a copy of the License at
+						http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software
+						distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+						express or implied. See the License for the specific language governing permissions and limitations under the License
+						>>
+					-->
+					<xp:div id="xpageApiInspector"
+						styleClass="api-inspector">
+						<table>
+							<tr>
+								<td>
+									<div>
+										<strong>Inspect XPage</strong>
+									</div>
+									<xp:comboBox id="externalPage"
+										value="">
+										<xp:selectItem itemValue=""
+											itemLabel="Only API Inspector" />
+										<xp:selectItems>
+											<xp:this.value><![CDATA[#{javascript:return APIInspector.getXPageNames();}]]></xp:this.value>
+										</xp:selectItems>
+										<xp:eventHandler
+											event="onchange" submit="true" refreshMode="partial"
+											refreshId="xpageApiInspector" disableValidators="true"
+											execMode="partial">
+											<xp:this.script><![CDATA[var xpageName = thisEvent.target.value;
+				var inspectorPageName = '#{javascript:view.getPageName();}'.substring(1);
+				var currentPath = document.location.pathname;
+				if( currentPath.indexOf( inspectorPageName ) === -1 ){
+					document.location.href = currentPath + inspectorPageName + '?external_page=' + xpageName;
+				} else {
+					document.location.search = '?external_page=' + xpageName;
+				}
+				]]></xp:this.script>
+										</xp:eventHandler>
+									</xp:comboBox>
+								</td>
+								<td>
+									<div>
+										<strong>Component IDs</strong>
+									</div>
+									<xp:comboBox id="componentId"
+										value="#{viewScope.componentId}">
+										<xp:selectItem itemValue=""
+											itemLabel="" />
+										<xp:selectItems>
+											<xp:this.value><![CDATA[#{javascript:return APIInspector.getComponentIds();}]]></xp:this.value>
+										</xp:selectItems>
+										<xp:eventHandler
+											event="onchange" submit="true" refreshMode="partial"
+											refreshId="xpageApiInspector" disableValidators="true"
+											execMode="partial">
+											<xp:this.action><![CDATA[#{javascript:var componentId = this.getParent().value;
+				if( componentId ){
+					viewScope.put( 'expression', 'getComponent( \'' + componentId + '\' )' );
+				} else {
+					viewScope.remove( 'expression' );
+				}}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:comboBox>
+									<xp:checkBox
+										value="#{viewScope.showHiddenComponents}"
+										id="chkShowHiddenComponents" text="Show hidden components"
+										checkedValue="show" uncheckedValue="hide">
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="partial" refreshId="componentId"
+											disableValidators="true" execMode="partial">
+										</xp:eventHandler>
+									</xp:checkBox>
+								</td>
+								<td>
+									<div>
+										<strong>
+											Previous expressions
+										</strong>
+									</div>
+									<xp:comboBox
+										id="previousExpressions"
+										value="#{viewScope.previousExpressions}">
+										<xp:selectItem itemValue=""
+											itemLabel="" />
+										<xp:selectItems
+											value="#{sessionScope.previousExpressions}" />
+										<xp:eventHandler
+											event="onchange" submit="true" refreshMode="partial"
+											refreshId="xpageApiInspector" disableValidators="true"
+											execMode="partial">
+											<xp:this.action><![CDATA[#{javascript:APIInspector.storePreviousExpression();
+				viewScope.put( 'expression', viewScope.previousExpressions );
+				viewScope.put( 'componentId', '' );}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:comboBox>
+								</td>
+							</tr>
+						</table>
+						<div>
+							<xp:text disableTheme="true"
+								escape="false">
+								<xp:this.value><![CDATA[<strong>Press <em>Shift + Enter</em> to execute/inspect expression</strong>]]></xp:this.value>
+							</xp:text><br />
+
+							<xp:inputTextarea id="expression"
+								value="#{viewScope.expression}" style="width:550px;" dojoType='dijit.form.Textarea'>
+								<xp:eventHandler event="onkeypress"
+									submit="true" refreshMode="partial"
+									refreshId="xpageApiInspector" disableValidators="true"
+									execMode="partial" execId="debugToolbar">
+									<xp:this.script><![CDATA[// Do a partial refresh on Shift+Enter
+								if( thisEvent.shiftKey && thisEvent.keyCode === 13 ){
+					dojo.stopEvent( thisEvent );
+				} else {		
+					return false;
+				}
+				]]></xp:this.script>
+								</xp:eventHandler>
+
+							</xp:inputTextarea>
+						</div>
+						<div>
+							<xp:text style="color:red"
+								value="Invalid expression">
+								<xp:this.rendered><![CDATA[#{javascript:return ( viewScope.expressionInfo === '' && !facesContext.getMessages( 'inspectorMessages' ).hasNext() );}]]></xp:this.rendered>
+							</xp:text>
+						</div>
+						<div>
+							<xp:text style="color:red"
+								value="#{javascript:'Exception:' + viewScope.exception}"
+								rendered="#{javascript:viewScope.exception}" />
+						</div>
+						<xp:panel
+							rendered="#{javascript:viewScope.expressionInfo}">
+							<!-- Class name -->
+							<xp:text id="className" disableTheme="true"
+								escape="false">
+								<xp:this.value><![CDATA[#{javascript:return APIInspector.makeMainClassLinks();}]]></xp:this.value>
+							</xp:text>
+							<xp:br />
+							<!-- Object value (toString) -->
+							<xp:text id="expressionValue"
+								disableTheme="true" escape="false">
+								<xp:this.value><![CDATA[#{javascript:var expressionInfo = viewScope.expressionInfo;
+				if( !expressionInfo || !expressionInfo.value ){ return; }
+				'<h3>toString: ' + expressionInfo.value + '</h3>';}]]></xp:this.value>
+							</xp:text>
+
+							<!-- Methods -->
+							<xp:br />
+							<xp:section id="methods"
+								header="#{javascript: 'Methods (' + expressionInfo.methods.length + ')'}"
+								initClosed="true">
+								<xp:this.rendered><![CDATA[#{javascript:var expressionInfo = viewScope.expressionInfo;
+				return ( expressionInfo && expressionInfo.methods && expressionInfo.methods.length > 0 );}]]></xp:this.rendered>
+								<ul>
+									<xp:repeat id="methodsRepeat"
+										rows="100" value="#{viewScope.expressionInfo.methods}"
+										var="method">
+										<li>
+											<dl>
+												<dt>
+													<xp:text
+														disableTheme="true"
+														value="#{javascript:method.command + method.commandThrows}" />
+												</dt>
+
+
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true">
+														<xp:this.value><![CDATA[#{javascript:return APIInspector.makeReturnTypeLinks( method.returnClass );}]]></xp:this.value>
+													</xp:text>
+												</dd>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true">
+														<xp:this.value><![CDATA[#{javascript:return APIInspector.makeInheritedLinks( method.commandClass );}]]></xp:this.value>
+													</xp:text>
+												</dd>
+											</dl>
+										</li>
+									</xp:repeat>
+								</ul>
+							</xp:section>
+							<!-- Declared Methods -->
+							<xp:br />
+							<xp:section id="declaredMethods"
+								initClosed="true"
+								header="#{javascript: 'Declared Methods (' + expressionInfo.declaredMethods.length + ')'}">
+								<xp:this.rendered><![CDATA[#{javascript:var expressionInfo = viewScope.expressionInfo;
+				return ( expressionInfo && expressionInfo.declaredMethods && expressionInfo.declaredMethods.length > 0 );}]]></xp:this.rendered>
+								<ul>
+									<xp:repeat
+										id="declaredMethodsRepeat" rows="100"
+										value="#{viewScope.expressionInfo.declaredMethods}"
+										var="declaredMethod">
+										<li>
+											<dl>
+												<dt>
+													<xp:text
+														disableTheme="true" value="#{declaredMethod.command}" />
+												</dt>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true"
+														value="#{javascript:return APIInspector.makeReturnTypeLinks( declaredMethod.returnClass );}">
+													</xp:text>
+												</dd>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true"
+														value="#{javascript:return APIInspector.makeInheritedLinks( declaredMethod.commandClass );}">
+													</xp:text>
+												</dd>
+											</dl>
+										</li>
+									</xp:repeat>
+								</ul>
+							</xp:section>
+							<!-- Fields -->
+							<xp:br />
+							<xp:section id="fields"
+								header="#{javascript: 'Fields (' + expressionInfo.fields.length + ')'}"
+								initClosed="true">
+								<xp:this.rendered><![CDATA[#{javascript:var expressionInfo = viewScope.expressionInfo;
+				return ( expressionInfo && expressionInfo.fields && expressionInfo.fields.length > 0 );}]]></xp:this.rendered>
+								<ul>
+									<xp:repeat id="fieldsRepeat"
+										rows="100" value="#{viewScope.expressionInfo.fields}"
+										var="field">
+										<li>
+											<dl>
+												<dt>
+													<xp:text
+														disableTheme="true" value="#{field.command}" />
+												</dt>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true"
+														value="#{javascript:return APIInspector.makeReturnTypeLinks( field.returnClass );" />
+												</dd>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true"
+														value="#{javascript:return APIInspector.makeInheritedLinks( field.commandClass );}" />
+												</dd>
+											</dl>
+										</li>
+									</xp:repeat>
+								</ul>
+							</xp:section>
+							<!-- Declared Fields -->
+							<xp:br />
+							<xp:section id="declaredFields"
+								header="#{javascript: 'Declared Fields (' + expressionInfo.declaredFields.length + ')'}"
+								initClosed="true">
+								<xp:this.rendered><![CDATA[#{javascript:var expressionInfo = viewScope.expressionInfo;
+				return ( expressionInfo && expressionInfo.declaredFields && expressionInfo.declaredFields.length > 0 );}]]></xp:this.rendered>
+								<ul>
+									<xp:repeat id="declaredFieldsRepeat"
+										rows="100" value="#{viewScope.expressionInfo.declaredFields}"
+										var="declaredField">
+										<li>
+											<dl>
+												<dt>
+													<xp:text
+														disableTheme="true" value="#{declaredField.command}" />
+												</dt>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true"
+														value="#{javascript:return APIInspector.makeReturnTypeLinks( declaredField.returnClass );" />
+												</dd>
+												<dd>
+													<xp:text
+														escape="false" disableTheme="true"
+														value="#{javascript:return APIInspector.makeInheritedLinks( declaredField.commandClass );}" />
+												</dd>
+											</dl>
+										</li>
+									</xp:repeat>
+								</ul>
+							</xp:section>
+						</xp:panel>
+						<pre>
+							<xp:messages id="inspectorMessages"
+								title="Press left mouse button to show entire message" />
+						</pre>
+					</xp:div>
+					<xp:include id="includeExternalPage"
+						pageName="${param.external_page}"
+						loaded="${!empty(param.external_page)}" />
+				</xp:div>
+
+				<!-- about -->
+				<xp:div>
+					<xp:this.rendered><![CDATA[#{javascript:dBar.getActiveTab().equals("about")}]]></xp:this.rendered>
+
+					<xp:div styleClass="content">
+
+						The XPage Debug Toolbar is created and maintained by Mark Leusink (
+						<a target="_blank" href="http://linqed.eu">
+							blog
+						</a>
+						&#160;|&#160;
+						<a target="_blank"
+							href="http://nl.linkedin.com/in/mleusink">
+							linkedIn
+						</a>
+						&#160;|&#160;
+						<a target="_blank"
+							href="http://www.twitter.com/markleusink">
+							twitter
+						</a>
+						).
+
+						<div
+							style="margin-top: 10px; padding: 5px; font-weight:bold; width: 450px; background: #f8fc92;">
+							Looking for an expert in IBM XPages or Domino development? Or need assistance in using this or any of my other open source
+							projects?&#160;
+							<a href="mailto:m.leusink@linqed.eu">
+								Contact me
+							</a>
+							!
+						</div>
+						
+						<p style="margin-top: 10px;">Version:&#160;2.0</p>
+
+						<p style="margin-top: 10px;">
+							The following component is embedded in this component:
+						</p>
+						<p style="margin-top: 10px;">
+							<xp:link escape="true" text="API Inspector"
+								id="link13" target="_blank">
+								<xp:this.value><![CDATA[#{javascript:"http://www.openntf.org/internal/home.nsf/project.xsp?action=openDocument&name=XPages%20API%20Inspector"}]]></xp:this.value>
+							</xp:link>
+							&#160;(version 5)
+							<br />
+							Developed by Tommy Valand
+						</p>
+					</xp:div>
+
+				</xp:div>
+			</xp:div>
+
+			<!-- close contents -->
+			<xp:div styleClass="hideContent bg">
+				<xp:this.rendered><![CDATA[#{javascript:dBar.getActiveTab().length>0 && !dBar.isCollapsed()}]]></xp:this.rendered>
+				<ul class="links">
+					<li>
+						<xp:link escape="true" text="close"
+							id="link4">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="debugToolbar"
+								immediate="true" execMode="partial">
+								<xp:this.action><![CDATA[#{javascript:dBar.close();}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</li>
+				</ul>
+			</xp:div>
+		</xp:div>
+
+	</xp:panel>
+
+	<!-- missing required managed bean message -->
+	<xp:div
+		style="position: absolute; z-index: 10000; color: #ffffff; background: #000000; font-size: 11px; width: 100%; top: 0; left:0; padding: 5px;">
+		<xp:this.loaded><![CDATA[${javascript:typeof dBar == "undefined"}]]></xp:this.loaded>
+		
+		<xp:text escape="false" disableTheme="true" id="computedField1">
+			<xp:this.value><![CDATA[#{javascript:"The <b>XPage Debug Toolbar</b> requires a managed bean to function. Add the following definition to the <b>faces-config.xml</b> file (in the WebContent/WEB-INF/) folder in this database:<br /><br />" +
+"&lt;managed-bean id=\"dBar\"&gt;<br />" +
+"&nbsp;&lt;managed-bean-name&gt;dBar&lt;/managed-bean-name&gt;<br />" +
+"&nbsp;&lt;managed-bean-class&gt;eu.linqed.debugtoolbar.DebugToolbar&lt;/managed-bean-class&gt;<br />" +
+"&nbsp;&lt;managed-bean-scope&gt;session&lt;/managed-bean-scope&gt;<br />" +
+"&lt;/managed-bean&gt;<br />"}]]></xp:this.value>
+		</xp:text>
+
+	</xp:div>
+
+</xp:view>

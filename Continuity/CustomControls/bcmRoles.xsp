@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<div class="section">
+		<div class="title">Roles and responsibilities</div>
+		<div class="actions"><xp:button value="Add role" id="button1">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+				<xp:this.action><![CDATA[#{javascript:viewScope.remove("docId");
+	getComponent("dynamicContent1").show("bcmRole");}]]></xp:this.action>
+			</xp:eventHandler></xp:button></div>
+	</div>
+
+<xp:panel>
+			<xp:this.data>
+				<xp:dominoView var="vwRoles" viewName="vwRoles"></xp:dominoView>
+			</xp:this.data>
+
+			<xp:repeat id="repeat1" rows="30" value="#{vwRoles}" var="roleRow">
+
+				
+						<xp:link escape="true" text="#{roleRow.name}" id="link1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:viewScope.put("docId", roleRow.getUniversalID());
+						getComponent("dynamicContent1").show("bcmRole")}]]></xp:this.action>
+					</xp:eventHandler></xp:link>
+				
+				<br />
+				
+				<ul>
+				
+				<xp:repeat id="repeat2" rows="30" var="roleResp">
+					<xp:this.value><![CDATA[#{javascript:database.getView("vwResponsibilitiesByRole").getAllEntriesByKey(roleRow.getColumnValue("id"), true);}]]></xp:this.value>
+
+					<li>
+					<xp:link escape="true" text="#{javascript:roleResp.getColumnValues().get(1);}" id="link3">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:viewScope.put("docId", roleResp.getUniversalID());
+						getComponent("dynamicContent1").show("responsibility")}]]></xp:this.action>
+					</xp:eventHandler></xp:link>
+					
+					<xp:text escape="true" id="computedField1">
+						<xp:this.value><![CDATA[#{javascript:" (tasks: " + roleResp.getDocument().getResponses().getCount()  + ")"}]]></xp:this.value>
+					</xp:text>
+
+					</li>
+
+				</xp:repeat>
+				
+
+					<li style="margin-top: 10px">
+					<xp:link escape="true" text="Add responsibility" id="link2">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+							refreshId="dynamicContent1">
+							<xp:this.action><![CDATA[#{javascript:viewScope.remove("docId");
+							viewScope.put("roleId", roleRow.getColumnValue("id")); 
+getComponent("dynamicContent1").show("responsibility");}]]></xp:this.action>
+						</xp:eventHandler></xp:link>
+					</li>
+				
+				</ul>
+
+
+
+
+			</xp:repeat>
+
+		</xp:panel>
+		
+
+	
+</xp:view>

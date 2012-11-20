@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="C1257AA000374D6A" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="246" sequence="68" unid="27CC023FB3AD7F4DC1257AA2006B7B9F">
+<created><datetime dst="true">20121025T213359,99+02</datetime></created>
+<modified><datetime>20121118T212415,64+01</datetime></modified>
+<revised><datetime>20121118T212415,63+01</datetime></revised>
+<lastaccessed><datetime>20121118T212415,63+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20121025T213400,00+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE"><text>bcmRoles.xsp</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>bcmRoles.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+</note>

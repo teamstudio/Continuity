@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="C1257AA000374D6A" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="762" sequence="44" unid="0462495E7A38CEABC1257AA9003C42AB">
+<created><datetime>20121101T115812,27+01</datetime></created>
+<modified><datetime>20121118T212416,85+01</datetime></modified>
+<revised><datetime>20121118T212416,84+01</datetime></revised>
+<lastaccessed><datetime>20121118T212416,84+01</datetime></lastaccessed>
+<addedtofile><datetime>20121101T115812,27+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE"><text>mCommsGuide.xsp</text></item>
+
+
+
+<item name="$FileNames" sign="true"><text>mCommsGuide.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+</note>

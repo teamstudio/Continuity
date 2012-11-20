@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits"></xp:dominoView>
+	</xp:this.data>
+
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE">
+					<xp:this.fullName><![CDATA[[bcEditor]]]></xp:this.fullName>
+					<xp:this.name><![CDATA[[bcEditor]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+	<xc:mLayout addBackButton="false">
+
+		<div data-role="header">
+			<h1>Organisation Unit</h1>
+		</div>
+
+		<div data-role="content">
+
+
+			<!-- list of org units -->
+			<xp:repeat id="repeat1" rows="30" value="#{vwOrgUnits}" var="rowEntry"
+				disableOutputTag="true">
+
+				<xp:this.facets>
+					<xp:text xp:key="header" disableTheme="true" escape="false">
+						<xp:this.value><![CDATA[<ul data-role="listview">]]></xp:this.value>
+					</xp:text>
+					<xp:text xp:key="footer" disableTheme="true" escape="false">
+						<xp:this.value><![CDATA[</ul>]]></xp:this.value>
+					</xp:text>
+				</xp:this.facets>
+
+				<xp:text escape="false">
+					<li>
+						<xp:link text="#{rowEntry.name}">
+							<xp:this.value><![CDATA[#{javascript:"mDashboard.xsp?orgUnitId=" + rowEntry.getColumnValue("id")}]]></xp:this.value>
+						</xp:link>
+
+					</li>
+				</xp:text>
+
+			</xp:repeat>
+
+		</div>
+
+
+	</xc:mLayout>
+
+
+</xp:view>

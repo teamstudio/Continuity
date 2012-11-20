@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='C1257AA000374D6A'>
+<noteinfo noteid='182' unid='26B8C12B98504995C1257AA0003E0852' sequence='10'>
+<created><datetime dst='true'>20121023T131733,62+02</datetime></created>
+<modified><datetime>20121118T212417,30+01</datetime></modified>
+<revised><datetime>20121118T212417,29+01</datetime></revised>
+<lastaccessed><datetime>20121118T212417,29+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20121023T131731,80+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><text>Shared fields</text></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text>CUAx3</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Shared fields</text></item>
+<item name='createdBy' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='createdDate' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='createdByName' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='modifiedByName' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='modifiedDate' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='modifiedBy' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>modifiedBy</text><text>modifiedDate</text><text
+>modifiedByName</text><text>createdByName</text><text>createdDate</text><text
+>createdBy</text></textlist></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAmBAoMEAQCF/xMA
+AQAACWNyZWF0ZWRCeToJAN0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8uAIoAAAUAMAIA
+AAAAAAACAQAACQAAAAAAAAAACQAAAAAAY3JlYXRlZEJ5AGIOAQCEAAAAAAAAAAAA3gYAAIr/hf8I
+AAEAAAmBAoMEAQCF/xcAAQAACWNyZWF0ZWRCeU5hbWU6CQDdBgAAiv/+/1AAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAIr/MgCKAAAFADACAAAAAAAAAgEAAAkAAAAAAAAAAA0AAAAAAGNyZWF0ZWRCeU5hbWUA
+Yg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACYECgwQBAIX/FQABAAAJY3JlYXRlZERhdGU6CQDd
+BgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/MACKAAAFADACAAAAAAAAAgEAAAkAAAAAAAAA
+AAsAAAAAAGNyZWF0ZWREYXRlAGIOAQCEAAAAAAAAAAAA3gYAAIr/hf8IAAEAAAmBAoMEAQCF/wgA
+AQAACYECgwQBAIX/FAABAAAJbW9kaWZpZWRCeToJ3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AACK/y4AigAABQAwAgAAAAAAAAIBAAAJAAAAAAAAAAAKAAAAAABtb2RpZmllZEJ5Yg4BAIQAAAAA
+AAAAAADeBgAAiv+F/wgAAQAACYECgwQBAIX/GAABAAAJbW9kaWZpZWRCeU5hbWU6Cd0GAACK//7/
+UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8yAIoAAAUAMAIAAAAAAAACAQAACQAAAAAAAAAADgAAAAAA
+bW9kaWZpZWRCeU5hbWViDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAJgQKDBAEAhf8WAAEAAAlt
+b2RpZmllZERhdGU6Cd0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8wAIoAAAUAMAIAAAAA
+AAACAQAACQAAAAAAAAAADAAAAAAAbW9kaWZpZWREYXRlYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgA
+AQAACQ==
+</rawitemdata></item></note>
+

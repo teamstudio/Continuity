@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<div class="section">
+		<div class="title">Scenario</div>
+	</div>
+	
+	<xp:this.data>
+		<xp:dominoDocument var="docScenario" formName="fScenario"
+			documentId="#{javascript:viewScope.docId}">
+			<xp:this.querySaveDocument><![CDATA[#{javascript:try {
+	//store name of selected org unit
+	var orgUnitId = docScenario.getItemValueString("orgUnitId");
+	
+	var orgUnitName = @DbLookup( @DbName(), "vwAllById", orgUnitId, "name");
+	
+	docScenario.replaceItemValue("orgUnitName", orgUnitName);
+	
+	if ( docScenario.isNewNote() || !docScenario.hasItem("id") ) {
+	
+		//create id for this scenario
+		docScenario.replaceItemValue("id", "s" + docScenario.getDocument().getUniversalID() );
+	}	
+
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.querySaveDocument>
+			<xp:this.action><![CDATA[#{javascript:return (viewScope.containsKey("docId") ? "openDocument" : "editDocument")}]]></xp:this.action>
+			<xp:this.postSaveDocument><![CDATA[#{javascript:try {
+	//save contents of rich text field as string
+	var d = docScenario.getDocument();
+	var desc = d.getMIMEEntity("description_input");
+	docScenario.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
+	
+	var comGuide = d.getMIMEEntity("commGuidelines_input");
+	docScenario.replaceItemValue("commGuidelines", (comGuide != null ? comGuide.getContentAsText() : "") );
+	
+	docScenario.save();
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.postSaveDocument></xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:table>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Category:" id="category_Label1" for="category1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docScenario.category}" id="category1">
+					</xp:inputText>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Organisation Unit:" id="label1" for="rgOrgUnit"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:radioGroup id="rgOrgUnit" value="#{docScenario.orgUnitId}">
+					<xp:selectItems id="selectItems2">
+						<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:radioGroup>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Name:" id="name_Label1" for="name1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docScenario.name}" id="name1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Description:" id="description_Label1" for="description1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+			
+				<xp:inputRichText id="inputRichText2" value="#{docScenario.description_input}">
+
+				<xp:this.dojoAttributes>
+						<xp:dojoAttribute name="toolbar">
+							<xp:this.value><![CDATA[#{javascript:"[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['NumberedList','BulletedList','Blockquote']]"}]]></xp:this.value>
+						</xp:dojoAttribute>
+					</xp:this.dojoAttributes>
+
+				</xp:inputRichText>
+
+			</xp:td>
+		</xp:tr>
+		
+		<!-- communication guidelines -->
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Communication guidelines:" id="commGuidelines_Label1"
+					for="commGuidelines1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:checkBox text="Use default communication guidelines" id="checkBox1"
+					value="#{docScenario.useDefaultCommGuidelines}" defaultChecked="true" checkedValue="yes"
+					uncheckedValue="no">
+				</xp:checkBox>
+				<xp:inputRichText id="inputRichText1" value="#{docScenario.commGuidelines_input}">
+
+			
+			
+			<xp:this.dojoAttributes>
+							<xp:dojoAttribute name="toolbar">
+								<xp:this.value><![CDATA[#{javascript:"[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['NumberedList','BulletedList','Blockquote']]"}]]></xp:this.value>
+							</xp:dojoAttribute>
+			</xp:this.dojoAttributes>
+				
+		</xp:inputRichText>
+			</xp:td>
+		</xp:tr>
+
+	</xp:table>
+	<xp:br></xp:br>
+	<xp:button value="Edit" id="button1" rendered="#{javascript:!docScenario.isEditable()}"><xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+	<xp:this.action>
+		<xp:changeDocumentMode mode="edit" var="docScenario"></xp:changeDocumentMode>
+	</xp:this.action></xp:eventHandler></xp:button>
+	
+	<xp:button value="Save" id="button2" rendered="#{javascript:docScenario.isEditable()}">
+
+	<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+		refreshId="dynamicContent1">
+		<xp:this.action><![CDATA[#{javascript:docScenario.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+
+docScenario.save();}]]></xp:this.action>
+	</xp:eventHandler></xp:button>
+		
+		<xp:link escape="true" text="Cancel" id="link1">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+		<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenariosList");}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+		
+
+	<xc:ccTasks parentUnid="#{javascript:docScenario.getDocument().getUniversalID()}"
+		rendered="#{javascript:!docScenario.isNewNote()}">
+	</xc:ccTasks>
+
+
+</xp:view>

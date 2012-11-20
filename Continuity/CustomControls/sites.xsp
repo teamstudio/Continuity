@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xp:dominoView var="vwSites" viewName="vwSites"></xp:dominoView>
+	</xp:this.data>
+	
+	<div class="section">
+		<div class="title">Sites</div>
+		<div class="actions">
+			<xp:button value="Add site" id="button2">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="sites">
+					<xp:this.action><![CDATA[#{javascript:viewScope.remove("docId");
+viewScope.put("addSite", true);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</div>
+	</div>
+
+	<xp:panel id="sites" style="margin-bottom:10px">
+
+		<xp:repeat id="repeat1" rows="30" value="#{vwSites}" var="row">
+
+			<xp:this.facets>
+				<xp:text xp:key="header" escape="false" disableTheme="true">
+					<xp:this.value><![CDATA[<table class="lotusTable"><tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text xp:key="footer" escape="false" disableTheme="true">
+					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+
+			<tr>
+				<td>
+
+					<xp:span id="inform">
+						<h4>
+							<xp:link escape="true" text="#{row.name}" id="link3">
+
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+									refreshId="inform">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("inPlaceForm1")
+c.toggle()
+}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</h4>
+
+						<xe:inPlaceForm id="inPlaceForm1" partialEvents="true">
+						<xp:panel>
+								<xp:this.data>
+									<xp:dominoDocument var="docSite" formName="fSite"
+										action="editDocument" documentId="#{javascript:row.getNoteID()}"
+										ignoreRequestParams="true">
+									</xp:dominoDocument>
+								</xp:this.data>
+
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td>
+											<xp:label value="Name:" id="firstName_Label1"
+												for="firstName1">
+											</xp:label>
+										</xp:td>
+										<xp:td>
+											<xp:inputText value="#{docSite.name}" id="firstName1"
+												required="true" disableClientSideValidation="true">
+											</xp:inputText>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td>
+											<xp:label value="Address:" id="label1"
+												for="inputText1">
+											</xp:label>
+										</xp:td>
+										<xp:td>
+											<xp:inputText value="#{docSite.address}" id="inputText1"
+												required="true" disableClientSideValidation="true">
+											</xp:inputText>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td>
+											<xp:label value="Country:" id="label2"
+												for="inputText2">
+											</xp:label>
+										</xp:td>
+										<xp:td>
+											<xp:inputText value="#{docSite.country}" id="inputText2"
+												required="true" disableClientSideValidation="true">
+											</xp:inputText>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+
+								<xp:messages id="messages1"></xp:messages>
+								<xp:button value="Save" id="button5">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="repeat1">
+										<xp:this.action>
+											<xp:actionGroup>
+												<xp:saveDocument></xp:saveDocument>
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript:loadAppConfig(true);
+										var c = getComponent("inPlaceForm1")
+		c.hide()}]]></xp:this.script>
+												</xp:executeScript>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:button>
+								<xp:link escape="true" styleClass="lotusTiny" text="Close"
+									id="link1">
+
+
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="inform" immediate="true">
+										<xp:this.action>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript:getComponent("inPlaceForm1").hide()}]]></xp:this.script>
+											</xp:executeScript>
+
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+
+
+							</xp:panel>
+						</xe:inPlaceForm>
+
+					</xp:span>
+
+				</td>
+				
+				<td>
+					<xp:text escape="true" id="computedField1" value="#{row.address}"></xp:text>
+				</td>
+				
+				<td>
+					<xp:text escape="true" id="computedField2" value="#{row.country}"></xp:text>
+				</td>
+		
+			</tr>
+		</xp:repeat>
+
+
+		<xp:panel id="panel1" rendered="#{javascript:viewScope.addSite==true}">
+
+			<xp:this.data>
+				<xp:dominoDocument var="docSite" formName="fSite" action="editDocument"
+					documentId="#{javascript:viewScope.docId}" ignoreRequestParams="true" scope="request">
+				</xp:dominoDocument>
+			</xp:this.data>
+
+			<xp:table>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Name:" id="name_Label1" for="name1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSite.name}" id="name1"></xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Adress:" id="label3" for="inputText3"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSite.address}" id="inputText3"></xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Country:" id="label4" for="inputText4"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSite.country}" id="inputText4"></xp:inputText>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+			<xp:button value="Save" id="button1">
+
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="sites">
+					<xp:this.action>
+
+						<xp:actionGroup>
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:if (docSite.isNewNote()) {
+	docSite.replaceItemValue("id", "s" + docSite.getDocument().getUniversalID() );
+	docSite.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+}
+
+if ( docSite.save() ) {
+							loadAppConfig(true);
+							viewScope.remove("addSite");
+							}
+										}]]></xp:this.script>
+							</xp:executeScript>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:link escape="true" text="Cancel" id="link2">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="sites">
+					<xp:this.action><![CDATA[#{javascript:viewScope.remove("addSite");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+
+
+		</xp:panel>
+	</xp:panel>
+
+</xp:view>

@@ -1,0 +1,63 @@
+.section {
+	margin: 0 0 15px 0;
+	padding: 14px 3px 2px 3px;
+	background: #F4F5F6;
+	border-bottom: 1px solid #cccccc;
+	position: relative;
+}
+
+.section .title {
+	font-weight: bold;
+	font-size: 14px;
+}
+.section .actions {
+	position: absolute;
+	left: 350px;
+	top: 2px;
+}
+
+.xspPanelViewColumnHeader {
+	padding-left: 0;
+	padding-right: 5px;
+ 	font-weight: bold;
+	font-size: 11px;	
+}
+td {
+	vertical-align: top;
+}
+
+textarea {
+	width: 350px;
+}
+
+
+.xspInputFieldEditBox {
+	width: 300px;
+}
+
+fieldset.xspRadioButton label, fieldset.xspCheckBox label {
+	font-weight: normal;
+}
+fieldset.xspRadioButton td, fieldset.xspCheckBox td {
+	padding:0;
+	border:0;
+}
+
+
+fieldset.xspRadioButton input {
+	margin-top: 0;
+}
+label.xspCheckBox {
+	font-weight: normal !important;
+}
+
+/*mark certain columns not to wrap*/
+td.noWrap {
+	white-space: nowrap;
+}
+
+/*hide view panel column header bar*/
+.xspDataTableViewPanelHeaderStart, .xspDataTableViewPanelHeaderMiddle, .xspDataTableViewPanelHeaderEnd,
+.xspDataTableViewPanelFooterStart, .xspDataTableViewPanelFooterMiddle, .xspDataTableViewPanelFooterEnd {
+display: none;
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var orgUnitId = param.get("orgUnitId");
+
+//allowed only for bc editors
+
+if (orgUnitId != null && orgUnitId.length>0 && sessionScope.isBCEditor) {
+
+	sessionScope.put("orgUnitId", orgUnitId);
+
+}}]]></xp:this.beforePageLoad>
+	<xc:mLayout addBackButton="false">
+
+		<div data-role="header">
+			<h1>
+				<xp:text escape="true">
+					<xp:this.value><![CDATA[#{javascript:sessionScope.name}]]></xp:this.value>
+				</xp:text>
+			</h1>
+		</div>
+
+		<div data-role="content">
+
+			<xc:mOrgUnit>
+				<xc:this.orgUnitId><![CDATA[#{javascript:sessionScope.get("orgUnitId")}]]></xc:this.orgUnitId>
+			</xc:mOrgUnit>
+
+			<!-- standard users -->
+			<xp:div style="margin-top: 20px">
+				<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isBCUser && !sessionScope.isBCEditor}]]></xp:this.rendered>
+				<div>
+					<a href="mContacts.xsp" data-role="button" data-theme="b">Contacts</a>
+				</div>
+
+				<div>
+					<a href="mPlans.xsp" data-role="button" data-theme="b">Plans</a>
+				</div>
+
+			</xp:div>
+
+			<!-- bc users/ editors -->
+			<xp:div style="margin-top: 20px"
+				rendered="#{javascript:sessionScope.isBCUser || sessionScope.isBCEditor}">
+
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<a href="mRole.xsp" data-role="button" style="white-space:normal"
+							data-theme="b">
+							My role
+						</a>
+					</div>
+					<div class="ui-block-b">
+						<a href="mContacts.xsp" data-role="button" data-theme="b">Contacts</a>
+					</div>
+				</fieldset>
+
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<a href="mCallTree.xsp" data-role="button" data-theme="b">Call tree</a>
+					</div>
+					<div class="ui-block-b">
+						<a href="mPlans.xsp" data-role="button" data-theme="b">Plans</a>
+					</div>
+				</fieldset>
+
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<a href="mActivate.xsp" data-role="button" data-theme="b">Activate team</a>
+					</div>
+					<div class="ui-block-b">
+						<a href="mCommsGuide.xsp" data-role="button" data-theme="b">Comm guide</a>
+					</div>
+				</fieldset>
+			</xp:div>
+
+		</div>
+	</xc:mLayout>
+
+</xp:view>

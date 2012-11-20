@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.resources>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init("continuity");}]]></xp:this.beforePageLoad>
+	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right"></xc:ccDebugToolbar>
+
+	<xe:applicationLayout id="applicationLayout1">
+		<xp:callback></xp:callback>
+		<xe:this.facets>
+			<xp:callback facetName="facetLeft" id="facetLeft" xp:key="LeftColumn"></xp:callback>
+		</xe:this.facets>
+		<xe:this.configuration>
+			<xe:oneuiApplication legal="false" footer="false" titleBarName="Continuity">
+				<xe:this.placeBarActions>
+					<xe:pageTreeNode label="Preview mobile" page="/mDashboard.xsp"></xe:pageTreeNode>
+				</xe:this.placeBarActions>
+
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode label="#{sessionScope.name}"></xe:userTreeNode>
+					<xe:separatorTreeNode></xe:separatorTreeNode>
+					<xe:basicLeafNode label="Logout" href="/names.nsf?logout"></xe:basicLeafNode>
+				</xe:this.bannerUtilityLinks>
+
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+	</xe:applicationLayout>
+
+</xp:view>

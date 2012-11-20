@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	
+	<div class="section">
+		<div class="title">Contact</div>
+	</div>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact" action="editDocument"
+			documentId="#{javascript:viewScope.docId}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="First name:" id="firstName_Label1"
+					for="firstName1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.firstName}"
+					id="firstName1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Last name:" id="lastName_Label1"
+					for="lastName1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.lastName}"
+					id="lastName1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="User name:" id="label1"
+					for="inputUserName">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.userName}"
+					id="inputUserName">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Photo:" id="label2"
+					for="photo">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:div>
+				<xp:image id="image1" style="width: 100px; height: 100px;">
+					<xp:this.url><![CDATA[#{javascript:var a = docContact.getAttachmentList("photo");
+
+docContact.getDocument().getUniversalID() + "/$file/" + a.get(0).getName();}]]></xp:this.url>
+					<xp:this.rendered><![CDATA[#{javascript:!docContact.isNewNote() && docContact.getAttachmentList("photo").size()>0}]]></xp:this.rendered>
+				</xp:image>
+				</xp:div>
+			
+				<xp:fileUpload id="photo" value="#{docContact.photo}"
+					rendered="#{javascript:docContact.isEditable()}">
+				</xp:fileUpload>
+				
+			</xp:td>
+		</xp:tr>
+		
+		
+		<xp:tr>
+		<xp:td style="padding-top: 15px">
+		<b>Organisation Unit:</b></xp:td>
+		<xp:td style="padding-top: 15px"><xp:radioGroup id="radioGroup2" value="#{docContact.orgUnitId}">
+		<xp:selectItems id="selectItems2">
+			<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
+		</xp:selectItems>
+	</xp:radioGroup></xp:td></xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Job title:" id="jobTitle_Label1"
+					for="jobTitle1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.jobTitle}"
+					id="jobTitle1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		
+		<xp:tr><xp:td><b>BCM role:</b></xp:td>
+	<xp:td>
+		<xp:radioGroup id="radioGroup1" value="#{docContact.roleId}" defaultValue="none">
+			<xp:selectItem itemLabel="-None-" itemValue="none"></xp:selectItem>
+			<xp:selectItems id="selectItems1">
+				<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwRoles", 2);}]]></xp:this.value>
+			</xp:selectItems>
+
+		</xp:radioGroup>
+
+		<xp:checkBox text="This person is an alternate for this BCM role" id="checkBox1" value="#{docContact.isAlternate}"
+			checkedValue="yes" uncheckedValue="no">
+		</xp:checkBox>
+
+	</xp:td></xp:tr>
+	
+	</xp:table>
+	
+	<!-- contact details -->
+	<div style="background: #F4F5F6;">
+		<div style="padding: 5px; font-weight:bold; font-size: 13px; border-bottom: 1px solid silver">Contact details</div>
+		<div style="padding: 5px;">
+	<xp:table>
+	<xp:tr>
+			<xp:td>
+				<xp:label value="Email:" id="email_Label1"
+					for="email1">
+				</xp:label>
+			</xp:td>
+			<xp:td style="padding-top: 15px">
+				<xp:inputText value="#{docContact.email}" id="email1"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Phone mobile:" id="phoneMobile_Label1"
+					for="phoneMobile1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.phoneMobile}"
+					id="phoneMobile1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Phone home:" id="phoneHome_Label1"
+					for="phoneHome1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.phoneHome}"
+					id="phoneHome1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Phone work:" id="phoneWork_Label1"
+					for="phoneWork1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.phoneWork}"
+					id="phoneWork1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Phone SMS:" id="phoneSMS_Label1"
+					for="phoneSMS1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docContact.phoneSMS}"
+					id="phoneSMS1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		
+	</xp:table>
+	</div>
+	</div>
+	<xp:br></xp:br>
+	
+	<xp:button value="Save" id="button1">
+
+	<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+		<xp:this.action><![CDATA[#{javascript:try {
+	//set authors
+	var authors = [ "[bcEditor]" ];
+	var userName = docContact.getItemValueString("userName");
+	if (userName.length>0) {
+		authors.push(userName); 
+	} 
+	docContact.getDocument().replaceItemValue("docAuthors", authors).setAuthors(true);
+	
+	//store name (lastname + firstname
+	var lastName = docContact.getItemValueString("lastName");
+	var firstName = docContact.getItemValueString("firstName");
+	var name = lastName;
+	if (firstName.length>0) {
+		name += ", " + firstName;
+	}
+	docContact.replaceItemValue("name", name);
+
+	//store roleName
+	var roleId = docContact.getItemValueString("roleId");
+	var roleName = "";
+	if (roleId.length>0) {
+		roleName = applicationScope.get("roles").get(roleId);
+	}
+	docContact.replaceItemValue("roleName", roleName);
+	
+	//store org unit name
+	var orgUnitId = docContact.getItemValueString("orgUnitId");
+	var orgUnitName = "";
+	if (orgUnitId.length>0) {
+		orgUnitName = applicationScope.get("orgUnits").get(orgUnitId).name;
+	}
+	docContact.replaceItemValue("orgUnitName", orgUnitName);
+
+if ( docContact.save() ) {
+	getComponent("dynamicContent1").show("contactsList");
+}
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.action>
+	</xp:eventHandler></xp:button>
+	
+	
+	<xp:link escape="true" text="Cancel" id="link1">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+		<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactsList");}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+	
+</xp:view>

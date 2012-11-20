@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident">
+			<xp:this.postSaveDocument><![CDATA[#{javascript:try {
+	//set this org units alerts level
+	var alertLevel = docIncident.getItemValueString("alertLevel");
+
+	var orgUnits = applicationScope.get("orgUnits")
+	var orgUnitId = sessionScope.get("orgUnitId");
+	var orgUnitUnid = orgUnits.get(orgUnitId).unid;
+	
+	var docOrgUnit = database.getDocumentByUNID(orgUnitUnid);
+	
+	docOrgUnit.replaceItemValue("alertLevel", alertLevel);
+	
+	//store active scenario id
+	docOrgUnit.replaceItemValue("activeScenarioId", docIncident.getItemValueString("scenarioId") );
+	
+	docOrgUnit.save();
+	
+	//update orgunit alertlevel in appscope
+	orgUnits.get(orgUnitId).alertLevel = alertLevel;
+	applicationScope.put("orgUnits", orgUnits);
+
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.postSaveDocument>
+
+			<xp:this.querySaveDocument><![CDATA[#{javascript:try {
+	if (docIncident.isNewNote()) {
+	
+		//store name of person that initiated this activation
+		docIncident.replaceItemValue("initiatedBy", sessionScope.get("userName") );
+		docIncident.replaceItemValue("initiatedByName", sessionScope.get("name") );
+		
+		//store name of scenario
+		var scenarioId:String = docIncident.getItemValueString("scenarioId");
+		var scenarioName:String = "-none-";
+		if ( scenarioId.length>0 ) {
+			
+			scenarioName = @DbLookup( @DbName(), "vwAllById", scenarioId, "name");
+		
+		}
+		docIncident.replaceItemValue("scenarioName", scenarioName);
+		
+	}
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.querySaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry type="ROLE" right="EDITOR">
+					<xp:this.fullName><![CDATA[[bcUser]]]></xp:this.fullName>
+					<xp:this.name><![CDATA[[bcUser]]]></xp:this.name>
+				</xp:aclEntry>
+				<xp:aclEntry type="ROLE" right="EDITOR">
+					<xp:this.fullName><![CDATA[[bcEditor]]]></xp:this.fullName>
+					<xp:this.name><![CDATA[[bcEditor]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries></xp:acl>
+	</xp:this.acl>
+	<xc:mLayout addBackButton="false">
+
+		<div data-role="header">
+			<a href="mDashboard.xsp" data-icon="grid" data-direction="reverse">Home</a>
+			<h1>Activate team</h1>
+		</div>
+
+		<div data-role="content">
+
+			<xc:mOrgUnit>
+				<xc:this.orgUnitId><![CDATA[#{javascript:sessionScope.get("orgUnitId")}]]></xc:this.orgUnitId>
+			</xc:mOrgUnit>
+
+			<div style="margin: 10px 0">
+				Activate the BCM Team. Enter a short description of the current incident below.
+				Linking this incident to an existing plan is optional.
+			</div>
+
+			<strong>Describe incident:</strong>
+			<xp:inputText id="inputText1" value="#{docIncident.description}"></xp:inputText>
+			<br />
+			<strong>Link to plan:</strong>
+			<xp:comboBox id="comboBox1" value="#{docIncident.scenarioId}">
+				<xp:selectItem itemLabel="-none-"></xp:selectItem>
+
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:var vwPlans:NotesView = database.getView("vwScenariosByOrgUnit");
+var vePlans:NotesViewNavigator = vwPlans.createViewNavFromCategory( sessionScope.get("orgUnitId") );
+
+var options:java.util.ArrayList = new java.util.ArrayList();
+var group:javax.faces.model.SelectItemGroup = null;
+var groupItems = new Array();
+
+var ve:NotesViewEntry = vePlans.getFirst();
+
+var veTmp:NotesViewEntry = null;
+
+while (null != ve) {
+
+	var colValues = ve.getColumnValues();
+
+	if (ve.isCategory() ) {
+		//start a new group
+		var cat = colValues.get(1);
+		
+		if (group != null) {
+			group.setSelectItems(groupItems);
+			options.add(group);
+			groupItems = new Array();
+		}
+		
+		group = new javax.faces.model.SelectItemGroup( cat );
+		
+	
+	} else {
+		//add to current group
+		var thisItem = new javax.faces.model.SelectItem(colValues.get(3), colValues.get(2) );
+		
+		groupItems.push( thisItem );
+		
+	}
+
+	veTmp = vePlans.getNext(ve);
+	ve.recycle();
+	ve = veTmp;
+}
+
+//process last group
+if (group != null) {
+	group.setSelectItems(groupItems);
+	options.add(group);
+	groupItems = new Array();
+}
+
+vePlans.recycle();
+vwPlans.recycle();
+
+return options;
+}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>
+			<br />
+
+			<strong>Change alert level:</strong>
+
+			<xp:radioGroup id="radioGroup1" value="#{docIncident.alertLevel}">
+				<xp:this.attrs>
+					<xp:attr name="data-role" value="controlgroup"></xp:attr>
+					<xp:attr name="data-type" value="horizontal"></xp:attr>
+				</xp:this.attrs>
+				<xp:this.defaultValue><![CDATA[#{javascript:var id = sessionScope.get("orgUnitId");
+if (id != null && id.length>0) {
+	applicationScope.get("orgUnits").get(id).alertLevel;
+}}]]></xp:this.defaultValue>
+				<xp:selectItem itemLabel="Normal" itemValue="normal"></xp:selectItem>
+				<xp:selectItem itemLabel="Elevated" itemValue="elevated"></xp:selectItem>
+				<xp:selectItem itemLabel="High" itemValue="high"></xp:selectItem>
+			</xp:radioGroup>
+
+			<xp:button value="Store incident" id="button3">
+				<xp:this.attrs>
+					<xp:attr name="data-theme" value="b">
+
+					</xp:attr>
+				</xp:this.attrs>
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete"
+					immediate="false" save="true">
+					<xp:this.action>
+
+						<xp:actionGroup>
+							<xp:saveDocument var="docIncident"></xp:saveDocument>
+
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+
+
+			<div style="margin-top: 20px">
+
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<xp:button value="Notify team" id="button1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+								<xp:this.action>
+									<xp:openPage name="/mNotify.xsp"></xp:openPage>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</div>
+					<div class="ui-block-b">
+						<xp:button value="Call tree" id="button2">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+								<xp:this.action>
+									<xp:openPage name="/mCallTree.xsp"></xp:openPage>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</div>
+				</fieldset>
+
+			</div>
+
+
+
+
+
+
+		</div>
+
+	</xc:mLayout>
+</xp:view>

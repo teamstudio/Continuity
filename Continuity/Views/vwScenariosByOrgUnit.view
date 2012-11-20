@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='C1257AA000374D6A'>
+<noteinfo noteid='722' unid='5992EC11197F12C4C1257AA600495984' sequence='15'>
+<created><datetime>20121029T142110,44+01</datetime></created>
+<modified><datetime>20121118T212417,56+01</datetime></modified>
+<revised><datetime>20121118T212417,55+01</datetime></revised>
+<lastaccessed><datetime>20121118T212417,55+01</datetime></lastaccessed>
+<addedtofile><datetime>20121029T142110,46+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwScenariosByOrgUnit</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+hAAFADgANAAGAAkACAAEAAIACQAEAG9yZ1VuaXRJZGNhdGVnb3J5bmFtZWlkJENvbmZsaWN0JFJF
+RgQABAAAADQABQAEAEZvcm0BAAkAZlNjZW5hcmlvAAoCBQAJAG9yZ1VuaXRJZAABAAAACwIcAgMA
+BwASAAwACUwxUzRTNVM2UzdT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+MAADAABECGYHAAAJAIhmBwkACACAZgARAAQAb3JnVW5pdElkY2F0ZWdvcnluYW1l
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQAEAAMACAAAAFZDAwAJAAkAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMDAAgACAAAAAAAUAAB
+AAAKAAEAAAAAAAAAAgIAAABWQwEABAAEAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAACAAIA
+AAAAAKYAAQAACgAAAAAAAAAAAAICAAAAb3JnVW5pdElkb3JnVW5pdElkY2F0ZWdvcnljYXRlZ29y
+eW5hbWVuYW1laWRpZCYAAQAAAAEBAAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJ
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAA
+AAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAA
+AAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAA
+AAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAA
+AAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

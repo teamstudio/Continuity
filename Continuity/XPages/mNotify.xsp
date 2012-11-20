@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="view1" viewName="vwContactsByRole">
+			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId")}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xc:mLayout addBackButton="true">
+
+		<div data-role="header">
+			<a href="mDashboard.xsp" data-icon="grid" data-direction="reverse">Home</a>
+			<h1>Send message</h1>
+			<xp:link escape="true" styleClass="ui-btn-right" text="Send" id="link1"
+				value="/mDashboard.xsp">
+			</xp:link>
+		</div>
+
+		<div data-role="content">
+
+			<strong>Message:</strong>
+			<xp:br></xp:br>
+			<xp:inputTextarea id="inputTextarea1"></xp:inputTextarea>
+			<xp:br></xp:br>
+
+			<strong>Contacts:</strong>
+			<xp:br></xp:br>
+
+			<xp:repeat id="repeat2" rows="30" value="#{view1}" var="rowEntry"
+				disableOutputTag="true">
+				<xp:text escape="false" rendered="#{javascript:!rowEntry.isCategory()}">
+
+					<xp:checkBox text="#{rowEntry.name}" id="checkBox1" defaultChecked="true"></xp:checkBox>
+
+				</xp:text>
+
+			</xp:repeat>
+
+
+
+		</div>
+	</xc:mLayout>
+
+</xp:view>
