@@ -1,73 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-	
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
 	<div class="section">
 		<div class="title">Responsibility</div>
 	</div>
 
-
 	<xp:this.data>
-		<xp:dominoDocument var="docResp" formName="fResponsibility" action="editDocument"
+		<xp:dominoDocument var="docResp" formName="fResponsibility" action="openDocument"
 			documentId="#{javascript:viewScope.docId}">
 		</xp:dominoDocument>
 	</xp:this.data>
 
-	<xp:table>
-		<xp:tr>
-			<xp:td><xp:label value="Role" id="label1" for="radioGroup1"></xp:label></xp:td>
-			<xp:td>
-				<xp:radioGroup id="radioGroup1" value="#{docResp.roleId}"
-					defaultValue="#{javascript:viewScope.roleId}">
-					<xp:selectItems>
-						<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwRoles", 2);}]]></xp:this.value>
-					</xp:selectItems>
-				</xp:radioGroup>
-			</xp:td>
-		</xp:tr>
-	
-		<xp:tr>
-			<xp:td>
-				<xp:label value="Title:" id="title_Label1" for="title1"></xp:label>
-			</xp:td>
-			<xp:td>
-				<xp:inputText value="#{docResp.title}" id="title1"></xp:inputText>
-			</xp:td>
-		</xp:tr>
-		<xp:tr>
-			<xp:td>
-				<xp:label value="Description:" id="description_Label1" for="description1">
-				</xp:label>
-			</xp:td>
-			<xp:td>
-				<xp:inputText value="#{docResp.description}" id="description1"></xp:inputText>
-			</xp:td>
-		</xp:tr>
-		
-	</xp:table>
+	<xe:formTable id="formTable1" labelPosition="left" disableRowError="false"
+		disableErrorSummary="true">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+
+				<xp:button value="Edit" id="button3"
+					rendered="#{javascript:!docResp.isEditable()}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit" var="docResp"></xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Save" id="button1"
+					rendered="#{javascript:docResp.isEditable()}">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action>
+
+							<xp:actionGroup>
+								<xp:saveDocument var="docResp"></xp:saveDocument>
+
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:docResp.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+			docResp.save();}]]></xp:this.script>
+								</xp:executeScript>
+
+								<xp:changeDocumentMode mode="readOnly" var="docResp"></xp:changeDocumentMode>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Remove" id="button2"
+					rendered="#{javascript:!docResp.isNewNote()}">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:var dcTasks = docResp.getDocument().getResponses();
+dBar.debug("found " + dcTasks.getCount() + " related tasks");
+
+				if (dcTasks.getCount()>0) {
+				 dcTasks.removeAll(true);
+				 dBar.debug("related tasks removed");
+				}
+
+dBar.debug("remove responsibility");
+docResp.getDocument().remove(true);
+								
+getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Removing this responsibility will also remove all related tasks.\n\nAre you sure?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Cancel" id="link1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow1" for="radioGroup1" label="BC Role:">
+			<xp:radioGroup id="radioGroup1" value="#{docResp.roleId}"
+				defaultValue="#{javascript:viewScope.roleId}">
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwRoles", 2);}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:radioGroup>
+		</xe:formRow>
+
+		<xe:formRow id="formRow2" for="title1" label="Responsibility:">
+			<xp:inputText value="#{docResp.title}" id="title1" required="true">
+				<xp:this.validators>
+					<xp:validateRequired message="Enter a title for this responsibility"></xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow3" for="radioGroup1" label="Description:">
+			<xp:inputText value="#{docResp.description}" id="description1"></xp:inputText>
+		</xe:formRow>
+
+	</xe:formTable>
+
 	<xp:br></xp:br>
-	<xp:button value="Save" id="button1">
 
-		<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-			refreshId="dynamicContent1">
-			<xp:this.action>
 
-				<xp:actionGroup>
-					<xp:saveDocument var="docResp"></xp:saveDocument>
-
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:docResp.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
-docResp.save();
-
-getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.script>
-					</xp:executeScript>
-				</xp:actionGroup>
-			</xp:this.action>
-		</xp:eventHandler>
-	</xp:button>
-	<xp:br></xp:br>
-	
-	<xc:ccTasks parentUnid="#{javascript:docResp.getDocument().getUniversalID()}"
-		rendered="#{javascript:!docResp.isNewNote()}">
-	</xc:ccTasks>
+		<xc:ccTasks parentUnid="#{javascript:docResp.getDocument().getUniversalID()}"
+			rendered="#{javascript:!docResp.isNewNote()}">
+		</xc:ccTasks>
 
 </xp:view>

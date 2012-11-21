@@ -2,16 +2,15 @@
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
  replicaid='C1257AA000374D6A'>
-<noteinfo noteid='6fa' unid='F375BF3E32769255C1257AA500730D39' sequence='17'>
-<created><datetime>20121028T215640,25+01</datetime></created>
-<modified><datetime>20121118T212417,42+01</datetime></modified>
-<revised><datetime>20121118T212417,41+01</datetime></revised>
-<lastaccessed><datetime>20121118T212417,41+01</datetime></lastaccessed>
-<addedtofile><datetime>20121028T215640,26+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<noteinfo noteid='85a' unid='6C0716C6D4BD3752C1257ABD004AE7D4' sequence='6'>
+<created><datetime>20121121T143810,12+01</datetime></created>
+<modified><datetime>20121121T144728,30+01</datetime></modified>
+<revised><datetime>20121121T144728,29+01</datetime></revised>
+<lastaccessed><datetime>20121121T144728,29+01</datetime></lastaccessed>
+<addedtofile><datetime>20121121T143811,22+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwContactsByRole</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 tAACAC4AAgAkNgUACABsYXN0TmFtZQEAAgAsICICBQAJAGZpcnN0TmFtZQAiAgMAAgAOAAMAJDEw
@@ -42,5 +41,6 @@ AAAAAAABAAAAAAAAAAgAAAAAAAEA
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$TITLE' sign='true'><text>vwContactsByRole</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
 

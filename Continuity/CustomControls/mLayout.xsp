@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
-	
-	<xp:this.beforePageLoad><![CDATA[#{javascript:init("jqm");}]]></xp:this.beforePageLoad>
-	
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right"></xc:ccDebugToolbar>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");}]]></xp:this.beforePageLoad>
+
 	<xp:this.resources>
 		<xp:metaData name="viewport" content="width=device-width, initial-scale=1"></xp:metaData>
 		<xp:script src="/base.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
-	
+
 	<xp:div>
 		<xp:this.attrs>
 			<xp:attr name="data-role" value="page"></xp:attr>
@@ -15,7 +17,7 @@
 				rendered="#{javascript:compositeData.addBackButton}">
 			</xp:attr>
 		</xp:this.attrs>
-		
+
 		<xp:callback id="callback1"></xp:callback>
 
 	</xp:div>

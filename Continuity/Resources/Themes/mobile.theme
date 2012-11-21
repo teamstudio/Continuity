@@ -1,8 +1,5 @@
 <theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
 
-
-
-
 	<resource>
 		<content-type>text/css</content-type>
 		<href>jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.css</href>
@@ -20,12 +17,12 @@
 	
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>jquery.mobile-1.2.0/jquery.mobile-1.2.0.js</href>
+		<href>mobileFunctions.js</href>
 	</resource>
 	
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>mobileFunctions.js</href>
+		<href>jquery.mobile-1.2.0/jquery.mobile-1.2.0.js</href>
 	</resource>
 
 	<control override="false">

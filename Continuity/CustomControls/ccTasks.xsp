@@ -86,90 +86,80 @@ database.getView("vwTasksByParent").refresh();
 				<div class="section" style="margin-top: 10px;">
 					<div class="title">Task</div>
 				</div>
-
-
-				<xp:table>
 				
-					<xp:tr>
-						<xp:td>
-							<xp:label value="Title:" id="title_Label1" for="inputTaskTitle"></xp:label>
-						</xp:td>
-						<xp:td>
-							<xp:inputText value="#{docTask.title}" id="inputTaskTitle"></xp:inputText>
-						</xp:td>
-					</xp:tr>
-					
+				<xe:formTable id="formTable1" disableErrorSummary="true">
 
-					<xp:tr>
-						<xp:td>
-							<xp:label value="Priority:" id="label1" for="priority"></xp:label>
-						</xp:td>
-						<xp:td>
-							<xp:radioGroup id="radioGroup2" value="#{docTask.categoryId}">
-								<xp:selectItems id="selectItems2">
-									<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwTaskCategories", 2);}]]></xp:this.value>
-								</xp:selectItems>
-							</xp:radioGroup>
-						</xp:td>
-					</xp:tr>
+					<xp:this.facets>
+						<xp:panel xp:key="footer" id="panel1">
+							<xp:button value="Save task" id="button3">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+									refreshId="dynContTasks">
+									<xp:this.action><![CDATA[#{javascript:docTask.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+									
+									//store categoryName and categoryOrder
+									var catId = docTask.getItemValueString("categoryId");
+									if (catId.length>0) {
+										var docTaskCat = database.getView("vwAllById").getDocumentByKey(catId, true);
+										
+										if (null != docTaskCat) {
+											docTask.replaceItemValue("categoryName", docTaskCat.getItemValueString("name") );
+											docTask.replaceItemValue("categoryOrder", docTaskCat.getItemValueString("order") );
+										}
+										
+									}
+									
+									docTask.getDocument().makeResponse( database.getDocumentByUNID( compositeData.parentUnid) ); 
+										
+									
+			docTask.save();
+			getComponent("dynContTasks").show("tasks")}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
 
-					
-					<xp:tr>
-						<xp:td>
-							<xp:label value="Description:" id="description_Label1"
-								for="description1">
-							</xp:label>
-						</xp:td>
-						<xp:td>
-							<xp:inputText value="#{docTask.description}" id="description1"></xp:inputText>
-						</xp:td>
-					</xp:tr>
-				</xp:table>
+							<xp:link escape="true" text="Cancel" id="link2">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+									refreshId="dynContTasks" immediate="true">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript:getComponent("dynContTasks").show("tasks")}]]></xp:this.script>
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
 
-				<xp:br></xp:br>
-				<xp:button value="Save task" id="button3">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynContTasks">
-						<xp:this.action><![CDATA[#{javascript:docTask.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
-						
-						//store categoryName and categoryOrder
-						var catId = docTask.getItemValueString("categoryId");
-						if (catId.length>0) {
-							var docTaskCat = database.getView("vwAllById").getDocumentByKey(catId, true);
-							
-							if (null != docTaskCat) {
-								docTask.replaceItemValue("categoryName", docTaskCat.getItemValueString("name") );
-								docTask.replaceItemValue("categoryOrder", docTaskCat.getItemValueString("order") );
-							}
-							
-						}
-						
-						docTask.getDocument().makeResponse( database.getDocumentByUNID( compositeData.parentUnid) ); 
-							
-						
-docTask.save();
-getComponent("dynContTasks").show("tasks")}]]></xp:this.action>
-					</xp:eventHandler>
-				</xp:button>
 
-				<xp:link escape="true" text="Cancel" id="link2">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynContTasks">
-						<xp:this.action>
-							<xp:actionGroup>
-								<xp:executeScript>
-									<xp:this.script><![CDATA[#{javascript:getComponent("dynContTasks").show("tasks")}]]></xp:this.script>
-								</xp:executeScript>
-							</xp:actionGroup>
-						</xp:this.action>
-					</xp:eventHandler>
-				</xp:link>
+						</xp:panel>
+					</xp:this.facets>
 
+					<xe:formRow id="formRow1" label="Title:">
+						<xp:inputText value="#{docTask.title}" id="inputTaskTitle"
+							required="true">
+							<xp:this.validators>
+								<xp:validateRequired message="Enter a title for this task"></xp:validateRequired>
+							</xp:this.validators>
+						</xp:inputText>
+					</xe:formRow>
+
+					<xe:formRow id="formRow2" label="Priority:">
+						<xp:radioGroup id="radioGroup2" value="#{docTask.categoryId}">
+							<xp:selectItems id="selectItems2">
+								<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwTaskCategories", 2);}]]></xp:this.value>
+							</xp:selectItems>
+						</xp:radioGroup>
+					</xe:formRow>
+
+					<xe:formRow id="formRow3" label="Description:">
+						<xp:inputText value="#{docTask.description}" id="description1"></xp:inputText>
+					</xe:formRow>
+
+				</xe:formTable>
 
 			</xp:panel>
 
 		</xp:this.facets>
-	</xe:dynamicContent>
+		</xe:dynamicContent>
 
 </xp:view>
 

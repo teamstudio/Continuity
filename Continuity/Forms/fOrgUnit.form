@@ -2,11 +2,11 @@
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
  replicaid='C1257AA000374D6A'>
-<noteinfo noteid='17a' unid='A0FFD617A7F7306BC1257AA0003DF1B3' sequence='17'>
+<noteinfo noteid='17a' unid='A0FFD617A7F7306BC1257AA0003DF1B3' sequence='23'>
 <created><datetime dst='true'>20121023T131635,71+02</datetime></created>
-<modified><datetime>20121118T215145,12+01</datetime></modified>
-<revised><datetime>20121118T215145,10+01</datetime></revised>
-<lastaccessed><datetime>20121118T215145,11+01</datetime></lastaccessed>
+<modified><datetime>20121121T144726,94+01</datetime></modified>
+<revised><datetime>20121121T144726,93+01</datetime></revised>
+<lastaccessed><datetime>20121121T144726,93+01</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20121023T131627,55+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -34,8 +34,11 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <item name='siteIds' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='$Fields'><textlist><text>siteIds</text><text>alertLevel</text><text
->name</text></textlist></item>
+<item name='siteNames' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>siteNames</text><text>siteIds</text><text
+>alertLevel</text><text>name</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -50,6 +53,9 @@ hAAAAAAAAAAAAN4GAACK/4X/IAABAAAKCQlub3JtYWwsIGVsZXZhdGVkLCBoaWdogQKDBAEAhf8I
 AAEAAAqBAoMEAQCF/xIAAQAACnNpdGVJZHM6CQndBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AIr/LACKAAEFBjACAAAAAAAAAgEAAAoAAAAAAAAAAAcAAAAAAHNpdGVJZHMAYg4BAIQAAAAAAAAA
-AADeBgAAiv+F/wgAAQAACg==
+AADeBgAAiv+F/wgAAQAACoECgwQBAIX/EwABAAAKc2l0ZU5hbWVzOgkA3QYAAIr//v9QAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAACK/y4AigABBQYwAgAAAAAAAAIBAAAKAAAAAAAAAAAJAAAAAABzaXRlTmFt
+ZXMAYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACg==
 </rawitemdata></item></note>
 

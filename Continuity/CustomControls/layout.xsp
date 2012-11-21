@@ -15,17 +15,26 @@
 			<xp:callback facetName="facetLeft" id="facetLeft" xp:key="LeftColumn"></xp:callback>
 		</xe:this.facets>
 		<xe:this.configuration>
-			<xe:oneuiApplication legal="false" footer="false" titleBarName="Continuity">
+		
+			<xe:oneuiApplication legal="false" footer="false">
 				<xe:this.placeBarActions>
 					<xe:pageTreeNode label="Preview mobile" page="/mDashboard.xsp"></xe:pageTreeNode>
 				</xe:this.placeBarActions>
 
 				<xe:this.bannerUtilityLinks>
-					<xe:userTreeNode label="#{sessionScope.name}"></xe:userTreeNode>
+					<xe:basicLeafNode><xp:this.label>
+					<![CDATA[
+					#{javascript:sessionScope.name  + (isBCEditor ? " (bc editor)" : (isBCUser ? " (bc user)" : "") )}
+					]]>
+					</xp:this.label></xe:basicLeafNode>
+					<xe:separatorTreeNode></xe:separatorTreeNode>
+					<xe:basicLeafNode label="#{configBean.organisationName}"></xe:basicLeafNode>
 					<xe:separatorTreeNode></xe:separatorTreeNode>
 					<xe:basicLeafNode label="Logout" href="/names.nsf?logout"></xe:basicLeafNode>
+
 				</xe:this.bannerUtilityLinks>
 
+				<xe:this.titleBarName><![CDATA[#{javascript:"Continuity - " + configBean.getOrganisationName() }]]></xe:this.titleBarName>
 			</xe:oneuiApplication>
 		</xe:this.configuration>
 	</xe:applicationLayout>

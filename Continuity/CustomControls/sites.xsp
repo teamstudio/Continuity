@@ -20,7 +20,7 @@ viewScope.put("addSite", true);}]]></xp:this.action>
 
 	<xp:panel id="sites" style="margin-bottom:10px">
 
-		<xp:repeat id="repeat1" rows="30" value="#{vwSites}" var="row">
+		<xp:repeat id="repeat1" rows="30" value="#{vwSites}" var="row" indexVar="rowIndex">
 
 			<xp:this.facets>
 				<xp:text xp:key="header" escape="false" disableTheme="true">
@@ -31,7 +31,8 @@ viewScope.put("addSite", true);}]]></xp:this.action>
 				</xp:text>
 			</xp:this.facets>
 
-			<tr>
+			<xp:tr>
+				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
 				<td>
 
 					<xp:span id="inform">
@@ -66,7 +67,9 @@ c.toggle()
 										<xp:td>
 											<xp:inputText value="#{docSite.name}" id="firstName1"
 												required="true" disableClientSideValidation="true">
-											</xp:inputText>
+											<xp:this.validators>
+												<xp:validateRequired message="Name is required"></xp:validateRequired>
+											</xp:this.validators></xp:inputText>
 										</xp:td>
 									</xp:tr>
 									<xp:tr>
@@ -142,7 +145,7 @@ c.toggle()
 					<xp:text escape="true" id="computedField2" value="#{row.country}"></xp:text>
 				</td>
 		
-			</tr>
+			</xp:tr>
 		</xp:repeat>
 
 
@@ -153,6 +156,8 @@ c.toggle()
 					documentId="#{javascript:viewScope.docId}" ignoreRequestParams="true" scope="request">
 				</xp:dominoDocument>
 			</xp:this.data>
+			
+			<xp:messages id="messages2"></xp:messages>
 
 			<xp:table>
 				<xp:tr>
@@ -160,7 +165,10 @@ c.toggle()
 						<xp:label value="Name:" id="name_Label1" for="name1"></xp:label>
 					</xp:td>
 					<xp:td>
-						<xp:inputText value="#{docSite.name}" id="name1"></xp:inputText>
+						<xp:inputText value="#{docSite.name}" id="name1" required="true">
+							<xp:this.validators>
+								<xp:validateRequired message="Name is required"></xp:validateRequired>
+							</xp:this.validators></xp:inputText>
 					</xp:td>
 				</xp:tr>
 				<xp:tr>
@@ -206,7 +214,7 @@ if ( docSite.save() ) {
 
 			<xp:link escape="true" text="Cancel" id="link2">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-					refreshId="sites">
+					refreshId="sites" immediate="true">
 					<xp:this.action><![CDATA[#{javascript:viewScope.remove("addSite");}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:link>

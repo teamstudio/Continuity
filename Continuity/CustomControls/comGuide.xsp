@@ -1,57 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 
 	<div class="section">
 		<div class="title">General Communication Guidelines</div>
 	</div>
-	
-		<xp:this.data>
-			<xp:dominoDocument var="docSettings" action="editDocument"
-				documentId="#{javascript:configBean.settingsUnid}">
-				<xp:this.postSaveDocument><![CDATA[#{javascript:try {
+
+	<xp:this.data>
+		<xp:dominoDocument var="docCommGuide" action="openDocument" formName="fCommGuidelines">
+			<xp:this.postSaveDocument><![CDATA[#{javascript:try {
 	//save contents of rich text field as string
-	var d = docSettings.getDocument();
+	var d = docCommGuide.getDocument();
 	var desc = d.getMIMEEntity("description_input");
-	docSettings.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
-	docSettings.save();
+	docCommGuide.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
+	docCommGuide.save();
 } catch (e) {
 	dBar.error(e);
 }}]]></xp:this.postSaveDocument>
-				
+			
+				<xp:this.documentId><![CDATA[#{javascript:var entry = database.getView("vwSettings").getEntryByKey("fCommGuidelines", true);
+				return (null != entry ? entry.getColumnValues().get(1) : null);}]]></xp:this.documentId>
+			
 		</xp:dominoDocument>
-		</xp:this.data>
-		
-		<xp:inputRichText id="inputRichText1" value="#{docSettings.description_input}">
-			
-			<xp:this.dojoAttributes>
-							<xp:dojoAttribute name="toolbar">
-								<xp:this.value><![CDATA[#{javascript:"[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['NumberedList','BulletedList','Blockquote']]"}]]></xp:this.value>
-							</xp:dojoAttribute>
-			</xp:this.dojoAttributes>
-							
-			
-		</xp:inputRichText>
-		
-		<xp:br></xp:br>
-		<xp:button value="Edit" id="button1" rendered="#{javascript:!docSettings.isEditable()}"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-	<xp:this.action>
-		<xp:changeDocumentMode mode="edit" var="docSettings"></xp:changeDocumentMode>
-	</xp:this.action></xp:eventHandler></xp:button>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" labelPosition="left">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+				<xp:button value="Edit" id="button1"
+					rendered="#{javascript:!docCommGuide.isEditable()}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit" var="docCommGuide"></xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Save" id="button3"
+					rendered="#{javascript:docCommGuide.isEditable()}">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:docCommGuide.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+docCommGuide.save();
+context.setDocumentMode("readOnly");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+
+	<xe:formRow id="formRow1" labelPosition="none">
 	
-	<xp:button value="Save" id="button3" rendered="#{javascript:docSettings.isEditable()}">
-
-			<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-				refreshId="dynamicContent1">
-				<xp:this.action>
-
-
-					<xp:actionGroup>
-						<xp:actionGroup>
-							<xp:saveDocument var="docSettings"></xp:saveDocument>
-						</xp:actionGroup>
-						<xp:changeDocumentMode mode="readOnly" var="docSettings"></xp:changeDocumentMode>
-					</xp:actionGroup>
-				</xp:this.action></xp:eventHandler>
-		</xp:button>
+		<xe:formColumn id="formColumn2" colSpan="3">
 	
-	</xp:view>
+			<xp:inputRichText id="inputRichText1" value="#{docCommGuide.description_input}">
+					<xp:this.dojoAttributes>
+						<xp:dojoAttribute name="toolbar">
+							<xp:this.value><![CDATA[#{javascript:"[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['NumberedList','BulletedList','Blockquote']]"}]]></xp:this.value>
+						</xp:dojoAttribute>
+					</xp:this.dojoAttributes>
+				</xp:inputRichText>
+		</xe:formColumn>
+	
+	</xe:formRow>
+	
+	</xe:formTable>	
+
+
+
+</xp:view>

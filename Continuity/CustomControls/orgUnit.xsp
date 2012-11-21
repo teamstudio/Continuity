@@ -20,7 +20,7 @@ viewScope.put("addOrgUnit", true);}]]></xp:this.action>
 
 	<xp:panel id="orgUnits">
 
-		<xp:repeat id="repeat1" rows="30" value="#{vwOrgUnits}" var="row">
+		<xp:repeat id="repeat1" rows="30" value="#{vwOrgUnits}" var="row" indexVar="rowIndex">
 
 			<xp:this.facets>
 				<xp:text xp:key="header" escape="false" disableTheme="true">
@@ -31,7 +31,9 @@ viewScope.put("addOrgUnit", true);}]]></xp:this.action>
 				</xp:text>
 			</xp:this.facets>
 
-			<tr>
+			<xp:tr>
+				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+				
 				<td>
 
 					<xp:span id="inform">
@@ -48,7 +50,7 @@ c.toggle()
 						</h4>
 
 						<xe:inPlaceForm id="inPlaceForm1" partialEvents="true">
-							
+
 							<xp:panel>
 								<xp:this.data>
 									<xp:dominoDocument var="docOU" formName="fOrgUnit"
@@ -67,6 +69,11 @@ c.toggle()
 										<xp:td>
 											<xp:inputText value="#{docOU.name}" id="firstName1"
 												required="true" disableClientSideValidation="true">
+												<xp:this.validators>
+													<xp:validateRequired
+														message="Name is required">
+													</xp:validateRequired>
+												</xp:this.validators>
 											</xp:inputText>
 										</xp:td>
 
@@ -76,7 +83,8 @@ c.toggle()
 											<xp:label value="Sites:" id="label2" for="name1"></xp:label>
 										</xp:td>
 										<xp:td>
-											<xp:checkBoxGroup id="checkBoxGroup2" value="#{docOU.siteIds}">
+											<xp:checkBoxGroup id="checkBoxGroup2"
+												value="#{docOU.siteIds}">
 												<xp:selectItems>
 													<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwSites", 2)}]]></xp:this.value>
 												</xp:selectItems>
@@ -90,9 +98,20 @@ c.toggle()
 									<xp:eventHandler event="onclick" submit="true"
 										refreshMode="partial" refreshId="repeat1">
 										<xp:this.action>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript://store name of selected site(s)
+var siteIds = docOU.getItemValue("siteIds");
+if (typeof siteIds=="string") { siteIds = [siteIds]; }
+var siteNames = [];
+for (var i=0; i<siteIds.length; i++) {
+	siteName = @DbLookup( @DbName(), "vwAllById", siteIds[i], "name");
+	siteNames.push( siteName);
+}
+docOU.replaceItemValue("siteNames", siteNames);
 
-												<xp:executeScript>
-													<xp:this.script><![CDATA[#{javascript:docOU.save();
+docOU.save();
+
+
 													
 	//existing org unit: update name in all documents that use this org unit
 	var orgUnitId = docOU.getItemValueString("id");
@@ -105,12 +124,11 @@ c.toggle()
 													loadAppConfig(true);
 										var c = getComponent("inPlaceForm1")
 		c.hide()}]]></xp:this.script>
-												</xp:executeScript>
-										
+											</xp:executeScript>
 										</xp:this.action>
 									</xp:eventHandler>
 								</xp:button>
-								
+
 								<xp:link escape="true" styleClass="lotusTiny" text="Close"
 									id="link1">
 
@@ -133,7 +151,12 @@ c.toggle()
 					</xp:span>
 
 				</td>
-			</tr>
+
+				<td>
+					<xp:text escape="true" id="computedField1" value="#{row.siteNames}"></xp:text>
+				</td>
+
+			</xp:tr>
 		</xp:repeat>
 
 
@@ -145,13 +168,18 @@ c.toggle()
 				</xp:dominoDocument>
 			</xp:this.data>
 
+			<xp:messages id="messages2"></xp:messages>
+
 			<xp:table>
 				<xp:tr>
 					<xp:td>
 						<xp:label value="Name:" id="name_Label1" for="name1"></xp:label>
 					</xp:td>
 					<xp:td>
-						<xp:inputText value="#{docOU.name}" id="name1"></xp:inputText>
+						<xp:inputText value="#{docOU.name}" id="name1" required="true">
+							<xp:this.validators>
+								<xp:validateRequired message="Name is required"></xp:validateRequired>
+							</xp:this.validators></xp:inputText>
 					</xp:td>
 				</xp:tr>
 				<xp:tr>
@@ -174,12 +202,24 @@ c.toggle()
 					<xp:this.action>
 
 						<xp:actionGroup>
+
+
 							<xp:executeScript>
 								<xp:this.script><![CDATA[#{javascript:if (docOU.isNewNote()) {
 	docOU.replaceItemValue("id", "ou" + docOU.getDocument().getUniversalID() );
 	docOU.replaceItemValue("alertLevel", "normal");
 	docOU.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
 }
+
+//store name of selected site(s)
+var siteIds = docOU.getItemValue("siteIds");
+if (typeof siteIds=="string") { siteIds = [siteIds]; }
+var siteNames = [];
+for (var i=0; i<siteIds.length; i++) {
+	siteName = @DbLookup( @DbName(), "vwAllById", siteIds[i], "name");
+	siteNames.push( siteName);
+}
+docOU.replaceItemValue("siteNames", siteNames);
 
 if ( docOU.save() ) {
 							loadAppConfig(true);
@@ -194,7 +234,7 @@ if ( docOU.save() ) {
 
 			<xp:link escape="true" text="Cancel" id="link2">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-					refreshId="orgUnits">
+					refreshId="orgUnits" immediate="true">
 					<xp:this.action><![CDATA[#{javascript:viewScope.remove("addOrgUnit");}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:link>

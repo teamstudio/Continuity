@@ -4,16 +4,16 @@ function init( theme:String) {
 		
 		var currentTheme = context.getSessionProperty("xsp.theme");
 
+		//switch the theme used by this application
 		if ( currentTheme == null || !currentTheme.equals(theme)) {
 			
-			//print("set theme to " + theme);
 			var f = "/"+@RightBack(context.getUrl().getAddress(),"/");
 			context.setSessionProperty("xsp.theme",theme);
 			context.redirectToPage(f);
 
 		}
 		
-		
+		//load the application configuration
 		loadAppConfig(false);
 		
 		var currentUser = @UserName();
@@ -22,12 +22,12 @@ function init( theme:String) {
 		if ( !sessionScope.configLoaded || sessionScope.get("userName") != currentUser) {
 			
 			sessionScope.put("configLoaded", true);
-			
 			sessionScope.put("userName", currentUser);
 			
 			var roles = context.getUser().getRoles();
 			sessionScope.put("isBCUser", roles.contains("[bcUser]" ));
 			sessionScope.put("isBCEditor", roles.contains("[bcEditor]" ));
+			sessionScope.put("isDebug", roles.contains("[debug]" ));
 		
 			//retrieve information from user's profile
 			var docUser:NotesDocument = database.getView("vwContactsByUsername").getDocumentByKey( @UserName(), true);
@@ -37,15 +37,12 @@ function init( theme:String) {
 				sessionScope.put("name", docUser.getItemValueString("firstName") + " " + docUser.getItemValueString("lastName") );
 
 				//store user's bcm role id
-				var roleId = docUser.getItemValueString("roleId");
-				if (roleId.length>0) {
-					sessionScope.put("roleId", roleId);
-					sessionScope.put("roleName", roles.get(roleId));
-				}
+				sessionScope.put("roleId", docUser.getItemValueString("roleId"));
+				sessionScope.put("roleName", docUser.getItemValueString("roleName"));
 					
-				//store user's org unit id
-				var orgUnitId = docUser.getItemValueString("orgUnitId");
-				sessionScope.put("orgUnitId", orgUnitId);
+				//store user's org unit
+				sessionScope.put("orgUnitId", docUser.getItemValueString("orgUnitId"));
+				sessionScope.put("orgUnitName", docUser.getItemValueString("orgUnitName"));
 	
 			} else {
 				
@@ -126,8 +123,60 @@ function loadAppConfig( forceUpdate:boolean ) {
 	
 }
 
+//mark a task as 'completed'
+function markTaskCompleted( name:String ) {
+	
+	logActivity( "task completed: " + name);
+	
+}
 
 
+//store a user activity
+function logActivity( message:String ) {
+	
+	//get user's activity document
+	try {
+		
+		dBar.debug("logging activity");
+		
+		//TODO: use sessionscope variable to hold log documents' unid
+		var docLog:NotesDocument = database.getView("vwLogsByUser").getDocumentByKey( sessionScope.get("userName"), true);
+		var logEntries:java.util.Vector = null;
+		
+		if (docLog==null) {
+			
+			dBar.debug("get existing doc");
+			
+			docLog = database.createDocument();
+			docLog.replaceItemValue("form", "fLog");
+			docLog.replaceItemValue("userName", sessionScope.get("userName")).setAuthors(true);
+			docLog.replaceItemValue("name", sessionScope.get("name"))
+			docLog.replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+			
+			logEntries = new java.util.Vector();
+			
+		} else {
+			
+			logEntries = docLog.getItemValue("logEntries");
+			
+		}
+		
+		logEntries.add(0, @Text(@Now()) + " - " + message);
+		
+		docLog.replaceItemValue("logEntries", logEntries);
+		docLog.save();
+		docLog.recycle();
+		
+		dBar.debug("done");
+	
+	} catch (e) {
+		dBar.error(e);
+	}
+	
+}
+
+
+//sort an array of objects by a property of those objects
 Array.prototype.sortByField = function( fieldName:String, direction:String, fieldDataType:String ){
 	
 	var values = this;

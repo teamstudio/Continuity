@@ -39,8 +39,8 @@ fieldset.xspRadioButton label, fieldset.xspCheckBox label {
 	font-weight: normal;
 }
 fieldset.xspRadioButton td, fieldset.xspCheckBox td {
-	padding:0;
-	border:0;
+	padding:0 !important;
+	border:0 !important;
 }
 
 
@@ -51,7 +51,16 @@ label.xspCheckBox {
 	font-weight: normal !important;
 }
 
-/*mark certain columns not to wrap*/
+/*forms*/
+
+.formSection td {
+	font-weight: bold;
+	padding: 10px 0;
+	font-size: 14px;
+}
+
+
+/*mark columns not to wrap*/
 td.noWrap {
 	white-space: nowrap;
 }

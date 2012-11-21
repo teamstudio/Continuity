@@ -2,11 +2,11 @@
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
  replicaid='C1257AA000374D6A'>
-<noteinfo noteid='806' unid='D8E44FF713B9C478C1257AB70076A75D' sequence='3'>
+<noteinfo noteid='806' unid='D8E44FF713B9C478C1257AB70076A75D' sequence='8'>
 <created><datetime>20121115T223600,93+01</datetime></created>
-<modified><datetime>20121118T212416,16+01</datetime></modified>
-<revised><datetime>20121118T212416,15+01</datetime></revised>
-<lastaccessed><datetime>20121118T212416,15+01</datetime></lastaccessed>
+<modified><datetime>20121121T144727,04+01</datetime></modified>
+<revised><datetime>20121121T144727,03+01</datetime></revised>
+<lastaccessed><datetime>20121121T144727,03+01</datetime></lastaccessed>
 <addedtofile><datetime>20121115T223559,98+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -20,7 +20,6 @@ X/8QAAIADwAHAAAAAAAAAA==
 <rawitemdata type='1'>
 hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 </rawitemdata></item>
-<item name='$Flags'><text/></item>
 <item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$$ScriptName' summary='false' sign='true'><text>fSite</text></item>
 <item name='name' placeholder='true'>
@@ -48,5 +47,6 @@ iv+F/wgAAQAACoECgwQBAIX/EwABAAAKY291bnRyeTogCQkA3QYAAIr//v9QAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAACK/ywAigAABQAwAgAAAAAAAAIBAAAKAAAAAAAAAAAHAAAAAABjb3VudHJ5AGIOAQCE
 AAAAAAAAAAAA3gYAAIr/hf8IAAEAAAo=
-</rawitemdata></item></note>
+</rawitemdata></item>
+<item name='$Flags'><text>w</text></item></note>
 

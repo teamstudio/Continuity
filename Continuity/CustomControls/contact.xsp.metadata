@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="C1257AA000374D6A" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="24e" sequence="110" unid="6BEAF6383526828AC1257AA2006CB656">
+<noteinfo noteid="24e" sequence="214" unid="6BEAF6383526828AC1257AA2006CB656">
 <created><datetime dst="true">20121025T214725,66+02</datetime></created>
-<modified><datetime>20121118T230121,37+01</datetime></modified>
-<revised><datetime>20121118T230121,36+01</datetime></revised>
-<lastaccessed><datetime>20121118T230121,36+01</datetime></lastaccessed>
+<modified><datetime>20121121T142922,27+01</datetime></modified>
+<revised><datetime>20121121T142922,26+01</datetime></revised>
+<lastaccessed><datetime>20121121T142922,26+01</datetime></lastaccessed>
 <addedtofile><datetime dst="true">20121025T214725,66+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -12,12 +12,12 @@
 
 
 
-
-
-<item name="$FileNames" sign="true"><text>contact.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 
 
-</note>
+
+
+
+<item name="$FileNames" sign="true"><text>contact.xsp</text></item></note>

@@ -158,13 +158,10 @@ if (a.size()>0) {
 				</xp:tr>
 			</xp:table>
 
-			<!--<div>Photo</div>
+			<div>Upload a new photo:</div>
 				<xp:fileUpload id="fileUpload1" value="#{docContact.photo}"></xp:fileUpload>
 				
-				
-				
-				
-			-->
+			
 		</div>
 	
 	</xc:mLayout>

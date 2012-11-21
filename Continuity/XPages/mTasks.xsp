@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-	<xc:ccDebugToolbar defaultCollapsed="false" collapseTo="left"></xc:ccDebugToolbar>
+	
 	<xp:this.data>
 		<xp:dominoView var="vwTasksByParent" viewName="vwTasksByParent">
 			<xp:this.categoryFilter><![CDATA[#{javascript:param.get("respId")}]]></xp:this.categoryFilter>
@@ -10,9 +10,12 @@
 	<xp:this.resources>
 		<xp:script src="/xpTasks.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
+	
 	<xc:mLayout addBackButton="true">
 
 		<div data-role="header">
+		
+			<a href="mDashboard.xsp" data-icon="grid" data-direction="reverse">Home</a>
 
 			<xp:text escape="true" tagName="h1" id="computedField1">
 				<xp:this.value><![CDATA[#{javascript://get parent
@@ -64,10 +67,19 @@ if (docParent.getItemValueString("form").equals("fScenario")) {
 								value="#{javascript:task.name}">
 							</xp:text>
 						</a>
-						<a href="#complete" data-rel="popup" data-position-to="window"
-							data-transition="pop">
-							Mark complete
-						</a>
+						
+						<xp:link id="link1">
+
+						<xp:this.attrs>
+							<xp:attr name="data-position-to" value="window"></xp:attr>
+						</xp:this.attrs><xp:eventHandler event="onclick" submit="true" refreshMode="norefresh">
+	<xp:this.action>
+		<xp:executeScript>
+			<xp:this.script><![CDATA[#{javascript:markTaskCompleted(task.name);}]]></xp:this.script>
+		</xp:executeScript>
+	</xp:this.action></xp:eventHandler></xp:link>
+
+						
 					</li>
 
 				</xp:repeat>

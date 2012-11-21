@@ -43,9 +43,8 @@
 						<xp:this.text><![CDATA[#{javascript://get number of tasks
 var numTasks = rowEntry.getDocument().getResponses().getCount();
 
-
 rowEntry.getColumnValue("title")
-// +"<span class=\"ui-li-count\">" + numTasks + "</span>"
++ "<span class=\"ui-li-count\">" + numTasks + "</span>"
 }]]></xp:this.text>
 					</xp:link>
 				</li>

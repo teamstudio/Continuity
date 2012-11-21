@@ -17,11 +17,11 @@
 	<xc:mLayout addBackButton="false">
 
 		<div data-role="header">
-			<h1>Organisation Unit</h1>
+			<a href="mDashboard.xsp" data-icon="back" data-direction="reverse">Back</a>
+			<h1>Switch Org Unit</h1>
 		</div>
 
 		<div data-role="content">
-
 
 			<!-- list of org units -->
 			<xp:repeat id="repeat1" rows="30" value="#{vwOrgUnits}" var="rowEntry"
@@ -35,20 +35,38 @@
 						<xp:this.value><![CDATA[</ul>]]></xp:this.value>
 					</xp:text>
 				</xp:this.facets>
-
-				<xp:text escape="false">
-					<li>
-						<xp:link text="#{rowEntry.name}">
-							<xp:this.value><![CDATA[#{javascript:"mDashboard.xsp?orgUnitId=" + rowEntry.getColumnValue("id")}]]></xp:this.value>
+				
+				<li>
+					<xp:link text="">
+						<xp:this.value><![CDATA[#{javascript:"mDashboard.xsp?orgUnitId=" + rowEntry.getColumnValue("id")}]]></xp:this.value>
+							
+						<xp:text tagName="h3" styleClass="ui-li-heading" disableTheme="true" id="orgName" escape="false" value="#{rowEntry.name}"></xp:text>
+							
+						<p class="ui-li-desc">
+						
+							<xp:text escape="true" disableTheme="true" id="alertLevel" value="#{rowEntry.alertLevel}">
+								<xp:this.style><![CDATA[#{javascript:switch (rowEntry.getColumnValue("alertLevel")) {
+			case "normal":
+				return "padding: 3px; background: #00cc33; color: white;";
+			case "elevated":
+				return "padding: 3px; background: orange; color: white;";
+			case "high":
+				return "padding: 3px; background: red; color: white;";
+		
+		}
+		}]]></xp:this.style>
+					</xp:text>
+						
+						
+						</p>
 						</xp:link>
 
-					</li>
-				</xp:text>
+				</li>
+
 
 			</xp:repeat>
 
 		</div>
-
 
 	</xc:mLayout>
 

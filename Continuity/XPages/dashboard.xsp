@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex" pageTitle="Continuity">
-	
+
 	<xp:this.beforePageLoad><![CDATA[#{javascript:if (!viewScope.selectedMenu) { viewScope.selectedMenu="contactsList"; }}]]></xp:this.beforePageLoad>
+	
 	<xe:redirect id="redirect1">
 		<xe:this.rules>
 			<xe:redirectPhoneRule url="/mDashboard.xsp"></xe:redirectPhoneRule>
@@ -16,7 +17,7 @@
 			<xp:div xp:key="facetLeft">
 				<xe:navigator id="outline" expandable="true">
 					<xe:this.treeNodes>
-					
+
 						<xe:basicLeafNode submitValue="contactsList" label="Contacts">
 							<xe:this.selected><![CDATA[#{javascript:viewScope.selectedMenu.equals("contactsList");}]]></xe:this.selected>
 						</xe:basicLeafNode>
@@ -29,12 +30,11 @@
 						<xe:basicLeafNode submitValue="scenariosList" label="Scenarios/ plans">
 							<xe:this.selected><![CDATA[#{javascript:viewScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
 						</xe:basicLeafNode>
-					
-						<xe:basicLeafNode submitValue="comGuide"
-								label="Communication Guidelines">
-								<xe:this.selected><![CDATA[#{javascript:viewScope.selectedMenu.equals("comGuide");}]]></xe:this.selected>
-							</xe:basicLeafNode>
-						
+
+						<xe:basicLeafNode submitValue="comGuide" label="Communication Guidelines">
+							<xe:this.selected><![CDATA[#{javascript:viewScope.selectedMenu.equals("comGuide");}]]></xe:this.selected>
+						</xe:basicLeafNode>
+
 						<xe:separatorTreeNode></xe:separatorTreeNode>
 
 						<xe:basicLeafNode submitValue="incidentsList" label="Incidents">
@@ -42,14 +42,14 @@
 						</xe:basicLeafNode>
 
 						<xe:separatorTreeNode></xe:separatorTreeNode>
-						
+
 						<xe:basicLeafNode submitValue="config" label="Configuration">
 							<xe:this.selected><![CDATA[#{javascript:viewScope.selectedMenu.equals("config");}]]></xe:this.selected>
 						</xe:basicLeafNode>
-						
+
 					</xe:this.treeNodes>
 
-					<xp:eventHandler event="onItemClick" submit="true" refreshMode="full">
+					<xp:eventHandler event="onItemClick" submit="true" refreshMode="partial" refreshId="dynamicContent1" immediate="true">
 						<xp:this.action><![CDATA[#{javascript:var c = context.getSubmittedValue();
 						viewScope.selectedMenu = c;
 					
@@ -58,6 +58,28 @@ getComponent("dynamicContent1").show(c);}]]></xp:this.action>
 				</xe:navigator>
 			</xp:div>
 		</xp:this.facets>
+		
+		<xp:scriptBlock id="scriptBlock1">
+			<xp:this.value><![CDATA[
+			//add a clientside onclick event to all navigator options that sets the active option
+			dojo.addOnLoad( function() {
+	dojo.query("li", dojo.byId("#{id:outline}") ).forEach( function(navNode) {
+		dojo.query("a", navNode).connect("onclick", function() {
+		
+			//clear lotusSelected class from all navigation options
+			dojo.query("li", dojo.byId("#{id:outline}") ).removeClass("lotusSelected");
+			
+			//mark current node as selected
+			dojo.addClass(navNode, "lotusSelected"); 
+		});
+		
+	
+	});
+});]]></xp:this.value>
+		</xp:scriptBlock>
+
+
+
 
 		<xe:dynamicContent id="dynamicContent1" defaultFacet="contactsList" useHash="true">
 			<xe:this.afterContentLoad><![CDATA[#{javascript:view.postScript("setFocusOnFirstField();");}]]></xe:this.afterContentLoad>
@@ -72,10 +94,10 @@ getComponent("dynamicContent1").show(c);}]]></xp:this.action>
 				<xc:bcmRoles id="bcmRoles" xp:key="bcmRoles"></xc:bcmRoles>
 				<xc:bcmRole id="bcmRole" xp:key="bcmRole"></xc:bcmRole>
 				<xc:responsibility id="responsibility" xp:key="responsibility"></xc:responsibility>
-				
+
 				<xc:configuration id="config" xp:key="config"></xc:configuration>
 
-				
+
 
 				<xp:panel xp:key="incidentsList" id="incidentsList">
 
@@ -118,7 +140,7 @@ getComponent("dynamicContent1").show(c);}]]></xp:this.action>
 
 			</xp:this.facets>
 		</xe:dynamicContent>
-
+		
 	</xc:layout>
 
 </xp:view>
