@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<div class="section">
+		<div class="title">Roles and responsibilities</div>
+		<div class="actions">
+			<xp:button value="Add role" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="dynamicContent1">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("bcmRole");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			</div>
+	</div>
+
+	<xp:panel readonly="true">
+		<xp:this.data>
+			<xp:dominoView var="vwRoles" viewName="vwRoles"></xp:dominoView>
+			<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"></xp:dominoView>
+		</xp:this.data>
+		
+
+		<table class="grid">
+			<tbody>
+
+				<xp:repeat id="repeatRoles" rows="100"
+					value="#{vwRoles}" var="roleRow" indexVar="rowIndex">
+
+					<tr>
+						<th colspan="2" style="min-width: 400px;">
+
+							<!-- action to add a responsibility -->
+							<div style="float: right; margin: 0 5px"
+								class="lotusTiny">
+								<xp:link escape="true"
+									text="add responsibility" style="font-weight:normal"
+									styleClass="lotusTiny" id="link2"
+									rendered="#{javascript:sessionScope.isEditor}">
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="partial"
+										refreshId="dynamicContent1">
+										<xp:this.action>
+
+											<xp:actionGroup>
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript:viewScope.put("roleId", roleRow.getColumnValue("id"));
+										viewScope.put("roleName", roleRow.getColumnValue("name"));}]]></xp:this.script>
+												</xp:executeScript>
+												<xe:changeDynamicContentAction
+													facetName="responsibility" for="dynamicContent1">
+												</xe:changeDynamicContentAction>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</div>
+
+							<!-- name of role -->
+							<h4>
+								<xp:link escape="true" id="link4"
+									text="#{roleRow.name}">
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="partial"
+										refreshId="dynamicContent1">
+										<xp:this.action>
+											<xe:changeDynamicContentAction
+												facetName="bcmRole" for="dynamicContent1">
+												<xe:this.parameters>
+													<xp:parameter
+														name="documentId"
+														value="#{javascript:roleRow.getUniversalID()}">
+													</xp:parameter>
+													<xp:parameter
+														name="action" value="openDocument">
+													</xp:parameter>
+												</xe:this.parameters>
+											</xe:changeDynamicContentAction>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</h4>
+
+						</th>
+					</tr>
+
+					<xp:tr>
+						<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResp").getRowCount()==0}]]></xp:this.rendered>
+						<td colspan="2" class="grid">
+							<i>
+								No responsibilities defined for this role yet
+							</i>
+						</td>
+					</xp:tr>
+
+					<!-- list of responsibilities for this role -->
+					<xp:repeat id="repeatResp" rows="100" var="respRow" disableOutputTag="true">
+						<xp:this.value><![CDATA[#{javascript:vwResponsibilitiesByRole.getAllEntriesByKey(roleRow.getColumnValue("id"), true);}]]></xp:this.value>
+
+						<tr>
+							<td class="grid"
+								style="width: 500px;">
+
+								<xp:link escape="true"
+									text="#{javascript:respRow.getColumnValues().get(2);}"
+									style="font-weight:bold" id="link3">
+
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="partial"
+										refreshId="dynamicContent1">
+
+										<xp:this.action>
+											<xe:changeDynamicContentAction
+												facetName="responsibility" for="dynamicContent1">
+												<xe:this.parameters>
+													<xp:parameter
+														name="documentId"
+														value="#{javascript:respRow.getUniversalID()}">
+													</xp:parameter>
+													<xp:parameter
+														name="action" value="openDocument">
+													</xp:parameter>
+												</xe:this.parameters>
+											</xe:changeDynamicContentAction>
+										</xp:this.action>
+
+									</xp:eventHandler>
+								</xp:link>
+								<br />
+								
+								<!-- description -->
+								<xp:text tagName="div" style="margin: 5px 0" escape="false" disableTheme="true" value="#{javascript:respRow.getColumnValues().get(5)}">
+								</xp:text>
+
+							</td>
+							
+						</tr>
+
+					</xp:repeat>
+
+					<tr>
+						<td colspan="2" class="noBorders"></td>
+					</tr>
+
+				</xp:repeat>
+
+			</tbody>
+		</table>
+
+	</xp:panel>
+
+</xp:view>

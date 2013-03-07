@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");}]]></xp:this.beforePageLoad>
+	<xp:this.afterRestoreView><![CDATA[#{javascript:init("mobile");}]]></xp:this.afterRestoreView>
+
+	<xp:this.resources>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
+		<xp:script src="/unpCommon.jss" clientSide="false"></xp:script>
+
+		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
+		
+		<xp:metaData name="Content-Type"
+			content="text/html; charset=utf-8">
+		</xp:metaData>
+		<xp:metaData name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		</xp:metaData>
+		<xp:metaData name="apple-mobile-web-app-capable" content="yes"></xp:metaData>
+		<!--<xp:metaData name="apple-mobile-web-app-status-bar-style" content="black"></xp:metaData>
+		
+		--><xp:metaData name="apple-mobile-web-app-status-bar-style" content="black-translucent"></xp:metaData>
+		
+		<xp:metaData name="format-detection" content="telephone=no"></xp:metaData>
+
+		<xp:script src="unp/jquery-1.7.2.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/iscroll.min.js" clientSide="true"></xp:script>
+		<xp:script src="/unplugged.js" clientSide="true"></xp:script>
+		
+	</xp:this.resources>
+
+</xp:view>

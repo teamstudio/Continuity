@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+		<xp:this.beforeRenderResponse><![CDATA[#{javascript:
+		var db = null;
+		
+		try {
+	var unid = param.get("documentId")
+	
+	db = session.getDatabase("", applicationScope.coreDbPath);
+	var docContact = db.getDocumentByUNID(unid );
+	
+	viewScope.unid = unid;
+	viewScope.userName = docContact.getItemValueString("userName");
+
+viewScope.firstName = docContact.getItemValueString("firstName");
+viewScope.lastName = docContact.getItemValueString("lastName");
+viewScope.name = @Trim(viewScope.firstName + " " + viewScope.lastName);
+
+var thumb = docContact.getItemValueString("photoThumbnailName")
+var photo = docContact.getItemValueString("photoFileName");
+
+viewScope.photoUrl = thumb.length>0 ? "/0/" + viewScope.unid + "/$file/" + thumb :
+             photo.length>0 ? "/0/" + unid + "/$file/" + photo :
+             "noProfile.gif";
+
+viewScope.orgUnitName = docContact.getItemValueString("orgUnitName");
+viewScope.jobTitle = docContact.getItemValueString("jobTitle");
+viewScope.roleName = docContact.getItemValueString("roleName");
+viewScope.isAlternate = docContact.getItemValueString("isAlternate").equals("yes");
+viewScope.phoneHome = docContact.getItemValueString("phoneHome");
+viewScope.phoneWork = docContact.getItemValueString("phoneWork");
+viewScope.phoneMobile = docContact.getItemValueString("phoneMobile");
+viewScope.email = docContact.getItemValueString("email");
+
+viewScope.editMode = false;
+
+db.close();
+} catch (e) {
+	print(e);
+} finally {
+
+	try {
+		db.close();
+	} catch (e) { }
+
+}
+}]]></xp:this.beforeRenderResponse>
+
+	<div id="formholder">
+		<h2>
+			<xp:text escape="true" id="title" tagName="span"
+				value="#{javascript:viewScope.name}" styleClass="formtitle">
+			</xp:text>
+		</h2>
+		<xp:panel id="topbuttons" styleClass="buttons" tagName="ul">
+			<xp:panel id="editbutton" styleClass="editButton"
+				tagName="li">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("userName") == viewScope.get("userName")}]]></xp:this.rendered>
+				<xp:this.attrs>
+					<xp:attr name="onclick">
+						<xp:this.value><![CDATA[#{javascript:"openDocument('mContactEdit.xsp?action=editDocument&documentId=" + viewScope.unid + "', 'contentwrapper');"}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+				<span>Edit</span>
+			</xp:panel>
+			<xp:panel id="closebutton" styleClass="cancelButton" tagName="li">
+				<xp:this.attrs>
+					<xp:attr name="onclick">
+						<xp:this.value><![CDATA[#{javascript:"$.blockUI();window.location.href='" + param.get("from") + "';"}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+				<span>Close</span>
+			</xp:panel>
+		</xp:panel>
+	
+		<ul class="fieldlist">
+			<li>
+
+				<div
+					style="float:left; clear:left; width:27%; text-align:right; min-width: 70px; padding-top:10px; padding-bottom:10px;">
+
+					<xp:image id="image1"
+						style="width: 70px; height: 70px;"
+						styleClass="thumbnail roundedBorders">
+						<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
+					</xp:image>
+				</div>
+
+				<div style="padding-left: 30%; padding-top:10px; padding-bottom:10px;">
+
+					<b>
+						<xp:text escape="true"
+							styleClass="reset" style="font-weight: bold"
+							value="#{javascript:viewScope.name}" />
+					</b>
+
+					<!--  title/ org unit -->
+					<xp:text escape="true"
+						style="padding:0; border:0">
+						<xp:this.value><![CDATA[#{javascript:viewScope.jobTitle + (viewScope.orgUnitName.length>0 ? " (" + viewScope.orgUnitName + ")" : "")}]]></xp:this.value>
+					</xp:text>
+
+					<!-- bc role --> 
+					<xp:text escape="true" styleClass="reset"
+						id="computedField2">
+						<xp:this.value><![CDATA[#{javascript:(viewScope.roleName.length>0 ? viewScope.roleName : "(no BC role)") + 
+(viewScope.isAlternate ? " (alternate)" : "")}]]></xp:this.value>
+					</xp:text>
+
+				</div>
+
+				</li>
+
+
+			
+				<li>
+					<xp:label value="Email:" id="label4"
+						for="email" />
+					<span class="xspTextComputedField">
+						<xp:link escape="true"
+							text="#{viewScope.email}" id="email"
+							rendered="#{javascript:!viewScope.editMode}">
+							<xp:this.value><![CDATA[#{javascript:"mailto:" + viewScope.email}]]></xp:this.value>
+
+						</xp:link>
+					</span>
+				</li>
+				<li>
+					<xp:label value="Work:" id="label3"
+						for="workPhone" />
+					<span class="xspTextComputedField">
+						<xp:link escape="true"
+							text="#{viewScope.phoneWork}" id="workPhone">
+							<xp:this.value><![CDATA[#{javascript:"tel:" + viewScope.phoneWork}]]></xp:this.value>
+						</xp:link>
+					</span>
+				</li>
+				<li>
+					<xp:label value="Mobile:" id="label1"
+						for="mobilePhone" />
+					<span class="xspTextComputedField">
+						<xp:link escape="true"
+							text="#{viewScope.phoneMobile}" id="mobilePhone">
+							<xp:this.value><![CDATA[#{javascript:"tel:" + viewScope.phoneMobile}]]></xp:this.value>
+						</xp:link>
+					</span>
+				</li>
+				<li>
+					<xp:label value="Home:" id="label2"
+						for="homePhone" />
+					<span class="xspTextComputedField">
+						<xp:link escape="true"
+							text="#{viewScope.phoneHome}" id="homePhone">
+							<xp:this.value><![CDATA[#{javascript:"tel:" + viewScope.phoneHome}]]></xp:this.value>
+						</xp:link>
+					</span>
+				</li>
+			</ul>
+		
+		
+		<br />
+		<br />
+	</div>
+
+</xp:view>

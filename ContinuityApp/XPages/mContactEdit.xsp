@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:
+	
+	var db = null;
+	
+	try {
+	var unid = param.get("documentId");
+	
+	db = session.getDatabase("", applicationScope.coreDbPath);
+	var docContact = db.getDocumentByUNID(unid );
+	
+	if (docContact==null) {
+		print("error: target document not found (id: " + unid + ", db: " + applicationScope.coreDbPath );
+	} else {
+	
+		viewScope.unid = unid;
+	
+		viewScope.firstName = docContact.getItemValueString("firstName");
+		viewScope.lastName = docContact.getItemValueString("lastName");
+		viewScope.name = @Trim(viewScope.firstName + " " + viewScope.lastName);
+		
+		var thumb = docContact.getItemValueString("photoThumbnailName")
+		var photo = docContact.getItemValueString("photoFileName");
+		
+		viewScope.photoUrl = thumb.length>0 ? "/0/" + viewScope.unid + "/$file/" + thumb :
+		             photo.length>0 ? "/0/" + unid + "/$file/" + photo :
+		             "noProfile.gif";
+		
+		viewScope.orgUnitName = docContact.getItemValueString("orgUnitName");
+		viewScope.jobTitle = docContact.getItemValueString("jobTitle");
+		viewScope.roleName = docContact.getItemValueString("roleName");
+		viewScope.isAlternate = docContact.getItemValueString("isAlternate");
+		viewScope.phoneHome = docContact.getItemValueString("phoneHome");
+		viewScope.phoneWork = docContact.getItemValueString("phoneWork");
+		viewScope.phoneMobile = docContact.getItemValueString("phoneMobile");
+		viewScope.email = docContact.getItemValueString("email");
+	}
+	
+	
+
+} catch (e) {
+	print(e);
+} finally {
+
+	try {
+		db.close();
+	} catch (e) { }
+}
+}]]></xp:this.beforeRenderResponse>
+	<xc:unpScrollableArea>
+		<xp:this.facets>
+		
+		<xc:unpFormEditor showbuttons="true" closexpagename="mContacts.xsp"
+				viewxpagename="mContacts.xsp" formname="fContact" title="Contact"
+				xp:key="facet_1">
+
+				<xp:this.facets>
+					<xp:panel xp:key="facet_1">
+						
+						<div id="contactDetails" style="padding: 12px;background: #fff">
+						
+						<table style="width: 100%"><tbody>
+							
+							<tr style="vertical-align: top">
+							
+							<td style="width: 27%; text-align: right">
+								<xp:image id="image1" style="width: 75px; height: 75px;" >
+									<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
+								</xp:image>
+							</td>
+							<td>
+									<xp:text escape="true" style="padding:0; border:0" id="computedField2" value="#{javascript:viewScope.roleName}">
+									</xp:text>
+									
+									<xp:text style="font-weight: bold;padding:0; border:0" value="- Alternate contact -">
+										<xp:this.rendered><![CDATA[#{javascript:"yes".equals( viewScope.isAlternate)}]]></xp:this.rendered>
+									</xp:text>
+									<i>
+										<xp:text escape="true" style="padding:0; border:0">
+											<xp:this.value><![CDATA[#{javascript:viewScope.jobTitle + (viewScope.orgUnitName.length>0 ? " (" + viewScope.orgUnitName + ")" : "")}]]></xp:this.value>
+										</xp:text>
+									</i>
+								</td></tr>
+							</tbody></table>			
+							
+							<ul class="fieldlist">
+							<li>
+								<xp:label value="Email:" id="label4" for="email" />
+								
+								<xp:inputText id="inputEmail" value="#{viewScope.email}"
+									type="email" styleClass="required xspInputFieldEditBox">
+								</xp:inputText>
+							</li>
+							<li>
+								<xp:label value="Work:" id="label3" for="workPhone" />
+								<xp:inputText id="workPhone" value="#{viewScope.phoneWork}" styleClass="required xspInputFieldEditBox">
+								</xp:inputText>
+
+							</li>
+							<li>
+								<xp:label value="Mobile:" id="label1" for="mobilePhone" />
+								<xp:inputText id="mobilePhone" value="#{viewScope.phoneMobile}" styleClass="xspInputFieldEditBox">
+								</xp:inputText>
+							</li>
+							<li>
+								<xp:label value="Home:" id="label2" for="homePhone" />
+								<xp:inputText id="homePhone" value="#{viewScope.phoneHome}" styleClass="xspInputFieldEditBox">
+								</xp:inputText>
+							</li>
+						</ul>
+				<xp:div rendered="#{javascript:viewScope.editMode}">
+					<div>Upload a new photo:</div>
+					<xp:fileUpload id="fileUpload1" value="#{docContact.photo}"></xp:fileUpload>
+				</xp:div>
+					</div>
+					</xp:panel>
+				</xp:this.facets>
+			</xc:unpFormEditor>
+			</xp:this.facets>
+		</xc:unpScrollableArea>
+</xp:view>

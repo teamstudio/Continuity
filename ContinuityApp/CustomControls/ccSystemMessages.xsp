@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<!-- repeat over 'global' faces messages  -->
+	<xp:repeat id="repeatMsgs" rows="30" var="message" indexVar="index" disableOutputTag="true">
+		<xp:this.value><![CDATA[#{javascript:var m = [];
+var sm = facesContext.getMessages(null);
+
+while (sm.hasNext()) {
+	m.push(sm.next());
+}
+
+return m}]]>
+		</xp:this.value>
+
+		<xp:panel id="msg" style="margin-bottom: 5px;" readonly="true">
+
+			<xp:this.styleClass><![CDATA[#{javascript:switch (message.getSeverity() ) {
+	case javax.faces.application.FacesMessage.SEVERITY_WARN:
+		return "lotusMessage lotusChunk lotusWarning";
+		break;
+	case javax.faces.application.FacesMessage.SEVERITY_ERROR:
+		return "lotusMessage lotusChunk";
+		break;		
+	default: 		//info
+		return "lotusMessage lotusChunk lotusInfo"	;
+		break;	
+}}]]></xp:this.styleClass>
+
+			<xp:text escape="false" id="msgTxt" value="#{javascript:message.getSummary()}" disableTheme="true">
+			</xp:text>
+		
+			<xp:link escape="true" styleClass="lotusDelete" text="" id="link1" disableTheme="true">
+				<img src="/oneuiv2/images/blank.gif" alt="sluiten" />
+				<span class="lotusAltText">X</span>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[dojo.fadeOut( {
+       node:"#{id:msg}",
+        onEnd: function(node) {
+        	dojo.destroy(node);
+                }
+}).play();		]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:panel>
+	</xp:repeat>
+
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[XSP.scrollWindow = function scrollWindow(x,y) {
+	//scrolling disabled
+}]]></xp:this.value>
+	</xp:scriptBlock>
+
+</xp:view>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="vwScenariosByOrgUnit" viewName="vwScenariosByOrgUnit">
+			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId")}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+			<xp:dominoView var="vwTasksByParent"
+			viewName="vwTasksByParent">
+		</xp:dominoView>
+	</xp:this.data>
+
+<xc:mLayout showMenu="true" pageTitle="Plans">
+		<xp:this.facets>
+
+			<xp:panel xp:key="contents" disableOutputTag="true">
+	
+	
+				
+					<ul id="summaryList">
+			
+						<xp:repeat id="repeat3" rows="50" value="#{vwScenariosByOrgUnit}" var="row" disableOutputTag="true">
+			
+							<xp:text escape="false" tagName="li" styleClass="categoryRowFixed" disableTheme="true" rendered="#{javascript:row.isCategory()}">
+								<xp:this.value><![CDATA[#{javascript:row.getColumnValue("category")}]]></xp:this.value>
+							</xp:text>
+							
+							<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row">
+							
+								<xp:this.attrs>
+								<xp:attr name="onClick">
+									<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mPlan.xsp?action=openDocument&documentId=" + row.getUniversalID() + " #contentwrapper', 'contentwrapper', 'Plans', false, true);"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+								
+								<xp:image url="/unp/right-arrow-circle.png" id="image1" styleClass="multiLineIcon"></xp:image>
+
+								<xp:label id="label2" styleClass="viewlistsummary">
+										<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name")}]]></xp:this.value>
+								</xp:label>
+								
+								<xp:label id="label3"
+									styleClass="viewlistdetail">
+									<xp:this.value><![CDATA[#{javascript:var ve = vwTasksByParent.getAllEntriesByKey( row.getColumnValue("id"), true);
+									var numTasks = ve.getCount();
+									
+									@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
+								</xp:label>
+
+								
+							</xp:panel>
+
+
+						</xp:repeat>
+						
+					</ul>
+				
+				
+			</xp:panel>
+		</xp:this.facets>
+	</xc:mLayout>
+</xp:view>

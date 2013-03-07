@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='25e' unid='FFDB2438CDD7D1A1C1257AA1004F5D54' sequence='34'>
+<created><datetime dst='true'>20121024T162652,36+02</datetime></created>
+<modified><datetime>20130307T090218,71+01</datetime></modified>
+<revised><datetime>20130307T090218,70+01</datetime></revised>
+<lastaccessed><datetime>20130307T090218,71+01</datetime></lastaccessed>
+<addedtofile><datetime>20130301T115514,81+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwScenarios</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+YgAFADQAMAAEAAwABAALAAkAb3JnVW5pdE5hbWVzbmFtZWRlc2NyaXB0aW9uJENvbmZsaWN0BAAE
+AAAAHgAFAAQARm9ybQEACQBmU2NlbmFyaW8ACgIDAAcACgAEAAlMMVM=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+JAACAABEiGYHAAAMAABmAAwABABvcmdVbml0TmFtZXNuYW1l
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAAUACgAAAFZDAwAMAAwAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMBAAQABAAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAACwALAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAG9yZ1VuaXRO
+YW1lc29yZ1VuaXROYW1lc25hbWVuYW1lZGVzY3JpcHRpb25kZXNjcmlwdGlvbiYAAQAAAAEBAAkB
+AAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA
+//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAA
+AAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAA
+AQD///8ABQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAA
+AAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

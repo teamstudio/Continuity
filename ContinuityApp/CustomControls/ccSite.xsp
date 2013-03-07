@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<div class="section">
+		<div class="title">Site</div>
+	</div>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docSite" formName="fSite"
+			action="editDocument" databaseName="${configBean.coreDbPath}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" disableErrorSummary="true">
+		<xp:this.facets>
+			<xp:div xp:key="footer">
+
+				<xp:button value="Save" id="button1" icon="disk.png">
+
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docSite.isEditable()}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+
+							<xp:actionGroup>
+
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:if (docSite.isNewNote()) {
+	docSite.replaceItemValue("id", "s" + docSite.getDocument().getUniversalID() );
+	docSite.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+}
+
+docSite.replaceItemValue("hazardNames", com.teamstudio.continuity.Hazard.getNames( docSite.getItemValue("hazardIds")) );
+
+if ( docSite.save() ) {
+							loadAppConfig(true);
+
+							}
+										}]]></xp:this.script>
+								</xp:executeScript>
+								<xe:changeDynamicContentAction
+									facetName="sites" for="dynamicContent1">
+								</xe:changeDynamicContentAction>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Remove" id="button3">
+					<xp:this.rendered><![CDATA[#{javascript:!docSite.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:if (siteBean.remove( docSite ) ) {
+					getComponent("dynamicContent1").show("sites");
+				}}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this site?\n\nThis will remove the linkage to this site from all objects (contacts, org units, etc.)")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Cancel" id="link2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action>
+							<xe:changeDynamicContentAction
+								facetName="sites" for="dynamicContent1">
+							</xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:div>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow1" for="name" label="Name:">
+
+			<xp:inputText value="#{docSite.name}" id="name"
+				required="true">
+				<xp:this.validators>
+					<xp:validateRequired message="Name is required"></xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow2" for="inputText3" label="Adress:">
+			<xp:inputText value="#{docSite.address}" id="inputText3"></xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow4" for="inputText4" label="Country:">
+			<xp:inputText value="#{docSite.country}" id="inputText4"></xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow5" label="Hazards:">
+
+			<xp:div id="hazards">
+
+				<xp:repeat id="repeat3" rows="50"
+					value="#{docSite.hazardNames}" var="name">
+					<xp:text escape="false" id="computedField2"
+						value="#{name}">
+					</xp:text>
+					<br />
+				</xp:repeat>
+
+				<xc:ccSelectHazards doc="#{docSite}"></xc:ccSelectHazards>
+
+			</xp:div>
+
+		</xe:formRow>
+
+		<xe:formRow id="formRow3" label="Image:">
+			<xp:fileUpload id="fileUpload1" value="#{docSite.photos}"></xp:fileUpload>
+			<xp:fileDownload rows="30" id="fileDownload1"
+				displayLastModified="false" value="#{docSite.photos}"
+				hideWhen="true" displayType="false" displayCreated="false"
+				allowDelete="true">
+			</xp:fileDownload>
+		</xe:formRow>
+
+	</xe:formTable>
+
+</xp:view>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xp_1="http://www.ibm.com/xsp/coreex">
+
+	<div class="section">
+		<div class="title">Hazards</div>
+
+		<div class="actions">
+
+			<xp:button value="Add hazard" id="button1" rendered="#{javascript:sessionScope.isEditor}">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="dynamicContent1">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("hazardForm");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</div>
+
+	</div>
+
+	<xp:panel readonly="true">
+		<xp:this.data>
+			<xp:dominoView var="vwHazards"
+				viewName="#{javascript:'vwHazards'}">
+			</xp:dominoView>
+		</xp:this.data>
+
+		<xp:repeat id="repeat1" rows="100" value="#{vwHazards}" var="rowEntry"
+			indexVar="rowIndex">
+
+			<xp:this.facets>
+				<xp:text disableTheme="true" escape="false"
+					xp:key="header">
+					<xp:this.value><![CDATA[<table class="lotusTable"><tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text disableTheme="true" escape="false"
+					xp:key="footer">
+					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+			
+			<xp:tr rendered="#{javascript:rowEntry.isCategory()}">
+				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+				
+				<xp:td>
+					<xp:text escape="true" id="computedField1"
+						tagName="h4" value="#{rowEntry.type}">
+					</xp:text>
+				</xp:td>
+			</xp:tr>
+
+			<xp:tr rendered="#{javascript:!rowEntry.isCategory()}">
+				<xp:td styleClass="lotusFirstCell">
+					<h4>
+						<xp:link escape="true" text="#{rowEntry.name}"
+							id="link1">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial">
+							<xp:this.action>
+								<xp_1:changeDynamicContentAction
+									facetName="hazardForm" for="dynamicContent1">
+									<xp_1:this.parameters>
+										<xp:parameter name="documentId"
+											value="#{javascript:rowEntry.getUniversalID()}">
+										</xp:parameter>
+										<xp:parameter name="action" value="openDocument"></xp:parameter>
+									</xp_1:this.parameters>
+								</xp_1:changeDynamicContentAction>
+							</xp:this.action></xp:eventHandler>
+						</xp:link>
+					</h4>
+				</xp:td>
+			</xp:tr>
+			
+		</xp:repeat>
+
+	</xp:panel>
+
+
+
+</xp:view>

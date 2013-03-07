@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits" databaseName="${configBean.coreDbPath}"></xp:dominoView>
+	</xp:this.data>
+	
+	<xc:settingsForm></xc:settingsForm>
+
+	<div class="section">
+		<div class="title">Organisation units</div>
+		<div class="actions">
+			<xp:button value="Add organisation unit" id="button2" icon="chart_organisation_add.png" rendered="#{javascript:sessionScope.isEditor}">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+				<xp:this.action>
+					<xe:changeDynamicContentAction facetName="orgUnit" for="dynamicContent1"></xe:changeDynamicContentAction>
+				</xp:this.action></xp:eventHandler></xp:button>
+		</div>
+	</div>
+	
+	<xp:panel id="orgUnits">
+
+		<xp:repeat id="repeat1" rows="30" value="#{vwOrgUnits}" var="row" indexVar="rowIndex">
+
+			<xp:this.facets>
+				<xp:text xp:key="header" escape="false" disableTheme="true">
+					<xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th>Name</th><th>Site(s)</th><th>Image</th></tr></thead><tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text xp:key="footer" escape="false" disableTheme="true">
+					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+
+			<xp:tr>
+				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+
+				<td>
+					<h4>
+							<xp:link escape="true" text="#{row.name}" id="link3">
+
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+									refreshId="dynamicContent1">
+
+								<xp:this.action>
+									<xe:changeDynamicContentAction facetName="orgUnit"
+										for="dynamicContent1">
+										<xe:this.parameters>
+											<xp:parameter name="action" value="editDocument"></xp:parameter>
+											<xp:parameter name="documentId"
+												value="#{javascript:row.getUniversalID()}">
+											</xp:parameter>
+										</xe:this.parameters>
+									</xe:changeDynamicContentAction>
+								</xp:this.action></xp:eventHandler>
+							</xp:link>
+						</h4>
+
+				</td>
+
+				<td>
+					<xp:text escape="false" id="computedField1" value="#{row.siteNames}">
+						<xp:this.converter>
+							<xp:customConverter getAsObject="#{javascript:return value}">
+								<xp:this.getAsString><![CDATA[#{javascript:return (typeof value =="string" ? value : value.join("<br/>"));}]]></xp:this.getAsString>
+							</xp:customConverter>
+						</xp:this.converter>
+					</xp:text>
+				</td>
+				<td>
+					<xp:link escape="true" text="#{row.images}" id="link1" target="_blank">
+						<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + configBean.coreDbUrl + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value>
+					</xp:link>
+				</td>
+				
+			</xp:tr>
+		</xp:repeat>
+
+	</xp:panel>
+
+</xp:view>

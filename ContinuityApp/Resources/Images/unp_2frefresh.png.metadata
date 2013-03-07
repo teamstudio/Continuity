@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="406" sequence="9" unid="87A530F315A5D014C1257AF500452A04">
+<created><datetime>20130116T133527,40+01</datetime></created>
+<modified><datetime>20130306T172245,82+01</datetime></modified>
+<revised><datetime>20130306T172245,81+01</datetime></revised>
+<lastaccessed><datetime>20130306T172245,82+01</datetime></lastaccessed>
+<addedtofile><datetime>20130301T115517,01+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$TITLE" sign="true"><text>unp/refresh.png</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$ImageNames" sign="true"><text>ic_action_refresh.png</text></item>
+<item name="$FileModDT" sign="true"><datetime>20120125T184850,00-05</datetime></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

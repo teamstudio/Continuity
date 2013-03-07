@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:djextListTextBox displayLabel="true" id="djextListTextOwner"
+		value="#{compositeData.dataSource[compositeData.fieldName]}"
+		required="true" title=""
+		disableValidators="#{javascript:!compositeData.required}">
+		<xe:this.validators>
+			<xp:validateRequired
+				message="Select a contact from the list">
+			</xp:validateRequired>
+		</xe:this.validators>
+
+	</xe:djextListTextBox>
+
+	<xe:valuePicker id="valuePicker1" for="djextListTextOwner" dialogTitle="#{compositeData.dlgTitle}">
+		<xe:this.dataProvider>
+			<xe:simpleValuePicker labelSeparator="|">
+				<xe:this.valueList><![CDATA[#{javascript:@DbColumn( ["",configBean.coreDbPath], "vwContactsLU", 1)}]]></xe:this.valueList>
+			</xe:simpleValuePicker>
+		</xe:this.dataProvider>
+	</xe:valuePicker>
+	
+</xp:view>

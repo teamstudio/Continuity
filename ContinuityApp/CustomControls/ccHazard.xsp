@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docHazard" formName="fHazard"></xp:dominoDocument>
+	</xp:this.data>
+
+	<div class="section">
+		<div class="title">Hazard</div>
+	</div>
+
+	<xe:formTable id="formTable1" disableErrorSummary="true">
+
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+
+				<xp:button value="Edit" id="button1"
+					icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docHazard.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit"
+								var="docHazard">
+							</xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Save" id="button2" icon="disk.png" rendered="#{javascript:docHazard.isEditable()}">
+
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:try {
+						var blnIsNew = docHazard.isNewNote();
+
+	if (blnIsNew) {
+		//set the authors: [bcEditor]
+		docHazard.replaceItemValue("docAuthors", "[bcEditor]");
+		
+		var doc:NotesDocument = docHazard.getDocument(true);
+		doc.getFirstItem("docAuthors").setAuthors(true);
+		
+		docHazard.replaceItemValue("id", "h" + doc.getUniversalID().toLowerCase() );
+	}
+									
+	docHazard.save();
+	
+	if (blnIsNew) {
+		getComponent("dynamicContent1").show("hazardsList");
+	} else {
+		context.setDocumentMode("readOnly");
+	}
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Remove" id="button3">
+
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docHazard.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript://remove hazard
+docHazard.getDocument().remove(true);
+							
+getComponent("dynamicContent1").show("hazardsList");}]]></xp:this.action>
+							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this hazard?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Back to list" id="link1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("hazardsList");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow1" label="Type:" for="inputType">
+			<xp:inputText value="#{docHazard.type}" id="inputType" style="width: 300px">
+			<xp:typeAhead mode="partial" minChars="1" ignoreCase="true" var="lupkey"
+				valueMarkup="true">
+				<xp:this.valueList><![CDATA[#{javascript://unique, sorted list of hazard types
+				var values = database.getView("vwHazards").getColumnValues(0);
+				var un = new java.util.ArrayList( new java.util.HashSet(values) );
+				var it = un.iterator();
+				
+				var r = [];
+				while (it.hasNext() ) {
+					 
+					var i = it.next();
+					if (i.toLowerCase().startsWith( lupkey.toLowerCase() ) ) {
+						r.push(i);
+					}
+				}
+				
+
+"<ul><li>" + @Implode( r, "</li><li>") + "</li></ul>"}]]></xp:this.valueList>
+			</xp:typeAhead></xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow2" label="Description:"
+			for="inputName">
+			<xp:inputTextarea value="#{docHazard.name}"
+				id="inputName">
+			</xp:inputTextarea>
+		</xe:formRow>
+		
+
+	</xe:formTable>
+
+
+</xp:view>

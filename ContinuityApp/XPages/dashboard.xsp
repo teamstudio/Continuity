@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" pageTitle="Continuity">
+	
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.ComboBox"></xp:dojoModule>
+	</xp:this.resources>
+	
+	<xc:layout>
+
+		<xp:this.facets>
+			<xp:div xp:key="facetLeft">
+
+				<!--  menu -->
+				<xe:navigator id="outline">
+					<xe:this.treeNodes>
+
+						<xe:basicContainerNode label="BCM framework"
+							enabled="false">
+							<xe:this.children>
+							
+								<!-- roles -->
+								<xe:basicLeafNode submitValue="bcmRoles"
+									label="Roles and responsibilities">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("bcmRoles");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Contact matrix"
+									submitValue="bcmRoleMatrix" style="margin-left:20px" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("bcmRoleMatrix");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<!-- scenarios -->
+								<xe:basicLeafNode
+									submitValue="scenariosList">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[Business scenarios]]></xe:this.label>
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Impact"
+									submitValue="scenariosImpact" style="margin-left:20px" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosImpact");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+								
+								<xe:basicLeafNode submitValue="tasks"
+									label="Tasks">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("tasks");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+
+								<xe:basicLeafNode
+									submitValue="quickGuidesList" label="Quick guides">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("quickGuidesList");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<xe:separatorTreeNode></xe:separatorTreeNode>
+
+							</xe:this.children>
+							
+						</xe:basicContainerNode>
+
+						<xe:basicContainerNode label="Activity history"
+							enabled="false">
+							<xe:this.children>
+
+								<xe:basicLeafNode
+									submitValue="incidentsList" label="Incidents">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("incidentsList");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<xe:basicLeafNode submitValue="auditLog"
+									label="Audit log" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("auditLog");}]]></xe:this.selected>
+									<!--<xe:this.children>
+										<xe:basicLeafNode label="by Incident" submitValue="auditLogByIncident" style="margin-left:20px">
+										<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("auditLogByIncident");}]]></xe:this.selected>
+										</xe:basicLeafNode>
+										</xe:this.children>
+									-->
+								</xe:basicLeafNode>
+
+								<xe:basicLeafNode
+									submitValue="updatesList" label="Updates">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("updatesList");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<xe:separatorTreeNode></xe:separatorTreeNode>
+
+							</xe:this.children>
+
+						</xe:basicContainerNode>
+
+						<xe:basicContainerNode label="Configuration"
+							enabled="false">
+							<xe:this.children>
+
+								<xe:basicLeafNode
+									submitValue="contactsList" label="Contacts">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("contactsList");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<xe:basicLeafNode
+									submitValue="hazardsList" label="Hazards">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("hazardsList");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+								
+								<xe:basicLeafNode label="Plans"
+									submitValue="plansList" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("plansList");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<xe:basicLeafNode
+									label="Organisation Units" submitValue="orgUnits">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("orgUnits");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+								<xe:basicLeafNode label="Sites"
+									submitValue="sites">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("sites");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+								
+								<xe:basicLeafNode label="Task categories"
+									submitValue="taskCats" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("taskCats");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+
+							</xe:this.children>
+						</xe:basicContainerNode>
+
+					</xe:this.treeNodes>
+
+					<xp:eventHandler event="onItemClick" submit="true"
+						refreshMode="partial" refreshId="facetMiddle" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:var c = context.getSubmittedValue();
+						sessionScope.selectedMenu = c;		
+						
+						if (c.equals("myProfile")) {
+							var id =  sessionScope.get("profileUnid");
+							getComponent("dynamicContent1").show("contactForm", {action:'openDocument',documentId:id });
+						} else {
+									
+getComponent("dynamicContent1").show(c);
+
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xe:navigator>
+			</xp:div>
+
+			<xp:div xp:key="facetMiddle" id="facetMiddle">
+
+				<xp:scriptBlock id="scriptBlock1">
+					<xp:this.value><![CDATA[
+					//add a clientside onclick event to all navigator options that sets the active option
+					dojo.addOnLoad( function() {
+			dojo.query("li", dojo.byId("#{id:outline}") ).forEach( function(navNode) {
+				dojo.query("a", navNode).connect("onclick", function() {
+				
+					//clear lotusSelected class from all navigation options
+					dojo.query("li", dojo.byId("#{id:outline}") ).removeClass("lotusSelected");
+					
+					//mark current node as selected
+					dojo.addClass(navNode, "lotusSelected"); 
+				});
+				
+			
+			});
+		});]]></xp:this.value>
+				</xp:scriptBlock>
+
+				<!-- show messages -->
+				<xc:ccSystemMessages></xc:ccSystemMessages>
+
+				<xe:dynamicContent id="dynamicContent1" useHash="true"
+					defaultFacet="#{javascript:sessionScope.selectedMenu}">
+					<xe:this.afterContentLoad><![CDATA[#{javascript:view.postScript("setFocusOnFirstField();");}]]></xe:this.afterContentLoad>
+
+					<xp:this.facets>
+
+						<xc:ccHazardsList xp:key="hazardsList" id="hazardsList"></xc:ccHazardsList>
+						<xc:ccHazard xp:key="hazardForm" id="hazardForm"></xc:ccHazard>
+
+						<xc:ccScenarios id="scenariosList"
+							xp:key="scenariosList">
+						</xc:ccScenarios>
+						<xc:scenariosImpact id="scenariosImpact"
+							xp:key="scenariosImpact">
+						</xc:scenariosImpact>
+						<xc:ccScenario id="scenarioForm"
+							xp:key="scenarioForm">
+						</xc:ccScenario>
+
+						<xc:contacts id="contactsList"
+							xp:key="contactsList">
+						</xc:contacts>
+						<xc:contactsImport id="contactsImport"
+							xp:key="contactsImport">
+						</xc:contactsImport>
+						<xc:contact id="contactForm"
+							xp:key="contactForm">
+						</xc:contact>
+
+						<xc:bcmRoles id="bcmRoles" xp:key="bcmRoles"></xc:bcmRoles>
+						<xc:bcmRole id="bcmRole" xp:key="bcmRole"></xc:bcmRole>
+						<xc:bcmRoleMatrix id="bcmRoleMatrix"
+							xp:key="bcmRoleMatrix">
+						</xc:bcmRoleMatrix>
+
+						<xc:ccResponsibility id="responsibility"
+							xp:key="responsibility">
+						</xc:ccResponsibility>
+
+						<xc:ccAuditLog id="auditLog"
+							xp:key="auditLog">
+						</xc:ccAuditLog>
+						<xc:ccAuditLogByIncident id="auditLogByIncident"
+							xp:key="auditLogByIncident">
+						</xc:ccAuditLogByIncident>
+
+						<xc:changePasswordForm id="changePasswordForm"
+							xp:key="changePasswordForm">
+						</xc:changePasswordForm>
+
+						<xc:ccIncidents xp:key="incidentsList"
+							id="incidentsList">
+						</xc:ccIncidents>
+						<xc:ccIncident xp:key="incidentForm"
+							id="incidentForm">
+						</xc:ccIncident>
+
+						<xc:updates id="updatesList"
+							xp:key="updatesList">
+						</xc:updates>
+
+						<xc:ccQuickGuides id="quickGuidesList" xp:key="quickGuidesList"></xc:ccQuickGuides>
+						<xc:ccQuickGuide id="quickGuideForm" xp:key="quickGuideForm"></xc:ccQuickGuide>
+
+						<xc:ccTasksCategorized id="tasks" xp:key="tasks"></xc:ccTasksCategorized>
+
+						<xc:orgUnits id="orgUnits" xp:key="orgUnits"></xc:orgUnits>
+						<xc:orgUnit id="orgUnit" xp:key="orgUnit"></xc:orgUnit>
+						
+						<xc:ccSites id="sites" xp:key="sites"></xc:ccSites>
+						<xc:ccSite id="site" xp:key="site"></xc:ccSite>
+
+						<xc:ccTaskCategories id="taskCats" xp:key="taskCats"></xc:ccTaskCategories>
+						
+						<xc:ccPlans id="plansList" xp:key="plansList"></xc:ccPlans>
+						<xc:ccPlan id="planForm" xp:key="planForm"></xc:ccPlan>
+
+						</xp:this.facets>
+				</xe:dynamicContent>
+
+			</xp:div>
+
+		</xp:this.facets>
+
+	</xc:layout>
+
+</xp:view>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:div>
+		<xp:this.styleClass><![CDATA[#{javascript:"lotusMessage " + "lotusInfo"}]]></xp:this.styleClass>
+		
+		<xp:text escape="true" id="computedField1" value="#{compositeData.message}"></xp:text>
+		
+	</xp:div>
+
+</xp:view>

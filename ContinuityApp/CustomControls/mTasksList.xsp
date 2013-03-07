@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="vwTasks"
+			viewName="#{javascript:compositeData.viewName}" categoryFilter="#{javascript:compositeData.categoryFilter}">
+		</xp:dominoView>
+	</xp:this.data>
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript://check if the view has any entries (no categories = no tasks)
+	
+	var numTaskCats = 0;
+	
+	if (compositeData.categoryFilter == null || compositeData.categoryFilter.length==0) {
+	
+		viewScope.put("hasFilter", false);
+		numTaskCats = vwTasks.getEntryCount();
+	}  else {
+		viewScope.put("hasFilter", true);
+		numTaskCats = vwTasks.getAllEntriesByKey(compositeData.categoryFilter).getCount();
+	}
+	
+	viewScope.put("hasTasks", (numTaskCats > 0) );
+	
+	}]]>
+	</xp:this.beforePageLoad>
+
+	<xp:div styleClass="box" rendered="#{javascript:viewScope.hasTasks == false}">
+		<div class="content">No tasks found</div>
+	</xp:div>
+		
+	<div>
+				
+		<ul id="summaryList">
+
+			<xp:repeat id="repeat3" rows="50" value="#{vwTasks}" var="row"
+				disableOutputTag="true">
+
+				<xp:text escape="false" tagName="li"
+					styleClass="categoryRowFixed" disableTheme="true"
+					rendered="#{javascript:row.isCategory()}">
+					<xp:this.value><![CDATA[#{javascript:(viewScope.hasFilter ? 
+	row.getColumnValues().get(1) :
+	row.getColumnValues().get(0) );}]]></xp:this.value>
+				</xp:text>
+
+				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row">
+					<xp:this.attrs>
+						<xp:attr name="onclick">
+							<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("desc") + "')"}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>
+					
+					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0)}" 
+						url="/unp/arrow-down.png"
+						id="image1"	
+						styleClass="multilineIcon"
+						style="margin-top:7px;"></xp:image>
+										
+					<!-- name -->
+					<xp:label id="label2" styleClass="viewlistsummary">
+						<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
+					</xp:label>
+					
+										<!-- description -->
+					<xp:text tagName="div" id="desc" value="#{row.description}" escape="false" style="display:none; margin-right: 25px; line-height:normal;" />
+					
+				</xp:panel>
+
+			</xp:repeat>
+
+		</ul>
+						
+	</div>
+	
+
+</xp:view>

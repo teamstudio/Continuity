@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<div class="section">
+		<div class="title">BCM Role</div>
+	</div>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docRole" formName="fRole" action="openDocument"
+			documentId="#{javascript:viewScope.docId}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" disableErrorSummary="true">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+			
+				<xp:button value="Edit" id="button3" icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docRole.isEditable()}]]></xp:this.rendered>
+					
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit" var="docRole"></xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+					
+				</xp:button>
+
+				<xp:button value="Save" id="button1"  icon="disk.png" rendered="#{javascript:docRole.isEditable()}">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:try {
+						
+						//store name of selected site(s)
+						
+var siteIds = docRole.getItemValue("siteIds");
+var siteNames = [];
+
+if (siteIds != null) {
+	if (typeof siteIds=="string") { siteIds = [siteIds]; }
+
+	for (var i=0; i<siteIds.length; i++) {
+		var siteId = siteIds[i]
+	
+		if (siteId != null && siteId.length>0) {
+			var siteName = @DbLookup( ["",configBean.coreDbPath], "vwAllById", siteId, "name", "[FailSilent]");
+			siteNames.push( siteName);	
+		}	
+	}
+}
+docRole.replaceItemValue("siteNames", siteNames);
+
+var orgUnitIds = docRole.getItemValue("orgUnitIds");
+var orgUnitNames = [];
+
+if (orgUnitIds != null) {
+
+	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
+	
+	for (var j=0; j<orgUnitIds.length; j++) {
+		var orgUnitId = orgUnitIds[j];
+	
+		if (orgUnitId != null && orgUnitId.length>0) {
+			var orgUnitName = @DbLookup( ["", configBean.coreDbPath] , "vwAllById", orgUnitId, "name", "[FailSilent]");
+			orgUnitNames.push( orgUnitName);
+		}
+	}
+}
+docRole.replaceItemValue("orgUnitNames", orgUnitNames);
+
+} catch (e) { 
+	dBar.error(e);
+}	
+
+roleBean.save( docRole);
+//force update of app config
+loadAppConfig(true);
+
+			
+getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Remove" id="button2">
+
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docRole.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:var dcResp = database.search("Form=\"fResponsibility\" & roleId=\"" + docRole.getItemValueString("id") + "\"");
+						
+						var docTemp:NotesDocument = null;
+						
+						var docResp:NotesDocument = dcResp.getFirstDocument();
+						while (docResp != null) {
+							docTemp = dcResp.getNextDocument(docResp);
+						
+							dBar.info("removing responsibility: " + docResp.getItemValueString("name") );
+							docResp.remove(true);
+							docResp.recycle();
+						
+							docResp = docTemp;
+						}
+						
+						dBar.debug("removing role " + docRole.getItemValueString("name"));
+						docRole.getDocument().remove(true);
+								
+getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Removing this role will also remove all related responsibilities.\n\nAre you sure?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Back to list" id="link1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow1" label="Role name:">
+			<xp:inputText value="#{docRole.name}" id="name1"
+				required="true" maxlength="50">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Enter a name for this role">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow3">
+
+			<xp:checkBox text="User with this role can access all organisation units" id="checkBox1"
+				value="#{docRole.canAccessAllOrgUnits}" checkedValue="yes" uncheckedValue="no">
+			</xp:checkBox>
+			
+		</xe:formRow>
+
+		<xe:formRow id="formRow2" label="Ordering number:"
+			style="white-space:noWrap">
+			<xp:inputText value="#{docRole.order}" id="inputText1"
+				required="true" styleClass="number" maxlength="3">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Enter a number for this roles' order">
+					</xp:validateRequired>
+					<xp:validateLongRange maximum="999"
+						message="Ordering number must be a (positive) number"
+						minimum="0">
+					</xp:validateLongRange>
+				</xp:this.validators>
+				<xp:this.converter>
+					<xp:convertNumber type="number"
+						integerOnly="true">
+					</xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+
+		</xe:formRow>
+		
+		<!-- link to org unit(s) -->
+		<xe:formRow id="formRow5" for="checkBoxGroupOrgUnits">
+			<xe:this.label><![CDATA[Organisation units (optional):]]></xe:this.label>
+		
+			<xc:ccSelectOrgUnits doc="#{docRole}"></xc:ccSelectOrgUnits>
+
+		</xe:formRow>
+
+		<!-- link to site(s) -->
+		<xe:formRow id="formRow15" for="checkBoxGroupSites" label="Sites (optional):">
+		
+			<xp:radio text="All" id="radio1" selectedValue="all"
+				groupName="rgSites" value="#{docRole.siteTarget}"
+				defaultSelected="true">
+				<xp:eventHandler event="onchange" submit="false">
+					<xp:this.script><![CDATA[dojo.style( "#{id:cbSites}", "display", "none")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:radio>
+			<br />
+			<xp:radio text="Selected sites" id="radio2"
+				selectedValue="selected" groupName="rgSites" value="#{docRole.siteTarget}">
+			<xp:eventHandler event="onchange" submit="false">
+				<xp:this.script><![CDATA[dojo.style("#{id:cbSites}", "display", "block")]]></xp:this.script>
+			</xp:eventHandler></xp:radio>
+			<br />
+
+			<xp:div id="cbSites">
+				<xp:this.style><![CDATA[#{javascript:"margin-left: 20px; display: " + (docRole.getItemValueString("siteTarget").equals("all") || docRole.getItemValueString("siteTarget").equals("") ? "none" : "block" )}]]></xp:this.style>
+				
+				<xp:checkBoxGroup id="checkBoxGroupSites"
+					value="#{docRole.siteIds}">
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( ["", configBean.coreDbPath], "vwSites", 2);
+						return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:checkBoxGroup>
+
+			</xp:div>
+
+			<xp:text escape="true" disableTheme="true"
+				value="No sites selected">
+				<xp:this.rendered><![CDATA[#{javascript://show in read mode when no options have been selected
+!docRole.isEditable() && @Text(docRole.getItemValue("siteIds"))==""}]]></xp:this.rendered>
+			</xp:text>
+
+			</xe:formRow>
+
+	</xe:formTable>
+
+
+</xp:view>

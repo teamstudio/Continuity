@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="docUpdate" formName="fUpdate" action="createDocument" scope="request"></xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" disableErrorSummary="true">
+	
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+				<xp:button value="Save" id="button3" icon="disk.png">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="full"
+						execMode="partial" execId="updates">
+						<xp:this.action><![CDATA[#{javascript://needs 'full' refresh to deal with photos
+						
+docUpdate.replaceItemValue("createdBy", sessionScope.get("userName"));
+docUpdate.replaceItemValue("createdByName", sessionScope.get("name"));
+docUpdate.replaceItemValue("createdDateMs", (new Date()).getTime().toString() );
+docUpdate.replaceItemValue("docAuthors", "[bcEditor]");
+docUpdate.getDocument(true).getFirstItem("docAuthors").setAuthors(true);
+
+docUpdate.replaceItemValue("photoFileName", session.evaluate("@AttachmentNames", docUpdate.getDocument()) );
+
+if( docUpdate.save()) {
+
+	viewScope.remove("addUpdate");
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Cancel" id="link2">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="newUpdate" execMode="partial" execId="newUpdate" immediate="true">
+						<xp:this.action>
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:viewScope.remove("addUpdate");}]]></xp:this.script>
+							</xp:executeScript>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow1" label="Message">
+			<xp:inputTextarea id="inputTextarea1" value="#{docUpdate.message}" required="true"
+				rows="2">
+				<xp:this.validators>
+					<xp:validateLength maximum="140"
+						message="Message length cannot exceed 140 characters">
+					</xp:validateLength>
+					<xp:validateRequired message="Message is required"></xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputTextarea>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow2" label="Photo">
+			<xp:fileUpload id="fileUpload1" value="#{docUpdate.photo}"></xp:fileUpload>
+		</xe:formRow>
+	
+	</xe:formTable>
+	
+	
+</xp:view>

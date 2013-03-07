@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<div id="formholder" class="editmode">
+		<div class="customform">
+
+			<h2>
+				<span class="formtitle">New update</span>
+			</h2>
+
+			<!-- start form controls -->
+			<div>
+				<ul class="fieldlist">
+					<li>
+						<xp:label value="Message" id="msgLabel" for="inputMessage"></xp:label>
+						<!--
+							<xp:inputTextarea id="inputMessage" value="#{docUpdate.message}"
+							styleClass="richtextfield"></xp:inputTextarea>
+						-->
+						<xp:inputText id="inputMessage" value="#{docUpdate.message}"
+							styleClass="required xspInputTextField"></xp:inputText>
+
+					</li>
+					<li>
+						<xp:label value="Photo" id="label1" for="fileUpload1"></xp:label>
+						<xp:fileUpload id="fileUpload1" value="#{docUpdate.photo}"></xp:fileUpload>
+					</li>
+				</ul>
+			</div>
+
+			<!--  end form controls -->
+
+			<!-- buttons -->
+			<xp:panel id="buttons" styleClass="buttons" tagName="ul">
+
+				<li class="saveButton">
+
+					<xp:link escape="true" text="" id="lnkSave">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:try {
+			
+			setDefaultFields( docUpdate.getDocument() );
+			
+			var a = [];
+			a.push("[bcEditor]");
+			a.push( sessionScope.get("userName") );
+			
+			docUpdate.replaceItemValue("docAuthors", a );	//set as authors field not supported in Unpluged: done in TMSRunAfterPush agent
+			
+			var attachments = docUpdate.getAttachmentList();
+			
+			if (attachments.length>0)  {
+				docUpdate.replaceItemValue("photoFileName", docUpdate.getAttachmentList().get(0).getName() );
+			}
+			
+			docUpdate.save();
+			
+			//force replication
+			var db = session.getCurrentDatabase();
+			db.replicate("someserver");
+	
+			context.redirectToPage("mUpdates.xsp");
+	} catch (e) {
+		dBar.error(e);
+	}
+									
+									}]]></xp:this.action>
+							<xp:this.script><![CDATA[return validate();]]></xp:this.script>
+						</xp:eventHandler>
+
+						<span>Save</span>
+					</xp:link>
+
+				</li>
+				<xp:panel id="closebutton" styleClass="cancelButton"
+					tagName="li">
+					<xp:this.attrs>
+						<xp:attr name="onclick">
+							<xp:this.value><![CDATA[#{javascript:return "$.blockUI(); window.location.href='mUpdates.xsp';";}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>
+					<span>Cancel</span>
+				</xp:panel>
+			</xp:panel>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+		$("input:text:visible:first").focus();
+	</script>
+
+</xp:view>

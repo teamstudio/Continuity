@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:dynamicContent id="dynContTasks" defaultFacet="tasks">
+		<xp:this.facets>
+
+			<xp:panel id="tasks" xp:key="tasks">
+
+				<div class="section" style="margin-top: 10px;">
+					<div class="title">Tasks</div>
+					<div class="actions">
+						<xp:button value="Add task" id="button1"
+							icon="to_do_list_cheked_all.png">
+							<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && compositeData.allowAdd}]]></xp:this.rendered><xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" refreshId="dynContTasks">
+								<xp:this.action><![CDATA[#{javascript:viewScope.remove("taskId");
+			getComponent("dynContTasks").show("task");}]]></xp:this.action>
+								<xp:this.onComplete><![CDATA[var inputTitleNode = dojo.query('input[id$="inputTaskTitle"]')[0];
+if (inputTitleNode) {
+	inputTitleNode.focus();
+}]]></xp:this.onComplete>
+							</xp:eventHandler>
+						</xp:button>
+					</div>
+				</div>
+				
+				<xc:ccTaskList allowRemove="true"
+					categoryFilter="#{javascript:compositeData.parentUnid}" viewName="vwTasksByParentByTaskCat">
+				</xc:ccTaskList>
+
+			</xp:panel>
+			
+			<xc:ccTask id="task" xp:key="task"
+				parentUnid="#{javascript:compositeData.parentUnid}"
+				setResponsibleFor="#{javascript:compositeData.setResponsibleFor}">
+			</xc:ccTask>
+
+		</xp:this.facets>
+	</xe:dynamicContent>
+
+</xp:view>

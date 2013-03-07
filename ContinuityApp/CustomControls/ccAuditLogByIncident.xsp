@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="vwAuditLog">
+			<xp:this.viewName><![CDATA[#{javascript:"vwAuditLog"}]]></xp:this.viewName>
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xp:div id="updates">
+
+		<div class="section">
+			<div class="title">Audit Log</div>
+		</div>
+		
+		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
+			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager2" for="repeatLog"></xp:pager>
+			<br style="clear:both" />
+		</div>
+
+		<xp:repeat id="repeatLog" rows="30" value="#{vwAuditLog}" var="row" styleClass="lotusForum" style="width:650px;">
+			
+			<xp:div id="update" styleClass="lotusPost">
+	
+				<div class="lotusPostAuthorInfo">
+					<xp:image id="image1" style="width: 40px; height: 40px;">
+						<xp:this.url><![CDATA[#{javascript:getProfilePhotoUrl( row.getColumnValue("_createdBy") )}]]></xp:this.url>
+					</xp:image>
+				</div>
+				
+				<div class="lotusPostContent">
+				
+					<div>
+						<div style="float: left; width: 230px;">
+						
+							<!-- type -->
+							<xp:text style="font-weight: bold" escape="true" id="computedField1" value="#{row._type}"></xp:text>
+							&#160;(<xp:text style="font-weight: bold" escape="true" id="computedField3" value="#{row.createdByName}"></xp:text>)
+						</div>
+						
+						<div style="float: right; margin-top:1px" class="lotusMeta">
+							<xp:text escape="true" id="computedField2" value="#{row.createdDate}">
+								<xp:this.converter>
+									<xp:customConverter getAsObject="#{javascript:value}" getAsString="#{javascript:TimeSinceConverter.getAsString(value)}">
+									</xp:customConverter>
+								</xp:this.converter>
+							</xp:text>
+						</div>
+						
+						
+					</div>
+					
+					<div style="clear:both">
+						<xp:text escape="false" disableTheme="true" value="#{row._contents}"></xp:text><br />
+						
+						<!-- attachment  -->
+						<xp:link escape="true" id="link1" text="#{row.photoFileName}">
+							<xp:this.rendered><![CDATA[#{javascript:var photo = row.getColumnValue("photoFileName");
+							photo != null && photo.length>0}]]></xp:this.rendered>
+							<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photoFileName")}]]></xp:this.value>
+							
+							<xp:this.attrs>
+								<xp:attr name="data-dojo-type" value="dojox.image.Lightbox"></xp:attr>
+								<xp:attr name="data-dojo-props">
+									<xp:this.value><![CDATA[#{javascript:var fileName = row.getColumnValue("photoFileName").replace("'", "\\'");
+									var href = applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + fileName;
+"title:'" + fileName + "',href:'" + href + "'"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							
+						</xp:link>
+
+					</div>
+
+				</div>
+
+			</xp:div>
+			
+		</xp:repeat>
+		
+		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
+			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager1" for="repeatLog"></xp:pager>
+		</div>
+	</xp:div>
+
+</xp:view>

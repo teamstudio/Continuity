@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:link escape="true" text="Select" id="link2"
+		rendered="#{javascript:compositeData.doc.isEditable()}">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgSelectHazards}");]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:link>
+
+	<xe:dialog id="dlgSelectHazards"
+		title="Select one or more hazards">
+
+		<xp:panel style="padding:15px">
+
+			<xp:repeat id="repeat1" rows="100" var="hazardCat"
+				indexVar="hazardIndex" style="height: 375px; overflow-y:auto">
+				<xp:this.value><![CDATA[#{javascript:@Trim(database.getView("vwHazards").getColumnValues(0))}]]></xp:this.value>
+
+				<xp:text tagName="h4" escape="true" id="computedField1"
+					value="#{hazardCat}">
+					<xp:this.style><![CDATA[#{javascript:"margin-bottom:5px;" + (hazardIndex>0 ? "margin-top:10px;" : "")}]]></xp:this.style>
+				</xp:text>
+
+				<xp:repeat id="repeat2" rows="100" var="hazard">
+					<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwHazards", hazardCat, 3, "[FailSilent]")}]]></xp:this.value>
+
+					<label>
+						<xp:text escape="false" disableTheme="true">
+							<xp:this.value><![CDATA[#{javascript:var checked = false;
+										var hazardId = @Right(hazard, "|");
+										if (compositeData.doc.hasItem("hazardIds") ) {
+											checked = @IsMember( hazardId, compositeData.doc.getItemValue("hazardIds") );
+										}
+										
+										"<input type=\"checkbox\" class=\"hazardIds\" " + (checked ? "checked " : "") + "value=\"" + hazardId + "\" />" + @Left(hazard, "|")}]]></xp:this.value>
+						</xp:text>
+					</label>
+					<br />
+				</xp:repeat>
+
+			</xp:repeat>
+
+			<xp:inputHidden id="selectedIds" multipleSeparator=","
+				multipleTrim="true">
+			</xp:inputHidden>
+		</xp:panel>
+
+		<xe:dialogButtonBar id="dialogButtonBar1">
+
+			<xp:button value="Ok" id="button4">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="hazards">
+					<xp:this.action><![CDATA[#{javascript:try {
+							
+							var selected = getComponent("selectedIds").getValue();
+							
+							if (typeof selected == 'string') { selected = [selected]; }
+							
+							compositeData.doc.replaceItemValue("hazardIds", selected);
+							
+							var names = [];
+							var vwAllById = database.getView("vwAllById");
+						
+							for (var i=0; i<selected.length; i++) {
+								if (selected[i].length>0 ) {					
+									var ve = vwAllById.getEntryByKey( selected[i] );
+									if (null != ve) {
+										names.push( ve.getColumnValues().get(1) );
+										ve.recycle();
+									}
+								}
+							}
+							
+							compositeData.doc.replaceItemValue("hazardNames", names);
+		
+			getComponent("dlgSelectHazards").hide();
+		} catch (e) {
+			dBar.error(e);
+		}}]]></xp:this.action>
+					<xp:this.script><![CDATA[var ids = [];
+			
+			dojo.query('input.hazardIds:checked').forEach( function(cb) {
+				ids.push( cb.value);
+			});
+			
+			dojo.byId("#{id:selectedIds}").value = ids.join(",");]]></xp:this.script>
+
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:link escape="true" text="Cancel" id="link3">
+				<xp:eventHandler event="onclick" submit="false"
+					immediate="true" refreshMode="partial"
+					refreshId="dlgSelectHazards">
+					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgSelectHazards}")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+
+		</xe:dialogButtonBar>
+	</xe:dialog>
+
+
+</xp:view>

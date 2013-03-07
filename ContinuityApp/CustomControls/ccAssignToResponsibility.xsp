@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	&#160;
+	(<xp:link escape="true" text="change" id="link1">
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:link>)
+
+	<xe:dialog id="dlgAssignTo" title="Allocate task to responsibilities">
+									
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument
+					var="docTarget" formName="fTask" action="editDocument"
+					documentId="#{javascript:compositeData.taskUnid}"
+					ignoreRequestParams="true">
+				</xp:dominoDocument>
+				<xp:dominoView var="vwRoles"
+							viewName="vwRoles">
+				</xp:dominoView>
+				<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"></xp:dominoView>
+			</xp:this.data>
+			
+			<div style="padding:15px;">
+				
+				<!-- show all roles and responsibilities -->
+				<xp:repeat id="repeatRoles" rows="100"
+					value="#{vwRoles}" var="roleRow" indexVar="rowIndex" style="height: 350px; overflow-y:auto">
+
+					<div style="width: 400px; border-bottom: 1px solid silver;">
+						<xp:text tagName="h4" escape="true"
+							id="computedField1" value="#{roleRow.name}">
+							<xp:this.style><![CDATA[#{javascript:"margin-bottom:5px;" + (rowIndex>0 ? "margin-top:10px;" : "")}]]></xp:this.style>
+						</xp:text>
+					</div>
+
+					<xp:text disableTheme="true" escape="false"
+						value="No responsibilities defined for this role yet">
+						<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResp").getRowCount()==0}]]></xp:this.rendered>
+					</xp:text>
+
+					<xp:repeat id="repeatResp" rows="100" var="respRow">
+						<xp:this.value><![CDATA[#{javascript:vwResponsibilitiesByRole.getAllEntriesByKey(roleRow.getColumnValue("id"), true);}]]></xp:this.value>
+						
+						<label>
+							<xp:text escape="false" disableTheme="true">
+								<xp:this.value><![CDATA[#{javascript:var checked = false;
+								var id = respRow.getColumnValues().get(4);
+								if (docTarget.hasItem("responsibilityIds") ) {
+									checked = @IsMember( id, docTarget.getItemValue("responsibilityIds") );
+								}
+								
+								"<input type=\"checkbox\" class=\"respIds\" " + (checked ? "checked " : "") + "value=\"" + id + "\" />" + respRow.getColumnValues().get(2)}]]></xp:this.value>
+							</xp:text>
+						</label>
+							
+						<br />
+
+					</xp:repeat>
+
+				</xp:repeat>
+				
+				<xp:inputHidden id="selectedResponsibilityIds" multipleSeparator="," multipleTrim="true"></xp:inputHidden>
+
+			</div>
+			
+			<xe:dialogButtonBar id="dialogButtonBar1">
+
+			<xp:button value="Ok" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="#{javascript:compositeData.refreshId}">
+					<xp:this.action><![CDATA[#{javascript:try {
+					//update tasks
+					var selected = getComponent("selectedResponsibilityIds").getValue();
+
+					if (typeof selected == 'string') { selected = [selected]; }
+					
+					docTarget.replaceItemValue("responsibilityIds", selected);
+					
+					
+					
+					var respNames = [];
+					
+					if (selected != null) {
+					
+						var vwAllById = database.getView("vwAllById");
+							
+						for (var i=0; i<selected.length; i++) {
+							if (selected[i].length>0 ) {					
+								var ve = vwAllById.getEntryByKey( selected[i] );
+								if (null != ve) {
+									var docResp = ve.getDocument();
+									respNames.push( docResp.getItemValueString("roleName") + " - " + docResp.getItemValueString("name") );
+									ve.recycle();
+								}
+							}
+						}
+					}
+					
+	docTarget.replaceItemValue("responsibilityNames", respNames );
+	docTarget.save();
+
+	getComponent("dlgAssignTo").hide();
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.action>
+<xp:this.script><![CDATA[var ids = [];
+			
+			dojo.query('input.respIds:checked').forEach( function(cb) {
+				ids.push( cb.value);
+			});
+			
+			dojo.byId("#{id:selectedResponsibilityIds}").value = ids.join(",");]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:link escape="true" text="Cancel" id="link3">
+				<xp:eventHandler event="onclick" submit="false" immediate="true" refreshMode="partial" refreshId="dlgAssignTo">
+					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgAssignTo}")]]></xp:this.script>
+				</xp:eventHandler></xp:link>
+			
+			</xe:dialogButtonBar>
+		</xp:panel>
+	</xe:dialog>
+
+</xp:view>
+
+

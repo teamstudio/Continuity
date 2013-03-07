@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xp_1="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<div class="section">
+		<div class="title">Contacts</div>
+		<div class="actions">
+			<xp:button value="Add contact" id="button1" icon="user_add.png">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="facetMiddle">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactForm");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			
+			<xp:button value="Import contacts" id="button2" icon="group_add.png">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="facetMiddle">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactsImport");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			
+		</div>
+	</div>
+
+	<div style="margin-bottom:10px;">
+		<strong>Filter:</strong>
+		&#160;
+		<xp:comboBox id="comboBox1" value="#{viewScope.filter}" defaultValue="all">
+			<xp:selectItems>
+				<xp:this.value><![CDATA[#{javascript:var options:java.util.ArrayList = new java.util.ArrayList();
+				
+				options.add( new javax.faces.model.SelectItem("all", "- All contacts -") );
+				
+				var orgUnits = @DbColumn( configBean.coreDbPath, "vwOrgUnits", 2);
+	if (typeof orgUnits == "string") { orgUnits =[orgUnits]; }
+
+var group1:javax.faces.model.SelectItemGroup = new javax.faces.model.SelectItemGroup("Organisation Unit");
+var group1Items = new Array();
+
+for (var i=0; i<orgUnits.length; i++) {
+	group1Items.push( new javax.faces.model.SelectItem( "o-" + @Right(orgUnits[i], "|"), @Left(orgUnits[i], "|")) );
+}
+group1Items.push( new javax.faces.model.SelectItem( "o-" + "none", "- No organisation unit -") );
+
+group1.setSelectItems(group1Items);
+
+var sites = @DbColumn( configBean.coreDbPath, "vwSites", 2);
+	if (typeof sites == "string") { sites =[sites]; }
+
+var group2:javax.faces.model.SelectItemGroup = new javax.faces.model.SelectItemGroup("Site");
+var group2Items = new Array();
+
+for (var i=0; i<sites.length; i++) {
+	group2Items.push( new javax.faces.model.SelectItem( "s-" + @Right(sites[i], "|"), @Left(sites[i], "|")) );
+}
+group2Items.push( new javax.faces.model.SelectItem( "s-" + "none", "- No site -") );
+
+group2.setSelectItems(group2Items);
+
+options.add(group1);
+options.add(group2);
+
+return options;
+}]]></xp:this.value>
+			</xp:selectItems>
+			<xp:eventHandler event="onchange" submit="true" refreshMode="partial"
+				refreshId="contactsList">
+			</xp:eventHandler>
+		</xp:comboBox>
+	</div>
+
+	<xp:div id="contactsList">
+
+		<xc:ccMessage>
+			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()==0}]]></xp:this.rendered>
+			<xc:this.message><![CDATA[#{javascript:"No contacts found" +
+	(viewScope.filter && !viewScope.filter.equals("all") ? 
+		" in the selected organisation unit/ site" : 
+		"")}]]></xc:this.message>
+		</xc:ccMessage>
+	
+		
+		
+		
+		<xp:viewPanel rows="500" id="viewPanel1" var="row">
+			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()>0}]]></xp:this.rendered>
+
+			<xp:this.data>
+				<xp:dominoView var="vwContacts"
+					databaseName="${configBean.coreDbPath}">
+					<xp:this.categoryFilter><![CDATA[#{javascript:if ( !viewScope.containsKey("filter") || viewScope.filter=="all") {
+					return "all";
+					} else if (viewScope.filter=="none") {
+					return "none";
+					} else {
+					return viewScope.filter.substring(2);
+					}}]]></xp:this.categoryFilter>
+					<xp:this.viewName><![CDATA[#{javascript:(viewScope.filter && viewScope.filter.indexOf('s-')==0 ? 'vwContactsBySite' : 'vwContactsByOrgUnit')}]]></xp:this.viewName>
+				</xp:dominoView>
+			</xp:this.data>
+			
+				<xp:viewColumn value="" id="viewColumn1">
+				<xp:viewColumnHeader value="Type" id="viewColumnHeader1"></xp:viewColumnHeader>
+				
+				<xp:image id="image1" title="#{javascript:this.getAlt()}">
+					<xp:this.url><![CDATA[#{javascript:switch (row.getColumnValue("userType")) {
+	case "user":
+		return "user.png";
+	case "editor":
+		return "user_edit.png";
+	case "contact":
+		return "user_red.png";
+}}]]></xp:this.url>
+					<xp:this.rendered><![CDATA[#{javascript:var t = row.getColumnValue("userType");
+"user".equals(t) || "editor".equals(t)|| "contact".equals(t);}]]></xp:this.rendered>
+					<xp:this.alt><![CDATA[#{javascript:switch (row.getColumnValue("userType")) {
+	case "user":
+		return "User";
+	case "editor":
+		return "Editor";
+	case "contact":
+		return "Contact";
+}}]]></xp:this.alt>
+				</xp:image>
+			</xp:viewColumn>
+			
+			<xp:viewColumn value="" id="viewColumn8">
+				<xp:viewColumnHeader value="Name" id="viewColumnHeader6"></xp:viewColumnHeader>
+
+				<xp:link escape="true" id="link1" text="#{row.name}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp_1:changeDynamicContentAction facetName="contactForm"
+								for="dynamicContent1">
+								<xp_1:this.parameters>
+									<xp:parameter name="documentId"
+										value="#{javascript:row.getUniversalID()}">
+									</xp:parameter>
+									<xp:parameter name="action" value="openDocument"></xp:parameter>
+								</xp_1:this.parameters>
+							</xp_1:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:viewColumn>
+
+		
+			<xp:viewColumn columnName="jobTitle" id="viewColumn12">
+				<xp:viewColumnHeader value="Job title" id="viewColumnHeader11"></xp:viewColumnHeader>
+			</xp:viewColumn>
+			<xp:viewColumn columnName="roleName" id="viewColumn13">
+				<xp:viewColumnHeader value="Role" id="viewColumnHeader12"></xp:viewColumnHeader>
+			</xp:viewColumn>
+			
+			<xp:viewColumn value="" id="viewColumn4">
+				<xp:text escape="true">
+					<xp:this.value><![CDATA[#{javascript:var isAlternate = row.getColumnValue("isAlternate").equals("yes");
+	(isAlternate ? " (alternate)" : "");}]]></xp:this.value>
+				</xp:text>
+			</xp:viewColumn>
+
+				<xp:viewColumn columnName="email" id="viewColumn11">
+				<xp:viewColumnHeader value="Email" id="viewColumnHeader10"></xp:viewColumnHeader>
+			</xp:viewColumn>
+
+				<xp:viewColumn value="" id="viewColumn2">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
+					
+					<xp:text escape="true" id="computedField1" value="#{row.lastLogin}">
+						<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("active")}]]></xp:this.rendered>
+						<xp:this.converter>
+							<xp:convertDateTime type="both" timeStyle="short"></xp:convertDateTime>
+						</xp:this.converter>
+					</xp:text>
+					
+					<xp:text escape="true" id="computedField3" value="deactivated">
+						<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("inactive")}]]></xp:this.rendered>
+					</xp:text>
+					<xp:text escape="true" id="computedField2" value="not activated">
+						<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("new") && !row.getColumnValue("userType").equals("none")}]]></xp:this.rendered>
+					</xp:text>
+					<xp:viewColumnHeader value="Last login" id="viewColumnHeader2"></xp:viewColumnHeader>
+				</xp:viewColumn>
+
+
+		</xp:viewPanel>
+	</xp:div>
+
+</xp:view>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="vwTasks"
+			viewName="#{javascript:compositeData.viewName}"
+			categoryFilter="#{javascript:compositeData.categoryFilter}">
+		</xp:dominoView>
+	</xp:this.data>
+	
+	<xp:text value="No tasks found" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
+
+	<xp:repeat id="repeatTasks" rows="500" value="#{vwTasks}" var="row" indexVar="rowIndex">
+
+		<xp:this.facets>
+			<xp:text escape="false" disableTheme="true"
+				xp:key="header">
+				<xp:this.value><![CDATA[<table class="lotusTable"><tbody>]]></xp:this.value>
+			</xp:text>
+			<xp:text escape="false" disableTheme="true"
+				xp:key="footer">
+				<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+			</xp:text>
+		</xp:this.facets>
+
+		<xp:tr styleClass="highlight">
+
+			<xp:this.rendered><![CDATA[#{javascript:row.getIndentLevel()==0 && row.isCategory()}]]></xp:this.rendered>
+			<th colspan="2">
+				<xp:text escape="false" tagName="h4"
+					value="#{javascript:row.getColumnValues().get(0)}">
+				</xp:text>
+			</th>
+
+		</xp:tr>
+
+		<xp:tr>
+			<xp:this.rendered><![CDATA[#{javascript:row.getIndentLevel()==1 && row.isCategory()}]]></xp:this.rendered>
+			
+			<th colspan="2" style="font-weight: bold; padding-left: 10px">
+				<xp:text disableTheme="true" escape="false"
+					value="#{javascript:row.getColumnValues().get(1)}">
+				</xp:text>
+			</th>
+
+		</xp:tr>
+
+		<xp:tr rendered="#{javascript:!row.isCategory()}">
+			<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+		
+			<td style="padding-left: 20px; width:100%">
+				
+				<h4>
+					<xp:link escape="false" id="link4" disableTheme="true"
+						rendered="#{javascript:sessionScope.isEditor}"
+						style="font-weight: bold" text="#{row.name}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dynContTasks">
+							<xp:this.action><![CDATA[#{javascript:viewScope.put("taskId", row.getUniversalID());
+						getComponent("dynContTasks").show("task")}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+			
+					<xp:text rendered="#{javascript:!sessionScope.isEditor}" escape="false" disableTheme="true" value="#{row.name}"></xp:text>
+			
+				</h4>
+			
+				<!-- responsible -->
+				<xp:div styleClass="lotusMeta" id="taskMetaInfo">
+			
+					<b>Responsibility:</b>&#160;
+					<xp:text escape="false" disableTheme="true">
+						<xp:this.value><![CDATA[#{javascript:if (row.getColumnValue("responsibilityNames").length==0) {
+				return "not allocated";
+			} else {
+				return @Implode(row.getColumnValue('responsibilityNames'), ", ");
+			}
+			
+			}]]></xp:this.value>
+					</xp:text>
+			
+					<!-- dialog to change assignment -->
+					<xc:ccAssignToResponsibility refreshId="repeatTasks"
+						taskUnid="#{javascript:row.getUniversalID()}">
+						<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
+					</xc:ccAssignToResponsibility>
+			
+					<!-- type -->
+					<span class="lotusDivider">|</span>
+					<b>Type:</b>&#160;
+					<xp:text escape="false" disableTheme="true"
+						value="#{row.type}">
+					</xp:text>
+			
+					<!-- status -->
+					<xp:text escape="false" disableTheme="true">
+						<xp:this.value><![CDATA[#{javascript:(row.getColumnValue('status').length>0 ? '<span class="lotusDivider">|</span><b>Status:</b> ' + row.getColumnValue('status') : '')}]]></xp:this.value>
+					</xp:text>
+			
+					<br />
+					<b>Plans:</b>&#160;
+					<xp:text escape="false" disableTheme="true">
+						<xp:this.value><![CDATA[#{javascript:if (row.getColumnValue("planNames").length==0) {
+				return "not allocated";
+			} else {
+				return @Implode(row.getColumnValue('planNames'), ", ");
+			}
+			
+			}]]></xp:this.value>
+					</xp:text>
+			
+					<!-- plan(s) -->
+					<xc:ccAssignToPlans refreshId="repeatTasks"
+						taskUnid="#{javascript:row.getUniversalID()}">
+						<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
+					</xc:ccAssignToPlans>
+			
+				</xp:div>
+				
+				
+				
+				
+
+				<!-- description -->
+				<xp:div id="rowDetails"
+					style="display:none; margin-top:5px; margin-bottom:5px;">
+					<xp:text escape="false" id="computedField3"
+						value="#{row.description}">
+					</xp:text>
+				</xp:div>
+				
+				<!-- remove -->
+				<xp:td>
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && compositeData.allowRemove}]]></xp:this.rendered>
+					<xp:link escape="true" text="remove"
+						id="link5" styleClass="lotusTiny">
+						<xp:eventHandler event="onclick"
+							submit="true" refreshMode="partial" refreshId="dynContTasks">
+							<xp:this.action><![CDATA[#{javascript:taskBean.remove(row.getUniversalID());}]]></xp:this.action>
+							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this task?");]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:td>
+
+			</td>
+
+			<td class="lotusRight lotusLastCell">
+
+				<xp:image
+					url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif"
+					id="imageShowDetails" width="16" height="16" title="Show details"
+					styleClass="lotusIcon16 lotusIconShow pointer">
+					<xp:this.rendered><![CDATA[#{javascript:!row.isCategory() && row.getColumnValue("description").length>0}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script>
+							<xp:executeClientScript>
+								<xp:this.script><![CDATA[toggleDetails( "#{id:imageShowDetails}", "#{id:rowDetails}" );]]></xp:this.script>
+							</xp:executeClientScript>
+						</xp:this.script>
+					</xp:eventHandler>
+				</xp:image>
+
+			</td>
+
+		</xp:tr>
+	</xp:repeat>
+
+</xp:view>

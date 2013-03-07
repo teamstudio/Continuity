@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits" databaseName="#{applicationScope.coreDbPath}"></xp:dominoView>
+	</xp:this.data>
+	
+	
+
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE">
+					<xp:this.fullName><![CDATA[[bcEditor]]]></xp:this.fullName>
+					<xp:this.name><![CDATA[[bcEditor]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+	
+	<xc:mLayout showMenu="false" pageTitle="Organisation unit">
+		<xp:this.facets>
+
+			<xp:div xp:key="contents">
+
+				<ul id="summaryList">
+
+					<xp:repeat id="repeat3" rows="50"
+						value="#{vwOrgUnits}" var="row" disableOutputTag="true">
+
+						<xp:panel tagName="li" styleClass="data-row">
+							<xp:this.attrs>
+								<xp:attr name="onClick">
+									<xp:this.value><![CDATA[#{javascript:"document.location.href='UnpMain.xsp?orgUnid=" + row.getUniversalID() + "';"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+
+							<xp:image url="/unp/right-arrow-circle.png"
+								id="image1" styleClass="multiLineIcon">
+							</xp:image>
+
+							<xp:label id="label2"
+								styleClass="viewlistsummary">
+								<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name")}]]></xp:this.value>
+							</xp:label>
+
+
+							<div
+								style="background: #6b6b6b; padding: 0 7px; width: 140px;"
+								class="roundedBorders">
+
+								<xp:text escape="false"
+									id="computedField1"
+									style="font-size: 12px; color: #fff; font-weight: bold;">
+									<xp:this.value><![CDATA[#{javascript:var level = row.getColumnValue("alertLevel");
+								
+								"Alert level: <span class=\"" + level + "\">" + level + "</a>";
+								}]]></xp:this.value>
+								</xp:text>
+
+							</div>
+
+
+						</xp:panel>
+
+
+					</xp:repeat>
+
+				</ul>
+
+
+			</xp:div>
+
+		</xp:this.facets>
+	</xc:mLayout>
+
+
+
+</xp:view>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");
+	
+	viewScope.put("pageTitle", compositeData.pageTitle);
+	viewScope.put("newDocTarget", compositeData.newDocTarget );
+	viewScope.put("backButtonURL", compositeData.backButtonURL );
+	
+	}]]></xp:this.beforePageLoad>
+	<xp:this.afterRestoreView><![CDATA[#{javascript:init("mobile");}]]></xp:this.afterRestoreView>
+	
+	<xp:this.resources>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
+		<xp:script src="/unpCommon.jss" clientSide="false"></xp:script>
+
+		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
+		
+		<xp:metaData name="Content-Type" content="text/html; charset=utf-8"></xp:metaData>
+		<xp:metaData name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"></xp:metaData>
+		<xp:metaData name="apple-mobile-web-app-capable" content="yes"></xp:metaData>
+		<xp:metaData name="apple-mobile-web-app-status-bar-style" content="black-translucent"></xp:metaData>
+		
+		<xp:metaData name="format-detection" content="telephone=no"></xp:metaData>
+
+		<xp:script src="unp/jquery-1.7.2.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/iscroll.min.js" clientSide="true"></xp:script>
+		<xp:script src="/unplugged.js" clientSide="true"></xp:script>
+		
+	</xp:this.resources>
+	
+	<div id="page">
+
+		<xc:unpHeader search="none" searchPage="UnpSearch.xsp"
+			viewsButton="false" title="#{javascript:viewScope.pageTitle}"
+			backButtonText="Back"
+			backButtonURL="#{javascript:viewScope.backButtonURL}">
+		</xc:unpHeader>
+
+		<div id="body">
+		
+			<!-- menu -->
+			
+			<!-- show only the contacts and plans option for standard contacts -->
+			<xc:unpNavigator>
+				<xc:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xc:this.rendered>
+				
+				<xc:this.menuItem>
+					<xc:menuItem disabled="false" label="Contacts" page="/mContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem disabled="false" label="Plans" page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+				</xc:this.menuItem>
+			</xc:unpNavigator>
+		
+			<xc:unpNavigator>
+				<xc:this.menuItem>
+
+					<xc:menuItem disabled="false" label="Activate team"
+						page="/mActivate.xsp" icon="activate.png"
+						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+
+					<xc:menuItem disabled="false" label="Contacts"
+						page="/mContacts.xsp" icon="contacts-blue.png"
+						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+					<xc:menuItem disabled="false" label="Call tree"
+						page="/mCallTree.xsp" icon="calltree-blue.png"
+						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+
+					<xc:menuItem disabled="false" label="Incidents"
+						page="/mIncidents.xsp" icon="incidents.png"
+						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+
+					<xc:menuItem disabled="false" label="My role"
+						page="/mRole.xsp" icon="role.png" ajaxloadid="contentwrapper"
+						ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+					<xc:menuItem disabled="false" label="Plans"
+						page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper"
+						ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+
+					<xc:menuItem
+						disabled="#{javascript:sessionScope.numAssignedTasks==0}"
+						label="Active tasks" page="/mTasks.xsp" icon="tasks.png"
+						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+					<xc:menuItem disabled="false" label="Updates"
+						page="/mUpdates.xsp" icon="updates-blue.png"
+						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
+					</xc:menuItem>
+
+					<!--<xc:menuItem label="Locate team" page="/mLocateTeam.xsp" icon="locate-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="content"></xc:menuItem>-->
+
+				</xc:this.menuItem>
+				<xc:this.rendered><![CDATA[#{javascript:if ( compositeData.showMenu == 'false') {
+	return false;
+} else if (sessionScope.isUser || sessionScope.isEditor) {
+	return true;
+}}]]></xc:this.rendered>
+			</xc:unpNavigator>
+
+			<!-- main (scrollable) area -->
+			<div id="contentwrapper" >
+				<xp:div id="contentwrapper" styleClass="iscrollcontent">
+				
+					<div id="contentScroller">
+				
+						<xp:callback facetName="contents"></xp:callback>
+						
+					</div>
+				</xp:div>
+			</div>
+			
+			
+		</div>
+		
+		<xc:unpFooter
+			newDocTarget="#{javascript:viewScope.newDocTarget}">
+			<xc:this.rendered><![CDATA[#{javascript:(isEmpty(compositeData.useCustomFooter) || compositeData.useCustomFooter=='false');}]]></xc:this.rendered>
+		</xc:unpFooter>
+
+		<!-- custom footer for calltree  -->
+		<xp:panel styleClass="footer black">
+
+			<xp:this.rendered><![CDATA[#{javascript:!isEmpty( compositeData.useCustomFooter ) && compositeData.useCustomFooter == 'true'}]]></xp:this.rendered>
+		
+			<div id="footer">
+		
+				<xp:panel tagName="div" id="panel1"
+					styleClass="button buttonPrevious"
+					rendered="#{javascript:viewScope.hasPreviousPage}">
+					<xp:this.attrs>
+						<xp:attr name="onclick">
+							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + " #contentwrapper', 'contentwrapper');"}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>
+					<span>Previous</span>
+				</xp:panel>
+				
+	
+				<xp:panel tagName="div" id="panel2"
+					styleClass="button buttonNext"
+					rendered="#{javascript:viewScope.hasNextPage}">
+					<xp:this.attrs>
+						<xp:attr name="onclick">
+							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + " #contentwrapper', 'contentwrapper');"}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>
+					<span>Next</span>
+				</xp:panel>
+				
+			</div>
+			
+		</xp:panel>
+
+	</div>
+
+</xp:view>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<div class="section">
+		<div class="title">Business scenario</div>
+	</div>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docScenario" formName="fScenario"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<xe:formTable id="formTable1" labelPosition="left" disableErrorSummary="true">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+				<xp:button value="Edit" id="button1"
+					icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docScenario.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit" var="docScenario"></xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Save" id="button2" icon="disk.png"
+					rendered="#{javascript:docScenario.isEditable()}">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:try {
+						var blnIsNew = docScenario.isNewNote();
+
+if (blnIsNew) {
+	//set the authors: [bcEditor]
+	docScenario.replaceItemValue("docAuthors", "[bcEditor]");
+	docScenario.replaceItemValue("numTasks", 0);
+	
+	var doc:NotesDocument = docScenario.getDocument(true)
+	
+	doc.getFirstItem("docAuthors").setAuthors(true);
+}
+
+if (blnIsNew || docScenario.getItemValueString("id").length==0 ) {
+	docScenario.replaceItemValue("id", "s" + doc.getUniversalID().toLowerCase() );
+}
+						
+//store org unit name
+var orgUnitIds = docScenario.getItemValue("orgUnitIds");
+var orgUnitNames = [];
+
+if (orgUnitIds != null) {
+
+	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
+	
+	for (var j=0; j<orgUnitIds.length; j++) {
+	
+		if (orgUnitIds[j] != null && orgUnitIds[j].length>0) {
+			orgUnitName = @DbLookup( ["", configBean.coreDbPath], "vwAllById", orgUnitIds[j], "name");
+			orgUnitNames.push( orgUnitName);
+		}
+	}
+}
+
+docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
+
+//save contents of rich text field as string
+var doc:NotesDocument = docScenario.getDocument(true);
+	
+var desc = doc.getMIMEEntity("description_input");
+docScenario.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
+
+var desc = doc.getMIMEEntity("impactDescription_input");
+docScenario.replaceItemValue("impactDescription", (desc != null ? desc.getContentAsText() : "") );
+						
+docScenario.save();
+
+context.setDocumentMode("readOnly");
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button><xp:button value="Remove" id="button3">
+
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docScenario.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
+						<xp:this.action><![CDATA[#{javascript://find related tasks
+var dcTasks = database.search( "Form=\"fTask\" & scenarioId=\"" + docScenario.getItemValueString("id") + "\"");
+if (dcTasks.getCount()>0) {
+ dcTasks.removeAll(true);
+}
+
+//remove scenario
+docScenario.getDocument().remove(true);
+							
+getComponent("dynamicContent1").show("scenariosList");}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Removing this plan will also remove all related tasks.\n\nAre you sure?")]]></xp:this.script>
+					</xp:eventHandler>
+</xp:button>
+
+				<xp:link escape="true" text="Back to list" id="link1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenariosList");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xp:this.facets>
+		
+		<xe:formRow id="formRow3" label="Scenario name:" for="name1">
+			<xp:inputText value="#{docScenario.name}" id="name1"
+				required="true" maxlength="50">
+				<xp:this.validators>
+					<xp:validateRequired message="Name is required"></xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+		
+		
+		<!-- link to org unit(s) -->
+		<xe:formRow id="formRow1" for="checkBoxGroupOrgUnits">
+			<xe:this.label><![CDATA[Organisation units (optional):]]></xe:this.label>
+			<xc:ccSelectOrgUnits doc="#{docScenario}"></xc:ccSelectOrgUnits>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow8" label="Hazards:">
+		
+			<xp:div id="hazards">
+
+				<xp:repeat id="repeat3" rows="50" value="#{docScenario.hazardNames}" var="name">
+					<xp:text escape="false" id="computedField2"	value="#{name}"></xp:text>
+					<br />
+				</xp:repeat>
+	
+				<xc:ccSelectHazards doc="#{docScenario}"></xc:ccSelectHazards>
+				
+			</xp:div>
+
+		</xe:formRow>
+		
+		<xe:formRow id="formRow4" label="Description:" for="inputRichText2">
+			<xp:inputRichText id="inputRichText2" value="#{docScenario.description_input}">
+
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar">
+						<xp:this.value><![CDATA[#{javascript:applicationScope.toolbarConfig}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+
+			</xp:inputRichText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow10" label="Quick guides:">
+		
+			<xe:djextListTextBox multipleSeparator="," displayLabel="true"
+				id="djextListTextBoxQG" value="#{docScenario.quickGuideIds}"
+				readOnly="#{javascript:!docScenario.isEditable()}" styleClass="asBlock">
+				<xe:this.title><![CDATA[#{javascript:(!docScenario.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
+			</xe:djextListTextBox>
+			
+			<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
+				pickerText="Select" dialogTitle="Select one or more quick guides">
+				<xe:this.dataProvider>
+					<xe:simpleValuePicker labelSeparator="|"
+						valueListSeparator=",">
+						<xe:this.valueList><![CDATA[#{javascript:@Implode(database.getView("vwQuickGuides").getColumnValues(2), ",")}]]></xe:this.valueList>
+					</xe:simpleValuePicker>
+				</xe:this.dataProvider>
+			</xe:valuePicker>
+			
+		</xe:formRow>
+		
+		<!-- impact -->
+		<xe:formRow id="formRow14" labelPosition="none" styleClass="formSection"
+			disableTheme="true">
+			<xe:formColumn id="formColumn3" colSpan="3">Impact</xe:formColumn>
+		</xe:formRow>
+
+		<xe:formRow id="formRow6" for="rgImpact" label="Impact level:">
+			<xp:radioGroup id="rgImpact" value="#{docScenario.impactLevel}">
+				<xp:selectItem itemLabel="High" itemValue="High"></xp:selectItem>
+				<xp:selectItem itemLabel="Medium" itemValue="Medium"></xp:selectItem>
+				<xp:selectItem itemLabel="Low" itemValue="Low"></xp:selectItem>
+			</xp:radioGroup></xe:formRow>
+
+		<xe:formRow id="formRow5" label="Describe impact:">
+			<xp:inputRichText id="inputRichText3" value="#{docScenario.impactDescription_input}">
+					<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar">
+						<xp:this.value><![CDATA[#{javascript:applicationScope.toolbarConfig}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow7" label="Costs:" for="inputOneTime">
+		
+			<div style="float: left; width: 150px;">
+					<b>one-time:</b>&#160;
+					<xp:inputText id="inputOneTime" value="#{docScenario.impactCostsOneTime}"
+						styleClass="numberLarge" maxlength="10">
+						<xp:this.converter>
+							<xp:convertNumber pattern="#,##0"></xp:convertNumber>
+						</xp:this.converter>
+					</xp:inputText>
+			</div>
+			<div style="float: left; width: 150px;">
+					<b>recurring:</b>&#160;
+						<xp:inputText id="inputRecurring" value="#{docScenario.impactCostsRecurring}"
+				styleClass="numberLarge" maxlength="10">
+				<xp:this.converter>
+					<xp:convertNumber pattern="#,##0"></xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+			</div>
+			<br style="clear:both"/>
+		</xe:formRow>
+	</xe:formTable>
+
+	<xc:ccTasks allowAdd="true" parentUnid="#{docScenario.id}"
+		rendered="#{javascript:!docScenario.isNewNote()}"
+		setResponsibleFor="true">
+		<xc:this.allowEdit><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xc:this.allowEdit>
+	</xc:ccTasks>
+
+</xp:view>

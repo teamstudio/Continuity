@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='786' unid='BFB65BB9493D5989C1257B25007501A8' sequence='6'>
+<created><datetime>20130305T221801,36+01</datetime></created>
+<modified><datetime>20130307T090234,72+01</datetime></modified>
+<revised><datetime>20130307T090234,71+01</datetime></revised>
+<lastaccessed><datetime>20130307T090234,72+01</datetime></lastaccessed>
+<addedtofile><datetime>20130305T221802,45+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwPlans</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+dgACACIAAgAkMwUABABuYW1lAQABAHwAIgIFAAIAaWQiAgMABQAqACYABAAEAAsAAgAJAG5hbWVk
+ZXNjcmlwdGlvbiQzJENvbmZsaWN0BAAEAAAAGgAFAAQARm9ybQEABQBmUGxhbgAKAgMABwAKAAQA
+CUwxUw==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+EQABAABEAGYAAAAEAG5hbWU=
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAAQACgAAAFZDAQAEAAQAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAAAgAHADQAAADVAAEAAAoAAAAAAAAAAAACAgAAAG5hbWVuYW1l
+ZGVzY3JpcHRpb25kZXNjcmlwdGlvbiQzbmFtZS9pZDQAAgAiAAIAJDMFAAQAbmFtZQEAAQB8ACIC
+BQACAGlkIgIDAAcAEAAJAAkxUzJTM1M0UwAmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAA
+AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
+AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAA
+AAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAA
+AAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

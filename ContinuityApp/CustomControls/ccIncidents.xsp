@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+
+	<div class="section">
+		<div class="title">Incidents</div>
+	</div>
+
+	<xp:viewPanel rows="30" id="viewPanel1" var="row">
+		<xp:this.facets>
+			<xp:pager partialRefresh="true" layout="Previous Group Next"
+				xp:key="headerPager" id="pager1">
+			</xp:pager>
+		</xp:this.facets>
+		<xp:this.data>
+			<xp:dominoView var="vwIncidents" viewName="vwIncidents"></xp:dominoView>
+		</xp:this.data>
+		
+		<xp:viewColumn columnName="description" id="viewColumn2" displayAs="link"
+			openDocAsReadonly="true">
+			<xp:viewColumnHeader value="Description"
+				id="viewColumnHeader2">
+			</xp:viewColumnHeader>
+			
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+			<xp:this.action>
+				<xe:changeDynamicContentAction for="dynamicContent1"
+					facetName="incidentForm">
+					
+					<xe:this.parameters>
+						<xp:parameter name="documentId"	value="#{javascript:row.getUniversalID()}">
+						</xp:parameter>
+						<xp:parameter name="action" value="openDocument"></xp:parameter>
+					</xe:this.parameters>
+					
+				</xe:changeDynamicContentAction>
+			</xp:this.action></xp:eventHandler>
+		</xp:viewColumn>
+		
+		
+		<xp:viewColumn columnName="$0" id="viewColumn1"
+			style="white-space:nowrap" >
+			<xp:viewColumnHeader value="Registered"
+				id="viewColumnHeader1">
+			</xp:viewColumnHeader>
+
+			<xp:this.converter>
+				<xp:customConverter getAsObject="#{javascript:value}"
+					getAsString="#{javascript:TimeSinceConverter.getAsString(value)}">
+				</xp:customConverter>
+			</xp:this.converter>
+
+		</xp:viewColumn>
+		
+		<xp:viewColumn columnName="status" id="viewColumn6">
+			<xp:viewColumnHeader value="Status"
+				id="viewColumnHeader5">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+
+		<xp:viewColumn columnName="createdByName" id="viewColumn3"
+			style="white-space:nowrap">
+			<xp:viewColumnHeader value="Registered by"
+				id="viewColumnHeader3">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="alertLevel" id="viewColumn4">
+			<xp:viewColumnHeader value="Alert level"
+				id="viewColumnHeader4">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="scenarioName" id="viewColumn5">
+			<xp:viewColumnHeader value="Scenario"
+				id="viewColumnHeader6">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+
+		<xp:viewColumn value="" id="viewColumn7"
+			rendered="#{javascript:sessionScope.isEditor}">
+
+			<xp:link escape="true" text="remove" id="linkRemove"
+				styleClass="lotusTiny">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="dynamicContent1">
+					<xp:this.script><![CDATA[return confirm("Removing an incident will also remove all activated tasks.\n\nAre you sure you want to remove this incident?");]]></xp:this.script>
+					<xp:this.action><![CDATA[#{javascript:dBar.info("removing incident " + row.getColumnValue("description") );
+					
+					//remove related tasks
+					
+					var dcTasks = database.search("Form=\"fTask\" & incidentId=\"" + row.getDocument().getItemValueString("id") + "\"");
+					if (dcTasks.getCount() > 0) {
+						dBar.info("removing " + dcTasks.getCount() + " related tasks");
+						dcTasks.removeAll(true);
+					}
+					
+					dBar.info("removing incident");
+					row.getDocument().remove(true);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:viewColumn>
+
+	</xp:viewPanel>
+
+
+</xp:view>

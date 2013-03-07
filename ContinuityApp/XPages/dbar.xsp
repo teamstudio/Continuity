@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+	/*
+	var coreDb = "uhs/38570/core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("1:" + db.isOpen() );
+db.close();
+
+var coreDb = "uhs//38570//core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("2:" + db.isOpen() );
+db.close();
+
+var coreDb = "/uhs/38570/core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("3:" + db.isOpen() );
+db.close();
+
+var coreDb = "//uhs//38570//core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("4:" + db.isOpen() );
+db.close();
+
+var coreDb = "uhs\38570\core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("5:" + db.isOpen() );
+db.close();
+
+var coreDb = "uhs\\38570\\core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("6:" + db.isOpen() );
+db.close();
+
+var coreDb = "\uhs\38570\core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("7:" + db.isOpen() );
+db.close();
+
+var coreDb = "\\uhs\\38570\\core.unp";
+var db = session.getDatabase("", coreDb);
+dBar.debug("8:" + db.isOpen() );
+db.close();
+*/
+
+
+}]]></xp:this.beforePageLoad>
+	<xc:unpDebugToolbar defaultCollapsed="false"></xc:unpDebugToolbar></xp:view>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+&#160;
+	(<xp:link escape="true" text="change" id="link1">
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:link>)
+
+	<xe:dialog id="dlgAssignTo" title="Allocate task to plans">
+									
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument
+					var="docTarget" formName="fTask" action="editDocument"
+					documentId="#{javascript:compositeData.taskUnid}"
+					ignoreRequestParams="true">
+				</xp:dominoDocument>
+			</xp:this.data>
+			
+			<div style="padding:15px;height: 200px; overflow-y:auto">
+			
+				Select one or more plans to allocate this task to.
+				
+				<div style="margin-top:10px">
+				
+				<xp:checkBoxGroup id="checkBoxGroup1"
+					value="#{docTarget.planIds}" layout="pageDirection">
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwPlans", 3)}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:checkBoxGroup>
+				
+				</div>
+			</div>
+			
+			<xe:dialogButtonBar id="dialogButtonBar1">
+
+			<xp:button value="Ok" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="#{javascript:compositeData.refreshId}">
+					<xp:this.action><![CDATA[#{javascript:try {
+					//update tasks
+var assignedTo = getComponent("checkBoxGroup1").getValue();
+
+dBar.debug("assigned to plan id: " + assignedTo);
+
+//get plan names
+
+var planNames = [];
+
+if (assignedTo != null) {
+
+	var vwAllById = database.getView("vwAllById");
+	
+	for (var i=0; i<assignedTo.length; i++) {
+		var planId = assignedTo[i];
+		var vePlan = vwAllById.getEntryByKey(planId, true);
+		
+		var planName = "error: can't find plan";
+		
+		if (vePlan != null) {
+			planName = vePlan.getColumnValues().get(1);
+		}
+		
+		planNames.push(planName);
+	}
+}
+
+	docTarget.replaceItemValue("planNames", planNames);
+	docTarget.save();
+
+	getComponent("dlgAssignTo").hide();
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+
+			<xp:link escape="true" text="Cancel" id="link3">
+				<xp:eventHandler event="onclick" submit="false" immediate="true" refreshMode="partial" refreshId="dlgAssignTo">
+					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgAssignTo}")]]></xp:this.script>
+				</xp:eventHandler></xp:link>
+			
+			</xe:dialogButtonBar>
+		</xp:panel>
+	</xe:dialog>
+
+</xp:view>
+
+

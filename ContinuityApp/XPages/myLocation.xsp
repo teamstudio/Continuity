@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	Thank you. We have stored your
+	location.
+	
+	<xp:br></xp:br><xp:br></xp:br>
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[var x=document.getElementById("demo");
+
+
+
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition();
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+  /*
+function showPosition(position)
+  {
+  x.innerHTML="Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude; 
+  }*/
+  
+dojo.addOnLoad( function() {
+	getLocation();
+})
+]]></xp:this.value>
+	</xp:scriptBlock></xp:view>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
+	
+	viewScope.put("hasDescription", (docScenario.getItemValueString("description").length > 0) );
+	
+	//get quick guides
+	var quickGuides = [];
+	var quickGuideIds = docScenario.getItemValue("quickGuideIds");
+	
+	if (quickGuideIds.length>0 ) {
+	
+		var vwAllById = database.getView("vwAllById");
+	
+		for (var i=0; i<quickGuideIds.length; i++) {
+			var veQuickGuide = vwAllById.getEntryByKey( quickGuideIds[i], true );
+			
+			if (null != veQuickGuide) {
+				quickGuides.push( {
+					"name" : veQuickGuide.getColumnValues().get(1),
+					"unid" : veQuickGuide.getUniversalID()
+				} );	
+			}
+		}
+	}
+	
+	viewScope.put("quickGuides", quickGuides);
+	
+	} catch (e) {
+		dBar.error(e);
+	}
+	}]]></xp:this.beforePageLoad>
+	
+
+	<xp:this.data>
+		<xp:dominoDocument var="docScenario" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<!-- viewsButton false, backButtonURL, mPlans, searchPage:UnpSearch.xsp, search:none -->
+	<xc:mLayout showMenu="true" pageTitle="Plan"
+		backButtonURL="mPlans.xsp">
+		<xp:this.facets>
+
+			<xp:panel xp:key="contents" disableOutputTag="true">
+
+				<!-- plan name  & description -->
+				<div class="box">
+
+					<xp:text tagName="h2" escape="false"
+						id="computedField2" value="#{docScenario.name}" />
+					<div class="content">
+						<xp:text escape="false" id="computedField8"
+							value="#{docScenario.description}"
+							rendered="#{javascript:viewScope.hasDescription}" />
+						<xp:text escape="false" id="computedField3"
+							value="(no description entered)"
+							rendered="#{javascript:!viewScope.hasDescription}" />
+					</div>
+
+				</div>
+				
+				<!-- quick guides -->
+				<xp:div styleClass="mTop box" rendered="#{javascript:viewScope.get('quickGuides').length>0}">
+				
+					<h2>Quick guides</h2>
+				
+					<ul id="summaryList">
+			
+						<xp:repeat id="repeat3" rows="50" var="row"
+							disableOutputTag="true">
+
+							<xp:this.value><![CDATA[#{javascript:viewScope.get("quickGuides")}]]></xp:this.value>
+							
+							<xp:panel tagName="li" styleClass="data-row">
+								<xp:this.attrs>
+									<xp:attr name="onClick">
+										<xp:this.value>
+										<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mQuickGuide.xsp?action=openDocument&documentId=" + row.unid + "&fromId=" + docScenario.getDocument().getUniversalID() + " #contentwrapper', 'contentwrapper', false, false); return false;"}]]>
+										</xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+								
+								<xp:image url="/unp/right-arrow-circle.png"
+									id="image2"
+									styleClass="singleLineIcon">
+								</xp:image>
+							
+								<!-- name -->
+								<xp:label id="label2"
+									styleClass="viewlistsummary">
+									<xp:this.value><![CDATA[#{javascript:row.name}]]></xp:this.value>
+								</xp:label>
+							</xp:panel>
+
+
+						</xp:repeat>
+
+					</ul>
+				
+				</xp:div>
+
+				<!-- list of tasks -->
+				<div class="mTop">
+					<xc:mTasksList
+						viewName="vwTasksByParentByTaskCat" categoryFilter="#{javascript:docScenario.getItemValueString('id')}">
+					</xc:mTasksList>
+				</div>
+			</xp:panel>
+
+		</xp:this.facets>
+	</xc:mLayout>
+
+</xp:view>

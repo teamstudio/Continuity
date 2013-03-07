@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xp:dominoView var="vwScenariosImpact" viewName="vwScenariosByImpact"></xp:dominoView>
+	</xp:this.data>
+
+	<div class="section">
+		<div class="title">Business scenarios - impact</div>
+		<div class="actions">
+
+			<xp:button value="Add scenario" id="button1" icon="page_add.png">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="dynamicContent1">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenarioForm");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</div>
+	</div>
+	
+	<xp:viewPanel rows="100" id="viewPanel1" var="row">
+
+		<xp:this.data>
+			<xp:dominoView var="vwScenariosByImpact" viewName="vwScenariosByImpact"></xp:dominoView>
+		</xp:this.data>
+		<xp:viewColumn columnName="orgUnitNames" id="viewColumn1">
+			
+		</xp:viewColumn>
+		<xp:viewColumn columnName="impact" id="viewColumn2">
+			
+		</xp:viewColumn>
+		
+		<xp:viewColumn value="" id="viewColumn6">
+		
+			<xp:link escape="true" id="link1" text="#{row.catName}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1">
+						<xp:this.action>
+							<xe:changeDynamicContentAction facetName="scenarioForm" for="dynamicContent1">
+								<xe:this.parameters>
+									<xp:parameter name="documentId"
+										value="#{javascript:row.getUniversalID()}">
+									</xp:parameter>
+									<xp:parameter name="action" value="openDocument"></xp:parameter>
+								</xe:this.parameters>
+							</xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+		</xp:viewColumn>
+		
+		
+		<xp:viewColumn columnName="impactCostsOneTime" id="viewColumn4">
+			<xp:this.converter>
+				<xp:convertNumber pattern="#,##0"></xp:convertNumber>
+			</xp:this.converter>
+			<xp:viewColumnHeader value="One-time costs" id="viewColumnHeader4"></xp:viewColumnHeader>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="impactCostsRecurring" id="viewColumn5">
+			<xp:this.converter>
+				<xp:convertNumber pattern="#,##0"></xp:convertNumber>
+			</xp:this.converter>
+
+
+			<xp:viewColumnHeader value="Recurring costs" id="viewColumnHeader5"></xp:viewColumnHeader>
+		</xp:viewColumn>
+	</xp:viewPanel></xp:view>

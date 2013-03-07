@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2013 Teamstudio Inc 
+Licensed under the Apache License, Version 2.0 (the "License"); 
+you may not use this file except in compliance with the License. You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0 
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+the specific language governing permissions and limitations under the License
+ -->
+
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	
+	<xp:panel styleClass="footer black">
+		
+	<div id="footer">
+	
+	
+		<xp:link id="link1" styleClass="syncButton" value="#"
+			rendered="#{javascript:isUnpluggedServer();}">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+					<xp:actionGroup>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:db = session.getCurrentDatabase();
+db.replicate("someserver");
+
+//sync core database
+var dbCore:NotesDatabase = session.getDatabase(applicationScope.get("server") , applicationScope.get("coreDbPath") );
+		
+if (dbCore.isOpen()) {
+	dbCore.replicate("someserver");
+	dbCore.close();
+}
+
+//force sessionscope reload
+sessionScope.configLoaded = false;
+}]]></xp:this.script>
+						</xp:executeScript>
+						<xp:openPage name="/UnpMain.xsp"
+							target="openDocument">
+						</xp:openPage>
+					</xp:actionGroup>
+				</xp:this.action>
+				<xp:this.script><![CDATA[$.blockUI();]]></xp:this.script>
+			</xp:eventHandler>
+			<span>Sync</span>
+		</xp:link>
+		<!--
+			<xp:text value='#{javascript:var rep =
+			session.getEnvironmentString("ro.last.replicate", true); if (""==rep)
+			rep="(never)"; else rep=@Text(new Date(parseInt(rep))); return
+			"Updated: " + rep.substring(0,14);}' />
+		-->
+		<span class="updated">
+			<!-- iOS: returns date -->
+			Updated:&#160;
+			<xp:text
+				value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
+			  if (""==rep) { return "(never)" };
+			  rep}'>
+				<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) == 'string'}]]></xp:this.rendered>
+			</xp:text>
+
+			<!-- android: returns epoch ms -->
+			<xp:text
+				value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
+			  if (""==rep) { rep="(never)" };
+			 new Date( parseInt(rep) );}'>
+				<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) != 'string'}]]></xp:this.rendered>
+				<xp:this.converter>
+					<xp:convertDateTime type="both"></xp:convertDateTime>
+				</xp:this.converter>
+			</xp:text>
+			
+		</span>
+
+		<xp:panel tagName="div" id="newButton" styleClass="newButton"
+			rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
+			<xp:this.attrs>
+				<xp:attr name="onclick">
+					<!--<xp:this.value><![CDATA[#{javascript:"openDocument('" + compositeData.newDocTarget + "?action=newDocument', 'content');"}]]></xp:this.value>-->
+					<xp:this.value><![CDATA[#{javascript:"$.blockUI(); window.location.href='" + compositeData.newDocTarget + "';"}]]></xp:this.value>
+				</xp:attr>
+			</xp:this.attrs>
+			<span>New</span>
+		</xp:panel>
+		<xp:panel tagName="div" id="settingsButton"
+			styleClass="settingsButton">
+			<xp:this.attrs>
+				<xp:attr name="onclick">
+					<xp:this.value><![CDATA[#{javascript:"window.location.href='" + (sessionScope.get('userName').indexOf("mark.leusink")>-1 ? "dbar.xsp" : compositeData.settingsurl) + "';"}]]></xp:this.value>
+				</xp:attr>
+			</xp:this.attrs>
+			<xp:this.rendered><![CDATA[#{javascript:compositeData.settingsurl != null && (compositeData.settingsurl.length > 0);}]]></xp:this.rendered>
+			<span>Settings</span>
+		</xp:panel>
+	
+	</div>
+	
+	</xp:panel>
+
+</xp:view>

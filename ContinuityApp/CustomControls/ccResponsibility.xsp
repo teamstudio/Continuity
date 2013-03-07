@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.afterPageLoad><![CDATA[#{javascript:if (docResp.isNewNote() ) {
+	docResp.replaceItemValue("roleId", viewScope.roleId);
+	docResp.replaceItemValue("roleName", viewScope.roleName);
+}}]]></xp:this.afterPageLoad>
+	<div class="section">
+		<div class="title">Responsibility</div>
+	</div>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docResp" formName="fResponsibility" action="openDocument"
+			documentId="#{javascript:viewScope.docId}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" labelPosition="left" disableRowError="false" disableErrorSummary="true">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+
+				<xp:button value="Edit" id="button3" icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docResp.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit" var="docResp"></xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Save" id="button1" icon="disk.png" rendered="#{javascript:docResp.isEditable()}">
+
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action>
+
+							<xp:actionGroup>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:if ( responsibilityBean.save(docResp) ) {
+	context.setDocumentMode("readOnly");
+}
+}]]></xp:this.script>
+								</xp:executeScript>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Remove" id="button2">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docResp.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:dBar.info("remove responsibility: " & docResp.getItemValueString("name") );
+docResp.getDocument().remove(true);
+								
+getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this responsibility?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Back to list" id="link1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow1" label="BC Role:">
+			<xp:text escape="true" id="computedField1" value="#{docResp.roleName}"></xp:text></xe:formRow>
+
+		<xe:formRow id="formRow2" for="title1" label="Responsibility:">
+			<xp:inputText value="#{docResp.name}" id="title1"
+				required="true" maxlength="60">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Enter a name for this responsibility">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow3" for="description1" label="Description:">
+			<xp:inputTextarea value="#{docResp.description}" id="description1">
+			</xp:inputTextarea>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow4" label="Ordering number:"
+			style="white-space:noWrap">
+			<xp:inputText value="#{docResp.order}" id="inputText1"
+				required="true" styleClass="number" maxlength="3">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Enter a number for this responsibilities' order">
+					</xp:validateRequired>
+					<xp:validateLongRange maximum="999"
+						message="Ordering number must be a (positive) number"
+						minimum="0">
+					</xp:validateLongRange>
+				</xp:this.validators>
+				<xp:this.converter>
+					<xp:convertNumber type="number"
+						integerOnly="true">
+					</xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+
+		</xe:formRow>
+
+	</xe:formTable>
+
+	<xp:br></xp:br>
+
+	<xc:ccTasks allowAdd="false" allowEdit="true" setResponsibleFor="false" parentUnid="#{javascript:docResp.getItemValueString('id')}" rendered="#{javascript:!docResp.isNewNote()}">
+	</xc:ccTasks>
+
+</xp:view>

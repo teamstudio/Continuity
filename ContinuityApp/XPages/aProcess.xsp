@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" rendered="false">
+
+	<xp:this.afterRenderResponse><![CDATA[#{javascript:try {
+	
+		var exCon = facesContext.getExternalContext(); 
+var writer = facesContext.getResponseWriter();
+var response = exCon.getResponse();
+response.setContentType("text/plain");
+
+var resp = "";
+
+var id = param.get("id");
+	
+if (id=="") {
+	throw("invalid input");
+}
+
+var doc = database.getDocumentByUNID(id);
+
+if (doc == null) {
+	throw("invalid id");
+}	
+
+//incident deactivation
+if (param.get("type").equals("incident") ) {
+
+	//only allowed for bc editors
+	if (!sessionScope.get("isEditor")) {
+		throw("you're not authorized to update this document");
+	}
+	
+	var isTest = doc.getItemValueString("test").equals("yes");
+	
+	//ML: close any open tasks in this incident
+	var vecOpenTasks = database.getView("vwTasksAssignedOpen").getAllEntriesByKey( doc.getItemValueString("id"), true);
+	var veTask = vecOpenTasks.getFirstEntry();
+	while (null != veTask) {
+		docTask = veTask.getDocument();
+	
+		docTask.replaceItemValue("status", "complete");
+		docTask.replaceItemValue("statusChangedBy", sessionScope.get("userName") );
+		docTask.replaceItemValue("statusChangedByName", sessionScope.get("name") );
+		docTask.save();
+		
+		veTask = vecOpenTasks.getNextEntry();
+	}
+	
+	//ML: Update alert level of OU in org unit doc (from core db)
+	var dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
+	var vwById = dbCore.getView("vwAllById");
+	var docTemp = vwById.getDocumentByKey(doc.getItemValueString("orgUnitId"), true);
+	if (null != docTemp) {
+		
+		var alertLevel = "normal";
+		
+		//update alert level in OU document
+		dBar.debug("setting alert level in OU document to " + alertLevel);
+		
+		docTemp.replaceItemValue("alertLevel", alertLevel);
+		docTemp.replaceItemValue("activeScenarioId", "" );
+		docTemp.save();
+		docTemp.recycle();
+	}
+	
+	doc.replaceItemValue("status", "deactivated");
+	doc.save();
+	
+	//ML: update number of assigned tasks
+	sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleName")) );
+	
+	//ML: create update item for this deactivation
+	createUpdate( (isTest ? "TEST " : "") + "Deactivated incident: <b>" + doc.getItemValueString("description") + "</b><br />" +
+		"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
+		"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
+		"- site: " + doc.getItemValueString("siteName") + "<br />" +
+		"- plan: " + doc.getItemValueString("scenarioName")
+	);
+	
+	//ML: send email to all BC users in the system
+	dBar.debug("send mail to all users");
+	var vwBCUsers = dbCore.getView("vwBCUsers");
+	var nav = vwBCUsers.createViewNav();
+	var ve = nav.getFirst();
+	while (null != ve) {
+	
+		sendMail( ve.getColumnValues().get(0) , 
+				"[continuity] " + "incident deactivated" + (isTest ? " TEST" : ""), 
+				sessionScope.name + " has just deactivated the following incident:\r\n\r\n" +
+					"Incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
+	"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
+		"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
+		"- site: " + doc.getItemValueString("siteName") + "\r\n" +
+		"- plan: " + doc.getItemValueString("scenarioName"),
+				sessionScope.email, sessionScope.name);
+	
+		ve = nav.getNext();
+	}
+	
+	//sync mail, current and core db
+
+	var mailDb = @MailDbName();
+	dbMail = session.getDatabase(mailDb[0], mailDb[1]);
+	dbMail.replicate("someserver");
+	dbMail.close();
+		
+	var db = session.getCurrentDatabase();
+	db.replicate("someserver");
+	
+	dbCore.replicate("someserver");
+	
+	dbCore.close();
+	
+} else if (param.get("type").equals("task") ) {
+	
+	//mark a task as done/ undone
+	
+	var isTest = doc.getItemValueString("test").equals("yes");
+
+	if (!sessionScope.roleId.equals( doc.getItemValueString("roleId") ) ) {
+		throw("you're not authorized to update this document");
+	}
+	
+	doc.replaceItemValue("status", (param.get("to").equals("done") ? "complete" : "assigned") );
+	doc.replaceItemValue("statusChangedBy", sessionScope.get("userName") );
+	doc.replaceItemValue("statusChangedByName", sessionScope.get("name") );
+	doc.save();
+	
+	//ML: create update item for this completion
+	createUpdate( (isTest ? "TEST " : "") + "Task marked as " + (param.get("to").equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
+		"- incident: " + doc.getItemValueString("incidentName") + "<br />" +
+		"- by: " +	sessionScope.get("name")
+	);
+	
+	//sync current database
+	var db = session.getCurrentDatabase();
+	db.replicate("someserver");
+
+}
+
+//update number of open tasks for this user
+sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleName")) );
+
+resp = "ok";
+
+} catch (e) { 
+	dBar.error(e);
+	resp = "error" + e.toString();
+}
+
+writer.write(resp);
+writer.endDocument();
+facesContext.responseComplete();
+
+}]]></xp:this.afterRenderResponse>
+
+	<xp:this.resources>
+		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+</xp:view>

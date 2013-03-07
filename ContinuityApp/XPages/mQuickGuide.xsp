@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoDocument var="docQuickGuide" formName="fQuickGuide"
+			action="openDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xc:mLayout showMenu="true" pageTitle="quickGuide">
+	
+		<xp:this.facets>
+		
+			<xp:panel xp:key="contents" styleClass="box">
+
+				<xp:text tagName="h2" escape="true" id="computedField1" value="#{docQuickGuide.name}"></xp:text>
+				
+				<div class="content">
+				
+					<div class="buttons" style="margin-bottom:15px;">
+						<xp:link value="#" text="Close" styleClass="red">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mPlan.xsp?documentId=" + param.get("fromId") + " #contentwrapper', 'contentwrapper', false, false); return false;"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:link>
+					
+					</div>
+				
+					<xp:text escape="false" disableTheme="true" value="#{docQuickGuide.description}"></xp:text>
+				</div>
+
+			</xp:panel>
+		
+		
+		</xp:this.facets>
+	
+	
+	
+	</xc:mLayout>
+</xp:view>

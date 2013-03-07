@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+
+	<div class="section">
+		<div class="title">
+			<xp:text escape="true" disableTheme="true">
+				<xp:this.value><![CDATA[#{javascript:( docContact.isNewNote() ? "New contact" : docContact.getItemValueString("name") );}]]></xp:this.value>
+			</xp:text>
+		</div>
+	</div>
+	<!--
+		
+		<xp:this.acl>
+		<xp:acl>
+		<xp:this.entries>
+		<xp:aclEntry right="READER" type="ROLE">
+		<xp:this.name><![CDATA[[bcUser]]]></xp:this.name>
+		</xp:aclEntry>
+		<xp:aclEntry type="DEFAULT" right="NOACCESS"></xp:aclEntry>
+		<xp:aclEntry right="EDITOR" type="ROLE">
+		<xp:this.name><![CDATA[[bcEditor]]]></xp:this.name>
+		</xp:aclEntry>
+		</xp:this.entries>
+		</xp:acl>
+		</xp:this.acl>
+		
+	-->
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact"
+			action="newDocument" databaseName="${configBean.coreDbPath}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" labelPosition="left"
+		disableErrorSummary="true">
+
+		<xe:formRow id="formRow7" label="First name:"
+			for="firstName1">
+			<xp:inputText value="#{docContact.firstName}" id="firstName1">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow8" label="Last name:" for="lastName1">
+			<xp:inputText value="#{docContact.lastName}" id="lastName1"
+				required="true">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Lastname is required">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow12" label="Job title:" for="jobTitle1">
+			<xp:inputText value="#{docContact.jobTitle}" id="jobTitle1"
+				maxlength="50">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow10" label="Photo:">
+
+			<xp:div>
+				<xp:image id="image1"
+					style="width: 100px; height: 100px;">
+					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("coreDbUrl") + "/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getItemValueString("photoThumbnailName");}]]></xp:this.url>
+					<xp:this.rendered><![CDATA[#{javascript:docContact.getItemValueString("photoThumbnailName").length>0}]]></xp:this.rendered>
+				</xp:image>
+			</xp:div>
+
+			<xp:fileUpload id="photo" value="#{contactBean.photo}"
+				rendered="#{javascript:docContact.isEditable()}">
+			</xp:fileUpload>
+
+			<xp:div styleClass="debug">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.isDebug && !docContact.isNewNote()}]]></xp:this.rendered>
+				<xp:fileDownload rows="30" id="fileDownload1"
+					displayLastModified="false" value="#{docContact.photos}">
+				</xp:fileDownload>
+			</xp:div>
+
+		</xe:formRow>
+	</xe:formTable>
+		
+	<xe:formTable id="formTableOrgDetails" labelPosition="left" disableErrorSummary="true">
+	
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+
+				<xp:button value="Edit" id="button2"
+					icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:( sessionScope.get("isEditor") || docContact.getItemValueString("userName").equals( sessionScope.get("userName")) ) &&
+!docContact.isEditable()}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit"
+								var="docContact">
+							</xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Save" id="button1" icon="disk.png"
+					rendered="#{javascript:docContact.isEditable()}">
+
+					<!-- need to do a full refresh here for image uploads -->
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:if (contactBean.save( docContact) ) {
+								//update profile photo url
+								sessionScope.put("profilePhotoUrl", getProfilePhotoUrl(sessionScope.get("userName"), true) );
+								viewScope.remove("useExistingUser");
+								
+		getComponent("dynamicContent1").show("contactsList");
+	}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button value="Remove" id="button3">
+					<xp:this.rendered><![CDATA[#{javascript:!docContact.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:if (contactBean.remove( docContact ) ) {
+							getComponent("dynamicContent1").show("contactsList");
+						}}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this contact?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link escape="true" text="Back to list" id="link1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:viewScope.remove("useExistingUser");
+								getComponent("dynamicContent1").show("contactsList");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xp:this.facets>
+
+
+		<!-- organisation details -->
+		<xe:formRow id="formRow14" labelPosition="none"
+			styleClass="formSection" disableTheme="true">
+			<xe:formColumn id="formColumn3" colSpan="3">
+				Organisation details
+			</xe:formColumn>
+		</xe:formRow>
+
+		<xe:formRow id="formRow9" label="User name:">
+
+			<xp:div rendered="#{javascript:docContact.isNewNote()}"
+				id="selectUser">
+
+				<xp:span>
+					<xp:this.rendered><![CDATA[#{javascript:!viewScope.useExistingUser}]]></xp:this.rendered>
+
+					<xp:text escape="true" disableTheme="true"
+						styleClass="lotusTiny" value="(automatically generated)">
+					</xp:text>
+					&#160;
+					<xp:link escape="true"
+						text="Use existing Notes user" id="link2"
+						styleClass="lotusTiny">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="selectUser" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:viewScope.useExistingUser = true;}]]></xp:this.action>
+							<xp:this.onComplete><![CDATA[try {
+	dojo.byId("#{id:inputText1}").focus();
+} catch (e) { }]]></xp:this.onComplete>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:span>
+
+				<xp:div
+					rendered="#{javascript:viewScope.useExistingUser}">
+					<xp:inputText id="inputText1"
+						value="#{docContact.userName}">
+					</xp:inputText>
+					&#160;
+					<xp:link escape="true" text="Get details"
+						id="link3">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="formTableOrgDetails"
+							disableValidators="true">
+							<xp:this.action><![CDATA[#{javascript:try {
+					var u = docContact.getItemValueString("userName");
+			if (u==null || u.length==0) { return; }
+			
+			var dbNAB = sessionAsSigner.getDatabase("", "names.nsf");
+			var vwUsers = dbNAB.getView("($Users)");
+			var docUser = vwUsers.getDocumentByKey(u, true);
+						
+			if (docUser != null) { 
+				docContact.replaceItemValue("userName", docUser.getItemValueString("FullName") );
+				docContact.replaceItemValue("firstName", docUser.getItemValueString("firstName"));
+				docContact.replaceItemValue("lastName", docUser.getItemValueString("LastName"));
+				
+				var email = docUser.getItemValueString("InternetAddress");
+				if (email.length==0) { 
+					email = docUser.getItemValueString("MailAddress");
+				}
+				docContact.replaceItemValue("email", email);
+			}
+			
+		} catch (e) {
+			dBar.error(e);
+		}
+		}]]></xp:this.action>
+
+<!-- this strange refresh is needed to be able to refresh the firstname/ lastname fields, but without the file upload: -->
+<!-- if the file upload is refreshed, any selected image is gone -->
+							<xp:this.onComplete><![CDATA[XSP.partialRefreshGet( "#{id:firstName1}", {
+							    onComplete: function() {
+							        XSP.partialRefreshGet("#{id:lastName1}", {});
+							    }
+							});]]></xp:this.onComplete>
+						</xp:eventHandler>
+					</xp:link>
+
+				</xp:div>
+			</xp:div>
+
+			<xp:text escape="true" id="computedField1"
+				value="#{docContact.userName}"
+				rendered="#{javascript:!docContact.isNewNote()}">
+				<xp:this.converter>
+					<xp:customConverter
+						getAsObject="#{javascript:@Name('[Canonicalize]', @Explode(value, ' ,'))}"
+						getAsString="#{javascript:@Implode(@Name('[Abbreviate]', value), ', ')}">
+					</xp:customConverter>
+				</xp:this.converter>
+
+			</xp:text>
+
+		</xe:formRow>
+
+
+		<!-- only for editors: set usertype -->
+		<xe:formRow id="formRow16" label="User type:">
+			<xp:radioGroup id="radioGroup3"
+				value="#{docContact.userType}" defaultValue="contact"
+				readonly="#{javascript:!sessionScope.isEditor}">
+
+				<xp:selectItem itemLabel="Standard user"
+					itemValue="user">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="System administrator"
+					itemValue="editor">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="External contact"
+					itemValue="contact">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="No account"
+					itemValue="none">
+					<xp:this.itemDisabled><![CDATA[#{javascript:!docContact.isNewNote() && docContact.getItemValueString("userName").length>0}]]></xp:this.itemDisabled>
+				</xp:selectItem>
+
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="formTableOrgDetails"
+					disableValidators="true">
+				</xp:eventHandler>
+			</xp:radioGroup>
+		</xe:formRow>
+
+		<xe:formRow id="formRow13" label="BC Role:" for="radioGroup1">
+			<xe:this.rendered><![CDATA[#{javascript:var t = docContact.getItemValueString("userType"); t.equals("user") || t.equals("editor")}]]></xe:this.rendered>
+			<xp:radioGroup id="radioGroup1" value="#{docContact.roleId}"
+				defaultValue="none"
+				readonly="#{javascript:!sessionScope.isEditor}">
+				<xp:selectItem itemLabel="-None-" itemValue="none"></xp:selectItem>
+				<xp:selectItems id="selectItems1">
+					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwRoles", 3);}]]></xp:this.value>
+				</xp:selectItems>
+
+			</xp:radioGroup>
+
+			<xp:checkBox
+				text="This person is an alternate for this BCM role" id="checkBox1"
+				value="#{docContact.isAlternate}" checkedValue="yes"
+				uncheckedValue="no"
+				readonly="#{javascript:!sessionScope.isEditor}">
+			</xp:checkBox>
+		</xe:formRow>
+
+		<xe:formRow id="formRow17" label="Status:" for="radioGroup2">
+			<xp:radioGroup id="radioGroup4" value="#{docContact.status}"
+				readonly="#{javascript:!sessionScope.isEditor}"
+				defaultValue="new">
+				<xe:this.rendered><![CDATA[#{javascript:var t = docContact.getItemValueString("userType");
+					!docContact.isNewNote() && !docContact.getItemValueString("status").equals("new") && (t.equals("user") || t.equals("editor") || t.equals("contact"))}]]></xe:this.rendered>
+
+				<xp:selectItem itemLabel="Active" itemValue="active"></xp:selectItem>
+				<xp:selectItem itemLabel="Inactive"
+					itemValue="inactive">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="New" itemValue="new">
+					<xp:this.rendered><![CDATA[#{javascript:docContact.getItemValue("status").equals("new")}]]></xp:this.rendered>
+				</xp:selectItem>
+			</xp:radioGroup>
+
+			<xp:text disableTheme="true" escape="false"
+				value="Not activated">
+				<xp:this.rendered><![CDATA[#{javascript:docContact.isNewNote() || docContact.getItemValueString('status').equals('new')}]]></xp:this.rendered>
+			</xp:text>
+		</xe:formRow>
+
+		<xe:formRow id="formRow11" label="Organisation Unit:"
+			for="radioGroup2">
+			<xp:radioGroup id="radioGroup2"
+				value="#{docContact.orgUnitId}"
+				readonly="#{javascript:!sessionScope.isEditor}">
+				<xp:selectItems id="selectItems2">
+					<xp:this.value><![CDATA[#{javascript:@DbColumn( configBean.coreDbPath, "vwOrgUnits", 2);}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:radioGroup>
+		</xe:formRow>
+
+		<xe:formRow id="formRow15" for="checkBoxGroupSites"
+			label="Sites:">
+			<xp:checkBoxGroup id="checkBoxGroupSites"
+				value="#{docContact.siteIds}"
+				readonly="#{javascript:!sessionScope.isEditor}">
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( configBean.coreDbPath, "vwSites", 2);
+							
+							return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:checkBoxGroup>
+
+			<xp:text escape="true" disableTheme="true"
+				value="No sites selected">
+				<xp:this.rendered><![CDATA[#{javascript://show in read mode when no options have been selected
+!docContact.isEditable() && @Text(docContact.getItemValue("siteIds"))==""}]]></xp:this.rendered>
+			</xp:text>
+
+		</xe:formRow>
+
+		<xe:formRow id="formRow5" label="Reports to:">
+			<xc:ccSelectContact dataSource="#{docContact}"
+				fieldName="reportsTo"
+				dlgTitle="Select to whom this contact reports to" required="false">
+			</xc:ccSelectContact>
+		</xe:formRow>
+		
+
+		<!-- contact details -->
+		<xe:formRow id="formRow6" labelPosition="none"
+			styleClass="formSection" disableTheme="true">
+			<xe:formColumn id="formColumn1" colSpan="3">
+				Contact details
+			</xe:formColumn>
+		</xe:formRow>
+
+		<xe:formRow id="formRow1" for="email1" label="Email:">
+			<xp:inputText value="#{docContact.email}" id="email1"
+				required="true">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Email address is required">
+					</xp:validateRequired>
+					<xp:validateConstraint
+						message="Enter a valid email address">
+						<xp:this.regex><![CDATA[^([0-9a-zA-Z-!\'%&\*\+\/=\?^`{}\|$~]([-.!\'%&\*\+\/=\?^`{}\|$~\w]*[0-9a-zA-Z\-!\'%&\*\+\/=\?^`{}\|$~])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z]{2,9})$]]></xp:this.regex>
+					</xp:validateConstraint>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow2" for="phoneMobile1"
+			label="Phone - mobile:">
+			<div style="float:left; width: 150px; min-height: 10px">
+				<xp:inputText styleClass="mediumLength"
+					value="#{docContact.phoneMobile}" id="phoneMobile1">
+				</xp:inputText>
+			</div>
+			<div style="float:left;">
+				<xp:radio text="primary number" id="radio1"
+					groupName="phoneTypePrimary" defaultSelected="true"
+					value="#{docContact.phoneTypePrimary}" selectedValue="mobile">
+				</xp:radio>
+			</div>
+		</xe:formRow>
+
+		<xe:formRow id="formRow4" for="phoneWork1"
+			label="Phone - work:">
+			<div style="float:left; width: 150px; min-height: 10px">
+				<xp:inputText styleClass="mediumLength"
+					value="#{docContact.phoneWork}" id="phoneWork1">
+				</xp:inputText>
+			</div>
+			<div style="float:left;">
+				<xp:radio text="primary number" id="radio2"
+					groupName="phoneTypePrimary" value="#{docContact.phoneTypePrimary}"
+					selectedValue="work">
+				</xp:radio>
+			</div>
+		</xe:formRow>
+
+		<xe:formRow id="formRow3" for="phoneHome1"
+			label="Phone - home:">
+			<div style="float:left; width: 150px; min-height: 10px">
+				<xp:inputText styleClass="mediumLength"
+					value="#{docContact.phoneHome}" id="phoneHome1">
+				</xp:inputText>
+			</div>
+			<div style="float:left;">
+
+				<xp:radio text="primary number" id="radio3"
+					groupName="phoneTypePrimary" value="#{docContact.phoneTypePrimary}"
+					selectedValue="home">
+				</xp:radio>
+			</div>
+		</xe:formRow>
+
+	</xe:formTable>
+	<!--
+		</xp:tabPanel>
+		
+		<xp:tabPanel label="Activity" id="tabPanel2"
+		rendered="#{javascript:!docContact.isNewNote()}">
+		
+		<xp:text rendered="#{!viewScope.hasActivities}" escape="true" id="computedField2"
+		value="No activity registered yet for this user">
+		</xp:text>
+		
+		<xp:panel readonly="true">
+		<xp:this.data>
+		<xp:dominoDocument var="docLog" formName="fLog" action="openDocument"
+		ignoreRequestParams="true">
+		<xp:this.documentId><![CDATA[#{javascript:viewScope.get("activitiesDocUnid")}]]></xp:this.documentId>
+		</xp:dominoDocument>
+		</xp:this.data>
+		
+		<xp:this.rendered><![CDATA[#{javascript:viewScope.get("hasActivities")}]]></xp:this.rendered>
+		
+		<xp:inputTextarea id="inputTextarea1" value="#{docLog.logEntries}">
+		<xp:this.multipleSeparator><![CDATA[#{javascript:"\n"}]]></xp:this.multipleSeparator>
+		</xp:inputTextarea>
+		
+		</xp:panel>
+		
+		
+		</xp:tabPanel>
+		
+		</xp:tabbedPanel>
+		
+	-->
+</xp:view>

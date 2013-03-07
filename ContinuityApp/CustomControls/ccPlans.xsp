@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="vwPlans" viewName="vwPlans"></xp:dominoView>
+	</xp:this.data>
+
+	<div class="section">
+		<div class="title">Plans</div>
+		<div class="actions">
+			<xp:button value="Add plan" id="button1"
+				icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="dynamicContent1">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("planForm");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</div>
+	</div>
+	
+	<xp:repeat id="repeat1" rows="100" var="rowEntry"
+		disableOutputTag="true" value="#{vwPlans}"
+		indexVar="rowIndex">
+		<xp:this.facets>
+			<xp:text xp:key="header" disableTheme="true"
+				escape="false">
+				<xp:this.value><![CDATA[<table class="lotusTable lotusClear"><tbody>]]></xp:this.value>
+			</xp:text>
+			<xp:text xp:key="footer" disableTheme="true"
+				escape="false">
+				<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+			</xp:text>
+		</xp:this.facets>
+
+		<xp:tr>
+			<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+
+			<td style="width:100%">
+				<h4>
+					<xp:link escape="true" text="#{rowEntry.name}"
+						id="link1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dynamicContent1">
+							<xp:this.action>
+								<xe:changeDynamicContentAction
+									facetName="planForm" for="dynamicContent1">
+									<xe:this.parameters>
+										<xp:parameter name="documentId"
+											value="#{javascript:rowEntry.getUniversalID()}">
+										</xp:parameter>
+										<xp:parameter name="action"
+											value="openDocument">
+										</xp:parameter>
+									</xe:this.parameters>
+								</xe:changeDynamicContentAction>
+							</xp:this.action>
+
+						</xp:eventHandler>
+					</xp:link>
+				</h4>
+				
+				<xp:div id="rowDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
+					<xp:text escape="false" id="computedField3"
+						value="#{rowEntry.description}">
+					</xp:text>
+				</xp:div>
+
+			</td>
+			
+			<td class="lotusRight lotusLastCell">
+
+				<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imageShowDetails" 
+					width="16" height="16" title="Show details" styleClass="lotusIcon16 lotusIconShow pointer">
+					<xp:this.rendered><![CDATA[#{javascript:rowEntry.getColumnValue("description").length>0}]]></xp:this.rendered>
+					
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xp:executeClientScript>
+							<xp:this.script><![CDATA[toggleDetails( "#{id:imageShowDetails}", "#{id:rowDetails}" );]]></xp:this.script>
+						</xp:executeClientScript>
+					</xp:this.script></xp:eventHandler></xp:image>
+			
+			</td>
+			
+		</xp:tr>
+
+	</xp:repeat>
+
+</xp:view>

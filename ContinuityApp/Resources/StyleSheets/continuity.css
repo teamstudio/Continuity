@@ -1,0 +1,270 @@
+/* sections */
+.section {
+	margin: 0 0 15px 0;
+	padding: 6px 3px 2px 3px;
+	border-bottom: 1px solid #cccccc;
+	position: relative;
+}
+.section .title {
+  color: #666666;
+  font-size: 1.7em;
+  font-weight: normal;
+  line-height: 1.2em;
+}
+.section .actions {
+	position: absolute;
+	left: 350px;
+	top: 2px;
+}
+
+.xspPanelViewColumnHeader {
+	padding-left: 0;
+	padding-right: 5px;
+ 	font-weight: bold;
+	font-size: 11px;	
+}
+
+td {
+	vertical-align: top;
+}
+
+textarea {
+	width: 350px;
+}
+
+.lotusTable th {
+	font-weight: bold;	
+}
+
+/*remove white background from rt fields*/
+.xspInputFieldRichText {
+	background: inherit;	
+}
+
+/*logo in banner*/
+.logo {
+	padding-top: 14px;
+	padding-left: 9px;	
+}
+/*title in banner*/
+.lotusBanner ul.lotusLinks {
+	font-size: 16px;	
+}
+.lotusBanner ul.lotusLinks a {
+	padding: 6px 4px 0 1px;
+}
+
+/* font size in listtextbox */
+.lotusFilters {
+	font-size: inherit;	
+}
+
+/* table 'grid' style */
+table.grid {
+	border-collapse: collapse;
+}
+table.grid th, table.grid td.label {
+	border: 1px solid silver;
+	background-color: #F4F5F6;
+	padding: 5px;
+	text-align: left;
+	font-weight: bold;	
+	white-space: noWrap
+}
+table.grid td {
+	border: 1px solid silver;	
+	padding: 5px;
+}
+table.grid ul {
+	margin-bottom:0;
+}
+
+td.noBorders {
+	border: 0 !important;	
+}
+
+.highlight {
+	background-color: #F4F5F6;
+}
+
+input.xspInputFieldEditBox, .lotusForm textarea {
+	width: 300px;
+}
+
+input.mediumLength {
+	width: 125px;	
+}
+
+
+/*number input fields*/
+.number {
+	width: 25px;	
+}
+.numberLarge {
+	width: 65px;	
+}
+
+/* images in buttons */
+button > img {
+	padding-right:4px;	
+}
+
+
+fieldset.xspRadioButton label, fieldset.xspCheckBox label, .twoColumns label {
+	font-weight: normal !important;
+}
+fieldset.xspRadioButton td, fieldset.xspCheckBox td {
+	padding:0 !important;
+	border:0 !important;
+}
+
+/* add padding to first row in formtables */
+table.lotusFormTable > tbody > tr:first-child > td {
+	padding-top: 15px;	
+}
+
+/*remove padding on td's in a checkbox/ radio group */
+tr.lotusFormFieldRow > td > table {
+	border-collapse: collapse;	
+}
+tr.lotusFormFieldRow > td > table > tbody > tr > td {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+fieldset.xspRadioButton input {
+	margin-top: 0;
+}
+label.xspRadioButton {
+	font-weight: normal !important;	
+}
+
+label.xspCheckBox {
+	font-weight: normal !important;
+}
+
+/*forms*/
+.formSection {
+	padding-bottom: 10px;
+}
+
+.formSection td {
+	font-weight: bold;
+	font-size: 14px;
+	padding: 10px 0 10px 10px !important;
+}
+
+
+/*mark columns not to wrap*/
+td.noWrap {
+	white-space: nowrap;
+}
+
+/*hide view panel column header bar*/
+.xspDataTableViewPanelHeaderStart, .xspDataTableViewPanelHeaderMiddle, .xspDataTableViewPanelHeaderEnd,
+.xspDataTableViewPanelFooterStart, .xspDataTableViewPanelFooterMiddle, .xspDataTableViewPanelFooterEnd {
+display: none;
+}
+
+/*height of li elements in the top banner*/
+.lotusBanner li {
+	line-height: 35px;
+}
+
+/*override top margin for delete action in message*/
+.lotusMessage .lotusDelete {
+  top: 4px;
+}
+
+/*don't highlight clicked container nodes in navigator*/
+.lotusMenu li.lotusSelected h3 a {
+	background: inherit;
+	color: inherit !important;
+	border:0;
+}
+
+/*remove dotted links from ff*/
+a:active {
+  outline: none !important;
+}
+:focus {
+  -moz-outline-style: none;
+}
+
+
+/*
+ * maximum width of messages
+ */
+.lotusMessage {
+	max-width: 550px;	
+	background-image: url(/oneuiv2/images/iconError16.png);
+	background-repeat: no-repeat;
+	background-position: 8px 5px;
+	padding-left: 13px;
+}
+
+/* icon for messages */
+.lotusWarning {
+	background-image: url(/oneuiv2/images/iconWarning16.png);
+	background-repeat: no-repeat;
+	background-position: 8px 5px;
+}
+
+.lotusError {
+	background-image: url(/oneuiv2/images/iconError16.png);
+	background-repeat: no-repeat;
+	background-position: 8px 5px;
+}
+
+.lotusInfo {
+	background-image: url(/oneuiv2/images/iconInfo16.png);
+	background-repeat: no-repeat;
+	background-position: 8px 5px;
+}
+
+.lotusConfirm {
+	background-image: url(/oneuiv2/images/iconConfirmation16.png);
+	background-repeat: no-repeat;
+	background-position: 8px 5px;
+}
+
+/*
+ *updates section
+ */
+.lotusForum .lotusPostAuthorInfo {
+  width: 40px;
+  padding-right: 0;
+}
+.lotusForum .lotusPostContent {
+  padding-right: 0;
+}
+
+/*textarea: same margin as input fields */
+.lotusForm textarea {
+	margin-left: 0.1em;		
+}
+
+/* 2 columns for cb group */
+.twoColumns { display: inline; }
+.twoColumns td { 
+	float: left; 
+	width: 300px;
+	padding-bottom: 5px !important;
+	padding-right: 4px;
+	white-space: nowrap;
+}
+
+.asBlock > span > span {
+	display: block;
+	margin-left: 0 !important;
+}
+
+/*correct margin on first p tag in rt fields */
+.lotusui p:first-child {
+	margin: 2px 0 0 0;
+}
+
+.pointer {
+	cursor: hand; cursor: pointer;
+}

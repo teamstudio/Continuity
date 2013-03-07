@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccTask</component-type>
+    <composite-name>ccTask</composite-name>
+    <composite-file>/ccTask.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>parentUnid</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.std.String</editor>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>setResponsibleFor</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.std.Boolean</editor>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+  </composite-component>
+</faces-config>

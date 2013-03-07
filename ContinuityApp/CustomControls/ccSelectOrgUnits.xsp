@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:radio text="All" id="radio3" selectedValue="all"
+		groupName="rgOUs" value="#{compositeData.doc.orgUnitTarget}"
+		defaultSelected="true">
+		<xp:eventHandler event="onchange" submit="false">
+			<xp:this.script><![CDATA[dojo.style( "#{id:cbOUs}", "display", "none")]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:radio>
+	
+	<br />
+	<xp:radio text="Selected organisation units" id="radio4"
+		selectedValue="selected" groupName="rgOUs" value="#{compositeData.doc.orgUnitTarget}">
+		<xp:eventHandler event="onchange" submit="false">
+			<xp:this.script><![CDATA[dojo.style("#{id:cbOUs}", "display", "block")]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:radio>
+	<br />
+
+	<xp:div id="cbOUs" rendered="#{javascript:compositeData.doc.isEditable()}">
+		<xp:this.style><![CDATA[#{javascript:"margin-left: 20px; display: " + (compositeData.doc.getItemValueString("orgUnitTarget").equals("all") || compositeData.doc.getItemValueString("orgUnitTarget").equals("") ? "none" : "block" )}]]></xp:this.style>
+
+		<xp:checkBoxGroup id="checkBoxGroupOrgUnits" value="#{compositeData.doc.orgUnitIds}">
+			<xp:selectItems>
+				<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( ["", configBean.coreDbPath], "vwOrgUnits", 2);
+						return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
+			</xp:selectItems>
+		</xp:checkBoxGroup>
+	</xp:div>
+
+	<xp:div style="margin-left: 20px">
+		<xp:this.rendered><![CDATA[#{javascript://show in read mode
+	!compositeData.doc.isEditable()}]]></xp:this.rendered>
+	
+		<xp:text escape="false" disableTheme="true">
+			<xp:this.value><![CDATA[#{javascript:var o = compositeData.doc.getItemValue("orgUnitNames");
+	
+	if ( o==null || o.length==0 ) {
+	return "No organisation units selected";
+	} else {
+		return @Implode(o, "<br />");
+	}}]]></xp:this.value>
+		</xp:text>
+
+	</xp:div>
+</xp:view>

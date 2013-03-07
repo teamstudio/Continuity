@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident"
+			action="openDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<div class="section">
+		<div class="title">Incident</div>
+	</div>
+
+	<xe:formTable id="formTable1" disableErrorSummary="true">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel1">
+
+				<xp:link escape="true" text="Back to list" id="link1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("incidentsList");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xp:this.facets>
+
+		<xe:formRow id="formRow2" label="Description:">
+			<xp:inputText value="#{docIncident.description}"
+				id="description1">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow3" label="Alert level:">
+			<xp:inputText value="#{docIncident.alertLevel}"
+				id="inputText1">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow4" label="Scenario:">
+			<xp:inputText value="#{docIncident.scenarioName}"
+				id="inputText2">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow5" label="Site:">
+			<xp:inputText value="#{docIncident.siteName}"
+				id="inputText3">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow id="formRow6" label="Status:">
+			<xp:inputText value="#{docIncident.status}"
+				id="inputText4">
+			</xp:inputText>
+		</xe:formRow>
+
+
+	</xe:formTable>
+
+	<xc:ccTasks allowAdd="false" allowEdit="false"
+		parentUnid="#{javascript:docIncident.getItemValueString('id')}"
+		setResponsibleFor="false">
+	</xc:ccTasks>
+
+</xp:view>

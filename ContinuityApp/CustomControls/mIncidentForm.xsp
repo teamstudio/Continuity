@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<div>
+	
+	<xc:unpFormViewer showbuttons="true" editxpagename="mActivate.xsp"
+		formname="fIncident" title="Incident" newresponsexpagename=""
+		closexpagename="mIncidents.xsp" showEditButton="true">
+		<xp:this.facets>
+			<xp:panel xp:key="facet_1">
+
+				<ul class="fieldlist">
+					<li>
+						<xp:label value="Description" id="namelabel"
+							for="description">
+						</xp:label>
+						<xp:text escape="true" id="description"
+							value="#{docIncident.description}">
+						</xp:text>
+
+					</li>
+					<li>
+						<xp:label value="Site" id="label1"
+							for="siteId">
+						</xp:label>
+						<xp:text escape="true" id="siteId"
+							value="#{docIncident.siteName}">
+						</xp:text>
+					</li>
+					<li>
+						<xp:label value="Org unit" id="label4"
+							for="orgUnitId">
+						</xp:label>
+						<xp:text escape="true" id="orgUnitId"
+							value="#{docIncident.orgUnitName}">
+						</xp:text>
+					</li>
+
+					<li>
+						<xp:label value="Plan" id="label2"
+							for="scenarioId">
+						</xp:label>
+						<xp:text escape="true" id="scenarioId"
+							rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}"
+							value="#{docIncident.scenarioName}">
+						</xp:text>
+						<xp:text escape="true" id="computedField1"
+							rendered="#{javascript:docIncident.getItemValueString('scenarioId')=='none'}"
+							value="-none-">
+						</xp:text>
+					</li>
+
+					<li>
+
+						<xp:label value="Alert level" id="label3"
+							for="alertLevel">
+						</xp:label>
+						<xp:text escape="true" id="alertLevel"
+							value="#{docIncident.alertLevel}">
+						</xp:text>
+
+					</li>
+
+					<li>
+
+						<xp:label value="Status" id="label6"
+							for="status">
+						</xp:label>
+						<xp:text escape="true" id="status"
+							value="#{docIncident.status}">
+						</xp:text>
+
+					</li>
+
+					<li>
+
+						<xp:label value="Test" id="label5" for="test">
+						</xp:label>
+						<xp:text escape="true" id="test"
+							value="#{javascript:(docIncident.getItemValueString('test').equals('yes') ? 'Yes' : 'No')}">
+						</xp:text>
+
+					</li>
+
+				</ul>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:unpFormViewer>
+
+
+
+
+	<div class="box">
+
+		<ul class="buttons">
+			<li class="buttonBlue">
+				<xp:link escape="true" text="" id="link1">
+					<xp:this.value><![CDATA[#{javascript:"mNotify.xsp?incidentId=" + docIncident.getDocument().getUniversalID()}]]></xp:this.value>
+					<span>Notify team</span>
+				</xp:link>
+
+			</li>
+
+			<li class="buttonBlue">
+				<xp:link escape="true" text="" id="link2"
+					value="mCallTree.xsp">
+					<span>Call tree</span>
+				</xp:link>
+			</li>
+		</ul>
+
+		<!-- deactivate button -->
+		<xp:div>
+			<xp:this.rendered><![CDATA[#{javascript:sessionScope.get('isEditor') && docIncident.getItemValueString('status').equals('active')}]]></xp:this.rendered>
+			<ul class="buttons">
+				<li class="buttonBlue">
+					<xp:link escape="true" value="#" text=""
+						id="link3">
+						<xp:this.attrs>
+							<xp:attr name="onclick">
+								<xp:this.value><![CDATA[#{javascript:"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "'); return false;"}]]></xp:this.value>
+							</xp:attr>
+						</xp:this.attrs>
+						<span>Deactivate</span>
+					</xp:link>
+
+				</li>
+			</ul>
+		</xp:div>
+
+	</div>
+
+	<xc:mTasksList showStatus="true"
+		viewName="vwTasksByParentByTaskCat">
+		<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
+	</xc:mTasksList>
+	
+	</div>
+
+</xp:view>

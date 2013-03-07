@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='2de' unid='B225A5E5BC5C140CC1257AA0003D965A' sequence='37'>
+<created><datetime dst='true'>20121023T131241,86+02</datetime></created>
+<modified><datetime>20130307T135743,16+01</datetime></modified>
+<revised><datetime>20130307T135743,15+01</datetime></revised>
+<lastaccessed><datetime>20130307T135743,16+01</datetime></lastaccessed>
+<addedtofile><datetime>20130301T115515,48+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><text>fRole</text></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text>w</text></item>
+<item name='$XPageAlt'><text>role.xsp</text></item>
+<item name='$XPageAltClient'><text>role.xsp</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>fRole</text></item>
+<item name='name' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='order' summary='false'><number>0</number></item>
+<item name='canAccessAllOrgUnits' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='id' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='siteTarget' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='siteIds' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='siteName' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='orgUnitTarget' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='orgUnitIds' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='orgUnitNames' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>orgUnitNames</text><text>orgUnitIds</text><text
+>orgUnitTarget</text><text>siteName</text><text>siteIds</text><text>siteTarget</text><text
+>id</text><text>canAccessAllOrgUnits</text><text>order</text><text>name</text></textlist></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+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
+</rawitemdata></item></note>
+

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xc:mLayoutBase></xc:mLayoutBase>
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:try {
+	
+	var orgUnid = param.get("orgUnid");
+
+//allowed only for bc editors: set context to a different OU
+if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
+
+	var dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
+	var docOrgUnit = dbCore.getDocumentByUNID( orgUnid);
+				
+	if (docOrgUnit != null) {
+	
+		sessionScope.put("orgUnitId", docOrgUnit.getItemValueString("name"));
+		sessionScope.put("orgUnitName", docOrgUnit.getItemValueString("name") );
+		sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
+
+	}
+	
+	dbCore.close();
+
+}
+} catch (e) {
+	dBar.error(e.toString() );
+}}]]></xp:this.beforeRenderResponse>
+
+	<xp:this.resources>
+		<xp:script src="workspace.js" clientSide="true"></xp:script>
+	</xp:this.resources>
+	
+	<div id="page">
+	
+		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" title="Continuity"
+			homeToWorkspace="true">
+		</xc:unpHeader>
+		
+		<xc:mOrgUnit></xc:mOrgUnit>
+	
+		<section id="wscontent">
+	
+			<!-- standard users --> 
+			<xp:div styleClass="wsscroll">
+				<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xp:this.rendered>
+				<ul class="workspace-items">
+					
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mContacts.xsp';">
+							<span class="chicletimg imgContacts"></span>
+							<span>Contacts</span>
+						</a>
+					</li>
+					
+					
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mPlans.xsp';">
+							<span class="chicletimg imgPlans"></span>
+							<span>Plans</span>
+						</a>
+					</li>
+					
+				</ul>
+	
+			</xp:div>
+			
+			<!-- Continuity editors/ users -->
+			<xp:div styleClass="wsscroll" rendered="#{javascript:sessionScope.isUser || sessionScope.isEditor}">
+			
+				<ul class="workspace-items">
+				
+					<!--  activate team -->
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mActivate.xsp';">
+							<span class="chicletimg imgActivate"></span>
+							<span>Activate team</span>
+						</a>
+					</li>
+					
+					<!-- contacts -->	
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mContacts.xsp';">
+							<span class="chicletimg imgContacts"></span>
+							<span>Contacts</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mCallTree.xsp';">
+							<span class="chicletimg imgCalltree"></span>
+							<span>Call tree</span>
+						</a>
+					</li>
+					
+					<!-- Incidents -->
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mIncidents.xsp';">
+							<xp:text escape="true" styleClass="badge" id="computedField2">
+								<xp:this.value><![CDATA[#{javascript:sessionScope.numIncidents}]]></xp:this.value>
+								<xp:this.converter>
+									<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+						
+							<span class="chicletimg imgIncidents"></span>
+							<span>Incidents</span>
+						</a>
+					</li>
+					
+					<!-- my role -->
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mRole.xsp';">
+							<span class="chicletimg imgRole"></span>
+							<span>My role</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mPlans.xsp';">
+							<span class="chicletimg imgPlans"></span>
+							<span>Plans</span>
+						</a>
+					</li>
+	
+				
+					<!--  my active tasks -->
+					<xp:text tagName="li" styleClass="disabled" rendered="#{javascript:sessionScope.numAssignedTasks==0}">
+						<a href="#" onclick="$.blockUI();window.location.href='mTasks.xsp';">
+							<xp:text escape="true" styleClass="badge" id="computedField3" value="0">
+							</xp:text>
+							<span class="chicletimg imgTasks"></span>
+							<span>Active tasks</span>
+						</a>
+					</xp:text>
+					<xp:text tagName="li" rendered="#{javascript:sessionScope.numAssignedTasks>0}">
+						<a href="#" onclick="$.blockUI();window.location.href='mTasks.xsp';">
+							<xp:text escape="true" styleClass="badge" id="computedField4">
+								<xp:this.value><![CDATA[#{javascript:sessionScope.numAssignedTasks}]]></xp:this.value>
+								<xp:this.converter>
+									<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+							<span class="chicletimg imgTasks"></span>
+							<span>Active tasks</span>
+						</a>
+					</xp:text>
+					
+					
+					<!-- Updates -->
+					<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mUpdates.xsp';">
+							<xp:text escape="true" styleClass="badge" id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:sessionScope.numUpdates}]]></xp:this.value>
+								<xp:this.converter>
+									<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+	
+							<span class="chicletimg imgUpdates"></span>
+							<span>Updates</span>
+						</a>
+					</li>
+				
+					
+					<!-- locate team -->
+					<!--<li>
+						<a href="#" onclick="$.blockUI();window.location.href='mLocateTeam.xsp';">
+							<span class="chicletimg" style="background: url(locate-blue.png) no-repeat scroll 0 0 transparent;"></span>
+							<span>Locate team</span>
+						</a>
+					</li>
+					
+					-->
+				
+				</ul>
+	
+			</xp:div>
+		</section>
+		
+		<style type="text/css">
+				body {
+				padding-bottom: 80px !important;
+			}	
+		</style>
+						
+		<xc:unpFooter settingsurl="/unpws.unp/UnpOptions.xsp"></xc:unpFooter>
+		
+	</div>
+
+</xp:view>
