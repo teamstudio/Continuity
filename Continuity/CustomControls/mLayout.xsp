@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right"></xc:ccDebugToolbar>
+	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right"
+		loaded="${javascript:sessionScope.isDebug}">
+	</xc:ccDebugToolbar>
 
 	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");}]]></xp:this.beforePageLoad>
 

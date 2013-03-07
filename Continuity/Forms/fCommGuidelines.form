@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='C1257AA000374D6A'>
+<noteinfo noteid='832' unid='FC13C6968CC401DEC1257ABC00453330' sequence='8'>
+<created><datetime>20121120T133550,88+01</datetime></created>
+<modified><datetime>20121121T144726,86+01</datetime></modified>
+<revised><datetime>20121121T144726,85+01</datetime></revised>
+<lastaccessed><datetime>20121121T144726,85+01</datetime></lastaccessed>
+<addedtofile><datetime>20121120T133551,02+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><text>fCommGuidelines</text></item>
+<item name='$Comment' sign='true'><text>global communication guidelines</text></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>fCommGuidelines</text></item>
+<item name='description_input' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><text>description_input</text></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoMEAQCF/xsA
+AQAACmRlc2NyaXB0aW9uX2lucHV0OgkA3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK/zYA
+ggABAAAAAgAAAAAAAAIBAAAKAAAAAAAAAAARAAAAAABkZXNjcmlwdGlvbl9pbnB1dABiDgEAhAAA
+AAAAAQAAAN4GAACK/4X/CAABAAAK
+</rawitemdata></item>
+<item name='$Flags'><text>Cw</text></item></note>
+

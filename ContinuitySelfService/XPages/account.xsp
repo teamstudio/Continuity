@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" styleClass="lotusui lotusLogin2 tundra"
+	disableTheme="true" dojoTheme="true" dojoParseOnLoad="true" dojoForm="true"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.Button"></xp:dojoModule>
+		<xp:metaData name="viewport" content="user-scalable=no, width=device-width"></xp:metaData>
+	</xp:this.resources>
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:var it = facesContext.getMessages();
+if (it.hasNext() ) {
+	//store first message in viewscope
+	var m = it.next();
+	viewScope.put("message", m.getSummary() );
+	
+	//determine message class
+	if (m.getSeverity().equals( javax.faces.application.FacesMessage.SEVERITY_WARN ) ) {
+		viewScope.put("messageClass", "lotusWarning");
+	} else if (m.getSeverity().equals( javax.faces.application.FacesMessage.SEVERITY_ERROR ) ) {
+		viewScope.put("messageClass", "lotusError");
+	} else {
+		viewScope.put("messageClass", "lotusConfirm");
+	}
+}
+}]]></xp:this.beforeRenderResponse>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:accountsBean.validateInputs();
+}]]></xp:this.beforePageLoad>
+	<xp:this.pageTitle><![CDATA[#{javascript:"Continuity | " + (accountsBean.activation ? "Account activation" : "Lost password")}]]></xp:this.pageTitle>
+	<style>
+		.tundra .dijitButtonNode { padding:3px 7px 3px; font-weight:bold;-webkit-border-radius:
+		2px;-moz-border-radius: 2px;border-radius: 2px; font-family:Arial,Helvetica,sans-serif;
+		font-size: 0.9em; line-height:1.7em; margin-top:-2px; }
+	</style>
+	<div class="lotusBanner" style="height: 18px;" role="banner">
+		<div class="lotusLogo">
+			<span class="lotusAltText">&#160;</span>
+			
+		</div>
+	</div> 
+
+	<div class="lotusLoginBox">
+		<div class="lotusLoginContent">
+			<div class="lotusLoginForm">
+
+				<xp:text escape="true" id="computedField3" tagName="h1"
+					value="Continuity | Account activation" rendered="#{accountsBean.activation}">
+				</xp:text>
+				<xp:text escape="true" id="computedField4" tagName="h1"
+					value="Continuity | Lost password" rendered="#{accountsBean.lostPassword}">
+				</xp:text>
+
+				<xp:div id="lostPassword">
+
+					<!-- messages -->
+					<xp:div rendered="#{javascript:viewScope.message}">
+						<xp:this.styleClass><![CDATA[#{javascript:"lotusMessage " + viewScope.get("messageClass");}]]></xp:this.styleClass>
+						<xp:text escape="false" style="margin-left: 0" id="computedField1"
+							value="#{viewScope.message}">
+
+						</xp:text>
+					</xp:div>
+
+					<xp:div>
+						<xp:this.rendered><![CDATA[#{javascript:!accountsBean.isValidateKey() && accountsBean.isActivation()}]]></xp:this.rendered>
+						If this is your first use of Continuity you need to activate your account.
+						Please enter your email address below. Only registered email addresses are
+						accepted. Click "Send" and you will receive an email containing instructions
+						on how to activate your account.
+					</xp:div>
+
+					<xp:div>
+						<xp:this.rendered><![CDATA[#{javascript:!accountsBean.isValidateKey() && accountsBean.isLostPassword()}]]></xp:this.rendered>
+						Please enter your email address below. Only registered email addresses are
+						accepted. Click "Send" and you will receive an email containing instructions
+						on how to change your password.
+					</xp:div>
+					
+					<xp:div>
+						<xp:this.rendered><![CDATA[#{javascript:accountsBean.isValidateKey() && !accountsBean.isPWChanged()}]]></xp:this.rendered>
+						Enter a new password below. Repeat the new password and click "Change&#160;password".
+					</xp:div>
+
+					<div style="margin-top: 10px;">
+
+						<xp:table>
+						
+						<xp:tr>
+							<td><xp:label for="inputEmail">Email address:</xp:label></td>
+							
+							<td>
+								<xp:inputText id="inputEmail" value="#{accountsBean.emailAddress}"
+									style="width: 200px" required="true" rendered="#{!accountsBean.existingUser}">
+									<xp:this.validators>
+										<xp:validateRequired message="Enter an email address">
+										</xp:validateRequired>
+									</xp:this.validators>
+									<xp:eventHandler event="onkeypress" submit="true" refreshMode="partial"
+										refreshId="lostPassword">
+										<xp:this.action><![CDATA[#{javascript:accountsBean.sendLink();}]]></xp:this.action>
+										<xp:this.script><![CDATA[if(thisEvent.keyCode == dojo.keys.ENTER) {
+			dijit.byId("#{id:button1}").setDisabled(true);
+			return true;
+		} else { return false; }]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:inputText>
+		
+								<xp:text rendered="#{accountsBean.existingUser}"
+									value="#{accountsBean.emailAddress}">
+								</xp:text>
+							
+							</td>
+						
+						</xp:tr>
+						
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:accountsBean.isValidateKey() && !accountsBean.isPWChanged()}]]></xp:this.rendered>
+								<td><label for="computedField2">Name:</label></td>
+								<td>
+							<xp:text escape="true" id="computedField2"
+								value="#{accountsBean.name}">
+							</xp:text>
+								</td>
+							</xp:tr>
+							
+							
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:accountsBean.isValidateKey() && !accountsBean.isPWChanged()}]]></xp:this.rendered>
+							
+							<td><label for="inputPWNew1">New password *:</label></td>
+	
+							<td><xe:djValidationTextBox id="inputPWNew1" required="true"
+								invalidMessage="Enter a new password with at least 6 digits." regExp=".{6,}" type="password"
+								promptMessage="Enter a new password with at least 6 digits."
+								value="#{accountsBean.newPassword}">
+								<xe:this.dojoAttributes>
+									<xp:dojoAttribute name="missingMessage"
+										value="Enter a new password with at least 6 digits.">
+									</xp:dojoAttribute>
+								</xe:this.dojoAttributes>
+								<xp:this.validators>
+									<xp:validateExpression message="The passwords do not match.">
+										<xp:this.expression><![CDATA[#{javascript:var pw1 = getComponent("inputPWNew1").getSubmittedValue();
+							var pw2 = getComponent("inputPWNew2").getSubmittedValue();
+							return pw1.equals( pw2 );}]]>
+										</xp:this.expression>
+									</xp:validateExpression>
+								</xp:this.validators>
+							</xe:djValidationTextBox>
+	
+							</td>
+						</xp:tr>
+					
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:accountsBean.isValidateKey() && !accountsBean.isPWChanged()}]]></xp:this.rendered>
+						
+							<td><label for="inputPWNew1">New password (repeat) *:</label></td>
+							<td>
+	
+							<xe:djValidationTextBox id="inputPWNew2" required="true"
+								invalidMessage="The passwords do not match." type="password" validatorExt="confirmPassword"
+								value="#{accountsBean.newPasswordRepeat}">
+								<xe:this.dojoAttributes>
+									<xp:dojoAttribute name="missingMessage"
+										value="Repeat the new password.">
+									</xp:dojoAttribute>
+									<xp:dojoAttribute name="constraints">
+										<xp:this.value><![CDATA[{'other': '#{id:inputPWNew1}'}]]></xp:this.value>
+									</xp:dojoAttribute>
+								</xe:this.dojoAttributes>
+								<xp:this.validators>
+									<xp:validateRequired message="Repeat the new password.">
+									</xp:validateRequired>
+								</xp:this.validators>
+	
+								<xp:eventHandler event="onKeyPress" submit="true"
+									refreshMode="partial" refreshId="lostPassword">
+									<xp:this.action><![CDATA[#{javascript:accountsBean.changePassword();}]]></xp:this.action>
+									<xp:this.script><![CDATA[if(thisEvent.keyCode == dojo.keys.ENTER) {
+		dijit.byId("#{id:button2}").setDisabled(true);
+		return true;
+	} else { return false; }]]></xp:this.script>
+								</xp:eventHandler>
+	
+	
+							</xe:djValidationTextBox>
+	
+							<xp:scriptBlock id="scriptBlock3">
+								<xp:this.value><![CDATA[function confirmPassword(value, constraints) {
+	    var isValid = false;
+	    if (constraints && constraints.other) {
+	        var otherInput = dijit.byId(constraints.other);
+	        if (otherInput) {
+	            var otherValue = otherInput.value;
+	            isValid = (value == otherValue);
+	        }
+	    }
+	    return isValid;
+	}]]></xp:this.value>
+							</xp:scriptBlock>
+							</td>
+						</xp:tr>
+						
+						<xp:tr>
+							<xp:this.rendered><![CDATA[#{javascript:accountsBean.isValidateKey() && !accountsBean.isPWChanged()}]]></xp:this.rendered>
+							
+							<td>&#160;</td>
+							
+							<td style="padding-top:10px">
+								<xp:button id="btnSetPW" dojoType="dijit.form.Button">
+									<xp:this.value><![CDATA[#{javascript:(accountsBean.isLostPassword() ? "Change password" : "Set password")}]]></xp:this.value>
+									<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+										refreshId="lostPassword">
+										<xp:this.action><![CDATA[#{javascript:accountsBean.changePassword();}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:button>
+							</td>
+						
+						</xp:tr>
+						
+						</xp:table>
+					</div>
+
+					<xp:div style="margin-top: 15px" rendered="#{!accountsBean.existingUser}">
+
+						<xp:button value="Send" id="button1"
+							dojoType="dijit.form.Button" styleClass="tundra">
+
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+								immediate="false" save="true" refreshId="lostPassword">
+								<xp:this.action><![CDATA[#{javascript:accountsBean.sendLink();}]]></xp:this.action>
+								<xp:this.script><![CDATA[dijit.byId("#{id:button1}").setDisabled(true);]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+
+						<xp:link style="padding-left: 5px" escape="true" text="Back" id="link1">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[history.go(-1)]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:link>
+
+					</xp:div>
+					
+				</xp:div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- set focus on email input or password input field -->
+	<xp:scriptBlock id="scriptBlock1" rendered="#{!accountsBean.validateKey}">
+		<xp:this.value><![CDATA[dojo.addOnLoad( function() {
+	var inpEmail = dojo.byId("#{id:inputEmail}");
+	if (inpEmail) { inpEmail.focus(); }
+});]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xp:scriptBlock id="scriptBlock2" rendered="#{accountsBean.validateKey}">
+		<xp:this.value><![CDATA[dojo.addOnLoad( function() {
+	var inpEmail = dojo.byId("#{id:inputPWNew1}");
+	if (inpEmail) { inpEmail.focus(); }
+});]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script><![CDATA[dojo.connect(window, "onkeypress", function (e) {
+   
+    var key;
+   
+    if (window.event) {
+        key = window.event.keyCode;
+    } else {
+        key = e.which;
+    }
+   
+    if (key == dojo.keys.ENTER) {
+    	dojo.stopEvent(e);
+    	return false;
+    }
+});]]></xp:this.script>
+	</xp:eventHandler>
+</xp:view>

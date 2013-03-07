@@ -1,0 +1,24 @@
+<!--
+	The default theme contents use theme inheritance.
+
+	Application themes can extend an existing global theme using the
+	extends attribute.  Existing themes include the following options:
+
+	1. webstandard 2. oneui 3. notes
+-->
+<theme extends="oneuiv2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
+
+	<!-- set default page title -->
+	<control override="false">
+		<name>ViewRoot</name>
+  		<property>
+   			<name>pageTitle</name>
+   			<value>Continuity</value>
+  		</property>
+  		<property>
+			<name>pageIcon</name>
+			<value>/favicon.ico</value>
+		</property>
+	</control>
+
+</theme>

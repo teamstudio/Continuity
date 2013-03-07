@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A00423EA1'>
+<noteinfo noteid='18e' unid='0195E4B8BDA0E9BEC1257B18007E4D13' sequence='7'>
+<created><datetime>20130220T235932,67+01</datetime></created>
+<modified><datetime>20130307T155615,46+01</datetime></modified>
+<revised><datetime>20130304T153356,33+01</datetime></revised>
+<lastaccessed><datetime>20130307T155615,46+01</datetime></lastaccessed>
+<addedtofile><datetime>20130307T155615,46+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwBCUsers</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+igAFAC4AKQAEAAgACAAJAAQAdXNlck5hbWVsYXN0TmFtZSRDb25mbGljdCRSRUYABAAEAAAARAAF
+AAQARm9ybQEACABmQ29udGFjdAoCBQAGAHJvbGVJZAEABABub25lAQAHAGNvbnRhY3QAHwIKAgQA
+HgEcAgMABwASAAwACUwxUzRTNVM4UzlT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FQABAABEAGYAAAAIAHVzZXJOYW1l
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAIACAAAAFZDAQAIAAgAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAAB1c2VyTmFtZXVzZXJOYW1lbGFzdE5hbWVsYXN0TmFtZSYAAQAAAAEB
+AAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAA
+AAAAAAAAAABCAAAAAAABAP///wAFAP///wABAAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAA
+AAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

@@ -79,8 +79,9 @@ c.toggle()
 											</xp:label>
 										</xp:td>
 										<xp:td>
-											<xp:inputText value="#{docTaskCat.order}" id="inputText1"
-												required="true" disableClientSideValidation="true">
+											<xp:inputText value="#{docTaskCat.order}"
+												id="inputText1" required="true" disableClientSideValidation="true" styleClass="number"
+												maxlength="3">
 											</xp:inputText>
 										</xp:td>
 									</xp:tr>

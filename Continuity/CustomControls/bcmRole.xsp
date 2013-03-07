@@ -99,7 +99,12 @@ getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
 		</xe:formRow>
 
 		<xe:formRow id="formRow2" label="Order:">
-
+			<xp:inputText value="#{docRole.order}" id="inputText1" required="true"
+				styleClass="number" maxlength="3">
+				<xp:this.validators>
+					<xp:validateRequired message="Enter a position in the hierarchy"></xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
 		</xe:formRow>
 
 		<xe:formRow id="formRow3">

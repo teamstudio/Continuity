@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" rendered="false">
+
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="NOACCESS" type="ANONYMOUS"></xp:aclEntry>
+				<xp:aclEntry type="DEFAULT" right="EDITOR"></xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:configBean.redirectToContinuity();}]]></xp:this.beforePageLoad>
+	
+</xp:view>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Error">
+
+	<div class="lotusErrorBox">
+		<div class="lotusErrorContent">
+			<img class="yourProductSprite yourProductSprite-msgError48"
+				src="../../css/images/blank.gif" />
+			<div class="lotusErrorForm">
+				<h1>We are unable to process your request</h1>
+				<p>If this error persists, report the problem to your administrator.</p>
+				<p>
+					<xp:messages id="messages1" globalOnly="true"></xp:messages>
+				</p>
+			</div><!-- end errorForm -->
+		</div>
+		<!-- end errorContent -->
+	</div><!-- end errorBox -->
+
+
+</xp:view>

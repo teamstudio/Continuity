@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="docOrg" formName="fOrganisation"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry type="DEFAULT" right="NOACCESS"></xp:aclEntry>
+				<xp:aclEntry type="ROLE" right="EDITOR">
+					<xp:this.name><![CDATA[[admin]]]></xp:this.name>
+					<xp:this.fullName><![CDATA[[admin]]]></xp:this.fullName>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xc:layout>
+		<xp:this.facets>
+
+			<xp:div xp:key="facetMiddle">
+
+				<xp:table>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Name:" id="name_Label1"
+								for="name1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText value="#{docOrg.name}"
+								id="name1" required="true">
+							<xp:this.validators>
+								<xp:validateRequired
+									message="Name is required.">
+								</xp:validateRequired>
+							</xp:this.validators></xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Alias:" id="alias_Label1"
+								for="alias1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText value="#{docOrg.alias}"
+								id="alias1" required="true">
+							<xp:this.validators>
+								<xp:validateRequired
+									message="Alias is required.">
+								</xp:validateRequired>
+							</xp:this.validators></xp:inputText>
+						</xp:td>
+					</xp:tr>
+
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Folder:" id="label1"
+								for="alias1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText value="#{docOrg.folder}"
+								id="inputText1" required="true">
+							<xp:this.validators>
+								<xp:validateRequired
+									message="Folder is required.">
+								</xp:validateRequired>
+							</xp:this.validators></xp:inputText>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+				<xp:table>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Admin first name:"
+								id="adminFirstName_Label1" for="adminFirstName1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docOrg.adminFirstName}" id="adminFirstName1">
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Admin last name:"
+								id="adminLastName_Label1" for="adminLastName1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docOrg.adminLastName}" id="adminLastName1">
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Admin email:"
+								id="adminEmail_Label1" for="adminEmail1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText value="#{docOrg.adminEmail}"
+								id="adminEmail1">
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+				<xp:br></xp:br>
+				<xp:button value="Save" id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:if ( orgBean.save(docOrg) ) {
+	context.redirectToPage("organisations");
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+		</xp:div>
+	</xp:this.facets>
+	</xc:layout>
+	
+</xp:view>

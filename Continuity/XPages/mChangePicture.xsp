@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+
+	<xc:mLayout addBackButton="#{javascript:!docContact.isEditable();}">
+
+		<div data-role="header">
+
+			<!-- cancel -->
+			<xp:link escape="true" text="Cancel" id="linkCancel"
+				rendered="#{javascript:docContact.isEditable()}">
+
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action>
+						<xp:changeDocumentMode mode="readOnly" var="docContact"></xp:changeDocumentMode>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+
+			<xp:text escape="true" tagName="h1" id="computedField1">
+				<xp:this.value><![CDATA[#{javascript:@Trim(docContact.getItemValueString("firstName") + " " + docContact.getItemValueString("lastName"))}]]></xp:this.value>
+			</xp:text>
+
+			<!-- edit -->
+			<xp:link escape="true" styleClass="ui-btn-right" text="Edit" id="link2">
+				<xp:this.rendered><![CDATA[#{javascript:var contact = docContact.getItemValueString("userName");
+
+sessionScope.get("userName").equals(contact) && !docContact.isEditable()}]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action>
+						<xp:changeDocumentMode mode="edit" var="docContact"></xp:changeDocumentMode>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+
+			<!-- save -->
+			<xp:link escape="true" styleClass="ui-btn-right" text="Save" id="link3"
+				rendered="#{javascript:docContact.isEditable()}">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action>
+
+						<xp:actionGroup>
+							<xp:saveDocument var="docContact"></xp:saveDocument>
+							<xp:changeDocumentMode mode="readOnly" var="docContact"></xp:changeDocumentMode>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+
+		</div>
+
+		<div data-role="content">
+
+			<table>
+				<tbody>
+
+					<tr>
+						<td style="padding-right: 5px">
+							<!-- photo -->
+							<xp:image id="image1" style="width: 75px; height: 75px;">
+								<xp:this.rendered><![CDATA[#{javascript:docContact.getAttachmentList("photo").size()>0}]]></xp:this.rendered>
+								<xp:this.url><![CDATA[#{javascript:var a = docContact.getAttachmentList("photo");
+
+if (a.size()>0) {
+	return docContact.getDocument().getUniversalID() + "/$file/" + a[0].getName();
+}}]]></xp:this.url>
+							</xp:image>
+						</td>
+
+						<td>
+							<xp:text escape="true" style="font-weight:bold">
+								<xp:this.value><![CDATA[#{javascript:@Trim(docContact.getItemValueString("firstName") + " " + docContact.getItemValueString("lastName"))}]]></xp:this.value>
+							</xp:text>
+							<br />
+
+							<i>
+								<xp:text escape="true" value="#{docContact.jobTitle}"></xp:text>&#160;(
+								<xp:text escape="true" value="#{docContact.orgUnitName}"></xp:text>)
+							</i>
+
+							<div style="margin-top: 5px">
+								<xp:text escape="true" id="computedField2" value="#{docContact.roleName}"></xp:text><br />
+								<xp:text disableTheme="true" style="font-weight: bold" value="- Alternate contact -">
+									<xp:this.rendered><![CDATA[#{javascript:docContact.getItemValueString("isAlternate").equals("yes")}]]></xp:this.rendered>
+								</xp:text>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+			<!--<div>Photo</div>
+				<xp:fileUpload id="fileUpload1" value="#{docContact.photo}"></xp:fileUpload>
+				
+				
+				
+				
+			-->
+		</div>
+	
+	</xc:mLayout>
+
+</xp:view>

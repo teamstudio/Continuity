@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
+<noteinfo noteid='1fe' unid='3114FE56BA434226C1257AD20046C1EF' sequence='20'>
+<created><datetime>20121212T135251,67+01</datetime></created>
+<modified><datetime>20130307T155644,89+01</datetime></modified>
+<revised><datetime>20130222T103017,87+01</datetime></revised>
+<lastaccessed><datetime>20130307T155644,89+01</datetime></lastaccessed>
+<addedtofile><datetime>20130307T155644,89+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>Organisations|vwOrganisations</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+dgAFAEQAQAAGAAUABAAKABAACQAEAGFsaWFzbmFtZWNvcmVEYlBhdGhjb250aW51aXR5RGJQYXRo
+JENvbmZsaWN0JFJFRgQABAAAACIABQAEAEZvcm0BAA0AZk9yZ2FuaXNhdGlvbgAKAgMABwAKAAQA
+CUwxUw==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+EgABAABEAGYAAAAFAGFsaWFz
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQAEAAMAiAAAAFZDAQAFAAUAAAAAAIAAAQAACQAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAsQAB
+AAAJAAAAAAAAAAAAAgIAAABWQwAACgAKAAAAAADcAAEAAAkAAAAAAAAAAAACAgAAAFZDAAAQABAA
+AAAAANwAAQAACQAAAAAAAAAAAAICAAAAYWxpYXNhbGlhc25hbWVuYW1lY29yZURiUGF0aGNvcmVE
+YlBhdGhjb250aW51aXR5RGJQYXRoY29udGludWl0eURiUGF0aCYAAQAAAAEBAAkBAAAKAQEOCgAA
+PwCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAA
+AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
+AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAA
+AAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAEA7+/vAAEAAAAAAAAA
+AAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

@@ -34,6 +34,9 @@ textarea {
 .xspInputFieldEditBox {
 	width: 300px;
 }
+.number {
+	width: 20px;	
+}
 
 fieldset.xspRadioButton label, fieldset.xspCheckBox label {
 	font-weight: normal;
