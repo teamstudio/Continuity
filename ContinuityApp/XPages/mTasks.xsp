@@ -122,21 +122,10 @@ viewScope.put("hasAssignedTasks", nav.getFirst() != null );
 
 									<xp:panel tagName="li" styleClass="data-row">
 										
-										<xp:image url="/unp/arrow-down.png" id="image1"
-											styleClass="multilineIcon" style="margin-top:7px;">
-											<xp:this.rendered><![CDATA[#{javascript:task.hasDescription}]]></xp:this.rendered>
-											
-											<xp:this.attrs>
-												<xp:attr name="onclick">
-													<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("tDesc") + "')"}]]></xp:this.value>
-												</xp:attr>
-											</xp:this.attrs>
-										</xp:image>
-										
 										<xp:div id="markDone"
 											styleClass="buttons pull-right">
 											<xp:this.rendered><![CDATA[#{javascript:task.myTasks && type.equals("one-time")}]]></xp:this.rendered>
-											<xp:this.style><![CDATA[#{javascript:"margin-top:-5px; display:" + (task.status.equals("assigned") ? "block;" : "none;") + "margin-right:" + (!task.hasDescription ? "22px;" : "6px")}]]></xp:this.style>
+											<xp:this.style><![CDATA[#{javascript:"margin-top:-5px; display:" + (task.status.equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 											<xp:link value="#"
 												text="to do" styleClass="red">
 												<xp:this.attrs>
@@ -151,7 +140,7 @@ viewScope.put("hasAssignedTasks", nav.getFirst() != null );
 										<xp:div id="markUndone"
 											styleClass="buttons pull-right">
 											<xp:this.rendered><![CDATA[#{javascript:task.myTasks && type.equals("one-time")}]]></xp:this.rendered>
-											<xp:this.style><![CDATA[#{javascript:"margin-top:-5px; display:" + (task.status.equals("complete") ? "block;" : "none;") + "margin-right:" + (!task.hasDescription ? "22px;" : "6px")}]]></xp:this.style>
+											<xp:this.style><![CDATA[#{javascript:"margin-top:-5px; display:" + (task.status.equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 											<xp:link value="#"
 												text="done" styleClass="green">
 												<xp:this.attrs>
@@ -162,6 +151,17 @@ viewScope.put("hasAssignedTasks", nav.getFirst() != null );
 												</xp:this.attrs>
 											</xp:link>
 										</xp:div>
+										
+										<xp:image url="/unp/arrow-down.png" id="image1"
+											styleClass="multilineIcon" style="margin-top:7px; margin-right: 20px;">
+											<xp:this.rendered><![CDATA[#{javascript:task.hasDescription}]]></xp:this.rendered>
+											
+											<xp:this.attrs>
+												<xp:attr name="onclick">
+													<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("tDesc") + "')"}]]></xp:this.value>
+												</xp:attr>
+											</xp:this.attrs>
+										</xp:image>
 
 										<xp:label id="label2" styleClass="viewlistsummary" value="#{javascript:task.title}"></xp:label>
 	
