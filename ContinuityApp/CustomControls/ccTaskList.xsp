@@ -115,6 +115,12 @@
 						taskUnid="#{javascript:row.getUniversalID()}">
 						<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
 					</xc:ccAssignToPlans>
+				
+					<xp:text rendered="#{javascript:compositeData.showScenario}" escape="false" disableTheme="true">
+					<xp:this.value>
+						<![CDATA[#{javascript:" | <b>Scenario:</b> " + row.getColumnValue("scenarioName")}]]>
+					</xp:this.value>
+					</xp:text>
 			
 				</xp:div>
 				

@@ -106,6 +106,19 @@ try{
 		
 		//ml: get org unit name
 		var scenarioId = doc.getItemValueString("scenarioId");
+		
+		if (scenarioId.indexOf("#")>-1) {		//see activation form
+			var idAndPlan = scenarioId;
+			scenarioId = @Left(idAndPlan, "#");
+			planName = @Right(idAndPlan, "#");
+			planId = database.getView("vwPlans").getEntryByKey( planName, true).getColumnValues().get(3);
+			
+			doc.replaceItemValue("scenarioId", scenarioId);
+			doc.replaceItemValue("planId", planId);
+			doc.replaceItemValue("planName", planName);
+			
+		}
+		
 		var orgUnitId = doc.getItemValueString("orgUnitId");
 		var siteId = doc.getItemValueString("siteId");
 		var alertLevel = doc.getItemValueString("alertLevel");

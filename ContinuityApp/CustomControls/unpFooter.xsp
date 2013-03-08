@@ -90,7 +90,7 @@ sessionScope.configLoaded = false;
 			styleClass="settingsButton">
 			<xp:this.attrs>
 				<xp:attr name="onclick">
-					<xp:this.value><![CDATA[#{javascript:"window.location.href='" + (sessionScope.get('userName').indexOf("mark.leusink")>-1 ? "dbar.xsp" : compositeData.settingsurl) + "';"}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:"window.location.href='" + (sessionScope.isDebug ? "dbar.xsp" : compositeData.settingsurl) + "';"}]]></xp:this.value>
 				</xp:attr>
 			</xp:this.attrs>
 			<xp:this.rendered><![CDATA[#{javascript:compositeData.settingsurl != null && (compositeData.settingsurl.length > 0);}]]></xp:this.rendered>

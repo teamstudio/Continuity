@@ -46,49 +46,56 @@
 								</xp:selectItems>
 							</xp:comboBox>
 						</li>
-
+						
 						<li>
 
-							<xp:label value="Scenario" id="label2" for="scenarioId"></xp:label>
+							<xp:label value="Scenario" id="label6" for="scenarioId"></xp:label>
+							
+							<xp:text disableTheme="true" escape="false" style="padding:0; display:inline; margin:0">
+							<xp:this.value>
+							<![CDATA[#{javascript:var plans = getScenariosByPlan(database.getView('vwScenariosByOrgUnitId') );
+							
+							var options = [];
+							
+							options.push("<option value='none' selected>-none-</option>");
+							
+							for (var i=0; i<plans.length; i++) {
+							
+								var option = [];
+								
+								option.push("<optgroup label='" + plans[i].name + "'>");
+								
+								for (var j=0; j<plans[i].scenarios.length; j++) {
+								
+									var name = plans[i].scenarios[j].name;
+									
+									//id is a combination of scenarioId and planName so we can figure out later
+									//what plan the user selected
+									var id = plans[i].scenarios[j].id + "#" + plans[i].name;
+									
+									option.push("<option value='" + id + "'>" + name + "</option>");
+								
+								}
+									
+								option.push("</optgroup>");
+								
+								var o = option.join("");
+								
+								options.push(o);
+							}
+							
+							var html = options.join("");
+							
+							return "<select id=\"scenarioId\" name=\"scenarioId\" class=\"xspComboBox xspListBox\">" + html + "</select>";
+							
+							}]]>							
+							</xp:this.value>
 
-							<xp:comboBox id="scenarioId" value="#{docIncident.scenarioId}"
-								styleClass="xspListBox">
-								<xp:selectItem itemLabel="-none-" itemValue="none">
-								</xp:selectItem>
-
-								<xp:selectItems>
-									<xp:this.value><![CDATA[#{javascript:@DbLookup(@DbName(), "vwScenariosByOrgUnit", sessionScope.get("orgUnitId"), 6);}]]></xp:this.value>
-								</xp:selectItems>
-
-								<!--
-									<xp:selectItems> <xp:this.value><![CDATA[#{javascript:var
-									vwPlans:NotesView = database.getView("vwScenariosByOrgUnit");
-									var vePlans:NotesViewNavigator =
-									vwPlans.createViewNavFromCategory(
-									sessionScope.get("orgUnitId") ); var
-									options:java.util.ArrayList = new java.util.ArrayList(); var
-									group:javax.faces.model.SelectItemGroup = null; var groupItems
-									= new Array(); var ve:NotesViewEntry = vePlans.getFirst(); var
-									veTmp:NotesViewEntry = null; while (null != ve) { var colValues
-									= ve.getColumnValues(); if (ve.isCategory() ) { //start a new
-									group var cat = colValues.get(1); if (group != null) {
-									group.setSelectItems(groupItems); options.add(group);
-									groupItems = new Array(); } group = new
-									javax.faces.model.SelectItemGroup( cat ); } else { //add to
-									current group var thisItem = new
-									javax.faces.model.SelectItem(colValues.get(3), colValues.get(2)
-									); groupItems.push( thisItem ); } veTmp = vePlans.getNext(ve);
-									ve.recycle(); ve = veTmp; } //process last group if (group !=
-									null) { group.setSelectItems(groupItems); options.add(group);
-									groupItems = new Array(); } vePlans.recycle();
-									vwPlans.recycle(); return options; }]]></xp:this.value>
-									</xp:selectItems>
-								-->
-							</xp:comboBox>
-
+							</xp:text>
+							
 						</li>
 
-						<li>
+		<li>
 
 							<xp:label value="Alert level" id="label3" for="alert"></xp:label>
 							<xp:comboBox id="alertLevel" value="#{docIncident.alertLevel}"
@@ -122,7 +129,7 @@
 				<xp:panel tagName="li" id="saveButton" styleClass="saveButton">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:var out = "if (x$('" + getClientId("scenarioId") + "').val()=='none') { if (!confirm('Are you sure you want to create an incident without linking it to a scenario?') ) { return false;} }";
+							<xp:this.value><![CDATA[#{javascript:var out = "if ($('#scenarioId').val()=='none') { if (!confirm('Are you sure you want to create an incident without linking it to a scenario?') ) { return false;} }";
 							
 							out += "saveDocument('" + getClientId("customform") + "', '" + docIncident.getDocument().getUniversalID() + 
 			"', 'mIncident.xsp', 'fIncident'";

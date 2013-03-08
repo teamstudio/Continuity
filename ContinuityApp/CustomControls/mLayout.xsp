@@ -113,6 +113,8 @@
 				
 						<xp:callback facetName="contents"></xp:callback>
 						
+						<xc:unpDebugToolbar rendered="#{javascript:sessionScope.isDebug}" defaultCollapsed="false"></xc:unpDebugToolbar>
+
 					</div>
 				</xp:div>
 			</div>

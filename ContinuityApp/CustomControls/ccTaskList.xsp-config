@@ -43,5 +43,15 @@
         <required>true</required>
       </property-extension>
     </property>
+    <property>
+      <property-name>showScenario</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.std.Boolean</editor>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

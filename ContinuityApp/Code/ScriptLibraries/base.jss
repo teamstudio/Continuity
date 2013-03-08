@@ -64,13 +64,16 @@ function init( theme:String) {
 			var isDebug = false;
 			
 			if ( isUnplugged() ) {
-				//determine the user's role based on a setting in his profile
+				//determine the user's role based on settings in his profile
 				
 				if (null != docUser) {
 					
 					var userType:String = docUser.getItemValueString("userType");
 					isEditor = userType.equals("editor");
 					isUser = isEditor || userType.equals("user");
+					
+					isDebug = docUser.getItemValueString("debugMode").equals("yes");
+					
 				}
 				
 			} else {
@@ -1002,4 +1005,78 @@ function isEmpty( input ) {
 	}
 	
 	return false;
+}
+
+function getScenariosByPlan(vwScenariosByOrgUnitId) {
+	
+	try {
+		
+		dBar.debug("get plans...");
+		
+		//create an array of all plans, with in every plan an array of all scenario's in that plan
+		
+		var nav = vwScenariosByOrgUnitId.createViewNavFromCategory(sessionScope.get("orgUnitId"));
+	
+		var plans = [];
+		var _plan = null;
+		
+		var ve = nav.getFirst();
+		while (null != ve) {
+		
+			var colValues = ve.getColumnValues();
+		
+			if (ve.isCategory() ) {
+		
+				//dBar.debug("found cat: " + colValues.get(1) );
+		
+				if (_plan != null) { plans.push( _plan ); }
+		
+				_plan = {
+					"name" : colValues.get(1),
+					"scenarios" : [],
+					"addedIds" : []
+				};
+		
+			} else {
+		
+				var scenarioId = colValues.get(3);
+		
+				//dBar.debug("add scenario: " + colValues.get(2));
+		
+				var alreadyAdded = false;
+		
+				for (var i=0; i< _plan.addedIds.length && !alreadyAdded; i++) {
+					if ( _plan.addedIds[i].equals( scenarioId ) ) {
+						//dBar.debug("already added...");
+						alreadyAdded = true;
+					}
+				}
+				
+				if ( !alreadyAdded ) {
+		
+					_plan.addedIds.push(scenarioId);
+			
+					_plan.scenarios.push( {
+						"name": colValues.get(2),
+						"id" : scenarioId,
+						"numTasks" : 1
+					} );
+				} else {
+				
+					_plan.scenarios[ _plan.scenarios.length-1 ].numTasks = _plan.scenarios[ _plan.scenarios.length-1 ].numTasks + 1;
+				
+				}
+			
+			}
+			
+			ve = nav.getNext();
+		}
+			
+		if (_plan != null) { plans.push( _plan ); }
+	} catch (e) {
+		dBar.error(e);	
+
+	}
+		
+	return plans;
 }

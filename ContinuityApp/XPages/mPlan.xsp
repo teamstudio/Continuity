@@ -35,7 +35,9 @@
 	
 
 	<xp:this.data>
-		<xp:dominoDocument var="docScenario" action="openDocument"></xp:dominoDocument>
+		<xp:dominoDocument var="docScenario" action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript:database.getView("vwAllById").getEntryByKey( param.get("id"), true).getUniversalID()}]]></xp:this.documentId>
+		</xp:dominoDocument>
 	</xp:this.data>
 	
 	<!-- viewsButton false, backButtonURL, mPlans, searchPage:UnpSearch.xsp, search:none -->

@@ -9,7 +9,7 @@ if (t != null && t != "") {
 	numOpenTasks = @Elements(t);
 }
 
-dBar.debug("num open: " + numOpenTasks);
+//dBar.debug("num open: " + numOpenTasks);
 
 viewScope.put("numOpenTasks", numOpenTasks);
 }]]></xp:this.beforePageLoad>
@@ -77,6 +77,20 @@ viewScope.put("numOpenTasks", numOpenTasks);
 									value="#{docIncident.orgUnitName}">
 								</xp:text>
 							</li>
+							
+							<li>
+								<xp:label value="Plan" id="label7"
+									for="planName">
+								</xp:label>
+								<xp:text escape="true" id="planName"
+									rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}"
+									value="#{docIncident.planName}">
+								</xp:text>
+								<xp:text escape="true" id="computedField3"
+									rendered="#{javascript:docIncident.getItemValueString('scenarioId')=='none'}"
+									value="-none-">
+								</xp:text>
+							</li>
 		
 							<li>
 								<xp:label value="Scenario" id="label2"
@@ -98,7 +112,14 @@ viewScope.put("numOpenTasks", numOpenTasks);
 									for="alertLevel">
 								</xp:label>
 								<xp:text escape="true" id="alertLevel"
-									value="#{docIncident.alertLevel}">
+									value="#{javascript:var level = docIncident.getItemValueString('alertLevel');
+									if (level == 'elevated') {
+										return 'Elevated';
+									} else if (level == 'high') {
+										return 'High alert';
+									} else {
+										return 'Normal';
+									}}">
 								</xp:text>
 		
 							</li>
@@ -109,7 +130,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 									for="status">
 								</xp:label>
 								<xp:text escape="true" id="status"
-									value="#{docIncident.status}">
+									value="#{javascript:@ProperCase( docIncident.getItemValueString('status') )}">
 								</xp:text>
 		
 							</li>

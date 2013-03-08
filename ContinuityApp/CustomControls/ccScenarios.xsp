@@ -2,21 +2,10 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 
 	<xp:this.data>
-		<xp:dominoView var="vwScenarios" viewName="vwScenarios"></xp:dominoView>
+		<xp:dominoView var="vwScenarios"
+			viewName="#{javascript:compositeData.viewName}">
+		</xp:dominoView>
 	</xp:this.data>
-
-	<div class="section">
-		<div class="title">Business scenarios</div>
-		<div class="actions">
-
-			<xp:button value="Add scenario" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
-				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-					refreshId="dynamicContent1">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenarioForm");}]]></xp:this.action>
-				</xp:eventHandler>
-			</xp:button>
-		</div>
-	</div>
 
 	<xp:repeat id="repeat1" rows="100" value="#{vwScenarios}" var="row" disableOutputTag="true">
 		<xp:this.facets>
@@ -25,55 +14,55 @@
 		</xp:this.facets>
 	
 
-	<xp:tr rendered="#{javascript:row.isCategory()}" styleClass="highlight">
-		<td colspan="2">
-			<xp:text escape="true" id="computedField1" value="#{row.orgUnitNames}" style="font-weight: bold"></xp:text>
-		</td>
-	</xp:tr>
+		<xp:tr rendered="#{javascript:row.isCategory()}" styleClass="highlight">
+			<td colspan="2">
+				<xp:text escape="true" id="computedField1" value="#{row.orgUnitNames}" style="font-weight: bold"></xp:text>
+			</td>
+		</xp:tr>
 	
-	<xp:tr rendered="#{javascript:!row.isCategory()}">
-		<td style="padding-left: 20px;">
-			<h4>
-				<xp:link escape="true" text="#{row.name}" id="link1">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1">
+		<xp:tr rendered="#{javascript:!row.isCategory()}">
+			<td style="padding-left: 20px;">
+				<h4>
+					<xp:link escape="true" text="#{row.name}" id="link1">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+							refreshId="dynamicContent1">
+								
+							<xp:this.action>
+								<xe:changeDynamicContentAction facetName="scenarioForm"	for="dynamicContent1">
+									<xe:this.parameters>
+										<xp:parameter name="documentId"
+											value="#{javascript:row.getUniversalID()}">
+										</xp:parameter>
+										<xp:parameter name="action" value="openDocument"></xp:parameter>
+									</xe:this.parameters>
+								</xe:changeDynamicContentAction>
+							</xp:this.action>
 							
-						<xp:this.action>
-							<xe:changeDynamicContentAction facetName="scenarioForm"	for="dynamicContent1">
-								<xe:this.parameters>
-									<xp:parameter name="documentId"
-										value="#{javascript:row.getUniversalID()}">
-									</xp:parameter>
-									<xp:parameter name="action" value="openDocument"></xp:parameter>
-								</xe:this.parameters>
-							</xe:changeDynamicContentAction>
-						</xp:this.action>
+						</xp:eventHandler>
 						
-					</xp:eventHandler>
-					
-				</xp:link>
-			</h4>
+					</xp:link>
+				</h4>
+				
+				
+				<xp:div id="rowDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
+						<xp:text escape="false" id="computedField3" value="#{row.description}"></xp:text>
+				</xp:div>
+	
+			</td>
+				
+			<td class="lotusRight lotusLastCell">
+	
+				<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imageShowDetails" width="16" height="16" title="Show details" styleClass="lotusIcon16 lotusIconShow pointer">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xp:executeClientScript>
+							<xp:this.script><![CDATA[toggleDetails( "#{id:imageShowDetails}", "#{id:rowDetails}" );]]></xp:this.script>
+						</xp:executeClientScript>
+					</xp:this.script></xp:eventHandler></xp:image>
 			
+			</td>
 			
-			<xp:div id="rowDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
-					<xp:text escape="false" id="computedField3" value="#{row.description}"></xp:text>
-			</xp:div>
-
-		</td>
-			
-		<td class="lotusRight lotusLastCell">
-
-			<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imageShowDetails" width="16" height="16" title="Show details" styleClass="lotusIcon16 lotusIconShow pointer">
-			<xp:eventHandler event="onclick" submit="false">
-				<xp:this.script>
-					<xp:executeClientScript>
-						<xp:this.script><![CDATA[toggleDetails( "#{id:imageShowDetails}", "#{id:rowDetails}" );]]></xp:this.script>
-					</xp:executeClientScript>
-				</xp:this.script></xp:eventHandler></xp:image>
-		
-		</td>
-		
-	</xp:tr>
+		</xp:tr>
 
 	</xp:repeat>
 

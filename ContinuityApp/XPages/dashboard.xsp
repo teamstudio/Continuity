@@ -41,6 +41,13 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosImpact");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								
+								<xe:basicLeafNode
+									submitValue="scenariosByPlan">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosByPlan");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[Plans]]></xe:this.label>
+								</xe:basicLeafNode>
+								
+								
 								<xe:basicLeafNode submitValue="tasks"
 									label="Tasks">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("tasks");}]]></xe:this.selected>
@@ -177,17 +184,35 @@ getComponent("dynamicContent1").show(c);
 
 						<xc:ccHazardsList xp:key="hazardsList" id="hazardsList"></xc:ccHazardsList>
 						<xc:ccHazard xp:key="hazardForm" id="hazardForm"></xc:ccHazard>
+						
+						<xp:panel xp:key="scenariosList" id="scenariosList">
+	
+							<div class="section">
+								<div class="title">Business scenarios</div>
+								<div class="actions">
+						
+									<xp:button value="Add scenario" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+										<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+											refreshId="dynamicContent1">
+											<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenarioForm");}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:button>
+								</div>
+							</div>
+							
+							<xc:ccScenarios viewName="vwScenarios" />
+						
+						</xp:panel>
 
-						<xc:ccScenarios id="scenariosList"
-							xp:key="scenariosList">
-						</xc:ccScenarios>
 						<xc:scenariosImpact id="scenariosImpact"
 							xp:key="scenariosImpact">
 						</xc:scenariosImpact>
 						<xc:ccScenario id="scenarioForm"
 							xp:key="scenarioForm">
 						</xc:ccScenario>
-
+						
+						<xc:ccScenariosByPlan xp:key="scenariosByPlan" id="scenariosByPlan"></xc:ccScenariosByPlan>
+						
 						<xc:contacts id="contactsList"
 							xp:key="contactsList">
 						</xc:contacts>
