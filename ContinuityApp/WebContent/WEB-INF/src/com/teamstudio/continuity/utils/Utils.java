@@ -151,6 +151,69 @@ public class Utils {
 		}
 	}
 	
+	/*
+	 * adds a value to an item in a document
+	 */
+	//returns true if the item was added and false if nothing was added (e.g. if the value was already in the item)
+	@SuppressWarnings("unchecked")
+	public static boolean addItemValue( Document doc, String itemName, Object itemValue, boolean allowDoubleEntries, boolean overwriteLastEntry ) {
+		
+		Item item = null;
+		boolean result = false;
+		
+		try {
+		
+			item = doc.getFirstItem(itemName);
+			
+			if ( item == null ) {	//item doesn't exist: create it and add the value
+				
+				doc.replaceItemValue( itemName, itemValue );
+				result = true;
+				
+			} else {
+				
+				//add value if double entries are allowed (always) or 
+				//no double entries allowed and value isn't present yet
+				
+				if ( (!allowDoubleEntries && !item.containsValue(itemValue)) || allowDoubleEntries  ) {
+
+					Vector<Object> values = item.getValues();
+					
+					if (values == null) {		//item doesn't have a value at all (e.g. empty string)
+						
+						doc.replaceItemValue( itemName, itemValue);
+						result = true;
+						
+					} else if (overwriteLastEntry) {
+					
+						values.set( values.size()-1, itemValue);
+						item.setValues(values);
+						result = true;
+						
+					} else {
+					
+						values.add(itemValue);
+						item.setValues(values);
+						result = true;
+						
+					}
+				}
+
+			}
+			
+			
+		} catch (NotesException e) {
+
+			Logger.error(e);
+		} finally {
+			
+			Utils.recycle(item);
+		}
+		
+		return result;
+	}
+	
+	
 	//removes a values from a field (for a text list: leaves existing values intact)
 	//returns true if the item was removed and false if nothing was removed
 	@SuppressWarnings("unchecked")

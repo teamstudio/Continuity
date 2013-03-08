@@ -1,5 +1,6 @@
 package com.teamstudio.continuity;
 
+import com.ibm.commons.util.StringUtil;
 import com.teamstudio.continuity.utils.Utils;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -12,37 +13,36 @@ import lotus.domino.DocumentCollection;
 import lotus.domino.Item;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
+import lotus.domino.View;
 
 //helper functions for required data conversion in new versions 
 public class Conversion {
 
-	public static void startConversion() {
+	public static void startConversion( Database dbCurrent, String coreDbPath ) {
 
+		DocumentCollection dc = null;
+		
 		try {
-			Session session = Utils.getCurrentSessionAsSigner();
 
 			DebugToolbar.get().info("Starting Continuity conversion");
 
 			boolean updated = false;
+			Document doc  = null;
+			String form;
+			int numUpdated = 0;
 
-			Database dbCurrent = session.getCurrentDatabase();
-
-			// updates with incorrect updated field
-			DocumentCollection dc = dbCurrent.getAllDocuments();
+			dc = dbCurrent.getAllDocuments();
 
 			DebugToolbar.get().info("- found " + dc.getCount() + " documents in current database");
 
 			Document docTemp = null;
 
-			int numUpdated = 0;
-
-			Document doc = dc.getFirstDocument();
+			doc = dc.getFirstDocument();
 			while (null != doc) {
 				
-				String form = doc.getItemValueString("form");
-
+				form = doc.getItemValueString("form");
 				updated = false;
-
+				
 				// update: add authors field and check createdDateMs field
 				if (form.equals("fUpdate")) {
 					
@@ -187,6 +187,7 @@ public class Conversion {
 					doc.removeItem("title");
 					updated = true;
 				}
+
 				
 				if (updated) {
 					
@@ -196,21 +197,106 @@ public class Conversion {
 					doc.save();
 				}
 
-				docTemp = dc.getNextDocument();
+				docTemp = dc.getNextDocument(doc);
 				doc.recycle();
 				doc = docTemp;
 			}
 			
-			DebugToolbar.get().info("- finished processing docs, updated " + numUpdated + " docs");
+			DebugToolbar.get().info("- finished processing docs in Continuity database, updated " + numUpdated + " docs");
 			
+			//update data in core database
+			updateCoreDatabase( dbCurrent.getParent(), coreDbPath );
+
 			updateACL(dbCurrent);
 			
 			DebugToolbar.get().info("Finished Continuity conversion");
 
 		} catch (Exception e) {
 			DebugToolbar.get().error(e);
+		} finally {
+			
+			Utils.recycle(dc);
 		}
 
+	}
+	
+	//update data in core database
+	private static void updateCoreDatabase(Session session, String coreDbPath) {
+		
+		DocumentCollection dcCore = null;
+		Database dbCore = null;
+		View vwContactByUsername = null;
+		
+		try {
+
+			DebugToolbar.get().info("Starting Core database conversion");
+
+			boolean updated = false;
+			Document doc  = null;
+			String form;
+
+			Document docTemp = null;
+
+			int numUpdated = 0;
+			
+			dbCore = session.getDatabase( session.getServerName(), coreDbPath );
+			dcCore = dbCore.getAllDocuments();
+
+			DebugToolbar.get().info("- found " + dcCore.getCount() + " documents in core database");
+
+			numUpdated = 0;
+			
+			vwContactByUsername = dbCore.getView("vwContactsByUsername");
+
+			doc = dcCore.getFirstDocument();
+			while (null != doc) {
+				
+				form = doc.getItemValueString("form");
+				updated = false;
+
+				if (form.equals("fContact") ) {
+					
+					if (doc.hasItem("reportsTo")) {
+					 
+						String reportsTo = doc.getItemValueString("reportsTo");
+						
+						if (StringUtil.isNotEmpty(reportsTo)) {
+						
+							Document docReportsTo = vwContactByUsername.getDocumentByKey(reportsTo, true);
+							Utils.addItemValue(docReportsTo, "callTreeLinksTo", doc.getItemValueString("userName"), false, false);
+							docReportsTo.save();
+							docReportsTo.recycle();
+							
+						}
+					
+						doc.removeItem("reportsTo");
+						updated = true;
+					}
+					
+				}
+				
+				if (updated) {
+					
+					DebugToolbar.get().info("- updating document, form: " + doc.getItemValueString("form") + ", unid " + doc.getUniversalID());
+					
+					numUpdated++;
+					doc.save();
+				}
+
+				docTemp = dcCore.getNextDocument(doc);
+				doc.recycle();
+				doc = docTemp;
+			}
+			
+			DebugToolbar.get().info("Finished processing docs in Continuity database, updated " + numUpdated + " docs");
+
+		} catch (Exception e) {
+			DebugToolbar.get().error(e);
+		} finally {
+			
+			Utils.recycle(vwContactByUsername, dcCore, dbCore);
+		}
+		
 	}
 
 	private static void updateACL(Database dbCurrent) throws NotesException {

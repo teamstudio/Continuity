@@ -62,7 +62,7 @@
 	</xe:formTable>
 
 	<xc:ccTasks allowAdd="false" allowEdit="false"
-		parentUnid="#{javascript:docIncident.getItemValueString('id')}"
+		parentId="#{javascript:docIncident.getItemValueString('id')}"
 		setResponsibleFor="false">
 	</xc:ccTasks>
 

@@ -34,7 +34,7 @@
 					icon="disk.png" rendered="#{javascript:docTask.isEditable()}">
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynContTasks">
-						<xp:this.action><![CDATA[#{javascript:taskBean.save(docTask, compositeData.parentUnid);
+						<xp:this.action><![CDATA[#{javascript:taskBean.save(docTask, compositeData.parentId);
 	getComponent("dynContTasks").show("tasks")}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>

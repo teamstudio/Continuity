@@ -14,7 +14,7 @@
       </designer-extension>
     </composite-extension>
     <property>
-      <property-name>parentUnid</property-name>
+      <property-name>parentId</property-name>
       <property-class>string</property-class>
       <property-extension>
         <required>true</required>

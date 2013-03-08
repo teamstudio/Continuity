@@ -78,7 +78,7 @@
 			
 			<xc:ccTask id="task" xp:key="task"
 				setResponsibleFor="true">
-				<xc:this.parentUnid><![CDATA[""]]></xc:this.parentUnid>
+				<xc:this.parentId><![CDATA[""]]></xc:this.parentId>
 			</xc:ccTask>
 
 		</xp:this.facets>

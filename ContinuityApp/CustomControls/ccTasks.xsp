@@ -27,13 +27,13 @@ if (inputTitleNode) {
 				</div>
 				
 				<xc:ccTaskList allowRemove="true"
-					categoryFilter="#{javascript:compositeData.parentUnid}" viewName="vwTasksByParentByTaskCat">
+					categoryFilter="#{javascript:compositeData.parentId}" viewName="vwTasksByParentByTaskCat">
 				</xc:ccTaskList>
 
 			</xp:panel>
 			
 			<xc:ccTask id="task" xp:key="task"
-				parentUnid="#{javascript:compositeData.parentUnid}"
+				parentId="#{javascript:compositeData.parentId}"
 				setResponsibleFor="#{javascript:compositeData.setResponsibleFor}">
 			</xc:ccTask>
 

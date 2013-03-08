@@ -34,7 +34,6 @@
 if (blnIsNew) {
 	//set the authors: [bcEditor]
 	docScenario.replaceItemValue("docAuthors", "[bcEditor]");
-	docScenario.replaceItemValue("numTasks", 0);
 	
 	var doc:NotesDocument = docScenario.getDocument(true)
 	
@@ -217,7 +216,7 @@ getComponent("dynamicContent1").show("scenariosList");}]]></xp:this.action>
 		</xe:formRow>
 	</xe:formTable>
 
-	<xc:ccTasks allowAdd="true" parentUnid="#{docScenario.id}"
+	<xc:ccTasks allowAdd="true" parentId="#{docScenario.id}"
 		rendered="#{javascript:!docScenario.isNewNote()}"
 		setResponsibleFor="true">
 		<xc:this.allowEdit><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xc:this.allowEdit>

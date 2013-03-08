@@ -22,9 +22,12 @@ public class Task implements Serializable {
 		
 	}
 	
-	public void save( com.ibm.xsp.model.domino.wrapped.DominoDocument docTaskUI, String parentUnid ) {
+	public void save( com.ibm.xsp.model.domino.wrapped.DominoDocument docTaskUI, String parentId ) {
 		
 		Session session = null;
+		
+		View vwAllById = null;
+		Document docParent = null;
 		
 		try {
 			
@@ -32,23 +35,36 @@ public class Task implements Serializable {
 			dbCurrent = session.getCurrentDatabase();
 			
 			Document docTask = docTaskUI.getDocument(true);
-			
+
 			if (docTaskUI.isNewNote()) {
-			
-				Document docParent = dbCurrent.getDocumentByUNID(parentUnid);
 				
-				//copy owner from parent
-				if (docParent.hasItem("owner")) {
-					docTask.copyItem(docParent.getFirstItem("owner"));
-				}
-				//copy authors from parent
-				if (docParent.hasItem("docAuthors")) {
-					docTask.copyItem(docParent.getFirstItem("docAuthors"));
+				vwAllById = dbCurrent.getView("vwAllById");
+				docParent = vwAllById.getDocumentByKey(parentId, true);
+				
+				if (null != docParent) {
+				
+					//copy owner from parent
+					if (docParent.hasItem("owner")) {
+						docTask.copyItem(docParent.getFirstItem("owner"));
+					}
+					//copy authors from parent
+					if (docParent.hasItem("docAuthors")) {
+						docTask.copyItem(docParent.getFirstItem("docAuthors"));
+					}
+					
+					//link to scenario
+					docTask.replaceItemValue("scenarioId", docParent.getItemValueString("id"));
+					docTask.replaceItemValue("scenarioName", docParent.getItemValueString("name"));
+					
+					docParent.recycle();
+
+				} else {
+				
+					Logger.warn("parent document not found with id " + parentId);
+				
 				}
 				
-				//link to scenario
-				docTask.replaceItemValue("scenarioId", docParent.getItemValueString("id"));
-				docTask.replaceItemValue("scenarioName", docParent.getItemValueString("name"));
+				vwAllById.recycle();
 					
 			}
 			
@@ -62,13 +78,10 @@ public class Task implements Serializable {
 			
 			docTaskUI.save();
 			
-			//store number of tasks in parent
-			updateNumTasks(parentUnid);
-			
 		} catch (NotesException e) {
 			Logger.error(e);
 		} finally {
-			Utils.recycle(dbCurrent, session);
+			Utils.recycle(docParent, vwAllById, dbCurrent);
 		}
 		
 	}
@@ -82,45 +95,17 @@ public class Task implements Serializable {
 			
 			session = ExtLibUtil.getCurrentSession();
 			dbCurrent = session.getCurrentDatabase();
-		
-			docTask = dbCurrent.getDocumentByUNID( taskUnid);
 			
-			String parentUnid = docTask.getParentDocumentUNID();
+			docTask = dbCurrent.getDocumentByUNID( taskUnid);
 			
 			docTask.remove(true);
 			
 			dbCurrent.getView("vwTasksByParent").refresh();
 			
-			//store number of tasks in parent
-			updateNumTasks(parentUnid);
-			
 		} catch (NotesException e) {
 			Logger.error(e);
 		} finally {
 			Utils.recycle(docTask, dbCurrent, session);
-		}
-		
-	}
-	
-	//update number of tasks in parent
-	private void updateNumTasks( String parentUnid ) {
-		
-		Document docParent = null;
-		View vwTasksByParent = null;
-		
-		try {
-			
-			vwTasksByParent = dbCurrent.getView("vwTasksByParent");
-			vwTasksByParent.refresh();
-
-			docParent = dbCurrent.getDocumentByUNID(parentUnid);
-			docParent.replaceItemValue("numTasks", vwTasksByParent.getAllEntriesByKey(parentUnid, true).getCount() );
-			docParent.save();
-			
-		} catch (NotesException e) {
-			Logger.error(e);
-		} finally {
-			Utils.recycle(docParent, vwTasksByParent);
 		}
 		
 	}

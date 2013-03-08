@@ -109,7 +109,7 @@ getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
 
 	<xp:br></xp:br>
 
-	<xc:ccTasks allowAdd="false" allowEdit="true" setResponsibleFor="false" parentUnid="#{javascript:docResp.getItemValueString('id')}" rendered="#{javascript:!docResp.isNewNote()}">
+	<xc:ccTasks allowAdd="false" allowEdit="true" setResponsibleFor="false" parentId="#{javascript:docResp.getItemValueString('id')}" rendered="#{javascript:!docResp.isNewNote()}">
 	</xc:ccTasks>
 
 </xp:view>

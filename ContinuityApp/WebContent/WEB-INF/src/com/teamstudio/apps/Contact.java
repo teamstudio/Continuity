@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
@@ -61,8 +62,7 @@ public class Contact implements Serializable {
 	public static final String STATUS_INACTIVE = "inactive";
 	
 	private transient View vwUsers = null;
-	private transient View vwReportsTo = null;
-	HashMap<String, ArrayList<String> > callTreeUsers = null;
+	HashMap<String, Vector<String> > callTreeUsers = null;
 	
 	public Contact() { }
 	
@@ -185,63 +185,66 @@ public class Contact implements Serializable {
 	 * Update information on contact documents to be able to display the calltree.
 	 * The call tree is based on the 'reports to' attribute of every contact
 	 */
+	@SuppressWarnings("unchecked")
 	private void updateCallTreeInfo(Document docContact ) {
 		
 		Logger.debug("start the call tree thing");
 		
 		Database dbCore = null;
+		View vwContactsThatLinkTo = null;
 		
 		ViewNavigator nav = null;
 		
 		try {
 			
-			if (StringUtil.isEmpty( docContact.getItemValueString("reportsTo")) ) {
+			if (StringUtil.isEmpty( docContact.getItemValueString("callTreeLinksTo")) ) {
 				return;
 			}
 			
 			dbCore = docContact.getParentDatabase();
-			vwReportsTo = dbCore.getView("vwContactsByReportTo");
+			vwContactsThatLinkTo = dbCore.getView("vwContactsThatLinkTo");
 			vwUsers = dbCore.getView("vwContactsByUsername");
-			vwReportsTo.setAutoUpdate(false);
+			vwContactsThatLinkTo.setAutoUpdate(false);
 			vwUsers.setAutoUpdate(false);
 			
 			ViewEntry ve = null;
 			ViewEntry veTmp = null;
 			
 			ArrayList<String> callTreeStart = new ArrayList<String>();
-			callTreeUsers = new HashMap<String, ArrayList<String> >();
-			
-			ViewEntry veContact = null;
+			callTreeUsers = new HashMap<String, Vector<String> >();
 			
 			//Logger.debug("get main cats");
 			
-			//find contact who don't report to anyone: that's the first level of the calltree
-			nav = vwReportsTo.createViewNavMaxLevel(0);
+			//find all users that are supposed to call someone else
+			nav = vwContactsThatLinkTo.createViewNav(0);
 			ve = nav.getFirst();
 			while (null != ve) {
 				
 				userName = (String) ve.getColumnValues().get(0);
 				
-				//Logger.debug("process main cat: " + userName);
+				Logger.debug("process main cat: " + userName);
 
-				callTreeUsers.put( userName, getCallsUsers( userName ) );
-				
-				//check if this user reports to anyone
-				veContact = vwUsers.getEntryByKey(userName, true);
-				if (null != veContact) {
-					
-					String reportsTo = (String) veContact.getColumnValues().get(3);
-					
-					if (StringUtil.isEmpty(reportsTo)) {
-						//Logger.debug("user doesn't report to anyone...");
-						callTreeStart.add(userName);
-					}
-					veContact.recycle();
-				}
+				callTreeUsers.put( userName, ve.getDocument().getItemValue("callTreeLinksTo") );
 				
 				veTmp = nav.getNext();
 				ve.recycle();
 				ve = veTmp;
+			}
+			
+			//find contacts that aren't called by anyone: that determines the first level of the calltree
+			for (String callTreeUser : callTreeUsers.keySet()) {
+				
+				boolean userIsCalled = false;
+				
+				Iterator<Vector<String>> callUsers = callTreeUsers.values().iterator();
+				while (callUsers.hasNext() && !userIsCalled) {
+					userIsCalled = callUsers.next().contains( callTreeUser);
+				}
+				
+				if (!userIsCalled) {
+					callTreeStart.add(callTreeUser);
+				}
+
 			}
 			
 			//Logger.debug("update call tree");
@@ -257,16 +260,17 @@ public class Contact implements Serializable {
 			
 		} finally {
 			
-			Utils.recycle(nav, vwUsers, vwReportsTo, dbCore);
+			Utils.recycle(nav, vwUsers, vwContactsThatLinkTo, dbCore);
 		}
-		
-		
 	
 	}
 	
+	/*
+	 * recursively called function to set the calltree level in contact documents
+	 */
 	private void updateCallTree(String userName, int level) throws NotesException {
 		
-		//Logger.debug("update call tree for " + userName + ", level: " + level);
+		Logger.debug("update call tree for " + userName + ", level: " + level);
 		setCallTreeLevel( userName, level);
 		
 		if (callTreeUsers.containsKey(userName)) {
@@ -278,11 +282,16 @@ public class Contact implements Serializable {
 			}
 		}
 	}
+	
+	/*
+	 * set the call tree level for the specified contact
+	 */
 	private void setCallTreeLevel( String userName, int level) throws NotesException {
 		
 		//Logger.debug("- try saving to doc for " + userName);
 		
 		ViewEntry veContact = vwUsers.getEntryByKey(userName, true);
+		
 		if (null != veContact) {
 			
 			Document doc = veContact.getDocument();
@@ -298,32 +307,6 @@ public class Contact implements Serializable {
 			
 		}
 	}
-		
-	private ArrayList<String> getCallsUsers( String userName ) throws NotesException {
-		
-		ViewNavigator navCalls = vwReportsTo.createViewNavFromCategory(userName);
-		
-		ViewEntry ve = null;
-		ViewEntry veTmp = null;
-		
-		ArrayList<String> results = new ArrayList<String>();
-		
-		ve = navCalls.getFirst();
-		while (null != ve) {
-			
-			String callsUser = (String) ve.getColumnValues().get(1);
-			Logger.debug("found calls user: " + callsUser);
-			results.add( callsUser);
-			
-			veTmp = navCalls.getNext();
-			ve.recycle();
-			ve = veTmp;
-		}
-		
-		return results;
-		
-	}
-	
 	
 	/*
 	 * Create a new contact in the application

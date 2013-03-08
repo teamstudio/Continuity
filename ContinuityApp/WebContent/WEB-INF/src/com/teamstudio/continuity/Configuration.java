@@ -29,7 +29,7 @@ public class Configuration implements Serializable {
 	
 	private String serverName;
 
-	private static String THIS_VERSION = "013";		//used to determine data version
+	private static String THIS_VERSION = "015";		//used to determine data version
 	
 	public Configuration() {
 	
@@ -50,6 +50,7 @@ public class Configuration implements Serializable {
 		Database dbCurrent = null;
 		View vwSettings = null;
 		Document docSettings = null;
+		Database dbCore = null;
 
 		try {
 			
@@ -69,34 +70,16 @@ public class Configuration implements Serializable {
 			
 			Utils.recycle(docSettings, vwSettings, dbCurrent);
 			
-			
-			if ( !appVersion.equals( THIS_VERSION) ) {
-				
-				Conversion.startConversion();
-				
-				//update field in settings document (re-retrieve using signer access)
-				dbCurrent = Utils.getCurrentSessionAsSigner().getCurrentDatabase();
-				vwSettings = dbCurrent.getView("vwSettings");
-				docSettings = vwSettings.getDocumentByKey("fSettings", true);
-				docSettings.replaceItemValue("appVersion", THIS_VERSION);
-				docSettings.save();
-				
-				Utils.recycle(docSettings, vwSettings, dbCurrent);
-				
-			}
-			
-			Utils.recycle(docSettings, vwSettings);
+			//get settings from core db
+			Session sessionAsSigner = Utils.getCurrentSessionAsSigner();
+			dbCore = sessionAsSigner.getDatabase(serverName, coreDbPath);
+			vwSettings = dbCore.getView("vwSettings");
 			
 			if (StringUtil.isEmpty(coreDbPath)) {
 				
 				System.out.println("error while reading configuration: core database path not set");
 				
 			} else {
-				
-				//open core database
-				Session sessionAsSigner = Utils.getCurrentSessionAsSigner();
-				Database dbCore = sessionAsSigner.getDatabase(serverName, coreDbPath);
-				vwSettings = dbCore.getView("vwSettings");
 				
 				docSettings = vwSettings.getDocumentByKey("fSettings", true);
 
@@ -113,14 +96,32 @@ public class Configuration implements Serializable {
 					directoryDbPath = docSettings.getItemValueString("directoryDbPath");
 					unpluggedDbPath = docSettings.getItemValueString("unpluggedDbPath");
 					
+					docSettings.recycle();
+					
 				}
+				
+				vwSettings.recycle();
+				
+				if ( !appVersion.equals( THIS_VERSION) ) {
+					
+					dbCurrent = sessionAsSigner.getCurrentDatabase();
+					Conversion.startConversion(dbCurrent, coreDbPath);
+					
+					//update field in settings document (re-retrieve using signer access)
+					vwSettings = dbCurrent.getView("vwSettings");
+					docSettings = vwSettings.getDocumentByKey("fSettings", true);
+					docSettings.replaceItemValue("appVersion", THIS_VERSION);
+					docSettings.save();
+					
+				}
+				
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			
-			Utils.recycle(docSettings, vwSettings, dbCurrent);
+			Utils.recycle(docSettings, vwSettings, dbCurrent, dbCore);
 			
 		}
 	
