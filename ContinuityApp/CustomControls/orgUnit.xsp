@@ -48,27 +48,9 @@ if ( docOU.save() ) {
 	//update org unit name in all documents that use this org unit
 	var orgUnitId = docOU.getItemValueString("id");
 	var orgUnitName = docOU.getItemValueString("name");
-	var dc:NotesDocumentCollection = database.search("orgUnitId=\"" + orgUnitId + "\"");
-	if (dc.getCount()>0) {
-		dc.stampAll("orgUnitName", orgUnitName );
-	}
 	
-	dc = database.search("@IsMember( \"" + orgUnitId + "\"; orgUnitIds)");
-	if (dc.getCount()>0) {
-		var doc = dc.getFirstDocument();
-		while (null != doc) {
-			
-			var pos = @Member(orgUnitId, doc.getItemValue("orgUnitIds") );
-			
-			if (pos>0) {
-				var current = doc.getItemValue("orgUnitNames");
-				doc.replaceItemValue( "orgUnitNames", @Replace(current, current[pos], orgUnitName) );
-				doc.save();
-			}
-			 
-			doc = dc.getNextDocument(doc);
-		}
-	}
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("orgUnitId", orgUnitId, "orgUnitName", orgUnitName );
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("orgUnitIds", orgUnitId, "orgUnitNames", orgUnitName );
 
 	loadAppConfig(true);
 }

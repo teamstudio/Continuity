@@ -35,6 +35,10 @@
 docSite.replaceItemValue("hazardNames", com.teamstudio.continuity.Hazard.getNames( docSite.getItemValue("hazardIds")) );
 
 if ( docSite.save() ) {
+
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("siteId", docSite.getItemValueString("id"), "siteName", docSite.getItemValueString("name") );
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("siteIds", docSite.getItemValueString("id"), "siteNames", docSite.getItemValueString("name") );
+
 							loadAppConfig(true);
 
 							}

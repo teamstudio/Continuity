@@ -53,11 +53,8 @@ if (orgUnitIds != null) {
 	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
 	
 	for (var j=0; j<orgUnitIds.length; j++) {
-	
-		if (orgUnitIds[j] != null && orgUnitIds[j].length>0) {
-			orgUnitName = @DbLookup( ["", configBean.coreDbPath], "vwAllById", orgUnitIds[j], "name");
-			orgUnitNames.push( orgUnitName);
-		}
+		var orgUnitId:string = orgUnitIds[j];
+		orgUnitNames.push( com.teamstudio.continuity.OrganisationUnit.getName( orgUnitId ));
 	}
 }
 
@@ -73,6 +70,13 @@ var desc = doc.getMIMEEntity("impactDescription_input");
 docScenario.replaceItemValue("impactDescription", (desc != null ? desc.getContentAsText() : "") );
 						
 docScenario.save();
+
+if (!blnIsNew) {
+						
+	//replace this name everywhere
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("scenarioId", docScenario.getItemValueString("id"), "scenarioName", docScenario.getItemValueString("name") );
+}
+	
 
 context.setDocumentMode("readOnly");
 } catch (e) {

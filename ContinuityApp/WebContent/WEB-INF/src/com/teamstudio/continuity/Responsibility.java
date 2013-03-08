@@ -6,6 +6,7 @@ import lotus.domino.Document;
 
 import com.teamstudio.continuity.utils.Authorizations;
 import com.teamstudio.continuity.utils.Logger;
+import com.teamstudio.continuity.utils.Utils;
 
 public class Responsibility implements Serializable {
 
@@ -21,7 +22,9 @@ public class Responsibility implements Serializable {
 		
 		try {
 
-			if (xspDocResponsibility.isNewNote()) {
+			boolean isNew = xspDocResponsibility.isNewNote();
+			
+			if (isNew) {
 				
 				//set default authors
 				doc = xspDocResponsibility.getDocument(true);
@@ -36,6 +39,16 @@ public class Responsibility implements Serializable {
 
 			//save the current xsp document
 			xspDocResponsibility.save();
+
+			//update changed name in all related documents
+			if (!isNew) {
+				
+				String id = xspDocResponsibility.getItemValueString("id");
+				String name = xspDocResponsibility.getItemValueString("name");
+			
+				Utils.fieldValueChange("responsibilityIds", id, "responsibilityNames",  xspDocResponsibility.getItemValueString("roleName") + " - " + name );
+				Utils.fieldValueChange("responsibilityId", id, "responsibilityName",  name );
+			}
 			
 			success = true;
 		

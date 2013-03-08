@@ -13,6 +13,7 @@ import com.teamstudio.continuity.Configuration;
 import lotus.domino.Base;
 import lotus.domino.Database;
 import lotus.domino.Document;
+import lotus.domino.DocumentCollection;
 import lotus.domino.Item;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
@@ -95,6 +96,97 @@ public class Utils {
 		return facesContext.getApplication().getVariableResolver().resolveVariable(facesContext, name);
 	}
 	
+	/*
+	 * update a field value based on documents found using a match field/- value
+	 * 
+	 * This function is used to change names in related documents based on an id 
+	 */
+	public static void fieldValueChange( String matchField, String matchValue, String fieldName, String fieldValue) {
+		try {
+			Session sessionAsSigner = Utils.getCurrentSessionAsSigner();
+
+			Database dbCurrent = sessionAsSigner.getCurrentDatabase();
+			
+			fieldValueChange(dbCurrent, matchField, matchValue, fieldName, fieldValue );
+		} catch (NotesException e) {
+			Logger.error(e);
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void fieldValueChange( Database dbTarget, String matchField, String matchValue, String fieldName, String fieldValue) {
+		
+		DocumentCollection dc = null;
+		
+		try {
+			
+			//Logger.debug("set new value " + fieldValue + " in field " + fieldName + " by matching " + matchValue + " in " + matchField);
+			
+			dc = dbTarget.search( "@IsMember(\"" + matchValue + "\"; " + matchField + ")");
+			
+			//Logger.debug("found " + dc.getCount() + " documents in " + dbTarget.getFilePath() );
+			
+			Document docTemp;
+			Item fld;
+			
+			if (dc.getCount()>0) {
+				
+				Document doc = dc.getFirstDocument();
+				while (null != doc) {
+					
+					fld = doc.getFirstItem(fieldName);
+					
+					if (fld != null) {
+						
+						Vector<String> matchValues = doc.getItemValue(matchField);
+						
+						int pos = matchValues.indexOf(matchValue);
+						
+						if (pos>-1) {
+							
+							Vector<String> fieldValues = fld.getValues();
+							
+							if (!fieldValues.get(pos).equals(fieldValue) ) {
+
+								fieldValues.set(pos, fieldValue);
+								
+								fld.setValues(fieldValues);
+								doc.save();
+								
+								//Logger.debug("- saved " + doc.getItemValueString("name"));
+
+							}
+						}
+						
+						fld.recycle();
+						
+					} else {
+						
+						doc.replaceItemValue(fieldName, fieldValue);
+						doc.save();
+						
+					}
+					
+					docTemp = dc.getNextDocument(doc);
+					doc.recycle();
+					doc = docTemp;
+				}
+				
+				
+			}
+			
+			//Logger.debug("done");
+		} catch (NotesException e) {
+			Logger.error(e);
+			
+		} finally {
+			Utils.recycle(dc);
+			
+		}
+
+	}
+	
 	//add an message to the current context
 	public static void addInfoMessage( String message) {
 		FacesContext.getCurrentInstance().addMessage(null, 
@@ -153,8 +245,8 @@ public class Utils {
 	
 	/*
 	 * adds a value to an item in a document
+	 * returns true if the item was added and false if nothing was added (e.g. if the value was already in the item)
 	 */
-	//returns true if the item was added and false if nothing was added (e.g. if the value was already in the item)
 	@SuppressWarnings("unchecked")
 	public static boolean addItemValue( Document doc, String itemName, Object itemValue, boolean allowDoubleEntries, boolean overwriteLastEntry ) {
 		

@@ -10,7 +10,6 @@ import com.teamstudio.continuity.utils.Utils;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
-import lotus.domino.DocumentCollection;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
 import lotus.domino.View;
@@ -65,13 +64,13 @@ public class Role implements Serializable {
 		boolean success = false;
 		
 		Session session = null;
-		Database dbCurrent = null;
 		Database dbCore = null;
-		DocumentCollection dc = null;
 		
 		try {
 			
-			if (xspDocRole.isNewNote()) {
+			boolean isNew = xspDocRole.isNewNote();
+			
+			if (isNew) {
 				xspDocRole.replaceItemValue("id", "r" + xspDocRole.getDocument().getUniversalID().toLowerCase() );
 				xspDocRole.replaceItemValue("docAuthors", Authorizations.ROLE_EDITOR);
 
@@ -83,27 +82,18 @@ public class Role implements Serializable {
 			
 			this.id = xspDocRole.getItemValueString("id");
 			this.name = xspDocRole.getItemValueString("name");
-		
-			session = ExtLibUtil.getCurrentSession();
-			dbCurrent = session.getCurrentDatabase();
 			
 			//update role name in all documents that use this role (in the current & core database (e.g. contacts)
-			dc = dbCurrent.search("roleId=\"" + id + "\"");
-			if (dc.getCount()>0) {
-				dc.stampAll("roleName", name);
-			}
-			dc.recycle();
+			Utils.fieldValueChange("roleId", id, "roleName", name );
 			
+			session = ExtLibUtil.getCurrentSession();
 			dbCore = session.getDatabase(Configuration.get().getServerName(), Configuration.get().getCoreDbPath());
 			if ( !dbCore.isOpen() ) {
 				
 				Logger.error("core database could not be opened at " + Configuration.get().getCoreDbPath());
 				
 			} else {
-				dc = dbCore.search("roleId=\"" + id + "\"");
-				if (dc.getCount()>0) {
-					dc.stampAll("roleName", name);
-				}
+				Utils.fieldValueChange(dbCore, "roleId", id, "roleName", name );
 			}
 			
 			success = true;
@@ -114,7 +104,7 @@ public class Role implements Serializable {
 			
 		} finally {
 			
-			Utils.recycle(dc, dbCurrent, dbCore, session);
+			Utils.recycle(dbCore, session);
 		}
 		
 		return success;

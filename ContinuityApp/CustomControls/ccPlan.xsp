@@ -35,7 +35,8 @@
 }]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynamicContent1">
 						<xp:this.action><![CDATA[#{javascript:try {
-						if (docPlan.isNewNote() ) {
+						var blnIsNew = docPlan.isNewNote();
+						if ( blnIsNew ) {
 						
 							//set the owners: [bcEditor] and owner
 							docPlan.replaceItemValue("docAuthors", "[bcEditor]");
@@ -46,9 +47,15 @@
 			
 							docPlan.replaceItemValue("id", "p" + docPlan.getDocument().getUniversalID().toLowerCase() );
 							
-						}
+						} 
 	
 	docPlan.save();
+	
+	if (!blnIsNew) {
+						
+							//replace this name everywhere
+							com.teamstudio.continuity.utils.Utils.fieldValueChange("planIds", docPlan.getItemValueString("id"), "planNames", docPlan.getItemValueString("name") );
+	}
 	
 	getComponent("dynamicContent1").show("plansList");
 	
