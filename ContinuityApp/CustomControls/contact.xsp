@@ -341,38 +341,6 @@
 
 		</xe:formRow>
 		
-		<xe:formRow id="formRow18" label="Links to (calltree):">
-			
-			<xe:djextListTextBox displayLabel="true"
-				id="djextListTextOwner" value="#{docContact.callTreeLinksTo}" styleClass="asBlock"
-				title="" multipleTrim="true" multipleSeparator=",">
-			</xe:djextListTextBox>
-
-			<xe:valuePicker id="valuePicker1" for="djextListTextOwner" dialogTitle="Select contacts to call in the calltree">
-				<xe:this.dataProvider>
-					<xe:simpleValuePicker labelSeparator="|">
-						<xe:this.valueList><![CDATA[#{javascript:var contacts = @DbColumn( ["",configBean.coreDbPath], "vwContactsLU", 1);
-						if (typeof contacts=='string') { contacts = [contacts]; }
-						
-						var currentContact = docContact.getItemValueString("userName");
-						
-						//filter current contact out
-						for (var i=0; i<contacts.length; i++) {
-							if (contacts[i].indexOf( currentContact ) > -1) {
-								contacts = contacts.splice(i,1);
-								break;
-							}
-						}
-						
-						return contacts;
-						}]]></xe:this.valueList>
-					</xe:simpleValuePicker>
-				</xe:this.dataProvider>
-			</xe:valuePicker>
-			
-		</xe:formRow>
-		
-
 		<!-- contact details -->
 		<xe:formRow id="formRow6" labelPosition="none"
 			styleClass="formSection" disableTheme="true">

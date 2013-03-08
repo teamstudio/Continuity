@@ -207,7 +207,27 @@ getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
 !docRole.isEditable() && @Text(docRole.getItemValue("siteIds"))==""}]]></xp:this.rendered>
 			</xp:text>
 
-			</xe:formRow>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow4" label="Call tree hierarchy position:">
+			<xp:inputText value="#{docRole.callTreeOrder}" id="inputText2" required="true"
+				styleClass="number" maxlength="3">
+				<xp:this.validators>
+					<xp:validateRequired message="Enter a position for this role in the call tree hierarchy"></xp:validateRequired>
+					<xp:validateLongRange maximum="50"
+						message="Position needs to be a positive number (under 50)" minimum="0">
+					</xp:validateLongRange>
+				</xp:this.validators>
+				<xp:this.converter>
+					<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+			
+			<xp:checkBox text="Show role in call tree" id="checkBox2"
+				value="#{docRole.showInCallTree}" checkedValue="yes" uncheckedValue="no">
+			</xp:checkBox>
+			
+		</xe:formRow>
 
 	</xe:formTable>
 

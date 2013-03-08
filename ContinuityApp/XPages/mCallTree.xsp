@@ -5,36 +5,43 @@
 	<xp:this.data>
 		<xp:dominoView var="view2"
 			databaseName="#{javascript:applicationScope.coreDbPath}"
-			viewName="vwContactsCallTree">
-			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId") + "-" + viewScope.get("callTreeLevel")}]]></xp:this.categoryFilter>
+			viewName="vwContactsByRole">
+			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId") + "-" + viewScope.get("roleId")}]]></xp:this.categoryFilter>
 		</xp:dominoView>
 	</xp:this.data>
 
 	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
 	
-	//determine calltree level to show
+	//determine ID of the role to show
 var pos = param.get("pos");
 
-var callTreeLevel = sessionScope.get("callTreeLevel");
+var callTreeOrder = applicationScope.get("callTreeOrder");
 
-if (pos == null || pos.length == 0) {		//no calltree position in url: check my level
+if (pos == null || pos.length == 0) {		//no calltree position in url: check my role
 
-	pos = 1;
+	pos = 0;
+
+	if (sessionScope.roleId != null && sessionScope.roleId.length>0) {	
 	
-	if (sessionScope.callTreeLevel > 0 ) {	
-		//user is in the calltree: set default calltree position
-		pos = sessionScope.callTreeLevel;
+		//user has a BC role: set default calltree position
+		for (var i=0; i<callTreeOrder.length; i++) {
+			if (callTreeOrder[i].equals(sessionScope.get("roleId") ) ) {
+				pos = i;
+				break;
+			}
+		}
 	}
 	
 } else {
 	pos = @TextToNumber(pos);
 }
 
-var numCallTreeLevels = sessionScope.get("numCallTreeLevels"); 
 
-viewScope.put("callTreeLevel", pos);
-viewScope.put("hasNextPage", pos < numCallTreeLevels );
-viewScope.put("hasPreviousPage", pos>1 );
+var roleId = callTreeOrder[pos]
+viewScope.put("roleId", roleId);
+viewScope.put("roleName", applicationScope.get("roles")[roleId] );
+viewScope.put("hasNextPage", pos < (callTreeOrder.length-1) );
+viewScope.put("hasPreviousPage", pos>0 );
 viewScope.put("orderPosition", pos);
 } catch (e) {
 	dBar.error(e);
@@ -50,7 +57,7 @@ viewScope.put("orderPosition", pos);
 
 				<ul id="summaryList">
 
-					<xp:repeat id="repeat3" rows="100" var="row"
+					<xp:repeat id="repeat3" rows="250" var="row"
 						disableOutputTag="true" value="#{view2}">
 
 						<xp:panel tagName="li">

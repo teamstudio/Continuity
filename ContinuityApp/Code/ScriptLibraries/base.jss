@@ -99,8 +99,6 @@ function init( theme:String) {
 			
 			sessionScope.put("isPhoneSupported", !@Contains( ua, "ipad") && !@Contains( ua, "ipod") );
 			
-			var callTreeLevel = 0;
-			
 			if (null != docUser) {
 				//retrieve settings from the user's profile
 				
@@ -128,10 +126,7 @@ function init( theme:String) {
 				//get number of new incidents for this user
 				var numNewIncidents = getNumNewItems( docUser.getItemValueString("lastViewedIncident"), "vwIncidents" );
 				sessionScope.put("numIncidents", numNewIncidents);
-				
-				if (docUser.hasItem("callTreeLevel")) {
-					callTreeLevel = docUser.getItemValueInteger("callTreeLevel");
-				}
+			
 				
 				//store current login
 				docUser.replaceItemValue("lastLogin", session.createDateTime(@Now()) );
@@ -161,30 +156,9 @@ function init( theme:String) {
 				
 			}
 			
-			sessionScope.put("callTreeLevel", callTreeLevel);
-			
 			//get number of open tasks, assigned to the current user (based on bc role)
 			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
-			
-			//get max call tree level for the current OU
-			var cats = @DbColumn( ["", applicationScope.get("coreDbPath")], "vwContactsCallTree", 1);
-			var numCallTreeLevels = 0;
-			
-			if (typeof cats=='string') { cats = [cats]; }
-			
-			for (var i=0; i<cats.length; i++) {
-				var cat = cats[i];
-				
-				if ( @Left(cat, "-").equals(sessionScope.orgUnitId) ) {
-					
-					var level = @TextToNumber( @Right(cat, "-") );
-					if (level > numCallTreeLevels) { 
-						numCallTreeLevels = level;
-					}
-				}
-			}
-			sessionScope.put("numCallTreeLevels", numCallTreeLevels);
-			
+						
 			dBar.debug("done");
 			
 		} else {
@@ -217,7 +191,7 @@ function getNumAssignedTasks(orgUnitId, roleId) {
 		var vwTasks = database.getView("vwTasksAssignedByRoleId");
 		var key = orgUnitId + "-" + roleId;
 		
-		var vec = vwTasks.getAllEntriesByKey(key, true);
+		var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
 		numAssignedTasks = vec.getCount();
 		
 		//dBar.debug("found " + numAssignedTasks + " assigned tasks for ou " + orgUnitId + " and role " + roleName);
@@ -276,22 +250,51 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			//get all roles
 			var vwRoles = database.getView("vwRoles");
-			var docRole:NotesDocument = vwRoles.getFirstDocument();
+			var vecRoles:NotesViewEntryCollection = vwRoles.getAllEntries();
+			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
+			
+			var veTemp:NotesViewEntry = null;
 			
 			var roles = getMap();
-		
-			while (null != docRole) {
+			
+			while (null != veRole) {
 				
-				var id:String = docRole.getItemValueString("id");
-		
-				roles[id] = docRole.getItemValueString("name");
+				var colValues = veRole.getColumnValues();
 				
-				docTemp = vwRoles.getNextDocument(docRole);
-				docRole.recycle();
-				docRole = docTemp;
+				var id:String = colValues.get(3);
+				roles[id] = colValues.get(1);
+				
+				veTemp = vecRoles.getNextEntry();
+				veRole.recycle();
+				veRole = veTemp;
 			}
 		
-			applicationScope.put("roles", roles);			
+			applicationScope.put("roles", roles);
+			
+			vecRoles.recycle();
+			vwRoles.recycle();
+			
+			//get call tree order
+			vwRoles = database.getView("vwRolesCallTreeOrder");
+			vecRoles = vwRoles.getAllEntries();
+			veRole = vecRoles.getFirstEntry();
+			
+			var callTreeOrder = [];
+			
+			while (null != veRole) {
+				
+				var colValues = veRole.getColumnValues();
+				callTreeOrder.push( colValues.get(1) );
+				
+				veTemp = vecRoles.getNextEntry();
+				veRole.recycle();
+				veRole = veTemp;
+			}
+
+			applicationScope.put("callTreeOrder", callTreeOrder);		//determines order in the calltree
+			
+			vecRoles.recycle();
+			vwRoles.recycle();
 		
 			//get all ou's from core database
 			var veTemp:NotesViewEntry = null;

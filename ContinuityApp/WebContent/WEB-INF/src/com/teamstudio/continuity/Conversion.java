@@ -1,6 +1,5 @@
 package com.teamstudio.continuity;
 
-import com.ibm.commons.util.StringUtil;
 import com.teamstudio.continuity.utils.Utils;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -13,7 +12,6 @@ import lotus.domino.DocumentCollection;
 import lotus.domino.Item;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
-import lotus.domino.View;
 
 //helper functions for required data conversion in new versions 
 public class Conversion {
@@ -222,7 +220,7 @@ public class Conversion {
 	
 	//update data in core database
 	private static void updateCoreDatabase(Session session, String coreDbPath) {
-		
+		/*
 		DocumentCollection dcCore = null;
 		Database dbCore = null;
 		View vwContactByUsername = null;
@@ -256,22 +254,6 @@ public class Conversion {
 
 				if (form.equals("fContact") ) {
 					
-					if (doc.hasItem("reportsTo")) {
-					 
-						String reportsTo = doc.getItemValueString("reportsTo");
-						
-						if (StringUtil.isNotEmpty(reportsTo)) {
-						
-							Document docReportsTo = vwContactByUsername.getDocumentByKey(reportsTo, true);
-							Utils.addItemValue(docReportsTo, "callTreeLinksTo", doc.getItemValueString("userName"), false, false);
-							docReportsTo.save();
-							docReportsTo.recycle();
-							
-						}
-					
-						doc.removeItem("reportsTo");
-						updated = true;
-					}
 					
 				}
 				
@@ -296,7 +278,7 @@ public class Conversion {
 			
 			Utils.recycle(vwContactByUsername, dcCore, dbCore);
 		}
-		
+		*/
 	}
 
 	private static void updateACL(Database dbCurrent) throws NotesException {

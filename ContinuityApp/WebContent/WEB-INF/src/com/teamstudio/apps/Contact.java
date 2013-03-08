@@ -2,9 +2,6 @@ package com.teamstudio.apps;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
@@ -16,9 +13,6 @@ import lotus.domino.NotesException;
 import lotus.domino.RichTextItem;
 import lotus.domino.Session;
 import lotus.domino.View;
-import lotus.domino.ViewEntry;
-import lotus.domino.ViewNavigator;
-
 import com.teamstudio.continuity.Configuration;
 import com.teamstudio.continuity.OrganisationUnit;
 import com.teamstudio.continuity.Role;
@@ -60,9 +54,6 @@ public class Contact implements Serializable {
 	public static final String STATUS_NEW = "new";
 	public static final String STATUS_ACTIVE = "active";
 	public static final String STATUS_INACTIVE = "inactive";
-	
-	private transient View vwUsers = null;
-	HashMap<String, Vector<String> > callTreeUsers = null;
 	
 	public Contact() { }
 	
@@ -152,9 +143,6 @@ public class Contact implements Serializable {
 			
 			setupAccount(docContact);
 			
-			//update calltree info
-			updateCallTreeInfo(docContact);
-			
 			success = true;
 			
 			Map<String,Object> sessionScope = ExtLibUtil.getSessionScope();
@@ -179,133 +167,6 @@ public class Contact implements Serializable {
 		
 		return success;
 		
-	}
-	
-	/*
-	 * Update information on contact documents to be able to display the calltree.
-	 * The call tree is based on the 'reports to' attribute of every contact
-	 */
-	@SuppressWarnings("unchecked")
-	private void updateCallTreeInfo(Document docContact ) {
-		
-		Logger.debug("start the call tree thing");
-		
-		Database dbCore = null;
-		View vwContactsThatLinkTo = null;
-		
-		ViewNavigator nav = null;
-		
-		try {
-			
-			if (StringUtil.isEmpty( docContact.getItemValueString("callTreeLinksTo")) ) {
-				return;
-			}
-			
-			dbCore = docContact.getParentDatabase();
-			vwContactsThatLinkTo = dbCore.getView("vwContactsThatLinkTo");
-			vwUsers = dbCore.getView("vwContactsByUsername");
-			vwContactsThatLinkTo.setAutoUpdate(false);
-			vwUsers.setAutoUpdate(false);
-			
-			ViewEntry ve = null;
-			ViewEntry veTmp = null;
-			
-			ArrayList<String> callTreeStart = new ArrayList<String>();
-			callTreeUsers = new HashMap<String, Vector<String> >();
-			
-			//Logger.debug("get main cats");
-			
-			//find all users that are supposed to call someone else
-			nav = vwContactsThatLinkTo.createViewNav(0);
-			ve = nav.getFirst();
-			while (null != ve) {
-				
-				userName = (String) ve.getColumnValues().get(0);
-				
-				Logger.debug("process main cat: " + userName);
-
-				callTreeUsers.put( userName, ve.getDocument().getItemValue("callTreeLinksTo") );
-				
-				veTmp = nav.getNext();
-				ve.recycle();
-				ve = veTmp;
-			}
-			
-			//find contacts that aren't called by anyone: that determines the first level of the calltree
-			for (String callTreeUser : callTreeUsers.keySet()) {
-				
-				boolean userIsCalled = false;
-				
-				Iterator<Vector<String>> callUsers = callTreeUsers.values().iterator();
-				while (callUsers.hasNext() && !userIsCalled) {
-					userIsCalled = callUsers.next().contains( callTreeUser);
-				}
-				
-				if (!userIsCalled) {
-					callTreeStart.add(callTreeUser);
-				}
-
-			}
-			
-			//Logger.debug("update call tree");
-			
-			for( String userName : callTreeStart) {
-				updateCallTree(userName, 1);
-			}
-						
-		
-		} catch (Exception e) {
-			
-			Logger.error(e);
-			
-		} finally {
-			
-			Utils.recycle(nav, vwUsers, vwContactsThatLinkTo, dbCore);
-		}
-	
-	}
-	
-	/*
-	 * recursively called function to set the calltree level in contact documents
-	 */
-	private void updateCallTree(String userName, int level) throws NotesException {
-		
-		Logger.debug("update call tree for " + userName + ", level: " + level);
-		setCallTreeLevel( userName, level);
-		
-		if (callTreeUsers.containsKey(userName)) {
-
-			//Logger.debug("> should call " + callTreeUsers.get(userName).size() + " users");
-			
-			for(String shouldCall :  callTreeUsers.get(userName)) {
-				updateCallTree( shouldCall, (level+1));
-			}
-		}
-	}
-	
-	/*
-	 * set the call tree level for the specified contact
-	 */
-	private void setCallTreeLevel( String userName, int level) throws NotesException {
-		
-		//Logger.debug("- try saving to doc for " + userName);
-		
-		ViewEntry veContact = vwUsers.getEntryByKey(userName, true);
-		
-		if (null != veContact) {
-			
-			Document doc = veContact.getDocument();
-			doc.replaceItemValue("callTreeLevel", level);
-			doc.save();
-			doc.recycle();
-			
-			//Logger.debug("saved level " + level + " for " + userName);
-			veContact.recycle();
-		} else {
-			
-			Logger.warn("contact document not found for " + userName);
-			
-		}
 	}
 	
 	/*
