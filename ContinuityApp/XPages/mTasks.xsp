@@ -4,7 +4,7 @@
 	
 	
 	<xp:this.data>
-		<xp:dominoView var="vwTasksAssigned" viewName="vwTasksAssignedByRole" categoryFilter="#{javascript:sessionScope.orgUnitId}"></xp:dominoView>
+		<xp:dominoView var="vwTasksAssigned" viewName="vwTasksAssignedByRoleName" categoryFilter="#{javascript:sessionScope.orgUnitId}"></xp:dominoView>
 	</xp:this.data>
 	
 	<xp:this.beforePageLoad><![CDATA[#{javascript:try {

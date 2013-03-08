@@ -161,7 +161,7 @@ function init( theme:String) {
 			sessionScope.put("callTreeLevel", callTreeLevel);
 			
 			//get number of open tasks, assigned to the current user (based on bc role)
-			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleName")) );
+			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 			
 			//get max call tree level for the current OU
 			var cats = @DbColumn( ["", applicationScope.get("coreDbPath")], "vwContactsCallTree", 1);
@@ -205,29 +205,19 @@ function getMap() {
 }
 
 //get number of open tasks, assigned to the current user (based on bc role)
-function getNumAssignedTasks(orgUnitId, roleName) {
+function getNumAssignedTasks(orgUnitId, roleId) {
 	
 	var numAssignedTasks = 0;
 	
 	try {
 	
-		var vwTasks = database.getView("vwTasksAssignedByRole");
-		var key;
+		var vwTasks = database.getView("vwTasksAssignedByRoleId");
+		var key = orgUnitId + "-" + roleId;
 		
-		if (isUnplugged()) {
-			key = [];
-			key.push( orgUnitId );
-			key.push( roleName );
-		} else {
-			key = new java.util.Vector();
-			key.add(orgUnitId);
-			key.add(roleName);
-		}
+		var vec = vwTasks.getAllEntriesByKey(key, true);
+		numAssignedTasks = vec.getCount();
 		
-		
-		
-		
-		numAssignedTasks = vwTasks.getAllEntriesByKey(key, true).getCount();
+		//dBar.debug("found " + numAssignedTasks + " assigned tasks for ou " + orgUnitId + " and role " + roleName);
 		
 	} catch (e) {
 		dBar.error(e);	
@@ -867,7 +857,7 @@ function createUpdate( text:String) {
 				
 		docUpdate.save();
 		
-		dBar.debug("done");
+		dBar.debug("done creating update");
 
 	} catch (e) {
 		dBar.error(e);
@@ -938,7 +928,7 @@ function assignTasks( docIncident, docScenario ) {
 		}
 
 		var vwTasksByParent = database.getView("vwTasksByParent");
-		var parentId = docScenario.getUniversalID();
+		var parentId = docScenario.getItemValueString("id");
 		
 		//retrieve all tasks belonging to the selected scenario
 		var vecTasks = vwTasksByParent.getAllEntriesByKey( parentId, true);
@@ -955,7 +945,7 @@ function assignTasks( docIncident, docScenario ) {
 			docTaskNew.replaceItemValue("incidentId", docIncident.getItemValueString("id") );
 			docTaskNew.replaceItemValue("incidentName", docIncident.getItemValueString("description") );
 			
-			docTaskNew.replaceItemValue("test", docIncident.getItemValueString("test") );
+			docTaskNew.replaceItemValue("isRehearsal", docIncident.getItemValueString("isRehearsal") );
 			
 			docTaskNew.replaceItemValue("orgUnitId", docIncident.getItemValue("orgUnitId") );
 			docTaskNew.replaceItemValue("orgUnitName", docIncident.getItemValue("orgUnitName") );
@@ -989,7 +979,7 @@ function assignTasks( docIncident, docScenario ) {
 		dBar.debug("all tasks have been created");
 		
 		//update number of open tasks, assigned to the current user (based on bc role)
-		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleName")) );
+		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 		
 		dBar.debug("number of assigned tasks updated to " + sessionScope.get("numAssignedTasks") );
 		

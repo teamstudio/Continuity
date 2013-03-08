@@ -23,9 +23,11 @@
 				<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"></xp:dominoView>
 			</xp:this.data>
 			
-			<div style="padding:15px;">
+			<xp:div id="assignTo" style="padding:15px;">
 				
 				<!-- show all roles and responsibilities -->
+				
+				
 				<xp:repeat id="repeatRoles" rows="100"
 					value="#{vwRoles}" var="roleRow" indexVar="rowIndex" style="height: 350px; overflow-y:auto">
 
@@ -64,7 +66,7 @@
 				
 				<xp:inputHidden id="selectedResponsibilityIds" multipleSeparator="," multipleTrim="true"></xp:inputHidden>
 
-			</div>
+			</xp:div>
 			
 			<xe:dialogButtonBar id="dialogButtonBar1">
 
@@ -77,9 +79,10 @@
 
 					if (typeof selected == 'string') { selected = [selected]; }
 					
+					dBar.debug("assigned to resp ids:");
+					dBar.dump( selected);
+					
 					docTarget.replaceItemValue("responsibilityIds", selected);
-					
-					
 					
 					var respNames = [];
 					
@@ -108,7 +111,7 @@
 }}]]></xp:this.action>
 <xp:this.script><![CDATA[var ids = [];
 			
-			dojo.query('input.respIds:checked').forEach( function(cb) {
+			dojo.query('input.respIds:checked', '#{id:assignTo}').forEach( function(cb) {
 				ids.push( cb.value);
 			});
 			

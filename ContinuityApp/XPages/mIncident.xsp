@@ -79,7 +79,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 							</li>
 		
 							<li>
-								<xp:label value="Plan" id="label2"
+								<xp:label value="Scenario" id="label2"
 									for="scenarioId">
 								</xp:label>
 								<xp:text escape="true" id="scenarioId"
@@ -116,10 +116,10 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		
 							<li>
 		
-								<xp:label value="Test" id="label5" for="test">
+								<xp:label value="Rehearsal" id="label5" for="isRehearsal">
 								</xp:label>
-								<xp:text escape="true" id="test"
-									value="#{javascript:(docIncident.getItemValueString('test').equals('yes') ? 'Yes' : 'No')}">
+								<xp:text escape="true" id="isRehearsal"
+									value="#{javascript:(docIncident.getItemValueString('isRehearsal').equals('yes') ? 'Yes' : 'No')}">
 								</xp:text>
 		
 							</li>

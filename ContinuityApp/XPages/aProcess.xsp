@@ -30,7 +30,7 @@ if (param.get("type").equals("incident") ) {
 		throw("you're not authorized to update this document");
 	}
 	
-	var isTest = doc.getItemValueString("test").equals("yes");
+	var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
 	
 	//ML: close any open tasks in this incident
 	var vecOpenTasks = database.getView("vwTasksAssignedOpen").getAllEntriesByKey( doc.getItemValueString("id"), true);
@@ -67,10 +67,10 @@ if (param.get("type").equals("incident") ) {
 	doc.save();
 	
 	//ML: update number of assigned tasks
-	sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleName")) );
+	sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 	
 	//ML: create update item for this deactivation
-	createUpdate( (isTest ? "TEST " : "") + "Deactivated incident: <b>" + doc.getItemValueString("description") + "</b><br />" +
+	createUpdate( (isRehearsal ? "Deactivated rehearsal incident" : "Deactivated incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
 		"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 		"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
 		"- site: " + doc.getItemValueString("siteName") + "<br />" +
@@ -85,7 +85,7 @@ if (param.get("type").equals("incident") ) {
 	while (null != ve) {
 	
 		sendMail( ve.getColumnValues().get(0) , 
-				"[continuity] " + "incident deactivated" + (isTest ? " TEST" : ""), 
+				"[continuity] " + (isRehearsal ? "Rehearsal incident deactivated" : "Incident deactivated"), 
 				sessionScope.name + " has just deactivated the following incident:\r\n\r\n" +
 					"Incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 	"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
@@ -115,7 +115,7 @@ if (param.get("type").equals("incident") ) {
 	
 	//mark a task as done/ undone
 	
-	var isTest = doc.getItemValueString("test").equals("yes");
+	var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
 
 	if (!sessionScope.roleId.equals( doc.getItemValueString("roleId") ) ) {
 		throw("you're not authorized to update this document");
@@ -127,7 +127,7 @@ if (param.get("type").equals("incident") ) {
 	doc.save();
 	
 	//ML: create update item for this completion
-	createUpdate( (isTest ? "TEST " : "") + "Task marked as " + (param.get("to").equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
+	createUpdate( (isRehearsal ? "Rehearsal task" : "Task") + " marked as " + (param.get("to").equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
 		"- incident: " + doc.getItemValueString("incidentName") + "<br />" +
 		"- by: " +	sessionScope.get("name")
 	);
@@ -139,7 +139,7 @@ if (param.get("type").equals("incident") ) {
 }
 
 //update number of open tasks for this user
-sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleName")) );
+sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 
 resp = "ok";
 

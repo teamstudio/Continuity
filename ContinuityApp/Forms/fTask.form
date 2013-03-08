@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2f2' unid='19B45927CFAAE5CBC1257AA0003DB36E' sequence='36'>
+<noteinfo noteid='2f2' unid='19B45927CFAAE5CBC1257AA0003DB36E' sequence='38'>
 <created><datetime dst='true'>20121023T131356,30+02</datetime></created>
-<modified><datetime>20130307T091947,76+01</datetime></modified>
-<revised><datetime>20130307T091947,75+01</datetime></revised>
-<lastaccessed><datetime>20130307T091947,76+01</datetime></lastaccessed>
+<modified><datetime>20130308T123246,06+01</datetime></modified>
+<revised><datetime>20130308T123246,05+01</datetime></revised>
+<lastaccessed><datetime>20130308T123246,06+01</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115515,60+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -38,9 +38,18 @@ hhgBAIgAAAAAgAAAAQABAP///wAQAAAA
 <rawitemdata type='0'>
 </rawitemdata></item>
 <item name='categoryOrder' summary='false'><number>0</number></item>
-<item name='$Fields'><textlist><text>categoryOrder</text><text>categoryId</text><text
->categoryName</text><text>type</text><text>order</text><text>description</text><text
->name</text></textlist></item>
+<item name='planIds' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='planNames' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='isRehearsal' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>isRehearsal</text><text>planNames</text><text
+>planIds</text><text>categoryOrder</text><text>categoryId</text><text>categoryName</text><text
+>type</text><text>order</text><text>description</text><text>name</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -87,12 +96,21 @@ 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
-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
+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
+CqUGAAAAAIECgwQBAIX/CwABAAAKCQkJAA==
 </rawitemdata></item></note>
 
