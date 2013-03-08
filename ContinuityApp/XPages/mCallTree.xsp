@@ -34,7 +34,7 @@ var numCallTreeLevels = sessionScope.get("numCallTreeLevels");
 
 viewScope.put("callTreeLevel", pos);
 viewScope.put("hasNextPage", pos < numCallTreeLevels );
-viewScope.put("hasPreviousPage", pos>0 );
+viewScope.put("hasPreviousPage", pos>1 );
 viewScope.put("orderPosition", pos);
 } catch (e) {
 	dBar.error(e);

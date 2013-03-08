@@ -515,8 +515,13 @@ function markDone(doneId, undoneId, id) {
 	function(response) {
 		
 		try {
-			x$(doneId).hide();
-			x$(undoneId).show();
+			
+			if (response.indexOf("error")>-1) {
+				alert(response);
+			} else 	{	
+				x$(doneId).hide();
+				x$(undoneId).show();
+			}
 		} catch (e) {
 			console.log(e);
 		}
@@ -536,8 +541,12 @@ function markUndone(doneId, undoneId, id) {
 	function(response) {
 		
 		try {
-			x$(doneId).show();
-			x$(undoneId).hide();
+			if (response.indexOf("error")>-1) {
+				alert(response);
+			} else 	{	
+				x$(doneId).hide();
+				x$(undoneId).show();
+			}
 		} catch (e) {
 			console.log(e);
 		}

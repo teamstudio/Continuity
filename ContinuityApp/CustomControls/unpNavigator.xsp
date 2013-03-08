@@ -20,13 +20,10 @@ the specific language governing permissions and limitations under the License
 					<ul id="menuitems">
 						<xp:repeat id="repeat1" rows="30" disableOutputTag="true"
 							var="menuItem" value="#{javascript:compositeData.menuItem;}">
-							<xp:panel id="viewMenuItem" tagName="li">
+							<xp:panel id="viewMenuItem" tagName="li"
+								rendered="#{javascript:menuItem.disabled != true}">
 								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + viewScope.menuItemIndex;
-								if (menuItem.disabled == true) {
-									c += " disabled";
-								}
-								
-	if (("/" + getCurrentXPage()) == menuItem.page){
+								if (("/" + getCurrentXPage()) == menuItem.page){
 	
 		return c += " viewMenuItemSelected";
 	}else{
@@ -41,8 +38,10 @@ the specific language governing permissions and limitations under the License
 	}}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
-								<xp:panel id="menulink" tagName="div" styleClass="menulink">
-									<xp:image url="#{javascript:menuItem.icon}" id="image2"
+								<xp:panel id="menulink" tagName="div"
+									styleClass="menulink">
+									<xp:image
+										url="#{javascript:menuItem.icon}" id="image2"
 										styleClass="iconleft">
 										<xp:this.rendered><![CDATA[#{javascript:if (viewScope.menuItemIndex == null){
 		viewScope.menuItemIndex = 0;
@@ -51,14 +50,41 @@ the specific language governing permissions and limitations under the License
 	}
 	menuItem.icon != null && menuItem.icon != ""}]]></xp:this.rendered>
 									</xp:image>
-									<xp:text id="menutext" styleClass="menutext"
-										value="#{javascript:menuItem.label;}">
+									<xp:text id="menutext"
+										styleClass="menutext" value="#{javascript:menuItem.label;}">
 									</xp:text>
-									<xp:image url="/unp/right-arrow-trans-white-large.png"
-										id="image1" styleClass="icon">
+									<xp:image
+										url="/unp/right-arrow-trans-white-large.png" id="image1"
+										styleClass="icon">
 									</xp:image>
 								</xp:panel>
 							</xp:panel>
+
+							<!-- disabled menu option -->
+							<xp:panel id="panel1" tagName="li"
+								rendered="#{javascript:menuItem.disabled == true}">
+								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + viewScope.menuItemIndex + " disabled";
+							return c += " viewMenuItem";
+	}]]></xp:this.styleClass>
+								<xp:panel id="panel2" tagName="div" styleClass="menulink">
+									<xp:image url="#{javascript:menuItem.icon}" id="image3"
+										styleClass="iconleft">
+										<xp:this.rendered><![CDATA[#{javascript:if (viewScope.menuItemIndex == null){
+		viewScope.menuItemIndex = 0;
+	}else{
+		viewScope.menuItemIndex = viewScope.menuItemIndex + 1;
+	}
+	menuItem.icon != null && menuItem.icon != ""}]]></xp:this.rendered>
+									</xp:image>
+									<xp:text id="computedField1" styleClass="menutext"
+										value="#{javascript:menuItem.label;}">
+									</xp:text>
+									<xp:image url="/unp/right-arrow-trans-white-large.png"
+										id="image4" styleClass="icon">
+									</xp:image>
+								</xp:panel>
+							</xp:panel>
+							
 						</xp:repeat>
 					</ul>
 				</xp:panel>

@@ -126,9 +126,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 				
 					<!--  my active tasks -->
 					<xp:text tagName="li" styleClass="disabled" rendered="#{javascript:sessionScope.numAssignedTasks==0}">
-						<a href="#" onclick="$.blockUI();window.location.href='mTasks.xsp';">
-							<xp:text escape="true" styleClass="badge" id="computedField3" value="0">
-							</xp:text>
+						<a href="#" onclick="return false">
 							<span class="chicletimg imgTasks"></span>
 							<span>Active tasks</span>
 						</a>

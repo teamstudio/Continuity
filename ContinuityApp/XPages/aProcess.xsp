@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" rendered="false">
 
+	<xp:this.resources>
+		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
 	<xp:this.afterRenderResponse><![CDATA[#{javascript:try {
+	
+		init("mobile");
 	
 		var exCon = facesContext.getExternalContext(); 
 var writer = facesContext.getResponseWriter();
 var response = exCon.getResponse();
 response.setContentType("text/plain");
 
-var resp = "";
+var resp = "ok";
 
 var id = param.get("id");
 	
@@ -141,8 +148,6 @@ if (param.get("type").equals("incident") ) {
 //update number of open tasks for this user
 sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 
-resp = "ok";
-
 } catch (e) { 
 	dBar.error(e);
 	resp = "error" + e.toString();
@@ -154,8 +159,5 @@ facesContext.responseComplete();
 
 }]]></xp:this.afterRenderResponse>
 
-	<xp:this.resources>
-		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
-		<xp:script src="/base.jss" clientSide="false"></xp:script>
-	</xp:this.resources>
+	
 </xp:view>

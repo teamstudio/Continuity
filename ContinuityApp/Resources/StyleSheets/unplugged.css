@@ -1621,7 +1621,9 @@ body {
 }
 
 /*disabled workspace/ menu items*/
-.workspace-items li.disabled .chicletimg, li.disabled .iconleft {
+.workspace-items li.disabled .chicletimg, 
+li.disabled .iconleft,
+.workspace-items li.disabled span {
 	opacity: 0.4;
 	filter: alpha(opacity=40);
 }
@@ -1714,6 +1716,9 @@ only screen and (min-device-pixel-ratio: 2) {
 	.workspace-items a:hover {
 		background: #111;
 		text-decoration: none;
+	}	
+	.workspace-items li.disabled a:hover {
+		background: #333333;
 	}	
 	.workspace-items img, .chicletimg {
 		float: left;
