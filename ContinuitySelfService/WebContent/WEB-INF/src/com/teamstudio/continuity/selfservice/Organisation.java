@@ -3,7 +3,6 @@ package com.teamstudio.continuity.selfservice;
 import java.io.File;
 import java.io.Serializable;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.teamstudio.continuity.utils.Authorizations;
 import com.teamstudio.continuity.utils.Logger;

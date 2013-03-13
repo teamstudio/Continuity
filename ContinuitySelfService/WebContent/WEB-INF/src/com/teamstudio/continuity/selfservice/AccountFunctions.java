@@ -144,7 +144,7 @@ public class AccountFunctions implements Serializable {
 					
 					String linkActive = config.getDbUrl() + "/account.xsp?type=" + TYPE_ACTIVATE + "&for=" + java.net.URLEncoder.encode(emailAddress, "UTF-8") + "&key=" + java.net.URLEncoder.encode(passCode, "UTF-8");
 					
-					mail.addHTML("<p>To activate you Continuity account you need to open <a href=\"" + linkActive + "\">this</a> link and set a password.</p>" +
+					mail.addHTML("<p>To activate your Continuity account you need to open <a href=\"" + linkActive + "\">this</a> link and set a password.</p>" +
 							"<p>After doing so you can use this email address (" + emailAddress + ") and the new password to configure Unplugged.</p>" +
 							AccountFunctions.txtLimitedUse);
 					

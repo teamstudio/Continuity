@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='256' unid='A90D3E359AF8DC81C1257AD20043A588' sequence='20'>
+<noteinfo noteid='256' unid='A90D3E359AF8DC81C1257AD20043A588' sequence='21'>
 <created><datetime>20121212T131852,88+01</datetime></created>
-<modified><datetime>20130307T155645,34+01</datetime></modified>
-<revised><datetime>20130227T130243,36+01</datetime></revised>
-<lastaccessed><datetime>20130307T155645,34+01</datetime></lastaccessed>
+<modified><datetime>20130313T110056,55+01</datetime></modified>
+<revised><datetime>20130313T110056,54+01</datetime></revised>
+<lastaccessed><datetime>20130313T110056,55+01</datetime></lastaccessed>
 <addedtofile><datetime>20130307T155645,34+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -18,7 +18,9 @@ X/8QAAIADwAHAAAAAAAAAA==
 <rawitemdata type='1'>
 hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 </rawitemdata></item>
-<item name='$WindowTitle' sign='true'><formula>"Organisation"</formula></item>
+<item name='$WindowTitle' sign='true'><formula>@If(
+	@IsNewDoc; "New organisation";
+name)</formula></item>
 <item name='$Flags'><text>w</text></item>
 <item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$$ScriptName' summary='false' sign='true'><text>fOrganisation</text></item>
