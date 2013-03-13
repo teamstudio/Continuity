@@ -12,6 +12,7 @@ import lotus.domino.DocumentCollection;
 import lotus.domino.Item;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
+import lotus.domino.View;
 
 //helper functions for required data conversion in new versions 
 public class Conversion {
@@ -113,18 +114,40 @@ public class Conversion {
 					
 				} else if (form.equals("fTask")) {
 					
-					if ( doc.isResponse() ) {
-					
-						Document docScenario = dbCurrent.getDocumentByUNID( doc.getParentDocumentUNID() );
+					if ( doc.isResponse() || !doc.hasItem("orgUnitIds")  ) {
 						
-						doc.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
-						doc.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
+						Document docScenario = null;
+						View vwAllById = null;
 						
-						doc.removeItem("$Ref");
+						if (doc.isResponse()) {
+							docScenario = dbCurrent.getDocumentByUNID( doc.getParentDocumentUNID() );
 						
-						updated = true;
+							doc.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
+							doc.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
 						
-						Utils.recycle(docScenario);
+							doc.removeItem("$Ref");
+						
+							updated = true;
+				
+						}
+						
+						if (!doc.hasItem("orgUnitIds")) {
+							
+							if (docScenario == null) {
+								vwAllById = dbCurrent.getView("vwAllById");
+								docScenario = vwAllById.getDocumentByKey( doc.getItemValueString("scenarioId"), true);
+								
+								if (null != docScenario) {
+									
+									doc.replaceItemValue("orgUnitIds", docScenario.getItemValue("orgUnitIds"));
+									doc.replaceItemValue("orgUnitNames", docScenario.getItemValue("orgUnitNames"));
+									updated = true;
+								}
+							}
+							
+						}
+						
+						Utils.recycle(docScenario, vwAllById);
 					}
 					
 					if ( doc.hasItem("responsibilityId") ) {
@@ -150,6 +173,7 @@ public class Conversion {
 						updated = true;
 						
 					}
+					
 					
 				} else if (form.equals("fCommGuidelines")) {
 					

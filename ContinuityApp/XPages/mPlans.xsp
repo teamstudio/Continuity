@@ -3,9 +3,6 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<xp:this.data>
-		<xp:dominoView var="vwScenariosByOrgUnitId" viewName="vwScenariosByOrgUnitId">
-			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId")}]]></xp:this.categoryFilter>
-		</xp:dominoView>
 			<xp:dominoView var="vwTasksByParent"
 			viewName="vwTasksByParent">
 		</xp:dominoView>
@@ -21,7 +18,7 @@
 					<xp:repeat id="repeat3" rows="50" var="plan"
 						disableOutputTag="true">
 
-						<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan() }]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(database.getView('vwScenariosByOrgUnitId')) }]]></xp:this.value>
 
 						<xp:text escape="false" tagName="li"
 							styleClass="categoryRowFixed" disableTheme="true">

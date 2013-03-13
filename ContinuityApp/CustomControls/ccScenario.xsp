@@ -48,9 +48,6 @@ if (blnIsNew || docScenario.getItemValueString("id").length==0 ) {
 var orgUnitIds = docScenario.getItemValue("orgUnitIds");
 var orgUnitNames = [];
 
-dBar.debug("2");
-
-
 if (orgUnitIds != null) {
 
 	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
@@ -60,8 +57,6 @@ if (orgUnitIds != null) {
 		orgUnitNames.push( com.teamstudio.continuity.OrganisationUnit.getName( orgUnitId ));
 	}
 }
-
-dBar.debug("3");
 
 docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
 
@@ -73,25 +68,19 @@ docScenario.replaceItemValue("description", (desc != null ? desc.getContentAsTex
 
 var desc = doc.getMIMEEntity("impactDescription_input");
 docScenario.replaceItemValue("impactDescription", (desc != null ? desc.getContentAsText() : "") );
-						
-dBar.debug("3" + blnIsNew);						
-						
+												
 docScenario.save();
 
 if (!blnIsNew) {
-
-dBar.debug("4");
 
 	var scenarioId = docScenario.getItemValueString("id");
 						
 	//replace this name everywhere
 	com.teamstudio.continuity.utils.Utils.fieldValueChange("scenarioId", scenarioId, "scenarioName", docScenario.getItemValueString("name") );
-	dBar.debug("5");
 	
 	//copy org units to all tasks in this scenario
 	var dc = database.search( "Form=\"fTask\" & scenarioId=\"" + scenarioId + "\"");
 	
-	dBar.debug("found" + dc.getCount() + "tasks");
 	if (dc.getCount()>0) {
 		dc.stampAll( "orgUnitIds", orgUnitIds );
 		dc.stampAll( "orgUnitNames", orgUnitNames );

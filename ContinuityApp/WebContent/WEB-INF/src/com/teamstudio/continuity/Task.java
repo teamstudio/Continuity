@@ -56,6 +56,10 @@ public class Task implements Serializable {
 					docTask.replaceItemValue("scenarioId", docParent.getItemValueString("id"));
 					docTask.replaceItemValue("scenarioName", docParent.getItemValueString("name"));
 					
+					//copy org units
+					docTask.replaceItemValue("orgUnitIds", docParent.getItemValueString("orgUnitIds"));
+					docTask.replaceItemValue("orgUnitNames", docParent.getItemValueString("orgUnitNames"));
+					
 					docParent.recycle();
 
 				} else {

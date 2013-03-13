@@ -1014,7 +1014,7 @@ function getScenariosByPlan(vwScenariosByOrgUnitId) {
 	
 	try {
 		
-		dBar.debug("get plans...");
+		dBar.debug("retrieving plans...");
 		
 		//create an array of all plans, with in every plan an array of all scenario's in that plan
 		
@@ -1076,6 +1076,9 @@ function getScenariosByPlan(vwScenariosByOrgUnitId) {
 		}
 			
 		if (_plan != null) { plans.push( _plan ); }
+		
+		dBar.debug("finished");
+		
 	} catch (e) {
 		dBar.error(e);	
 
