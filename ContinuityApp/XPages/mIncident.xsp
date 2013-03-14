@@ -151,8 +151,8 @@ viewScope.put("numOpenTasks", numOpenTasks);
 						
 					</div>
 				
-					<xp:div styleClass="box mTop"
-						rendered="#{javascript:sessionScope.isEditor}">
+					<xp:div styleClass="box mTop">
+						<xp:this.rendered><![CDATA[#{javascript:sessionScope.get('isEditor') && docIncident.getItemValueString('status').equals('active')}]]></xp:this.rendered>
 
 						<ul class="buttons">
 							<li class="buttonBlue">
@@ -174,7 +174,6 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 						<!-- deactivate button -->
 						<xp:div>
-							<xp:this.rendered><![CDATA[#{javascript:sessionScope.get('isEditor') && docIncident.getItemValueString('status').equals('active')}]]></xp:this.rendered>
 							<ul class="buttons">
 								<li class="buttonBlue">
 									<xp:link escape="true" value="#"
