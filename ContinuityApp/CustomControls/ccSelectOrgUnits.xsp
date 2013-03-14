@@ -31,7 +31,7 @@
 
 	<xp:div style="margin-left: 20px">
 		<xp:this.rendered><![CDATA[#{javascript://show in read mode
-	!compositeData.doc.isEditable()}]]></xp:this.rendered>
+	!compositeData.doc.isEditable() && !compositeData.doc.getItemValueString("orgUnitTarget").equals("all")}]]></xp:this.rendered>
 	
 		<xp:text escape="false" disableTheme="true">
 			<xp:this.value><![CDATA[#{javascript:var o = compositeData.doc.getItemValue("orgUnitNames");

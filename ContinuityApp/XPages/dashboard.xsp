@@ -200,7 +200,7 @@ getComponent("dynamicContent1").show(c);
 								</div>
 							</div>
 							
-							<xc:ccScenarios viewName="vwScenarios" />
+							<xc:ccScenarios />
 						
 						</xp:panel>
 

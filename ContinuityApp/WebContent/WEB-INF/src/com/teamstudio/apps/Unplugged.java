@@ -31,7 +31,9 @@ public class Unplugged {
 		
 		try {
 			
-			Logger.debug("create unplugged application " + appPath + " for " + userName );
+			String correctedPath = appPath.replace("\\", "/");
+			
+			Logger.debug("create unplugged application " + correctedPath + " for " + userName );
 			
 			Configuration config = Configuration.get();
 			
@@ -66,7 +68,7 @@ public class Unplugged {
 			}	
 							
 			//check if an app document for this app already exists and create it if not
-			DocumentCollection dcApp = dbUnplugged.search("Form=\"UserDatabase\" & Path=\"" + appPath.replace("\\", "\\\\") + "\"" );
+			DocumentCollection dcApp = dbUnplugged.search("Form=\"UserDatabase\" & Path=\"" + correctedPath + "\"" );
 			
 			if (dcApp.getCount()==0) {
 				
@@ -75,7 +77,7 @@ public class Unplugged {
 				
 				docApp = dbUnplugged.createDocument();
 				docApp.replaceItemValue("form", "UserDatabase");
-				docApp.replaceItemValue("Path", appPath);
+				docApp.replaceItemValue("Path", correctedPath );
 				
 			} else {
 				
@@ -205,7 +207,6 @@ public class Unplugged {
 				}
 				
 			}
-			
 										
 		} catch (Exception e) {
 			Logger.error(e);

@@ -15,10 +15,9 @@
 			
 				<ul id="summaryList">
 		
-					<xp:repeat id="repeat3" rows="50" var="plan"
-						disableOutputTag="true">
+					<xp:repeat id="repeat3" rows="50" var="plan" disableOutputTag="true">
 
-						<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(database.getView('vwScenariosByOrgUnitId')) }]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(sessionScope.get("orgUnitId"))}]]></xp:this.value>
 
 						<xp:text escape="false" tagName="li"
 							styleClass="categoryRowFixed" disableTheme="true">

@@ -29,10 +29,9 @@ public class Configuration implements Serializable {
 	
 	private String serverName;
 
-	private static String THIS_VERSION = "015";		//used to determine data version
+	private static String THIS_VERSION = "019";		//used to determine data version
 	
 	public Configuration() {
-	
 		reload();
 		
 	}

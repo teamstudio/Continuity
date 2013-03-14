@@ -1,5 +1,7 @@
 package com.teamstudio.continuity;
 
+import java.util.Vector;
+
 import com.teamstudio.continuity.utils.Utils;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -11,15 +13,19 @@ import lotus.domino.Document;
 import lotus.domino.DocumentCollection;
 import lotus.domino.Item;
 import lotus.domino.NotesException;
-import lotus.domino.Session;
 import lotus.domino.View;
+import lotus.domino.ViewEntry;
+import lotus.domino.ViewEntryCollection;
 
 //helper functions for required data conversion in new versions 
 public class Conversion {
 
+	@SuppressWarnings("unchecked")
 	public static void startConversion( Database dbCurrent, String coreDbPath ) {
 
 		DocumentCollection dc = null;
+		Database dbCore = null;
+		View vwAllById = null;
 		
 		try {
 
@@ -29,6 +35,34 @@ public class Conversion {
 			Document doc  = null;
 			String form;
 			int numUpdated = 0;
+			
+			vwAllById = dbCurrent.getView("vwAllById");
+
+			//create lists with all orgUnitIds/ orgUnitNames
+			Vector<String> allOrgUnitIds = new Vector<String>();
+			Vector<String> allOrgUnitNames = new Vector<String>();
+			
+			dbCore = dbCurrent.getParent().getDatabase( dbCurrent.getServer(), coreDbPath );
+			View vwOrgUnits = dbCore.getView("vwOrgUnits");
+			
+			ViewEntry veTmp;
+			
+			ViewEntryCollection vec = vwOrgUnits.getAllEntries();
+			ViewEntry veOrgUnit = vec.getFirstEntry();
+			while (null != veOrgUnit) {
+				
+				Vector<String> colValues = veOrgUnit.getColumnValues();
+				
+				allOrgUnitNames.add( colValues.get(0) );
+				allOrgUnitIds.add( colValues.get(2) );
+
+				veTmp = vec.getNextEntry(veOrgUnit);
+				veOrgUnit.recycle();
+				veOrgUnit = veTmp;
+			}
+			
+			vwOrgUnits.recycle();
+			dbCore.recycle();
 
 			dc = dbCurrent.getAllDocuments();
 
@@ -85,6 +119,17 @@ public class Conversion {
 						updated = true;
 					}
 					
+					//check if all org unit ids have been filled in the orgUnitIds field
+					if (doc.getItemValueString("orgUnitTarget").equals("all")) {
+						
+						if (doc.getItemValue("orgUnitIds").size() != allOrgUnitIds.size()) {
+							doc.replaceItemValue("orgUnitIds", allOrgUnitIds);
+							doc.replaceItemValue("orgUnitNames", allOrgUnitNames);
+							updated = true;
+						}
+					}
+					
+					
 				} else if (form.equals("fResponsibility")) {
 
 					// check if field id exists
@@ -114,40 +159,44 @@ public class Conversion {
 					
 				} else if (form.equals("fTask")) {
 					
-					if ( doc.isResponse() || !doc.hasItem("orgUnitIds")  ) {
-						
-						Document docScenario = null;
-						View vwAllById = null;
-						
-						if (doc.isResponse()) {
-							docScenario = dbCurrent.getDocumentByUNID( doc.getParentDocumentUNID() );
-						
-							doc.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
-							doc.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
-						
-							doc.removeItem("$Ref");
-						
-							updated = true;
+					Document docScenario = null;
+					
+					if ( doc.isResponse() ) {
+
+						docScenario = dbCurrent.getDocumentByUNID( doc.getParentDocumentUNID() );
+					
+						doc.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
+						doc.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
+						doc.removeItem("$Ref");
+					
+						updated = true;
+					}
 				
-						}
+					if (docScenario == null) {
+						docScenario = vwAllById.getDocumentByKey( doc.getItemValueString("scenarioId"), true);
+					}
 						
-						if (!doc.hasItem("orgUnitIds")) {
+					if (null != docScenario) {
+						
+						String orgUnitTarget = docScenario.getItemValueString("orgUnitTarget");
+						
+						if (orgUnitTarget.equals("all")) {
 							
-							if (docScenario == null) {
-								vwAllById = dbCurrent.getView("vwAllById");
-								docScenario = vwAllById.getDocumentByKey( doc.getItemValueString("scenarioId"), true);
+							if (doc.getItemValue("orgUnitIds").size() != allOrgUnitIds.size()) {
 								
-								if (null != docScenario) {
-									
-									doc.replaceItemValue("orgUnitIds", docScenario.getItemValue("orgUnitIds"));
-									doc.replaceItemValue("orgUnitNames", docScenario.getItemValue("orgUnitNames"));
-									updated = true;
-								}
+								doc.replaceItemValue("orgUnitIds", docScenario.getItemValue("orgUnitIds"));
+								doc.replaceItemValue("orgUnitNames", docScenario.getItemValue("orgUnitNames"));
+								updated = true;
 							}
 							
 						}
 						
-						Utils.recycle(docScenario, vwAllById);
+						if ( !orgUnitTarget.equals( doc.getItemValueString("orgUnitTarget") ) ) {
+							doc.replaceItemValue("orgUnitTarget", orgUnitTarget );
+							updated = true;
+						}
+						
+						Utils.recycle(docScenario);
 					}
 					
 					if ( doc.hasItem("responsibilityId") ) {
@@ -227,7 +276,7 @@ public class Conversion {
 			DebugToolbar.get().info("- finished processing docs in Continuity database, updated " + numUpdated + " docs");
 			
 			//update data in core database
-			updateCoreDatabase( dbCurrent.getParent(), coreDbPath );
+			//updateCoreDatabase( dbCurrent.getParent(), coreDbPath );
 
 			updateACL(dbCurrent);
 			
@@ -237,16 +286,16 @@ public class Conversion {
 			DebugToolbar.get().error(e);
 		} finally {
 			
-			Utils.recycle(dc);
+			Utils.recycle(vwAllById, dc);
 		}
 
 	}
 	
 	//update data in core database
-	private static void updateCoreDatabase(Session session, String coreDbPath) {
-		/*
+	/*private static void updateCoreDatabase(Session session, String coreDbPath) {
+		
 		DocumentCollection dcCore = null;
-		Database dbCore = null;
+		
 		View vwContactByUsername = null;
 		
 		try {
@@ -302,8 +351,8 @@ public class Conversion {
 			
 			Utils.recycle(vwContactByUsername, dcCore, dbCore);
 		}
-		*/
-	}
+		
+	}*/
 
 	private static void updateACL(Database dbCurrent) throws NotesException {
 		boolean updated = false;

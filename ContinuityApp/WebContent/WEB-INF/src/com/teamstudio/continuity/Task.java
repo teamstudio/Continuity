@@ -27,7 +27,7 @@ public class Task implements Serializable {
 		Session session = null;
 		
 		View vwAllById = null;
-		Document docParent = null;
+		Document docScenario = null;
 		
 		try {
 			
@@ -39,28 +39,29 @@ public class Task implements Serializable {
 			if (docTaskUI.isNewNote()) {
 				
 				vwAllById = dbCurrent.getView("vwAllById");
-				docParent = vwAllById.getDocumentByKey(parentId, true);
+				docScenario = vwAllById.getDocumentByKey(parentId, true);
 				
-				if (null != docParent) {
+				if (null != docScenario) {
 				
 					//copy owner from parent
-					if (docParent.hasItem("owner")) {
-						docTask.copyItem(docParent.getFirstItem("owner"));
+					if (docScenario.hasItem("owner")) {
+						docTask.copyItem(docScenario.getFirstItem("owner"));
 					}
 					//copy authors from parent
-					if (docParent.hasItem("docAuthors")) {
-						docTask.copyItem(docParent.getFirstItem("docAuthors"));
+					if (docScenario.hasItem("docAuthors")) {
+						docTask.copyItem(docScenario.getFirstItem("docAuthors"));
 					}
 					
 					//link to scenario
-					docTask.replaceItemValue("scenarioId", docParent.getItemValueString("id"));
-					docTask.replaceItemValue("scenarioName", docParent.getItemValueString("name"));
+					docTask.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
+					docTask.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
 					
-					//copy org units
-					docTask.replaceItemValue("orgUnitIds", docParent.getItemValueString("orgUnitIds"));
-					docTask.replaceItemValue("orgUnitNames", docParent.getItemValueString("orgUnitNames"));
+					//copy org unit settings
+					docTask.replaceItemValue("orgUnitIds", docScenario.getItemValue("orgUnitIds"));
+					docTask.replaceItemValue("orgUnitNames", docScenario.getItemValue("orgUnitNames"));
+					docTask.replaceItemValue("orgUnitTarget", docScenario.getItemValueString("orgUnitTarget") );
 					
-					docParent.recycle();
+					docScenario.recycle();
 
 				} else {
 				
@@ -85,7 +86,7 @@ public class Task implements Serializable {
 		} catch (NotesException e) {
 			Logger.error(e);
 		} finally {
-			Utils.recycle(docParent, vwAllById, dbCurrent);
+			Utils.recycle(docScenario, vwAllById, dbCurrent);
 		}
 		
 	}

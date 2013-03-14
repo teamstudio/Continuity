@@ -23,9 +23,11 @@
 
 						<xp:actionGroup>
 							<xp:executeScript>
-								<xp:this.script><![CDATA[#{javascript:try {								
+								<xp:this.script><![CDATA[#{javascript:try {		
+								
+								var blnIsNew = 	docOU.isNewNote()					
 
-if (docOU.isNewNote()) {
+if (blnIsNew) {
 	docOU.replaceItemValue("id", "ou" + docOU.getDocument().getUniversalID().toLowerCase() );
 	docOU.replaceItemValue("alertLevel", "normal");
 	docOU.replaceItemValue("docAuthors", "[bcEditor]");
@@ -53,6 +55,30 @@ if ( docOU.save() ) {
 	com.teamstudio.continuity.utils.Utils.fieldValueChange("orgUnitIds", orgUnitId, "orgUnitNames", orgUnitName );
 
 	loadAppConfig(true);
+	
+	if (blnIsNew) {		//new org unit saved	
+	
+		//find all scenarios that are for all org units and add all org unit ids
+		var dcScenarios = database.search("Form=\"fScenario\" & orgUnitTarget=\"all\"");
+		
+		if (dcScenarios.getCount()>0) {
+		
+			var orgUnits = applicationScope.get("orgUnits");
+			var orgUnitIds = [];
+			var orgUnitNames = [];
+			
+			for (var i=0; i<orgUnits; i++) {
+				orgUnitIds.push( orgUnits[i].id );
+				orgUnitNames.push( orgUnits[i].name );
+			}
+			
+			dcScenarios.stampAll("orgUnitIds", orgUnitIds);
+			dcScenarios.stampAll("orgUnitNames", orgUnitNames);
+		
+		}
+	
+	}
+	 
 }
 					
 } catch (e) {

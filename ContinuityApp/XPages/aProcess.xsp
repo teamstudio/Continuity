@@ -79,7 +79,7 @@ if (!applicationScope.isDemoMode) {
 		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 		
 		//ML: create update item for this deactivation
-		createUpdate( (isRehearsal ? "Deactivated rehearsal incident" : "Deactivated incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
+		createUpdate( (isRehearsal ? "Deactivated exercise incident" : "Deactivated incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
 			"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 			"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
 			"- site: " + doc.getItemValueString("siteName") + "<br />" +
@@ -94,7 +94,7 @@ if (!applicationScope.isDemoMode) {
 		while (null != ve) {
 		
 			sendMail( ve.getColumnValues().get(0) , 
-					"[continuity] " + (isRehearsal ? "Rehearsal incident deactivated" : "Incident deactivated"), 
+					"[continuity] " + (isRehearsal ? "Exercise incident deactivated" : "Incident deactivated"), 
 					sessionScope.name + " has just deactivated the following incident:\r\n\r\n" +
 						"Incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 		"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
@@ -136,7 +136,7 @@ if (!applicationScope.isDemoMode) {
 		doc.save();
 		
 		//ML: create update item for this completion
-		createUpdate( (isRehearsal ? "Rehearsal task" : "Task") + " marked as " + (param.get("to").equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
+		createUpdate( (isRehearsal ? "Exercise task" : "Task") + " marked as " + (param.get("to").equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
 			"- incident: " + doc.getItemValueString("incidentName") + "<br />" +
 			"- by: " +	sessionScope.get("name")
 		);

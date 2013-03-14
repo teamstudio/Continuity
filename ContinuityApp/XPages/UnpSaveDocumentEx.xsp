@@ -203,7 +203,7 @@ try{
 				
 				dBar.debug("create update");
 				//ML: create update item for new incidents
-				createUpdate( (isRehearsal ? "Rehearsal incident" : "Incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
+				createUpdate( (isRehearsal ? "Exercise incident" : "Incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
 				"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 					"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
 					"- site: " + doc.getItemValueString("siteName") + "<br />" +
@@ -218,7 +218,7 @@ try{
 				while (null != ve) {
 				
 					sendMail( ve.getColumnValues().get(0) , 
-							"[continuity] " + (isRehearsal ? "Rehearsal incident created" : "Incident created"), 
+							"[continuity] " + (isRehearsal ? "Exercise incident created" : "Incident created"), 
 							sessionScope.name + " has just created an incident in Continuity:\r\n\r\n" +
 								"Incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 				"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
@@ -251,7 +251,7 @@ try{
 						sendMail( to, 
 							"[continuity] new message", 
 							sessionScope.name + " has sent you the following message:\r\n\r\n" +
-								(isRehearsal ? "Rehearsal incident" : "Incident") + ": " + doc.getItemValueString("incidentName") + "\r\n" +
+								(isRehearsal ? "Exercise incident" : "Incident") + ": " + doc.getItemValueString("incidentName") + "\r\n" +
 								"Message: " + doc.getItemValueString("message") + "\r\n",
 							sessionScope.email, sessionScope.name);
 					}

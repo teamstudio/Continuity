@@ -3,7 +3,7 @@
 
 	<xp:this.data>
 		<xp:dominoView var="vwScenarios"
-			viewName="#{javascript:compositeData.viewName}">
+			viewName="vwScenarios">
 		</xp:dominoView>
 	</xp:this.data>
 
@@ -12,7 +12,6 @@
 			<xp:text xp:key="header" disableTheme="true" escape="false"><xp:this.value><![CDATA[<table class="lotusTable lotusClear"><tbody>]]></xp:this.value></xp:text>
 			<xp:text xp:key="footer" disableTheme="true" escape="false"><xp:this.value><![CDATA[</tbody></table>]]></xp:this.value></xp:text>
 		</xp:this.facets>
-	
 
 		<xp:tr rendered="#{javascript:row.isCategory()}" styleClass="highlight">
 			<td colspan="2">

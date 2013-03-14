@@ -122,10 +122,10 @@
 		
 			<xp:text escape="true" disableTheme="true"
 				value="Not allocated">
-				<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatPlans").getRowCount()==0}]]></xp:this.rendered>
+				<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResponsibilities").getRowCount()==0}]]></xp:this.rendered>
 			</xp:text>
 		
-			<xp:repeat id="repeatResponsibilities" rows="50" value="#{docTask.responsibleNames}" var="name">
+			<xp:repeat id="repeatResponsibilities" rows="50" value="#{docTask.responsibilityNames}" var="name">
 				<xp:text escape="false" disableTheme="true" value="#{name}"></xp:text>
 				<br />
 			</xp:repeat>

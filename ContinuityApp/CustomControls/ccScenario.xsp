@@ -43,22 +43,47 @@ if (blnIsNew) {
 if (blnIsNew || docScenario.getItemValueString("id").length==0 ) {
 	docScenario.replaceItemValue("id", "s" + doc.getUniversalID().toLowerCase() );
 }
-						
-//store org unit name
-var orgUnitIds = docScenario.getItemValue("orgUnitIds");
+
+var orgUnitIds;
 var orgUnitNames = [];
 
-if (orgUnitIds != null) {
+var orgUnits = applicationScope.get("orgUnits");
 
-	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
+var orgUnitTarget = docScenario.getItemValueString("orgUnitTarget")
+
+if (orgUnitTarget.equals("all") ) {
+
+	//scenario for all org units: copy in all org unit ids
+	 orgUnitIds = [];
 	
-	for (var j=0; j<orgUnitIds.length; j++) {
-		var orgUnitId:string = orgUnitIds[j];
-		orgUnitNames.push( com.teamstudio.continuity.OrganisationUnit.getName( orgUnitId ));
+	for (var i=0; i<orgUnits.length; i++) {
+		orgUnitIds.push( orgUnits[i].id );
+		orgUnitNames.push( orgUnits[i].name );
 	}
-}
 
-docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
+	docScenario.replaceItemValue("orgUnitIds", orgUnitIds);
+	docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
+
+} else {
+
+ 	orgUnitIds = docScenario.getItemValue("orgUnitIds");
+ 	
+ 	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
+ 	
+ 	for (var j=0; j<orgUnitIds.length; j++) {
+		var orgUnitId:string = orgUnitIds[j];
+		
+		for (var i=0; i<orgUnits.length; i++) {
+			if (orgUnits[i].id.equals( orgUnitId) ) {
+				orgUnitNames.push( orgUnits[i].name );
+				break;
+			}
+		}
+			
+	}
+	
+	docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
+}
 
 //save contents of rich text field as string
 var doc:NotesDocument = docScenario.getDocument(true);
@@ -79,11 +104,12 @@ if (!blnIsNew) {
 	com.teamstudio.continuity.utils.Utils.fieldValueChange("scenarioId", scenarioId, "scenarioName", docScenario.getItemValueString("name") );
 	
 	//copy org units to all tasks in this scenario
-	var dc = database.search( "Form=\"fTask\" & scenarioId=\"" + scenarioId + "\"");
+	var dcTasks = database.search( "Form=\"fTask\" & scenarioId=\"" + scenarioId + "\"");
 	
-	if (dc.getCount()>0) {
-		dc.stampAll( "orgUnitIds", orgUnitIds );
-		dc.stampAll( "orgUnitNames", orgUnitNames );
+	if (dcTasks.getCount()>0) {
+		dcTasks.stampAll( "orgUnitIds", orgUnitIds );
+		dcTasks.stampAll( "orgUnitNames", orgUnitNames );
+		dcTasks.stampAll( "orgUnitTarget", orgUnitTarget );
 	}
 }
 	

@@ -313,10 +313,17 @@ function loadAppConfig( forceUpdate:boolean ) {
 				var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
 			
 				var orgUnitChoices = [];
+				var orgUnits = [];
 							
 				while (null != veOrgUnit) {
 					
-					orgUnitChoices.push( veOrgUnit.getColumnValues().get(1) );
+					var colValues = veOrgUnit.getColumnValues();
+					var name = colValues.get(0);
+					var id = colValues.get(2);
+					
+					orgUnitChoices.push( colValues.get(1) );
+					
+					orgUnits.push( { "name" : name, "id" : id} );
 					
 					veTemp = vecOrgUnits.getNextEntry();
 					veOrgUnit.recycle();
@@ -324,6 +331,9 @@ function loadAppConfig( forceUpdate:boolean ) {
 				}
 				
 				applicationScope.put("orgUnitChoices", orgUnitChoices);
+				applicationScope.put("orgUnits", orgUnits);
+				
+				vwOrgUnits.recycle();
 				
 				//store a list of all sites in the application scope (for combobox/ radio selections)
 				var vwSites:NotesView = dbCore.getView("vwSites");
@@ -341,6 +351,8 @@ function loadAppConfig( forceUpdate:boolean ) {
 				}
 	
 				applicationScope.put("siteChoices", siteChoices);
+				
+				vwSites.recycle();
 			}
 			
 			dBar.debug("done");
@@ -1010,20 +1022,23 @@ function isEmpty( input ) {
 	return false;
 }
 
-function getScenariosByPlan(vwScenariosByOrgUnitId) {
+function getScenariosByPlan( orgUnit ) {
+	
+	var plans = [];
 	
 	try {
 		
-		dBar.debug("retrieving plans...");
+		dBar.debug("retrieving plans for org unit " + orgUnit + "...");
 		
-		//create an array of all plans, with in every plan an array of all scenario's in that plan
+		//create an array of all plans for the current orgUnit, with in every plan an array of all scenario's in that plan
+		var vwScenariosByOrgUnitId:NotesView = database.getView("vwScenariosByOrgUnitId");
+		var nav:NotesViewNavigator = vwScenariosByOrgUnitId.createViewNavFromCategory( orgUnit );
 		
-		var nav = vwScenariosByOrgUnitId.createViewNavFromCategory(sessionScope.get("orgUnitId"));
-	
-		var plans = [];
+		//dBar.debug("found " + nav.getCount() + "nav entries");
+		
 		var _plan = null;
 		
-		var ve = nav.getFirst();
+		var ve:NotesViewEntry = nav.getFirst();
 		while (null != ve) {
 		
 			var colValues = ve.getColumnValues();
@@ -1033,7 +1048,9 @@ function getScenariosByPlan(vwScenariosByOrgUnitId) {
 				//dBar.debug("found cat: " + colValues.get(1) );
 		
 				if (_plan != null) { plans.push( _plan ); }
-		
+
+				//"orgUnits" : colValues.get(4),								
+				
 				_plan = {
 					"name" : colValues.get(1),
 					"scenarios" : [],
@@ -1056,12 +1073,18 @@ function getScenariosByPlan(vwScenariosByOrgUnitId) {
 				}
 				
 				if ( !alreadyAdded ) {
+					
+					var scenarioName = colValues.get(2);
+					var ouTarget = colValues.get(4)
+					
+					dBar.debug("adding scenario: " + scenarioName);
 		
 					_plan.addedIds.push(scenarioId);
 			
 					_plan.scenarios.push( {
-						"name": colValues.get(2),
+						"name": scenarioName,
 						"id" : scenarioId,
+						"orgUnitTarget" : ouTarget,
 						"numTasks" : 1
 					} );
 				} else {
@@ -1076,6 +1099,9 @@ function getScenariosByPlan(vwScenariosByOrgUnitId) {
 		}
 			
 		if (_plan != null) { plans.push( _plan ); }
+		
+		nav.recycle();
+		vwScenariosByOrgUnitId.recycle();
 		
 		dBar.debug("finished");
 		

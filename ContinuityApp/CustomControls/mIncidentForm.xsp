@@ -75,7 +75,7 @@
 
 					<li>
 
-						<xp:label value="Rehearsal" id="label5" for="isRehearsal">
+						<xp:label value="Exercise" id="label5" for="isRehearsal">
 						</xp:label>
 						<xp:text escape="true" id="isRehearsal"
 							value="#{javascript:(docIncident.getItemValueString('isRehearsal').equals('yes') ? 'Yes' : 'No')}">
