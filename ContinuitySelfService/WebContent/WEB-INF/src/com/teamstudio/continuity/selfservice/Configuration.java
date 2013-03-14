@@ -38,6 +38,7 @@ public class Configuration implements Serializable {
 	public static final String ROLE_ADMIN = "[admin]";
 	public static final String ROLE_EDITOR = "[bcEditor]";
 	public static final String ROLE_USER = "[bcUser]";
+	public static final String ROLE_DEBUG = "[debug]";
 
 	private HashMap<String, String> orgContinuityPaths;
 	private HashMap<String, String> orgCorePaths;

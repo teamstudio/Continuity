@@ -163,6 +163,7 @@ public class Organisation implements Serializable {
 					
 			aclEntry = Authorizations.createACLEntry(acl, ADMINS_GROUP, ACLEntry.TYPE_PERSON_GROUP, ACL.LEVEL_MANAGER );
 			aclEntry.enableRole( Configuration.ROLE_EDITOR );
+			aclEntry.enableRole( Configuration.ROLE_DEBUG );
 
 			//add LocalDomainServers
 			Logger.info("- add LocalDomainServers");
