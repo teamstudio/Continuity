@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='8b2' unid='E411C9BFC59150B1C1257B280080283D' sequence='6'>
+<created><datetime>20130309T001949,09+01</datetime></created>
+<modified><datetime>20130309T002430,15+01</datetime></modified>
+<revised><datetime>20130309T002430,14+01</datetime></revised>
+<lastaccessed><datetime>20130309T002430,15+01</datetime></lastaccessed>
+<addedtofile><datetime>20130309T001950,36+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwRolesCallTreeOrder</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+vAACAFAAAgAkNwUADQBjYWxsVHJlZU9yZGVyAFYBAQAAAAsCrwAqABgABQANAGNhbGxUcmVlT3Jk
+ZXIArgASAAAAAAAAAAA4j0CuAAQAtQMDAAUAHAAXAAMAAgACAAkAJDdpZCRDb25mbGljdAAEAAQA
+AAA4AAUABABGb3JtAQAFAGZSb2xlAAoCBQAOAHNob3dJbkNhbGxUcmVlAQADAHllcwAKAhwCAwAH
+ABIADAAJTDFTNFM1UzZTN1M=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+DwABAABEgGYAAAACACQ3
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAgACgAAAFZDAQACAA0AZgAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIAAgAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAAAkN2NhbGxUcmVlT3JkZXJmAAIAUAACACQ3BQANAGNhbGxUcmVlT3Jk
+ZXIAVgEBAAAACwKvACoAGAAFAA0AY2FsbFRyZWVPcmRlcgCuABIAAAAAAAAAADiPQK4ABAC1AwMA
+BwAUAA0ACTJSVDZTN1M5UzExUgBpZGlkJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAA
+AAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJ
+AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////
+AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRw/AAAAAQABAAAAAQAAAAAAAAAAAAAACAACAHn/bAABAPDw8AABAAAAAAAJAAAAAAABAPDw8AAA
+AB8AAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=
+</rawitemdata></item></note>
+

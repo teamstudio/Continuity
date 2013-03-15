@@ -79,12 +79,14 @@
 
 					if (typeof selected == 'string') { selected = [selected]; }
 					
-					dBar.debug("assigned to resp ids:");
-					dBar.dump( selected);
+					//dBar.debug("assigned to resp ids:");
+					//dBar.dump( selected);
 					
 					docTarget.replaceItemValue("responsibilityIds", selected);
 					
 					var respNames = [];
+					var roleIds = [];
+					var roleNames = [];
 					
 					if (selected != null) {
 					
@@ -95,14 +97,27 @@
 								var ve = vwAllById.getEntryByKey( selected[i] );
 								if (null != ve) {
 									var docResp = ve.getDocument();
-									respNames.push( docResp.getItemValueString("roleName") + " - " + docResp.getItemValueString("name") );
+									
+									var roleId = docResp.getItemValueString("roleId");
+									var roleName = docResp.getItemValueString("roleName");
+									
+									if ( @IsNotMember( roleId, roleIds ) ) {
+										roleIds.push( roleId );
+										roleNames.push( roleName );
+									}
+									
+									respNames.push( roleName + " - " + docResp.getItemValueString("name") );
 									ve.recycle();
 								}
 							}
 						}
 					}
 					
+	
+	docTarget.replaceItemValue("roleIds", roleIds);
+	docTarget.replaceItemValue("roleNames", roleNames);
 	docTarget.replaceItemValue("responsibilityNames", respNames );
+	
 	docTarget.save();
 
 	getComponent("dlgAssignTo").hide();

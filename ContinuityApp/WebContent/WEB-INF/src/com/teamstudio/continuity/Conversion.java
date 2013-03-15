@@ -223,6 +223,36 @@ public class Conversion {
 						
 					}
 					
+					//add unique list of roleIds (based on the selected responsibilities)
+					if ( !doc.hasItem("roleIds") ) {
+						
+						Vector<String> respIds = doc.getItemValue("responsibilityIds");
+						Vector<String> roleIds = new Vector<String>();
+						Vector<String> roleNames = new Vector<String>();
+						
+						for(String respId : respIds) {
+							ViewEntry veRes = vwAllById.getEntryByKey( respId, true );
+							
+							if (veRes != null) {
+								
+								Document docResp = veRes.getDocument();
+								String roleId = docResp.getItemValueString("roleId");
+								String roleName = docResp.getItemValueString("roleName");
+								
+								if (!roleIds.contains(roleId)) {
+									roleIds.add(roleId);
+									roleNames.add(roleName);
+								}
+								
+								docResp.recycle();
+								veRes.recycle();
+							}
+						}
+						
+						doc.replaceItemValue("roleIds", roleIds);
+						doc.replaceItemValue("roleNames", roleNames);
+						updated = true;
+					}
 					
 				} else if (form.equals("fCommGuidelines")) {
 					

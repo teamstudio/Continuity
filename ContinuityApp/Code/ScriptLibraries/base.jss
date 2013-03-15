@@ -941,7 +941,7 @@ function assignTasks( docIncident, docScenario ) {
 
 	try {
 		
-		if (applicationScope.isDemoMode) {
+		if (applicationScope.isDemoMode) {		//don't assign tasks in demo mode
 			return false;
 		}
 
@@ -978,11 +978,16 @@ function assignTasks( docIncident, docScenario ) {
 			docTaskNew.replaceItemValue("categoryName", docTask.getItemValueString("categoryName") );
 			docTaskNew.replaceItemValue("categoryOrder", docTask.getItemValueInteger("categoryOrder") );
 			
-			docTaskNew.replaceItemValue("roleId", docTask.getItemValue("roleId") );
-			docTaskNew.replaceItemValue("roleName", docTask.getItemValue("roleName") );
-			
 			docTaskNew.replaceItemValue("responsibilityIds", docTask.getItemValue("responsibilityIds") );
 			docTaskNew.replaceItemValue("responsibilityNames", docTask.getItemValue("responsibilityNames") );
+			
+			docTaskNew.replaceItemValue("roleIds", docTask.getItemValue("roleIds") );
+			docTaskNew.replaceItemValue("roleNames", docTask.getItemValue("roleNames") );
+			
+			docTaskNew.replaceItemValue("planNames", docTask.getItemValue("planNames") );
+			docTaskNew.replaceItemValue("planIds", docTask.getItemValue("planIds") );
+			docTaskNew.replaceItemValue("scenarioId", docTask.getItemValueString("scenarioId") );
+			docTaskNew.replaceItemValue("scenarioName", docTask.getItemValueString("scenarioName") );
 			
 			docTaskNew.replaceItemValue("order", docTask.getItemValue("order") );
 			

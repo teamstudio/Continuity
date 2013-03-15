@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xp:dominoView var="vwAllById" viewName="vwAllById"></xp:dominoView>
+	</xp:this.data>
+	
+	<div class="section">
+		<div class="title">Plans</div>
+	</div>
+	
+	<!-- repeat over ou's  -->
+	<xp:repeat id="repeat3" rows="30" var="orgUnit" indexVar="orgUnitIndex">
+		<xp:this.value><![CDATA[#{javascript:applicationScope.get("orgUnits");		
+		}]]></xp:this.value>
+		
+		<xp:this.facets>
+				<xp:text disableTheme="true" escape="false" xp:key="header">
+					<xp:this.value><![CDATA[<table class="lotusTable"><tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text disableTheme="true" escape="false" xp:key="footer">
+					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+				</xp:text>
+		</xp:this.facets>
+		
+		<xp:tr>
+			<xp:this.styleClass><![CDATA[#{javascript:"highlight " + (orgUnitIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+
+			<xp:td>
+				<xp:text escape="true" id="computedField2" value="#{javascript:orgUnit.name}" style="font-weight: bold">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+		
+		<xp:tr rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" >
+			<xp:text value="No plans found" escape="true" />
+		</xp:tr>
+		
+		<!-- repeat over plans for this ou -->
+		<xp:repeat id="repeat1" rows="500" value="#{javascript:var plans = getScenariosByPlan(orgUnit.id);
+		return plans;}" var="plan" disableOutputTag="true">
+		
+			<xp:tr>
+				<xp:td style="padding-left: 20px;">
+					<xp:text escape="true" id="computedField1" tagName="h4" value="#{plan.name}">
+					</xp:text>
+				</xp:td>
+			</xp:tr>
+	
+			<xp:repeat id="repeat2" rows="100" value="#{javascript:plan.scenarios}" var="scenario"
+				indexVar="scenarioIndex" disableOutputTag="true">
+	
+				<xp:tr>
+					<xp:td styleClass="lotusFirstCell"  style="padding-left: 40px;">
+						<h4>
+							<xp:link escape="true" text="#{scenario.name}" id="link1">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial">
+									<xp:this.action>
+										<xe:changeDynamicContentAction facetName="scenarioForm"
+											for="dynamicContent1">
+											<xe:this.parameters>
+												<xp:parameter name="documentId"
+													value="#{javascript:vwAllById.getDocumentByKey(scenario.id, true).getUniversalID()}">
+												</xp:parameter>
+												<xp:parameter name="action" value="openDocument"></xp:parameter>
+											</xe:this.parameters>
+										</xe:changeDynamicContentAction>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</h4>
+					</xp:td>
+				</xp:tr>
+	
+			</xp:repeat>
+
+		</xp:repeat>
+		
+	</xp:repeat>
+
+</xp:view>
