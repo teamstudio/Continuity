@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note default='true' class='view' xmlns='http://www.lotus.com/dxl' version='9.0'
- replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='3a6' unid='E3E2D109FF31EB32C1257AA000374D6E' sequence='49'>
-<created><datetime dst='true'>20121023T120403,02+02</datetime></created>
-<modified><datetime>20130307T091953,72+01</datetime></modified>
-<revised><datetime>20130307T091953,71+01</datetime></revised>
-<lastaccessed><datetime>20130307T091953,72+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,58+01</datetime></addedtofile></noteinfo>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
+<noteinfo noteid='2c6' unid='918FD0D283BB9728C1257B300046453D' sequence='1'>
+<created><datetime>20130316T134732,45+01</datetime></created>
+<modified><datetime>20130316T134733,54+01</datetime></modified>
+<revised><datetime>20130316T134733,53+01</datetime></revised>
+<lastaccessed><datetime>20130316T134733,54+01</datetime></lastaccessed>
+<addedtofile><datetime>20130316T134733,54+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass'><text>1</text></item>
