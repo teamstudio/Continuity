@@ -34,15 +34,17 @@ if (blnIsNew) {
 	docOU.getDocument(true).getFirstItem("docAuthors").setAuthors(true);
 }
 
-
 //store name of selected site(s)
 var siteIds = docOU.getItemValue("siteIds");
 if (typeof siteIds=="string") { siteIds = [siteIds]; }
 var siteNames = [];
 for (var i=0; i<siteIds.length; i++) {
-	siteName = @DbLookup( configBean.coreDbPath, "vwAllById", siteIds[i], "name");
-	siteNames.push( siteName);
+	if (siteIds[i].length>0) { 
+		siteName = @DbLookup( configBean.coreDbPath, "vwAllById", siteIds[i], "name");
+		siteNames.push( siteName);
+	}
 }
+
 docOU.replaceItemValue("siteNames", siteNames);
 
 if ( docOU.save() ) {
@@ -64,27 +66,19 @@ if ( docOU.save() ) {
 		if (dcScenarios.getCount()>0) {
 		
 			var orgUnits = applicationScope.get("orgUnits");
-			var orgUnitIds = [];
-			var orgUnitNames = [];
-			
-			for (var i=0; i<orgUnits; i++) {
-				orgUnitIds.push( orgUnits[i].id );
-				orgUnitNames.push( orgUnits[i].name );
-			}
+			var orgUnitIds = new java.util.Vector( orgUnits.keySet() );
+			var orgUnitNames = new java.util.Vector( orgUnits.values() );
 			
 			dcScenarios.stampAll("orgUnitIds", orgUnitIds);
 			dcScenarios.stampAll("orgUnitNames", orgUnitNames);
-		
 		}
-	
 	}
-	 
 }
 					
 } catch (e) {
 	dBar.error(e);
 }	
-										}]]></xp:this.script>
+}]]></xp:this.script>
 							</xp:executeScript>
 							<xe:changeDynamicContentAction facetName="orgUnits"
 								for="dynamicContent1">

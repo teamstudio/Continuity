@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
-
-	<div class="section">
-		<div class="title">BCM Role</div>
-	</div>
+	<xp:br></xp:br>
 
 	<xp:this.data>
 		<xp:dominoDocument var="docRole" formName="fRole" action="openDocument"
@@ -20,7 +17,7 @@
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docRole.isEditable()}]]></xp:this.rendered>
 					
 					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynamicContent1">
+						refreshMode="partial" refreshId="#{javascript:compositeData.dynContentId}">
 						<xp:this.action>
 							<xp:changeDocumentMode mode="edit" var="docRole"></xp:changeDocumentMode>
 						</xp:this.action>
@@ -31,7 +28,7 @@
 				<xp:button value="Save" id="button1"  icon="disk.png" rendered="#{javascript:docRole.isEditable()}">
 
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1">
+						refreshId="#{javascript:compositeData.dynContentId}">
 						<xp:this.action><![CDATA[#{javascript:try {
 						
 						//store name of selected site(s)
@@ -79,15 +76,14 @@ roleBean.save( docRole);
 //force update of app config
 loadAppConfig(true);
 
-			
-getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+context.setDocumentMode("readOnly");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 
 				<xp:button value="Remove" id="button2">
 
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docRole.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1" immediate="true">
+						refreshId="#{javascript:compositeData.dynContentId}" immediate="true">
 						<xp:this.action><![CDATA[#{javascript:var dcResp = database.search("Form=\"fResponsibility\" & roleId=\"" + docRole.getItemValueString("id") + "\"");
 						
 						var docTemp:NotesDocument = null;
@@ -106,15 +102,15 @@ getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
 						dBar.debug("removing role " + docRole.getItemValueString("name"));
 						docRole.getDocument().remove(true);
 								
-getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+getComponent(compositeData.dynContentId).show("rolesList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Removing this role will also remove all related responsibilities.\n\nAre you sure?")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
 
 				<xp:link escape="true" text="Back to list" id="link1">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1" immediate="true">
-						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("bcmRoles");}]]></xp:this.action>
+						refreshId="#{javascript:compositeData.dynContentId}" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent(compositeData.dynContentId).show("rolesList");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
 

@@ -6,7 +6,20 @@
 		<xp:dominoDocument var="docTask" formName="fTask"
 			action="openDocument" documentId="#{javascript:viewScope.taskId}"
 			ignoreRequestParams="true">
-		</xp:dominoDocument>
+		<xp:this.postOpenDocument><![CDATA[#{javascript:
+if (docTask.isNewNote() ) {
+
+var vwPlans = database.getView("vwPlans");
+
+if ( vwPlans.getEntryCount()==1 ) {
+	//only 1 plan exists - make this the allocated plan
+	
+	var docPlan = vwPlans.getFirstDocument();
+	docTask.replaceItemValue("planIds", docPlan.getItemValueString("id") );
+	docTask.replaceItemValue("planNames", docPlan.getItemValueString("name") );
+	
+}
+	}	}]]></xp:this.postOpenDocument></xp:dominoDocument>
 	</xp:this.data>
 
 	<div class="section" style="margin-top: 10px;">

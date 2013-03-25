@@ -7,22 +7,22 @@
 		</xp:dominoView>
 	</xp:this.data>
 
-	<xp:repeat id="repeat1" rows="100" value="#{vwScenarios}" var="row" disableOutputTag="true">
+	<xp:repeat id="repeat1" rows="100" value="#{vwScenarios}" var="rowEntry" disableOutputTag="true">
 		<xp:this.facets>
 			<xp:text xp:key="header" disableTheme="true" escape="false"><xp:this.value><![CDATA[<table class="lotusTable lotusClear"><tbody>]]></xp:this.value></xp:text>
 			<xp:text xp:key="footer" disableTheme="true" escape="false"><xp:this.value><![CDATA[</tbody></table>]]></xp:this.value></xp:text>
 		</xp:this.facets>
 
-		<xp:tr rendered="#{javascript:row.isCategory()}" styleClass="highlight">
+		<xp:tr rendered="#{javascript:rowEntry.isCategory()}" styleClass="highlight">
 			<td colspan="2">
-				<xp:text escape="true" id="computedField1" value="#{row.orgUnitNames}" style="font-weight: bold"></xp:text>
+				<xp:text escape="true" id="computedField1" value="#{rowEntry.orgUnitNames}" style="font-weight: bold"></xp:text>
 			</td>
 		</xp:tr>
 	
-		<xp:tr rendered="#{javascript:!row.isCategory()}">
-			<td style="padding-left: 20px;">
+		<xp:tr rendered="#{javascript:!rowEntry.isCategory()}">
+			<td style="padding-left: 20px; width: 100%">
 				<h4>
-					<xp:link escape="true" text="#{row.name}" id="link1">
+					<xp:link escape="true" text="#{rowEntry.name}" id="link1">
 						<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 							refreshId="dynamicContent1">
 								
@@ -30,7 +30,7 @@
 								<xe:changeDynamicContentAction facetName="scenarioForm"	for="dynamicContent1">
 									<xe:this.parameters>
 										<xp:parameter name="documentId"
-											value="#{javascript:row.getUniversalID()}">
+											value="#{javascript:rowEntry.getUniversalID()}">
 										</xp:parameter>
 										<xp:parameter name="action" value="openDocument"></xp:parameter>
 									</xe:this.parameters>
@@ -44,7 +44,7 @@
 				
 				
 				<xp:div id="rowDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
-						<xp:text escape="false" id="computedField3" value="#{row.description}"></xp:text>
+						<xp:text escape="false" id="computedField3" value="#{rowEntry.description}"></xp:text>
 				</xp:div>
 	
 			</td>
@@ -52,6 +52,7 @@
 			<td class="lotusRight lotusLastCell">
 	
 				<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imageShowDetails" width="16" height="16" title="Show details" styleClass="lotusIcon16 lotusIconShow pointer">
+				<xp:this.rendered><![CDATA[#{javascript:rowEntry.getColumnValue("description").length>0}]]></xp:this.rendered>
 				<xp:eventHandler event="onclick" submit="false">
 					<xp:this.script>
 						<xp:executeClientScript>

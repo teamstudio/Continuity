@@ -97,7 +97,7 @@ function init( theme:String) {
 			} catch (ee) { }
 							
 			//set default menu option
-			sessionScope.put("selectedMenu", (isEditor ? "bcmRoles" : "contactsList") );
+			sessionScope.put("selectedMenu", (isEditor ? "miniConfigGuide" : "contactsList") );
 			
 			var ua = @LowerCase( context.getUserAgent().getUserAgent() );
 			
@@ -316,7 +316,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 				var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
 			
 				var orgUnitChoices = [];
-				var orgUnits = [];
+				var orgUnits = getMap();
 							
 				while (null != veOrgUnit) {
 					
@@ -326,7 +326,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 					
 					orgUnitChoices.push( colValues.get(1) );
 					
-					orgUnits.push( { "name" : name, "id" : id} );
+					orgUnits[id] = name;
 					
 					veTemp = vecOrgUnits.getNextEntry();
 					veOrgUnit.recycle();
@@ -1056,8 +1056,7 @@ function getScenariosByPlan( orgUnit ) {
 				//dBar.debug("found cat: " + colValues.get(1) );
 		
 				if (_plan != null) { plans.push( _plan ); }
-
-				//"orgUnits" : colValues.get(4),								
+								
 				
 				_plan = {
 					"name" : colValues.get(1),

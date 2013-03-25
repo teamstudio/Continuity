@@ -10,8 +10,8 @@
 	</div>
 	
 	<!-- repeat over ou's  -->
-	<xp:repeat id="repeat3" rows="30" var="orgUnit" indexVar="orgUnitIndex">
-		<xp:this.value><![CDATA[#{javascript:applicationScope.get("orgUnits");		
+	<xp:repeat id="repeat3" rows="30" var="orgUnitId" indexVar="orgUnitIndex">
+		<xp:this.value><![CDATA[#{javascript:applicationScope.get("orgUnits").keySet();		
 		}]]></xp:this.value>
 		
 		<xp:this.facets>
@@ -27,17 +27,17 @@
 			<xp:this.styleClass><![CDATA[#{javascript:"highlight " + (orgUnitIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
 
 			<xp:td>
-				<xp:text escape="true" id="computedField2" value="#{javascript:orgUnit.name}" style="font-weight: bold">
+				<xp:text escape="true" id="computedField2" value="#{javascript:applicationScope.get('orgUnits').get(orgUnitId)}" style="font-weight: bold">
 				</xp:text>
 			</xp:td>
 		</xp:tr>
 		
 		<xp:tr rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" >
-			<xp:text value="No plans found" escape="true" />
+			<xp:td style="padding-left: 20px;"><xp:text value="No plans found" escape="true" /></xp:td>
 		</xp:tr>
 		
 		<!-- repeat over plans for this ou -->
-		<xp:repeat id="repeat1" rows="500" value="#{javascript:var plans = getScenariosByPlan(orgUnit.id);
+		<xp:repeat id="repeat1" rows="500" value="#{javascript:var plans = getScenariosByPlan(orgUnitId);
 		return plans;}" var="plan" disableOutputTag="true">
 		
 			<xp:tr>

@@ -15,7 +15,7 @@
 		<xp:panel style="padding:15px">
 
 			<xp:repeat id="repeat1" rows="100" var="hazardCat"
-				indexVar="hazardIndex" style="height: 375px; overflow-y:auto">
+				indexVar="hazardIndex" styleClass="showScrollbar" style="height: 375px; overflow-y:auto">
 				<xp:this.value><![CDATA[#{javascript:@Trim(database.getView("vwHazards").getColumnValues(0))}]]></xp:this.value>
 
 				<xp:text tagName="h4" escape="true" id="computedField1"

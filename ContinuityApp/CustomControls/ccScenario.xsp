@@ -2,10 +2,6 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
-	<div class="section">
-		<div class="title">Business scenario</div>
-	</div>
-
 	<xp:this.data>
 		<xp:dominoDocument var="docScenario" formName="fScenario"></xp:dominoDocument>
 	</xp:this.data>
@@ -16,7 +12,7 @@
 				<xp:button value="Edit" id="button1"
 					icon="pencil.png">
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docScenario.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1">
+						refreshId="#{javascript:compositeData.dynContentId}">
 						<xp:this.action>
 							<xp:changeDocumentMode mode="edit" var="docScenario"></xp:changeDocumentMode>
 						</xp:this.action>
@@ -27,102 +23,15 @@
 					rendered="#{javascript:docScenario.isEditable()}">
 
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1">
-						<xp:this.action><![CDATA[#{javascript:try {
-						var blnIsNew = docScenario.isNewNote();
-
-if (blnIsNew) {
-	//set the authors: [bcEditor]
-	docScenario.replaceItemValue("docAuthors", "[bcEditor]");
-	
-	var doc:NotesDocument = docScenario.getDocument(true)
-	
-	doc.getFirstItem("docAuthors").setAuthors(true);
-}
-
-if (blnIsNew || docScenario.getItemValueString("id").length==0 ) {
-	docScenario.replaceItemValue("id", "s" + doc.getUniversalID().toLowerCase() );
-}
-
-var orgUnitIds;
-var orgUnitNames = [];
-
-var orgUnits = applicationScope.get("orgUnits");
-
-var orgUnitTarget = docScenario.getItemValueString("orgUnitTarget")
-
-if (orgUnitTarget.equals("all") ) {
-
-	//scenario for all org units: copy in all org unit ids
-	 orgUnitIds = [];
-	
-	for (var i=0; i<orgUnits.length; i++) {
-		orgUnitIds.push( orgUnits[i].id );
-		orgUnitNames.push( orgUnits[i].name );
-	}
-
-	docScenario.replaceItemValue("orgUnitIds", orgUnitIds);
-	docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
-
-} else {
-
- 	orgUnitIds = docScenario.getItemValue("orgUnitIds");
- 	
- 	if (typeof orgUnitIds=="string") { orgUnitIds = [orgUnitIds]; }
- 	
- 	for (var j=0; j<orgUnitIds.length; j++) {
-		var orgUnitId:string = orgUnitIds[j];
-		
-		for (var i=0; i<orgUnits.length; i++) {
-			if (orgUnits[i].id.equals( orgUnitId) ) {
-				orgUnitNames.push( orgUnits[i].name );
-				break;
-			}
-		}
-			
-	}
-	
-	docScenario.replaceItemValue("orgUnitNames", orgUnitNames);
-}
-
-//save contents of rich text field as string
-var doc:NotesDocument = docScenario.getDocument(true);
-	
-var desc = doc.getMIMEEntity("description_input");
-docScenario.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
-
-var desc = doc.getMIMEEntity("impactDescription_input");
-docScenario.replaceItemValue("impactDescription", (desc != null ? desc.getContentAsText() : "") );
-												
-docScenario.save();
-
-if (!blnIsNew) {
-
-	var scenarioId = docScenario.getItemValueString("id");
-						
-	//replace this name everywhere
-	com.teamstudio.continuity.utils.Utils.fieldValueChange("scenarioId", scenarioId, "scenarioName", docScenario.getItemValueString("name") );
-	
-	//copy org units to all tasks in this scenario
-	var dcTasks = database.search( "Form=\"fTask\" & scenarioId=\"" + scenarioId + "\"");
-	
-	if (dcTasks.getCount()>0) {
-		dcTasks.stampAll( "orgUnitIds", orgUnitIds );
-		dcTasks.stampAll( "orgUnitNames", orgUnitNames );
-		dcTasks.stampAll( "orgUnitTarget", orgUnitTarget );
-	}
-}
-	
-
-context.setDocumentMode("readOnly");
-} catch (e) {
-	dBar.error(e);
+						refreshId="#{javascript:compositeData.dynContentId}">
+						<xp:this.action><![CDATA[#{javascript:if (scenarioBean.save(docScenario) ) {
+	context.setDocumentMode("readOnly");
 }}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button><xp:button value="Remove" id="button3">
 
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docScenario.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1" immediate="true">
+						refreshId="#{javascript:compositeData.dynContentId}" immediate="true">
 						<xp:this.action><![CDATA[#{javascript://find related tasks
 var dcTasks = database.search( "Form=\"fTask\" & scenarioId=\"" + docScenario.getItemValueString("id") + "\"");
 if (dcTasks.getCount()>0) {
@@ -132,15 +41,15 @@ if (dcTasks.getCount()>0) {
 //remove scenario
 docScenario.getDocument().remove(true);
 							
-getComponent("dynamicContent1").show("scenariosList");}]]></xp:this.action>
+getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Removing this plan will also remove all related tasks.\n\nAre you sure?")]]></xp:this.script>
 					</xp:eventHandler>
 </xp:button>
 
 				<xp:link escape="true" text="Back to list" id="link1">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1" immediate="true">
-						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenariosList");}]]></xp:this.action>
+						refreshId="#{javascript:compositeData.dynContentId}" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
 			</xp:panel>

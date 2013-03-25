@@ -2,12 +2,12 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	
 	<div class="section">
-		<div class="title">Roles and responsibilities</div>
+		<div class="title">Responsibilities</div>
 		<div class="actions">
 			<xp:button value="Add role" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("bcmRole");}]]></xp:this.action>
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("roleForm");}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
 			</div>
@@ -19,7 +19,6 @@
 			<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"></xp:dominoView>
 		</xp:this.data>
 		
-
 		<table class="grid">
 			<tbody>
 
@@ -64,7 +63,7 @@
 										refreshId="dynamicContent1">
 										<xp:this.action>
 											<xe:changeDynamicContentAction
-												facetName="bcmRole" for="dynamicContent1">
+												facetName="roleForm" for="dynamicContent1">
 												<xe:this.parameters>
 													<xp:parameter
 														name="documentId"
