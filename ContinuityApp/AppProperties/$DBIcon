@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='336' unid='1E4C93320CA23FC1C1257AC6007AD5AB' sequence='12'>
+<created><datetime>20121130T232140,91+01</datetime></created>
+<modified><datetime>20130306T172248,25+01</datetime></modified>
+<revised><datetime>20130306T172248,24+01</datetime></revised>
+<lastaccessed><datetime>20130306T172248,25+01</datetime></lastaccessed>
+<addedtofile><datetime>20130301T115515,98+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$TITLE'><text>$DBIcon</text></item>
+<item name='$Flags'><text>34Ci~Q</text></item>
+<item name='$ImagesWide' sign='true'><number>1</number></item>
+<item name='$ImagesHigh' sign='true'><number>1</number></item>
+<item name='$ImagesColorize' sign='true'><number>0</number></item>
+<item name='$FileSize' sign='true'><number>1483</number></item>
+<item name='$ImageData' sign='true'>
+<rawitemdata type='1'>
+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
+AABJRU5ErkJggmQ=
+</rawitemdata></item>
+<item name='$FileModDT' sign='true'><datetime>20130122T134424,40+01</datetime></item>
+<item name='$ImageNames' sign='true'><text>C:\Users\Mark Leusink\Documents\Projects\Teamstudio\Continuity\screenshots\dblogo.png</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

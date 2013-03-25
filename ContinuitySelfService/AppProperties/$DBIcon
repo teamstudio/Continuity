@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
+<noteinfo noteid='242' unid='DCB0D8314E1BF964C1257A250024EA9F' sequence='12'>
+<created><datetime dst='true'>20120622T084313,59+02</datetime></created>
+<modified><datetime>20130307T155645,23+01</datetime></modified>
+<revised><datetime>20130222T103020,87+01</datetime></revised>
+<lastaccessed><datetime>20130307T155645,23+01</datetime></lastaccessed>
+<addedtofile><datetime>20130307T155645,23+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name
+>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$TITLE'><text>$DBIcon</text></item>
+<item name='$Flags'><text>34Ci~Q</text></item>
+<item name='$ImagesWide' sign='true'><number>1</number></item>
+<item name='$ImagesHigh' sign='true'><number>1</number></item>
+<item name='$ImagesColorize' sign='true'><number>0</number></item>
+<item name='$FileSize' sign='true'><number>1520</number></item>
+<item name='$ImageData' sign='true'>
+<rawitemdata type='1'>
+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
+</rawitemdata></item>
+<item name='$FileModDT' sign='true'><datetime dst='true'>20120418T092359,48+02</datetime></item>
+<item name='$ImageNames' sign='true'><text>C:\Users\Mark Leusink\Documents\Development\icons\fatcow-hosting-icons-2400\32x32\lock_open.png</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+
