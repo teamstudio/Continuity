@@ -32,60 +32,49 @@
 				<xp:div styleClass="mTop">
 
 					<div id="results">
-						<xp:panel tagName="div" styleClass="bordered">
-							<div id="flatView">
-								<ul id="flatViewRowSet">
-									<li style="display:none" />
+								
+						<ul id="summaryList">
 
-									<xp:repeat id="repeat4"
-										var="thisRowData" value="#{viewList}" disableOutputTag="true"
-										rows="100">
+							<xp:text escape="false" tagName="li"
+								styleClass="categoryRowFixed" disableTheme="true" value="My responsibilities">
+							</xp:text>
 
-										<xp:panel tagName="li"
-											id="datarow">
-											<xp:this.attrs>
-												<xp:attr
-													name="onClick">
-													<xp:this.value><![CDATA[#{javascript:return "openDocument('" + getDbPath() + "/mRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
-					}]]></xp:this.value>
-												</xp:attr>
-											</xp:this.attrs>
-											<xp:this.styleClass><![CDATA[#{javascript:if (viewScope.rowcount == null){
-	viewScope.rowcount = 1;
-}else{
-	viewScope.rowcount = viewScope.rowcount + 1;
-}
-var out = "data-row";
-if (viewScope.rowcount == 1 && compositeData.title == null){
-	out += " first-row";
-}
-return out;}]]></xp:this.styleClass>
+							<xp:repeat id="repeat4"
+								var="thisRowData" value="#{viewList}" disableOutputTag="true" rows="250">
 
+								<xp:panel tagName="li"
+									id="datarow" styleClass="data-row">
+									<xp:this.attrs>
+										<xp:attr
+											name="onClick">
+											<xp:this.value><![CDATA[#{javascript:return "openDocument('" + getDbPath() + "/mRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
+			}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
 
-											<xp:image
-												url="/unp/right-arrow-circle.png" id="image1"
-												styleClass="multiLineIcon">
-											</xp:image>
-											<xp:label id="label2"
-												value="#{javascript:thisRowData.getColumnValue('name');}"
-												styleClass="viewlistsummary wrap">
-											</xp:label>
-											<div>
-												<xp:label id="label1"
-													styleClass="viewlistdetail">
-													<xp:this.value><![CDATA[#{javascript:var ve = vwTasksByParent.getAllEntriesByKey( thisRowData.getColumnValue("id"), true);
-													
-													var numTasks = ve.getCount();
-									
-									@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
-												</xp:label>
-											</div>
-										</xp:panel>
-									</xp:repeat>
-								</ul>
-								<div class="summaryDataRow"></div>
-							</div>
-						</xp:panel>
+									<xp:image
+										url="/unp/right-arrow-circle.png" id="image1"
+										styleClass="multiLineIcon">
+									</xp:image>
+									<xp:label id="label2"
+										value="#{javascript:thisRowData.getColumnValue('name');}"
+										styleClass="viewlistsummary wrap">
+									</xp:label>
+									<div>
+										<xp:label id="label1"
+											styleClass="viewlistdetail">
+											<xp:this.value><![CDATA[#{javascript:var ve = vwTasksByParent.getAllEntriesByKey( thisRowData.getColumnValue("id"), true);
+											
+											var numTasks = ve.getCount();
+							
+							@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
+										</xp:label>
+									</div>
+								</xp:panel>
+							</xp:repeat>
+						</ul>
+						<div class="summaryDataRow"></div>
+
 					</div>
 
 				</xp:div>

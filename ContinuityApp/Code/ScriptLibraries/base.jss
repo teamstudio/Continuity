@@ -92,6 +92,10 @@ function init( theme:String) {
 			sessionScope.put("isUser", isUser);
 			sessionScope.put("isDebug", isDebug);
 			
+			try {
+				sessionScope.put("canEdit", ( database.getCurrentAccessLevel()>=3));	
+			} catch (ee) { }
+							
 			//set default menu option
 			sessionScope.put("selectedMenu", (isEditor ? "bcmRoles" : "contactsList") );
 			
@@ -242,8 +246,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 				applicationScope.put("coreDbPath", coreDbPath);
 				applicationScope.put("coreDbUrl", "/" + coreDbPath );
 				
-				applicationScope.put("isDemoMode", docSettings.getItemValueString("demoMode").equals("yes"));
-				
+				applicationScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));				
 			}
 			
 			var docTemp:NotesDocument = null;
@@ -853,7 +856,7 @@ ReadableDate.prototype.timeSince = function(date){
 //creates a new update item with the specified message
 function createUpdate( text:String) {
 
-	if (applicationScope.isDemoMode) {
+	if (applicationScope.isReadOnlyMode) {
 		return false;
 	}
 	
@@ -887,7 +890,7 @@ function createUpdate( text:String) {
 //create a new mail
 function sendMail( to:string, subject:string, body:string, fromEmail:string, fromName:string ) {
 	
-	if (applicationScope.isDemoMode) {
+	if (applicationScope.isReadOnlyMode) {
 		return false;
 	}
 
@@ -941,7 +944,7 @@ function assignTasks( docIncident, docScenario ) {
 
 	try {
 		
-		if (applicationScope.isDemoMode) {		//don't assign tasks in demo mode
+		if (applicationScope.isReadOnlyMode) {		//don't assign tasks in demo mode
 			return false;
 		}
 

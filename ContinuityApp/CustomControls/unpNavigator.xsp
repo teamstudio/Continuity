@@ -32,7 +32,8 @@ the specific language governing permissions and limitations under the License
 								<xp:this.attrs>
 									<xp:attr name="onclick">
 										<xp:this.value><![CDATA[#{javascript:if (menuItem.ajaxloadid != null && menuItem.ajaxloadid != ""){
-		return "loadPageEx('" + getDbPath() + menuItem.page + " #" + menuItem.ajaxloadid + "', '" + menuItem.ajaxtargetid + "', " + viewScope.menuItemIndex + ");";
+		//return "loadPageEx('" + getDbPath() + menuItem.page + " #" + menuItem.ajaxloadid + "', '" + menuItem.ajaxtargetid + "', " + viewScope.menuItemIndex + ");";
+		return "loadPageEx('" + getDbPath() + menuItem.page + "', '" + menuItem.ajaxtargetid + "', " + viewScope.menuItemIndex + ");";
 	}else{
 		return "openPage('" + getDbPath() + menuItem.page + "', '" + menuItem.ajaxtargetid + "')";
 	}}]]></xp:this.value>

@@ -156,9 +156,14 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 						<ul class="buttons">
 							<li class="buttonBlue">
-								<xp:link escape="true" text=""
+								<xp:link escape="true" text="" value=""
 									id="link1">
-									<xp:this.value><![CDATA[#{javascript:"mNotify.xsp?incidentId=" + docIncident.getDocument().getUniversalID()}]]></xp:this.value>
+									
+									<xp:this.attrs>
+									<xp:attr name="onClick">
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mNotify.xsp?incidentId=" + docIncident.getDocument().getUniversalID() + "', 'contentwrapper', 8, false, true); return false;"}]]></xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
 									<span>Notify team</span>
 								</xp:link>
 
@@ -180,7 +185,12 @@ viewScope.put("numOpenTasks", numOpenTasks);
 										text="" id="link3">
 										<xp:this.attrs>
 											<xp:attr name="onclick">
-												<xp:this.value><![CDATA[#{javascript:"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "'); return false;"}]]></xp:this.value>
+												<xp:this.value><![CDATA[#{javascript:javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
+} else {
+												"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "'); return false;"
+												}
+												}]]></xp:this.value>
 											</xp:attr>
 										</xp:this.attrs>
 										<span>Deactivate</span>

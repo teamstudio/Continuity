@@ -52,7 +52,9 @@
 							</xe:basicLeafNode>
 							<xe:basicLeafNode label="Change password"
 								submitValue="changePassword"
-								loaded="${javascript:sessionScope.profileUnid != null}">
+								loaded="${javascript:sessionScope.profileUnid != null}"
+								rendered="#{javascript:sessionScope.canEdit}"
+								>
 							</xe:basicLeafNode>
 						</xe:this.children>
 					</xe:basicContainerNode>
@@ -70,7 +72,7 @@
 
 				</xe:this.bannerUtilityLinks>
 
-				<xe:this.titleBarName><![CDATA[#{javascript:configBean.getOrganisationName()}]]></xe:this.titleBarName>
+				<xe:this.titleBarName><![CDATA[#{javascript:configBean.getOrganisationName() + (applicationScope.get("isReadOnlyMode") ? " (read only mode)" : "")}]]></xe:this.titleBarName>
 
 			</xe:oneuiApplication>
 

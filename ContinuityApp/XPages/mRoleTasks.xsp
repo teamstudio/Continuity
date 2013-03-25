@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
-
-	
 	<div id="contentwrapper">
+	
 		<xp:div id="div1" styleClass="iscrollcontent">
 		
 			<div id="contentScroller">
+			
+					<xp:div styleClass="box" style="margin-bottom: 10px"
+						rendered="#{javascript:sessionScope.roleName != ''}">
+						<div class="content">
+							Responsibility:&#160;
+							<xp:text style="font-weight:bold" escape="true" id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwAllById", param.get("respId"), 2)}]]></xp:this.value>
+							</xp:text>
+						</div>
+					</xp:div>
+					
 		
-			<xc:mTasksList viewName="vwTasksByRespId">
-				<xc:this.categoryFilter><![CDATA[#{javascript:param.get("respId")}]]></xc:this.categoryFilter>
-			</xc:mTasksList>
+					<xc:mTasksList viewName="vwTasksByRespId">
+						<xc:this.categoryFilter><![CDATA[#{javascript:param.get("respId")}]]></xc:this.categoryFilter>
+					</xc:mTasksList>
 				
 			</div>
 		</xp:div>

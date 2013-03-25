@@ -29,7 +29,7 @@ if (doc == null) {
 	throw("invalid id");
 }	
 
-if (!applicationScope.isDemoMode) {
+if (!applicationScope.isReadOnlyMode) {
 
 	//incident deactivation
 	if (param.get("type").equals("incident") ) {
@@ -154,7 +154,7 @@ if (!applicationScope.isDemoMode) {
 
 } catch (e) { 
 	dBar.error(e);
-	resp = "error" + e.toString();
+	resp = "error: " + e.toString();
 }
 
 writer.write(resp);

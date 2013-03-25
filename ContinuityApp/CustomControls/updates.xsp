@@ -11,8 +11,7 @@
 		<div class="section">
 			<div class="title">Updates</div>
 			<div class="actions">
-
-				<xp:button value="Add update" id="button1" icon="page_add.png">
+				<xp:button value="Add update" id="button1" icon="page_add.png" >
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 						refreshId="newUpdate">
 						<xp:this.action><![CDATA[#{javascript:viewScope.put("addUpdate", true);}]]></xp:this.action>
@@ -22,7 +21,9 @@
 		</div>
 
 		<xp:div id="newUpdate">
-			<xc:updatesForm rendered="#{javascript:viewScope.addUpdate}"></xc:updatesForm>
+			<xc:updatesForm rendered="#{javascript:viewScope.addUpdate}">
+				<xp:this.loaded><![CDATA[${javascript:sessionScope.get("isEditor")}]]></xp:this.loaded>
+			</xc:updatesForm>
 		</xp:div>
 		
 		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">

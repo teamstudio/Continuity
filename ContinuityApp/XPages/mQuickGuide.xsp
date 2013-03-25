@@ -21,7 +21,7 @@
 						<xp:link value="#" text="Close" styleClass="red">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
-									<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mPlan.xsp?documentId=" + param.get("fromId") + " #contentwrapper', 'contentwrapper', false, false); return false;"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mPlan.xsp?documentId=" + param.get("fromId") + "', 'contentwrapper', false, false); return false;"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 						</xp:link>

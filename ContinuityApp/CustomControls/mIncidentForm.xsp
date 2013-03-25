@@ -4,43 +4,33 @@
 	
 	<div>
 	
-	<xc:unpFormViewer showbuttons="true" editxpagename="mActivate.xsp"
-		formname="fIncident" title="Incident" newresponsexpagename=""
-		closexpagename="mIncidents.xsp" showEditButton="true">
+	<xc:unpFormViewer showbuttons="true" editxpagename="mActivate.xsp" formname="fIncident"
+		title="Incident" newresponsexpagename="" closexpagename="mIncidents.xsp"
+		showEditButton="#{javascript:!applicationScope.isReadOnlyMode}">
 		<xp:this.facets>
 			<xp:panel xp:key="facet_1">
 
 				<ul class="fieldlist">
 					<li>
-						<xp:label value="Description" id="namelabel"
-							for="description">
-						</xp:label>
+						<xp:label value="Description" id="namelabel" for="description"></xp:label>
 						<xp:text escape="true" id="description"
 							value="#{docIncident.description}">
 						</xp:text>
 
 					</li>
 					<li>
-						<xp:label value="Site" id="label1"
-							for="siteId">
-						</xp:label>
-						<xp:text escape="true" id="siteId"
-							value="#{docIncident.siteName}">
+						<xp:label value="Site" id="label1" for="siteId"></xp:label>
+						<xp:text escape="true" id="siteId" value="#{docIncident.siteName}">
 						</xp:text>
 					</li>
 					<li>
-						<xp:label value="Org unit" id="label4"
-							for="orgUnitId">
-						</xp:label>
-						<xp:text escape="true" id="orgUnitId"
-							value="#{docIncident.orgUnitName}">
+						<xp:label value="Org unit" id="label4" for="orgUnitId"></xp:label>
+						<xp:text escape="true" id="orgUnitId" value="#{docIncident.orgUnitName}">
 						</xp:text>
 					</li>
 
 					<li>
-						<xp:label value="Plan" id="label2"
-							for="scenarioId">
-						</xp:label>
+						<xp:label value="Plan" id="label2" for="scenarioId"></xp:label>
 						<xp:text escape="true" id="scenarioId"
 							rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}"
 							value="#{docIncident.scenarioName}">
@@ -53,30 +43,22 @@
 
 					<li>
 
-						<xp:label value="Alert level" id="label3"
-							for="alertLevel">
-						</xp:label>
-						<xp:text escape="true" id="alertLevel"
-							value="#{docIncident.alertLevel}">
+						<xp:label value="Alert level" id="label3" for="alertLevel"></xp:label>
+						<xp:text escape="true" id="alertLevel" value="#{docIncident.alertLevel}">
 						</xp:text>
 
 					</li>
 
 					<li>
 
-						<xp:label value="Status" id="label6"
-							for="status">
-						</xp:label>
-						<xp:text escape="true" id="status"
-							value="#{docIncident.status}">
-						</xp:text>
+						<xp:label value="Status" id="label6" for="status"></xp:label>
+						<xp:text escape="true" id="status" value="#{docIncident.status}"></xp:text>
 
 					</li>
 
 					<li>
 
-						<xp:label value="Exercise" id="label5" for="isRehearsal">
-						</xp:label>
+						<xp:label value="Exercise" id="label5" for="isRehearsal"></xp:label>
 						<xp:text escape="true" id="isRehearsal"
 							value="#{javascript:(docIncident.getItemValueString('isRehearsal').equals('yes') ? 'Yes' : 'No')}">
 						</xp:text>
@@ -87,9 +69,6 @@
 			</xp:panel>
 		</xp:this.facets>
 	</xc:unpFormViewer>
-
-
-
 
 	<div class="box">
 

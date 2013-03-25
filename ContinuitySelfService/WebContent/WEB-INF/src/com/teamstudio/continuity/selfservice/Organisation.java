@@ -121,7 +121,7 @@ public class Organisation implements Serializable {
 			
 			initACL(session, dbCore, "core");
 			
-			//create settings document
+			//create settings document (authors = [bvEditor] role)
 			Document docSettings = dbCore.createDocument();
 			docSettings.replaceItemValue("form", "fSettings");
 			docSettings.replaceItemValue("organisationId", alias);
@@ -247,7 +247,7 @@ public class Organisation implements Serializable {
 			
 			initACL(session, dbContinuity, "continuity");
 			
-			//create settings document
+			//create settings document (no authors needed)
 			Document docSettings = dbContinuity.createDocument();
 			docSettings.replaceItemValue("form", "fSettings");
 			docSettings.replaceItemValue("coreDbPath", coreDbPath);			

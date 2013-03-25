@@ -254,6 +254,10 @@ function loadPage(url, target, menuitem) {
 //ML: extended loadPage to also update the header title and footer content
 function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 	
+	if (url.indexOf(" #")==-1) {
+		url += " .iscrollcontent";		//only load content part
+	}
+	
 	var thisArea = $("#" + target);
 	
 	if (arguments.length<4) {
@@ -281,8 +285,6 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 			var h = $(data).find('.iHeader').html();
 			$(".iHeader").html(h);
 		}
-		
-		//console.log("done loading");
 		
 		initiscroll();
 		
@@ -317,11 +319,7 @@ var scrollContent = null;
 var scrollMenu;
 function initiscroll() {
 	
-	//console.log("init?");
-	
 	if (unpluggedserver){
-		
-		//console.log("init");
 		
 		document.addEventListener('touchmove', function(e) {
 			e.preventDefault()
@@ -344,17 +342,14 @@ function initiscroll() {
 		}catch(e){
 		}
 		try{
-			console.log("new scroll menu");
 			scrollMenu = new iScroll('#menuWrapper', {bounce: true, momentum: false});
 		}catch(e){}
 		
 		//if (!scrollContent) {
-		//	console.log("INIT");
 		
 		$(".iscrollcontent")
 				.each(
 						function() {
-							console.log("found one: " + $(this).attr("id"));
 							scrollContent = new iScroll(
 									$(this).attr("id"),
 									{
@@ -402,14 +397,6 @@ function initiscroll() {
 									});
 						});
 		
-		/*} else {
-			
-			console.log("refresh");
-						setTimeout(function () {
-				scrollContent.refresh();
-			}, 0)
-		
-		}*/
 	}else{
 		//alert("Not on unplugged so no iScroll");
 	}
@@ -460,7 +447,7 @@ function fetchDetails(obj, viewName, catName, xpage, dbname)
 	$('.accordionRowSet').empty();
 	$('.accLoadMoreLink').hide();
 	
-	console.log('Category: ' + catName);
+	//console.log('Category: ' + catName);
 	if($(obj).hasClass("accordianExpanded")){
 		$(obj).nextAll('.summaryDataRow:first').children('.accordionRowSet').slideUp('fast', function(){ $(this).children().remove()});
 		$(obj).removeClass("accordianExpanded");
@@ -559,11 +546,11 @@ function markUndone(doneId, undoneId, id) {
 function deactivateIncident(id, numOpenTasks) {
 	
 	//confirmation for open tasks
-	if (numOpenTasks>0) {
+	/*if (numOpenTasks>0) {
 		if (!confirm("This incident has " + numOpenTasks + " open tasks. These will be closed automatically.\n\nAre you sure you want to continue?") ) {
 			return;
 		}
-	}
+	}*/
 	
 	$.ajax( {
 		type : 'GET',

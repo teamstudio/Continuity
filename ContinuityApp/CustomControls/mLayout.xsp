@@ -9,8 +9,9 @@
 	viewScope.put("backButtonURL", compositeData.backButtonURL );
 	
 	}]]></xp:this.beforePageLoad>
-	<xp:this.afterRestoreView><![CDATA[#{javascript:init("mobile");}]]></xp:this.afterRestoreView>
 	
+	<xp:this.afterRestoreView><![CDATA[#{javascript:init("mobile");}]]></xp:this.afterRestoreView>
+
 	<xp:this.resources>
 		<xp:script src="/base.jss" clientSide="false"></xp:script>
 		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
@@ -31,6 +32,10 @@
 		<xp:script src="/unplugged.js" clientSide="true"></xp:script>
 		
 	</xp:this.resources>
+	
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[#{javascript:"var isReadOnlyMode = " + (applicationScope.isReadOnlyMode ? "true" : "false") + ";"}]]></xp:this.value>
+	</xp:scriptBlock>
 	
 	<div id="page">
 
@@ -85,12 +90,13 @@
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
-					<xc:menuItem
+					<!--<xc:menuItem
 						disabled="#{javascript:sessionScope.numAssignedTasks==0}"
 						label="Active tasks" page="/mTasks.xsp" icon="tasks.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
-					<xc:menuItem disabled="false" label="Updates"
+					
+					--><xc:menuItem disabled="false" label="Updates"
 						page="/mUpdates.xsp" icon="updates-blue.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
@@ -107,7 +113,7 @@
 
 			<!-- main (scrollable) area -->
 			<div id="contentwrapper" >
-				<xp:div id="contentwrapper" styleClass="iscrollcontent">
+				<xp:div id="iscrollcontent" styleClass="iscrollcontent">
 				
 					<div id="contentScroller">
 				
@@ -139,7 +145,7 @@
 					rendered="#{javascript:viewScope.hasPreviousPage}">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + " #contentwrapper', 'contentwrapper');"}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper');"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 					<span>Previous</span>
@@ -151,7 +157,7 @@
 					rendered="#{javascript:viewScope.hasNextPage}">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + " #contentwrapper', 'contentwrapper');"}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + "', 'contentwrapper');"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 					<span>Next</span>

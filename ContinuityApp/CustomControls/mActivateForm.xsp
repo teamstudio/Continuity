@@ -129,15 +129,20 @@
 				<xp:panel tagName="li" id="saveButton" styleClass="saveButton">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:var out = "if ($('#scenarioId').val()=='none') { if (!confirm('Are you sure you want to create an incident without linking it to a scenario?') ) { return false;} }";
-							
-							out += "saveDocument('" + getClientId("customform") + "', '" + docIncident.getDocument().getUniversalID() + 
-			"', 'mIncident.xsp', 'fIncident'";
+							<xp:this.value><![CDATA[#{javascript:var out = "";
+
+if (applicationScope.isReadOnlyMode) {
+	out += "alert('Continuity is running in read only mode.\\n\\nThis incident won\\'t be saved.');";
+	out += "$.blockUI(); loadPageEx('" + getDbPath() + "/mIncidents.xsp', 'contentwrapper', 0, true, true);";
+} else {
+	out += "if ($('#scenarioId').val()=='none') { if (!confirm('Are you sure you want to create an incident without linking it to a scenario?') ) { return false;} }";
+	out += "saveDocument('" + getClientId("customform") + "', '" + docIncident.getDocument().getUniversalID() + "', 'mIncident.xsp', 'fIncident'";
 			if (context.getUrlParameter("parentunid") != ""){
 				out += ", '" + context.getUrlParameter("parentunid") + "'";
 			}
 			out += ");"
-			return out;}]]></xp:this.value>
+}
+return out;}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 					
@@ -147,6 +152,7 @@
 				<xp:panel id="closebutton" styleClass="cancelButton"
 					tagName="li">
 					<xp:this.attrs>
+					
 						<xp:attr name="onclick">
 							<xp:this.value><![CDATA[#{javascript:return "$.blockUI(); window.location.href='" + (docIncident.isNewNote() ? "UnpMain.xsp" : "mIncident.xsp?documentId=" + docIncident.getDocument().getUniversalID() + "&action=openDocument") + "';";}]]></xp:this.value>
 						</xp:attr>

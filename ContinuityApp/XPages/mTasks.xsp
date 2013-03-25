@@ -129,9 +129,12 @@ viewScope.put("hasAssignedTasks", nav.getFirst() != null );
 											<xp:link value="#"
 												text="to do" styleClass="red">
 												<xp:this.attrs>
-													<xp:attr
-														name="onclick">
-														<xp:this.value><![CDATA[#{javascript:"markDone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + task.unid + "'); return false;"}]]></xp:this.value>
+													<xp:attr name="onclick">
+														<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot mark this task as done.'); return false;";
+} else {
+	"markDone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + task.unid + "'); return false;"
+}}]]></xp:this.value>
 													</xp:attr>
 												</xp:this.attrs>
 											</xp:link>
@@ -146,7 +149,11 @@ viewScope.put("hasAssignedTasks", nav.getFirst() != null );
 												<xp:this.attrs>
 													<xp:attr
 														name="onclick">
-														<xp:this.value><![CDATA[#{javascript:"markUndone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + task.unid + "'); return false;"}]]></xp:this.value>
+														<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot mark this task as todo.'); return false;";
+} else {
+														"markUndone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + task.unid + "'); return false;"
+				}}]]></xp:this.value>
 													</xp:attr>
 												</xp:this.attrs>
 											</xp:link>

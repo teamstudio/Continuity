@@ -111,10 +111,17 @@ try{
 			var idAndPlan = scenarioId;
 			scenarioId = @Left(idAndPlan, "#");
 			planName = @Right(idAndPlan, "#");
-			planId = database.getView("vwPlans").getEntryByKey( planName, true).getColumnValues().get(3);
+			
+			var vwPlans = database.getView("vwPlans"); 
+			var vePlan = vwPlans.getEntryByKey( planName, true); 
+			
+			if (vePlan != null) {
+				planId = vePlan.getColumnValues().get(3);
+				
+				doc.replaceItemValue("planId", planId);
+			}
 			
 			doc.replaceItemValue("scenarioId", scenarioId);
-			doc.replaceItemValue("planId", planId);
 			doc.replaceItemValue("planName", planName);
 			
 		}
@@ -125,7 +132,7 @@ try{
 		
 		var dbCore = null;
 		
-		if (!applicationScope.isDemoMode && isNew && (orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident) ) {
+		if (!applicationScope.isReadOnlyMode && isNew && (orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident) ) {
 			
 			dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
 			var vwById = dbCore.getView("vwAllById");
@@ -177,7 +184,7 @@ try{
 		
 		var doMailSync = false;
 		
-		if (!applicationScope.isDemoMode) {
+		if (!applicationScope.isReadOnlyMode) {
 		
 			doc.save();
 			unid = doc.getUniversalID();
@@ -189,7 +196,7 @@ try{
 		
 		var doSync = false;
 		
-		if ( !applicationScope.isDemoMode ) {
+		if ( !applicationScope.isReadOnlyMode ) {
 		
 			if (isNew && isIncident) {
 			

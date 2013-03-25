@@ -91,7 +91,7 @@
 
 				<xp:button value="Edit" id="button2"
 					icon="pencil.png">
-					<xp:this.rendered><![CDATA[#{javascript:( sessionScope.get("isEditor") || docContact.getItemValueString("userName").equals( sessionScope.get("userName")) ) &&
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("canEdit") && ( sessionScope.get("isEditor") || docContact.getItemValueString("userName").equals( sessionScope.get("userName")) ) &&
 !docContact.isEditable()}]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynamicContent1">

@@ -28,7 +28,6 @@
 				var option = ve.getColumnValues().get(1);
 				
 				if (option.length>0) {
-				
 					contacts.push( option );
 				}
 				
@@ -53,61 +52,60 @@
 	<xc:mLayout showMenu="true" pageTitle="Send message">
 		<xp:this.facets>
 
-			<xc:unpFormEditor closexpagename="mIncidents.xsp"
-					viewxpagename="UnpMain.xsp" formname="fMessage" title="New message"
-					xp:key="contents" showbuttons="true">
-					<xp:this.facets>
-						<xp:panel xp:key="facet_1">
+			<xc:unpFormEditor viewxpagename="UnpMain.xsp" formname="fMessage" title="New message"
+				xp:key="contents" showbuttons="true">
+				<xc:this.closexpagename><![CDATA[#{javascript:"mIncident.xsp?action=openDocument&documentId=" + param.get("incidentId")}]]></xc:this.closexpagename>
+				<xp:this.facets>
+					<xp:panel xp:key="facet_1">
 
-							<ul class="fieldlist">
-								<li>
-									<xp:label value="Incident"
-										id="label1" for="incidentName">
-									</xp:label>
-									
-									<xp:text escape="true"
-										id="computedField1" value="#{docIncident.description}">
-									</xp:text>
-								</li>
-								<li>
-									<xp:label value="Message"
-										id="messageLabel" for="message">
-									</xp:label>
-									<xp:inputText id="message"
-										value="#{document1.message}" styleClass="required">
-									</xp:inputText>
-								</li>
-								<li>
-									<xp:label value="To" id="toLabel"
-										for="sendTo">
-									</xp:label>
+						<ul class="fieldlist">
+							<li>
+								<xp:label value="Incident" id="label1" for="incidentName">
+								</xp:label>
 
-									<xp:listBox id="sendTo"
-										multiple="true">
-										<xp:selectItems value="#{javascript:viewScope.contacts}">
+								<xp:text escape="true" id="computedField1"
+									value="#{docIncident.description}">
+								</xp:text>
+							</li>
+							<li>
+								<xp:label value="Message" id="messageLabel" for="message">
+								</xp:label>
+								<xp:inputText id="message" value="#{document1.message}"
+									styleClass="required">
+								</xp:inputText>
+							</li>
+							<li>
+								<xp:label value="To" id="toLabel" for="sendTo"></xp:label>
 
-										</xp:selectItems>
-									</xp:listBox>
+								<xp:listBox id="sendTo" multiple="true">
+									<xp:selectItems value="#{javascript:viewScope.contacts}">
 
-								</li>
-							</ul>
-							
-							<xp:inputHidden id="incidentName" value="#{document1.incidentName}" defaultValue="#{docIncident.description}"></xp:inputHidden>
-							<xp:inputHidden id="incidentId" value="#{document1.incidentId}" defaultValue="#{docIncident.id}"></xp:inputHidden>
+									</xp:selectItems>
+								</xp:listBox>
 
-							<xp:scriptBlock id="scriptBlock1">
-								<xp:this.value><![CDATA[
+							</li>
+						</ul>
+
+						<xp:inputHidden id="incidentName" value="#{document1.incidentName}"
+							defaultValue="#{docIncident.description}">
+						</xp:inputHidden>
+						<xp:inputHidden id="incidentId" value="#{document1.incidentId}"
+							defaultValue="#{docIncident.id}">
+						</xp:inputHidden>
+
+						<xp:scriptBlock id="scriptBlock1">
+							<xp:this.value><![CDATA[
 								//select all users by default
 								var id = "#{id:sendTo}";
 id = id.replace(/:/gi, "\\:");
 $('#' + id + ' option').attr('selected', 'selected');
 ]]></xp:this.value>
-							</xp:scriptBlock>
+						</xp:scriptBlock>
 
-						</xp:panel>
-					</xp:this.facets>
-				</xc:unpFormEditor>
-			</xp:this.facets>
+					</xp:panel>
+				</xp:this.facets>
+			</xc:unpFormEditor>
+		</xp:this.facets>
 		</xc:mLayout>
 
 </xp:view>
