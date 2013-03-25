@@ -29,11 +29,10 @@
 				
 				
 				<xp:repeat id="repeatRoles" rows="100"
-					value="#{vwRoles}" var="roleRow" indexVar="rowIndex" style="height: 350px; overflow-y:auto">
+					value="#{vwRoles}" var="roleRow" indexVar="rowIndex" styleClass="showScrollbar" style="height: 350px; overflow-y:auto; overflow-x:hidden;">
 
-					<div style="width: 450px; border-bottom: 1px solid silver;">
-						<xp:text tagName="h4" escape="true"
-							id="computedField1" value="#{roleRow.name}">
+					<div style="width: 500px; border-bottom: 1px solid silver; margin-bottom: 3px;">
+						<xp:text tagName="h4" escape="true"	id="computedField1" value="#{roleRow.name}">
 							<xp:this.style><![CDATA[#{javascript:"margin-bottom:5px;" + (rowIndex>0 ? "margin-top:10px;" : "")}]]></xp:this.style>
 						</xp:text>
 					</div>

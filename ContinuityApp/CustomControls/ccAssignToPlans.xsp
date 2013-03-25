@@ -19,7 +19,7 @@
 				</xp:dominoDocument>
 			</xp:this.data>
 			
-			<div style="padding:15px;height: 200px; overflow-y:auto">
+			<div class="showScrollbar" style="padding:15px;height: 250px; overflow-y:auto; overflow-x:hidden">
 			
 				Select one or more plans to allocate this task to.
 				
