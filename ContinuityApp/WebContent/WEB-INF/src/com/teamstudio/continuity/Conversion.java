@@ -161,9 +161,9 @@ public class Conversion {
 					
 					Document docScenario = null;
 					
-					if ( doc.isResponse() ) {
-
-						docScenario = dbCurrent.getDocumentByUNID( doc.getParentDocumentUNID() );
+					if ( doc.isResponse() ) {		//convert to non-response
+						
+						docScenario = dbCurrent.getDocumentByUNID( doc.getParentDocumentUNID() );		//parent = scenario
 					
 						doc.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
 						doc.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
@@ -180,7 +180,7 @@ public class Conversion {
 						
 						String orgUnitTarget = docScenario.getItemValueString("orgUnitTarget");
 						
-						if (orgUnitTarget.equals("all")) {
+						if (orgUnitTarget.equals("all")) {			//task in a scenarion for all  org units
 							
 							if (doc.getItemValue("orgUnitIds").size() != allOrgUnitIds.size()) {
 								

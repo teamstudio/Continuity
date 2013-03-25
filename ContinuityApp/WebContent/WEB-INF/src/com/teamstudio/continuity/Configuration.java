@@ -29,7 +29,9 @@ public class Configuration implements Serializable {
 	
 	private String serverName;
 
-	private static String THIS_VERSION = "021";		//used to determine data version
+	private static String VERSION = "v1.01";		//used to determine data version
+
+	private String appVersion;
 	
 	public Configuration() {
 		reload();
@@ -65,7 +67,7 @@ public class Configuration implements Serializable {
 			coreDbUrl = "/" + coreDbPath.replace("\\", "/");
 			continuityDbPath = dbCurrent.getFilePath();
 			
-			String appVersion = docSettings.getItemValueString("appVersion");
+			appVersion = docSettings.getItemValueString("appVersion");
 			
 			Utils.recycle(docSettings, vwSettings, dbCurrent);
 			
@@ -101,15 +103,15 @@ public class Configuration implements Serializable {
 				
 				vwSettings.recycle();
 				
-				if ( !appVersion.equals( THIS_VERSION) ) {
+				if ( !appVersion.equals(VERSION) ) {
 					
 					dbCurrent = sessionAsSigner.getCurrentDatabase();
 					Conversion.startConversion(dbCurrent, coreDbPath);
 					
-					//update field in settings document (re-retrieve using signer access)
+					//update version in settings document (re-retrieve using signer access)
 					vwSettings = dbCurrent.getView("vwSettings");
 					docSettings = vwSettings.getDocumentByKey("fSettings", true);
-					docSettings.replaceItemValue("appVersion", THIS_VERSION);
+					docSettings.replaceItemValue("appVersion", VERSION);
 					docSettings.save();
 					
 				}
@@ -160,4 +162,8 @@ public class Configuration implements Serializable {
 	public String getCoreDbUrl() {
 		return coreDbUrl;
 	}
+	public String getAppVersion() {
+		return appVersion;
+	}
+	
 }

@@ -31,44 +31,36 @@
 		
 		<xe:this.configuration>
 
-			<xe:oneuiApplication legal="false" footer="false"
-				productLogo="continuity_logo_white.png" productLogoClass="logo"
-				productLogoAlt="Continuity">
+			<xe:oneuiApplication legal="false" footer="false" productLogo="continuity_logo_white.png"
+				productLogoClass="logo" productLogoAlt="Continuity">
 
 				<xe:this.bannerUtilityLinks>
 
 					<!-- profile photo -->
-					<xe:basicLeafNode imageHeight="35px"
-						imageWidth="35px" image="#{sessionScope.profilePhotoUrl}" />
+					<xe:basicLeafNode imageHeight="35px" imageWidth="35px"
+						image="#{sessionScope.profilePhotoUrl}" />
 
 					<xe:basicContainerNode>
 						<xp:this.label>
 							<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : (sessionScope.isUser ? " (user)" : "") )}]]>
 						</xp:this.label>
 						<xe:this.children>
-							<xe:basicLeafNode label="My profile"
-								submitValue="myProfile"
+							<xe:basicLeafNode label="My profile" submitValue="myProfile"
 								loaded="${javascript:sessionScope.profileUnid != null}">
 							</xe:basicLeafNode>
-							<xe:basicLeafNode label="Change password"
-								submitValue="changePassword"
+							<xe:basicLeafNode label="Change password" submitValue="changePassword"
 								loaded="${javascript:sessionScope.profileUnid != null}"
-								rendered="#{javascript:sessionScope.canEdit}"
-								>
+								rendered="#{javascript:sessionScope.canEdit}">
 							</xe:basicLeafNode>
 						</xe:this.children>
 					</xe:basicContainerNode>
 					<xe:separatorTreeNode></xe:separatorTreeNode>
 
-					<xe:basicLeafNode
-						label="#{configBean.organisationName}">
-					</xe:basicLeafNode>
+					<xe:basicLeafNode label="#{configBean.organisationName}"></xe:basicLeafNode>
 
 					<xe:separatorTreeNode></xe:separatorTreeNode>
 
-					<xe:basicLeafNode label="Logout"
-						submitValue="logout">
-					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Logout" submitValue="logout"></xe:basicLeafNode>
 
 				</xe:this.bannerUtilityLinks>
 
@@ -110,9 +102,11 @@
 		</xp:eventHandler>
 	</xe:applicationLayout>
 	
-	<!-- add link to product logo -->
+	<!-- version and link to product logo -->
 	<xp:scriptBlock id="scriptBlock1">
 		<xp:this.value><![CDATA[dojo.addOnLoad( function() {
+		
+		//add link to product logo
 	var logo = dojo.query("span.logo img")[0];
 	
 	dojo.connect(logo, 'onclick', function( ) {
@@ -120,6 +114,9 @@
 	});
 	
 	dojo.style(logo, 'cursor', 'pointer');
+	
+	//add version number
+	dojo.create("div", { innerHTML : "#{configBean.appVersion}", class : "lotusTiny", style: "margin: 35px 0 5px 20px; color: #aaaaaa;"}, dojo.query(".lotusColLeft")[0] );
 		
 });]]></xp:this.value>
 	</xp:scriptBlock>
