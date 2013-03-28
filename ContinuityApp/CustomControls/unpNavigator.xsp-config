@@ -93,6 +93,13 @@
           <required>true</required>
         </property-extension>
       </property>
+      <property>
+        <property-name>itemId</property-name>
+        <property-class>string</property-class>
+        <property-extension>
+          <required>true</required>
+        </property-extension>
+      </property>
     </property-type>
   </composite-component>
 </faces-config>

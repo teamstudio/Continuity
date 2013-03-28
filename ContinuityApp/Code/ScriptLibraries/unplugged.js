@@ -296,14 +296,16 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		return false;
 	});
 	
-	var menuitems = $("#menuitems li");
-	
-	if (menuitems.length) {		//menuitems exist
-	
-		menuitems.removeClass("viewMenuItemSelected");
-		menuitems.addClass("viewMenuItem");
-		$(".menuitem" + menuitem).removeClass("viewMenuItem");
-		$(".menuitem" + menuitem).addClass("viewMenuItemSelected");
+	if (menuitem != null && menuitem != 0) {
+		
+		var menuitems = $("#menuitems li");
+		
+		if (menuitems.length) {		//menuitems exist
+			menuitems.removeClass("viewMenuItemSelected");
+			menuitems.addClass("viewMenuItem");
+			$(".menuitem" + menuitem).removeClass("viewMenuItem");
+			$(".menuitem" + menuitem).addClass("viewMenuItemSelected");
+		}
 	}
 	
 	hideViewsMenu();

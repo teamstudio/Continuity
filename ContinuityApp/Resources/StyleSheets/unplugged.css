@@ -1322,6 +1322,7 @@ body {
 	-webkit-appearance: none;
 }
 
+
 /*
 #formholder .xspInputFieldEditBox:focus,
 #formholder .xspListBox:focus,
@@ -1958,7 +1959,8 @@ and (orientation : portrait) {
 	display: block;
 	font-size: 16px;
 	padding-left: 2%;
-	//right: 7%;
+	padding-top: 11px;
+	/*right: 7%;*/
 	line-height: 24px;
 	height: 44px;
 	background: #fff;

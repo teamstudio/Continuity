@@ -54,49 +54,49 @@
 				<xc:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xc:this.rendered>
 				
 				<xc:this.menuItem>
-					<xc:menuItem disabled="false" label="Contacts" page="/mContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
-					<xc:menuItem disabled="false" label="Plans" page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem itemId="contacts" disabled="false" label="Contacts" page="/mContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem itemId="plans" disabled="false" label="Plans" page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
 				</xc:this.menuItem>
 			</xc:unpNavigator>
 		
 			<xc:unpNavigator>
 				<xc:this.menuItem>
 
-					<xc:menuItem disabled="false" label="Activate team"
+					<xc:menuItem itemId="activate" disabled="false" label="Activate team"
 						page="/mActivate.xsp" icon="activate.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
-					<xc:menuItem disabled="false" label="Contacts"
+					<xc:menuItem itemId="contacts" disabled="false" label="Contacts"
 						page="/mContacts.xsp" icon="contacts-blue.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
-					<xc:menuItem disabled="false" label="Call tree"
+					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"
 						page="/mCallTree.xsp" icon="calltree-blue.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
-					<xc:menuItem disabled="false" label="Incidents"
+					<xc:menuItem itemId="incidents" disabled="false" label="Incidents"
 						page="/mIncidents.xsp" icon="incidents.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
-					<xc:menuItem disabled="false" label="My role"
+					<xc:menuItem itemId="role" disabled="false" label="My role"
 						page="/mRole.xsp" icon="role.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
-					<xc:menuItem disabled="false" label="Plans"
+					<xc:menuItem itemId="plans" disabled="false" label="Plans"
 						page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
 					<!--<xc:menuItem
-						disabled="#{javascript:sessionScope.numAssignedTasks==0}"
+						itemId="tasks" disabled="#{javascript:sessionScope.numAssignedTasks==0}"
 						label="Active tasks" page="/mTasks.xsp" icon="tasks.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 					
-					--><xc:menuItem disabled="false" label="Updates"
+					--><xc:menuItem itemId="updates" disabled="false" label="Updates"
 						page="/mUpdates.xsp" icon="updates-blue.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
