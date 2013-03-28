@@ -1860,25 +1860,35 @@ source: .accordionRowSet>li
 	line-height: 36px;
 	font-size: 16px;
 }
+
 .footer .buttonNext {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-}
-.footer .buttonNext span {
-	background: url(right-arrow-white.png) 10px center no-repeat;
-	background-size: 11px 16px;
+	padding: 0 12px 0 12px;
 }
 .footer .buttonPrevious {
 	position: absolute;
 	top: 12px;
 	left: 10px;
+	padding: 0 12px 0 12px;
 }
+
+.footer .buttonNext span,
+.footer .buttonPrevious span {
+	padding: 0;
+}
+/*
+.footer .buttonNext span {
+	background: url(right-arrow-white.png) 10px center no-repeat;
+	background-size: 11px 16px;
+}
+
 .footer .buttonPrevious span {
 	background: url(left-arrow-white.png) 10px center no-repeat;
 	background-size: 11px 16px;
 }
-
+*/
 
 @media screen and (max-width: 700px) {
 	.footer .buttonPrevious,
@@ -1896,10 +1906,10 @@ source: .accordionRowSet>li
 	
 	.footer .buttonPrevious span,
 		.footer .buttonNext span {
-			text-indent: -9999px;
-			padding: 0;
+/*			text-indent: -9999px;
+			padding: 2px;
 			width: 34px;
-			background-position: center center;
+			background-position: center center;*/
 	}	
 	
 	
@@ -2022,9 +2032,12 @@ table.reset {
 	padding: 10px 15px 10px 12px !important;
 }
 
-/* top margin */
+/* top/ bottom margin */
 .mTop {
 	margin-top:10px;	
+}
+.mBottom {
+	margin-bottom:10px;
 }
 
 /* rounded box */

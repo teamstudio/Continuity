@@ -148,7 +148,9 @@
 							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper');"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-					<span>Previous</span>
+					<xp:text escape="true" id="computedField2">
+						<xp:this.value><![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")-1)}]]></xp:this.value>
+					</xp:text>
 				</xp:panel>
 				
 	
@@ -160,7 +162,11 @@
 							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + "', 'contentwrapper');"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-					<span>Next</span>
+					
+					<xp:text escape="true" id="computedField1">
+						<xp:this.value><![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")+1)}]]></xp:this.value>
+					</xp:text>
+
 				</xp:panel>
 				
 			</div>

@@ -19,41 +19,56 @@ var callTreeOrder = applicationScope.get("callTreeOrder");
 
 if (pos == null || pos.length == 0) {		//no calltree position in url: check my role
 
-	pos = 0;
+	pos = 1;		//start pos = level 1
 
 	if (sessionScope.roleId != null && sessionScope.roleId.length>0) {	
 	
 		//user has a BC role: set default calltree position
 		for (var i=0; i<callTreeOrder.length; i++) {
 			if (callTreeOrder[i].equals(sessionScope.get("roleId") ) ) {
-				pos = i;
+				pos = i+1;
 				break;
 			}
 		}
 	}
 	
+	//set current call tree level 1 level deeper than my role
+	var maxLevel = callTreeOrder.length;
+	
+	if ( (pos+1) <= maxLevel ) {
+		pos = pos + 1;
+	}
+		
 } else {
 	pos = @TextToNumber(pos);
 }
 
 
-var roleId = callTreeOrder[pos]
+var roleId = callTreeOrder[pos-1]
 viewScope.put("roleId", roleId);
 viewScope.put("roleName", applicationScope.get("roles")[roleId] );
-viewScope.put("hasNextPage", pos < (callTreeOrder.length-1) );
-viewScope.put("hasPreviousPage", pos>0 );
+viewScope.put("hasNextPage", pos < callTreeOrder.length );
+viewScope.put("hasPreviousPage", pos>1 );
 viewScope.put("orderPosition", pos);
 } catch (e) {
 	dBar.error(e);
 }
 }]]></xp:this.beforePageLoad>
 
-	<xc:mLayout showMenu="true" useCustomFooter="true">
+	<xc:mLayout showMenu="true" useCustomFooter="true" pageTitle="Call tree">
 
 
-		<xc:this.pageTitle><![CDATA[#{javascript:viewScope.get("roleName");}]]></xc:this.pageTitle>
+<!--		<xc:this.pageTitle><![CDATA[#{javascript://viewScope.get("roleName");}]]></xc:this.pageTitle>-->
 		<xp:this.facets>
 			<xp:div xp:key="contents">
+			
+				<xp:div styleClass="box mBottom">
+					<div class="content">
+						Level&#160;
+						<xp:text escape="true" id="computedField3" value="#{javascript:viewScope.orderPosition}">
+						</xp:text>&#160;of call tree
+					</div>
+				</xp:div>
 
 				<ul id="summaryList">
 
@@ -107,35 +122,32 @@ return out;}]]></xp:this.styleClass>
 
 										<!-- primary phone number: show as link for phone capable devices -->
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
-											<xp:text escape="true"
-												id="computedField2" value="#{row.$15}">
+											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName.equals( row.getColumnValue("userName") ) && !sessionScope.isPhoneSupported}]]></xp:this.rendered>
+											<xp:text escape="true" id="computedField2"
+												value="#{row.$15}">
 											</xp:text>
 										</xp:panel>
 
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName.equals( row.getColumnValue("userName") ) && isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
 											No phone number found
 										</xp:panel>
 
-										<xp:panel
-											disableOutputTag="true">
+										<xp:panel disableOutputTag="true">
 
-											<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName.equals( row.getColumnValue("userName") ) && sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
 											<ul class="btnInline">
 												<li>
-													<xp:link
-														escape="true" text="" id="link1" value="#">
+													<xp:link escape="true" text="" id="link1"
+														value="#">
 														<xp:this.attrs>
-															<xp:attr
-																name="onclick">
+															<xp:attr name="onclick">
 																<xp:this.value><![CDATA[#{javascript:"window.location.href='tel:" + row.getColumnValue("$15") + "'; event.stopPropagation(); return false;"}]]></xp:this.value>
 															</xp:attr>
 														</xp:this.attrs>
 
-														<xp:text
-															escape="true" id="computedField1" style="width: 150px;"
-															value="#{row.primaryPhoneNr}">
+														<xp:text escape="true" id="computedField1"
+															style="width: 150px;" value="#{row.primaryPhoneNr}">
 														</xp:text>
 													</xp:link>
 												</li>
