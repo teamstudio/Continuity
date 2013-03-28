@@ -74,7 +74,7 @@
 						</xp:td>
 					</xp:tr>
 				</xp:table>
-				<xp:table>
+				<!--<xp:table>
 					<xp:tr>
 						<xp:td>
 							<xp:label value="Admin first name:"
@@ -112,6 +112,8 @@
 						</xp:td>
 					</xp:tr>
 				</xp:table>
+				-->
+				
 				<xp:br></xp:br>
 				<xp:button value="Save" id="button1">
 					<xp:eventHandler event="onclick" submit="true"
