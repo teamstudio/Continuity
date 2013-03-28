@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xe:dynamicContent id="dynContentRoles" defaultFacet="rolesList">
+		<xp:this.facets>
+
+			<xp:panel readonly="true" xp:key="rolesList">
+
+				<div class="lotusActionBar lotusBtnContainer">
+
+					<xp:button value="Add role" id="button1" icon="page_add.png"
+						rendered="#{javascript:sessionScope.isEditor}">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+							refreshId="dynContentRoles">
+							<xp:this.action><![CDATA[#{javascript:getComponent("dynContentRoles").show("roleForm");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</div>
+
+				<xp:this.data>
+					<xp:dominoView var="vwRoles" viewName="vwRoles"></xp:dominoView>
+					<xp:dominoView var="vwResponsibilitiesByRole"
+						viewName="vwResponsibilitiesByRole">
+					</xp:dominoView>
+				</xp:this.data>
+				
+			<xp:text value="No roles found" rendered="#{javascript:getComponent('repeatRoles').getRowCount()==0}" />
+				
+			<xp:repeat id="repeatRoles" rows="100" value="#{vwRoles}" var="rowEntry" disableOutputTag="true" 
+							indexVar="rowIndex">
+			<xp:this.facets>
+				<xp:text xp:key="header" disableTheme="true"
+					escape="false">
+					<xp:this.value><![CDATA[<table class="lotusTable lotusClear"><tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text xp:key="footer" disableTheme="true"
+					escape="false">
+					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+	
+			<xp:tr>
+				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
+	
+				<td style="width:100%">
+					<h4>
+						<xp:link escape="true" text="#{rowEntry.name}">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="dynContentRoles">
+										<xp:this.action>
+											<xe:changeDynamicContentAction
+												facetName="roleForm" for="dynContentRoles">
+												<xe:this.parameters>
+													<xp:parameter name="documentId"
+														value="#{javascript:rowEntry.getUniversalID()}">
+													</xp:parameter>
+													<xp:parameter name="action"
+														value="openDocument">
+													</xp:parameter>
+												</xe:this.parameters>
+											</xe:changeDynamicContentAction>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</h4>
+				</td>
+			</xp:tr>
+		</xp:repeat>
+
+			</xp:panel>
+
+			<xc:bcmRole xp:key="roleForm" dynContentId="dynContentRoles"></xc:bcmRole>
+
+</xp:this.facets>
+</xe:dynamicContent>
+	</xp:view>

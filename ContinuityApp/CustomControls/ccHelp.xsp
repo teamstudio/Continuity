@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" readonly="true">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docHelp" formName="fHelp" action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript:var ve:NotesViewEntry = database.getView("vwHelp").getEntryByKey("miniConfigGuide", true);
+if (null != ve) {
+	return ve.getUniversalID();
+}}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:text escape="false" value="#{docHelp.contents}"></xp:text>
+
+</xp:view>

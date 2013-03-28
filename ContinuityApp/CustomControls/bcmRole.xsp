@@ -209,7 +209,9 @@ getComponent(compositeData.dynContentId).show("rolesList");}]]></xp:this.action>
 			<xp:inputText value="#{docRole.callTreeOrder}" id="inputText2" required="true"
 				styleClass="number" maxlength="3">
 				<xp:this.validators>
-					<xp:validateRequired message="Enter a position for this role in the call tree hierarchy"></xp:validateRequired>
+					<xp:validateRequired
+						message="Enter a position for this role in the call tree hierarchy">
+					</xp:validateRequired>
 					<xp:validateLongRange maximum="50"
 						message="Position needs to be a positive number (under 50)" minimum="0">
 					</xp:validateLongRange>
@@ -217,8 +219,9 @@ getComponent(compositeData.dynContentId).show("rolesList");}]]></xp:this.action>
 				<xp:this.converter>
 					<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
 				</xp:this.converter>
+				<xp:this.disableValidators><![CDATA[#{javascript:!docRole.getItemValueString("checkedValue").equals("yes")}]]></xp:this.disableValidators>
 			</xp:inputText>
-			
+
 			<xp:checkBox text="Show role in call tree" id="checkBox2"
 				value="#{docRole.showInCallTree}" checkedValue="yes" uncheckedValue="no">
 			</xp:checkBox>
