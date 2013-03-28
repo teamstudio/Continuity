@@ -47,23 +47,42 @@
 				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("desc") + "')"}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("taskDetails") + "'); event.stopPropagation();"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 					
-					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0)}" 
+					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0) || (row.getColumnValue('quickGuideIds').length > 0)}" 
 						url="/unp/arrow-down.png"
 						id="image1"	
 						styleClass="multilineIcon"
 						style="margin-top:7px;"></xp:image>
-										
+						
 					<!-- name -->
 					<xp:label id="label2" styleClass="viewlistsummary">
-						<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
 					</xp:label>
 					
-										<!-- description -->
-					<xp:text tagName="div" id="desc" value="#{row.description}" escape="false" style="display:none; margin-right: 25px; line-height:normal;" />
+					<xp:div id="taskDetails" style="display:none;">
+					
+					
+						<!-- description -->
+						<xp:text tagName="div" value="#{row.description}" escape="false" style="margin-right: 25px; line-height:normal;" 
+							rendered="#{javascript:(row.getColumnValue('description').length > 0)}" />
+							
+						<!-- quick Guide link -->
+						<xp:div styleClass="buttons" style="margin-top: 5px;" rendered="#{javascript:(row.getColumnValue('quickGuideIds').length > 0)}">
+							<xp:link text="Guide" id="btnGuide" style="width: 80px">
+								<xp:this.attrs>
+									<xp:attr name="onClick">
+										<xp:this.value>
+											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mQuickGuide.xsp?id=" + row.getColumnValue('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>
+										</xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+							</xp:link>
+						</xp:div>
+						
+					</xp:div>
 					
 				</xp:panel>
 

@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
 	<xp:this.data>
-		<xp:dominoDocument var="docQuickGuide" formName="fQuickGuide"
-			action="openDocument">
+		<xp:dominoDocument var="docQuickGuide" formName="fQuickGuide" action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript://find quick guides UNID based on ID in query_string
+var id = param.get("id");
+
+if (id != null && id.length>0) {
+	var ve = database.getView("vwAllById").getEntryByKey(id, true);
+	if (null != ve) {
+		return ve.getUniversalID();
+	}
+}}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
 
@@ -21,7 +30,7 @@
 						<xp:link value="#" text="Close" styleClass="red">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
-									<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mPlan.xsp?documentId=" + param.get("fromId") + "', 'contentwrapper', null, false, false); return false;"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"goBack(); return false;"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 						</xp:link>

@@ -130,6 +130,26 @@ if ( vwPlans.getEntryCount()==1 ) {
 			</xp:inputText>
 
 		</xe:formRow>
+		
+		<xe:formRow id="formRow10" label="Quick guide:">
+		
+			<xe:djextListTextBox displayLabel="true"
+				id="djextListTextBoxQG" value="#{docTask.quickGuideIds}"
+				readOnly="#{javascript:!docTask.isEditable()}" styleClass="asBlock">
+				<xe:this.title><![CDATA[#{javascript:(!docTask.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
+			</xe:djextListTextBox>
+			
+			<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
+				pickerText="Select" dialogTitle="Select one or more quick guides">
+				<xe:this.dataProvider>
+					<xe:simpleValuePicker labelSeparator="|"
+						valueListSeparator=",">
+						<xe:this.valueList><![CDATA[#{javascript:@Implode(database.getView("vwQuickGuides").getColumnValues(2), ",")}]]></xe:this.valueList>
+					</xe:simpleValuePicker>
+				</xe:this.dataProvider>
+			</xe:valuePicker>
+			
+		</xe:formRow>
 
 		<xe:formRow id="formRowAssignTask" label="Responsible:">
 		

@@ -12,7 +12,6 @@
 		</xp:dominoView>
 	</xp:this.data>
 
-
 	<xc:mLayout showMenu="true" pageTitle="My role">
 		<xp:this.facets>
 
@@ -47,7 +46,7 @@
 									<xp:this.attrs>
 										<xp:attr
 											name="onClick">
-											<xp:this.value><![CDATA[#{javascript:return "openDocument('" + getDbPath() + "/mRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
+											<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/mRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
 			}]]></xp:this.value>
 										</xp:attr>
 									</xp:this.attrs>

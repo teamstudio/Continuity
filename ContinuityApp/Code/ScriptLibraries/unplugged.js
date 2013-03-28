@@ -64,6 +64,7 @@ function allowFormsInIscroll() {
 }
 
 var firedrequests = new Array();
+
 function stopViewSpinner() {
 	$(".loadmorelink").disabled = false;
 	$("#loadmorespinner").hide();
@@ -254,7 +255,7 @@ function loadPage(url, target, menuitem) {
 //ML: extended loadPage to also update the header title and footer content
 function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 	
-	if (url.indexOf(" #")==-1) {
+	if (url.indexOf(" ")==-1) {
 		url += " .iscrollcontent";		//only load content part
 	}
 	
@@ -264,6 +265,8 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		loadFooter = true;
 		loadHeader = true;
 	}
+
+	storeRequest(url);
 	
 	thisArea.load(url, function(data) {
 
@@ -309,6 +312,30 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 	}
 	
 	hideViewsMenu();
+}
+
+var _ajaxRequests = [];
+
+//ML: store a string in the ajaxRequests array
+//the array cannot grow larger than X items
+function storeRequest(url) {
+	
+	_ajaxRequests.push(url);
+	
+	if (_ajaxRequests.length > 10 ) {
+		_ajaxRequests.splice(0,1);
+	}
+	
+}
+
+//ML: open the page that was shown before the current
+function goBack() {
+	
+	var to = _ajaxRequests[_ajaxRequests.length-2];
+	
+	
+	console.log(_ajaxRequests);
+	loadPageEx( to , 'contentwrapper', null, false, false );
 }
 
 
@@ -563,7 +590,6 @@ function deactivateIncident(id, numOpenTasks) {
 		window.location.href = "mIncident.xsp?action=openDocument&documentId=" + id;
 	});
 }
-
 
 //remove click delay
 function NoClickDelay(el) {

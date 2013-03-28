@@ -19,6 +19,7 @@
       <property-extension>
         <designer-extension>
           <editor>com.ibm.std.String</editor>
+          <default-value>page</default-value>
         </designer-extension>
         <required>true</required>
       </property-extension>
