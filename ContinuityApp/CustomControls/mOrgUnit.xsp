@@ -15,7 +15,7 @@
 			</xp:text>
 			<xp:text escape="false" id="computedField3" styleClass="headeritem" tagName="li">
 				<xp:this.value><![CDATA[#{javascript:(sessionScope.isEditor ? "<a href=\"mSwitchOrgUnit.xsp\">" + sessionScope.get("orgUnitName") + "</a>" : sessionScope.get("orgUnitName") ) +
-				(applicationScope.isReadOnlyMode ? " (read only mode)" : "");}]]></xp:this.value>
+				(applicationScope.isReadOnlyMode ? " (read only)" : "");}]]></xp:this.value>
 			</xp:text>
 		</xp:panel>
 		
