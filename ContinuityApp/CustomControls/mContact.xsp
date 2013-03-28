@@ -129,32 +129,53 @@ db.close();
 				<li>
 					<xp:label value="Work:" id="label3"
 						for="workPhone" />
-					<span class="xspTextComputedField">
+					
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
+						<xp:text disableTheme="true" value="#{javascript:viewScope.phoneWork}"></xp:text>
+					</xp:panel>
+					
+					<xp:span styleClass="xspTextComputedField">
+						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported}]]></xp:this.rendered>
 						<xp:link escape="true"
 							text="#{viewScope.phoneWork}" id="workPhone">
 							<xp:this.value><![CDATA[#{javascript:"tel:" + viewScope.phoneWork}]]></xp:this.value>
 						</xp:link>
-					</span>
+					</xp:span>
 				</li>
 				<li>
 					<xp:label value="Mobile:" id="label1"
 						for="mobilePhone" />
-					<span class="xspTextComputedField">
+						
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
+						<xp:text disableTheme="true" value="#{javascript:viewScope.phoneMobile}"></xp:text>
+					</xp:panel>
+						
+					<xp:span styleClass="xspTextComputedField">
+						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported}]]></xp:this.rendered>
 						<xp:link escape="true"
 							text="#{viewScope.phoneMobile}" id="mobilePhone">
 							<xp:this.value><![CDATA[#{javascript:"tel:" + viewScope.phoneMobile}]]></xp:this.value>
 						</xp:link>
-					</span>
+					</xp:span>
 				</li>
 				<li>
 					<xp:label value="Home:" id="label2"
 						for="homePhone" />
-					<span class="xspTextComputedField">
+						
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
+						<xp:text disableTheme="true" value="#{javascript:viewScope.phoneHome}"></xp:text>
+					</xp:panel>
+						
+					<xp:span styleClass="xspTextComputedField">
+						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported}]]></xp:this.rendered>
 						<xp:link escape="true"
 							text="#{viewScope.phoneHome}" id="homePhone">
 							<xp:this.value><![CDATA[#{javascript:"tel:" + viewScope.phoneHome}]]></xp:this.value>
 						</xp:link>
-					</span>
+					</xp:span>
 				</li>
 			</ul>
 		

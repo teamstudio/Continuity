@@ -47,26 +47,7 @@
 											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length==0}]]></xp:this.rendered>
 											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + "/noProfile.gif";}]]></xp:this.url>
 										</xp:image>
-										
-										
-										<!--
-										
-										
-										
-										
-										<xp:image id="image2"
-											styleClass="lazy roundedBorders thumbnail">
-											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + "/noProfile.gif";}]]></xp:this.url>
-											<xp:this.attrs>
-												<xp:attr
-													name="data-original">
-													<xp:this.value><![CDATA[#{javascript:applicationScope.get("coreDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + row.getColumnValue("photo");}]]></xp:this.value>
-													<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length>0}]]></xp:this.rendered>
-												</xp:attr>
-											</xp:this.attrs>
-										</xp:image>
-
-									--></td>
+									</td>
 
 									<td class="v-top">
 
