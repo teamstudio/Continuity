@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='filter' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A00423EA1'>
-<noteinfo noteid='1da' unid='D2E37AD10AD2F75BC1257AF6006EA0ED' sequence='9'>
+<noteinfo noteid='1da' unid='D2E37AD10AD2F75BC1257AF6006EA0ED' sequence='10'>
 <created><datetime>20130117T210821,57+01</datetime></created>
-<modified><datetime>20130307T155615,81+01</datetime></modified>
-<revised><datetime>20130214T213140,83+01</datetime></revised>
-<lastaccessed><datetime>20130307T155615,81+01</datetime></lastaccessed>
+<modified><datetime>20130329T115751,42+01</datetime></modified>
+<revised><datetime>20130329T115751,41+01</datetime></revised>
+<lastaccessed><datetime>20130329T115751,42+01</datetime></lastaccessed>
 <addedtofile><datetime>20130307T155615,81+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=TSPSDev</name></wassignedby>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FILE' summary='true' sign='true' seal='true'><object><file hosttype='msdos'
  compression='none' flags='sign' encoding='none' name='%%source%%.jar' size='579'>
 <created><datetime>20130110T234333,45+01</datetime></created>
@@ -101,5 +102,5 @@ qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
 qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
 qqqqqqqqqqqqqqqqqqqqqqqq
 </rawitemdata></item>
-<item name='$AssistVersion'><datetime>20130214T213203,09+01</datetime></item></note>
+<item name='$AssistVersion'><datetime>20130329T115751,38+01</datetime></item></note>
 

@@ -10,9 +10,14 @@
 			<xp:div styleClass="box" style="margin-bottom: 10px"
 				rendered="#{javascript:sessionScope.roleName != ''}">
 				<div class="content">
-					Responsibility:&#160;
 					<xp:text style="font-weight:bold" escape="true" id="computedField1">
-						<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwAllById", param.get("respId"), 2)}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:var respId = param.get("respId");
+						
+						if (respId.indexOf("role") == 0 ) {
+							"Uncategorised tasks";
+						} else {
+							"Responsibility: " + @DbLookup( @DbName(), "vwAllById", respId, 2);
+						}}]]></xp:this.value>
 					</xp:text>
 				</div>
 			</xp:div>

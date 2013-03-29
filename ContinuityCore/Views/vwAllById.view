@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A00423EA1'>
-<noteinfo noteid='16e' unid='82CC473817A5990EC1257AF4007BB86F' sequence='4'>
+<noteinfo noteid='16e' unid='82CC473817A5990EC1257AF4007BB86F' sequence='5'>
 <created><datetime>20130115T233121,43+01</datetime></created>
-<modified><datetime>20130307T155615,28+01</datetime></modified>
-<revised><datetime>20130214T213140,87+01</datetime></revised>
-<lastaccessed><datetime>20130307T155615,28+01</datetime></lastaccessed>
+<modified><datetime>20130329T115751,44+01</datetime></modified>
+<revised><datetime>20130329T115751,43+01</datetime></revised>
+<lastaccessed><datetime>20130329T115751,44+01</datetime></lastaccessed>
 <addedtofile><datetime>20130307T155615,28+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=TSPSDev</name></wassignedby>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name
+>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>vwAllById</text></item>
 <item name='$Index' sign='true'><text/></item>

@@ -1507,6 +1507,7 @@ body {
 .workspace-header .alert-status {
 	float: right;
 	position: relative;
+	margin-right: 16px;
 }
 
 .workspace-header .alert-status li {
