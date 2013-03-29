@@ -55,7 +55,7 @@
 
 		</xp:tabPanel>
 
-		<xp:tabPanel label="By responsibility (unallocated)"
+		<!--<xp:tabPanel label="By responsibility (unallocated)"
 			id="tabPanel5">
 
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
@@ -66,7 +66,7 @@
 
 		</xp:tabPanel>
 
-	</xp:tabbedPanel>
+	--></xp:tabbedPanel>
 
 	<xe:dynamicContent id="dynContTasks" defaultFacet="tasks">
 		<xp:this.facets>

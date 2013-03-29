@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<div class="section">
+		<div class="title">Uncategorised tasks</div>
+	</div>
+
+	<xc:ccTasks allowAdd="false" allowEdit="true" setResponsibleFor="false" showTitle="false">
+		<xc:this.parentId><![CDATA[#{javascript:viewScope.respNoCat}]]></xc:this.parentId>
+	</xc:ccTasks>
+
+</xp:view>

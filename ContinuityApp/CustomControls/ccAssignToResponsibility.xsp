@@ -8,7 +8,7 @@
 		</xp:eventHandler>
 	</xp:link>)
 
-	<xe:dialog id="dlgAssignTo" title="Allocate task to responsibilities">
+	<xe:dialog id="dlgAssignTo" title="Allocate task to roles/ responsibilities">
 									
 		<xp:panel>
 			<xp:this.data>
@@ -32,9 +32,29 @@
 					value="#{vwRoles}" var="roleRow" indexVar="rowIndex" styleClass="showScrollbar" style="height: 350px; overflow-y:auto; overflow-x:hidden;">
 
 					<div style="width: 500px; border-bottom: 1px solid silver; margin-bottom: 3px;">
-						<xp:text tagName="h4" escape="true"	id="computedField1" value="#{roleRow.name}">
+					
+						<xp:div>
 							<xp:this.style><![CDATA[#{javascript:"margin-bottom:5px;" + (rowIndex>0 ? "margin-top:10px;" : "")}]]></xp:this.style>
-						</xp:text>
+							
+							<h4>
+						
+								<label>
+									<xp:text escape="false" disableTheme="true">
+										<xp:this.value><![CDATA[#{javascript:var checked = false;
+										var id = "role-" + roleRow.getColumnValue("id");
+										if (docTarget.hasItem("responsibilityIds") ) {
+											checked = @IsMember( id, docTarget.getItemValue("responsibilityIds") );
+										}
+										
+										"<input type=\"checkbox\" class=\"respIds\" " + (checked ? "checked " : "") + "value=\"" + id + "\" />"}]]></xp:this.value>
+									</xp:text>
+								</label>
+								
+								<xp:text escape="false" disableTheme="true" value="#{roleRow.name}"> </xp:text>
+							
+							</h4>
+						</xp:div>
+						
 					</div>
 
 					<xp:text disableTheme="true" escape="false"
@@ -92,21 +112,46 @@
 						var vwAllById = database.getView("vwAllById");
 							
 						for (var i=0; i<selected.length; i++) {
-							if (selected[i].length>0 ) {					
-								var ve = vwAllById.getEntryByKey( selected[i] );
-								if (null != ve) {
-									var docResp = ve.getDocument();
+							if (selected[i].length>0 ) {
+							
+								if (selected[i].indexOf("role")==0) {
 									
-									var roleId = docResp.getItemValueString("roleId");
-									var roleName = docResp.getItemValueString("roleName");
+									//assigned to a role
+									var roleId = selected[i].substring(5);
 									
-									if ( @IsNotMember( roleId, roleIds ) ) {
-										roleIds.push( roleId );
+									var ve = vwAllById.getEntryByKey( roleId, true );
+									if (null != ve) {
+									
+										var roleName = ve.getColumnValues().get(1);
+									
+										roleIds.push(roleId);
 										roleNames.push( roleName );
+										
+										respNames.push( roleName );
+										
+										ve.recycle();
 									}
-									
-									respNames.push( roleName + " - " + docResp.getItemValueString("name") );
-									ve.recycle();
+								
+								} else {
+								
+									//assigned to a responsibility		
+									var ve = vwAllById.getEntryByKey( selected[i], true );
+									if (null != ve) {
+										var docResp = ve.getDocument();
+										
+										var roleId = docResp.getItemValueString("roleId");
+										var roleName = docResp.getItemValueString("roleName");
+										
+										if ( @IsNotMember( roleId, roleIds ) ) {
+											roleIds.push( roleId );
+											roleNames.push( roleName );
+										}
+										
+										respNames.push( roleName + " - " + docResp.getItemValueString("name") );
+										
+										docResp.recycle();
+										ve.recycle();
+									}
 								}
 							}
 						}

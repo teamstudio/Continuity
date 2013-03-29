@@ -1087,7 +1087,7 @@ function getScenariosByPlan( orgUnit ) {
 					var scenarioName = colValues.get(2);
 					var ouTarget = colValues.get(4)
 					
-					dBar.debug("adding scenario: " + scenarioName);
+					//dBar.debug("adding scenario: " + scenarioName);
 		
 					_plan.addedIds.push(scenarioId);
 			
@@ -1113,7 +1113,7 @@ function getScenariosByPlan( orgUnit ) {
 		nav.recycle();
 		vwScenariosByOrgUnitId.recycle();
 		
-		dBar.debug("finished");
+		//dBar.debug("finished");
 		
 	} catch (e) {
 		dBar.error(e);	

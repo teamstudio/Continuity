@@ -71,6 +71,46 @@
 									</div>
 								</xp:panel>
 							</xp:repeat>
+							
+							<!-- Uncategorised tasks (only shown if there are tasks that are assigned to this role, but not a responsibility -->
+							<xp:panel tagName="li" styleClass="data-row">
+								<xp:this.attrs>
+										<xp:attr
+											name="onClick">
+											<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/mRoleTasks.xsp?respId=role-" + sessionScope.roleId + "', 'contentwrapper');"
+			}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
+							
+								<xp:this.rendered><![CDATA[#{javascript:var vw = database.getView("vwTasksByRespId");
+								var vec = vw.getAllEntriesByKey( "role-" + sessionScope.roleId, true);
+								var numNotCategorisedTasks = vec.getCount()
+								
+								viewScope.put("numNotCategorisedTasks", numNotCategorisedTasks );
+								
+								return (numNotCategorisedTasks > 0);}]]></xp:this.rendered>
+								
+									<xp:image
+										url="/unp/right-arrow-circle.png" id="image2"
+										styleClass="multiLineIcon">
+									</xp:image>
+									
+									<xp:label id="label3" value="Uncategorised tasks" styleClass="viewlistsummary wrap">
+									</xp:label>
+									
+								<div>
+										<xp:label id="label4"
+											styleClass="viewlistdetail">
+											<xp:this.value><![CDATA[#{javascript:var numTasks = viewScope.numNotCategorisedTasks
+							
+							@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
+										</xp:label>
+									</div>
+									
+							</xp:panel>
+							
+							
+							
 						</ul>
 						<div class="summaryDataRow"></div>
 

@@ -7,7 +7,6 @@
  * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
  * the specific language governing permissions and limitations under the License
  */
-
 $(window).load( function() {
 
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
@@ -277,7 +276,7 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		//extract footer content from ajax request and update footer
 		if (loadFooter) {
 			
-			//TODO: remove sync button node from children (won't work with ajax calls)
+			//TODO: check possible issue remove sync button node from children (won't work with ajax calls)
 			//var footerNode = $(data).find(".footer").children("a.syncButton").remove();
 			var footerNode = $(data).find(".footer")
 			$(".footer").html( footerNode );
@@ -287,6 +286,14 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		if (loadHeader) {
 			var h = $(data).find('.iHeader').html();
 			$(".iHeader").html(h);
+			
+			//re-add onclick event to views button
+			$('.viewsButton').unbind('click');
+			$('.viewsButton').click( function(event) {
+				toggleViewsMenu();
+				return false;
+			});
+			
 		}
 		
 		initiscroll();

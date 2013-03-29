@@ -53,5 +53,16 @@
         <required>true</required>
       </property-extension>
     </property>
+    <property>
+      <property-name>showTitle</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.std.Boolean</editor>
+          <default-value>true</default-value>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

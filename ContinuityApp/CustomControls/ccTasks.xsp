@@ -8,7 +8,7 @@
 
 			<xp:panel id="tasks" xp:key="tasks">
 
-				<div class="section" style="margin-top: 10px;">
+				<xp:div styleClass="section" style="margin-top: 10px;" rendered="#{javascript:compositeData.showTitle}">
 					<div class="title">Tasks</div>
 					<div class="actions">
 						<xp:button value="Add task" id="button1"
@@ -24,7 +24,7 @@ if (inputTitleNode) {
 							</xp:eventHandler>
 						</xp:button>
 					</div>
-				</div>
+				</xp:div>
 				
 				<xc:ccTaskList allowRemove="true" showScenario="false"
 					categoryFilter="#{javascript:compositeData.parentId}" viewName="vwTasksByParentByTaskCat">

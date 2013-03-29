@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="7de" sequence="32" unid="86DBBB64A0368E1FC1257B260055E448">
+<noteinfo noteid="7de" sequence="49" unid="86DBBB64A0368E1FC1257B260055E448">
 <created><datetime>20130306T163810,00+01</datetime></created>
-<modified><datetime>20130307T092442,52+01</datetime></modified>
-<revised><datetime>20130307T092442,51+01</datetime></revised>
-<lastaccessed><datetime>20130307T092442,52+01</datetime></lastaccessed>
+<modified><datetime>20130329T113943,63+01</datetime></modified>
+<revised><datetime>20130329T113943,62+01</datetime></revised>
+<lastaccessed><datetime>20130329T113943,63+01</datetime></lastaccessed>
 <addedtofile><datetime>20130306T163810,01+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -14,9 +14,9 @@
 
 
 
-<item name="$DesignerVersion"><text>8.5.2</text></item>
-
-
 <item name="$FileNames" sign="true"><text>ccTaskList.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
 
 </note>

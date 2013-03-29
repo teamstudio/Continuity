@@ -175,7 +175,7 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 		</xe:formRow>
 	</xe:formTable>
 
-	<xc:ccTasks allowAdd="true" parentId="#{docScenario.id}"
+	<xc:ccTasks  showTitle="true" allowAdd="true" parentId="#{docScenario.id}"
 		rendered="#{javascript:!docScenario.isNewNote()}"
 		setResponsibleFor="true">
 		<xc:this.allowEdit><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xc:this.allowEdit>

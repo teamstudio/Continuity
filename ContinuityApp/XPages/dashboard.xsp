@@ -246,6 +246,9 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccResponsibility id="responsibility"
 							xp:key="responsibility">
 						</xc:ccResponsibility>
+						
+						<xc:ccResponsibilityNotCat id="responsibilityNotCat" xp:key="responsibilityNotCat">
+						</xc:ccResponsibilityNotCat>
 
 						<xc:ccAuditLog id="auditLog"
 							xp:key="auditLog">

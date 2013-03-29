@@ -135,6 +135,25 @@
 						</tr>
 
 					</xp:repeat>
+					
+					<!-- Uncategorised tasks (only shown if there are tasks that are assigned to this role, but not a responsibility -->
+					<xp:tr>
+						<xp:this.rendered><![CDATA[#{javascript:database.getView("vwTasksByRespId").getAllEntriesByKey( "role-" + roleRow.getColumnValue("id"), true).getCount() > 0;}]]></xp:this.rendered>
+						
+						<td class="grid" style="width: 500px;">
+						
+							<xp:link escape="true" text="Uncategorised tasks" style="font-weight:bold" id="link1">
+
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+									refreshId="dynamicContent1">
+									<xp:this.action><![CDATA[#{javascript:viewScope.put("respNoCat", "role-" + roleRow.getColumnValue("id"));
+getComponent("dynamicContent1").show("responsibilityNotCat");
+}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						
+						</td>
+					</xp:tr>
 
 					<tr>
 						<td colspan="2" class="noBorders"></td>

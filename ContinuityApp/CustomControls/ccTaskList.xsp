@@ -28,9 +28,20 @@
 
 			<xp:this.rendered><![CDATA[#{javascript:row.getIndentLevel()==0 && row.isCategory()}]]></xp:this.rendered>
 			<th colspan="2">
-				<xp:text escape="false" tagName="h4"
+			
+				<h4>
+					<xp:text escape="false" disableTheme="true"
 					value="#{javascript:row.getColumnValues().get(0)}">
 				</xp:text>
+					<xp:text escape="false" disableTheme="true" value=" (uncategorised tasks)">
+					<xp:this.rendered><![CDATA[#{javascript:compositeData.viewName=='vwTasksByResponsibility' &&
+row.getColumnValues().get(0).indexOf("- ") == -1}]]></xp:this.rendered>
+				</xp:text>
+				
+				</h4>
+				
+				
+				
 			</th>
 
 		</xp:tr>
@@ -42,6 +53,7 @@
 				<xp:text disableTheme="true" escape="false"
 					value="#{javascript:row.getColumnValues().get(1)}">
 				</xp:text>
+
 			</th>
 
 		</xp:tr>
