@@ -1024,21 +1024,56 @@ body {
 	opacity: 1;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 700px) {
 	#menu {
-		display:none;
+		position:absolute;
 	}
 	.navScrollArea ul {
 		margin: 0 10px;
 	}
+	
+	
+	
+	#menuPane {
+		position: absolute;
+		left: -700px;
+		display: block;
+		width: 100%;
+
+	}
+
+
 }
 
 @media screen and (min-width: 701px) {
 	#menu {
-		display:none;
+		position:absolute;
 	}
 	.navScrollArea ul {
 		margin: 0 10px;
+	}
+	
+	#menuPane {
+		position: absolute;
+		left: -700px;
+		display: block;
+
 	}
 }
 
@@ -1052,15 +1087,18 @@ body {
 	.navScrollArea ul {
 		margin-right: 0;
 	}
-	/*#results,.categoryRow,.summaryDataRow {
-		margin-left: 30%;
-	}*/
+	
+	
+	#menuPane {
+		position: absolute;
+		left: 0px !important;
+		width: 30%;
+		background: transparent;
+	}
 
 }
 
 /** PULL DOWN **/
-
-
 #pullDown,#pullUp {
 	height: 40px;
 	line-height: 40px;

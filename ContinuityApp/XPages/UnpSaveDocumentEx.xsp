@@ -207,15 +207,17 @@ try{
 					sessionScope.put("orgUnitAlertLevel", alertLevel);
 				}
 				
+				var incidentDesc = doc.getItemValueString("description");
 				
 				dBar.debug("create update");
 				//ML: create update item for new incidents
-				createUpdate( (isRehearsal ? "Exercise incident" : "Incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
+				var updateText = (isRehearsal ? "Exercise incident" : "Incident") + ": <b>" + incidentDesc + "</b><br />" +
 				"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 					"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
 					"- site: " + doc.getItemValueString("siteName") + "<br />" +
-					"- plan: " + doc.getItemValueString("scenarioName")
-				);
+					"- plan: " + doc.getItemValueString("scenarioName");
+				
+				createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
 				
 				//ML: send email to all BC users in the system
 				dBar.debug("send mail to all users");

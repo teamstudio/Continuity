@@ -40,8 +40,9 @@ the specific language governing permissions and limitations under the License
 				
 			</xp:label>
 		</xp:panel>
-		<!--<xp:panel styleClass="viewsButton">
-			<xp:this.rendered><![CDATA[#{javascript:if (compositeData.backButtonText != "" && compositeData.backButtonText != null){
+		
+		<xp:panel styleClass="viewsButton">
+			<xp:this.rendered><![CDATA[#{javascript:if ( !isEmpty( compositeData.backButtonURL ) ){
 	return false;
 }else{
 	return compositeData.viewsButton;
@@ -50,7 +51,7 @@ the specific language governing permissions and limitations under the License
 			</xp:label>
 		</xp:panel>
 
-		--><xp:label styleClass="title" id="title"	value="#{javascript:compositeData.title}">
+		<xp:label styleClass="title" id="title"	value="#{javascript:compositeData.title}">
 		</xp:label>
 		<xp:panel id="searchbutton" rendered="#{javascript:compositeData.search != 'none'}"
 			styleClass="searchButton">

@@ -29,7 +29,7 @@ public class Configuration implements Serializable {
 	
 	private String serverName;
 
-	private static String VERSION = "v1.1";		//used to determine data version
+	private static String VERSION = "v1.1";		//used to determine data version too
 
 	private String appVersion;
 	

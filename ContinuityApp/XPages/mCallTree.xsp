@@ -12,6 +12,15 @@
 
 	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
 	
+	var setFrom = param.get("setFrom");
+	
+	if ( !isEmpty(setFrom) ) {
+		sessionScope.from = setFrom;
+	} else if ( param.get("clearFrom") == "1" ) {
+		sessionScope.from = null;			//if this is set, a back button is added to the page
+												//redirecting the user back to this page
+	}
+	
 	//determine ID of the role to show
 var pos = param.get("pos");
 
@@ -25,7 +34,7 @@ if (pos == null || pos.length == 0) {		//no calltree position in url: check my r
 	
 		//user has a BC role: set default calltree position
 		for (var i=0; i<callTreeOrder.length; i++) {
-			if (callTreeOrder[i].equals(sessionScope.get("roleId") ) ) {
+			if (callTreeOrder[i] == sessionScope.get("roleId") ) {
 				pos = i+1;
 				break;
 			}
@@ -55,25 +64,28 @@ viewScope.put("orderPosition", pos);
 }
 }]]></xp:this.beforePageLoad>
 
-	<xc:mLayout showMenu="true" useCustomFooter="true" pageTitle="Call tree">
+	<xc:mLayout showMenu="true" useCustomFooter="true" pageTitle="Call tree"
+		backButtonURL="#{javascript:sessionScope.from;}">
 
+		<!--		<xc:this.pageTitle><![CDATA[#{javascript://viewScope.get("roleName");}]]></xc:this.pageTitle>-->
 
-<!--		<xc:this.pageTitle><![CDATA[#{javascript://viewScope.get("roleName");}]]></xc:this.pageTitle>-->
 		<xp:this.facets>
 			<xp:div xp:key="contents">
-			
+
 				<xp:div styleClass="box mBottom">
 					<div class="content">
 						Level&#160;
-						<xp:text escape="true" id="computedField3" value="#{javascript:viewScope.orderPosition}">
-						</xp:text>&#160;of call tree
+						<xp:text escape="true" id="computedField3"
+							value="#{javascript:viewScope.orderPosition}">
+						</xp:text>
+						&#160;of call tree
 					</div>
 				</xp:div>
 
 				<ul id="summaryList">
 
-					<xp:repeat id="repeat3" rows="250" var="row"
-						disableOutputTag="true" value="#{view2}">
+					<xp:repeat id="repeat3" rows="250" var="row" disableOutputTag="true"
+						value="#{view2}">
 
 						<xp:panel tagName="li">
 							<xp:this.attrs>
@@ -93,21 +105,19 @@ if (viewScope.rowcount == 1 && compositeData.title == null){
 }
 return out;}]]></xp:this.styleClass>
 
-							<xp:image url="/unp/right-arrow-circle.png"
-								id="image1" styleClass="multiLineIcon">
+							<xp:image url="/unp/right-arrow-circle.png" id="image1"
+								styleClass="multiLineIcon">
 							</xp:image>
 
 							<table class="reset">
 								<tr>
 									<td class="thumbnail">
 
-										<xp:image id="image3"
-											styleClass="roundedBorders">
+										<xp:image id="image3" styleClass="roundedBorders">
 											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length>0}]]></xp:this.rendered>
 											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + row.getColumnValue("photo");}]]></xp:this.url>
 										</xp:image>
-										<xp:image id="image2"
-											styleClass="roundedBorders">
+										<xp:image id="image2" styleClass="roundedBorders">
 											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length==0}]]></xp:this.rendered>
 											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + "/noProfile.gif";}]]></xp:this.url>
 										</xp:image>
@@ -116,26 +126,26 @@ return out;}]]></xp:this.styleClass>
 
 									<td class="v-top">
 
-										<xp:label id="label2"
-											styleClass="viewlistsummary" value="#{row.name}">
+										<xp:label id="label2" styleClass="viewlistsummary"
+											value="#{row.name}">
 										</xp:label>
 
 										<!-- primary phone number: show as link for phone capable devices -->
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName.equals( row.getColumnValue("userName") ) && !sessionScope.isPhoneSupported}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName == row.getColumnValue("userName") && !sessionScope.isPhoneSupported}]]></xp:this.rendered>
 											<xp:text escape="true" id="computedField2"
 												value="#{row.$15}">
 											</xp:text>
 										</xp:panel>
 
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName.equals( row.getColumnValue("userName") ) && isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName == row.getColumnValue("userName") && isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
 											No phone number found
 										</xp:panel>
 
 										<xp:panel disableOutputTag="true">
 
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName.equals( row.getColumnValue("userName") ) && sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName == row.getColumnValue("userName") && sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
 											<ul class="btnInline">
 												<li>
 													<xp:link escape="true" text="" id="link1"

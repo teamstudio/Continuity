@@ -32,16 +32,26 @@
 	<div>
 				
 		<ul id="summaryList">
-
-			<xp:repeat id="repeat3" rows="50" value="#{vwTasks}" var="row"
-				disableOutputTag="true">
+			<xp:repeat id="repeat3" rows="50" value="#{vwTasks}" var="row" disableOutputTag="true">
 
 				<xp:text escape="false" tagName="li"
-					styleClass="categoryRowFixed" disableTheme="true"
-					rendered="#{javascript:row.isCategory()}">
-					<xp:this.value><![CDATA[#{javascript:(viewScope.hasFilter ? 
+					disableTheme="true" rendered="#{javascript:row.isCategory()}">
+					<xp:this.styleClass><![CDATA[#{javascript:var c = (viewScope.hasFilter ? 
 	row.getColumnValues().get(1) :
-	row.getColumnValues().get(0) );}]]></xp:this.value>
+	row.getColumnValues().get(0) );
+	
+	var isSecCat = false;
+	
+	if ( isEmpty(c) ) {
+		c = row.getColumnValues().get(2);
+		isSecCat = true;
+	}
+	
+viewScope.put("cat", (isEmpty(c) ? "?" : c) );
+	
+"categoryRowFixed" + (isSecCat ? " catGrey" : "")}]]></xp:this.styleClass>
+					
+					<xp:this.value><![CDATA[#{javascript:viewScope.cat}]]></xp:this.value>
 				</xp:text>
 
 				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row">

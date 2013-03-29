@@ -80,8 +80,8 @@ sessionScope.configLoaded = false;
 			rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
 			<xp:this.attrs>
 				<xp:attr name="onclick">
-					<!--<xp:this.value><![CDATA[#{javascript:"openDocument('" + compositeData.newDocTarget + "?action=newDocument', 'content');"}]]></xp:this.value>-->
-					<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + compositeData.newDocTarget + "', 'contentwrapper', 'updates', true, true);"}]]></xp:this.value>
+					
+					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href='" + compositeData.newDocTarget + "?action=newDocument';"}]]></xp:this.value>
 				</xp:attr>
 			</xp:this.attrs>
 			<span>New</span>

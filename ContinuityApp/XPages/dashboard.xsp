@@ -93,12 +93,6 @@
 								<xe:basicLeafNode submitValue="auditLog"
 									label="Audit log" loaded="${sessionScope.isEditor}">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("auditLog");}]]></xe:this.selected>
-									<!--<xe:this.children>
-										<xe:basicLeafNode label="by Incident" submitValue="auditLogByIncident" style="margin-left:20px">
-										<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("auditLogByIncident");}]]></xe:this.selected>
-										</xe:basicLeafNode>
-										</xe:this.children>
-									-->
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode
@@ -184,7 +178,9 @@ getComponent("dynamicContent1").show(c);
 
 					<xp:this.facets>
 					
-						<xc:ccHelp xp:key="miniConfigGuide"></xc:ccHelp>
+						<xc:ccHelp xp:key="miniConfigGuide" helpTextId="miniConfigGuide">
+
+						</xc:ccHelp>
 						<xc:ccStarterLists xp:key="starterLists" id="starterLists"></xc:ccStarterLists>
 						
 						<xp:panel xp:key="scenariosList" id="scenariosList">
@@ -254,9 +250,6 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccAuditLog id="auditLog"
 							xp:key="auditLog">
 						</xc:ccAuditLog>
-						<xc:ccAuditLogByIncident id="auditLogByIncident"
-							xp:key="auditLogByIncident">
-						</xc:ccAuditLogByIncident>
 
 						<xc:changePasswordForm id="changePasswordForm"
 							xp:key="changePasswordForm">

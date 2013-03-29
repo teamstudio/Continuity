@@ -3,13 +3,13 @@
 
 	<xp:this.data>
 		<xp:dominoDocument var="docHelp" formName="fHelp" action="openDocument">
-			<xp:this.documentId><![CDATA[#{javascript:var ve:NotesViewEntry = database.getView("vwHelp").getEntryByKey("miniConfigGuide", true);
+			<xp:this.documentId><![CDATA[#{javascript:var ve:NotesViewEntry = database.getView("vwHelp").getEntryByKey(compositeData.helpTextId, true);
 if (null != ve) {
 	return ve.getUniversalID();
 }}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
 
-	<xp:text escape="false" value="#{docHelp.contents}"></xp:text>
+	<xp:text escape="false" disableTheme="true" value="#{docHelp.contents}"></xp:text>
 
 </xp:view>

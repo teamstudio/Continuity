@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<xp:this.acl>
 		<xp:acl>
@@ -12,7 +12,7 @@
 			</xp:this.entries>
 		</xp:acl>
 	</xp:this.acl>
-	
+
 	<div class="section">
 		<div class="title">Contacts batch import</div>
 	</div>
@@ -23,12 +23,10 @@
 			<xp:panel xp:key="footer" id="panel1">
 
 
-				<xp:button value="Import" id="button4"
-					icon="disk.png">
+				<xp:button value="Import" id="button4" icon="disk.png">
 
 					<!-- need to do a full refresh here for uploads -->
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="complete">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 						<xp:this.action><![CDATA[#{javascript:if (contactsImportBean.save() ) {
 	getComponent("dynamicContent1").show("contactsList");
 }}]]></xp:this.action>
@@ -36,9 +34,8 @@
 				</xp:button>
 
 				<xp:link escape="true" text="Back to list" id="link1">
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynamicContent1"
-						immediate="true">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+						refreshId="dynamicContent1" immediate="true">
 						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactsList");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
@@ -48,11 +45,17 @@
 
 
 		<xe:formRow id="formRow1" label="Batch file (CSV or LDIF):">
-			<xp:fileUpload id="importFile"
-				value="#{contactsImportBean.batchFile}">
-			</xp:fileUpload>
+			<xp:fileUpload id="importFile" value="#{contactsImportBean.batchFile}"></xp:fileUpload>
 		</xe:formRow>
 
 	</xe:formTable>
+	
+	<div style="margin-top:15px">
+	<xp:section id="section1" header="Instructions" initClosed="true">
+		<xc:ccHelp helpTextId="contactsImportFormat"></xc:ccHelp>
+	</xp:section>
+	</div>
 
+	
+	
 </xp:view>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xc:mLayout showMenu="true" pageTitle="Tasks">
+	<xc:mLayout showMenu="true" pageTitle="Tasks" backButtonURL="mRole.xsp">
+	
 	<xp:this.facets>
 
 		<xp:panel xp:key="contents" disableOutputTag="true">
@@ -15,14 +16,15 @@
 					</xp:text>
 				</div>
 			</xp:div>
-			
 	
 			<xc:mTasksList viewName="vwTasksByRespId">
 				<xc:this.categoryFilter><![CDATA[#{javascript:param.get("respId")}]]></xc:this.categoryFilter>
 			</xc:mTasksList>
 		
 		</xp:panel>
+		
 	</xp:this.facets>
+	
 	</xc:mLayout>
 
 </xp:view>
