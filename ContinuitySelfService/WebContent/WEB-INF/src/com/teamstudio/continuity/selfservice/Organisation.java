@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.teamstudio.apps.Unplugged;
 import com.teamstudio.continuity.utils.Authorizations;
 import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
@@ -85,6 +86,12 @@ public class Organisation implements Serializable {
 			}
 			
 			docOrg.save();
+			
+
+			//create Unplugged configuration for this user
+			Unplugged.createAppDefinition( continuityDbPath, false, true);
+			Unplugged.createAppDefinition( coreDbPath, true, false);
+			
 		} catch (NotesException e) {
 			Logger.error(e);
 		}
