@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257AFA004179FC" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="2be" sequence="5" unid="04143F8B6FB650E6C1257AFB00731451">
+<noteinfo noteid="2be" sequence="6" unid="04143F8B6FB650E6C1257AFB00731451">
 <created><datetime>20130122T215658,41+01</datetime></created>
-<modified><datetime>20130307T155645,86+01</datetime></modified>
-<revised><datetime>20130222T103017,07+01</datetime></revised>
-<lastaccessed><datetime>20130307T155645,86+01</datetime></lastaccessed>
+<modified><datetime>20130329T090009,50+01</datetime></modified>
+<revised><datetime>20130329T090009,49+01</datetime></revised>
+<lastaccessed><datetime>20130329T090009,50+01</datetime></lastaccessed>
 <addedtofile><datetime>20130307T155645,86+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$TITLE"><text>favicon.ico</text></item>
-<item name="$Flags"><text>345CgQ</text></item>
 <item name="$FlagsExt"><text>D</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
-<item name="$FileModDT" sign="true"><datetime>20130122T215424,73+01</datetime></item>
+<item name="$FileModDT" sign="true"><datetime>20130329T085649,69+01</datetime></item>
 
-
-
-
-<item name="$FileNames" sign="true"><text>favicon.ico</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FileNames" sign="true"><text>favicon.ico</text></item></note>
