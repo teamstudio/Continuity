@@ -2034,6 +2034,15 @@ table.reset {
 	padding: 10px 15px 10px 12px !important;
 }
 
+.catGrey {
+	background: #cccccc;
+	color: #444;	
+	border-bottom: 1px solid #BABABA;
+	border-top: 1px solid #BABABA;
+	box-shadow: inset 0 1px #DBDBDB;
+	text-shadow: none;
+}
+
 /* top/ bottom margin */
 .mTop {
 	margin-top:10px;	

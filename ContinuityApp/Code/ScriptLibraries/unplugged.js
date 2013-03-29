@@ -70,14 +70,15 @@ function stopViewSpinner() {
 	$("#loadmorespinner").hide();
 }
 
-function loadmore(dbName, viewName, summarycol, detailcol, category, xpage,
-		refreshmethod) {
+function loadmore(url) {
 	try {
+		
+		
 		$(".loadmorelink").hide();
 		$("#loadmorespinner").show();
 		setTimeout("stopViewSpinner()", 5000);
-		var itemlist = $("#flatViewRowSet li");
-		var pos = itemlist.length - 1;
+		var itemlist = $("#summaryList li");
+		var pos = itemlist.length;
 		for ( var i = 0; i < firedrequests.length; i++) {
 			if (firedrequests[i] == pos) {
 				$(".loadmorelink").show();
@@ -86,16 +87,15 @@ function loadmore(dbName, viewName, summarycol, detailcol, category, xpage,
 			}
 		}
 		firedrequests.push(pos);
+		
 		var thisArea = $(".summaryDataRow");
-		var url = "UnpFlatViewList.xsp?chosenView="
-				+ encodeURIComponent(viewName) + "&summarycol="
-				+ encodeURIComponent(summarycol) + "&detailcol="
-				+ encodeURIComponent(detailcol) + "&category="
-				+ encodeURIComponent(category) + "&xpage=" + xpage
-				+ "&dbName=" + dbName
-				+ "&refreshmethod=" + refreshmethod + "&start=" + pos;
-		thisArea.load(url + " #results", function() {
-			$("#flatViewRowSet").append($(".summaryDataRow li"));
+		
+		url = url + "?start=" + pos + "&dataMode=1";
+		thisArea.load(url + " #summaryList", function() {
+			
+			console.log("lets inser...")
+			
+			$("#summaryList").append($(".summaryDataRow li"));
 			if ($(".summaryDataRow").text().indexOf("NOMORERECORDS") > -1) {
 				$("#pullUp").hide();
 				$(".loadmorelink").hide();

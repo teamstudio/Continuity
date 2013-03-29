@@ -7,6 +7,7 @@
 
 	<xp:this.beforePageLoad><![CDATA[#{javascript:setLastViewedItem(vwUpdates, "lastViewedUpdate" );
 	sessionScope.put("numUpdates", 0);		//reset counter
+	viewScope.viewEntryCount = vwUpdates.getEntryCount();
 	}]]></xp:this.beforePageLoad>
 
 	<xc:mLayout showMenu="true" pageTitle="Updates" newDocTarget="mUpdate.xsp">
@@ -19,7 +20,22 @@
 				</xp:div>
 			
 				<ul id="summaryList">
-					<xp:repeat id="repeat3" rows="50" var="rowEntry" disableOutputTag="true" value="#{vwUpdates}">
+					<xp:repeat id="repeat3" var="rowEntry" disableOutputTag="true" value="#{vwUpdates}">
+						<xp:this.first><![CDATA[#{javascript:var start = context.getUrlParameter("start");
+							if (start == ""){
+								return 0;
+							}else{
+								return parseInt(start, 10);
+							}}]]>
+						</xp:this.first>
+							
+						<xp:this.rows><![CDATA[${javascript:if (sessionScope.rowcount != null){
+								return sessionScope.rowcount;
+							}else{
+								return 10;
+							}}]]>
+						</xp:this.rows>
+					
 						<xp:panel tagName="li" styleClass="data-row condensed">
 							
 							<table class="reset">
@@ -27,7 +43,13 @@
 									<td class="thumbnail">
 									
 										<xp:image id="image1" styleClass="roundedBorders">
-											<xp:this.url><![CDATA[#{javascript:getProfilePhotoUrl(rowEntry.getColumnValue('createdBy'))}]]></xp:this.url>
+											<xp:this.url><![CDATA[#{javascript:if (viewScope.rowcount == null){
+	viewScope.rowcount = 1;
+}else{
+	viewScope.rowcount = viewScope.rowcount + 1;
+}
+										
+											getProfilePhotoUrl(rowEntry.getColumnValue('createdBy'))}]]></xp:this.url>
 										</xp:image>
 
 									</td>
@@ -72,13 +94,46 @@
 
 
 					</xp:repeat>
+					
+					<xp:panel>
+			NOMORERECORDS
+			<xp:this.rendered><![CDATA[#{javascript:if ( sessionScope.rowcount == null){
+	sessionScope.rowcount = 10;
+}
+param.get("dataMode")=="1" && (viewScope.rowcount == null || viewScope.rowcount < sessionScope.rowcount);}]]></xp:this.rendered>
+		</xp:panel>
 
 				</ul>
+				
+				<!-- pull to refresh -->
+				<div class="summaryDataRow"></div>
+				<xp:div id="pullUpHolder">
+					<xp:this.rendered><![CDATA[#{javascript:viewScope.viewEntryCount > 10 && applicationScope.unpluggedserver == true}]]></xp:this.rendered>
+					<div id="pullUp">
+						<span class="pullUpIcon"></span>
+						<span class="pullUpLabel">
+							Pull up to load more...
+						</span>
+					</div>
+				</xp:div>
+				<xp:div id="loadmorelink">
+					<xp:this.styleClass><![CDATA[#{javascript:if (applicationScope.unpluggedserver == true){
+	return "loadmorelink hidden";
+}else{
+	return "loadmorelink";
+}}]]></xp:this.styleClass>
+					<xp:button value="Load More..." id="loadmorebutton"
+						styleClass="loadmorebutton">
+						<xp:this.attrs>
+							<xp:attr name="onclick">
+								<xp:this.value><![CDATA[#{javascript:"loadmore('mUpdates.xsp')"}]]></xp:this.value>
+							</xp:attr>
+						</xp:this.attrs>
+					</xp:button>
+				</xp:div>
 
 			</xp:panel>
 		</xp:this.facets>
 	</xc:mLayout>
-	
-	
 	
 </xp:view>

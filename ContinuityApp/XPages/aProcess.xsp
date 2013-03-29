@@ -79,12 +79,17 @@ if (!applicationScope.isReadOnlyMode) {
 		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 		
 		//ML: create update item for this deactivation
-		createUpdate( (isRehearsal ? "Deactivated exercise incident" : "Deactivated incident") + ": <b>" + doc.getItemValueString("description") + "</b><br />" +
+		
+		var incidentDesc = doc.getItemValueString("description")
+		
+		
+		var updateText = (isRehearsal ? "Deactivated exercise incident" : "Deactivated incident") + ": <b>" + incidentDesc + "</b><br />" +
 			"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 			"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
 			"- site: " + doc.getItemValueString("siteName") + "<br />" +
-			"- plan: " + doc.getItemValueString("scenarioName")
-		);
+			"- plan: " + doc.getItemValueString("scenarioName");
+		
+		createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
 		
 		//ML: send email to all BC users in the system
 		dBar.debug("send mail to all users");

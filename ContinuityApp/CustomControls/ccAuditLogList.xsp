@@ -3,30 +3,32 @@
 
 	<xp:this.data>
 		<xp:dominoView var="vwAuditLog">
-			<xp:this.viewName><![CDATA[#{javascript:"vwAuditLog"}]]></xp:this.viewName>
+			<xp:this.viewName><![CDATA[#{javascript:compositeData.viewName}]]></xp:this.viewName>
 		</xp:dominoView>
 	</xp:this.data>
-
+	
 	<xp:div id="updates">
 
-		<div class="section">
-			<div class="title">Audit Log</div>
-		</div>
-		
 		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
 			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager2" for="repeatLog"></xp:pager>
 			<br style="clear:both" />
 		</div>
 
 		<xp:repeat id="repeatLog" rows="30" value="#{vwAuditLog}" var="row" styleClass="lotusForum" style="width:650px;">
+		
+			<xp:div rendered="#{javascript:row.isCategory()}">
+				<xp:text tagName="h4" style="margin-bottom: 5px;" value="#{javascript:row.getColumnValues().get(0)}" />
+			</xp:div>
 			
-			<xp:div id="update" styleClass="lotusPost">
+			<xp:div id="update" styleClass="lotusPost" rendered="#{javascript:!row.isCategory()}">
 	
 				<div class="lotusPostAuthorInfo">
 					<xp:image id="image1" style="width: 40px; height: 40px;">
 						<xp:this.url><![CDATA[#{javascript:getProfilePhotoUrl( row.getColumnValue("_createdBy") )}]]></xp:this.url>
 					</xp:image>
 				</div>
+				
+				
 				
 				<div class="lotusPostContent">
 				

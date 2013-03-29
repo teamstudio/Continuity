@@ -854,7 +854,7 @@ ReadableDate.prototype.timeSince = function(date){
 };
 
 //creates a new update item with the specified message
-function createUpdate( text:String) {
+function createUpdate( text:String, incidentId, incidentName) {
 
 	if (applicationScope.isReadOnlyMode) {
 		return false;
@@ -869,6 +869,9 @@ function createUpdate( text:String) {
 		docUpdate.replaceItemValue("createdByName", sessionScope.get("name") );
 		
 		docUpdate.replaceItemValue("message", text );
+		
+		docUpdate.replaceItemValue("incidentId", incidentId);
+		docUpdate.replaceItemValue("incidentName", incidentName);
 		
 		var createdInMs = (new Date()).getTime().toString();
 	

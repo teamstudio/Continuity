@@ -5,13 +5,20 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>ccAuditLogByIncident</component-type>
-    <composite-name>ccAuditLogByIncident</composite-name>
-    <composite-file>/ccAuditLogByIncident.xsp</composite-file>
+    <component-type>ccAuditLogList</component-type>
+    <composite-name>ccAuditLogList</composite-name>
+    <composite-file>/ccAuditLogList.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
+    <property>
+      <property-name>viewName</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

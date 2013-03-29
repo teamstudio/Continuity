@@ -10,3 +10,4 @@ Welcome to the **Continuity** repository: Teamstudio's new mobile Business Conti
 
 * [High-level requirements](https://github.com/teamstudio/Continuity/wiki/High-level-requirements)
 * [Business Continuity Management – rules](https://github.com/teamstudio/Continuity/wiki/Business-Continuity-Management-%E2%80%93-rules)
+* [Design note on Responsibilities vs Tasks](https://github.com/teamstudio/Continuity/wiki/Design-note-on-Responsibilities-vs-Tasks)

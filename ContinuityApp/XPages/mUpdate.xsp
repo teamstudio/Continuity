@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xp:this.data>
-		<xp:dominoDocument var="docUpdate" formName="fUpdate"></xp:dominoDocument>
-	</xp:this.data>
-	
 	<xc:mLayout showMenu="true" pageTitle="New update">
 		<xp:this.facets>
 			<xc:mUpdateForm xp:key="contents"></xc:mUpdateForm>

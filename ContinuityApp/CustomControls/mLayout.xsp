@@ -2,7 +2,16 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");
+	<!--<style type="text/css">
+		.companyLogo {
+			display: none !important;
+		}
+		.backButton {
+			display: block !important;
+		}
+	</style>
+	
+	--><xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");
 	
 	viewScope.put("pageTitle", compositeData.pageTitle);
 	viewScope.put("newDocTarget", compositeData.newDocTarget );
@@ -39,10 +48,9 @@
 	
 	<div id="page">
 
-		<xc:unpHeader search="none" searchPage="UnpSearch.xsp"
-			viewsButton="false" title="#{javascript:viewScope.pageTitle}"
-			backButtonText="Back"
-			backButtonURL="#{javascript:viewScope.backButtonURL}">
+		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="true"
+			title="#{javascript:viewScope.pageTitle}" backButtonText="Back">
+			<xc:this.backButtonURL><![CDATA[#{javascript:viewScope.backButtonURL}]]></xc:this.backButtonURL>
 		</xc:unpHeader>
 
 		<div id="body">
@@ -72,7 +80,7 @@
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"
-						page="/mCallTree.xsp" icon="calltree-blue.png"
+						page="/mCallTree.xsp?clearFrom=1" icon="calltree-blue.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 

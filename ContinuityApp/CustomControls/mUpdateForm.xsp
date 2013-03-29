@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
 
+	<xp:this.data>
+		<xp:dominoDocument var="docUpdate" formName="fUpdate" action="newDocument"></xp:dominoDocument>
+	</xp:this.data>
+
 	<div id="formholder" class="editmode">
 		<div class="customform">
 
@@ -11,13 +15,28 @@
 			<!-- start form controls -->
 			<div>
 				<ul class="fieldlist">
+				
+					<li>
+
+						<xp:label value="Incident" id="label3" for="incident"></xp:label>
+						<xp:comboBox id="incident" value="#{docUpdate.incidentId}"
+							styleClass="xspListBox">
+							<xp:selectItem itemLabel="- Select an incident -"></xp:selectItem>
+							<xp:selectItems>
+								<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwIncidentsOpen", sessionScope.get("orgUnitId"), 2, "[FAILSILENT]")}]]></xp:this.value>
+							</xp:selectItems>
+						</xp:comboBox>
+
+					</li>
+					
+				
 					<li>
 						<xp:label value="Message" id="msgLabel" for="inputMessage"></xp:label>
-						<!--
-							<xp:inputTextarea id="inputMessage" value="#{docUpdate.message}"
+						
+							<!--<xp:inputTextarea id="inputMessage" value="#{docUpdate.message}"
 							styleClass="richtextfield"></xp:inputTextarea>
-						-->
-						<xp:inputText id="inputMessage" value="#{docUpdate.message}"
+						
+						--><xp:inputText id="inputMessage" value="#{docUpdate.message}"
 							styleClass="required xspInputTextField"></xp:inputText>
 
 					</li>
@@ -33,12 +52,13 @@
 			<!-- buttons -->
 			<xp:panel id="buttons" styleClass="buttons" tagName="ul">
 
-				<li class="saveButton">
-				
+			<li class="saveButton">
 				
 					<xp:link escape="true" text="" id="lnkSave">
 						<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-							<xp:this.action><![CDATA[#{javascript:try {
+							<xp:this.action><![CDATA[#{javascript:
+try {
+
 							
 							//don't save in demo mode
 							if ( !applicationScope.isReadOnlyMode ) { 
@@ -57,11 +77,22 @@
 					docUpdate.replaceItemValue("photoFileName", docUpdate.getAttachmentList().get(0).getName() );
 				}
 				
-				docUpdate.save();
+				var incidentId = docUpdate.getItemValueString("incidentId");
 				
-				//force replication
-				var db = session.getCurrentDatabase();
-				db.replicate("someserver");
+				if ( !isEmpty( incidentId) ) {
+					var incidentName = @DbLookup( @DbName(), "vwAllById", incidentId, "description", "[FAILSILENT]");
+					docUpdate.replaceItemValue("incidentName", incidentName);
+				}
+				
+				
+				if ( docUpdate.save() ) {
+				
+					//force replication
+					var db = session.getCurrentDatabase();
+					db.replicate("someserver");
+				
+				}
+
 			}
 	
 			context.redirectToPage("mUpdates.xsp");
@@ -87,7 +118,7 @@
 					tagName="li">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:return "$.blockUI(); window.location.href='mUpdates.xsp';";}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:return "loadPageEx('mUpdates.xsp', 'contentwrapper', null, true, true);";}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 					<span>Cancel</span>
