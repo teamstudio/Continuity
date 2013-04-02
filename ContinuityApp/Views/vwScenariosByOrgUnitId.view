@@ -1,15 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='8a2' unid='B0EFBC672D4AC5C7C1257B280056D329' sequence='25'>
+<noteinfo noteid='8a2' unid='B0EFBC672D4AC5C7C1257B280056D329' sequence='27'>
 <created><datetime>20130308T164821,53+01</datetime></created>
-<modified><datetime>20130329T115742,67+01</datetime></modified>
-<revised><datetime>20130329T115742,66+01</datetime></revised>
-<lastaccessed><datetime>20130329T115742,67+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20130402T215615,27+02</datetime></modified>
+<revised><datetime dst='true'>20130402T215615,26+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130402T215615,27+02</datetime></lastaccessed>
 <addedtofile><datetime>20130308T164822,43+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwScenariosByOrgUnitId</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 igEBAFAADwBmb3JBbGwA/gNAAC57JQAABQANAG9yZ1VuaXRUYXJnZXQAAQADAGFsbAAKAq8AGgAO
@@ -43,5 +42,6 @@ AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$TITLE' sign='true'><text>vwScenariosByOrgUnitId|unpScenariosByOrgUnitId</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
 

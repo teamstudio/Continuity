@@ -1,15 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2e6' unid='13B630F6F465F002C1257AED00577B35' sequence='39'>
+<noteinfo noteid='2e6' unid='13B630F6F465F002C1257AED00577B35' sequence='41'>
 <created><datetime>20130108T165531,73+01</datetime></created>
-<modified><datetime>20130329T115743,01+01</datetime></modified>
-<revised><datetime>20130329T115743,00+01</datetime></revised>
-<lastaccessed><datetime>20130329T115743,01+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20130402T220109,52+02</datetime></modified>
+<revised><datetime dst='true'>20130402T220109,51+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130402T220109,52+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115515,53+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwUpdates</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 ugACABYACwBjcmVhdGVkRGF0ZQBpAAMAAgAQAAUAcGhvdG8AcwADAAUAaABkAAgADQANAAkACwAN
@@ -23,7 +22,6 @@ GgABAABEAWYAAAANAGNyZWF0ZWREYXRlTXM=
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$ViewFormat' sign='true'>
 <rawitemdata type='5'>
 AQAIAAoAigAAAFZDBQANAA0AAAAAAJAAAQAACAAAAAEAAAAAAAICAAAAVkMAAAIACQAKAAoAUAAB
@@ -45,5 +43,7 @@ AAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wABAO/v7wABAAAAAAAA
 AAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAFhDAEyAAwAA
 AAAAAQICAgEBAQEHBAMAAAAAAAAAACAtLTpZQwABAAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAA
 AAACAAAAAAAAAAAAAAAAAAAAAAAALCADgA==
-</rawitemdata></item></note>
+</rawitemdata></item>
+<item name='$TITLE' sign='true'><text>vwUpdates|unpUpdates</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
 

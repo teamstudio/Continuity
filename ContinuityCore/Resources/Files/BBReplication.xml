@@ -5,5 +5,4 @@
 	<select notetype="view" name="unp*" />
 	<select notetype="imageresource" name="*" />
 
-
 </designselection>

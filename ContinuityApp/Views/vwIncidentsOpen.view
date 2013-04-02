@@ -1,15 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='111a' unid='F232A7D6E4B3F811C1257B3C00814074' sequence='9'>
+<noteinfo noteid='111a' unid='F232A7D6E4B3F811C1257B3C00814074' sequence='13'>
 <created><datetime>20130329T003146,44+01</datetime></created>
-<modified><datetime>20130329T115742,50+01</datetime></modified>
-<revised><datetime>20130329T115742,49+01</datetime></revised>
-<lastaccessed><datetime>20130329T115742,50+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20130402T215304,44+02</datetime></modified>
+<revised><datetime dst='true'>20130402T215304,43+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130402T215304,44+02</datetime></lastaccessed>
 <addedtofile><datetime>20130329T003146,46+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwIncidentsOpen</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 3AACAGoAAgAkMAUACwBkZXNjcmlwdGlvbgAFAAsAaXNSZWhlYXJzZWwAAQADAHllcwAKAq8AIgAW
@@ -34,5 +33,6 @@ AAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$TITLE' sign='true'><text>vwIncidentsOpen|unpIncidentsOpen</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
 
