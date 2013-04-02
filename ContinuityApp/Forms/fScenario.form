@@ -1,15 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='3ce' unid='38E76B3F710AE1BCC1257AA0003DBA40' sequence='41'>
+<noteinfo noteid='3ce' unid='38E76B3F710AE1BCC1257AA0003DBA40' sequence='43'>
 <created><datetime dst='true'>20121023T131413,76+02</datetime></created>
-<modified><datetime>20130329T115738,28+01</datetime></modified>
-<revised><datetime>20130329T115738,27+01</datetime></revised>
-<lastaccessed><datetime>20130329T115738,28+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20130402T214541,49+02</datetime></modified>
+<revised><datetime dst='true'>20130402T214541,48+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130402T214541,49+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115516,72+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$Comment' sign='true'><text/></item>
 <item name='impactCostsRecurringCosts' summary='false'><number>0</number></item>
+<item name='impactCostsOneTime' summary='false'><number>0</number></item>
+<item name='impactCostsRecurring' summary='false'><number>0</number></item>
 <item name='$HTMLCode' sign='true'>
 <rawitemdata type='1'>
 X/8QAAIADwAHAAAAAAAAAA==
@@ -45,21 +47,12 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <item name='hazardNames' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='impactDescription' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='impactLevel' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='impactCostsOneTime' summary='false'><number>0</number></item>
-<item name='impactCostsRecurring' summary='false'><number>0</number></item>
 <item name='quickGuideIds' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='$Fields'><textlist><text>quickGuideIds</text><text>impactCostsRecurring</text><text
->impactCostsOneTime</text><text>impactLevel</text><text>impactDescription</text><text
->hazardNames</text><text>hazardIds</text><text>orgUnitNames</text><text>orgUnitIds</text><text
->orgUnitTarget</text><text>description</text><text>name</text></textlist></item>
+<item name='$Fields'><textlist><text>quickGuideIds</text><text>hazardNames</text><text
+>hazardIds</text><text>orgUnitNames</text><text>orgUnitIds</text><text>orgUnitTarget</text><text
+>description</text><text>name</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -87,25 +80,10 @@ AAAAAAIBAAAKAAAAAAAAAAAJAAAAAABoYXphcmRJZHMAYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgA
 AQAACoECgwQBAIX/FgABAAAKaGF6YXJkTmFtZXM6CQndBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAIr/MACKAAEFBjACAAAAAAAAAgEAAAoAAAAAAAAAAAsAAAAAAGhhemFyZE5hbWVzAGIOAQCE
-AAAAAAAAAAAA3gYAAIr/hf8IAAEAAAqBAoMEAQCF/wgAAQAACoECgwQBAIX/CAABAAAKgQKDBAEA
-hf8OAAEBAApJbXBhY3SBAoMEAQCF/xwAAQAACmltcGFjdERlc2NyaXB0aW9uOgkJ3QYAAIr//v9Q
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAACK/zYAigAABQAwAgAAAAAAAAIBAAAKAAAAAAAAAAARAAAAAABp
-bXBhY3REZXNjcmlwdGlvbgBiDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAKgQKDBAEAhf8XAAEA
-AAppbXBhY3RMZXZlbDoJCQkA3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK/zAAigAABQAw
-AgAAAAAAAAIBAAAKAAAAAAAAAAALAAAAAABpbXBhY3RMZXZlbABiDgEAhAAAAAAAAAAAAN4GAACK
-/4X/CAABAAAKgQKDBAEAhf8dAAEAAAppbXBhY3RDb3N0c09uZVRpbWU6CQkA3QYAAIr//v9QAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAACK/zYAigAAAwAwAgAAAAAAAAIBAAAKAAAAAAAAAAASAAAAAABpbXBh
-Y3RDb3N0c09uZVRpbWXeBgAAiv+F/wgAAQAACoECgwQBAIX/IwABAAAKaW1wYWN0Q29zdHNSZWN1
-cnJpbmdDb3N0czoJAN0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv84AIoAAAMAMAIAAAAA
-AAACAQAACgAAAAAAAAAAFAAAAAAAaW1wYWN0Q29zdHNSZWN1cnJpbmfeBgAAiv+F/wgAAQAACoEC
-gwQBAIX/CAABAAAKgQKDBAEAhf8ZAAEAAApxdWlja0d1aWRlSWRzOgkJCQDdBgAAiv/+/1AAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAIr/MgCKAAEFBjACAAAAAAAAAgEAAAoAAAAAAAAAAA0AAAAAAHF1aWNr
-R3VpZGVJZHMAYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACoECgwQBAIX/CAABAAAKgQKDBAEA
-hf8IAAEAAAo=
+AAAAAAAAAAAA3gYAAIr/hf8IAAEAAAqBAoMEAQCF/wgAAQAACoECgwQBAIX/GQABAAAKcXVpY2tH
+dWlkZUlkczoJCQkA3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+eAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK/zIAigABBQYwAgAAAAAA
+AAIBAAAKAAAAAAAAAAANAAAAAABxdWlja0d1aWRlSWRzAGIOAQCEAAAAAAAAAAAA3gYAAIr/hf8I
+AAEAAAo=
 </rawitemdata></item></note>
 

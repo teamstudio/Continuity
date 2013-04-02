@@ -72,9 +72,6 @@ public class Scenario implements Serializable {
 			
 			MIMEEntity desc = doc.getMIMEEntity("description_input");
 			xspDocScenario.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
-			
-			desc = doc.getMIMEEntity("impactDescription_input");
-			xspDocScenario.replaceItemValue("impactDescription", (desc != null ? desc.getContentAsText() : "") );
 												
 			xspDocScenario.save();
 			
