@@ -20,7 +20,7 @@
 				<xp:div styleClass="box"
 					rendered="#{javascript:sessionScope.roleName != ''}">
 					<div class="content">
-						Your role:&#160;
+						My role:&#160;
 						<xp:text style="font-weight:bold" escape="true"
 							id="computedField1"
 							value="#{javascript:sessionScope.roleName}">

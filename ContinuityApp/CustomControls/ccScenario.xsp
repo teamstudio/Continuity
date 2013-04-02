@@ -117,7 +117,7 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 			
 			
 			<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
-				pickerText="Select" dialogTitle="Select one or more quick guides">
+				pickerText="Select" dialogTitle="Select a quick guides">
 				<xe:this.dataProvider>
 					<xe:simpleValuePicker labelSeparator="|"
 						valueListSeparator=",">
@@ -128,51 +128,6 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 			
 		</xe:formRow>
 		
-		<!-- impact -->
-		<xe:formRow id="formRow14" labelPosition="none" styleClass="formSection"
-			disableTheme="true">
-			<xe:formColumn id="formColumn3" colSpan="3">Impact</xe:formColumn>
-		</xe:formRow>
-
-		<xe:formRow id="formRow6" for="rgImpact" label="Impact level:">
-			<xp:radioGroup id="rgImpact" value="#{docScenario.impactLevel}">
-				<xp:selectItem itemLabel="High" itemValue="High"></xp:selectItem>
-				<xp:selectItem itemLabel="Medium" itemValue="Medium"></xp:selectItem>
-				<xp:selectItem itemLabel="Low" itemValue="Low"></xp:selectItem>
-			</xp:radioGroup></xe:formRow>
-
-		<xe:formRow id="formRow5" label="Describe impact:">
-			<xp:inputRichText id="inputRichText3" value="#{docScenario.impactDescription_input}">
-					<xp:this.dojoAttributes>
-					<xp:dojoAttribute name="toolbar">
-						<xp:this.value><![CDATA[#{javascript:applicationScope.toolbarConfig}]]></xp:this.value>
-					</xp:dojoAttribute>
-				</xp:this.dojoAttributes>
-			</xp:inputRichText>
-		</xe:formRow>
-		
-		<xe:formRow id="formRow7" label="Costs:" for="inputOneTime">
-		
-			<div style="float: left; width: 150px;">
-					<b>one-time:</b>&#160;
-					<xp:inputText id="inputOneTime" value="#{docScenario.impactCostsOneTime}"
-						styleClass="numberLarge" maxlength="10">
-						<xp:this.converter>
-							<xp:convertNumber pattern="#,##0"></xp:convertNumber>
-						</xp:this.converter>
-					</xp:inputText>
-			</div>
-			<div style="float: left; width: 150px;">
-					<b>recurring:</b>&#160;
-						<xp:inputText id="inputRecurring" value="#{docScenario.impactCostsRecurring}"
-				styleClass="numberLarge" maxlength="10">
-				<xp:this.converter>
-					<xp:convertNumber pattern="#,##0"></xp:convertNumber>
-				</xp:this.converter>
-			</xp:inputText>
-			</div>
-			<br style="clear:both"/>
-		</xe:formRow>
 	</xe:formTable>
 
 	<xc:ccTasks  showTitle="true" allowAdd="true" parentId="#{docScenario.id}"

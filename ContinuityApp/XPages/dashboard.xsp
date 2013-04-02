@@ -45,10 +45,6 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
 									<xe:this.label><![CDATA[Business scenarios]]></xe:this.label>
 								</xe:basicLeafNode>
-								<xe:basicLeafNode label="Impact"
-									submitValue="scenariosImpact" style="margin-left:20px" loaded="${sessionScope.isEditor}">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosImpact");}]]></xe:this.selected>
-								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode submitValue="tasks"
 									label="Tasks">
@@ -201,10 +197,6 @@ getComponent("dynamicContent1").show(c);
 							<xc:ccScenarios />
 						
 						</xp:panel>
-
-						<xc:scenariosImpact id="scenariosImpact"
-							xp:key="scenariosImpact">
-						</xc:scenariosImpact>
 						
 						<xp:panel id="scenarioForm"
 							xp:key="scenarioForm">
