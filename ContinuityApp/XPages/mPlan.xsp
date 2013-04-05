@@ -6,28 +6,6 @@
 	
 	viewScope.put("hasDescription", (docScenario.getItemValueString("description").length > 0) );
 	
-	//get quick guides
-	/*var quickGuides = [];
-	var quickGuideIds = docScenario.getItemValue("quickGuideIds");
-	
-	if (quickGuideIds.length>0 ) {
-	
-		var vwAllById = database.getView("vwAllById");
-	
-		for (var i=0; i<quickGuideIds.length; i++) {
-			var veQuickGuide = vwAllById.getEntryByKey( quickGuideIds[i], true );
-			
-			if (null != veQuickGuide) {
-				quickGuides.push( {
-					"name" : veQuickGuide.getColumnValues().get(1),
-					"unid" : veQuickGuide.getUniversalID()
-				} );	
-			}
-		}
-	}
-	
-	viewScope.put("quickGuides", quickGuides);*/
-	
 	} catch (e) {
 		dBar.error(e);
 	}

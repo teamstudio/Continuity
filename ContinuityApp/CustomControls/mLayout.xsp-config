@@ -45,15 +45,6 @@
       </property-extension>
     </property>
     <property>
-      <property-name>useCustomFooter</property-name>
-      <property-class>boolean</property-class>
-      <property-extension>
-        <designer-extension>
-          <editor>com.ibm.std.Boolean</editor>
-        </designer-extension>
-      </property-extension>
-    </property>
-    <property>
       <property-name>backButtonURL</property-name>
       <property-class>string</property-class>
       <property-extension>

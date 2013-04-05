@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" rendered="false">
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:
+var writer = facesContext.getResponseWriter();
+facesContext.getExternalContext().getResponse().setContentType("text/plain");
+if ("yes" === param.status) {
+	writer.write(session.getEnvironmentString("unpIsReplicating", true));
+}
+else {
+	@Command("[ReplicatorReplicateHigh]");
+	writer.write("true");
+	
+	//force sessionscope reload
+	sessionScope.configLoaded = false;
+}
+writer.endDocument();
+}]]></xp:this.beforeRenderResponse
+></xp:view>

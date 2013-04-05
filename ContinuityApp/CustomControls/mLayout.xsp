@@ -136,50 +136,8 @@
 			
 		</div>
 		
-		<xc:unpFooter
-			newDocTarget="#{javascript:viewScope.newDocTarget}">
-			<xc:this.rendered><![CDATA[#{javascript:(isEmpty(compositeData.useCustomFooter) || compositeData.useCustomFooter=='false');}]]></xc:this.rendered>
+		<xc:unpFooter newDocTarget="#{javascript:viewScope.newDocTarget}">
 		</xc:unpFooter>
-
-		<!-- custom footer for calltree  -->
-		<xp:panel styleClass="footer black">
-
-			<xp:this.rendered><![CDATA[#{javascript:!isEmpty( compositeData.useCustomFooter ) && compositeData.useCustomFooter == 'true'}]]></xp:this.rendered>
-		
-			<div id="footer">
-		
-				<xp:panel tagName="div" id="panel1"
-					styleClass="button buttonPrevious"
-					rendered="#{javascript:viewScope.hasPreviousPage}">
-					<xp:this.attrs>
-						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper');"}]]></xp:this.value>
-						</xp:attr>
-					</xp:this.attrs>
-					<xp:text escape="true" id="computedField2">
-						<xp:this.value><![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")-1)}]]></xp:this.value>
-					</xp:text>
-				</xp:panel>
-				
-	
-				<xp:panel tagName="div" id="panel2"
-					styleClass="button buttonNext"
-					rendered="#{javascript:viewScope.hasNextPage}">
-					<xp:this.attrs>
-						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + "', 'contentwrapper');"}]]></xp:this.value>
-						</xp:attr>
-					</xp:this.attrs>
-					
-					<xp:text escape="true" id="computedField1">
-						<xp:this.value><![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")+1)}]]></xp:this.value>
-					</xp:text>
-
-				</xp:panel>
-				
-			</div>
-			
-		</xp:panel>
 
 	</div>
 

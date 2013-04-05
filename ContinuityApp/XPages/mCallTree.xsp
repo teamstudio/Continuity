@@ -64,8 +64,7 @@ viewScope.put("orderPosition", pos);
 }
 }]]></xp:this.beforePageLoad>
 
-	<xc:mLayout showMenu="true" useCustomFooter="true" pageTitle="Call tree"
-		backButtonURL="#{javascript:sessionScope.from;}">
+	<xc:mLayout showMenu="true" pageTitle="Call tree" backButtonURL="#{javascript:sessionScope.from;}">
 
 		<!--		<xc:this.pageTitle><![CDATA[#{javascript://viewScope.get("roleName");}]]></xc:this.pageTitle>-->
 
@@ -73,16 +72,52 @@ viewScope.put("orderPosition", pos);
 			<xp:div xp:key="contents">
 
 				<xp:div styleClass="box mBottom">
-					<div class="content">
-						Level&#160;
-						<xp:text escape="true" id="computedField3"
-							value="#{javascript:viewScope.orderPosition}">
-						</xp:text>
-						&#160;of call tree
+
+					<div class="content" style="padding: 11px">
+					
+						<xp:panel style="float: right" id="panel2"
+							styleClass="buttons" rendered="#{javascript:viewScope.hasNextPage}">
+							<xp:link id="link2" value="#">
+								<xp:this.text>
+									<![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")+1)}]]>
+								</xp:this.text>
+								
+								<xp:this.attrs>
+									<xp:attr name="onclick">
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+							</xp:link>
+		
+						</xp:panel>
+					
+						<xp:panel style="float: left" id="panel1"
+							styleClass="buttons" rendered="#{javascript:viewScope.hasPreviousPage}">
+							<xp:link id="link3" value="#">
+								<xp:this.attrs>
+									<xp:attr name="onclick">
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+								<xp:this.text>
+									<![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")-1)}]]>
+								</xp:this.text>
+							</xp:link>
+						</xp:panel>
+					
+						<div>
+							Level&#160;
+							<xp:text escape="true" id="computedField3"
+								value="#{javascript:viewScope.orderPosition}">
+							</xp:text>
+						</div>
 					</div>
+		
+					<div style="clear:both"></div>
+					
 				</xp:div>
 
-				<ul id="summaryList">
+				<ul id="summaryList" >
 
 					<xp:repeat id="repeat3" rows="250" var="row" disableOutputTag="true"
 						value="#{view2}">

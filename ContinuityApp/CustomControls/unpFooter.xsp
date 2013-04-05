@@ -13,92 +13,64 @@ the specific language governing permissions and limitations under the License
 	
 	<xp:panel styleClass="footer black">
 		
-	<div id="footer">
-	
-	
-		<xp:link id="link1" styleClass="syncButton" value="#"
-			rendered="#{javascript:isUnpluggedServer();}">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-					<xp:actionGroup>
-						<xp:executeScript>
-							<xp:this.script><![CDATA[#{javascript:db = session.getCurrentDatabase();
-db.replicate("someserver");
-
-//sync core database
-var dbCore:NotesDatabase = session.getDatabase(applicationScope.get("server") , applicationScope.get("coreDbPath") );
+		<div id="footer">
 		
-if (dbCore.isOpen()) {
-	dbCore.replicate("someserver");
-	dbCore.close();
-}
-
-//force sessionscope reload
-sessionScope.configLoaded = false;
-}]]></xp:this.script>
-						</xp:executeScript>
-						<xp:openPage name="/UnpMain.xsp"
-							target="openDocument">
-						</xp:openPage>
-					</xp:actionGroup>
-				</xp:this.action>
-				<xp:this.script><![CDATA[$.blockUI();]]></xp:this.script>
-			</xp:eventHandler>
-			<span>Sync</span>
-		</xp:link>
-		<!--
-			<xp:text value='#{javascript:var rep =
-			session.getEnvironmentString("ro.last.replicate", true); if (""==rep)
-			rep="(never)"; else rep=@Text(new Date(parseInt(rep))); return
-			"Updated: " + rep.substring(0,14);}' />
-		-->
-		<span class="updated">
-			<!-- iOS: returns date -->
-			Updated:&#160;
-			<xp:text
-				value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
-			  if (""==rep) { return "(never)" };
-			  rep}'>
-				<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) == 'string'}]]></xp:this.rendered>
-			</xp:text>
-
-			<!-- android: returns epoch ms -->
-			<xp:text
-				value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
-			  if (""==rep) { rep="(never)" };
-			 new Date( parseInt(rep) );}'>
-				<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) != 'string'}]]></xp:this.rendered>
-				<xp:this.converter>
-					<xp:convertDateTime type="both"></xp:convertDateTime>
-				</xp:this.converter>
-			</xp:text>
+			<xp:link value="" styleClass="syncButton" id="unpSync">
+				<xp:this.attrs>
+					<xp:attr name="onclick">
+						<xp:this.value><![CDATA[#{javascript:"$.blockUI(); $.get('unpReplicate.xsp', syncFunc); return false;"}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
 			
-		</span>
-
-		<xp:panel tagName="div" id="newButton" styleClass="newButton"
-			rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
-			<xp:this.attrs>
-				<xp:attr name="onclick">
-					
-					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href='" + compositeData.newDocTarget + "?action=newDocument';"}]]></xp:this.value>
-				</xp:attr>
-			</xp:this.attrs>
-			<span>New</span>
-		</xp:panel>
-		<xp:panel tagName="div" id="settingsButton"
-			styleClass="settingsButton">
-			<xp:this.attrs>
-				<xp:attr name="onclick">
-					<xp:this.value><![CDATA[#{javascript:"window.location.href='" + (sessionScope.isDebug ? "dbar.xsp" : compositeData.settingsurl) + "';"}]]></xp:this.value>
-				</xp:attr>
-			</xp:this.attrs>
-			<xp:this.rendered><![CDATA[#{javascript:compositeData.settingsurl != null && (compositeData.settingsurl.length > 0);}]]></xp:this.rendered>
-			<span>Settings</span>
-		</xp:panel>
+				<span>Sync</span>
+			</xp:link>
+			
+			<span class="updated">
+				<!-- iOS: returns date -->
+				Updated:&#160;
+				<xp:text
+					value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
+				  if (""==rep) { return "(never)" };
+				  rep}'>
+					<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) == 'string'}]]></xp:this.rendered>
+				</xp:text>
 	
-	</div>
+				<!-- android: returns epoch ms -->
+				<xp:text
+					value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
+				  if (""==rep) { rep="(never)" };
+				 new Date( parseInt(rep) );}'>
+					<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) != 'string'}]]></xp:this.rendered>
+					<xp:this.converter>
+						<xp:convertDateTime type="both"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+				
+			</span>
+	
+			<xp:panel tagName="div" id="newButton" styleClass="newButton"
+				rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
+				<xp:this.attrs>
+					<xp:attr name="onclick">
+						
+						<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href='" + compositeData.newDocTarget + "?action=newDocument';"}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+				<span>New</span>
+			</xp:panel>
+			<xp:panel tagName="div" id="settingsButton"
+				styleClass="settingsButton">
+				<xp:this.attrs>
+					<xp:attr name="onclick">
+						<xp:this.value><![CDATA[#{javascript:"window.location.href='" + (sessionScope.isDebug ? "dbar.xsp" : compositeData.settingsurl) + "';"}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+				<xp:this.rendered><![CDATA[#{javascript:compositeData.settingsurl != null && (compositeData.settingsurl.length > 0);}]]></xp:this.rendered>
+				<span>Settings</span>
+			</xp:panel>
+		
+		</div>
 	
 	</xp:panel>
-
+	
 </xp:view>

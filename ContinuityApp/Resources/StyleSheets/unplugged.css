@@ -1901,69 +1901,6 @@ source: .accordionRowSet>li
 	font-size: 16px;
 }
 
-.footer .buttonNext {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	padding: 0 12px 0 12px;
-}
-.footer .buttonPrevious {
-	position: absolute;
-	top: 12px;
-	left: 10px;
-	padding: 0 12px 0 12px;
-}
-
-.footer .buttonNext span,
-.footer .buttonPrevious span {
-	padding: 0;
-}
-/*
-.footer .buttonNext span {
-	background: url(right-arrow-white.png) 10px center no-repeat;
-	background-size: 11px 16px;
-}
-
-.footer .buttonPrevious span {
-	background: url(left-arrow-white.png) 10px center no-repeat;
-	background-size: 11px 16px;
-}
-*/
-
-@media screen and (max-width: 700px) {
-	.footer .buttonPrevious,
-		.footer .buttonNext {
-			top: 6px;
-			height: 34px;
-	}
-	
-	.footer .buttonPrevious {
-		left: 4px;
-	}
-	.footer .buttonNext {
-		right: 4px;
-	}
-	
-	.footer .buttonPrevious span,
-		.footer .buttonNext span {
-/*			text-indent: -9999px;
-			padding: 2px;
-			width: 34px;
-			background-position: center center;*/
-	}	
-	
-	
-
-}
-
-/* max width on images: 98% - for image viewer */
-@media screen and (max-width: 1000px) {
-	img.imgViewer {
-		max-width: 97%;
-		margin-left: 1%;
-	}
-}
-
 @media screen and (min-width: 1001px) {		 
 	img.imgViewer {
 		max-width: 97%;
