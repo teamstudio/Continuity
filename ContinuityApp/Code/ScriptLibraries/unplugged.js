@@ -275,9 +275,6 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		
 		//extract footer content from ajax request and update footer
 		if (loadFooter) {
-			
-			//TODO: check possible issue remove sync button node from children (won't work with ajax calls)
-			//var footerNode = $(data).find(".footer").children("a.syncButton").remove();
 			var footerNode = $(data).find(".footer")
 			$(".footer").html( footerNode );
 		}
@@ -596,6 +593,17 @@ function deactivateIncident(id, numOpenTasks) {
 	function(response) {
 		window.location.href = "mIncident.xsp?action=openDocument&documentId=" + id;
 	});
+}
+
+//function to initiate synchronisation of Continuity
+var syncFunc = function(data) {
+	if ("true" === data) {
+		setTimeout(function() { $.get("/_$$unp/replStatus", syncFunc); }, 500);
+	}
+	else {
+		$.unblockUI();
+		location.reload();
+	}
 }
 
 //remove click delay
