@@ -130,12 +130,9 @@ try{
 		var siteId = doc.getItemValueString("siteId");
 		var alertLevel = doc.getItemValueString("alertLevel");
 		
-		var dbCore = null;
-		
 		if (!applicationScope.isReadOnlyMode && isNew && (orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident) ) {
 			
-			dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-			var vwById = dbCore.getView("vwAllById");
+			var vwById = database.getView("vwAllById");
 			
 			//get org unit name and set alert level
 			var docTemp = vwById.getDocumentByKey(orgUnitId, true);
@@ -158,7 +155,7 @@ try{
 			//get scenario name (from current db)
 			var scenarioName = "";
 			if (scenarioId != "none") {
-				docTemp = database.getView("vwAllById").getDocumentByKey(scenarioId, true);
+				docTemp = vwById.getDocumentByKey(scenarioId, true);
 				if (null != docTemp) {
 				
 					assignTasks( doc, docTemp );
@@ -169,7 +166,7 @@ try{
 			}
 			doc.replaceItemValue("scenarioName", scenarioName);
 			
-			//get site name (from core db)
+			//get site name
 			var siteName = "";
 			docTemp = vwById.getDocumentByKey(siteId, true);
 			if (null != docTemp) {
@@ -181,8 +178,6 @@ try{
 			vwById.recycle();
 					
 		}
-		
-		var doMailSync = false;
 		
 		if (!applicationScope.isReadOnlyMode) {
 		
@@ -221,7 +216,7 @@ try{
 				
 				//ML: send email to all BC users in the system
 				dBar.debug("send mail to all users");
-				var vwBCUsers = dbCore.getView("vwBCUsers");
+				var vwBCUsers = database.getView("vwBCUsers");
 				var nav = vwBCUsers.createViewNav();
 				var ve = nav.getFirst();
 				while (null != ve) {
@@ -240,7 +235,6 @@ try{
 				}
 				
 				//force sync (for update)
-				doMailSync = true;
 				doSync = true;
 			}
 		
@@ -267,28 +261,14 @@ try{
 				
 				}
 				
-				doMailSync = true; 
+				doSync = true; 
 			
-			}
-			
-			if (doMailSync) {
-				//sync mail db
-				var mailDb = @MailDbName();
-				dbMail = session.getDatabase(mailDb[0], mailDb[1]);
-				dbMail.replicate("someserver");
-				dbMail.close();
 			}
 			
 			if (doSync) {
-				var db = session.getCurrentDatabase();
-				db.replicate("someserver");
-				
-				dbCore.replicate("someserver");
+				//sync mail and current db
+				@Command("[ReplicatorReplicateHigh]");
 			}
-		}
-		
-		if (dbCore != null) {
-			dbCore.close();
 		}
 		
 	}catch(e){

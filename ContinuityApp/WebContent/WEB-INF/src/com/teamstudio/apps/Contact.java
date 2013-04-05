@@ -176,19 +176,14 @@ public class Contact implements Serializable {
 	 */
 	public void create() {
 		
-		Database dbCore = null;
 		Document docContact = null;
 		View vwContactsById = null;
-		Session session = null;
 		
 		try {
 			
 			//try to find contact 
-			Configuration config = Configuration.get();
-			
-			session = ExtLibUtil.getCurrentSession();
-			dbCore = session.getDatabase( config.getServerName(), config.getCoreDbPath() );
-			vwContactsById = dbCore.getView("vwContactsByIdentifier");
+			Database dbCurrent = ExtLibUtil.getCurrentDatabase();
+			vwContactsById = dbCurrent.getView("vwContactsByIdentifier");
 			
 			docContact = vwContactsById.getDocumentByKey(importIdentifier, true);
 			
@@ -196,7 +191,7 @@ public class Contact implements Serializable {
 			
 				status = Contact.STATUS_NEW;
 				
-				docContact = dbCore.createDocument();
+				docContact = dbCurrent.createDocument();
 				docContact.replaceItemValue("form", "fContact");
 				docContact.replaceItemValue("status", status);
 				docContact.replaceItemValue("identifier", importIdentifier);
@@ -235,7 +230,7 @@ public class Contact implements Serializable {
 			Logger.error(e);
 		} finally {
 			
-			Utils.recycle(docContact, vwContactsById, dbCore);
+			Utils.recycle(docContact, vwContactsById);
 		}
 		
 	}
@@ -289,7 +284,6 @@ public class Contact implements Serializable {
 	
 			//create Unplugged configuration for this user
 			Unplugged.createApplication(userName, Configuration.get().getContinuityDbPath(), status.equals( Contact.STATUS_ACTIVE ));
-			Unplugged.createApplication(userName, Configuration.get().getCoreDbPath(), status.equals( Contact.STATUS_ACTIVE ));
 		}
 		
 	}
@@ -345,7 +339,6 @@ public class Contact implements Serializable {
 				//remove this Continuity application for this user from Unplugged
 				Vector<String> removeApps = new Vector<String>();
 				removeApps.add( Configuration.get().getContinuityDbPath() );
-				removeApps.add( Configuration.get().getCoreDbPath() );
 				
 				Unplugged.deleteApplication( userName, removeApps);
 				

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='114a' unid='202B72B48DB9765DC1257B44002C402F' sequence='1'>
+<created><datetime dst='true'>20130405T100320,15+02</datetime></created>
+<modified><datetime dst='true'>20130405T100322,46+02</datetime></modified>
+<revised><datetime dst='true'>20130405T100322,45+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130405T100322,46+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130405T100322,46+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwBCUsersByOrgUnit</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+zAACACoAAwAkMTEABQAEAG5hbWUBAAEAfAAiAgUACAB1c2VyTmFtZSICAwAFACoAJQAEAAkAAwAJ
+AAQAb3JnVW5pdElkJDExJENvbmZsaWN0JFJFRgAEAAQAAABcAAUABABGb3JtAQAIAGZDb250YWN0
+CgIFAAkAb3JnVW5pdElkAAEAAAALAhwCBQAIAHVzZXJUeXBlAQAEAG5vbmUBAAcAY29udGFjdAAf
+AgoCBAAeARwCAwAHABYAEAAJTDFTNFM1UzZTN1M4UzlT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+IAACAABEiGYHAAAJAIBmAAkAAwBvcmdVbml0SWQkMTE=
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAMACAAAAFZDAwAJAAkAAAAAAFAAAQAACQABAAAAAAAAAAICAAAAVkMBAAMADQA8AAAAiQAB
+AAAJAAAAAAAAAAAAAgIAAABvcmdVbml0SWRvcmdVbml0SWQkMTFuYW1lfHVzZXJuYW1lPAACACoA
+AwAkMTEABQAEAG5hbWUBAAEAfAAiAgUACAB1c2VyTmFtZSICAwAHABAACQAJMVMyUzNTNFMAJgAB
+AAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAA
+AAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8A
+AAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8A
+AAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

@@ -103,11 +103,12 @@ public class Utils {
 	 */
 	public static void fieldValueChange( String matchField, String matchValue, String fieldName, String fieldValue) {
 		try {
+			
 			Session sessionAsSigner = Utils.getCurrentSessionAsSigner();
-
 			Database dbCurrent = sessionAsSigner.getCurrentDatabase();
 			
 			fieldValueChange(dbCurrent, matchField, matchValue, fieldName, fieldValue );
+			
 		} catch (NotesException e) {
 			Logger.error(e);
 		}

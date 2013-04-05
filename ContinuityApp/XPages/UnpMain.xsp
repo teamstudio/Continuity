@@ -11,8 +11,7 @@
 //allowed only for bc editors: set context to a different OU
 if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 
-	var dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-	var docOrgUnit = dbCore.getDocumentByUNID( orgUnid);
+	var docOrgUnit = database.getDocumentByUNID( orgUnid);
 				
 	if (docOrgUnit != null) {
 	
@@ -21,8 +20,6 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 		sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 
 	}
-	
-	dbCore.close();
 
 }
 } catch (e) {

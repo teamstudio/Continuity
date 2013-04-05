@@ -16,7 +16,7 @@
 	<xe:valuePicker id="valuePicker1" for="djextListTextOwner" dialogTitle="#{compositeData.dlgTitle}">
 		<xe:this.dataProvider>
 			<xe:simpleValuePicker labelSeparator="|">
-				<xe:this.valueList><![CDATA[#{javascript:@DbColumn( ["",configBean.coreDbPath], "vwContactsLU", 1)}]]></xe:this.valueList>
+				<xe:this.valueList><![CDATA[#{javascript:@DbColumn( @DbName(), "vwContactsLU", 1)}]]></xe:this.valueList>
 			</xe:simpleValuePicker>
 		</xe:this.dataProvider>
 	</xe:valuePicker>

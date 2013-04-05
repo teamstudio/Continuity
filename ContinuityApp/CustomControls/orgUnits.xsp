@@ -3,7 +3,7 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<xp:this.data>
-		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits" databaseName="${configBean.coreDbPath}"></xp:dominoView>
+		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits"></xp:dominoView>
 	</xp:this.data>
 	
 	<xc:settingsForm></xc:settingsForm>
@@ -69,7 +69,7 @@
 				</td>
 				<td>
 					<xp:link escape="true" text="#{row.images}" id="link1" target="_blank">
-						<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + configBean.coreDbUrl + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value>
 					</xp:link>
 				</td>
 				

@@ -4,7 +4,6 @@
 
 	<xp:this.data>
 		<xp:dominoView var="view2"
-			databaseName="#{javascript:applicationScope.coreDbPath}"
 			viewName="vwContactsByRole">
 			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId") + "-" + viewScope.get("roleId")}]]></xp:this.categoryFilter>
 		</xp:dominoView>
@@ -150,11 +149,11 @@ return out;}]]></xp:this.styleClass>
 
 										<xp:image id="image3" styleClass="roundedBorders">
 											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length>0}]]></xp:this.rendered>
-											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + row.getColumnValue("photo");}]]></xp:this.url>
+											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + row.getColumnValue("photo");}]]></xp:this.url>
 										</xp:image>
 										<xp:image id="image2" styleClass="roundedBorders">
 											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length==0}]]></xp:this.rendered>
-											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + "/noProfile.gif";}]]></xp:this.url>
+											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/noProfile.gif";}]]></xp:this.url>
 										</xp:image>
 
 									</td>

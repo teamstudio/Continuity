@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	
 	<xp:this.data>
-		<xp:dominoView var="vwSites" viewName="vwSites" databaseName="${configBean.coreDbPath}"></xp:dominoView>
+		<xp:dominoView var="vwSites" viewName="vwSites"></xp:dominoView>
 	</xp:this.data>
 	
 	<div class="section">
@@ -65,7 +65,7 @@
 				
 				<td>
 					<xp:link escape="true" text="#{row.images}" id="link1" target="_blank">
-					<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + configBean.coreDbUrl + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value></xp:link>
+					<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value></xp:link>
 				</td>
 		
 			</xp:tr>

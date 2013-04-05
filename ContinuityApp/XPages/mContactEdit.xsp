@@ -3,16 +3,13 @@
 
 	<xp:this.beforeRenderResponse><![CDATA[#{javascript:
 	
-	var db = null;
-	
 	try {
 	var unid = param.get("documentId");
 	
-	db = session.getDatabase("", applicationScope.coreDbPath);
-	var docContact = db.getDocumentByUNID(unid );
+	var docContact = database.getDocumentByUNID(unid );
 	
 	if (docContact==null) {
-		print("error: target document not found (id: " + unid + ", db: " + applicationScope.coreDbPath );
+		print("error: target document not found (id: " + unid + ")");
 	} else {
 	
 		viewScope.unid = unid;
@@ -44,9 +41,6 @@
 	print(e);
 } finally {
 
-	try {
-		db.close();
-	} catch (e) { }
 }
 }]]></xp:this.beforeRenderResponse>
 	<xc:unpScrollableArea>
@@ -67,7 +61,7 @@
 							
 							<td style="width: 27%; text-align: right">
 								<xp:image id="image1" style="width: 75px; height: 75px;" >
-									<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
+									<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
 								</xp:image>
 							</td>
 							<td>

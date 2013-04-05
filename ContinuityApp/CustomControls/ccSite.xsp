@@ -9,7 +9,7 @@
 
 	<xp:this.data>
 		<xp:dominoDocument var="docSite" formName="fSite"
-			action="editDocument" databaseName="${configBean.coreDbPath}">
+			action="editDocument">
 		</xp:dominoDocument>
 	</xp:this.data>
 

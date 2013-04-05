@@ -13,34 +13,26 @@
 	try {
 	
 		var contacts = [];
-		var dbCore:NotesDatabase = session.getDatabase("" , applicationScope.get("coreDbPath") );
 		
 		//dBar.debug("get selected");
 		
-		if (dbCore.isOpen()) {
+		var vwContacts:NotesView = database.getView("vwContactsByOrgUnit");
+		var vec:NotesViewEntryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("orgUnitId"), true);
+		var ve:NotesViewEntry = vec.getFirstEntry();
+		
+		while (null != ve) {
+		
+			var option = ve.getColumnValues().get(1);
 			
-			var vwContacts:NotesView = dbCore.getView("vwContactsByOrgUnit");
-			var vec:NotesViewEntryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("orgUnitId"), true);
-			var ve:NotesViewEntry = vec.getFirstEntry();
-			
-			while (null != ve) {
-			
-				var option = ve.getColumnValues().get(1);
-				
-				if (option.length>0) {
-					contacts.push( option );
-				}
-				
-				veTemp = vec.getNextEntry();
-				ve.recycle();
-				ve = veTemp;
+			if (option.length>0) {
+				contacts.push( option );
 			}
-
-			if (applicationScope.get("isUnplugged") ) { dbCore.close(); }
 			
-		} else {
-			dBar.debug("database at " + applicationScope.get("coreDbPath") + " could not be opened");
+			veTemp = vec.getNextEntry();
+			ve.recycle();
+			ve = veTemp;
 		}
+
 		
 		viewScope.put("contacts", contacts);
 	} catch (e) {

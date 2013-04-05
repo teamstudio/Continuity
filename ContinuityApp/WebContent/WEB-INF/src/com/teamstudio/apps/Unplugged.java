@@ -4,6 +4,7 @@ import lotus.domino.*;
 
 import java.util.Vector;
 
+import com.ibm.commons.util.StringUtil;
 import com.teamstudio.continuity.Configuration;
 import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
@@ -216,6 +217,51 @@ public class Unplugged {
 		}
 		
 		
+	}
+	
+	//removes an application from the Unplugged config
+	public static boolean deleteApplication( Session sessionAsSigner, String appPath, String unpluggedPath ) {
+		
+		Database dbUnplugged = null;
+		DocumentCollection dcApp = null;
+		
+		boolean success = false;
+		
+		try {
+			
+			if ( StringUtil.isNotEmpty(appPath) ) {
+				
+				Logger.info("Removing reference to " + appPath + " in Unplugged config");
+				
+				//open unplugged db and get application document
+				dbUnplugged = sessionAsSigner.getDatabase( "", unpluggedPath);
+				
+				//search with backward or forward slash
+				String forwardPath = appPath.replace("\\", "/");
+				String backwardPath = appPath.replace("/", "\\\\\\");
+				
+				String query = "Form=\"UserDatabase\" & (Path=\"" + forwardPath + "\":\"" + backwardPath + "\")";
+				Logger.info("Query: " + query);
+				
+				dcApp = dbUnplugged.search(query);
+				
+				if (dcApp.getCount() == 1) {	
+					dcApp.removeAll(true);
+				}
+				
+			}
+			
+			success = true;
+										
+		} catch (Exception e) {
+			Logger.error(e);
+		} finally {
+			
+			Utils.recycle(dcApp, dbUnplugged);
+		}
+		
+		return success;
+
 	}
 	
 }

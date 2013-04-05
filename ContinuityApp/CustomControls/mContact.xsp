@@ -2,13 +2,10 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
 
 		<xp:this.beforeRenderResponse><![CDATA[#{javascript:
-		var db = null;
-		
 		try {
 	var unid = param.get("documentId")
 	
-	db = session.getDatabase("", applicationScope.coreDbPath);
-	var docContact = db.getDocumentByUNID(unid );
+	var docContact = database.getDocumentByUNID(unid );
 	
 	viewScope.unid = unid;
 	viewScope.userName = docContact.getItemValueString("userName");
@@ -35,14 +32,9 @@ viewScope.email = docContact.getItemValueString("email");
 
 viewScope.editMode = false;
 
-db.close();
 } catch (e) {
 	print(e);
 } finally {
-
-	try {
-		db.close();
-	} catch (e) { }
 
 }
 }]]></xp:this.beforeRenderResponse>
@@ -83,7 +75,7 @@ db.close();
 					<xp:image id="image1"
 						style="width: 70px; height: 70px;"
 						styleClass="thumbnail roundedBorders">
-						<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
+						<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
 					</xp:image>
 				</div>
 

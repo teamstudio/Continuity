@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='21a' unid='75664C71A3ED1810C1257AD300704FDE' sequence='19'>
+<noteinfo noteid='21a' unid='75664C71A3ED1810C1257AD300704FDE' sequence='20'>
 <created><datetime>20121213T212644,78+01</datetime></created>
-<modified><datetime>20130329T115801,49+01</datetime></modified>
-<revised><datetime>20130329T115801,48+01</datetime></revised>
-<lastaccessed><datetime>20130329T115801,49+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20130405T094811,60+02</datetime></modified>
+<revised><datetime dst='true'>20130405T094811,59+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130405T094811,60+02</datetime></lastaccessed>
 <addedtofile><datetime>20130307T155645,03+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -33,15 +33,12 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <item name='installBasePath' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='coreDbTemplatePath' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
 <item name='continuityDbTemplatePath' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
 <item name='$Fields'><textlist><text>continuityDbTemplatePath</text><text
->coreDbTemplatePath</text><text>installBasePath</text><text>hostUrl</text><text
->unpluggedDbPath</text><text>directoryDbPath</text></textlist></item>
+>installBasePath</text><text>hostUrl</text><text>unpluggedDbPath</text><text
+>directoryDbPath</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -61,13 +58,10 @@ AAAAAAAAAADeBgAAiv+F/wgAAQAACoECgwQBAIX/CAABAAAKgQKDBAEAhf8IAAEAAAqBAoMEAQCF
 AAAAAAAAAAAAAAAAAHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv80
 AIoAAAUAMAIAAAAAAAACAQAACgAAAAAAAAAADwAAAAAAaW5zdGFsbEJhc2VQYXRoAGIOAQCEAAAA
 AAAAAAAA3gYAAIr/hf8IAAEAAAqBAoMEAQCF/wgAAQAACoECgwQBAIX/CAABAAAKgQKDBAEAhf8R
-AAEFAApUZW1wbGF0ZXMAgQKDBAEAhf8IAAEFAAqBAoMEAQCF/x0AAQAACmNvcmVEYlRlbXBsYXRl
-UGF0aDoJCQDdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/NgCKAAAFADACAAAAAAAAAgEA
-AAoAAAAAAAAAABIAAAAAAGNvcmVEYlRlbXBsYXRlUGF0aGIOAQCEAAAAAAAAAAAA3gYAAIr/hf8I
-AAEAAAqBAoMEAQCF/yIAAQAACmNvbnRpbnVpdHlEYlRlbXBsYXRlUGF0aDoJ3QYAAIr//v9QAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAACK/zwAigAABQAwAgAAAAAAAAIBAAAKAAAAAAAAAAAYAAAAAABjb250
-aW51aXR5RGJUZW1wbGF0ZVBhdGhiDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAK
+AAEFAApUZW1wbGF0ZXMAgQKDBAEAhf8IAAEFAAqBAoMEAQCF/yIAAQAACmNvbnRpbnVpdHlEYlRl
+bXBsYXRlUGF0aDoJ3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+eAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK/zwAigAABQAwAgAAAAAA
+AAIBAAAKAAAAAAAAAAAYAAAAAABjb250aW51aXR5RGJUZW1wbGF0ZVBhdGhiDgEAhAAAAAAAAAAA
+AN4GAACK/4X/CAABAAAK
 </rawitemdata></item></note>
 

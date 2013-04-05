@@ -1,12 +1,10 @@
 function init( theme:String) {
 	
-	var dbCore:NotesDatabase = null;
-	
 	try {
 		
 		//load the application configuration
 		loadAppConfig(false);
-		
+	/*	
 		if (!isUnplugged()) { 
 			var currentTheme = context.getSessionProperty("xsp.theme");
 
@@ -19,6 +17,7 @@ function init( theme:String) {
 	
 			}
 		}
+	*/
 		
 		var currentUser = @UserName();
 		
@@ -41,19 +40,7 @@ function init( theme:String) {
 			sessionScope.put("userName", currentUser);
 			
 			//retrieve information from user's profile
-			dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-			
-			var docUser:NotesDocument = null;
-			
-			if (dbCore == null || !dbCore.isOpen() ) {
-				
-				throw("could not open core database at " + applicationScope.get("coreDbPath"));
-				
-			} else {
-				
-				docUser = dbCore.getView("vwContactsByUsername").getDocumentByKey( currentUser, true);
-					
-			}
+			var docUser:NotesDocument = database.getView("vwContactsByUsername").getDocumentByKey( currentUser, true);
 			
 			if (docUser==null) {
 				dBar.error("could not retrieve user profile");	
@@ -144,7 +131,7 @@ function init( theme:String) {
 				var orgUnitId = sessionScope.get("orgUnitId");
 				if (orgUnitId.length>0) {
 				
-					var vwOrgUnits = dbCore.getView("vwAllById");
+					var vwOrgUnits = database.getView("vwAllById");
 					var docOrgUnit = vwOrgUnits.getDocumentByKey( orgUnitId, true);
 				
 					if (docOrgUnit != null) {
@@ -173,10 +160,7 @@ function init( theme:String) {
 	} catch (e) {
 		dBar.error( e.toString() );
 	} finally {
-		try {
-			dbCore.close();
-		} catch (e) { }
-		
+
 	}
 }		//end init()
 
@@ -224,28 +208,15 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			applicationScope.put("toolbarConfig", "[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],  ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText'], ['NumberedList','BulletedList','Blockquote'], ['Link', 'Unlink']]");
 			
-			//find path to core database
 			var vwSettings:NotesView = database.getView("vwSettings");
 			var docSettings:NotesDocument = vwSettings.getDocumentByKey("fSettings", true);
 			
 			if (docSettings == null ) {
 				
-				print("error: path to core database could not be set");
+				print("error: settings document not found");
 				
 			} else {
 			
-				var coreDbPath:String = docSettings.getItemValueString("coreDbPath");
-			
-				if (isUnplugged()) { 
-					coreDbPath = @Left(coreDbPath, ".nsf") + ".unp";
-				}
-				
-				//replace backward with forward slashes (else we can't open the databases)
-				coreDbPath = @ReplaceSubstring(coreDbPath, "\\", "/");
-			
-				applicationScope.put("coreDbPath", coreDbPath);
-				applicationScope.put("coreDbUrl", "/" + coreDbPath );
-				
 				applicationScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));				
 			}
 			
@@ -299,64 +270,55 @@ function loadAppConfig( forceUpdate:boolean ) {
 			vecRoles.recycle();
 			vwRoles.recycle();
 		
-			//get all ou's from core database
+			//get all ou's
 			var veTemp:NotesViewEntry = null;
-
-			var dbCore:NotesDatabase = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-			
-			if (!dbCore.isOpen()) {
 				
-				throw("error: could not open core database at " + applicationScope.get("coreDbPath"));
-			
-			} else {
+			//store a list of all org units in the application scope
+			var vwOrgUnits:NotesView = database.getView("vwOrgUnits");
+			var vecOrgUnits:NotesViewEntryCollection = vwOrgUnits.getAllEntries();
+			var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
+		
+			var orgUnitChoices = [];
+			var orgUnits = getMap();
+						
+			while (null != veOrgUnit) {
 				
-				//store a list of all org units in the application scope
-				var vwOrgUnits:NotesView = dbCore.getView("vwOrgUnits");
-				var vecOrgUnits:NotesViewEntryCollection = vwOrgUnits.getAllEntries();
-				var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
-			
-				var orgUnitChoices = [];
-				var orgUnits = getMap();
-							
-				while (null != veOrgUnit) {
-					
-					var colValues = veOrgUnit.getColumnValues();
-					var name = colValues.get(0);
-					var id = colValues.get(2);
-					
-					orgUnitChoices.push( colValues.get(1) );
-					
-					orgUnits[id] = name;
-					
-					veTemp = vecOrgUnits.getNextEntry();
-					veOrgUnit.recycle();
-					veOrgUnit = veTemp;
-				}
+				var colValues = veOrgUnit.getColumnValues();
+				var name = colValues.get(0);
+				var id = colValues.get(2);
 				
-				applicationScope.put("orgUnitChoices", orgUnitChoices);
-				applicationScope.put("orgUnits", orgUnits);
+				orgUnitChoices.push( colValues.get(1) );
 				
-				vwOrgUnits.recycle();
+				orgUnits[id] = name;
 				
-				//store a list of all sites in the application scope (for combobox/ radio selections)
-				var vwSites:NotesView = dbCore.getView("vwSites");
-				var vecSites:NotesViewEntryCollection = vwSites.getAllEntries();
-				var veSite:NotesViewEntry = vecSites.getFirstEntry();
-				
-				var siteChoices = [];
-				
-				while (null != veSite) {
-					siteChoices.push( veSite.getColumnValues().get(1) );
-					
-					veTemp = vecSites.getNextEntry();
-					veSite.recycle();
-					veSite = veTemp;
-				}
-	
-				applicationScope.put("siteChoices", siteChoices);
-				
-				vwSites.recycle();
+				veTemp = vecOrgUnits.getNextEntry();
+				veOrgUnit.recycle();
+				veOrgUnit = veTemp;
 			}
+			
+			applicationScope.put("orgUnitChoices", orgUnitChoices);
+			applicationScope.put("orgUnits", orgUnits);
+			
+			vwOrgUnits.recycle();
+			
+			//store a list of all sites in the application scope (for combobox/ radio selections)
+			var vwSites:NotesView = database.getView("vwSites");
+			var vecSites:NotesViewEntryCollection = vwSites.getAllEntries();
+			var veSite:NotesViewEntry = vecSites.getFirstEntry();
+			
+			var siteChoices = [];
+			
+			while (null != veSite) {
+				siteChoices.push( veSite.getColumnValues().get(1) );
+				
+				veTemp = vecSites.getNextEntry();
+				veSite.recycle();
+				veSite = veTemp;
+			}
+
+			applicationScope.put("siteChoices", siteChoices);
+			
+			vwSites.recycle();
 			
 			dBar.debug("done");
 
@@ -369,10 +331,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 	} catch (e) {
 		dBar.error( e.toString() );
 	} finally {
-		try {
-			dbCore.close();
-		} catch (e) { }
-	
+		
 	}
 	
 }
@@ -398,8 +357,7 @@ function setLastViewedItem( targetView, lastViewedItemName ) {
 			var docLastUpdate:NotesDocument = targetView.getFirstDocument();
 			
 			//open user's profile
-			var dbCore:NotesDatabase = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-			var docUser = dbCore.getDocumentByUNID( sessionScope.profileUnid );
+			var docUser = database.getDocumentByUNID( sessionScope.profileUnid );
 			
 			if (docUser != null) {
 			
@@ -417,7 +375,6 @@ function setLastViewedItem( targetView, lastViewedItemName ) {
 				
 			}
 
-			dbCore.close()
 		}
 		
 		//store a variable in the sessionScope indicating that we don't need to perform this action again during the current session
@@ -491,16 +448,15 @@ function getProfilePhotoUrl( userName:String, forceUpdate:boolean ) {
 	
 		var profilePhotos = applicationScope.get("profilePhotos") || getMap();
 		
-		var profilePhotoBaseUrl:String = ( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("coreDbUrl");
+		var profilePhotoBaseUrl:String = ( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl");
 		var profilePhotoUrl:String = profilePhotoBaseUrl + "/noProfile.gif";
 		
 		if (!profilePhotos[userName] || forceUpdate) {
 			
 			//dBar.debug("get image for " + userName + " from db");
 			
-			//retrieve url to user's profile photo in core database
-			var dbCore:NotesDatabase = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-			var vwContacts:NotesView = dbCore.getView("vwContactsByUsername");
+			//retrieve url to user's profile photo
+			var vwContacts:NotesView = database.getView("vwContactsByUsername");
 			var veUser:NotesViewEntry = vwContacts.getEntryByKey( userName, true);
 			
 			if ( veUser != null) {
@@ -533,10 +489,6 @@ function getProfilePhotoUrl( userName:String, forceUpdate:boolean ) {
 		dBar.error(e);	
 	
 	} finally {
-		
-		try {
-			dbCore.close();
-		} catch (e) { }
 	
 	}
 		

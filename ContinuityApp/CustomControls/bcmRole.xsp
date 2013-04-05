@@ -43,7 +43,7 @@ if (siteIds != null) {
 		var siteId = siteIds[i]
 	
 		if (siteId != null && siteId.length>0) {
-			var siteName = @DbLookup( ["",configBean.coreDbPath], "vwAllById", siteId, "name", "[FailSilent]");
+			var siteName = @DbLookup( @DbName(), "vwAllById", siteId, "name", "[FailSilent]");
 			siteNames.push( siteName);	
 		}	
 	}
@@ -61,7 +61,7 @@ if (orgUnitIds != null) {
 		var orgUnitId = orgUnitIds[j];
 	
 		if (orgUnitId != null && orgUnitId.length>0) {
-			var orgUnitName = @DbLookup( ["", configBean.coreDbPath] , "vwAllById", orgUnitId, "name", "[FailSilent]");
+			var orgUnitName = @DbLookup( @DbName() , "vwAllById", orgUnitId, "name", "[FailSilent]");
 			orgUnitNames.push( orgUnitName);
 		}
 	}
@@ -190,7 +190,7 @@ getComponent(compositeData.dynContentId).show("rolesList");}]]></xp:this.action>
 				<xp:checkBoxGroup id="checkBoxGroupSites"
 					value="#{docRole.siteIds}">
 					<xp:selectItems>
-						<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( ["", configBean.coreDbPath], "vwSites", 2);
+						<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwSites", 2);
 						return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
 					</xp:selectItems>
 				</xp:checkBoxGroup>

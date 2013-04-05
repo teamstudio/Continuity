@@ -380,29 +380,29 @@ public class AccountFunctions implements Serializable {
 	private Document getUserProfile(String userName) {
 		
 		Document docUserProfile = null;
-		Database dbCore = null;
+		Database dbContinuity = null;
 		View vwUserProfiles = null;
 		Session sessionAsSigner = null;
 		
 		try {
 			
-			String coreDbPath = config.getCoreDbPath(orgAlias);
+			String continuityDbPath = config.getContinuityDbPath(orgAlias);
 			
-			if ( StringUtil.isNotEmpty(coreDbPath) ) {
+			if ( StringUtil.isNotEmpty(continuityDbPath) ) {
 		
-				//open core database and mark user's account as active
+				//open Continuity database and mark user's account as active
 				sessionAsSigner = ExtLibUtil.getCurrentSessionAsSigner();
-				dbCore = sessionAsSigner.getDatabase( config.getServerName(), coreDbPath);
-				vwUserProfiles = dbCore.getView("vwContactsByUsername");
+				dbContinuity = sessionAsSigner.getDatabase( config.getServerName(), continuityDbPath);
+				vwUserProfiles = dbContinuity.getView("vwContactsByUsername");
 				docUserProfile = vwUserProfiles.getDocumentByKey(userName );
 				
 				if (docUserProfile==null) {
-					Logger.warn("user document for " + userName + " could not be found in " + coreDbPath);
+					Logger.warn("user document for " + userName + " could not be found in " + continuityDbPath);
 				}
 
 			} else {
 				
-				Logger.warn("core database path not specified for user " + userName + "' organisation");
+				Logger.warn("continuity database path not specified for user " + userName + "' organisation");
 				
 			}
 			

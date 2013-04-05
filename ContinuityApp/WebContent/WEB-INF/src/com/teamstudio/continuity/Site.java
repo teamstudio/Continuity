@@ -26,11 +26,11 @@ public class Site {
 			
 			String id = docSite.getItemValueString("id");
 
-			//find all documents that reference this site in the current and core databsae
+			//find all documents that reference this site in the current databsae
 			removeReferenceFromAllDocs(ExtLibUtil.getCurrentDatabase(), id);
 			removeReferenceFromAllDocs(docSite.getParentDatabase(), id);
 			
-			//remove site document in core database
+			//remove site document
 			docSite.remove(true);
 			
 			success = true;

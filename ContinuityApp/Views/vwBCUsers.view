@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='1146' unid='A4383D99E07DC1F0C1257B44002C402E' sequence='1'>
+<created><datetime dst='true'>20130405T100320,14+02</datetime></created>
+<modified><datetime dst='true'>20130405T100322,44+02</datetime></modified>
+<revised><datetime dst='true'>20130405T100322,43+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130405T100322,44+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130405T100322,44+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+igAFAC4AKQAEAAgACAAJAAQAdXNlck5hbWVsYXN0TmFtZSRDb25mbGljdCRSRUYABAAEAAAARAAF
+AAQARm9ybQEACABmQ29udGFjdAoCBQAGAHJvbGVJZAEABABub25lAQAHAGNvbnRhY3QAHwIKAgQA
+HgEcAgMABwASAAwACUwxUzRTNVM4UzlT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FQABAABEAGYAAAAIAHVzZXJOYW1l
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAIACAAAAFZDAQAIAAgAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAAB1c2VyTmFtZXVzZXJOYW1lbGFzdE5hbWVsYXN0TmFtZSYAAQAAAAEB
+AAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAA
+AAAAAAAAAABCAAAAAAABAP///wAFAP///wABAAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAA
+AAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$TITLE' sign='true'><text>vwBCUsers|unpBCUsers</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+

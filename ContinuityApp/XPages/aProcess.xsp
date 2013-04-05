@@ -55,9 +55,8 @@ if (!applicationScope.isReadOnlyMode) {
 			veTask = vecOpenTasks.getNextEntry();
 		}
 		
-		//ML: Update alert level of OU in org unit doc (from core db)
-		var dbCore = session.getDatabase( applicationScope.get("server"), applicationScope.get("coreDbPath") );
-		var vwById = dbCore.getView("vwAllById");
+		//ML: Update alert level of OU in org unit doc
+		var vwById = database.getView("vwAllById");
 		var docTemp = vwById.getDocumentByKey(doc.getItemValueString("orgUnitId"), true);
 		if (null != docTemp) {
 			
@@ -93,7 +92,7 @@ if (!applicationScope.isReadOnlyMode) {
 		
 		//ML: send email to all BC users in the system
 		dBar.debug("send mail to all users");
-		var vwBCUsers = dbCore.getView("vwBCUsers");
+		var vwBCUsers = database.getView("vwBCUsers");
 		var nav = vwBCUsers.createViewNav();
 		var ve = nav.getFirst();
 		while (null != ve) {
@@ -111,19 +110,8 @@ if (!applicationScope.isReadOnlyMode) {
 			ve = nav.getNext();
 		}
 		
-		//sync mail, current and core db
-	
-		var mailDb = @MailDbName();
-		dbMail = session.getDatabase(mailDb[0], mailDb[1]);
-		dbMail.replicate("someserver");
-		dbMail.close();
-			
-		var db = session.getCurrentDatabase();
-		db.replicate("someserver");
-		
-		dbCore.replicate("someserver");
-		
-		dbCore.close();
+		//sync mail and current db
+		@Command("[ReplicatorReplicateHigh]");
 		
 	} else if (param.get("type").equals("task") ) {
 		

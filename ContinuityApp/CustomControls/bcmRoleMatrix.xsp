@@ -9,10 +9,10 @@
 		<xp:dominoView var="vwRoles">
 			<xp:this.viewName><![CDATA[#{javascript:"vwRoles"}]]></xp:this.viewName>
 		</xp:dominoView>
-		<xp:dominoView var="vwOrgUnits" databaseName="${configBean.coreDbPath}">
+		<xp:dominoView var="vwOrgUnits">
 			<xp:this.viewName><![CDATA[#{javascript:"vwOrgUnits"}]]></xp:this.viewName>
 		</xp:dominoView>
-		<xp:dominoView var="vwContactsByRole" databaseName="${configBean.coreDbPath}">
+		<xp:dominoView var="vwContactsByRole">
 			<xp:this.viewName><![CDATA[#{javascript:"vwContactsByRole"}]]></xp:this.viewName>
 		</xp:dominoView>
 	</xp:this.data>
@@ -59,8 +59,7 @@
 											<xp:eventHandler event="onclick" submit="true"
 												refreshMode="partial" refreshId="bcmRoleMatrix">
 												<xp:this.action><![CDATA[#{javascript://clear bc role for this user
-												var dbCore:NotesDatabase = session.getDatabase( "", applicationScope.get("coreDbPath") );
-												var docContact = dbCore.getDocumentByUNID( userRow.getUniversalID() );		
+												var docContact = database.getDocumentByUNID( userRow.getUniversalID() );		
 		docContact.replaceItemValue("roleId", "none");
 		docContact.replaceItemValue("roleName", "");
 		docContact.save();
@@ -105,7 +104,7 @@
 													itemValue="">
 												</xp:selectItem>
 												<xp:selectItems>
-													<xp:this.value><![CDATA[#{javascript:@DbLookup( configBean.coreDbPath , "vwBCUsersByOrgUnit", ouRow.getColumnValue("id"), 2);}]]></xp:this.value>
+													<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName() , "vwBCUsersByOrgUnit", ouRow.getColumnValue("id"), 2);}]]></xp:this.value>
 												</xp:selectItems>
 											</xp:comboBox>
 
@@ -133,10 +132,8 @@ var userName = getComponent("comboBoxSelectedContact").getValue();
 var isAlternate = getComponent("cbAlternate").getValue();
 
 //dBar.debug("user: " + userName +", alternate?" + isAlternate);
-
-var dbCore:NotesDatabase = session.getDatabase( "", applicationScope.get("coreDbPath") );
 												
-var docContact = dbCore.getView("vwContactsByUsername").getDocumentByKey( userName, true);
+var docContact = database.getView("vwContactsByUsername").getDocumentByKey( userName, true);
 
 var currentRoleId = docContact.getItemValueString("roleId");
 var newRoleId = roleRow.getColumnValue("id");

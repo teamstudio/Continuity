@@ -31,7 +31,6 @@ public class Configuration implements Serializable {
 	private String unpluggedDbPath;
 	private String relativeDbUrl;
 	
-	private String coreDbTemplatePath;
 	private String continuityDbTemplatePath;
 	private String installBasePath; 
 	
@@ -41,7 +40,6 @@ public class Configuration implements Serializable {
 	public static final String ROLE_DEBUG = "[debug]";
 
 	private HashMap<String, String> orgContinuityPaths;
-	private HashMap<String, String> orgCorePaths;
 
 	//read the configuration for the logins/ self-service database
 	public Configuration() {
@@ -56,7 +54,6 @@ public class Configuration implements Serializable {
 			dbCurrent = Utils.getCurrentDatabase();
 			
 			orgContinuityPaths = new HashMap<String, String>();
-			orgCorePaths = new HashMap<String, String>();
 			
 			server = dbCurrent.getServer();
 			loginsDbPath = dbCurrent.getFilePath();
@@ -74,7 +71,6 @@ public class Configuration implements Serializable {
 				directoryDbPath = docSettings.getItemValueString("directoryDbPath");
 				unpluggedDbPath = docSettings.getItemValueString("unpluggedDbPath");
 				
-				coreDbTemplatePath = docSettings.getItemValueString("coreDbTemplatePath");
 				continuityDbTemplatePath = docSettings.getItemValueString("continuityDbTemplatePath");
 				installBasePath = docSettings.getItemValueString("installBasePath");
 				
@@ -180,14 +176,8 @@ public class Configuration implements Serializable {
 	
 	//retrieve the path to the Continuity database of the specified organisation (using the alias)
 	//the path is stored in the application scope for faster retrievals
-	private String getContinuityDbPath( String orgAlias) {
+	public String getContinuityDbPath( String orgAlias) {
 		return this.getOrganisationSetting(orgAlias, 3, orgContinuityPaths);
-	}
-	
-	//retrieve the path to the core database of the specified organisation (using the alias)
-	//the path is stored in the application scope for faster retrievals
-	public String getCoreDbPath( String orgAlias) {
-		return this.getOrganisationSetting(orgAlias, 2, orgCorePaths);
 	}
 	
 	private String getOrganisationSetting(String orgAlias, int colIndex, HashMap<String,String> cacheMap) {
@@ -274,10 +264,6 @@ public class Configuration implements Serializable {
 		
 		return sb.toString();
 		
-	}
-
-	public String getCoreDbTemplatePath() {
-		return coreDbTemplatePath;
 	}
 
 	public String getContinuityDbTemplatePath() {

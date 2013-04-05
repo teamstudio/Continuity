@@ -63,19 +63,6 @@
 						</xp:link>
 					</xp:viewColumn>
 					
-					<xp:viewColumn columnName="coreDbPath"
-						id="viewColumn3" value="">
-						<xp:viewColumnHeader value="Core database"
-							id="viewColumnHeader3">
-						</xp:viewColumnHeader>
-
-						<xp:link target="_blank" escape="true"
-							text="#{javascript:row.getColumnValue('coreDbPath')}"
-							id="link1">
-							<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino/" + row.getColumnValue('coreDbPath').replace("\\", "/");}]]></xp:this.value>
-						</xp:link>
-
-					</xp:viewColumn>
 					
 				</xp:viewPanel>
 

@@ -1,7 +1,5 @@
 package com.teamstudio.continuity;
 
-import lotus.domino.Database;
-import lotus.domino.Session;
 import lotus.domino.View;
 import lotus.domino.ViewEntry;
 
@@ -14,8 +12,6 @@ public class OrganisationUnit {
 	//retrieve a org unit name based on a orgunit id
 	public static String getName(String orgUnitId) {
 		
-		Session session = null;
-		Database dbCore = null;
 		View vwAllById = null;
 		ViewEntry veOrgUnit = null;
 		
@@ -25,11 +21,7 @@ public class OrganisationUnit {
 			
 			if ( StringUtil.isNotEmpty(orgUnitId) && !orgUnitId.equals("none") ) {
 				
-				Configuration config = Configuration.get();
-				
-				session = ExtLibUtil.getCurrentSession();
-				dbCore = session.getDatabase(config.getServerName(), config.getCoreDbPath() );
-				vwAllById = dbCore.getView("vwAllByID");
+				vwAllById = ExtLibUtil.getCurrentDatabase().getView("vwAllByID");
 				
 				veOrgUnit = vwAllById.getEntryByKey(orgUnitId, true);
 				

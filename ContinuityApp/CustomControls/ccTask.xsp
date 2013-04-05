@@ -109,17 +109,17 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 		</xe:formRow>
 
-		<xe:formRow id="formRow5" label="Ordering number:"
+		<xe:formRow id="formRow5" label="Step number:"
 			for="inputOrder" style="white-space:noWrap">
 			<xp:inputText value="#{docTask.order}" id="inputOrder"
 				required="true" styleClass="number" maxlength="3"
 				defaultValue="1">
 				<xp:this.validators>
 					<xp:validateRequired
-						message="Enter an ordering number for this task">
+						message="Enter a step number for this task">
 					</xp:validateRequired>
 					<xp:validateLongRange maximum="999"
-						message="Ordering number must be a (positive) number" minimum="0">
+						message="Step number must be a (positive) number" minimum="0">
 					</xp:validateLongRange>
 				</xp:this.validators>
 				<xp:this.converter>

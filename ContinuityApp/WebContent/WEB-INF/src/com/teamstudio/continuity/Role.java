@@ -11,7 +11,6 @@ import com.teamstudio.continuity.utils.Utils;
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.NotesException;
-import lotus.domino.Session;
 import lotus.domino.View;
 import lotus.domino.ViewEntry;
 
@@ -63,9 +62,6 @@ public class Role implements Serializable {
 		
 		boolean success = false;
 		
-		Session session = null;
-		Database dbCore = null;
-		
 		try {
 			
 			boolean isNew = xspDocRole.isNewNote();
@@ -83,18 +79,8 @@ public class Role implements Serializable {
 			this.id = xspDocRole.getItemValueString("id");
 			this.name = xspDocRole.getItemValueString("name");
 			
-			//update role name in all documents that use this role (in the current & core database (e.g. contacts)
+			//update role name in all documents that use this role (e.g. contacts)
 			Utils.fieldValueChange("roleId", id, "roleName", name );
-			
-			session = ExtLibUtil.getCurrentSession();
-			dbCore = session.getDatabase(Configuration.get().getServerName(), Configuration.get().getCoreDbPath());
-			if ( !dbCore.isOpen() ) {
-				
-				Logger.error("core database could not be opened at " + Configuration.get().getCoreDbPath());
-				
-			} else {
-				Utils.fieldValueChange(dbCore, "roleId", id, "roleName", name );
-			}
 			
 			success = true;
 			
@@ -104,7 +90,6 @@ public class Role implements Serializable {
 			
 		} finally {
 			
-			Utils.recycle(dbCore, session);
 		}
 		
 		return success;

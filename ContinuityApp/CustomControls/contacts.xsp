@@ -33,7 +33,7 @@
 				
 				options.add( new javax.faces.model.SelectItem("all", "- All contacts -") );
 				
-				var orgUnits = @DbColumn( configBean.coreDbPath, "vwOrgUnits", 2);
+				var orgUnits = @DbColumn( @DbName(), "vwOrgUnits", 2);
 	if (typeof orgUnits == "string") { orgUnits =[orgUnits]; }
 
 var group1:javax.faces.model.SelectItemGroup = new javax.faces.model.SelectItemGroup("Organisation Unit");
@@ -46,7 +46,7 @@ group1Items.push( new javax.faces.model.SelectItem( "o-" + "none", "- No organis
 
 group1.setSelectItems(group1Items);
 
-var sites = @DbColumn( configBean.coreDbPath, "vwSites", 2);
+var sites = @DbColumn( @DbName(), "vwSites", 2);
 	if (typeof sites == "string") { sites =[sites]; }
 
 var group2:javax.faces.model.SelectItemGroup = new javax.faces.model.SelectItemGroup("Site");
@@ -88,8 +88,7 @@ return options;
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()>0}]]></xp:this.rendered>
 
 			<xp:this.data>
-				<xp:dominoView var="vwContacts"
-					databaseName="${configBean.coreDbPath}">
+				<xp:dominoView var="vwContacts">
 					<xp:this.categoryFilter><![CDATA[#{javascript:if ( !viewScope.containsKey("filter") || viewScope.filter=="all") {
 					return "all";
 					} else if (viewScope.filter=="none") {

@@ -30,7 +30,7 @@
 	-->
 	<xp:this.data>
 		<xp:dominoDocument var="docContact" formName="fContact"
-			action="newDocument" databaseName="${configBean.coreDbPath}">
+			action="newDocument">
 		</xp:dominoDocument>
 	</xp:this.data>
 
@@ -65,7 +65,7 @@
 			<xp:div>
 				<xp:image id="image1"
 					style="width: 100px; height: 100px;">
-					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("coreDbUrl") + "/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getItemValueString("photoThumbnailName");}]]></xp:this.url>
+					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getItemValueString("photoThumbnailName");}]]></xp:this.url>
 					<xp:this.rendered><![CDATA[#{javascript:docContact.getItemValueString("photoThumbnailName").length>0}]]></xp:this.rendered>
 				</xp:image>
 			</xp:div>
@@ -316,7 +316,7 @@
 				value="#{docContact.orgUnitId}"
 				readonly="#{javascript:!sessionScope.isEditor}">
 				<xp:selectItems id="selectItems2">
-					<xp:this.value><![CDATA[#{javascript:@DbColumn( configBean.coreDbPath, "vwOrgUnits", 2);}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:radioGroup>
 		</xe:formRow>
@@ -327,7 +327,7 @@
 				value="#{docContact.siteIds}"
 				readonly="#{javascript:!sessionScope.isEditor}">
 				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( configBean.coreDbPath, "vwSites", 2);
+					<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwSites", 2);
 							
 							return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
 				</xp:selectItems>

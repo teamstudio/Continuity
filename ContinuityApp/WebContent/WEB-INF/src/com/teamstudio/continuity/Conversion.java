@@ -2,6 +2,10 @@ package com.teamstudio.continuity;
 
 import java.util.Vector;
 
+import com.ibm.commons.util.StringUtil;
+import com.teamstudio.apps.Unplugged;
+import com.teamstudio.continuity.utils.Authorizations;
+import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
 
 import eu.linqed.debugtoolbar.DebugToolbar;
@@ -19,15 +23,17 @@ import lotus.domino.ViewEntryCollection;
 
 //helper functions for required data conversion in new versions 
 public class Conversion {
-
+	
 	@SuppressWarnings("unchecked")
-	public static void startConversion( Database dbCurrent, String coreDbPath ) {
+	public static void startConversion( View vwSettings ) {
 
 		DocumentCollection dc = null;
-		Database dbCore = null;
 		View vwAllById = null;
+		Document docSettings = null;
 		
 		try {
+			
+			//need to perform a data conversion first
 
 			DebugToolbar.get().info("Starting Continuity conversion");
 
@@ -36,14 +42,23 @@ public class Conversion {
 			String form;
 			int numUpdated = 0;
 			
+			Database dbCurrent = vwSettings.getParent();
 			vwAllById = dbCurrent.getView("vwAllById");
-
+			docSettings = vwSettings.getDocumentByKey("fSettings", true);
+			
+			if (docSettings.hasItem("coreDbPath")) {
+			
+				//move data from (obsolete) Core database to Continuity database
+				Conversion.moveCoreDbData(docSettings);
+				
+				vwAllById.refresh();
+			}
+			
 			//create lists with all orgUnitIds/ orgUnitNames
 			Vector<String> allOrgUnitIds = new Vector<String>();
 			Vector<String> allOrgUnitNames = new Vector<String>();
 			
-			dbCore = dbCurrent.getParent().getDatabase( dbCurrent.getServer(), coreDbPath );
-			View vwOrgUnits = dbCore.getView("vwOrgUnits");
+			View vwOrgUnits = dbCurrent.getView("vwOrgUnits");
 			
 			ViewEntry veTmp;
 			
@@ -62,7 +77,6 @@ public class Conversion {
 			}
 			
 			vwOrgUnits.recycle();
-			dbCore.recycle();
 
 			dc = dbCurrent.getAllDocuments();
 
@@ -305,9 +319,6 @@ public class Conversion {
 			
 			DebugToolbar.get().info("- finished processing docs in Continuity database, updated " + numUpdated + " docs");
 			
-			//update data in core database
-			//updateCoreDatabase( dbCurrent.getParent(), coreDbPath );
-
 			updateACL(dbCurrent);
 			
 			DebugToolbar.get().info("Finished Continuity conversion");
@@ -316,74 +327,11 @@ public class Conversion {
 			DebugToolbar.get().error(e);
 		} finally {
 			
-			Utils.recycle(vwAllById, dc);
+			Utils.recycle(vwAllById, dc, docSettings);
 		}
 
 	}
 	
-	//update data in core database
-	/*private static void updateCoreDatabase(Session session, String coreDbPath) {
-		
-		DocumentCollection dcCore = null;
-		
-		View vwContactByUsername = null;
-		
-		try {
-
-			DebugToolbar.get().info("Starting Core database conversion");
-
-			boolean updated = false;
-			Document doc  = null;
-			String form;
-
-			Document docTemp = null;
-
-			int numUpdated = 0;
-			
-			dbCore = session.getDatabase( session.getServerName(), coreDbPath );
-			dcCore = dbCore.getAllDocuments();
-
-			DebugToolbar.get().info("- found " + dcCore.getCount() + " documents in core database");
-
-			numUpdated = 0;
-			
-			vwContactByUsername = dbCore.getView("vwContactsByUsername");
-
-			doc = dcCore.getFirstDocument();
-			while (null != doc) {
-				
-				form = doc.getItemValueString("form");
-				updated = false;
-
-				if (form.equals("fContact") ) {
-					
-					
-				}
-				
-				if (updated) {
-					
-					DebugToolbar.get().info("- updating document, form: " + doc.getItemValueString("form") + ", unid " + doc.getUniversalID());
-					
-					numUpdated++;
-					doc.save();
-				}
-
-				docTemp = dcCore.getNextDocument(doc);
-				doc.recycle();
-				doc = docTemp;
-			}
-			
-			DebugToolbar.get().info("Finished processing docs in Continuity database, updated " + numUpdated + " docs");
-
-		} catch (Exception e) {
-			DebugToolbar.get().error(e);
-		} finally {
-			
-			Utils.recycle(vwContactByUsername, dcCore, dbCore);
-		}
-		
-	}*/
-
 	private static void updateACL(Database dbCurrent) throws NotesException {
 		boolean updated = false;
 
@@ -409,6 +357,77 @@ public class Conversion {
 			acl.save();
 		}
 
+	}
+	
+	private static void moveCoreDbData(Document docSettings) {
+		
+		Database dbCore = null;
+		DocumentCollection dcCoreDocs = null;
+		Document docSettingsCore = null;
+		
+		try {
+			
+			String coreDbPath = docSettings.getItemValueString("coreDbPath");
+			Database dbCurrent = docSettings.getParentDatabase();
+			
+			
+			if (StringUtil.isNotEmpty(coreDbPath)) {
+				
+				dbCore = dbCurrent.getParent().getDatabase( dbCurrent.getParent().getServerName(), coreDbPath );
+				docSettingsCore = dbCore.getView("vwSettings").getFirstDocument();
+				
+				//cleanup reference to core database in Unplugged config
+				if ( Unplugged.deleteApplication(dbCurrent.getParent(), coreDbPath, docSettingsCore.getItemValueString("unpluggedDbPath") ) ) {
+					
+					DebugToolbar.get().info("Move data from Core database (" + coreDbPath + ") to current");
+					
+					dcCoreDocs = dbCore.search( "Form != \"fSettings\"");
+					
+					DebugToolbar.get().info("- found " + dcCoreDocs.getCount() + " documents in core database");
+					
+					Document docCore = dcCoreDocs.getFirstDocument();
+					while (null != docCore) {
+						
+						Document docTemp = dcCoreDocs.getNextDocument(docCore);
+						docCore.copyToDatabase(dbCurrent);
+						
+						Utils.recycle(docCore);
+						docCore = docTemp;
+					}
+					
+					//copy values from settings document in core database to current
+					docSettings.replaceItemValue( "organisationId", docSettingsCore.getItemValueString("organisationId") );
+					docSettings.replaceItemValue( "organisationName", docSettingsCore.getItemValueString("organisationName") );
+					docSettings.replaceItemValue( "unpluggedDbPath", docSettingsCore.getItemValueString("unpluggedDbPath") );
+					docSettings.replaceItemValue( "directoryDbPath", docSettingsCore.getItemValueString("directoryDbPath") );
+					
+					docSettings.replaceItemValue( "docAuthors", Authorizations.ROLE_EDITOR ).setAuthors(true);
+					
+					//all docs copied: remove core db reference
+					docSettings.removeItem("coreDbPath");
+					docSettings.save();
+					
+					
+					DebugToolbar.get().info("Finished moving data from Core database");
+					
+				} else {
+					
+					Logger.error("error while removing Unplugged database configuration - aborted");
+					
+				}
+				
+			}
+			
+			
+		} catch (NotesException e) {
+			
+			Logger.error(e);
+			
+		} finally {
+			
+			Utils.recycle(dcCoreDocs, docSettingsCore, dbCore);
+		}
+		
 	}
 
 }

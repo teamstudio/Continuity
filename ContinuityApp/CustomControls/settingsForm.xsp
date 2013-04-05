@@ -8,7 +8,7 @@
 		</div>
 
 		<xp:this.data>
-			<xp:dominoDocument var="docSettings" action="openDocument" formName="fSettings" databaseName="${configBean.coreDbPath}">
+			<xp:dominoDocument var="docSettings" action="openDocument" formName="fSettings">
 				<xp:this.documentId><![CDATA[#{javascript:configBean.settingsUnid}]]></xp:this.documentId>
 			</xp:dominoDocument>
 		</xp:this.data>

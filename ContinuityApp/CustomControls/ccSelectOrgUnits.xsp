@@ -23,7 +23,7 @@
 
 		<xp:checkBoxGroup id="checkBoxGroupOrgUnits" value="#{compositeData.doc.orgUnitIds}">
 			<xp:selectItems>
-				<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( ["", configBean.coreDbPath], "vwOrgUnits", 2);
+				<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwOrgUnits", 2);
 						return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
 			</xp:selectItems>
 		</xp:checkBoxGroup>

@@ -7,7 +7,7 @@
 
 <xp:this.data>
 				<xp:dominoDocument var="docOU" formName="fOrgUnit" action="editDocument"
-					documentId="#{javascript:viewScope.docId}" databaseName="${configBean.coreDbPath}">
+					documentId="#{javascript:viewScope.docId}">
 				</xp:dominoDocument>
 			</xp:this.data>
 
@@ -40,7 +40,7 @@ if (typeof siteIds=="string") { siteIds = [siteIds]; }
 var siteNames = [];
 for (var i=0; i<siteIds.length; i++) {
 	if (siteIds[i].length>0) { 
-		siteName = @DbLookup( configBean.coreDbPath, "vwAllById", siteIds[i], "name");
+		siteName = @DbLookup( @DbName(), "vwAllById", siteIds[i], "name");
 		siteNames.push( siteName);
 	}
 }
@@ -112,7 +112,7 @@ if ( docOU.save() ) {
 		<xe:formRow id="formRow2" for="checkBoxGroup2" label="Site(s):">
 			<xp:checkBoxGroup id="checkBoxGroup2" value="#{docOU.siteIds}">
 				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:@DbColumn( configBean.coreDbPath, "vwSites", 2)}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwSites", 2)}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:checkBoxGroup>
 		</xe:formRow>
