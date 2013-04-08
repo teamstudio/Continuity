@@ -4,11 +4,11 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<div class="section">
-		<div class="title">Site</div>
+		<div class="title">Asset</div>
 	</div>
 
 	<xp:this.data>
-		<xp:dominoDocument var="docSite" formName="fSite"
+		<xp:dominoDocument var="docAsset" formName="fSite"
 			action="editDocument">
 		</xp:dominoDocument>
 	</xp:this.data>
@@ -19,7 +19,7 @@
 
 				<xp:button value="Save" id="button1" icon="disk.png">
 
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docSite.isEditable()}]]></xp:this.rendered>
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docAsset.isEditable()}]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="complete">
 						<xp:this.action>
@@ -27,17 +27,17 @@
 							<xp:actionGroup>
 
 								<xp:executeScript>
-									<xp:this.script><![CDATA[#{javascript:if (docSite.isNewNote()) {
-	docSite.replaceItemValue("id", "s" + docSite.getDocument().getUniversalID() );
-	docSite.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
+									<xp:this.script><![CDATA[#{javascript:if (docAsset.isNewNote()) {
+	docAsset.replaceItemValue("id", "s" + docAsset.getDocument().getUniversalID() );
+	docAsset.getDocument().replaceItemValue("docAuthors", "[bcEditor]").setAuthors(true);
 }
 
-docSite.replaceItemValue("hazardNames", com.teamstudio.continuity.Hazard.getNames( docSite.getItemValue("hazardIds")) );
+docAsset.replaceItemValue("hazardNames", com.teamstudio.continuity.Hazard.getNames( docAsset.getItemValue("hazardIds")) );
 
-if ( docSite.save() ) {
+if ( docAsset.save() ) {
 
-	com.teamstudio.continuity.utils.Utils.fieldValueChange("siteId", docSite.getItemValueString("id"), "siteName", docSite.getItemValueString("name") );
-	com.teamstudio.continuity.utils.Utils.fieldValueChange("siteIds", docSite.getItemValueString("id"), "siteNames", docSite.getItemValueString("name") );
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("siteId", docAsset.getItemValueString("id"), "siteName", docAsset.getItemValueString("name") );
+	com.teamstudio.continuity.utils.Utils.fieldValueChange("siteIds", docAsset.getItemValueString("id"), "siteNames", docAsset.getItemValueString("name") );
 
 							loadAppConfig(true);
 
@@ -53,14 +53,14 @@ if ( docSite.save() ) {
 				</xp:button>
 
 				<xp:button value="Remove" id="button3">
-					<xp:this.rendered><![CDATA[#{javascript:!docSite.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
+					<xp:this.rendered><![CDATA[#{javascript:!docAsset.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynamicContent1"
 						immediate="true">
-						<xp:this.action><![CDATA[#{javascript:if (siteBean.remove( docSite ) ) {
+						<xp:this.action><![CDATA[#{javascript:if (siteBean.remove( docAsset ) ) {
 					getComponent("dynamicContent1").show("sites");
 				}}]]></xp:this.action>
-						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this site?\n\nThis will remove the linkage to this site from all objects (contacts, org units, etc.)")]]></xp:this.script>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this asset?\n\nThis will remove the linkage to this asset from all objects (contacts, org units, etc.)")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
 
@@ -80,7 +80,7 @@ if ( docSite.save() ) {
 
 		<xe:formRow id="formRow1" for="name" label="Name:">
 
-			<xp:inputText value="#{docSite.name}" id="name"
+			<xp:inputText value="#{docAsset.name}" id="name"
 				required="true">
 				<xp:this.validators>
 					<xp:validateRequired message="Name is required"></xp:validateRequired>
@@ -88,12 +88,12 @@ if ( docSite.save() ) {
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow2" for="inputText3" label="Adress:">
-			<xp:inputText value="#{docSite.address}" id="inputText3"></xp:inputText>
+		<xe:formRow id="formRow2" for="inputText3" label="Location:">
+			<xp:inputText value="#{docAsset.address}" id="inputText3"></xp:inputText>
 		</xe:formRow>
 
 		<xe:formRow id="formRow4" for="inputText4" label="Country:">
-			<xp:inputText value="#{docSite.country}" id="inputText4"></xp:inputText>
+			<xp:inputText value="#{docAsset.country}" id="inputText4"></xp:inputText>
 		</xe:formRow>
 
 		<xe:formRow id="formRow5" label="Hazards:">
@@ -101,23 +101,23 @@ if ( docSite.save() ) {
 			<xp:div id="hazards">
 
 				<xp:repeat id="repeat3" rows="50"
-					value="#{docSite.hazardNames}" var="name">
+					value="#{docAsset.hazardNames}" var="name">
 					<xp:text escape="false" id="computedField2"
 						value="#{name}">
 					</xp:text>
 					<br />
 				</xp:repeat>
 
-				<xc:ccSelectHazards doc="#{docSite}"></xc:ccSelectHazards>
+				<xc:ccSelectHazards doc="#{docAsset}"></xc:ccSelectHazards>
 
 			</xp:div>
 
 		</xe:formRow>
 
 		<xe:formRow id="formRow3" label="Image:">
-			<xp:fileUpload id="fileUpload1" value="#{docSite.photos}"></xp:fileUpload>
+			<xp:fileUpload id="fileUpload1" value="#{docAsset.photos}"></xp:fileUpload>
 			<xp:fileDownload rows="30" id="fileDownload1"
-				displayLastModified="false" value="#{docSite.photos}"
+				displayLastModified="false" value="#{docAsset.photos}"
 				hideWhen="true" displayType="false" displayCreated="false"
 				allowDelete="true">
 			</xp:fileDownload>

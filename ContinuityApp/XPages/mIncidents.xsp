@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity" 
-xmlns:xc="http://www.ibm.com/xsp/custom">
-	
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
+	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:unp="http://unplugged.teamstudio.com">
+
 	<xp:this.beforePageLoad><![CDATA[#{javascript:setLastViewedItem(database.getView("vwIncidents"), "lastViewedIncident" );
 	sessionScope.put("numIncidents", 0);		//reset counter
 	}]]></xp:this.beforePageLoad>
+
 	
 	<xc:mLayout showMenu="true" pageTitle="Incidents">
-	<xp:this.facets>
-	
-		<xp:panel xp:key="contents" disableOutputTag="true">
-			<xp:div styleClass="box" rendered="#{javascript:database.getView('vwIncidents').getEntryCount()==0}">
+		<xp:this.facets>
+
+			<xp:panel xp:key="contents" disableOutputTag="true">
+				<xp:div styleClass="box"
+					rendered="#{javascript:database.getView('vwIncidents').getEntryCount()==0}">
 					<div class="content">No incidents have been registered</div>
 				</xp:div>
-
-				<xc:unpIncidentsFlatView insetData="true" summaryColumn="description" detailColumn="summaryColumn"
+				<!--
+					
+					<xc:unpIncidentsFlatView insetData="true" summaryColumn="description" detailColumn="summaryColumn"
 					viewName="vwIncidents" xpageDoc="mIncident.xsp" numberofrows="50"
 					refreshmethod="none" position="menu-aligned">
-				</xc:unpIncidentsFlatView>
-		
-		</xp:panel>
-	
-	</xp:this.facets>
+					</xc:unpIncidentsFlatView>
+					
+				-->
+				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="mIncident.xsp"
+					position="menu-aligned" insetData="true">
+				</unp:unpAccordion>
+
+			</xp:panel>
+
+		</xp:this.facets>
 	</xc:mLayout>
 
 </xp:view>

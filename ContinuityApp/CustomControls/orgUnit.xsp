@@ -34,7 +34,7 @@ if (blnIsNew) {
 	docOU.getDocument(true).getFirstItem("docAuthors").setAuthors(true);
 }
 
-//store name of selected site(s)
+//store name of selected asset(s)
 var siteIds = docOU.getItemValue("siteIds");
 if (typeof siteIds=="string") { siteIds = [siteIds]; }
 var siteNames = [];
@@ -109,10 +109,10 @@ if ( docOU.save() ) {
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow2" for="checkBoxGroup2" label="Site(s):">
+		<xe:formRow id="formRow2" for="checkBoxGroup2" label="Asset(s):">
 			<xp:checkBoxGroup id="checkBoxGroup2" value="#{docOU.siteIds}">
 				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwSites", 2)}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwAssets", 2)}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:checkBoxGroup>
 		</xe:formRow>

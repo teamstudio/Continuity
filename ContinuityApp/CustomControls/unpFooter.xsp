@@ -15,38 +15,51 @@ the specific language governing permissions and limitations under the License
 		
 		<div id="footer">
 		
+			<!-- note: add handler here using onclick attrs or else it won't get added again after a ajax update -->
 			<xp:link value="" styleClass="syncButton" id="unpSync">
 				<xp:this.attrs>
 					<xp:attr name="onclick">
-						<xp:this.value><![CDATA[#{javascript:"$.blockUI(); $.get('unpReplicate.xsp', syncFunc); return false;"}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:"syncAllDbs(); return false"}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
-			
+				
 				<span>Sync</span>
 			</xp:link>
 			
-			<span class="updated">
-				<!-- iOS: returns date -->
-				Updated:&#160;
-				<xp:text
-					value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
-				  if (""==rep) { return "(never)" };
-				  rep}'>
-					<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) == 'string'}]]></xp:this.rendered>
-				</xp:text>
-	
-				<!-- android: returns epoch ms -->
-				<xp:text
-					value='#{javascript:var rep = session.getEnvironmentString("ro.last.replicate", true);
-				  if (""==rep) { rep="(never)" };
-				 new Date( parseInt(rep) );}'>
-					<xp:this.rendered><![CDATA[#{javascript:isUnpluggedServer() && typeof session.getEnvironmentString("ro.last.replicate", true) != 'string'}]]></xp:this.rendered>
-					<xp:this.converter>
-						<xp:convertDateTime type="both"></xp:convertDateTime>
-					</xp:this.converter>
-				</xp:text>
-				
-			</span>
+			<xp:text rendered="#{javascript:isUnpluggedServer()}" styleClass="updated">
+			<xp:this.value><![CDATA[#{javascript:var dbrep = session.getEnvironmentString("ro.last.sync." + @LowerCase(@ReplaceSubstring(database.getFilePath(), "\\", "/")), true);
+var rep = session.getEnvironmentString("ro.last.sync", true); 
+if ("" == rep) {
+	rep = session.getEnvironmentString("ro.last.replicate", true); 
+} 
+if ("" ==	rep) { 
+	rep = "(never)"; 
+} else {
+	if (dbrep != ""){
+		try{
+			var irep = parseInt(rep);
+			var idbrep = parseInt(dbrep);
+			if (idbrep > irep){
+				rep = dbrep;
+			}
+		}catch(e){
+			//rep = "localdate " + e;
+		}
+	}
+	try { 
+		var date = new Date(parseInt(rep)); 
+		rep = @Text(date);
+		rep = @Left(@Trim(rep), @Trim(rep).length - 3); 
+	} catch (e) {
+		//rep = "dateparse " + e;
+	} 
+} 
+if (rep == "01/01/70"){
+	rep = "(never)";
+}
+return "Updated: " + rep;}]]></xp:this.value>
+			</xp:text>
+			
 	
 			<xp:panel tagName="div" id="newButton" styleClass="newButton"
 				rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">

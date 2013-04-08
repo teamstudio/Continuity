@@ -6,8 +6,6 @@
 		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits"></xp:dominoView>
 	</xp:this.data>
 	
-	<xc:settingsForm></xc:settingsForm>
-
 	<div class="section">
 		<div class="title">Organisation units</div>
 		<div class="actions">
@@ -25,7 +23,7 @@
 
 			<xp:this.facets>
 				<xp:text xp:key="header" escape="false" disableTheme="true">
-					<xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th>Name</th><th>Site(s)</th><th>Image</th></tr></thead><tbody>]]></xp:this.value>
+					<xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th>Name</th><th>Asset(s)</th><th>Image</th></tr></thead><tbody>]]></xp:this.value>
 				</xp:text>
 				<xp:text xp:key="footer" escape="false" disableTheme="true">
 					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>

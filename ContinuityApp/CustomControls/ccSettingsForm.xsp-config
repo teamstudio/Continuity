@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>settingsForm</component-type>
-    <composite-name>settingsForm</composite-name>
-    <composite-file>/settingsForm.xsp</composite-file>
+    <component-type>ccSettingsForm</component-type>
+    <composite-name>ccSettingsForm</composite-name>
+    <composite-file>/ccSettingsForm.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

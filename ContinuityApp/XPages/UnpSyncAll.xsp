@@ -10,10 +10,6 @@ if ("yes" === param.status) {
 else {
 	@Command("[ReplicatorReplicateHigh]");
 	writer.write("true");
-	
-	//force sessionscope reload
-	sessionScope.configLoaded = false;
 }
 writer.endDocument();
-}]]></xp:this.beforeRenderResponse
-></xp:view>
+}]]></xp:this.beforeRenderResponse></xp:view>

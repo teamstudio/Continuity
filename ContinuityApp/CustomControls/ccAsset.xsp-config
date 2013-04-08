@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>ccSite</component-type>
-    <composite-name>ccSite</composite-name>
-    <composite-file>/ccSite.xsp</composite-file>
+    <component-type>ccAsset</component-type>
+    <composite-name>ccAsset</composite-name>
+    <composite-file>/ccAsset.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

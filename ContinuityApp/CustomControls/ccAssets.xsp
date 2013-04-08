@@ -2,29 +2,32 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	
 	<xp:this.data>
-		<xp:dominoView var="vwSites" viewName="vwSites"></xp:dominoView>
+		<xp:dominoView var="vwAssets" viewName="vwAssets"></xp:dominoView>
 	</xp:this.data>
 	
 	<div class="section">
-		<div class="title">Sites</div>
+		<div class="title"><xp:text value="#{javascript:configBean.getLabel('assets')}" disableTheme="true" escape="false" /></div>
 		<div class="actions">
-			<xp:button value="Add site" id="button2" icon="building_add.png" rendered="#{javascript:sessionScope.isEditor}">
+			<xp:button id="button2" icon="building_add.png"
+				rendered="#{javascript:sessionScope.isEditor}">
+				<xp:this.value><![CDATA[#{javascript:"Add " + configBean.getLabel("asset").toLowerCase()}]]></xp:this.value>
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1">
-				<xp:this.action>
-					<xe:changeDynamicContentAction facetName="site" for="dynamicContent1"></xe:changeDynamicContentAction>
-				</xp:this.action></xp:eventHandler>
+					<xp:this.action>
+						<xe:changeDynamicContentAction facetName="site" for="dynamicContent1"></xe:changeDynamicContentAction>
+					</xp:this.action>
+				</xp:eventHandler>
 			</xp:button>
 		</div>
 	</div>
 
 	<xp:panel id="sites" style="margin-bottom:10px">
 
-		<xp:repeat id="repeat1" rows="30" value="#{vwSites}" var="row" indexVar="rowIndex">
+		<xp:repeat id="repeat1" rows="30" value="#{vwAssets}" var="row" indexVar="rowIndex">
 
 			<xp:this.facets>
 				<xp:text xp:key="header" escape="false" disableTheme="true">
-					<xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th>Name</th><th>Address</th><th>Country</th><th>Image</th></tr></thead><tbody>]]></xp:this.value>
+					<xp:this.value><![CDATA[<table class="lotusTable"><thead><tr><th>Name</th><th>Location</th><th>Country</th><th>Image</th></tr></thead><tbody>]]></xp:this.value>
 				</xp:text>
 				<xp:text xp:key="footer" escape="false" disableTheme="true">
 					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>

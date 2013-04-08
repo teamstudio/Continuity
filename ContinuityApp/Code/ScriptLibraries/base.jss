@@ -302,8 +302,8 @@ function loadAppConfig( forceUpdate:boolean ) {
 			vwOrgUnits.recycle();
 			
 			//store a list of all sites in the application scope (for combobox/ radio selections)
-			var vwSites:NotesView = database.getView("vwSites");
-			var vecSites:NotesViewEntryCollection = vwSites.getAllEntries();
+			var vwAssets:NotesView = database.getView("vwAssets");
+			var vecSites:NotesViewEntryCollection = vwAssets.getAllEntries();
 			var veSite:NotesViewEntry = vecSites.getFirstEntry();
 			
 			var siteChoices = [];
@@ -318,7 +318,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 
 			applicationScope.put("siteChoices", siteChoices);
 			
-			vwSites.recycle();
+			vwAssets.recycle();
 			
 			dBar.debug("done");
 

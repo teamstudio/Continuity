@@ -19,7 +19,7 @@
 
 					</li>
 					<li>
-						<xp:label value="Site" id="label1" for="siteId"></xp:label>
+						<xp:label value="Asset" id="label1" for="siteId"></xp:label>
 						<xp:text escape="true" id="siteId" value="#{docIncident.siteName}">
 						</xp:text>
 					</li>

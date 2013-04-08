@@ -14,7 +14,7 @@
 				styleClass="headeritem" tagName="li">
 			</xp:text>
 			<xp:text escape="false" id="computedField3" styleClass="headeritem" tagName="li">
-				<xp:this.value><![CDATA[#{javascript:(sessionScope.isEditor ? "<a href=\"mSwitchOrgUnit.xsp\">" + sessionScope.get("orgUnitName") + "</a>" : sessionScope.get("orgUnitName") ) +
+				<xp:this.value><![CDATA[#{javascript:(sessionScope.isEditor ? "<a href=\"mSwitchOrgUnit.xsp\" onclick=\"$.blockUI()\">" + sessionScope.get("orgUnitName") + "</a>" : sessionScope.get("orgUnitName") ) +
 				(applicationScope.isReadOnlyMode ? " (RO)" : "");}]]></xp:this.value>
 			</xp:text>
 		</xp:panel>

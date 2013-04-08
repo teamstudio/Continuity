@@ -38,6 +38,16 @@ if (id != null && id.length>0) {
 					</div>
 				
 					<xp:text escape="false" disableTheme="true" value="#{docQuickGuide.description}"></xp:text>
+					
+					<!-- file(s) -->
+					<div class="mTop">
+						<xp:link escape="true" text="Open attachment" id="link1"
+							rendered="#{javascript:!docQuickGuide.getAttachmentList().isEmpty();}">
+							<xp:this.value><![CDATA[#{javascript:"/0/" + docQuickGuide.getDocument().getUniversalID() + "/$file/" + docQuickGuide.getAttachmentList().get(0).getName()}]]>
+							</xp:this.value>
+						</xp:link>
+					</div>
+					
 				</div>
 
 			</xp:panel>

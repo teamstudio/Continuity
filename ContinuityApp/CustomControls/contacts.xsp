@@ -46,10 +46,10 @@ group1Items.push( new javax.faces.model.SelectItem( "o-" + "none", "- No organis
 
 group1.setSelectItems(group1Items);
 
-var sites = @DbColumn( @DbName(), "vwSites", 2);
+var sites = @DbColumn( @DbName(), "vwAssets", 2);
 	if (typeof sites == "string") { sites =[sites]; }
 
-var group2:javax.faces.model.SelectItemGroup = new javax.faces.model.SelectItemGroup("Site");
+var group2:javax.faces.model.SelectItemGroup = new javax.faces.model.SelectItemGroup("Asset");
 var group2Items = new Array();
 
 for (var i=0; i<sites.length; i++) {
@@ -77,7 +77,7 @@ return options;
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()==0}]]></xp:this.rendered>
 			<xc:this.message><![CDATA[#{javascript:"No contacts found" +
 	(viewScope.filter && !viewScope.filter.equals("all") ? 
-		" in the selected organisation unit/ site" : 
+		" in the selected organisation unit/ asset" : 
 		"")}]]></xc:this.message>
 		</xc:ccMessage>
 	

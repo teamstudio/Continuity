@@ -85,7 +85,7 @@ if (!applicationScope.isReadOnlyMode) {
 		var updateText = (isRehearsal ? "Deactivated exercise incident" : "Deactivated incident") + ": <b>" + incidentDesc + "</b><br />" +
 			"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 			"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
-			"- site: " + doc.getItemValueString("siteName") + "<br />" +
+			"- asset: " + doc.getItemValueString("siteName") + "<br />" +
 			"- plan: " + doc.getItemValueString("scenarioName");
 		
 		createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
@@ -103,7 +103,7 @@ if (!applicationScope.isReadOnlyMode) {
 						"Incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 		"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
 			"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
-			"- site: " + doc.getItemValueString("siteName") + "\r\n" +
+			"- asset: " + doc.getItemValueString("siteName") + "\r\n" +
 			"- plan: " + doc.getItemValueString("scenarioName"),
 					sessionScope.email, sessionScope.name);
 		

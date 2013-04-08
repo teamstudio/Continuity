@@ -54,6 +54,7 @@ the specific language governing permissions and limitations under the License
 		
 		<xp:label styleClass="title" id="title"	value="#{javascript:compositeData.title}">
 		</xp:label>
+		
 		<xp:panel id="searchbutton" rendered="#{javascript:compositeData.search != 'none'}"
 			styleClass="searchButton">
 			<span></span>

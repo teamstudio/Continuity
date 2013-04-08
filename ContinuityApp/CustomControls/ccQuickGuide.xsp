@@ -135,6 +135,10 @@ try {
 			</xp:text>
 
 		</xe:formRow>
+		
+		<xe:formRow label="File:">
+			<xp:fileUpload id="fileUpload1" value="#{docQuickGuide.files}"></xp:fileUpload>
+		</xe:formRow>
 
 	</xe:formTable>
 

@@ -46,7 +46,7 @@
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow5" label="Site:">
+		<xe:formRow id="formRow5" label="Asset:">
 			<xp:inputText value="#{docIncident.siteName}"
 				id="inputText3">
 			</xp:inputText>

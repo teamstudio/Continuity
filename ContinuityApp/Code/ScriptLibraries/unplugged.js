@@ -119,6 +119,9 @@ function loadmore(url) {
 function openDocument(url, target, title) {
 	// $.blockUI();
 	// document.location.href = url;
+	
+	storeRequest(url);
+	
 	var thisArea = $("#" + target);
 	thisArea.load(url + " #contentwrapper",
 			function() {
@@ -254,6 +257,8 @@ function loadPage(url, target, menuitem) {
 //ML: extended loadPage to also update the header title and footer content
 function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 	
+	storeRequest(url);
+	
 	if (url.indexOf(" ")==-1) {
 		url += " .iscrollcontent";		//only load content part
 	}
@@ -264,8 +269,6 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		loadFooter = true;
 		loadHeader = true;
 	}
-
-	storeRequest(url);
 	
 	thisArea.load(url, function(data) {
 
@@ -334,11 +337,7 @@ function storeRequest(url) {
 
 //ML: open the page that was shown before the current
 function goBack() {
-	
 	var to = _ajaxRequests[_ajaxRequests.length-2];
-	
-	
-	console.log(_ajaxRequests);
 	loadPageEx( to , 'contentwrapper', null, false, false );
 }
 
@@ -480,7 +479,7 @@ function fetchDetails(obj, viewName, catName, xpage, dbname)
 	$('.accordionRowSet').empty();
 	$('.accLoadMoreLink').hide();
 	
-	//console.log('Category: ' + catName);
+	console.log('Category: ' + catName);
 	if($(obj).hasClass("accordianExpanded")){
 		$(obj).nextAll('.summaryDataRow:first').children('.accordionRowSet').slideUp('fast', function(){ $(this).children().remove()});
 		$(obj).removeClass("accordianExpanded");
@@ -529,7 +528,7 @@ function markDone(doneId, undoneId, id) {
 	
 	$.ajax( {
 		type : 'GET',
-		url : "aProcess.xsp?type=task&to=done&id=" + id,
+		url : "unpProcess.xsp?type=task&to=done&id=" + id,
 		cache : false
 	}).done(
 	function(response) {
@@ -555,7 +554,7 @@ function markUndone(doneId, undoneId, id) {
 	
 	$.ajax( {
 		type : 'GET',
-		url : "aProcess.xsp?type=task&to=undone&id=" + id,
+		url : "unpProcess.xsp?type=task&to=undone&id=" + id,
 		cache : false
 	}).done(
 	function(response) {
@@ -587,7 +586,7 @@ function deactivateIncident(id, numOpenTasks) {
 	
 	$.ajax( {
 		type : 'GET',
-		url : "aProcess.xsp?type=incident&id=" + id,
+		url : "unpProcess.xsp?type=incident&id=" + id,
 		cache : false
 	}).done(
 	function(response) {
@@ -595,15 +594,44 @@ function deactivateIncident(id, numOpenTasks) {
 	});
 }
 
-//function to initiate synchronisation of Continuity
 var syncFunc = function(data) {
+	
+	$.blockUI();
+
 	if ("true" === data) {
-		setTimeout(function() { $.get("/_$$unp/replStatus", syncFunc); }, 500);
+		
+		setTimeout(function() { 
+			$.get("/_$$unp/replStatus", syncFunc).error(
+					//ios doesn't have this page
+					function() { 
+						
+						if ( _ajaxRequests.length > 0 ) {
+							loadPageEx( _ajaxRequests[_ajaxRequests.length-1] , 'contentwrapper', null, true, false );
+						} else {
+							location.reload();
+						}
+					});
+		}, 500);
+			
 	}
 	else {
-		$.unblockUI();
-		location.reload();
+		
+		if ( _ajaxRequests.length > 0 ) {
+			loadPageEx( _ajaxRequests[_ajaxRequests.length-1] , 'contentwrapper', null, true, false );
+		} else {
+			location.reload();
+		}
 	}
+	
+}
+
+//function to initiate synchronisation of Continuity
+function syncAllDbs(){
+	$.blockUI({
+		centerY: 0,
+		css: { top: '10px', left: '10px', right: '' }
+	});
+	$.get("UnpSyncAll.xsp", syncFunc);
 }
 
 //remove click delay

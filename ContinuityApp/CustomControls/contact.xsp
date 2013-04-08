@@ -321,26 +321,25 @@
 			</xp:radioGroup>
 		</xe:formRow>
 
-		<xe:formRow id="formRow15" for="checkBoxGroupSites"
-			label="Sites:">
-			<xp:checkBoxGroup id="checkBoxGroupSites"
-				value="#{docContact.siteIds}"
+		<xe:formRow id="formRow15" for="checkBoxGroupSites">
+			<xe:this.label><![CDATA[#{javascript:configBean.getLabel("assets")}]]></xe:this.label>
+			<xp:checkBoxGroup id="checkBoxGroupSites" value="#{docContact.siteIds}"
 				readonly="#{javascript:!sessionScope.isEditor}">
 				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwSites", 2);
+					<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwAssets", 2);
 							
 							return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:checkBoxGroup>
 
-			<xp:text escape="true" disableTheme="true"
-				value="No sites selected">
+			<xp:text escape="true" disableTheme="true">
 				<xp:this.rendered><![CDATA[#{javascript://show in read mode when no options have been selected
 !docContact.isEditable() && @Text(docContact.getItemValue("siteIds"))==""}]]></xp:this.rendered>
+				<xp:this.value><![CDATA[#{javascript:"No " + configBean.getLabel("assets")  + " selected"}]]></xp:this.value>
 			</xp:text>
 
 		</xe:formRow>
-		
+
 		<!-- contact details -->
 		<xe:formRow id="formRow6" labelPosition="none"
 			styleClass="formSection" disableTheme="true">

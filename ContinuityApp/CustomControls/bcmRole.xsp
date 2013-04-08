@@ -31,24 +31,24 @@
 						refreshId="#{javascript:compositeData.dynContentId}">
 						<xp:this.action><![CDATA[#{javascript:try {
 						
-						//store name of selected site(s)
+						//store name of selected asset(s)
 						
-var siteIds = docRole.getItemValue("siteIds");
-var siteNames = [];
+var assetIds = docRole.getItemValue("siteIds");
+var assetNames = [];
 
-if (siteIds != null) {
-	if (typeof siteIds=="string") { siteIds = [siteIds]; }
+if (assetIds != null) {
+	if (typeof assetIds=="string") { assetIds = [assetIds]; }
 
-	for (var i=0; i<siteIds.length; i++) {
-		var siteId = siteIds[i]
+	for (var i=0; i<assetIds.length; i++) {
+		var assetId = assetIds[i]
 	
-		if (siteId != null && siteId.length>0) {
-			var siteName = @DbLookup( @DbName(), "vwAllById", siteId, "name", "[FailSilent]");
-			siteNames.push( siteName);	
+		if (assetId != null && assetId.length>0) {
+			var siteName = @DbLookup( @DbName(), "vwAllById", assetId, "name", "[FailSilent]");
+			assetNames.push( siteName);	
 		}	
 	}
 }
-docRole.replaceItemValue("siteNames", siteNames);
+docRole.replaceItemValue("siteNames", assetNames);
 
 var orgUnitIds = docRole.getItemValue("orgUnitIds");
 var orgUnitNames = [];
@@ -166,45 +166,46 @@ getComponent(compositeData.dynContentId).show("rolesList");}]]></xp:this.action>
 
 		</xe:formRow>
 
-		<!-- link to site(s) -->
-		<xe:formRow id="formRow15" for="checkBoxGroupSites" label="Sites (optional):">
-		
-			<xp:radio text="All" id="radio1" selectedValue="all"
-				groupName="rgSites" value="#{docRole.siteTarget}"
-				defaultSelected="true">
+		<!-- link to asset(s)/ activities -->
+		<xe:formRow id="formRow15" for="checkBoxGroupSites">
+
+			<xe:this.label><![CDATA[#{javascript:configBean.getLabel("assets") + " (optional):"}]]></xe:this.label>
+			<xp:radio text="All" id="radio1" selectedValue="all" groupName="rgSites"
+				value="#{docRole.siteTarget}" defaultSelected="true">
 				<xp:eventHandler event="onchange" submit="false">
 					<xp:this.script><![CDATA[dojo.style( "#{id:cbSites}", "display", "none")]]></xp:this.script>
 				</xp:eventHandler>
 			</xp:radio>
 			<br />
-			<xp:radio text="Selected sites" id="radio2"
-				selectedValue="selected" groupName="rgSites" value="#{docRole.siteTarget}">
-			<xp:eventHandler event="onchange" submit="false">
-				<xp:this.script><![CDATA[dojo.style("#{id:cbSites}", "display", "block")]]></xp:this.script>
-			</xp:eventHandler></xp:radio>
+			<xp:radio id="radio2" selectedValue="selected" groupName="rgSites"
+				value="#{docRole.siteTarget}">
+				<xp:this.text><![CDATA[#{javascript:"Selected " + configBean.getLabel("assets").toLowerCase()
+}]]></xp:this.text>
+				<xp:eventHandler event="onchange" submit="false">
+					<xp:this.script><![CDATA[dojo.style("#{id:cbSites}", "display", "block")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:radio>
 			<br />
 
 			<xp:div id="cbSites">
 				<xp:this.style><![CDATA[#{javascript:"margin-left: 20px; display: " + (docRole.getItemValueString("siteTarget").equals("all") || docRole.getItemValueString("siteTarget").equals("") ? "none" : "block" )}]]></xp:this.style>
-				
-				<xp:checkBoxGroup id="checkBoxGroupSites"
-					value="#{docRole.siteIds}">
+
+				<xp:checkBoxGroup id="checkBoxGroupSites" value="#{docRole.siteIds}">
 					<xp:selectItems>
-						<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwSites", 2);
+						<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwAssets", 2);
 						return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
 					</xp:selectItems>
 				</xp:checkBoxGroup>
 
 			</xp:div>
 
-			<xp:text escape="true" disableTheme="true"
-				value="No sites selected">
+			<xp:text escape="true" disableTheme="true" value="No assets selected">
 				<xp:this.rendered><![CDATA[#{javascript://show in read mode when no options have been selected
 !docRole.isEditable() && @Text(docRole.getItemValue("siteIds"))==""}]]></xp:this.rendered>
 			</xp:text>
 
 		</xe:formRow>
-		
+
 		<xe:formRow id="formRow4" label="Call tree hierarchy position:">
 			<xp:inputText value="#{docRole.callTreeOrder}" id="inputText2" required="true"
 				styleClass="number" maxlength="3">

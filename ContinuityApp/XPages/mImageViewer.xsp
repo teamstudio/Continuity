@@ -12,9 +12,7 @@
 		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
 	</xp:this.resources>
 	
-	<!--<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" backButtonText="Back" backButtonURL="mUpdates.xsp"></xc:unpHeader>
-
-	--><xp:this.beforePageLoad>
+	<xp:this.beforePageLoad>
 		<xp:executeScript>
 			<xp:this.script><![CDATA[#{javascript:var images = new Array;
 var imageFile = "";
