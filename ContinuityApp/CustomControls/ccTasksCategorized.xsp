@@ -76,8 +76,7 @@
 				<xp:this.categoryFilter><![CDATA[#{javascript:viewScope.categoryFilter}]]></xp:this.categoryFilter>
 			</xc:ccTaskList>
 			
-			<xc:ccTask id="task" xp:key="task"
-				setResponsibleFor="true">
+			<xc:ccTask id="task" xp:key="task" showTitle="false">
 				<xc:this.parentId><![CDATA[""]]></xc:this.parentId>
 			</xc:ccTask>
 

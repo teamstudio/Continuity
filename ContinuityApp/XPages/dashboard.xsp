@@ -34,7 +34,7 @@
 						<xe:basicContainerNode label="BCM Framework" enabled="false">
 							<xe:this.children>
 							
-								<xe:basicLeafNode label="Assets"
+								<xe:basicLeafNode label="#{javascript:configBean.getLabel('assets')}"
 									submitValue="sites">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("sites");}]]></xe:this.selected>
 								</xe:basicLeafNode>
@@ -247,23 +247,18 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccResponsibilityNotCat id="responsibilityNotCat" xp:key="responsibilityNotCat">
 						</xc:ccResponsibilityNotCat>
 
-						<xc:ccAuditLog id="auditLog"
-							xp:key="auditLog">
+						<xc:ccAuditLog id="auditLog"							xp:key="auditLog">
 						</xc:ccAuditLog>
 
-						<xc:changePasswordForm id="changePasswordForm"
-							xp:key="changePasswordForm">
+						<xc:changePasswordForm id="changePasswordForm"							xp:key="changePasswordForm">
 						</xc:changePasswordForm>
 
-						<xc:ccIncidents xp:key="incidentsList"
-							id="incidentsList">
+						<xc:ccIncidents xp:key="incidentsList"							id="incidentsList">
 						</xc:ccIncidents>
-						<xc:ccIncident xp:key="incidentForm"
-							id="incidentForm">
+						<xc:ccIncident xp:key="incidentForm"							id="incidentForm">
 						</xc:ccIncident>
 
-						<xc:updates id="updatesList"
-							xp:key="updatesList">
+						<xc:updates id="updatesList"							xp:key="updatesList">
 						</xc:updates>
 
 						<xc:ccQuickGuides id="quickGuidesList" xp:key="quickGuidesList"></xc:ccQuickGuides>
@@ -280,6 +275,8 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccSettingsForm xp:key="settings"></xc:ccSettingsForm>
 
 						<xc:ccTaskCategories xp:key="taskCats" id="taskCats"></xc:ccTaskCategories>
+						
+						
 
 					</xp:this.facets>
 				</xe:dynamicContent>

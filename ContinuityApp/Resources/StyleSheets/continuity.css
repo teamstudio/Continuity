@@ -63,7 +63,7 @@ textarea {
 table.grid {
 	border-collapse: collapse;
 }
-table.grid th, table.grid td.label {
+table.grid > tbody > tr > th, table.grid > thead > tr > th, table.grid > tbody > tr > td.label {
 	border: 1px solid silver;
 	background-color: #F4F5F6;
 	padding: 5px;
@@ -71,7 +71,7 @@ table.grid th, table.grid td.label {
 	font-weight: bold;	
 	white-space: noWrap
 }
-table.grid td {
+table.grid > tbody > tr > td {
 	border: 1px solid silver;	
 	padding: 5px;
 }

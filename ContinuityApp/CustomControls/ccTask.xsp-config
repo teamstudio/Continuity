@@ -11,6 +11,12 @@
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"&gt;&#xd;
+&lt;xp:div style="background-color:silver; color:white;"&gt;&#xd;
+ccTask&#xd;
+&lt;/xp:div&gt;&#xd;
+&lt;/xp:view&gt;</render-markup>
       </designer-extension>
     </composite-extension>
     <property>
@@ -24,13 +30,13 @@
       </property-extension>
     </property>
     <property>
-      <property-name>setResponsibleFor</property-name>
+      <property-name>showTitle</property-name>
       <property-class>boolean</property-class>
       <property-extension>
-        <designer-extension>
-          <editor>com.ibm.std.Boolean</editor>
-        </designer-extension>
         <required>true</required>
+        <designer-extension>
+          <default-value>true</default-value>
+        </designer-extension>
       </property-extension>
     </property>
   </composite-component>

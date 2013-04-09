@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
-
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
 	<xp:this.data>
 		<xp:dominoView var="vwRoles" viewName="vwRoles"></xp:dominoView>
 		<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"></xp:dominoView>
 	</xp:this.data>
-	
-	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.put("hasResponsibilities", vwResponsibilitiesByRole.getEntryCount() == 0);}]]></xp:this.beforePageLoad>
-	
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.put("hasResponsibilities", vwResponsibilitiesByRole.getEntryCount() > 0);}]]></xp:this.beforePageLoad>
+
 	<div class="section">
 		<div class="title">Responsibilities</div>
 		<div class="actions">
-			<xp:button value="Add role" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+			<xp:button value="Add role" id="button1" icon="page_add.png"
+				rendered="#{javascript:sessionScope.isEditor}">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("roleForm");}]]></xp:this.action>
@@ -20,26 +22,23 @@
 		</div>
 	</div>
 
-	<xp:panel readonly="true">
+	<xp:panel>
 		<table class="grid">
 			<tbody>
 
-				<xp:repeat id="repeatRoles" rows="100"
-					value="#{vwRoles}" var="roleRow" indexVar="rowIndex">
+				<xp:repeat id="repeatRoles" rows="100" value="#{vwRoles}" var="roleRow"
+					indexVar="rowIndex">
 
 					<tr>
 						<th colspan="2" style="min-width: 400px;">
 
 							<!-- action to add a responsibility -->
-							<div style="float: right; margin: 0 5px"
-								class="lotusTiny">
-								<xp:link escape="true"
-									text="add responsibility" style="font-weight:normal"
-									styleClass="lotusTiny" id="link2"
+							<div style="float: right; margin: 0 5px" class="lotusTiny">
+								<xp:link escape="true" text="add responsibility"
+									style="font-weight:normal" styleClass="lotusTiny" id="link2"
 									rendered="#{javascript:sessionScope.isEditor}">
-									<xp:eventHandler event="onclick"
-										submit="true" refreshMode="partial"
-										refreshId="dynamicContent1">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="dynamicContent1">
 										<xp:this.action>
 
 											<xp:actionGroup>
@@ -58,21 +57,18 @@
 
 							<!-- name of role -->
 							<h4>
-								<xp:link escape="true" id="link4"
-									text="#{roleRow.name}">
-									<xp:eventHandler event="onclick"
-										submit="true" refreshMode="partial"
-										refreshId="dynamicContent1">
+								<xp:link escape="true" id="link4" text="#{roleRow.name}">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="dynamicContent1">
 										<xp:this.action>
-											<xe:changeDynamicContentAction
-												facetName="roleForm" for="dynamicContent1">
+											<xe:changeDynamicContentAction facetName="roleForm"
+												for="dynamicContent1">
 												<xe:this.parameters>
-													<xp:parameter
-														name="documentId"
+													<xp:parameter name="documentId"
 														value="#{javascript:roleRow.getUniversalID()}">
 													</xp:parameter>
-													<xp:parameter
-														name="action" value="openDocument">
+													<xp:parameter name="action"
+														value="openDocument">
 													</xp:parameter>
 												</xe:this.parameters>
 											</xe:changeDynamicContentAction>
@@ -83,92 +79,98 @@
 
 						</th>
 					</tr>
-					
+
 					<!-- list of tasks for this role (if responsibilities haven't been setup at all) -->
 					<xp:panel disableOutputTag="true" rendered="#{javascript:viewScope.hasResponsibilities==0}">
-					
-						<!-- repeat over tasks by parent id (parent is in that case the role: show list of tasks here... -->
 						
-					
+						<!-- repeat over tasks by parent id (parent is in that case the role: show list of tasks here... -->
+						<tr>
+							<td colspan="2" class="grid">
+							
+								<xc:ccTasks showTitle="false" allowAdd="false" allowEdit="true" setResponsibleFor="false" parentId="#{javascript:roleRow.getColumnValue('id')}"
+								 />
+								
+							</td>
+						</tr>
+
 					</xp:panel>
-					
-					
+
+
 					<!--  list of responsibilities -->
-					<xp:panel disableOutputTag="true" rendered="#{javascript:viewScope.hasResponsibilities>0}">
+					<xp:panel disableOutputTag="true"
+						rendered="#{javascript:viewScope.hasResponsibilities>0}">
 
 						<xp:tr>
 							<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResp").getRowCount()==0}]]></xp:this.rendered>
 							<td colspan="2" class="grid">
-								<i>
-									No responsibilities defined for this role yet
-								</i>
+								<i>No responsibilities defined for this role yet</i>
 							</td>
 						</xp:tr>
-	
+
 						<!-- list of responsibilities for this role -->
-						<xp:repeat id="repeatResp" rows="100" var="respRow" disableOutputTag="true">
+						<xp:repeat id="repeatResp" rows="100" var="respRow"
+							disableOutputTag="true">
 							<xp:this.value><![CDATA[#{javascript:vwResponsibilitiesByRole.getAllEntriesByKey(roleRow.getColumnValue("id"), true);}]]></xp:this.value>
-	
+
 							<tr>
-								<td class="grid"
-									style="width: 500px;">
-	
+								<td class="grid" style="width: 500px;">
+
 									<xp:link escape="true"
-										text="#{javascript:respRow.getColumnValues().get(2);}"
-										style="font-weight:bold" id="link3">
-	
-										<xp:eventHandler event="onclick"
-											submit="true" refreshMode="partial"
-											refreshId="dynamicContent1">
-	
+										text="#{javascript:respRow.getColumnValues().get(2);}" style="font-weight:bold"
+										id="link3">
+
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" refreshId="dynamicContent1">
+
 											<xp:this.action>
 												<xe:changeDynamicContentAction
 													facetName="responsibility" for="dynamicContent1">
 													<xe:this.parameters>
-														<xp:parameter
-															name="documentId"
+														<xp:parameter name="documentId"
 															value="#{javascript:respRow.getUniversalID()}">
 														</xp:parameter>
-														<xp:parameter
-															name="action" value="openDocument">
+														<xp:parameter name="action"
+															value="openDocument">
 														</xp:parameter>
 													</xe:this.parameters>
 												</xe:changeDynamicContentAction>
 											</xp:this.action>
-	
+
 										</xp:eventHandler>
 									</xp:link>
 									<br />
-									
+
 									<!-- description -->
-									<xp:text tagName="div" style="margin: 5px 0" escape="false" disableTheme="true" value="#{javascript:respRow.getColumnValues().get(5)}">
+									<xp:text tagName="div" style="margin: 5px 0" escape="false"
+										disableTheme="true" value="#{javascript:respRow.getColumnValues().get(5)}">
 									</xp:text>
-	
+
 								</td>
-								
+
 							</tr>
-	
+
 						</xp:repeat>
-						
+
 						<!-- Uncategorised tasks (only shown if there are tasks that are assigned to this role, but not a responsibility -->
 						<xp:tr>
 							<xp:this.rendered><![CDATA[#{javascript:database.getView("vwTasksByRespId").getAllEntriesByKey( "role-" + roleRow.getColumnValue("id"), true).getCount() > 0;}]]></xp:this.rendered>
-							
+
 							<td class="grid" style="width: 500px;">
-							
-								<xp:link escape="true" text="Uncategorised tasks" style="font-weight:bold" id="link1">
-	
-									<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-										refreshId="dynamicContent1">
+
+								<xp:link escape="true" text="Uncategorised tasks"
+									style="font-weight:bold" id="link1">
+
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="dynamicContent1">
 										<xp:this.action><![CDATA[#{javascript:viewScope.put("respNoCat", "role-" + roleRow.getColumnValue("id"));
 	getComponent("dynamicContent1").show("responsibilityNotCat");
 	}]]></xp:this.action>
 									</xp:eventHandler>
 								</xp:link>
-							
+
 							</td>
 						</xp:tr>
-	
+
 						<tr>
 							<td colspan="2" class="noBorders"></td>
 						</tr>

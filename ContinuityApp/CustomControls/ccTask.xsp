@@ -22,23 +22,23 @@ if ( vwPlans.getEntryCount()==1 ) {
 	}	}]]></xp:this.postOpenDocument></xp:dominoDocument>
 	</xp:this.data>
 
-	<div class="section" style="margin-top: 10px;">
+	<xp:div styleClass="section" rendered="#{javascript:compositeData.showTitle}">
 		<div class="title">Task</div>
-	</div>
+	</xp:div>
 
 	<xe:formTable id="formTable1" disableErrorSummary="true">
 
 		<xp:this.facets>
 			<xp:panel xp:key="footer" id="panel1">
 			
-				<xp:button value="Edit" id="button1"
-					icon="pencil.png">
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docTask.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynamicContent1">
-						<xp:this.action>
-							<xp:changeDocumentMode mode="edit"
-								var="docTask">
-							</xp:changeDocumentMode>
+				<xp:button value="Edit" id="button1" icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docTask.isEditable()}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynContTasks">
+							<xp:this.action>
+								<xp:changeDocumentMode mode="edit"
+									var="docTask">
+								</xp:changeDocumentMode>
 						</xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
