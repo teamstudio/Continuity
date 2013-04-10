@@ -85,7 +85,8 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 								<xp:this.attrs>
 									<xp:attr name="onClick">
 										<xp:this.value>
-											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mQuickGuide.xsp?id=" + row.getColumnValue('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>
+<!--											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mQuickGuide.xsp?id=" + row.getColumnValue('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>-->
+											<![CDATA[#{javascript:"var back = '" + compositeData.parentUrl + "'; window.location.href='" + getDbPath() + "/mQuickGuide.xsp?id=" + row.getColumnValue('quickGuideIds') + "&back=' + encodeURIComponent(back); event.stopPropagation(); return false;"}]]>
 										</xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>

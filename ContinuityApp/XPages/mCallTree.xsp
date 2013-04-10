@@ -65,8 +65,6 @@ viewScope.put("orderPosition", pos);
 
 	<xc:mLayout showMenu="true" pageTitle="Call tree" backButtonURL="#{javascript:sessionScope.from;}">
 
-		<!--		<xc:this.pageTitle><![CDATA[#{javascript://viewScope.get("roleName");}]]></xc:this.pageTitle>-->
-
 		<xp:this.facets>
 			<xp:div xp:key="contents">
 

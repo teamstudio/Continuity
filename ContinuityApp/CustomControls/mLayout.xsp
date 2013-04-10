@@ -84,7 +84,7 @@
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
-					<xc:menuItem itemId="incidents" disabled="false" label="Incidents"
+					<xc:menuItem itemId="incidents" disabled="false" label="#{javascript:applicationScope.labels['incidents']}"
 						page="/mIncidents.xsp" icon="incidents.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>

@@ -18,10 +18,10 @@
 				
 					<li>
 
-						<xp:label value="Incident" id="label3" for="incident"></xp:label>
+						<xp:label value="#{javascript:applicationScope.labels['incident']}" id="label3" for="incident"></xp:label>
 						<xp:comboBox id="incident" value="#{docUpdate.incidentId}"
 							styleClass="xspListBox">
-							<xp:selectItem itemLabel="- Select an incident -"></xp:selectItem>
+							<xp:selectItem itemLabel="#{javascript:'- Select an ' + applicationScope.labels['incident'].toLowerCase() + ' -'}"></xp:selectItem>
 							<xp:selectItems>
 								<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwIncidentsOpen", sessionScope.get("orgUnitId"), 2, "[FAILSILENT]")}]]></xp:this.value>
 							</xp:selectItems>

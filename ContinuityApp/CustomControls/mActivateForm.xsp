@@ -31,7 +31,7 @@
 							</xp:this.attrs></xp:inputText>
 						</li>
 						<li>
-							<xp:label value="Asset" id="label1" for="siteId"></xp:label>
+							<xp:label value="#{javascript:applicationScope.labels['asset']}" id="label1" for="siteId"></xp:label>
 							<xp:comboBox id="siteId" value="#{docIncident.siteId}"
 								styleClass="xspListBox">
 								<xp:selectItems value="#{javascript:applicationScope.siteChoices}">

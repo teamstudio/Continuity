@@ -52,7 +52,7 @@
 
 						<ul class="fieldlist">
 							<li>
-								<xp:label value="Incident" id="label1" for="incidentName">
+								<xp:label value="#{javascript:applicationScope.labels['incident']}" id="label1" for="incidentName">
 								</xp:label>
 
 								<xp:text escape="true" id="computedField1"

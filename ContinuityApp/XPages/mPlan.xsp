@@ -32,7 +32,8 @@
 								<xp:this.attrs>
 									<xp:attr name="onClick">
 										<xp:this.value>
-											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mQuickGuide.xsp?id=" + docScenario.getItemValueString('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>
+<!--											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mQuickGuide.xsp?id=" + docScenario.getItemValueString('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>-->
+											<![CDATA[#{javascript:"var back = 'mPlan.xsp?id=" + param.get('id') + "'; window.location.href='" + getDbPath() + "/mQuickGuide.xsp?id=" + docScenario.getItemValueString('quickGuideIds') + "&back=' + encodeURIComponent(back); return false;"}]]>
 										</xp:this.value>
 									</xp:attr>
 									</xp:this.attrs>
@@ -94,8 +95,9 @@
 
 				--><!-- list of tasks -->
 				<div class="mTop">
-					<xc:mTasksList
-						viewName="vwTasksByParentByTaskCat" categoryFilter="#{javascript:docScenario.getItemValueString('id')}">
+					<xc:mTasksList viewName="vwTasksByParentByTaskCat"
+						categoryFilter="#{javascript:docScenario.getItemValueString('id')}">
+						<xc:this.parentUrl><![CDATA[#{javascript:"mPlan.xsp?id=" + param.get('id')}]]></xc:this.parentUrl>
 					</xc:mTasksList>
 				</div>
 			</xp:panel>

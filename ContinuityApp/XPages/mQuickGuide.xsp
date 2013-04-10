@@ -16,7 +16,7 @@ if (id != null && id.length>0) {
 		</xp:dominoDocument>
 	</xp:this.data>
 
-	<xc:mLayout showMenu="true" pageTitle="quickGuide">
+	<xc:mLayout showMenu="true" pageTitle="Quick guide">
 	
 		<xp:this.facets>
 		
@@ -30,7 +30,7 @@ if (id != null && id.length>0) {
 						<xp:link value="#" text="Close" styleClass="red">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
-									<xp:this.value><![CDATA[#{javascript:"goBack(); return false;"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"window.location.href='" + param.get('back') + "'; return false;"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 						</xp:link>
@@ -41,11 +41,19 @@ if (id != null && id.length>0) {
 					
 					<!-- file(s) -->
 					<div class="mTop">
-						<xp:link escape="true" text="Open attachment" id="link1"
-							rendered="#{javascript:!docQuickGuide.getAttachmentList().isEmpty();}">
-							<xp:this.value><![CDATA[#{javascript:"/0/" + docQuickGuide.getDocument().getUniversalID() + "/$file/" + docQuickGuide.getAttachmentList().get(0).getName()}]]>
-							</xp:this.value>
-						</xp:link>
+					
+						<xp:repeat id="repeat1" rows="30" var="att">
+							<xp:this.value><![CDATA[#{javascript:docQuickGuide.getAttachmentList('files')}]]></xp:this.value>
+							
+							<div style="margin-bottom: 10px">
+								<xp:link escape="true" text="#{javascript:att.getName()}" id="link2">
+									<xp:this.value><![CDATA[#{javascript:"/0/" + docQuickGuide.getDocument().getUniversalID() + "/$file/" + att.getName()}]]>
+									</xp:this.value>
+								</xp:link>
+							</div>
+
+						</xp:repeat>
+
 					</div>
 					
 				</div>

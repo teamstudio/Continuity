@@ -23,7 +23,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		<xc:this.pageTitle><![CDATA[#{javascript:if (docIncident.isNewNote()) {
 	return "Activate team";
 } else {
-	return "Incident";
+	return applicationScope.label['incident'];
 }}]]></xc:this.pageTitle>
 		<xp:this.facets>
 
@@ -31,7 +31,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 				<div id="formholder">
 					<h2>
-						<xp:text escape="true" id="title" tagName="span" value="Incident"
+						<xp:text escape="true" id="title" tagName="span" value="#{javascript:applicationScope.labels['incident']}"
 							styleClass="formtitle">
 						</xp:text>
 					</h2>
@@ -65,7 +65,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 						</li>
 						<li>
-							<xp:label value="Asset" id="label1" for="siteId"></xp:label>
+							<xp:label value="#{javascript:applicationScope.labels['asset']}" id="label1" for="siteId"></xp:label>
 							<xp:text escape="true" id="siteId" value="#{docIncident.siteName}">
 							</xp:text>
 						</li>
@@ -199,6 +199,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 					<xc:mTasksList showStatus="true" viewName="vwTasksByParentByTaskCat">
 						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
+						<xc:this.parentUrl><![CDATA[#{javascript:"mIncident.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:mTasksList>
 
 				</div>
