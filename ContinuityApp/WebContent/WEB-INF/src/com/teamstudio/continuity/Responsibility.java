@@ -40,14 +40,20 @@ public class Responsibility implements Serializable {
 			//save the current xsp document
 			xspDocResponsibility.save();
 
-			//update changed name in all related documents
-			if (!isNew) {
+			if (isNew) {
+				
+				Configuration.get().updateMenuOptionCounts();
+				
+			} else {
+				
+				//update changed name in all related documents
 				
 				String id = xspDocResponsibility.getItemValueString("id");
 				String name = xspDocResponsibility.getItemValueString("name");
 			
 				Utils.fieldValueChange("responsibilityIds", id, "responsibilityNames",  xspDocResponsibility.getItemValueString("roleName") + " - " + name );
 				Utils.fieldValueChange("responsibilityId", id, "responsibilityName",  name );
+				
 			}
 			
 			success = true;

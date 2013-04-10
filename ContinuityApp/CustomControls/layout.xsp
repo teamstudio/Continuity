@@ -20,105 +20,126 @@
 	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right">
 		<xc:this.loaded><![CDATA[${javascript:sessionScope.get("isDebug")}]]></xc:this.loaded>
 	</xc:ccDebugToolbar>
+	
+	<div class="lotusFrame">
+	
+		<div class="lotusBanner" role="banner">
+			<div class="lotusRightCorner">
+				<div class="lotusInner">
+					<!-- app logo -->
+					<span class="logo" style="float:left;vertical-align:middle;margin-right: 5px;">
 
-	<!-- main application layout -->
-	<xe:applicationLayout id="applicationLayout1">
-		<xp:callback facetName="facetMiddle" id="facetMiddle"></xp:callback>
+						<xp:link escape="true" text="" id="link1" value="#{applicationScope.thisDbUrl}" title="Continuity">
+							<xp:image url="/continuity_logo_white.png" id="image1" alt="Continuity logo"></xp:image>
+						</xp:link>
 
-		<xe:this.facets>
-			<xp:callback facetName="facetLeft" id="facetLeft" xp:key="LeftColumn"></xp:callback>
-		</xe:this.facets>
-		
-		<xe:this.configuration>
-
-			<xe:oneuiApplication legal="false" footer="false" productLogo="continuity_logo_white.png"
-				productLogoClass="logo" productLogoAlt="Continuity">
-
-				<xe:this.bannerUtilityLinks>
-
-					<!-- profile photo -->
-					<xe:basicLeafNode imageHeight="35px" imageWidth="35px"
-						image="#{sessionScope.profilePhotoUrl}" />
-
-					<xe:basicContainerNode>
-						<xp:this.label>
-							<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : (sessionScope.isUser ? " (user)" : "") )}]]>
-						</xp:this.label>
-						<xe:this.children>
-							<xe:basicLeafNode label="My profile" submitValue="myProfile"
-								loaded="${javascript:sessionScope.profileUnid != null}">
-							</xe:basicLeafNode>
-							<xe:basicLeafNode label="Change password" submitValue="changePassword"
-								loaded="${javascript:sessionScope.profileUnid != null}"
-								rendered="#{javascript:sessionScope.canEdit}">
-							</xe:basicLeafNode>
-						</xe:this.children>
-					</xe:basicContainerNode>
-					<xe:separatorTreeNode></xe:separatorTreeNode>
-
-					<xe:basicLeafNode label="#{configBean.organisationName}"></xe:basicLeafNode>
-
-					<xe:separatorTreeNode></xe:separatorTreeNode>
-
-					<xe:basicLeafNode label="Logout" submitValue="logout"></xe:basicLeafNode>
-
-				</xe:this.bannerUtilityLinks>
-
-				<xe:this.titleBarName><![CDATA[#{javascript:configBean.getOrganisationName() + (applicationScope.get("isReadOnlyMode") ? " (read only)" : "")}]]></xe:this.titleBarName>
-
-			</xe:oneuiApplication>
-
-		</xe:this.configuration>
-
-		<xp:eventHandler event="onItemClick" submit="true" refreshMode="full" immediate="true">
-			<xp:this.action><![CDATA[#{javascript:var c = context.getSubmittedValue();
-			
-			switch (c ) {
-			
-			case "myProfile":
-			
-				var id =  sessionScope.get("profileUnid");
-				getComponent("dynamicContent1").show("contactForm", {action:'openDocument',documentId:id });
-				break;
-			
-			case "changePassword":
-			
-				getComponent("dynamicContent1").show("changePasswordForm");
-				break;
+					</span>
 					
-	case "logout":
-	
-		//logout link clicked: clear sessionscope and logoff
-		var iter = sessionScope.keySet().iterator();
-		while( iter.hasNext() ){ 
-		   sessionScope.remove( iter.next() );
-		}
-		
-		facesContext.getExternalContext().redirect("/names.nsf?logout&redirectTo=" + applicationScope.get("thisDbUrl") );
-		
-		break;
+					<xe:linksList id="linksList1" styleClass="lotusInlinelist lotusUtility">
+						<xe:this.treeNodes>
 
-}}]]></xp:this.action>
-		</xp:eventHandler>
-	</xe:applicationLayout>
-	
-	<!-- version and link to product logo -->
-	<xp:scriptBlock id="scriptBlock1">
-		<xp:this.value><![CDATA[dojo.addOnLoad( function() {
+							<!-- profile photo -->
+							<xe:basicLeafNode imageHeight="35px" imageWidth="35px"
+								image="#{sessionScope.profilePhotoUrl}" />
+
+							<xe:basicContainerNode styleClass="pointer">
+								<xp:this.label>
+									<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : (sessionScope.isUser ? " (user)" : "") )}]]>
+								</xp:this.label>
+								<xe:this.children>
+									<xe:basicLeafNode label="My profile" submitValue="myProfile"
+										loaded="${javascript:sessionScope.profileUnid != null}">
+									</xe:basicLeafNode>
+									<xe:basicLeafNode label="Change password"
+										submitValue="changePassword" loaded="${javascript:sessionScope.profileUnid != null}"
+										rendered="#{javascript:sessionScope.canEdit}">
+									</xe:basicLeafNode>
+								</xe:this.children>
+							</xe:basicContainerNode>
+							<xe:separatorTreeNode></xe:separatorTreeNode>
+
+							<xe:basicLeafNode label="#{configBean.organisationName}"></xe:basicLeafNode>
+
+							<xe:separatorTreeNode></xe:separatorTreeNode>
+
+							<xe:basicLeafNode label="Logout" submitValue="logout"></xe:basicLeafNode>
+
+						</xe:this.treeNodes>
+						
+						<xp:eventHandler event="onItemClick" submit="true" refreshMode="partial" refreshId="lotusMain" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:var c = context.getSubmittedValue();
+							switch (c ) {
+							
+							case "myProfile":
+							
+								var id =  sessionScope.get("profileUnid");
+								getComponent("dynamicContent1").show("contactForm", {action:'openDocument',documentId:id });
+								break;
+							
+							case "changePassword":
+							
+								getComponent("dynamicContent1").show("changePasswordForm");
+								break;
+									
+					case "logout":
+					
+						//logout link clicked: clear sessionscope and logoff
+						var iter = sessionScope.keySet().iterator();
+						while( iter.hasNext() ){ 
+						   sessionScope.remove( iter.next() );
+						}
+						
+						//facesContext.getExternalContext().redirect("/names.nsf?logout&redirectTo=" + applicationScope.get("thisDbUrl") );
+						facesContext.getExternalContext().redirect("/names.nsf?logout&redirectTo=/");
+						
+						break;
+				
+				}}]]></xp:this.action>
+						</xp:eventHandler>
+					</xe:linksList>
+			
+				</div>
+			</div>
+		</div>
+
+		<div class="lotusTitleBar">
+			<div class="lotusRightCorner">
+				<div class="lotusInner">
+					<div class="lotusTitleBarContent">
+						<xp:text tagName="h2" styleClass="lotusEllipsis" style="margin: 0">
+							<xp:this.value><![CDATA[#{javascript:configBean.getOrganisationName() + (applicationScope.get("isReadOnlyMode") ? " (read only)" : "")}]]></xp:this.value>
+						</xp:text>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="lotusPlaceBar">
+			<div class="lotusRightCorner">
+				<div class="lotusInner"></div>
+			</div>
+		</div>
+
+		<xp:div styleClass="lotusMain" id="lotusMain">
 		
-		//add link to product logo
-	var logo = dojo.query("span.logo img")[0];
-	
-	dojo.connect(logo, 'onclick', function( ) {
-		window.location.href = "#{javascript:applicationScope.thisDbUrl}";
-	});
-	
-	dojo.style(logo, 'cursor', 'pointer');
-	
-	//add version number
-	dojo.create("div", { innerHTML : "#{configBean.appVersion}", class : "lotusTiny", style: "margin: 35px 0 5px 20px; color: #aaaaaa;"}, dojo.query(".lotusColLeft")[0] );
-		
-});]]></xp:this.value>
-	</xp:scriptBlock>
+			<div class="lotusColLeft">
+
+				<xp:callback facetName="facetLeft" id="facetLeft"></xp:callback>
+			
+				<!-- version -->
+				<div class="lotusTiny" style="margin: 35px 0 5px 20px; color: #aaaaaa;">
+					<xp:text escape="false" disableTheme="true" value="#{configBean.appVersion}"></xp:text>
+				</div>
+
+			</div>
+			
+			<div class="lotusContent">
+			
+				<xp:callback facetName="facetMiddle" id="facetMiddle"></xp:callback>
+				
+			</div>
+			
+		</xp:div>
+	</div>
 
 </xp:view>

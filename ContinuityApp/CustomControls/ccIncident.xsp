@@ -10,7 +10,7 @@
 	</xp:this.data>
 
 	<div class="section">
-		<div class="title">Incident</div>
+		<div class="title"><xp:text value="#{javascript:configBean.getLabel('incident')}" disableTheme="true" escape="false" /></div>
 	</div>
 
 	<xe:formTable id="formTable1" disableErrorSummary="true">

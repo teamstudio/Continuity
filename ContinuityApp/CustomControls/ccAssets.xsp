@@ -14,7 +14,7 @@
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1">
 					<xp:this.action>
-						<xe:changeDynamicContentAction facetName="site" for="dynamicContent1"></xe:changeDynamicContentAction>
+						<xe:changeDynamicContentAction facetName="riskEntity" for="dynamicContent1"></xe:changeDynamicContentAction>
 					</xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
@@ -37,25 +37,23 @@
 			<xp:tr>
 				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
 				<td>
-							<h4>
-							<xp:link escape="true" text="#{row.name}" id="link3">
+					<h4>
+						<xp:link escape="true" text="#{row.name}" id="link3">
 
-								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-									refreshId="dynamicContent1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+								refreshId="dynamicContent1">
 								<xp:this.action>
-									<xe:changeDynamicContentAction facetName="site"
+									<xe:changeDynamicContentAction facetName="riskEntity"
 										for="dynamicContent1">
 										<xe:this.parameters>
-											<xp:parameter name="documentId"
-												value="#{javascript:row.getUniversalID()}">
-											</xp:parameter>
-											<xp:parameter name="action" value="editDocument"></xp:parameter>
+											<xp:parameter name="documentId" value="#{javascript:row.getUniversalID()}"></xp:parameter>
+											<xp:parameter name="action" value="openDocument"></xp:parameter>
 										</xe:this.parameters>
 									</xe:changeDynamicContentAction>
-								</xp:this.action></xp:eventHandler>
-							</xp:link>
-						</h4>
-
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</h4>
 				</td>
 				
 				<td>

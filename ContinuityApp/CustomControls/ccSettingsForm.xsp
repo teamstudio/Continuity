@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 
-	<div class="section">
-		<div class="title">General settings</div>
-	</div>
+	<xp:panel style="margin-bottom: 10px">
 
-	<xp:this.data>
-		<xp:dominoDocument var="docSettings" action="openDocument" formName="fSettings">
-			<xp:this.documentId><![CDATA[#{javascript:configBean.settingsUnid}]]></xp:this.documentId>
-		</xp:dominoDocument>
-	</xp:this.data>
-	
-	<xe:formTable id="formTable1" disableErrorSummary="true">
-		<xp:this.facets>
-			<xp:panel xp:key="footer" id="panel1">
+		<div class="section">
+			<div class="title">Organisation</div>
+		</div>
 
-				<xp:button value="Edit" id="button1" icon="pencil.png">
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docSettings.isEditable()}]]></xp:this.rendered>
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1">
-						<xp:this.action>
-							<xp:changeDocumentMode mode="edit" var="docSettings">
-							</xp:changeDocumentMode>
-						</xp:this.action>
-					</xp:eventHandler>
-				</xp:button>
+		<xp:this.data>
+			<xp:dominoDocument var="docSettings" action="openDocument" formName="fSettings">
+				<xp:this.documentId><![CDATA[#{javascript:configBean.settingsUnid}]]></xp:this.documentId>
+			</xp:dominoDocument>
+		</xp:this.data>
+		
+		<table>
+			<tbody>
+				<tr>
+					<td><b>Name: *</b></td>
+					<td style="padding-left:20px">
+						<xp:inputText value="#{docSettings.organisationName}" id="organisationName1"
+					required="true">
+					<xp:this.validators>
+						<xp:validateRequired message="Name is required"></xp:validateRequired>
+					</xp:this.validators>
+					</xp:inputText>
+						&#160;
+						
+						<!-- save uses a full refresh in case the organisation name has changed (see the name in the header is also updated) -->
+						<xp:link text="Save" id="linkSave"
+							rendered="#{javascript:docSettings.isEditable()}" styleClass="lotusTiny">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xp:actionGroup>
+											<xp:saveDocument
+												var="docSettings">
+											</xp:saveDocument>
+											<xp:changeDocumentMode
+												mode="readOnly" var="docSettings">
+											</xp:changeDocumentMode>
+										</xp:actionGroup>
 
-				<xp:button value="Save" id="button3" icon="disk.png"
-					rendered="#{javascript:docSettings.isEditable()}">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-
-						<xp:this.action>
-							<xp:actionGroup>
-								<xp:actionGroup>
-									<xp:saveDocument var="docSettings"></xp:saveDocument>
-									<xp:changeDocumentMode mode="readOnly" var="docSettings"></xp:changeDocumentMode>
-								</xp:actionGroup>
-								<xp:executeScript>
-									<xp:this.script><![CDATA[#{javascript://update database title (used in Unplugged) (can only do that with signer access)
+										<xp:executeScript>
+											<xp:this.script><![CDATA[#{javascript://update database title (used in Unplugged) (can only do that with signer access)
 											try {
 												dBar.info("update db title...");
 												var name = docSettings.getItemValueString("organisationName");
@@ -49,65 +54,47 @@
 											}
 
 configBean.reload();}]]></xp:this.script>
-								</xp:executeScript>
-							</xp:actionGroup>
-						</xp:this.action>
-					</xp:eventHandler>
-				</xp:button>
+										</xp:executeScript>
+									</xp:actionGroup>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+						&#160;
+	
+						<xp:link escape="true" text="Cancel" id="link1" styleClass="lotusTiny"
+							rendered="#{javascript:docSettings.isEditable()}">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+								immediate="true" refreshId="dynamicContent1">
+								<xp:this.action>
+									<xp:changeDocumentMode mode="readOnly" var="docSettings"></xp:changeDocumentMode>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					
+					</td>
+					<td class="lotusTiny" style="padding-left:20px">
+						<xp:link text="Change" id="linkChange">
+							<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docSettings.isEditable()}]]></xp:this.rendered>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial"
+								refreshId="dynamicContent1">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xp:changeDocumentMode
+											mode="edit" var="docSettings">
+										</xp:changeDocumentMode>
+									</xp:actionGroup>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+
+
+					</td>
 				
-				<xp:link escape="true" text="Cancel" id="link1"
-					rendered="#{javascript:docSettings.isEditable()}">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1" immediate="true">
-						<xp:this.action>
-							<xp:changeDocumentMode mode="readOnly" var="docSettings"></xp:changeDocumentMode>
-						</xp:this.action>
-					</xp:eventHandler>
-				</xp:link>
+				</tr>
+			</tbody>
+		</table>
 
-			</xp:panel>
-
-		</xp:this.facets>
-
-
-		<xe:formRow id="formRow1" label="Name:">
-			<xp:inputText value="#{docSettings.organisationName}" id="organisationName1"
-				required="true">
-				<xp:this.validators>
-					<xp:validateRequired message="Name is required"></xp:validateRequired>
-				</xp:this.validators>
-			</xp:inputText>
-		</xe:formRow>
-
-		<xe:formRow id="formRow2" label="Labels:">
-
-			<table><tbody>
-			<tr>
-				<td style="padding: 0 0 4px 0 !important;">Assets:</td>
-				<td style="padding: 0 0 4px 5px !important;">
-					<xp:inputText value="#{docSettings.labelAssets}" id="inputText1" required="true"
-						defaultValue="Assets">
-						<xp:this.validators>
-							<xp:validateRequired message="Label for 'Assets' is required"></xp:validateRequired>
-						</xp:this.validators>
-					</xp:inputText>
-				</td>
-			</tr>
-			<tr>
-				<td style="padding: 0 0 4px 0 !important;">Asset:</td>
-				<td style="padding: 0 0 4px 5px !important;">
-				<xp:inputText value="#{docSettings.labelAsset}" id="inputText2" required="true" defaultValue="Asset">
-				<xp:this.validators>
-					<xp:validateRequired message="Label for 'Asset' is required"></xp:validateRequired>
-				</xp:this.validators>
-			</xp:inputText>
-				</td>
-			</tr>
-			</tbody></table>
-			
-		</xe:formRow>
-
-	</xe:formTable>
-
-
+	
+	</xp:panel>
 </xp:view>

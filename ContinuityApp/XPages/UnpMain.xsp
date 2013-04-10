@@ -102,7 +102,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 							</xp:text>
 						
 							<span class="chicletimg imgIncidents"></span>
-							<span>Incidents</span>
+							<xp:text value="#{javascript:applicationScope.labels['incidents']}" escape="false"></xp:text>
 						</a>
 					</li>
 					

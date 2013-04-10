@@ -35,8 +35,10 @@ public class Task implements Serializable {
 			dbCurrent = session.getCurrentDatabase();
 			
 			Document docTask = docTaskUI.getDocument(true);
-
-			if (docTaskUI.isNewNote()) {
+			
+			boolean isNew = docTaskUI.isNewNote();
+			
+			if (isNew) {
 				
 				vwAllById = dbCurrent.getView("vwAllById");
 				docScenario = vwAllById.getDocumentByKey(parentId, true);
@@ -83,6 +85,12 @@ public class Task implements Serializable {
 			
 			docTaskUI.save();
 			
+			if (isNew) {
+				
+				Configuration.get().updateMenuOptionCounts();
+			}
+			
+			
 		} catch (NotesException e) {
 			Logger.error(e);
 		} finally {
@@ -104,6 +112,8 @@ public class Task implements Serializable {
 			docTask = dbCurrent.getDocumentByUNID( taskUnid);
 			
 			docTask.remove(true);
+			
+			Configuration.get().updateMenuOptionCounts();
 			
 			dbCurrent.getView("vwTasksByParent").refresh();
 			

@@ -1,13 +1,17 @@
 package com.teamstudio.continuity;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
+import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
 
 import lotus.domino.Database;
 import lotus.domino.Session;
 import lotus.domino.View;
 import lotus.domino.Document;
+import lotus.domino.ViewNavigator;
 
 public class Configuration implements Serializable {
 
@@ -26,6 +30,15 @@ public class Configuration implements Serializable {
 	
 	private String serverName;
 	
+	private int numAssets;
+	private int numScenarios;
+	private int numTasks;
+	private int numPlans;
+	private int numResponsibilities;
+	private int numQuickGuides;
+	
+	private HashMap<String,String> labels = new HashMap<String,String>();
+	
 	public Configuration() {
 		reload();
 	}
@@ -36,6 +49,7 @@ public class Configuration implements Serializable {
 	
 	public static Configuration get() {
 		return (Configuration) Utils.resolveVariable(BEAN_NAME);
+
 	}
 	
 	/*
@@ -83,6 +97,28 @@ public class Configuration implements Serializable {
 				directoryDbPath = docSettings.getItemValueString("directoryDbPath");
 				unpluggedDbPath = docSettings.getItemValueString("unpluggedDbPath");
 				
+				//labels
+				if (docSettings.getItemValueString("riskNaming").equals("activities")) {
+					labels.put("assets", "Activities");
+					labels.put("asset", "Activity");
+				} else {
+					labels.put("assets", "Assets");
+					labels.put("asset", "Asset");
+				}
+				
+				if (docSettings.getItemValueString("incidentNaming").equals("crises")) {
+					labels.put("incidents", "Crises");
+					labels.put("incident", "Crisis");
+				} else if (docSettings.getItemValueString("incidentNaming").equals("emergencies")) {
+					labels.put("incidents", "Emergencies");
+					labels.put("incident", "Emergency");
+				} else {
+					labels.put("incidents", "Incidents");
+					labels.put("incident", "Incident");
+				}
+				
+				updateMenuOptionCounts();
+				
 			}
 			
 		} catch (Exception e) {
@@ -93,6 +129,72 @@ public class Configuration implements Serializable {
 			
 		}
 	
+	}
+	
+	public void updateMenuOptionCounts() {
+		
+		View vwTarget = null;
+		
+		try {
+			
+			Database dbCurrent = ExtLibUtil.getCurrentDatabase();
+			vwTarget = dbCurrent.getView("vwAllByType");
+			
+			ViewNavigator nav;
+			
+			nav = vwTarget.createViewNavFromCategory("fSite");
+			numAssets = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fScenario");
+			numScenarios = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fTask");
+			numTasks = nav.getCount();
+			Utils.recycle(nav);
+
+			nav = vwTarget.createViewNavFromCategory("fPlan");
+			numPlans = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fResponsibility");
+			numResponsibilities = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fQuickGuide");
+			numQuickGuides = nav.getCount();
+			Utils.recycle(nav);
+			
+		} catch (Exception e) {
+			Logger.error(e);
+		} finally {
+			Utils.recycle(vwTarget);
+		}
+		
+	}
+	
+	public int getNumAssets() {
+		return numAssets;
+	}
+	public int getNumScenarios() {
+		return numScenarios;
+	}
+	public int getNumTasks() {
+		return numTasks;
+	}
+	public int getNumPlans() {
+		return numPlans;
+	}
+	public int getNumResponsibilities() {
+		return numResponsibilities;
+	}
+	public int getNumQuickGuides() {
+		return numQuickGuides;
+	}	
+	
+	public String getLabel(String key) {
+		return labels.get(key);
 	}
 	
 	public String getSettingsUnid() {

@@ -102,6 +102,7 @@ public class Utils {
 	 * This function is used to change names in related documents based on an id 
 	 */
 	public static void fieldValueChange( String matchField, String matchValue, String fieldName, String fieldValue) {
+		
 		try {
 			
 			Session sessionAsSigner = Utils.getCurrentSessionAsSigner();
@@ -109,8 +110,10 @@ public class Utils {
 			
 			fieldValueChange(dbCurrent, matchField, matchValue, fieldName, fieldValue );
 			
-		} catch (NotesException e) {
+		} catch (Exception e) {
+			
 			Logger.error(e);
+			
 		}
 		
 	}
@@ -178,7 +181,7 @@ public class Utils {
 			}
 			
 			//Logger.debug("done");
-		} catch (NotesException e) {
+		} catch (Exception e) {
 			Logger.error(e);
 			
 		} finally {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:repeat id="repeat1" rows="30" var="att">
+		<xp:this.value><![CDATA[#{javascript:compositeData.doc.getAttachmentList( compositeData.fieldName );}]]></xp:this.value>
+				
+		<xp:this.facets>
+			<xp:text xp:key="header" escape="false" disableTheme="true"><xp:this.value><![CDATA[<table><tbody>]]></xp:this.value></xp:text>
+			<xp:text xp:key="footer" escape="false" disableTheme="true"><xp:this.value><![CDATA[</tbody></table>]]></xp:this.value></xp:text>
+		</xp:this.facets>
+	
+		<tr>
+			<td style="padding:0 4px 4px 4px; padding-left: 0;">
+			
+			<xp:link escape="true" text="#{javascript:att.getName()}" id="link2" target="_blank">
+	
+			<xp:this.value><![CDATA[#{javascript:"0/" + compositeData.doc.getDocument().getUniversalID() + "/$file/" + java.net.URLEncoder.encode (att.getName(), "utf-8")}]]></xp:this.value></xp:link>
+		</td>
+		<xp:td style="padding:0 4px 4px 4px;" rendered="#{javascript:compositeData.doc.isEditable()}">
+			<xp:link escape="true" styleClass="lotusTiny" text="remove" id="link3">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:compositeData.doc.removeAttachment( compositeData.fieldName , att.getName() );}]]></xp:this.action>
+				</xp:eventHandler></xp:link>
+		</xp:td>
+		
+		</tr>
+	
+	</xp:repeat>
+	
+	<xp:fileUpload id="fileUpload1" value="#{compositeData.doc[compositeData.fieldName ]}">
+
+	</xp:fileUpload>
+
+
+</xp:view>

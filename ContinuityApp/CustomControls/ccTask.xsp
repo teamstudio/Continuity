@@ -46,7 +46,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 				<xp:button value="Save task" id="button3"
 					icon="disk.png" rendered="#{javascript:docTask.isEditable()}">
 					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynContTasks">
+						refreshMode="partial" refreshId="lotusMain">
 						<xp:this.action><![CDATA[#{javascript:taskBean.save(docTask, compositeData.parentId);
 	getComponent("dynContTasks").show("tasks")}]]></xp:this.action>
 					</xp:eventHandler>

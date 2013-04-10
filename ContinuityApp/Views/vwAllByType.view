@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='1346' unid='D6AF617CF1F9A625C1257B49002955E0' sequence='10'>
+<created><datetime dst='true'>20130410T093129,60+02</datetime></created>
+<modified><datetime dst='true'>20130410T093544,53+02</datetime></modified>
+<revised><datetime dst='true'>20130410T093544,52+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130410T093544,53+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130410T093129,64+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwAllByType</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+iAACAFgAAgAkMgUABABGb3JtAQAFAGZUYXNrAAoCBQAGAHN0YXR1cwEAAAALAhwCrwAmABYAAQAM
+AHRhc2tBc3NpZ25lZK4AEAAFAAQARm9yba4ABAC1AwMABQAYABMAAgACAAkAJDIkQ29uZmxpY3QA
+BAAEAAAACABmAAMABwAKAAQACUwxUw==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+DwABAABECGYHAAACACQy
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAMAiwAAAFZDAwQCAAQAcgAAACEAAQEACQABAAAAAAAAAAICAAAAVkMAAAIAAAAKAAoAUAAB
+AAAJAAAAAAAAAAAAAgIAAAAkMkZvcm1yAAIAWAACACQyBQAEAEZvcm0BAAUAZlRhc2sACgIFAAYA
+c3RhdHVzAQAAAAsCHAKvACYAFgABAAwAdGFza0Fzc2lnbmVkrgAQAAUABABGb3JtrgAEALUDAwAH
+ABgAEgAJMlJUNVM2UzdTOFMxMFMxMlIkMQoAAAAIAJIAAwABBQEABAB/QTD/JgABAAAAAQEACQEA
+AAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/
+/wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAA
+AAAAAEIAAAAAAAEA////AAEA7+/vAAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAAB
+AAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>PY</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

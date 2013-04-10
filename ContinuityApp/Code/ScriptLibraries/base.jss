@@ -217,7 +217,33 @@ function loadAppConfig( forceUpdate:boolean ) {
 				
 			} else {
 			
-				applicationScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));				
+				applicationScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));
+				
+				//labels
+				var labels = getMap();
+				
+				//labels
+				if (docSettings.getItemValueString("riskNaming").equals("activities")) {
+					labels["assets"] = "Activities";
+					labels["asset"] = "Activity";
+				} else {
+					labels["assets"] = "Assets";
+					labels["asset"] = "Asset";
+				}
+				
+				if (docSettings.getItemValueString("incidentNaming").equals("crises")) {
+					labels["incidents"] = "Crises";
+					labels["incident"] = "Crisis";
+				} else if (docSettings.getItemValueString("incidentNaming").equals("emergencies")) {
+					labels["incidents"] = "Emergencies";
+					labels["incident"] = "Emergency";
+				} else {
+					labels["incidents"] = "Incidents";
+					labels["incident"] = "Incident";
+				}
+				
+				applicationScope.put("labels", labels);
+				
 			}
 			
 			var docTemp:NotesDocument = null;

@@ -123,7 +123,7 @@
 	
 						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docPlan.isEditable()
 	}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
-							refreshMode="partial" refreshId="dynContentPlans">
+							refreshMode="partial" refreshId="lotusMain">
 							<xp:this.action><![CDATA[#{javascript:try {
 							var blnIsNew = docPlan.isNewNote();
 							if ( blnIsNew ) {
@@ -141,8 +141,13 @@
 		
 		docPlan.save();
 		
-		if (!blnIsNew) {
-							
+		if (blnIsNew) {
+			
+			configBean.updateMenuOptionCounts();
+		
+		
+		} else {
+									
 								//replace this name everywhere
 								com.teamstudio.continuity.utils.Utils.fieldValueChange("planIds", docPlan.getItemValueString("id"), "planNames", docPlan.getItemValueString("name") );
 		}
@@ -158,8 +163,11 @@
 					
 					<xp:button value="Remove" id="button2">
 						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docPlan.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-							refreshId="dynContentPlans" immediate="true">
+							refreshId="lotusMain" immediate="true">
 							<xp:this.action><![CDATA[#{javascript:docPlan.getDocument().remove(true);
+							
+							configBean.updateMenuOptionCounts();
+							
 	getComponent("dynContentPlans").show("plansList");}]]></xp:this.action>
 							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this plan?")]]></xp:this.script>
 						</xp:eventHandler>

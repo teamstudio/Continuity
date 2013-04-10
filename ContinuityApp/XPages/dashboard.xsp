@@ -22,8 +22,8 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("miniConfigGuide");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 							
-								<xe:basicLeafNode submitValue="starterLists" label="Starter lists">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("starterLists");}]]></xe:this.selected>
+								<xe:basicLeafNode submitValue="exampleLists" label="Example lists">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("exampleLists");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								
 								<xe:separatorTreeNode></xe:separatorTreeNode>
@@ -34,33 +34,33 @@
 						<xe:basicContainerNode label="BCM Framework" enabled="false">
 							<xe:this.children>
 							
-								<xe:basicLeafNode label="#{javascript:configBean.getLabel('assets')}"
-									submitValue="sites">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("sites");}]]></xe:this.selected>
+								<xe:basicLeafNode label="#{javascript:configBean.getLabel('assets') + ' (' + configBean.numAssets + ')'}"
+									submitValue="riskEntities">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("riskEntities");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								
 								<!-- scenarios -->
-								<xe:basicLeafNode
-									submitValue="scenariosList">
+								<xe:basicLeafNode submitValue="scenariosList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[Business scenarios]]></xe:this.label>
+
+									<xe:this.label><![CDATA[#{javascript:"Business scenarios (" + configBean.numScenarios + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
-								
-								<xe:basicLeafNode submitValue="tasks"
-									label="Tasks">
+
+								<xe:basicLeafNode submitValue="tasks">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("tasks");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[#{javascript:"Tasks (" + configBean.numTasks + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode
 									submitValue="scenariosByPlan">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosByPlan");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[Plans]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Plans (" + configBean.numPlans + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<!-- roles -->
-								<xe:basicLeafNode submitValue="rolesList"
-									label="Responsibilities">
+								<xe:basicLeafNode submitValue="rolesList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("rolesList");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[#{javascript:"Responsibilities (" + configBean.numResponsibilities + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								<xe:basicLeafNode label="Contact matrix"
 									submitValue="bcmRoleMatrix" style="margin-left:20px" loaded="${sessionScope.isEditor}">
@@ -68,8 +68,9 @@
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode
-									submitValue="quickGuidesList" label="Quick guides">
+									submitValue="quickGuidesList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("quickGuidesList");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[#{javascript:"Quick guides (" + configBean.numQuickGuides + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:separatorTreeNode></xe:separatorTreeNode>
@@ -82,7 +83,7 @@
 							<xe:this.children>
 
 								<xe:basicLeafNode
-									submitValue="incidentsList" label="Incidents">
+									submitValue="incidentsList" label="#{javascript:configBean.getLabel('incidents')}">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("incidentsList");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
@@ -107,9 +108,14 @@
 							enabled="false">
 							<xe:this.children>
 							
-								<xe:basicLeafNode
-									submitValue="contactsList" label="Contacts">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("contactsList");}]]></xe:this.selected>
+								<xe:basicLeafNode label="Terms"
+									submitValue="terms" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("terms");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+								
+								<xe:basicLeafNode label="Task categories"
+									submitValue="taskCats" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("taskCats");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode
@@ -117,14 +123,9 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("orgUnits");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								
-								<xe:basicLeafNode label="General settings"
-									submitValue="settings" loaded="${sessionScope.isEditor}">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("settings");}]]></xe:this.selected>
-								</xe:basicLeafNode>
-								
-								<xe:basicLeafNode label="Task categories"
-									submitValue="taskCats" loaded="${sessionScope.isEditor}">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("taskCats");}]]></xe:this.selected>
+								<xe:basicLeafNode
+									submitValue="contactsList" label="Contacts">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("contactsList");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
 							</xe:this.children>
@@ -182,7 +183,7 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccHelp xp:key="miniConfigGuide" helpTextId="miniConfigGuide">
 
 						</xc:ccHelp>
-						<xc:ccStarterLists xp:key="starterLists" id="starterLists"></xc:ccStarterLists>
+						<xc:ccStarterLists xp:key="exampleLists"></xc:ccStarterLists>
 						
 						<xp:panel xp:key="scenariosList" id="scenariosList">
 	
@@ -250,34 +251,20 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccAuditLog id="auditLog"							xp:key="auditLog">
 						</xc:ccAuditLog>
 
-						<xc:changePasswordForm id="changePasswordForm"							xp:key="changePasswordForm">
-						</xc:changePasswordForm>
-
-						<xc:ccIncidents xp:key="incidentsList"							id="incidentsList">
-						</xc:ccIncidents>
-						<xc:ccIncident xp:key="incidentForm"							id="incidentForm">
-						</xc:ccIncident>
-
-						<xc:updates id="updatesList"							xp:key="updatesList">
-						</xc:updates>
-
+						<xc:changePasswordForm id="changePasswordForm" xp:key="changePasswordForm"></xc:changePasswordForm>
+						<xc:ccIncidents xp:key="incidentsList"							id="incidentsList"></xc:ccIncidents>
+						<xc:ccIncident xp:key="incidentForm"							id="incidentForm"></xc:ccIncident>
+						<xc:updates id="updatesList"							xp:key="updatesList"></xc:updates>
 						<xc:ccQuickGuides id="quickGuidesList" xp:key="quickGuidesList"></xc:ccQuickGuides>
 						<xc:ccQuickGuide id="quickGuideForm" xp:key="quickGuideForm"></xc:ccQuickGuide>
-
 						<xc:ccTasksCategorized id="tasks" xp:key="tasks"></xc:ccTasksCategorized>
-
 						<xc:orgUnits id="orgUnits" xp:key="orgUnits"></xc:orgUnits>
 						<xc:orgUnit id="orgUnit" xp:key="orgUnit"></xc:orgUnit>
-						
-						<xc:ccAssets id="sites" xp:key="sites"></xc:ccAssets>
-						<xc:ccAsset id="site" xp:key="site"></xc:ccAsset>
-						
-						<xc:ccSettingsForm xp:key="settings"></xc:ccSettingsForm>
-
+						<xc:ccAssets xp:key="riskEntities"></xc:ccAssets>
+						<xc:ccAsset xp:key="riskEntity"></xc:ccAsset>
+						<xc:ccTerms xp:key="terms"></xc:ccTerms>
 						<xc:ccTaskCategories xp:key="taskCats" id="taskCats"></xc:ccTaskCategories>
 						
-						
-
 					</xp:this.facets>
 				</xe:dynamicContent>
 

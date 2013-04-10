@@ -256,7 +256,7 @@ function loadPage(url, target, menuitem) {
 
 //ML: extended loadPage to also update the header title and footer content
 function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
-	
+
 	storeRequest(url);
 	
 	if (url.indexOf(" ")==-1) {
@@ -271,6 +271,7 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 	}
 	
 	thisArea.load(url, function(data) {
+		
 
 		if (firedrequests != null) {
 			firedrequests = new Array();
@@ -337,8 +338,10 @@ function storeRequest(url) {
 
 //ML: open the page that was shown before the current
 function goBack() {
-	var to = _ajaxRequests[_ajaxRequests.length-2];
-	loadPageEx( to , 'contentwrapper', null, false, false );
+	
+	var url = _ajaxRequests[_ajaxRequests.length - 2];
+	
+	loadPageEx( url , 'contentwrapper', null, false, false );
 }
 
 

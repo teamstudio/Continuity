@@ -206,10 +206,10 @@ try{
 				
 				dBar.debug("create update");
 				//ML: create update item for new incidents
-				var updateText = (isRehearsal ? "Exercise incident" : "Incident") + ": <b>" + incidentDesc + "</b><br />" +
+				var updateText = (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() : applicationScope.labels['incident']) + ": <b>" + incidentDesc + "</b><br />" +
 				"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 					"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
-					"- asset: " + doc.getItemValueString("siteName") + "<br />" +
+					"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "<br />" +
 					"- plan: " + doc.getItemValueString("scenarioName");
 				
 				createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
@@ -222,12 +222,12 @@ try{
 				while (null != ve) {
 				
 					sendMail( ve.getColumnValues().get(0) , 
-							"[continuity] " + (isRehearsal ? "Exercise incident created" : "Incident created"), 
-							sessionScope.name + " has just created an incident in Continuity:\r\n\r\n" +
-								"Incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
+							"[continuity] " + (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() + " created" : applicationScope.labels['incident'] + " created"), 
+							sessionScope.name + " has just created an " + applicationScope.labels['incident'].toLowerCase() + " in Continuity:\r\n\r\n" +
+								applicationScope.labels['incident'] + ": " + doc.getItemValueString("description") + "\r\n\r\n" +
 				"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
 					"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
-					"- asset: " + doc.getItemValueString("siteName") + "\r\n" +
+					"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "\r\n" +
 					"- plan: " + doc.getItemValueString("scenarioName"),
 							sessionScope.email, sessionScope.name);
 				
@@ -254,7 +254,7 @@ try{
 						sendMail( to, 
 							"[continuity] new message", 
 							sessionScope.name + " has sent you the following message:\r\n\r\n" +
-								(isRehearsal ? "Exercise incident" : "Incident") + ": " + doc.getItemValueString("incidentName") + "\r\n" +
+								(isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() : applicationScope.labels['incident']) + ": " + doc.getItemValueString("incidentName") + "\r\n" +
 								"Message: " + doc.getItemValueString("message") + "\r\n",
 							sessionScope.email, sessionScope.name);
 					}

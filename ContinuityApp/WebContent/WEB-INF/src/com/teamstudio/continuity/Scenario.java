@@ -75,7 +75,11 @@ public class Scenario implements Serializable {
 												
 			xspDocScenario.save();
 			
-			if (!blnIsNew) {
+			if (blnIsNew) {
+				
+				Configuration.get().updateMenuOptionCounts();
+			
+			} else {
 			
 				String scenarioId = xspDocScenario.getItemValueString("id");
 							

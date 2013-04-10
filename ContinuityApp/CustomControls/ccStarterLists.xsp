@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<div class="section">
-		<div class="title">Starter lists</div>
+		<div class="title">Example lists</div>
 	</div>
 
 	<xp:tabbedPanel id="tabbedPanel1" partialRefresh="true" refreshId="dynamicContent1">
@@ -18,11 +18,12 @@
 			
 		</xp:tabPanel>
 
-		<xp:tabPanel label="Business Scenarios" id="tabPanel2">
-		
+		<xp:tabPanel label="Business scenarios" id="tabPanel2">
+
 			<xc:ccStarterScenarios />
-			
-			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="tabbedPanel1" immediate="true">
+
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				refreshId="tabbedPanel1" immediate="true">
 				<xp:this.action><![CDATA[#{javascript:getComponent("tabbedPanel1").setSelectedTab("tabPanel2");
 				getComponent("dynContentScenarios").show("scenariosList");}]]></xp:this.action>
 			</xp:eventHandler>

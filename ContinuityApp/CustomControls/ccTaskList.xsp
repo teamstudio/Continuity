@@ -154,7 +154,7 @@ row.getColumnValues().get(0).indexOf("- ") == -1}]]></xp:this.rendered>
 					<xp:link escape="true" text="remove"
 						id="link5" styleClass="lotusTiny">
 						<xp:eventHandler event="onclick"
-							submit="true" refreshMode="partial" refreshId="dynContTasks">
+							submit="true" refreshMode="partial" refreshId="lotusMain">
 							<xp:this.action><![CDATA[#{javascript:taskBean.remove(row.getUniversalID());}]]></xp:this.action>
 							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this task?");]]></xp:this.script>
 						</xp:eventHandler>

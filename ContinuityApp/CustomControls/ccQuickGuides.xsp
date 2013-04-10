@@ -64,6 +64,23 @@
 					<xp:text escape="false" id="computedField3"
 						value="#{rowEntry.description}">
 					</xp:text>
+					
+					<xp:repeat id="repeat2" rows="30" var="att">
+						<xp:this.value><![CDATA[#{javascript:var a = rowEntry.getColumnValue("$4");
+
+if (typeof a == 'string' && a.length==0) { return null; } 
+
+if (typeof a == 'string') { a = [a];
+}}]]></xp:this.value>
+
+						<xp:link escape="true" text="#{att}" id="link2" target="_blank">
+							<xp:this.value><![CDATA[#{javascript:"0/" + rowEntry.getUniversalID() + "/$file/" + java.net.URLEncoder.encode (att, "utf-8")}]]></xp:this.value>
+						</xp:link>
+						<br />
+
+					</xp:repeat>
+
+
 				</xp:div>
 
 			</td>

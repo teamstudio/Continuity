@@ -1659,6 +1659,10 @@ body {
 	margin: 8px;
 }
 
+.workspace-items .xspTextComputedField {
+	font-weight: bold;	
+}
+
 /*disabled workspace/ menu items*/
 .workspace-items li.disabled .chicletimg, 
 li.disabled .iconleft,

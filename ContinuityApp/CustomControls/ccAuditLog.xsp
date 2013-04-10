@@ -17,7 +17,7 @@
 
 		</xp:tabPanel>
 
-		<xp:tabPanel label="By incident" id="tabPanel2">
+		<xp:tabPanel label="#{javascript:'By ' + configBean.getLabel('incident').toLowerCase()}" id="tabPanel2">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 				refreshId="dynamicContent1">
 				<xp:this.action><![CDATA[#{javascript:getComponent("tabbedPanel1").setSelectedTab(this.getParent().getId());

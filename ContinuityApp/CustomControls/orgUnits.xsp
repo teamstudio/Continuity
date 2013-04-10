@@ -6,6 +6,8 @@
 		<xp:dominoView var="vwOrgUnits" viewName="vwOrgUnits"></xp:dominoView>
 	</xp:this.data>
 	
+	<xc:ccSettingsForm></xc:ccSettingsForm>
+	
 	<div class="section">
 		<div class="title">Organisation units</div>
 		<div class="actions">

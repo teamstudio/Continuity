@@ -29,9 +29,8 @@
 				</xp:button>
 				<xp:button value="Save" id="button1" icon="disk.png" rendered="#{javascript:docResp.isEditable()}">
 
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
 						<xp:this.action>
-
 							<xp:actionGroup>
 								<xp:executeScript>
 									<xp:this.script><![CDATA[#{javascript:if ( responsibilityBean.save(docResp) ) {
@@ -44,10 +43,13 @@
 					</xp:eventHandler>
 				</xp:button>
 				<xp:button value="Remove" id="button2">
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docResp.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1"
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docResp.isNewNote()}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain"
 						immediate="true">
 						<xp:this.action><![CDATA[#{javascript:dBar.info("remove responsibility: " & docResp.getItemValueString("name") );
 docResp.getDocument().remove(true);
+
+configBean.updateMenuOptionCounts();
 								
 getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this responsibility?")]]></xp:this.script>

@@ -23,8 +23,7 @@ if (dbname != "" && dbname != "null" && dbname != "undefined"){
 	</xp:this.data>
 
 	<div id="results">
-		<xp:repeat id="repeat4" var="thisRowData" value="#{viewList}"
-			disableOutputTag="true">
+		<xp:repeat id="repeat4" var="thisRowData" value="#{viewList}" disableOutputTag="true">
 			<xp:this.first><![CDATA[#{javascript:var start = context.getUrlParameter("start");
 if (start == ""){
 	return 0;
@@ -45,7 +44,7 @@ if (start == ""){
 								}else{
 								  viewScope.accRowcount = viewScope.accRowcount + 1;
 								}
-								"openDocument('" + param.get("xpageDoc") + "?action=openDocument&documentId=" + thisRowData.getDocument().getUniversalID() + "', 'content')"}]]></xp:this.value>
+								"openDocument('" + param.get("xpageDoc") + "?action=openDocument&documentId=" + thisRowData.getDocument().getUniversalID() + "', 'contentwrapper')"}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
 				<xp:image url="/unp/right-arrow-circle.png" id="image1"
@@ -54,13 +53,31 @@ if (start == ""){
 				<xp:label id="label2" styleClass="viewlistsummary">
 					<xp:this.value><![CDATA[#{javascript:thisRowData.getColumnValues()[1];}]]></xp:this.value>
 				</xp:label>
+				
+				<!-- text -->
 				<xp:text tagName="div" id="detail" styleClass="viewlistdetail">
-					<xp:this.value><![CDATA[#{javascript:if(thisRowData.getColumnValues().length > 2){
-  return thisRowData.getColumnValues()[2];
-}
-else{
-  return "";
-}}]]></xp:this.value>
+					<xp:this.rendered><![CDATA[#{javascript:thisRowData.getColumnValues().length > 2 && thisRowData.getColumnValues()[2].indexOf("d/") == -1}]]></xp:this.rendered>
+					<xp:this.value><![CDATA[#{javascript:return thisRowData.getColumnValues()[2];}]]></xp:this.value>
+
+				</xp:text>
+				
+				<!-- date -->
+				<xp:text tagName="div" id="computedField1" styleClass="viewlistdetail">
+					<xp:this.value><![CDATA[#{javascript:var d = thisRowData.getColumnValues()[2];
+  	var t = d.split("/");
+  	d = new Date();
+  	d.setFullYear(t[1], t[2]-1, t[3]);
+  return d;
+}]]></xp:this.value>
+					<xp:this.rendered><![CDATA[#{javascript:thisRowData.getColumnValues().length > 2 && thisRowData.getColumnValues()[2].indexOf("d/") > -1}]]></xp:this.rendered>
+					<xp:this.converter>
+						<xp:convertDateTime type="date" dateStyle="short"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+
+				<!-- blank -->
+				<xp:text tagName="div" id="computedField2" styleClass="viewlistdetail" value="">
+					<xp:this.rendered><![CDATA[#{javascript:thisRowData.getColumnValues().length <= 2}]]></xp:this.rendered>
 				</xp:text>
 
 			</xp:panel>
@@ -76,7 +93,6 @@ viewScope.accRowcount == null || viewScope.accRowcount < sessionScope.accRowcoun
 	</div>
 
 	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/UnpMain.xsp">
-		</xp:navigationRule>
+		<xp:navigationRule outcome="xsp-success" viewId="/UnpMain.xsp"></xp:navigationRule>
 	</xp:this.navigationRules>
 </xp:view>

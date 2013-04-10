@@ -109,7 +109,7 @@ if ( docOU.save() ) {
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow2" for="checkBoxGroup2" label="Asset(s):">
+		<xe:formRow id="formRow2" for="checkBoxGroup2" label="#{javascript:configBean.getLabel('assets') + ':'}">
 			<xp:checkBoxGroup id="checkBoxGroup2" value="#{docOU.siteIds}">
 				<xp:selectItems>
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwAssets", 2)}]]></xp:this.value>
