@@ -177,7 +177,7 @@ public class Configuration implements Serializable {
 	//retrieve the path to the Continuity database of the specified organisation (using the alias)
 	//the path is stored in the application scope for faster retrievals
 	public String getContinuityDbPath( String orgAlias) {
-		return this.getOrganisationSetting(orgAlias, 3, orgContinuityPaths);
+		return this.getOrganisationSetting(orgAlias, 2, orgContinuityPaths);
 	}
 	
 	private String getOrganisationSetting(String orgAlias, int colIndex, HashMap<String,String> cacheMap) {
