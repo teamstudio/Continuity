@@ -65,11 +65,14 @@ return "Updated: " + rep;}]]></xp:this.value>
 				rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
 				<xp:this.attrs>
 					<xp:attr name="onclick">
-						
-						<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href='" + compositeData.newDocTarget + "?action=newDocument';"}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:if (compositeData.newDocTarget == "mTask.xsp") {
+	return "loadPageEx( 'mTask.xsp?action=newDocument' + getFromId() , 'contentwrapper', null, true, true);";
+} else {
+	return "$.blockUI();window.location.href='" + compositeData.newDocTarget + "?action=newDocument';"
+}}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
-				<span>New</span>
+				<xp:text value="#{javascript:(compositeData.newDocTarget == 'mTask.xsp' ? 'New task' : 'New')}" />
 			</xp:panel>
 			<xp:panel tagName="div" id="settingsButton"
 				styleClass="settingsButton">

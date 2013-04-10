@@ -1,196 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:unp="http://unplugged.teamstudio.com">
 	
-	
-	<xp:this.data>
-		<xp:dominoView var="vwTasksAssigned" viewName="vwTasksAssignedByRoleName" categoryFilter="#{javascript:sessionScope.orgUnitId}"></xp:dominoView>
-	</xp:this.data>
-	
-	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
-	
-	//check if the view has any entries (no categories = no tasks)
-	var nav = vwTasksAssigned.createViewNavFromCategory(sessionScope.get("orgUnitId") );
-	
-	var taskCats = [];
-	var cat;
-	
-	//dBar.debug("get tasks");
-	
-	var numTasks = 0;
-	
-	var ve = nav.getFirst();
-	while (null != ve) {
-	
-		var colValues = ve.getColumnValues();
-		
-		if (ve.isCategory() ) {
-		
-			var role = colValues.get(1);
-		
-			//dBar.debug("found cat: " + role);
-		
-			cat = {
-				roleName : role,
-				tasks : [],
-				myTasks : role.equals(sessionScope.roleName)
-			};
-			taskCats.push(cat);
-		
-		} else {
-		
-		 	var title = colValues.get(3);
-			var description = colValues.get(4);
-			var unid = ve.getUniversalID();
-			var status = colValues.get(6);
-			var type = 	colValues.get(7);
-			
-			//dBar.debug("found task: " + title + " (" + unid );
-			
-			//add all of my tasks (assigned and completed) and others' assigned tasks only
-			if (cat.myTasks || status.equals("assigned") ) {
-		
-				cat.tasks.push({
-					title : title,
-					type : type,
-					description : description,
-					hasDescription : ( description.length>0),
-					status : status,
-					unid : unid,
-					myTasks : cat.myTasks
-				});
-			}		
-			
-			numTasks++;
-			
-			//dBar.debug("status: " + colValues.get(6) );	
-		}
-
-	
-		ve = nav.getNext();
-	}
-	
-	//dBar.debug("found " + taskCats.length + " cats, tasks: " + numTasks);
-	
-	//move users' own tasks to top (based on roleName)
-	var myRole = sessionScope.get("roleName");
-	
-	//dBar.debug("my role= " + myRole);
-	
-	taskCats.sort( function genericSort( a, b ){
-		fieldA = a.myTasks;
-		fieldB = b.myTasks;
-		
-		if( fieldA > fieldB ){ return -1; }
-		if( fieldA < fieldB ){ return 1; }
-		return 0;
-	} );
-	
-	viewScope.put("taskCats", taskCats);
-	
-viewScope.put("hasAssignedTasks", nav.getFirst() != null );
-	} catch (e) {
-		dBar.error(e);
-	}
-					}]]>
-					</xp:this.beforePageLoad>
-
-	
-
-<xc:mLayout showMenu="true" pageTitle="Active tasks">
+	<xc:mLayout showMenu="true" pageTitle="Active tasks" newDocTarget="mTask.xsp">
 		<xp:this.facets>
 
 			<xp:panel xp:key="contents" disableOutputTag="true">
-
-
-					<xp:div styleClass="box" rendered="#{javascript:viewScope.hasAssignedTasks==false}">
-						<div class="content">No active tasks found</div>
-					</xp:div>
-						
-					<div>
-						<ul id="summaryList">
-				
-							<xp:repeat id="repCats" rows="50" value="#{javascript:viewScope.taskCats}" var="taskCat" disableOutputTag="true">
-				
-								<!--  role name -->
-								<xp:text escape="false" tagName="li"
-									styleClass="categoryRowFixed" disableTheme="true"
-									value="#{javascript:taskCat.roleName}">
-								</xp:text>
-								
-								<xp:repeat id="repTasks" rows="50" value="#{javascript:taskCat.tasks}" var="task" disableOutputTag="true">
-
-									<xp:panel tagName="li" styleClass="data-row">
-										
-										<xp:div id="markDone"
-											styleClass="buttons pull-right">
-											<xp:this.rendered><![CDATA[#{javascript:task.myTasks && type.equals("one-time")}]]></xp:this.rendered>
-											<xp:this.style><![CDATA[#{javascript:"margin-top:-5px; display:" + (task.status.equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
-											<xp:link value="#"
-												text="to do" styleClass="red">
-												<xp:this.attrs>
-													<xp:attr name="onclick">
-														<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
-	"alert('Continuity is running in read only mode.\\n\\nYou cannot mark this task as done.'); return false;";
-} else {
-	"markDone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + task.unid + "'); return false;"
-}}]]></xp:this.value>
-													</xp:attr>
-												</xp:this.attrs>
-											</xp:link>
-										</xp:div>
-										
-										<xp:div id="markUndone"
-											styleClass="buttons pull-right">
-											<xp:this.rendered><![CDATA[#{javascript:task.myTasks && type.equals("one-time")}]]></xp:this.rendered>
-											<xp:this.style><![CDATA[#{javascript:"margin-top:-5px; display:" + (task.status.equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
-											<xp:link value="#"
-												text="done" styleClass="green">
-												<xp:this.attrs>
-													<xp:attr
-														name="onclick">
-														<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
-	"alert('Continuity is running in read only mode.\\n\\nYou cannot mark this task as todo.'); return false;";
-} else {
-														"markUndone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + task.unid + "'); return false;"
-				}}]]></xp:this.value>
-													</xp:attr>
-												</xp:this.attrs>
-											</xp:link>
-										</xp:div>
-										
-										<xp:image url="/unp/arrow-down.png" id="image1"
-											styleClass="multilineIcon" style="margin-top:7px; margin-right: 20px;">
-											<xp:this.rendered><![CDATA[#{javascript:task.hasDescription}]]></xp:this.rendered>
-											
-											<xp:this.attrs>
-												<xp:attr name="onclick">
-													<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("tDesc") + "')"}]]></xp:this.value>
-												</xp:attr>
-											</xp:this.attrs>
-										</xp:image>
-
-										<xp:label id="label2" styleClass="viewlistsummary" value="#{javascript:task.title}"></xp:label>
-	
-										<!-- description -->
-										<xp:text tagName="div" id="tDesc"
-											value="#{javascript:task.description}" escape="false"
-											style="display:none; margin-right: 25px; line-height:normal;" />
-	
-									</xp:panel>
-								</xp:repeat>
-
-
-							</xp:repeat>
-				
-						</ul>
-										
+				<xp:div styleClass="box"
+					rendered="#{javascript:database.getView('vwIncidents').getEntryCount()==0}">
+					<div class="content">
+						<xp:text
+							value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
 					</div>
-					
+				</xp:div>
+
+				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="mIncidentTasks.xsp"
+					position="menu-aligned" insetData="true">
+				</unp:unpAccordion>
+
 			</xp:panel>
+
 		</xp:this.facets>
 	</xc:mLayout>
-			
-
 
 </xp:view>

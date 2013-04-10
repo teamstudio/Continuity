@@ -17,14 +17,7 @@
 						<xp:text value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
 					</div>
 				</xp:div>
-				<!--
-					
-					<xc:unpIncidentsFlatView insetData="true" summaryColumn="description" detailColumn="summaryColumn"
-					viewName="vwIncidents" xpageDoc="mIncident.xsp" numberofrows="50"
-					refreshmethod="none" position="menu-aligned">
-					</xc:unpIncidentsFlatView>
-					
-				-->
+				
 				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="mIncident.xsp"
 					position="menu-aligned" insetData="true">
 				</unp:unpAccordion>

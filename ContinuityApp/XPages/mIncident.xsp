@@ -14,24 +14,25 @@ if (t != null && t != "") {
 viewScope.put("numOpenTasks", numOpenTasks);
 }]]></xp:this.beforePageLoad>
 	
-
 	<xp:this.data>
-		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
+		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument"></xp:dominoDocument>
 	</xp:this.data>
 	
 	<xc:mLayout showMenu="true">
 		<xc:this.pageTitle><![CDATA[#{javascript:if (docIncident.isNewNote()) {
 	return "Activate team";
 } else {
-	return applicationScope.label['incident'];
+	return applicationScope.labels['incident'];
 }}]]></xc:this.pageTitle>
+		<xc:this.newDocTarget><![CDATA[#{javascript:( docIncident.getItemValueString("status").equals("deactivated") ? "" : "mTask.xsp")}]]></xc:this.newDocTarget>
 		<xp:this.facets>
 
 			<xp:panel xp:key="contents" disableOutputTag="true">
 
 				<div id="formholder">
 					<h2>
-						<xp:text escape="true" id="title" tagName="span" value="#{javascript:applicationScope.labels['incident']}"
+						<xp:text escape="true" id="title" tagName="span"
+							value="#{javascript:applicationScope.labels['incident'] + ': ' + docIncident.getItemValueString('description')}"
 							styleClass="formtitle">
 						</xp:text>
 					</h2>
@@ -47,7 +48,8 @@ viewScope.put("numOpenTasks", numOpenTasks);
 						<xp:panel id="closebutton" styleClass="cancelButton" tagName="li">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
-									<xp:this.value><![CDATA[#{javascript:"$.blockUI();window.location.href='mIncidents.xsp';"}]]></xp:this.value>
+									<!--<xp:this.value><![CDATA[#{javascript:"goBack();"}]]></xp:this.value>
+									--><xp:this.value><![CDATA[#{javascript:"loadPageEx('mIncidents.xsp', 'contentwrapper', 'incidents', true, true);"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 							<span>Close</span>
@@ -65,7 +67,9 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 						</li>
 						<li>
-							<xp:label value="#{javascript:applicationScope.labels['asset']}" id="label1" for="siteId"></xp:label>
+							<xp:label value="#{javascript:applicationScope.labels['asset']}"
+								id="label1" for="siteId">
+							</xp:label>
 							<xp:text escape="true" id="siteId" value="#{docIncident.siteName}">
 							</xp:text>
 						</li>
@@ -197,7 +201,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 				<div class="mTop">
 
-					<xc:mTasksList showStatus="true" viewName="vwTasksByParentByTaskCat">
+					<xc:mTasksList showStatus="true" viewName="vwTasksByIncident">
 						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
 						<xc:this.parentUrl><![CDATA[#{javascript:"mIncident.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:mTasksList>

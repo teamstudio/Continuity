@@ -60,6 +60,38 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 							<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("taskDetails") + "'); event.stopPropagation();"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
+				
+					<xp:div id="markDone" styleClass="buttons pull-right">
+						<xp:this.rendered><![CDATA[#{javascript:( !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && @Contains( row.getColumnValue("$9"), sessionScope.roleId) )}]]></xp:this.rendered>
+						<xp:this.style><![CDATA[#{javascript:"margin-left: 8px; margin-top:-5px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
+						<xp:link value="#" text="to do" styleClass="red">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+						"alert('Continuity is running in read only mode.\\n\\nYou cannot mark this task as done.'); return false;";
+						} else {
+						"markDone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + row.getUniversalID() + "'); event.stopPropagation(); return false;"
+						}}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:link>
+					</xp:div>
+				
+					<xp:div id="markUndone" styleClass="buttons pull-right">
+						<xp:this.rendered><![CDATA[#{javascript:( !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && @Contains( row.getColumnValue("$9"), sessionScope.roleId) )}]]></xp:this.rendered>
+						<xp:this.style><![CDATA[#{javascript:"margin-left: 8px; margin-top:-5px; display:" + (row.getColumnValue('status').equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
+						<xp:link value="#" text="done" styleClass="green">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+						"alert('Continuity is running in read only mode.\\n\\nYou cannot mark this task as todo.'); return false;";
+						} else {
+						"markUndone('" + getClientId('markDone') + "','" + getClientId('markUndone') + "','" + row.getUniversalID() + "'); event.stopPropagation(); return false;"
+						}}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:link>
+					</xp:div>
 					
 					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0) || (row.getColumnValue('quickGuideIds').length > 0)}" 
 						url="/unp/arrow-down.png"
@@ -69,7 +101,7 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 						
 					<!-- name -->
 					<xp:label id="label2" styleClass="viewlistsummary">
-							<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
 					</xp:label>
 					
 					<xp:div id="taskDetails" style="display:none;">
@@ -102,6 +134,126 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 		</ul>
 						
 	</div>
+	
+	
+		<!-- 
+	
+	<xp:this.data>
+		<xp:dominoView var="vwTasksAssigned" viewName="vwTasksAssignedByRoleName" categoryFilter="#{javascript:sessionScope.orgUnitId}"></xp:dominoView>
+	</xp:this.data>
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
+	
+	//check if the view has any entries (no categories = no tasks)
+	var nav = vwTasksAssigned.createViewNavFromCategory(sessionScope.get("orgUnitId") );
+	
+	var taskCats = [];
+	var cat;
+	
+	//dBar.debug("get tasks");
+	
+	var numTasks = 0;
+	
+	var ve = nav.getFirst();
+	while (null != ve) {
+	
+		var colValues = ve.getColumnValues();
+		
+		if (ve.isCategory() ) {
+		
+			var role = colValues.get(1);
+		
+			//dBar.debug("found cat: " + role);
+		
+			cat = {
+				roleName : role,
+				tasks : [],
+				myTasks : role.equals(sessionScope.roleName)
+			};
+			taskCats.push(cat);
+		
+		} else {
+		
+		 	var title = colValues.get(3);
+			var description = colValues.get(4);
+			var unid = ve.getUniversalID();
+			var status = colValues.get(6);
+			var type = 	colValues.get(7);
+			
+			//dBar.debug("found task: " + title + " (" + unid );
+			
+			//add all of my tasks (assigned and completed) and others' assigned tasks only
+			if (cat.myTasks || status.equals("assigned") ) {
+		
+				cat.tasks.push({
+					title : title,
+					type : type,
+					description : description,
+					hasDescription : ( description.length>0),
+					status : status,
+					unid : unid,
+					myTasks : cat.myTasks
+				});
+			}		
+			
+			numTasks++;
+			
+			//dBar.debug("status: " + colValues.get(6) );	
+		}
+
+	
+		ve = nav.getNext();
+	}
+	
+	//dBar.debug("found " + taskCats.length + " cats, tasks: " + numTasks);
+	
+	//move users' own tasks to top (based on roleName)
+	var myRole = sessionScope.get("roleName");
+	
+	//dBar.debug("my role= " + myRole);
+	
+	taskCats.sort( function genericSort( a, b ){
+		fieldA = a.myTasks;
+		fieldB = b.myTasks;
+		
+		if( fieldA > fieldB ){ return -1; }
+		if( fieldA < fieldB ){ return 1; }
+		return 0;
+	} );
+	
+	viewScope.put("taskCats", taskCats);
+	
+viewScope.put("hasAssignedTasks", nav.getFirst() != null );
+	} catch (e) {
+		dBar.error(e);
+	}
+					}]]>
+					</xp:this.beforePageLoad>
+
+			<xp:panel xp:key="contents" disableOutputTag="true">
+			
+						<div>
+						<ul id="summaryList">
+				
+							<xp:repeat id="repCats" rows="50" value="#{javascript:viewScope.taskCats}" var="taskCat" disableOutputTag="true">
+				
+								<xp:repeat id="repTasks" rows="50" value="#{javascript:taskCat.tasks}" var="task" disableOutputTag="true">
+
+									<xp:panel tagName="li" styleClass="data-row">
+										
+										
+		
+		
+		</xp:repeat>
+		
+		</ul>
+		
+		</div>
+
+		
+		</xp:panel>
+
+	-->
 	
 
 </xp:view>

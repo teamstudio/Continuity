@@ -18,13 +18,13 @@
 		
 			<xp:div rendered="#{javascript:row.isCategory()}">
 				<xp:text tagName="h4" style="margin-bottom: 5px;" value="#{javascript:row.getColumnValues().get(0)}" />
-			</xp:div>
+			</xp:div><!--
 			
 			<xp:div rendered="#{javascript:row.isCategory()}">
 				<xp:text tagName="h4" style="margin-bottom: 5px;" value="#{javascript:row.getColumnValues().get(1)}" />
 			</xp:div>
 			
-			<xp:div id="update" styleClass="lotusPost" rendered="#{javascript:!row.isCategory()}">
+			--><xp:div id="update" styleClass="lotusPost" rendered="#{javascript:!row.isCategory()}">
 	
 				<div class="lotusPostAuthorInfo">
 					<xp:image id="image1" style="width: 40px; height: 40px;">

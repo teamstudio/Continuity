@@ -27,6 +27,7 @@ try{
 	
 	var isNew = false;
 	var isIncident = false;
+	var isTask = false;
 	
 	try{
 		doc = database.getDocumentByUNID(context.getUrlParameter("unid"));
@@ -38,6 +39,7 @@ try{
 		
 		isNew = true;
 		isIncident = context.getUrlParameter("formname").equals("fIncident");
+		isTask = context.getUrlParameter("formname").equals("fTask");
 		
 		doc = database.createDocument();
 		doc.replaceItemValue("Form", context.getUrlParameter("formname"));
@@ -63,6 +65,7 @@ try{
 	}
 	
 	resp = "getting parentunid";
+	
 	if (context.getUrlParameter("parentunid") != "" && context.getUrlParameter("parentunid") != "null"){
 		var parent:NotesDocument = database.getDocumentByUNID(context.getUrlParameter("parentunid"));
 		resp = "creating response to parentunid = " + parent.getUniversalID();
@@ -70,6 +73,7 @@ try{
 	}
 	resp = "setting dateformat";
 	var dateformat = /^(19|20)\d\d[- \/.](0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])$/;
+	
 	try{
 		resp = "getting keyset";
 		var keys = param.keySet().iterator();
@@ -130,52 +134,78 @@ try{
 		var siteId = doc.getItemValueString("siteId");
 		var alertLevel = doc.getItemValueString("alertLevel");
 		
-		if (!applicationScope.isReadOnlyMode && isNew && (orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident) ) {
+		var doSync = false;
+		
+		var vwById = database.getView("vwAllById");
+		
+		if (!applicationScope.isReadOnlyMode && isNew ) {
+		
+			if ( isTask ) {		//new task
 			
-			var vwById = database.getView("vwAllById");
+				doSync = true;
 			
-			//get org unit name and set alert level
-			var docTemp = vwById.getDocumentByKey(orgUnitId, true);
-			if (null != docTemp) {
-				doc.replaceItemValue("orgUnitName", docTemp.getItemValueString("name") );
+				doc.replaceItemValue("status", "assigned" );
+				orgUnitId = sessionScope.orgUnitId
+				doc.replaceItemValue("orgUnitId", orgUnitId );
 				
-				//update alert level in OU document
-				if (isIncident) {
-					dBar.debug("setting alert level in OU document to " + alertLevel);
+				//find incident name
+				var veTemp = vwById.getEntryByKey( doc.getItemValueString("incidentId"), true);
+				if (null != veTemp) {
+					doc.replaceItemValue("incidentName", veTemp.getColumnValues().get(1)  );
+					veTemp.recycle();
+				}
+			
+			}			
+		
+			if( orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident ) {
 				
-					docTemp.replaceItemValue("alertLevel", alertLevel);
-					docTemp.replaceItemValue("activeScenarioId", scenarioId );
-					
-					docTemp.save();
+				//get org unit name and set alert level
+				if ( orgUnitId.length>0 ) {
+					var docTemp = vwById.getDocumentByKey(orgUnitId, true);
+					if (null != docTemp) {
+						doc.replaceItemValue("orgUnitName", docTemp.getItemValueString("name") );
+						
+						//update alert level in OU document
+						if (isIncident) {
+							dBar.debug("setting alert level in OU document to " + alertLevel);
+						
+							docTemp.replaceItemValue("alertLevel", alertLevel);
+							docTemp.replaceItemValue("activeScenarioId", scenarioId );
+							
+							docTemp.save();
+						}
+						
+						docTemp.recycle();
+					}
 				}
 				
-				docTemp.recycle();
-			}
-			
-			//get scenario name (from current db)
-			var scenarioName = "";
-			if (scenarioId != "none") {
-				docTemp = vwById.getDocumentByKey(scenarioId, true);
+				//get scenario name (from current db)
+				var scenarioName = "";
+				if (scenarioId != "none") {
+					docTemp = vwById.getDocumentByKey(scenarioId, true);
+					if (null != docTemp) {
+					
+						assignTasks( doc, docTemp );
+					
+						scenarioName = docTemp.getItemValueString("name");
+						docTemp.recycle();
+					}
+				}
+				doc.replaceItemValue("scenarioName", scenarioName);
+				
+				//get site name
+				var siteName = "";
+				docTemp = vwById.getDocumentByKey(siteId, true);
 				if (null != docTemp) {
-				
-					assignTasks( doc, docTemp );
-				
-					scenarioName = docTemp.getItemValueString("name");
+					siteName = docTemp.getItemValueString("name");
 					docTemp.recycle();
 				}
+				doc.replaceItemValue("siteName", siteName );
+				
+				vwById.recycle();
 			}
-			doc.replaceItemValue("scenarioName", scenarioName);
 			
-			//get site name
-			var siteName = "";
-			docTemp = vwById.getDocumentByKey(siteId, true);
-			if (null != docTemp) {
-				siteName = docTemp.getItemValueString("name");
-				docTemp.recycle();
-			}
-			doc.replaceItemValue("siteName", siteName );
 			
-			vwById.recycle();
 					
 		}
 		
@@ -189,9 +219,10 @@ try{
 		
 		resp = "OK";
 		
-		var doSync = false;
+		
 		
 		if ( !applicationScope.isReadOnlyMode ) {
+		
 		
 			if (isNew && isIncident) {
 			
@@ -266,7 +297,7 @@ try{
 			}
 			
 			if (doSync) {
-				//sync mail and current db
+				//sync
 				@Command("[ReplicatorReplicateHigh]");
 			}
 		}

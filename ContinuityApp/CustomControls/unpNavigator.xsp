@@ -24,7 +24,10 @@ the specific language governing permissions and limitations under the License
 							<xp:panel id="viewMenuItem" tagName="li"
 								rendered="#{javascript:menuItem.disabled != true}">
 								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + menuItem.itemId;
-								if (("/" + getCurrentXPage()) == menuItem.page){
+								
+								var p = (menuItem.page.indexOf('?')>-1 ? @Left(menuItem.page, "?") : menuItem.page); 
+								
+								if (("/" + getCurrentXPage()) == p){
 	
 		return c += " viewMenuItemSelected";
 	}else{

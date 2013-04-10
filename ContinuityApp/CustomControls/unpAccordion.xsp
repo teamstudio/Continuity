@@ -45,6 +45,27 @@ if (compositeData.dbName != null){
 	db = [@DbName()[0], compositeData.dbName];
 }
 var list = @Unique(@DbColumn(db, compositeData.viewName, 1));
+
+if (typeof list == 'string') { list = [list]; }
+
+if ( param.get("activeOnly") == "1" ) { 
+
+	list = @Trim( @Replace( list, "<!--3-->Deactivated incidents", "") );
+	
+}
+/*
+var tmp = []
+
+for (var i=0; i<list.length; i++ ) {
+
+	tmp.push( 
+		( list[i].indexOf("incidents") > -1 ? 
+		@ReplaceSubstring(list[i], "incidents", applicationScope.labels["incidents"].toLowerCase() ) :
+		list[i] )
+	);
+}
+*/
+
 viewScope.categorycount = list.length;
 return list;}]]></xp:this.value>
 				<xp:panel tagName="li" styleClass="categoryRow">

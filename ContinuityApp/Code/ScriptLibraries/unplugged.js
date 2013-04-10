@@ -185,8 +185,14 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 						//				+ "?action=openDocument&documentId="
 						//				+ response, "content");
 						//initiscroll();
-						$.blockUI();
-						window.location.href = viewxpagename + "?action=openDocument&documentId=" + response;
+						
+						//ML: go back to page from where this new document was opened
+						if (viewxpagename == 'back') {
+							goBack();
+						} else {
+							$.blockUI();
+							window.location.href = viewxpagename + "?action=openDocument&documentId=" + response;
+						}
 					} else {
 						alert(response);
 					}
@@ -199,7 +205,9 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 function validate() {
 	var valid = true;
 	$(".required").each( function() {
-		if ($(this).val() == "") {
+		var v = $(this).val();
+		//ML: can't add 'empty' values to computed combos in unplugged
+		if (v == "" || v =="~") {
 			var label = $("label[for='" + $(this).attr('id') + "']");
 			alert("Please complete " + label.text());
 			$(this).focus();
@@ -328,6 +336,8 @@ var _ajaxRequests = [];
 //the array cannot grow larger than X items
 function storeRequest(url) {
 	
+	//console.log(" store " + url);
+	
 	_ajaxRequests.push(url);
 	
 	if (_ajaxRequests.length > 10 ) {
@@ -336,12 +346,38 @@ function storeRequest(url) {
 	
 }
 
+function getFromId() {
+	
+	var fromId = "";
+	
+	if (_ajaxRequests.length>0 ) {
+		
+		var t = _ajaxRequests[_ajaxRequests.length - 1]; 
+		
+		if (t.indexOf('&documentId=')>-1) {
+			fromId = '&fromId=' + t.substring( t.indexOf('&documentId=')+'&documentId='.length );
+		}
+	}
+	
+	return fromId;
+}
+
 //ML: open the page that was shown before the current
 function goBack() {
 	
-	var url = _ajaxRequests[_ajaxRequests.length - 2];
+	var pos = _ajaxRequests.length - 2;
+	var url;
 	
-	loadPageEx( url , 'contentwrapper', null, false, false );
+	if (pos < 0 ) {
+		url = window.location.pathname + window.location.search;
+	} else {
+		
+		url = _ajaxRequests[pos];
+		_ajaxRequests.splice(pos, 2);
+		
+	}
+	
+	loadPageEx( url , 'contentwrapper', null, true, true);
 }
 
 
@@ -506,9 +542,21 @@ function x$(idTag, param){ //Updated 18 Feb 2012
    return($("#"+idTag));
 }
 
+//workaround for android v4.1 issue that onclick is called twice
+var clickCalled = 0;
+
 //expand/ collapse link
 function showListDetails(id) {
-
+	
+	var now = new Date().getTime();
+	
+	if (clickCalled > 0 && (now-clickCalled) < 1250) {
+		//abort if this function is called twice within a 1250ms
+		return;
+	}
+	
+	clickCalled = now;
+	
 	var $div = x$(id);
 	if ($div.text().length==0) { return; }		//no content to show
 	
@@ -566,8 +614,8 @@ function markUndone(doneId, undoneId, id) {
 			if (response.indexOf("error")>-1) {
 				alert(response);
 			} else 	{	
-				x$(doneId).hide();
-				x$(undoneId).show();
+				x$(doneId).show();
+				x$(undoneId).hide();
 			}
 		} catch (e) {
 			console.log(e);
@@ -581,11 +629,11 @@ function markUndone(doneId, undoneId, id) {
 function deactivateIncident(id, numOpenTasks) {
 	
 	//confirmation for open tasks
-	/*if (numOpenTasks>0) {
-		if (!confirm("This incident has " + numOpenTasks + " open tasks. These will be closed automatically.\n\nAre you sure you want to continue?") ) {
+	if (numOpenTasks>0) {
+		if (!confirm("This " + labelIncident.toLowerCase() + " has " + numOpenTasks + " open tasks. These will be closed automatically.\n\nAre you sure you want to continue?") ) {
 			return;
 		}
-	}*/
+	}
 	
 	$.ajax( {
 		type : 'GET',

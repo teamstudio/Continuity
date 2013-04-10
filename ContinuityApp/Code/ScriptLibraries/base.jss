@@ -256,19 +256,28 @@ function loadAppConfig( forceUpdate:boolean ) {
 			var veTemp:NotesViewEntry = null;
 			
 			var roles = getMap();
+			var roleChoices = [];
 			
 			while (null != veRole) {
 				
 				var colValues = veRole.getColumnValues();
 				
 				var id:String = colValues.get(3);
-				roles[id] = colValues.get(1);
+				var name:String = colValues.get(1);
+				roles[id] = name;
+				
+				var o = (name + "|" + id);
+				
+				dBar.debug(o);
+				
+				roleChoices.push( o );
 				
 				veTemp = vecRoles.getNextEntry();
 				veRole.recycle();
 				veRole = veTemp;
 			}
 		
+			applicationScope.put("roleChoices", roleChoices);
 			applicationScope.put("roles", roles);
 			
 			vecRoles.recycle();
@@ -973,9 +982,16 @@ function assignTasks( docIncident, docScenario ) {
 			docTaskNew.replaceItemValue("scenarioId", docTask.getItemValueString("scenarioId") );
 			docTaskNew.replaceItemValue("scenarioName", docTask.getItemValueString("scenarioName") );
 			
+			docTaskNew.replaceItemValue("quickGuideIds", docTask.getItemValue("quickGuideIds") );
+			
 			docTaskNew.replaceItemValue("order", docTask.getItemValue("order") );
 			
-			docTaskNew.replaceItemValue("docAuthors", "*" );	//TODO: who should be able to edit a task?
+			var authors = [];
+			authors.push(sessionScope.userName);
+			authors.push( "[bcEditor]");
+			authors.push( "[bcUser]");
+			
+			docTaskNew.replaceItemValue("docAuthors", authors );
 			docTaskNew.save();
 			
 			dBar.debug("saved a task, unid " + docTaskNew.getUniversalID() );
@@ -1099,4 +1115,50 @@ function getScenariosByPlan( orgUnit ) {
 	}
 		
 	return plans;
+}
+
+function getOpenIncidentOptions(orgUnitId, selected) {
+	
+	var nav = database.getView("vwIncidentsOpen").createViewNavFromCategory( orgUnitId);
+
+	var live = [];
+	var excercise = [];
+
+	var ve:NotesViewEntry = nav.getFirst();
+	while (null != ve) {
+	
+		var colValues = ve.getColumnValues();
+		var name = colValues.get(2);
+		var id = colValues.get(3);
+		
+		var isSelected = (selected.length>0 && selected.equals( id));
+		
+		var option = "<option value='" + id + "' " + (isSelected ? "selected" : "") + ">" + name + "</option>"
+		
+		if (colValues.get(4).equals('yes') ) {
+			excercise.push( option);
+		} else {
+			live.push(option);
+		}
+		
+		ve = nav.getNext();
+	}
+	
+	var html = [];
+	
+	html.push("<option value=''>- Select an " + applicationScope.labels['incident'].toLowerCase() + " -</option>");
+	
+	if (live.length>0 ) {
+		html.push("<optgroup label='Live " + applicationScope.labels['incidents'].toLowerCase() + "'>");
+		html = html.concat(live);
+		html.push("</optgroup>");
+	}
+	if (excercise.length>0 ) {
+		html.push("<optgroup label='Exercises'>");
+		html = html.concat(excercise);
+		html.push("</optgroup>");
+	}
+	
+	return html.join("");
+		
 }

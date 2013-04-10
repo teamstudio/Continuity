@@ -99,10 +99,10 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 			<xp:radioGroup id="radioGroup1" defaultValue="one-time"
 				value="#{docTask.type}" layout="lineDirection">
-				<xp:selectItem itemLabel="One-time"
+				<xp:selectItem itemLabel="Specific Task"
 					itemValue="one-time">
 				</xp:selectItem>
-				<xp:selectItem itemLabel="Ongoing (background)"
+				<xp:selectItem itemLabel="Background Task"
 					itemValue="ongoing">
 				</xp:selectItem>
 			</xp:radioGroup>

@@ -121,6 +121,19 @@ public class Configuration implements Serializable {
 				
 			}
 			
+			//Logger.debug("checking access level...");
+			
+			//Logger.debug("other db using full access: : " + ExtLibUtil.getCurrentSessionAsSignerWithFullAccess().getDatabase("", "uhs\\config.nsf").getCurrentAccessLevel());
+			
+			//Logger.debug( "current db (using full access): " + ExtLibUtil.getCurrentSessionAsSignerWithFullAccess().getCurrentDatabase().getCurrentAccessLevel() );
+			
+		//	Logger.debug( "other db: " + ExtLibUtil.getCurrentSessionAsSigner().getDatabase("", "uhs\\config.nsf").getCurrentAccessLevel() );
+			
+			//Logger.debug( "current db: " + ExtLibUtil.getCurrentSessionAsSigner().getCurrentDatabase().getCurrentAccessLevel() );
+
+			 
+			 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

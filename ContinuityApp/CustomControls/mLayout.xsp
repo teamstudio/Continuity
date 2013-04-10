@@ -43,7 +43,8 @@
 	</xp:this.resources>
 	
 	<xp:scriptBlock id="scriptBlock1">
-		<xp:this.value><![CDATA[#{javascript:"var isReadOnlyMode = " + (applicationScope.isReadOnlyMode ? "true" : "false") + ";"}]]></xp:this.value>
+		<xp:this.value><![CDATA[#{javascript:"var isReadOnlyMode = " + (applicationScope.isReadOnlyMode ? "true" : "false") + ";" +
+		"var labelIncident = \"" + applicationScope.labels['incident'] + "\";"}]]></xp:this.value>
 	</xp:scriptBlock>
 	
 	<div id="page">
@@ -97,13 +98,12 @@
 						icon="plans.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
-					<!--<xc:menuItem
+					<xc:menuItem
 						itemId="tasks" disabled="#{javascript:sessionScope.numAssignedTasks==0}"
-						label="Active tasks" page="/mTasks.xsp" icon="tasks.png"
+						label="Active tasks" page="/mTasks.xsp?activeOnly=1" icon="tasks.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
-						</xc:menuItem>
-						
-					-->
+					</xc:menuItem>
+					
 					<xc:menuItem itemId="updates" disabled="false" label="Updates"
 						page="/mUpdates.xsp" icon="updates-blue.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">

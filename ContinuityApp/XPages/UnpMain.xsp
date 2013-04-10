@@ -122,14 +122,14 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 	
 				
 					<!--  my active tasks -->
-					<!--<xp:text tagName="li" styleClass="disabled" rendered="#{javascript:sessionScope.numAssignedTasks==0}">
+					<xp:text tagName="li" styleClass="disabled" rendered="#{javascript:sessionScope.numAssignedTasks==0}">
 						<a href="#" onclick="return false">
 							<span class="chicletimg imgTasks"></span>
 							<span>Active tasks</span>
 						</a>
 					</xp:text>
 					<xp:text tagName="li" rendered="#{javascript:sessionScope.numAssignedTasks>0}">
-						<a href="#" onclick="$.blockUI();window.location.href='mTasks.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='mTasks.xsp?activeOnly=1';">
 							<xp:text escape="true" styleClass="badge" id="computedField4">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numAssignedTasks}]]></xp:this.value>
 								<xp:this.converter>
@@ -141,8 +141,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 						</a>
 					</xp:text>
 					
-					
-					--><!-- Updates -->
+					<!-- Updates -->
 					<li>
 						<a href="#" onclick="$.blockUI();window.location.href='mUpdates.xsp';">
 							<xp:text escape="true" styleClass="badge" id="computedField1">
@@ -156,17 +155,6 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 							<span>Updates</span>
 						</a>
 					</li>
-				
-					
-					<!-- locate team -->
-					<!--<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mLocateTeam.xsp';">
-							<span class="chicletimg" style="background: url(locate-blue.png) no-repeat scroll 0 0 transparent;"></span>
-							<span>Locate team</span>
-						</a>
-					</li>
-					
-					-->
 				
 				</ul>
 	

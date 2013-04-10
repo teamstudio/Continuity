@@ -1,18 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1de' unid='FDE11C6DDF05FFB1C1257AA1003DA474' sequence='31'>
+<noteinfo noteid='1de' unid='FDE11C6DDF05FFB1C1257AA1003DA474' sequence='32'>
 <created><datetime dst='true'>20121024T131317,96+02</datetime></created>
-<modified><datetime dst='true'>20130402T215146,87+02</datetime></modified>
-<revised><datetime dst='true'>20130402T215146,86+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130402T215146,87+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130410T164128,39+02</datetime></modified>
+<revised><datetime dst='true'>20130410T164128,38+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130410T164128,39+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115514,11+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwAllById|unpAllById</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-SgAFACQAHwAEAAIABAAJAAQAaWRuYW1lJENvbmZsaWN0JFJFRgAEAAQAAAASAAUAAgBpZAEAAAAL
-AgMABwAOAAgACUwxUzJTM1M=
+kgACAEoAAgAkMgUABABGb3JtAQAJAGZJbmNpZGVudAAKAq8AJgAWAAUACwBkZXNjcmlwdGlvbgCu
+ABAABQAEAG5hbWWuAAQAtQMDAAUAIgAdAAQAAgACAAkABABpZCQyJENvbmZsaWN0JFJFRgAEAAQA
+AAASAAUAAgBpZAEAAAALAgMABwAOAAgACUwxUzJTM1M=
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
@@ -20,15 +22,15 @@ DwABAABEAGYAAAACAGlk
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQACAAIACAAAAFZDAQACAAIAAAAAAP4AAQAACQAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAJwEB
-AAAJAAAAAAAAAAAAAgIAAABpZGlkbmFtZW5hbWUmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEA
-AQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABX
-QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8A
-BQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAA
-AAAAAQA=
+AQACAAMACAAAAFZDAQACAAIAAAAAAP4AAQAACQAAAAAAAAAAAAICAAAAVkMAAAIABABaAAAAJwEB
+AAAJAAAAAAAAAAAAAgIAAABpZGlkJDJuYW1lWgACAEoAAgAkMgUABABGb3JtAQAJAGZJbmNpZGVu
+dAAKAq8AJgAWAAUACwBkZXNjcmlwdGlvbgCuABAABQAEAG5hbWWuAAQAtQMDAAcADgAIAAkyUlQ2
+UzhSJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAA
+AAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8A
+AQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$TITLE' sign='true'><text>vwAllById|unpAllById</text></item>
-<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
 

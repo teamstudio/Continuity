@@ -118,8 +118,8 @@ if (!applicationScope.isReadOnlyMode) {
 		//mark a task as done/ undone
 		
 		var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
-	
-		if (!sessionScope.roleId.equals( doc.getItemValueString("roleId") ) ) {
+		
+		if( @IsNotMember( sessionScope.roleId, doc.getItemValue("roleIds") ) ) {
 			throw("you're not authorized to update this document");
 		}
 		

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
  replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='122' unid='4791DAB42FAF2820C1257AA000374D6F' sequence='101'>
+<noteinfo noteid='122' unid='4791DAB42FAF2820C1257AA000374D6F' sequence='0'>
 <created><datetime dst='true'>20121023T120403,03+02</datetime></created>
-<modified><datetime>20130328T105229,23+01</datetime></modified>
-<revised><datetime>20130328T105229,22+01</datetime></revised>
-<lastaccessed><datetime>20130328T105229,23+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20130410T111729,11+02</datetime></modified>
+<revised><datetime dst='true'>20130410T111520,87+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130410T111729,11+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115509,18+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name
 >CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name
@@ -32,11 +32,11 @@ AAAAAAACICABAAD/////+A4DgA==
 <item name='$PIRCRefreshModTime'><datetime>20121124T224507,50+01</datetime></item>
 <item name='$TemplateModTime'><datetime>20121124T224428,22+01</datetime></item>
 <item name='$DBTheme'><text>mobile.theme</text></item>
-<item name='$Daos'><text>0</text></item>
 <item name='$LaunchXPageRunOnServer'><text>0</text></item>
 <item name='$FlagsNoRefresh'><text/></item>
 <item name='$Flags'><text>J7f!z</text></item>
-<item name='$TITLE'><text>Continuity (DEV)
+<item name='$TITLE'><text>Continuity (CY Dev)
 UHS
-#1UHS - Continuity DEV</text></item></note>
+#1UHS - Continuity DEV</text></item>
+<item name='$Daos'><text>0</text></item></note>
 
