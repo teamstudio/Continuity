@@ -11,7 +11,8 @@
 		}
 	</style>
 	
-	--><xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");
+	-->
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");
 	
 	viewScope.put("pageTitle", compositeData.pageTitle);
 	viewScope.put("newDocTarget", compositeData.newDocTarget );
@@ -128,9 +129,9 @@
 				
 						<xp:callback facetName="contents"></xp:callback>
 						
-						<xc:unpDebugToolbar rendered="#{javascript:sessionScope.isDebug}" defaultCollapsed="false"></xc:unpDebugToolbar>
+						<!--<xc:unpDebugToolbar rendered="#{javascript:sessionScope.isDebug}" defaultCollapsed="false"></xc:unpDebugToolbar>
 
-					</div>
+					--></div>
 				</xp:div>
 			</div>
 			

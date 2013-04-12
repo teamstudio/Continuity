@@ -78,10 +78,10 @@ return "Updated: " + rep;}]]></xp:this.value>
 				styleClass="settingsButton">
 				<xp:this.attrs>
 					<xp:attr name="onclick">
-						<xp:this.value><![CDATA[#{javascript:"window.location.href='" + (sessionScope.isDebug ? "dbar.xsp" : compositeData.settingsurl) + "';"}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:"window.location.href='" + compositeData.settingsurl + "';"}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
-				<xp:this.rendered><![CDATA[#{javascript:compositeData.settingsurl != null && (compositeData.settingsurl.length > 0);}]]></xp:this.rendered>
+				<xp:this.rendered><![CDATA[#{javascript:!isEmpty(compositeData.settingsurl)}]]></xp:this.rendered>
 				<span>Settings</span>
 			</xp:panel>
 		

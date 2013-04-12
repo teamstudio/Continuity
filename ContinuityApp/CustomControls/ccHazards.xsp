@@ -152,8 +152,16 @@
 		
 					</xp:panel>
 				</xp:this.facets>
+				
+				<xe:formRow id="formRow2" label="Hazard name:"
+					for="inputName">
+					<xp:inputTextarea value="#{docHazard.name}" id="inputName" required="true">
+					<xp:this.validators>
+						<xp:validateRequired message="Enter a name"></xp:validateRequired>
+					</xp:this.validators></xp:inputTextarea>
+				</xe:formRow>
 		
-				<xe:formRow id="formRow1" label="Type:" for="inputType">
+				<xe:formRow id="formRow1" label="Hazard type:" for="inputType">
 					<xp:inputText value="#{docHazard.type}" id="inputType" style="width: 300px">
 					<xp:typeAhead mode="partial" minChars="1" ignoreCase="true" var="lupkey"
 						valueMarkup="true">
@@ -175,15 +183,6 @@
 		"<ul><li>" + @Implode( r, "</li><li>") + "</li></ul>"}]]></xp:this.valueList>
 					</xp:typeAhead></xp:inputText>
 				</xe:formRow>
-		
-				<xe:formRow id="formRow2" label="Description:"
-					for="inputName">
-					<xp:inputTextarea value="#{docHazard.name}" id="inputName" required="true">
-					<xp:this.validators>
-						<xp:validateRequired message="Enter a description"></xp:validateRequired>
-					</xp:this.validators></xp:inputTextarea>
-				</xe:formRow>
-				
 		
 			</xe:formTable>
 		</xp:panel>

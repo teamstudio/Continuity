@@ -63,10 +63,9 @@ the specific language governing permissions and limitations under the License
 		<!-- ML: link to homepage-->
 		<xp:panel id="homebutton"
 			styleClass="homeButton">
-			<xp:this.rendered><![CDATA[#{javascript:compositeData.homeToWorkspace == null || !compositeData.homeToWorkspace}]]></xp:this.rendered>
+			<xp:this.rendered><![CDATA[#{javascript:sessionScope.isDebug && context.getUrl().toString().indexOf("UnpMain") > -1}]]></xp:this.rendered>
 			<xp:this.attrs>
 				<xp:attr name="onclick">
-
 					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";}]]></xp:this.value>
 				</xp:attr>
 			</xp:this.attrs>
@@ -75,7 +74,7 @@ the specific language governing permissions and limitations under the License
 		<!-- ML: link to workspace -->
 		<xp:panel id="panel1"
 			styleClass="homeButton">
-			<xp:this.rendered><![CDATA[#{javascript:compositeData.homeToWorkspace != null && compositeData.homeToWorkspace}]]></xp:this.rendered>
+			<xp:this.rendered><![CDATA[#{javascript:context.getUrl().toString().indexOf("UnpMain") == -1}]]></xp:this.rendered>
 			<xp:this.attrs>
 				<xp:attr name="onclick">
 

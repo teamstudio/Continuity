@@ -71,7 +71,7 @@
 	<xe:dynamicContent id="dynContTasks" defaultFacet="tasks">
 		<xp:this.facets>
 			
-			<xc:ccTaskList id="tasks" xp:key="tasks" allowRemove="false" showScenario="true">
+			<xc:ccTaskList id="tasks" xp:key="tasks" allowRemove="true" showScenario="true">
 				<xp:this.viewName><![CDATA[#{javascript:viewScope.tasksView || "vwTasksByScenario"}]]></xp:this.viewName>
 				<xp:this.categoryFilter><![CDATA[#{javascript:viewScope.categoryFilter}]]></xp:this.categoryFilter>
 			</xc:ccTaskList>

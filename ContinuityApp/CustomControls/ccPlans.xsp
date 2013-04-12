@@ -168,15 +168,15 @@
 							
 							configBean.updateMenuOptionCounts();
 							
-	getComponent("dynContentPlans").show("plansList");}]]></xp:this.action>
+	getComponent().show("plansList");}]]></xp:this.action>
 							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this plan?")]]></xp:this.script>
 						</xp:eventHandler>
 					</xp:button>
 					
 					<xp:link escape="true" text="Back to list" id="link3">
 						<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-							refreshId="#{javascript:compositeData.dynContentId}" immediate="true">
-							<xp:this.action><![CDATA[#{javascript:getComponent(compositeData.dynContentId).show("plansList");}]]></xp:this.action>
+							refreshId="dynContentPlans" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:getComponent("dynContentPlans").show("plansList");}]]></xp:this.action>
 						</xp:eventHandler>
 					</xp:link>
 	

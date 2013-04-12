@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var numOpenTasks = 0;
+
+var t = @DbLookup( @DbName(), "vwTasksAssignedOpen", docIncident.getItemValueString("id"), 2, "[FailSilent]");
+
+if (t != null && t != "") {
+	numOpenTasks = @Elements(t);
+}
+
+//dBar.debug("num open: " + numOpenTasks);
+
+viewScope.put("numOpenTasks", numOpenTasks);
+}]]></xp:this.beforePageLoad>
+	
+
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<xc:mLayout showMenu="true" newDocTarget="mTask.xsp">
+		<xc:this.pageTitle><![CDATA[#{javascript:if (docIncident.isNewNote()) {
+	return "Activate team";
+} else {
+	return applicationScope.labels['incident'];
+}}]]></xc:this.pageTitle>
+		<xp:this.facets>
+
+			<xp:panel xp:key="contents" disableOutputTag="true">
+
+				<div id="formholder">
+					<h2>
+						<xp:text escape="true" id="title" tagName="span"
+							value="#{javascript:applicationScope.labels['incident'] + ': ' + docIncident.getItemValueString('description')}"
+							styleClass="formtitle">
+						</xp:text>
+					</h2>
+					<xp:panel id="panel1" styleClass="buttons" tagName="ul">
+						<xp:panel id="panel2" styleClass="cancelButton" tagName="li">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"loadPageEx('mTasks.xsp?activeOnly=1', 'contentwrapper', 'tasks', true, true);"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span>Close</span>
+						</xp:panel>
+					</xp:panel>
+				</div>
+
+				<div class="mTop">
+
+					<xc:mTasksList showStatus="true" viewName="vwTasksByIncident">
+						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
+						<xc:this.parentUrl><![CDATA[#{javascript:"mIncidentTasks.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
+					</xc:mTasksList>
+
+				</div>
+
+			</xp:panel>
+		</xp:this.facets>
+	</xc:mLayout>
+
+
+</xp:view>

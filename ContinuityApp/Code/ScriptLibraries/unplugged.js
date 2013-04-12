@@ -646,42 +646,48 @@ function deactivateIncident(id, numOpenTasks) {
 }
 
 var syncFunc = function(data) {
-	
-	$.blockUI();
 
 	if ("true" === data) {
 		
 		setTimeout(function() { 
-			$.get("/_$$unp/replStatus", syncFunc).error(
-					//ios doesn't have this page
-					function() { 
-						
-						if ( _ajaxRequests.length > 0 ) {
-							loadPageEx( _ajaxRequests[_ajaxRequests.length-1] , 'contentwrapper', null, true, false );
-						} else {
-							location.reload();
-						}
-					});
+			$.get("/_$$unp/replStatus", syncFunc).error(					//ios doesn't have this page
+				function() {
+					reloadAfterSync();
+				});
 		}, 500);
 			
-	}
-	else {
-		
-		if ( _ajaxRequests.length > 0 ) {
-			loadPageEx( _ajaxRequests[_ajaxRequests.length-1] , 'contentwrapper', null, true, false );
-		} else {
-			location.reload();
-		}
+	} else {
+		reloadAfterSync();
 	}
 	
 }
 
+function reloadAfterSync() {
+	
+	//register handlers again
+	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+	
+	if ( _ajaxRequests.length > 0 ) {
+		loadPageEx( _ajaxRequests[_ajaxRequests.length-1] , 'contentwrapper', null, true, false );
+	} else if (location.href.toLowerCase().indexOf('unpmain.xsp')>-1) {
+		location.href = "/unpws.unp/";		//redir to Unplugged workspace -> will auto launch correct continuity db
+	} else { 
+		location.reload();
+	}
+}
+
 //function to initiate synchronisation of Continuity
 function syncAllDbs(){
+	
+	//first unregister the ajaxstart/ stop handlers
+	$(document).unbind('ajaxStart').unbind('ajaxStop');
+	
+	//now block the ui for the sync action
 	$.blockUI({
 		centerY: 0,
 		css: { top: '10px', left: '10px', right: '' }
 	});
+	
 	$.get("UnpSyncAll.xsp", syncFunc);
 }
 

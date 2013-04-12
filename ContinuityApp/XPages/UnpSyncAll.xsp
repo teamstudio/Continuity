@@ -5,11 +5,13 @@
 var writer = facesContext.getResponseWriter();
 facesContext.getExternalContext().getResponse().setContentType("text/plain");
 if ("yes" === param.status) {
+
 	writer.write(session.getEnvironmentString("unpIsReplicating", true));
-}
-else {
+} else {
+
 	@Command("[ReplicatorReplicateHigh]");
 	writer.write("true");
+	
 }
 writer.endDocument();
 }]]></xp:this.beforeRenderResponse></xp:view>

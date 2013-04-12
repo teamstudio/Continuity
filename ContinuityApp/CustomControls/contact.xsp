@@ -268,27 +268,31 @@
 			</xp:radioGroup>
 		</xe:formRow>
 
-		<xe:formRow id="formRow13" label="BC Role:" for="radioGroup1">
+		<xe:formRow id="formRow13" label="BC Role:" for="comboBox1">
 			<xe:this.rendered><![CDATA[#{javascript:var t = docContact.getItemValueString("userType"); t.equals("user") || t.equals("editor")}]]></xe:this.rendered>
-			<xp:radioGroup id="radioGroup1" value="#{docContact.roleId}"
-				defaultValue="none"
-				readonly="#{javascript:!sessionScope.isEditor}">
+			
+			<xp:comboBox id="comboBox1" value="#{docContact.roleId}" defaultValue="none" readonly="#{javascript:!sessionScope.isEditor}">
 				<xp:selectItem itemLabel="-None-" itemValue="none"></xp:selectItem>
 				<xp:selectItems id="selectItems1">
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwRoles", 3);}]]></xp:this.value>
 				</xp:selectItems>
+			</xp:comboBox>
+			
+			<xp:text escape="true" id="computedField2">
+				<xp:this.rendered><![CDATA[#{javascript:!docContact.isEditable() && docContact.getItemValueString("isAlternate").equals("yes")}]]></xp:this.rendered>
+				<xp:this.value><![CDATA[#{javascript:" (alternate)"}]]></xp:this.value>
+			</xp:text>
 
-			</xp:radioGroup>
+			<br />
 
-			<xp:checkBox
-				text="This person is an alternate for this BCM role" id="checkBox1"
-				value="#{docContact.isAlternate}" checkedValue="yes"
-				uncheckedValue="no"
-				readonly="#{javascript:!sessionScope.isEditor}">
+			<xp:checkBox text="This person is an alternate for this BCM role" id="checkBox1"
+				value="#{docContact.isAlternate}" checkedValue="yes" uncheckedValue="no"
+				readonly="#{javascript:!sessionScope.isEditor}"
+				rendered="#{javascript:docContact.isEditable()}">
 			</xp:checkBox>
 		</xe:formRow>
 
-		<xe:formRow id="formRow17" label="Status:" for="radioGroup2">
+		<xe:formRow id="formRow17" label="Status:" for="radioGroup4">
 			<xp:radioGroup id="radioGroup4" value="#{docContact.status}"
 				readonly="#{javascript:!sessionScope.isEditor}"
 				defaultValue="new">
@@ -310,33 +314,14 @@
 			</xp:text>
 		</xe:formRow>
 
-		<xe:formRow id="formRow11" label="Organisation Unit:"
-			for="radioGroup2">
-			<xp:radioGroup id="radioGroup2"
-				value="#{docContact.orgUnitId}"
-				readonly="#{javascript:!sessionScope.isEditor}">
+		<xe:formRow id="formRow11" label="Organisation unit:" for="comboBox2">
+			
+			<xp:comboBox id="comboBox2" value="#{docContact.orgUnitId}" readonly="#{javascript:!sessionScope.isEditor}">
+				<xp:selectItem itemLabel="-Select an organisation unit-" itemValue=""></xp:selectItem>
 				<xp:selectItems id="selectItems2">
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
 				</xp:selectItems>
-			</xp:radioGroup>
-		</xe:formRow>
-
-		<xe:formRow id="formRow15" for="checkBoxGroupSites">
-			<xe:this.label><![CDATA[#{javascript:configBean.getLabel("assets")}]]></xe:this.label>
-			<xp:checkBoxGroup id="checkBoxGroupSites" value="#{docContact.siteIds}"
-				readonly="#{javascript:!sessionScope.isEditor}">
-				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), "vwAssets", 2);
-							
-							return (typeof lu=='string' && lu.length==0 ? null : lu);}]]></xp:this.value>
-				</xp:selectItems>
-			</xp:checkBoxGroup>
-
-			<xp:text escape="true" disableTheme="true">
-				<xp:this.rendered><![CDATA[#{javascript://show in read mode when no options have been selected
-!docContact.isEditable() && @Text(docContact.getItemValue("siteIds"))==""}]]></xp:this.rendered>
-				<xp:this.value><![CDATA[#{javascript:"No " + configBean.getLabel("assets")  + " selected"}]]></xp:this.value>
-			</xp:text>
+			</xp:comboBox>
 
 		</xe:formRow>
 

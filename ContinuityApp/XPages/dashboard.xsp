@@ -16,7 +16,7 @@
 				<xe:navigator id="outline">
 					<xe:this.treeNodes>
 						
-						<xe:basicContainerNode label="Configuration Guide" enabled="false">
+						<xe:basicContainerNode label="Getting started" enabled="false">
 							<xe:this.children>
 								<xe:basicLeafNode submitValue="miniConfigGuide" label="Mini configuration guide">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("miniConfigGuide");}]]></xe:this.selected>
@@ -119,7 +119,7 @@
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode
-									label="Organisation Units" submitValue="orgUnits">
+									label="Organisation units" submitValue="orgUnits">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("orgUnits");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								
