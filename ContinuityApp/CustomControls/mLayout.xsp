@@ -82,7 +82,7 @@
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"
-						page="/mCallTree.xsp?clearFrom=1" icon="calltree-blue.png" ajaxloadid="contentwrapper"
+						page="/UnpCallTree.xsp?clearFrom=1" icon="calltree-blue.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 

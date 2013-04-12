@@ -77,7 +77,7 @@ viewScope.put("orderPosition", pos);
 							<xp:link id="link3" value="#">
 								<xp:this.attrs>
 									<xp:attr name="onclick">
-										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
 								<xp:this.text>
@@ -95,7 +95,7 @@ viewScope.put("orderPosition", pos);
 								
 								<xp:this.attrs>
 									<xp:attr name="onclick">
-										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?pos=" + (viewScope.orderPosition+1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpCallTree.xsp?pos=" + (viewScope.orderPosition+1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
 							</xp:link>
@@ -122,7 +122,7 @@ viewScope.put("orderPosition", pos);
 						<xp:panel tagName="li">
 							<xp:this.attrs>
 								<xp:attr name="onClick">
-									<xp:this.value><![CDATA[#{javascript:"openDocument('mContactDetails.xsp?documentId=" + row.getUniversalID() + "&from=mCallTree.xsp%3fpos%3d" + viewScope.orderPosition + "', 'contentwrapper');"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"openDocument('mContactDetails.xsp?documentId=" + row.getUniversalID() + "&from=UnpCallTree.xsp%3fpos%3d" + viewScope.orderPosition + "', 'contentwrapper');"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 
@@ -164,20 +164,22 @@ return out;}]]></xp:this.styleClass>
 
 										<!-- primary phone number: show as link for phone capable devices -->
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName == row.getColumnValue("userName") && !sessionScope.isPhoneSupported}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName != row.getColumnValue("userName") && !sessionScope.isPhoneSupported}]]></xp:this.rendered>
 											<xp:text escape="true" id="computedField2"
 												value="#{row.$15}">
 											</xp:text>
 										</xp:panel>
-
+										
+										<!-- no phone number -->
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName == row.getColumnValue("userName") && isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName != row.getColumnValue("userName") && isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
 											No phone number found
 										</xp:panel>
 
+										<!--  button to call -->
 										<xp:panel disableOutputTag="true">
 
-											<xp:this.rendered><![CDATA[#{javascript:!sessionScope.userName == row.getColumnValue("userName") && sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
+											<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName != row.getColumnValue("userName") && sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
 											<ul class="btnInline">
 												<li>
 													<xp:link escape="true" text="" id="link1"

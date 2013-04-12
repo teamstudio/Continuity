@@ -165,7 +165,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 							<xp:link escape="true" text="" id="link2" value="">
 								<xp:this.attrs>
 									<xp:attr name="onClick">
-										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mCallTree.xsp?setFrom=' + encodeURIComponent('UnpIncident.xsp?action=openDocument&documentId=" + docIncident.getDocument().getUniversalID() + "'), 'contentwrapper', null, true, true); return false;"}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpCallTree.xsp?setFrom=' + encodeURIComponent('UnpIncident.xsp?action=openDocument&documentId=" + docIncident.getDocument().getUniversalID() + "'), 'contentwrapper', null, true, true); return false;"}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
 

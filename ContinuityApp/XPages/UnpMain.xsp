@@ -111,7 +111,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 						</a>
 					</li>
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mCallTree.xsp?clearFrom=1';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpCallTree.xsp?clearFrom=1';">
 							<span class="chicletimg imgCalltree"></span>
 							<span>Call tree</span>
 						</a>
