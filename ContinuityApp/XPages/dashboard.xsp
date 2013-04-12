@@ -127,7 +127,12 @@
 									submitValue="contactsList" label="Contacts">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("contactsList");}]]></xe:this.selected>
 								</xe:basicLeafNode>
-
+								
+								<xe:basicLeafNode
+									submitValue="contactsImport" label="Data import" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("contactsImport");}]]></xe:this.selected>
+								</xe:basicLeafNode>
+				
 							</xe:this.children>
 						</xe:basicContainerNode>
 

@@ -14,7 +14,25 @@
 	</xp:this.acl>
 
 	<div class="section">
-		<div class="title">Contacts batch import</div>
+		<div class="title">Contacts - Data import</div>
+		
+		<div class="actions">
+			<xp:button value="Show instructions" id="buttonShow">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[dojo.fx.wipeIn({node:'importHelp',duration:400}).play();
+					dojo.style( dojo.byId("#{id:buttonShow}"), "display", "none");
+					dojo.style( dojo.byId("#{id:buttonHide}"), "display", "");
+					]]></xp:this.script>
+				</xp:eventHandler></xp:button>
+			<xp:button value="Hide instructions" id="buttonHide" style="display:none">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[dojo.fx.wipeOut({node:'importHelp',duration:400}).play();
+					dojo.style( dojo.byId("#{id:buttonShow}"), "display", "");
+					dojo.style( dojo.byId("#{id:buttonHide}"), "display", "none");
+					]]></xp:this.script>
+				</xp:eventHandler></xp:button>
+		</div>
+		
 	</div>
 
 	<xe:formTable id="formTable1" disableErrorSummary="true">
@@ -50,12 +68,12 @@
 
 	</xe:formTable>
 	
-	<div style="margin-top:15px">
-	<xp:section id="section1" header="Instructions" initClosed="true">
+	<div style="margin-top:15px; display: none;" id="importHelp">
+	
+		<h4>Instructions</h4>
+	
 		<xc:ccHelp helpTextId="contactsImportFormat"></xc:ccHelp>
-	</xp:section>
 	</div>
-
 	
 	
 </xp:view>

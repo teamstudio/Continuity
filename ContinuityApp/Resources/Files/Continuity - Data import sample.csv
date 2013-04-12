@@ -1,0 +1,3 @@
+objectClass,dn,sAMAccountName,userPrincipalName,userAccountControl,givenName,SN,mail,Title,telephoneNumber
+user,"CN=TBarnhouse,CN=Users,DC=com", TBarnhouse, ted.barnhouse@zetacomm.com ,514, Ted, Barnhouse, ted.barnhouse@zetacomm.com, VP & Head of Zetafire division,"+1 650 555-0203"
+user,"CN=PAlmeida,CN=Users,DC=com", TBarnhouse, paul.almeida@zetacomm.com ,514, Paul, Almeida , paul.almeida@zetacomm.com, Project Lead,"+1 650 555-0200"

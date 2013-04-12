@@ -1,0 +1,21 @@
+#LDIF sample import file for continuity
+
+objectClass: user
+dn: CN=TBarnhouse,CN=Users,DC=com
+sAMAccountName: TBarnhouse
+userPrincipalName: ted.barnhouse@zetacomm.com
+givenName: Ted
+SN: Barnhouse
+mail: ted.barnhouse@zetacomm.com
+Title: VP & Head of Zetafire division
+telephoneNumber: +1 650 555-0203
+
+objectClass: user
+dn: CN=PAlmeida,CN=Users,DC=com
+sAMAccountName: PAlmeida
+userPrincipalName: paul.almeida@zetacomm.com
+givenName: Paul
+SN: Almeida
+mail: paul.almeida@zetacomm.com
+Title: Project Lead
+telephoneNumber: +1 650 555-0200

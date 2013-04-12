@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Employees>
+	<Employee id="ted.barnhouse@zetacomm.com">
+		<GivenName>Ted</GivenName>
+		<SurName>Barnhouse</SurName>
+		<JobTitle>VP &#038; Head of Zetafire division</JobTitle>
+		<EmailAddress>ted.barnhouse@zetacomm.com</EmailAddress>
+		<PhoneNumber>+1 650 555-0203</PhoneNumber>
+	</Employee>
+	<Employee id="paul.almeida@zetacomm.com">
+		<GivenName>Paul</GivenName>
+		<SurName>Almeida</SurName>
+		<JobTitle>Project Lead</JobTitle>
+		<EmailAddress>paul.almeida@zetacomm.com</EmailAddress>
+		<PhoneNumber>+1 650 555-0200</PhoneNumber>
+	</Employee>
+</Employees>
