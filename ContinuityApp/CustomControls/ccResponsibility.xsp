@@ -49,7 +49,7 @@
 						<xp:this.action><![CDATA[#{javascript:dBar.info("remove responsibility: " & docResp.getItemValueString("name") );
 docResp.getDocument().remove(true);
 
-configBean.updateMenuOptionCounts();
+currentUserBean.updateMenuOptionCounts();
 								
 getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this responsibility?")]]></xp:this.script>

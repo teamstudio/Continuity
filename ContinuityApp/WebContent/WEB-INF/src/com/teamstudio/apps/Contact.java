@@ -153,6 +153,10 @@ public class Contact implements Serializable {
 				Utils.addInfoMessage("Contact " + name + " has been saved");
 			}
 			
+			if (isNewNote) {
+				com.teamstudio.continuity.User.get().updateMenuOptionCounts();
+			}
+			
 			Logger.debug("finished");
 			
 		} catch (Exception e) {

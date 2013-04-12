@@ -42,7 +42,7 @@ public class Responsibility implements Serializable {
 
 			if (isNew) {
 				
-				Configuration.get().updateMenuOptionCounts();
+				com.teamstudio.continuity.User.get().updateMenuOptionCounts();
 				
 			} else {
 				

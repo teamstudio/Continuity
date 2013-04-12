@@ -87,7 +87,7 @@ public class Task implements Serializable {
 			
 			if (isNew) {
 				
-				Configuration.get().updateMenuOptionCounts();
+				com.teamstudio.continuity.User.get().updateMenuOptionCounts();
 			}
 			
 			
@@ -113,7 +113,7 @@ public class Task implements Serializable {
 			
 			docTask.remove(true);
 			
-			Configuration.get().updateMenuOptionCounts();
+			com.teamstudio.continuity.User.get().updateMenuOptionCounts();
 			
 			dbCurrent.getView("vwTasksByParent").refresh();
 			

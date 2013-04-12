@@ -122,9 +122,10 @@
 				<xp:button value="Remove" id="button3">
 					<xp:this.rendered><![CDATA[#{javascript:!docContact.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynamicContent1"
+						refreshMode="partial" refreshId="lotusMain"
 						immediate="true">
 						<xp:this.action><![CDATA[#{javascript:if (contactBean.remove( docContact ) ) {
+							currentUserBean.updateMenuOptionCounts();
 							getComponent("dynamicContent1").show("contactsList");
 						}}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this contact?")]]></xp:this.script>

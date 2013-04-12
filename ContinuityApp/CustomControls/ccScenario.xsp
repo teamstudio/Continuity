@@ -42,7 +42,7 @@ if (dcTasks.getCount()>0) {
 //remove scenario
 docScenario.getDocument().remove(true);
 
-configBean.updateMenuOptionCounts();
+currentUserBean.updateMenuOptionCounts();
 							
 getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Removing this plan will also remove all related tasks.\n\nAre you sure?")]]></xp:this.script>

@@ -6,6 +6,7 @@ import lotus.domino.Document;
 import lotus.domino.Session;
 import lotus.domino.View;
 import lotus.domino.Database;
+import lotus.domino.ViewNavigator;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.teamstudio.continuity.utils.Logger;
@@ -15,8 +16,22 @@ public class User implements Serializable{
 
 	private static final long serialVersionUID = 280445063966025957L;
 	
+	private static final String BEAN_NAME = "currentUserBean";
+	
 	private String userName;
 	private boolean miniGuideShown;
+	
+	//these values are stored here, so they are updated if a user logs in
+	//(if these are in the configuration bean, they aren't which can cause incorrect values if a user creates documents in the mobile app) 
+	private int numAssets;
+	private int numScenarios;
+	private int numTasks;
+	private int numPlans;
+	private int numResponsibilities;
+	private int numQuickGuides;
+	private int numIncidents;
+	private int numContacts;
+	private int numOrgUnits;
 	
 	public User() {
 		init(false);
@@ -50,6 +65,8 @@ public class User implements Serializable{
 				
 				miniGuideShown = docContact.getItemValueString("miniGuideShown").equals("true");
 				
+				updateMenuOptionCounts();
+				
 			}
 		
 		} catch (Exception e) {
@@ -59,14 +76,10 @@ public class User implements Serializable{
 		}
 	}
 	
-	/*public static User get() {
+	public static User get() {
 		return (User) Utils.resolveVariable(BEAN_NAME);
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-*/
 	public boolean isMiniGuideShown() {
 		return miniGuideShown;
 		
@@ -94,6 +107,91 @@ public class User implements Serializable{
 			Utils.recycle(docContact, vwContacts);
 		}
 	
+	}
+	
+	
+	public void updateMenuOptionCounts() {
+		
+		View vwTarget = null;
+		
+		try {
+			
+			Database dbCurrent = ExtLibUtil.getCurrentDatabase();
+			vwTarget = dbCurrent.getView("vwAllByType");
+			
+			ViewNavigator nav;
+			
+			nav = vwTarget.createViewNavFromCategory("fSite");
+			numAssets = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fScenario");
+			numScenarios = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fTask");
+			numTasks = nav.getCount();
+			Utils.recycle(nav);
+
+			nav = vwTarget.createViewNavFromCategory("fPlan");
+			numPlans = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fResponsibility");
+			numResponsibilities = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fQuickGuide");
+			numQuickGuides = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fIncident");
+			numIncidents = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fContact");
+			numContacts = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fOrgUnit");
+			numOrgUnits = nav.getCount();
+			Utils.recycle(nav);
+			
+			
+		} catch (Exception e) {
+			Logger.error(e);
+		} finally {
+			Utils.recycle(vwTarget);
+		}
+		
+	}
+	
+	public int getNumAssets() {
+		return numAssets;
+	}
+	public int getNumScenarios() {
+		return numScenarios;
+	}
+	public int getNumTasks() {
+		return numTasks;
+	}
+	public int getNumPlans() {
+		return numPlans;
+	}
+	public int getNumResponsibilities() {
+		return numResponsibilities;
+	}
+	public int getNumQuickGuides() {
+		return numQuickGuides;
+	}
+	public int getNumIncidents() {
+		return numIncidents;
+	}
+	public int getNumContacts() {
+		return numContacts;
+	}
+	public int getNumOrgUnits() {
+		return numOrgUnits;
 	}
 	
 	

@@ -91,7 +91,7 @@
 
 			<td>
 				<xp:link escape="true" text="remove" id="link1" styleClass="lotusTiny">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
 						<xp:this.script><![CDATA[return confirm("Removing an #{javascript:configBean.getLabel('incident').toLowerCase()} will also remove all activated tasks.\n\nAre you sure you want to remove this #{javascript:configBean.getLabel('incident').toLowerCase()}?");]]></xp:this.script>
 						<xp:this.action><![CDATA[#{javascript:dBar.info("removing incident " + row.getColumnValue("description") );
 					
@@ -104,7 +104,9 @@
 					}
 					
 					dBar.info("removing incident");
-					row.getDocument().remove(true);}]]></xp:this.action>
+					row.getDocument().remove(true);
+					currentUserBean.updateMenuOptionCounts();
+					}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
 

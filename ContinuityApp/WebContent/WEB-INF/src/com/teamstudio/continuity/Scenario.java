@@ -77,7 +77,7 @@ public class Scenario implements Serializable {
 			
 			if (blnIsNew) {
 				
-				Configuration.get().updateMenuOptionCounts();
+				com.teamstudio.continuity.User.get().updateMenuOptionCounts();
 			
 			} else {
 			

@@ -15,6 +15,19 @@
 		<xp:this.facets>
 			<xp:div xp:key="footer">
 			
+				<xp:button value="Edit" id="button2"
+					icon="pencil.png">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor") && !docOU.isEditable()}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action>
+							<xp:changeDocumentMode mode="edit"
+								var="docOU">
+							</xp:changeDocumentMode>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			
 			
 			<xp:button value="Save" id="button1" icon="disk.png" rendered="#{javascript:docOU.isEditable()}">
 
@@ -39,7 +52,7 @@ var siteIds = docOU.getItemValue("siteIds");
 if (typeof siteIds=="string") { siteIds = [siteIds]; }
 var siteNames = [];
 for (var i=0; i<siteIds.length; i++) {
-	if (siteIds[i].length>0) { 
+	if (siteIds[i] != null && siteIds[i].length>0) { 
 		siteName = @DbLookup( @DbName(), "vwAllById", siteIds[i], "name");
 		siteNames.push( siteName);
 	}
@@ -72,6 +85,8 @@ if ( docOU.save() ) {
 			dcScenarios.stampAll("orgUnitIds", orgUnitIds);
 			dcScenarios.stampAll("orgUnitNames", orgUnitNames);
 		}
+		
+		currentUserBean.updateMenuOptionCounts();
 	}
 }
 					
@@ -87,8 +102,21 @@ if ( docOU.save() ) {
 					</xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
+			
+			<xp:button value="Remove" id="button3">
+					<xp:this.rendered><![CDATA[#{javascript:!docOU.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="lotusMain"
+						immediate="true">
+						<xp:this.action><![CDATA[#{javascript:if ( docOU.getDocument().remove(true) ) {
+							currentUserBean.updateMenuOptionCounts();
+							getComponent("dynamicContent1").show("orgUnits");
+						}}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this organisation unit?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
 
-			<xp:link escape="true" text="Cancel" id="link2">
+			<xp:link escape="true" text="Back to list" id="link2">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1" immediate="true">
 					<xp:this.action>

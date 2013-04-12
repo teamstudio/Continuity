@@ -331,7 +331,6 @@ function loadAppConfig( forceUpdate:boolean ) {
 			}
 			
 			orgUnitChoices.sort();
-			orgUnits.sort(sortByName);
 			
 			applicationScope.put("orgUnitChoices", orgUnitChoices);
 			applicationScope.put("orgUnits", orgUnits);

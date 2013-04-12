@@ -34,7 +34,7 @@
 						<xe:basicContainerNode label="BCM Framework" enabled="false">
 							<xe:this.children>
 							
-								<xe:basicLeafNode label="#{javascript:configBean.getLabel('assets') + ' (' + configBean.numAssets + ')'}"
+								<xe:basicLeafNode label="#{javascript:configBean.getLabel('assets') + ' (' + currentUserBean.numAssets + ')'}"
 									submitValue="riskEntities">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("riskEntities");}]]></xe:this.selected>
 								</xe:basicLeafNode>
@@ -43,24 +43,24 @@
 								<xe:basicLeafNode submitValue="scenariosList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
 
-									<xe:this.label><![CDATA[#{javascript:"Business scenarios (" + configBean.numScenarios + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Business scenarios (" + currentUserBean.numScenarios + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode submitValue="tasks">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("tasks");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Tasks (" + configBean.numTasks + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Tasks (" + currentUserBean.numTasks + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode
 									submitValue="scenariosByPlan">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosByPlan");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Plans (" + configBean.numPlans + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Plans (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<!-- roles -->
 								<xe:basicLeafNode submitValue="rolesList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("rolesList");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Responsibilities (" + configBean.numResponsibilities + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Responsibilities (" + currentUserBean.numResponsibilities + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								<xe:basicLeafNode label="Contact matrix"
 									submitValue="bcmRoleMatrix" style="margin-left:20px" loaded="${sessionScope.isEditor}">
@@ -70,7 +70,7 @@
 								<xe:basicLeafNode
 									submitValue="quickGuidesList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("quickGuidesList");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Quick guides (" + configBean.numQuickGuides + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Quick guides (" + currentUserBean.numQuickGuides + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:separatorTreeNode></xe:separatorTreeNode>
@@ -83,7 +83,8 @@
 							<xe:this.children>
 
 								<xe:basicLeafNode
-									submitValue="incidentsList" label="#{javascript:configBean.getLabel('incidents')}">
+									submitValue="incidentsList">
+									<xe:this.label><![CDATA[#{javascript:configBean.getLabel('incidents') + " (" + currentUserBean.numScenarios + ")"}]]></xe:this.label>
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("incidentsList");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
@@ -118,13 +119,14 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("taskCats");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
-								<xe:basicLeafNode
-									label="Organisation units" submitValue="orgUnits">
+								<xe:basicLeafNode submitValue="orgUnits">
+									<xe:this.label><![CDATA[#{javascript:"Organisation units (" + currentUserBean.numOrgUnits + ")"}]]></xe:this.label>
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("orgUnits");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode
-									submitValue="contactsList" label="Contacts">
+									submitValue="contactsList">
+									<xe:this.label><![CDATA[#{javascript:"Contacts (" + currentUserBean.numContacts + ")"}]]></xe:this.label>
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("contactsList");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 								

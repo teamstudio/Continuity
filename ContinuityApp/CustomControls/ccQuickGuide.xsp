@@ -61,7 +61,7 @@ try {
 	
 	if (blnIsNew) {
 	
-		configBean.updateMenuOptionCounts();
+		currentUserBean.updateMenuOptionCounts();
 	}
 	
 	getComponent("dynamicContent1").show("quickGuidesList");
@@ -79,7 +79,7 @@ try {
 						refreshId="lotusMain" immediate="true">
 						<xp:this.action><![CDATA[#{javascript:docQuickGuide.getDocument().remove(true);
 
-configBean.updateMenuOptionCounts();
+currentUserBean.updateMenuOptionCounts();
 
 getComponent("dynamicContent1").show("quickGuidesList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this quick guide?")]]></xp:this.script>

@@ -143,7 +143,7 @@
 		
 		if (blnIsNew) {
 			
-			configBean.updateMenuOptionCounts();
+			currentUserBean.updateMenuOptionCounts();
 		
 		
 		} else {
@@ -166,7 +166,7 @@
 							refreshId="lotusMain" immediate="true">
 							<xp:this.action><![CDATA[#{javascript:docPlan.getDocument().remove(true);
 							
-							configBean.updateMenuOptionCounts();
+							currentUserBean.updateMenuOptionCounts();
 							
 	getComponent().show("plansList");}]]></xp:this.action>
 							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this plan?")]]></xp:this.script>

@@ -85,6 +85,8 @@ public class ContactsImport {
 					
 				}
 				
+				com.teamstudio.continuity.User.get().updateMenuOptionCounts();
+				
 				Utils.addInfoMessage("Succesfully processed " + numProcessed + " contact(s) from batch file");
 				Logger.debug("done");
 			}

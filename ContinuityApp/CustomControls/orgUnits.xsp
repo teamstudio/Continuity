@@ -46,7 +46,7 @@
 									<xe:changeDynamicContentAction facetName="orgUnit"
 										for="dynamicContent1">
 										<xe:this.parameters>
-											<xp:parameter name="action" value="editDocument"></xp:parameter>
+											<xp:parameter name="action" value="openDocument"></xp:parameter>
 											<xp:parameter name="documentId"
 												value="#{javascript:row.getUniversalID()}">
 											</xp:parameter>
