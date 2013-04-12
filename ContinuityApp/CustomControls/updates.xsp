@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-	<xp:this.data>
-		<xp:dominoView var="vwUpdates">
-			<xp:this.viewName><![CDATA[#{javascript:"vwUpdates"}]]></xp:this.viewName>
-		</xp:dominoView>
-	</xp:this.data>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
 
 	<xp:div id="updates">
 
@@ -26,85 +21,37 @@
 			</xc:updatesForm>
 		</xp:div>
 		
-		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
-			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager2" for="repeatUpdates"></xp:pager>
-			<br style="clear:both" />
-		</div>
+		<xp:tabbedPanel id="tabbedPanel1" partialRefresh="true" refreshId="dynContLog">
+		<xp:tabPanel label="All" id="tabPanel1">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				refreshId="dynamicContent1">
+				<xp:this.action><![CDATA[#{javascript:getComponent("tabbedPanel1").setSelectedTab(this.getParent().getId());
+				getComponent("dynContLog").show("all");
+				}]]></xp:this.action>
+			</xp:eventHandler>
 
-		<xp:repeat id="repeatUpdates" rows="30" value="#{vwUpdates}" var="row" styleClass="lotusForum" style="width:650px;">
-			
-			<xp:div id="update" styleClass="lotusPost">
+		</xp:tabPanel>
+
+		<xp:tabPanel label="#{javascript:'By ' + configBean.getLabel('incident').toLowerCase()}" id="tabPanel2">
+			<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				refreshId="dynamicContent1">
+				<xp:this.action><![CDATA[#{javascript:getComponent("tabbedPanel1").setSelectedTab(this.getParent().getId());
+				getComponent("dynContLog").show("byIncident");}]]></xp:this.action>
+			</xp:eventHandler>
+
+		</xp:tabPanel>
+
+	</xp:tabbedPanel>
+
+		<xe:dynamicContent id="dynContLog" defaultFacet="all">
+			<xp:this.facets>
 	
-				<div class="lotusPostAuthorInfo">
-					<xp:image id="image1" style="width: 40px; height: 40px;">
-						<xp:this.url><![CDATA[#{javascript:getProfilePhotoUrl( row.getColumnValue("createdBy") )}]]></xp:this.url>
-					</xp:image>
-				</div>
-				
-				<div class="lotusPostContent">
-				
-					<div>
-						<div style="float: left; width: 230px;">
-							<xp:text style="font-weight: bold" escape="true" id="computedField1" value="#{row.createdByName}"></xp:text>
-						</div>
-						
-						<xp:div style="float:left; display:none;" id="removeUpdate" rendered="#{sessionScope.isEditor}">
-							<xp:link escape="true" text="remove" id="linkRemove" styleClass="lotusTiny">
-								<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-									refreshId="updates">
-									<xp:this.script><![CDATA[return confirm("Are you sure you want to delete this update?");]]></xp:this.script>
-									<xp:this.action><![CDATA[#{javascript:row.getDocument().remove(true);}]]></xp:this.action>
-								</xp:eventHandler></xp:link>
-						</xp:div>
-						
-						<div style="float: right; margin-top:1px" class="lotusMeta">
-							<xp:text escape="true" id="computedField2" value="#{row.createdDate}">
-								<xp:this.converter>
-									<xp:customConverter getAsObject="#{javascript:value}" getAsString="#{javascript:TimeSinceConverter.getAsString(value)}">
-									</xp:customConverter>
-								</xp:this.converter>
-							</xp:text>
-						</div>
-						
-						
-					</div>
-					
-					<div style="clear:both">
-						<xp:text escape="false" disableTheme="true" value="#{row.message}"></xp:text><br />
-						
-						<!-- attachment  -->
-						<xp:link escape="true" id="link1" text="#{row.photoFileName}">
-							<xp:this.rendered><![CDATA[#{javascript:var photo = row.getColumnValue("photoFileName");
-							photo != null && photo.length>0}]]></xp:this.rendered>
-							<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photoFileName")}]]></xp:this.value>
-							
-							<xp:this.attrs>
-								<xp:attr name="data-dojo-type" value="dojox.image.Lightbox"></xp:attr>
-								<xp:attr name="data-dojo-props">
-									<xp:this.value><![CDATA[#{javascript:var fileName = row.getColumnValue("photoFileName").replace("'", "\\'");
-									var href = applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + fileName;
-"title:'" + fileName + "',href:'" + href + "'"}]]></xp:this.value>
-								</xp:attr>
-							</xp:this.attrs>
-							
-						</xp:link>
-
-					</div>
-
-				</div>
-
-				<xp:eventHandler event="onmouseover" submit="false">
-					<xp:this.script><![CDATA[dojo.style("#{id:removeUpdate}", "display", "");]]></xp:this.script>
-				</xp:eventHandler>
-				<xp:eventHandler event="onmouseout" submit="false">
-					<xp:this.script><![CDATA[dojo.style("#{id:removeUpdate}", "display", "none");]]></xp:this.script>
-				</xp:eventHandler></xp:div>
-			
-		</xp:repeat>
+				<xc:ccUpdatesList id="all" xp:key="all" viewName="vwUpdates"></xc:ccUpdatesList>
+				<xc:ccUpdatesList id="byIncident" xp:key="byIncident" viewName="vwUpdatesByIncident"></xc:ccUpdatesList>
+	
+			</xp:this.facets>
+		</xe:dynamicContent>
 		
-		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
-			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager1" for="repeatUpdates"></xp:pager>
-		</div>
 	</xp:div>
 
 </xp:view>

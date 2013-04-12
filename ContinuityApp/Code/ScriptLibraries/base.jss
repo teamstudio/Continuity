@@ -1060,3 +1060,10 @@ function getOpenIncidentOptions(orgUnitId, selected) {
 	return html.join("");
 		
 }
+/**
+ * Checks if a pager should be visible (has more than 1 page).
+ */
+function isPagerVisible(pager: com.ibm.xsp.component.xp.XspPager): boolean {
+    var state: com.ibm.xsp.component.UIPager.PagerState = pager.createPagerState();
+    return state.getRowCount() > state.getRows(); 
+}

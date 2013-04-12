@@ -641,7 +641,7 @@ function deactivateIncident(id, numOpenTasks) {
 		cache : false
 	}).done(
 	function(response) {
-		window.location.href = "mIncident.xsp?action=openDocument&documentId=" + id;
+		window.location.href = "UnpIncident.xsp?action=openDocument&documentId=" + id;
 	});
 }
 

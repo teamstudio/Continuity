@@ -12,13 +12,13 @@
 
 			<xp:panel xp:key="contents" disableOutputTag="true">
 				<xp:div styleClass="box"
-					rendered="#{javascript:database.getView('vwIncidents').getEntryCount()==0}">
+					rendered="#{javascript:database.getView('vwIncidentsByCat').getEntryCount()==0}">
 					<div class="content">
 						<xp:text value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
 					</div>
 				</xp:div>
 				
-				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="mIncident.xsp"
+				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncident.xsp"
 					position="menu-aligned" insetData="true">
 				</unp:unpAccordion>
 

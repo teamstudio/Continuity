@@ -52,7 +52,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 					<xc:mTasksList showStatus="true" viewName="vwTasksByIncident">
 						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
-						<xc:this.parentUrl><![CDATA[#{javascript:"mIncidentTasks.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
+						<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncidentTasks.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:mTasksList>
 
 				</div>

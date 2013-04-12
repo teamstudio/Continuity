@@ -119,7 +119,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 					
 					<!-- Incidents -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mIncidents.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpIncidents.xsp';">
 							<xp:text escape="true" styleClass="badge" id="computedField2">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numIncidents}]]></xp:this.value>
 								<xp:this.converter>

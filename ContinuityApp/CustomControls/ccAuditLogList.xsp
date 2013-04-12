@@ -9,10 +9,10 @@
 	
 	<xp:div id="updates">
 
-		<div style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
+		<xp:div rendered="#{javascript:isPagerVisible(getComponent('pager2'))}" style="clear:both; width: 650px; font-weight: normal; margin-bottom:5px;">
 			<xp:pager layout="Previous Group Next" partialRefresh="true" id="pager2" for="repeatLog"></xp:pager>
 			<br style="clear:both" />
-		</div>
+		</xp:div>
 
 		<xp:repeat id="repeatLog" rows="30" value="#{vwAuditLog}" var="row" styleClass="lotusForum" style="width:650px;">
 		
