@@ -1,24 +1,10 @@
-function init( theme:String) {
+function init() {
 	
 	try {
 		
 		//load the application configuration
 		loadAppConfig(false);
-	/*	
-		if (!isUnplugged()) { 
-			var currentTheme = context.getSessionProperty("xsp.theme");
 
-			//switch the theme used by this application
-			if ( currentTheme == null || !currentTheme.equals(theme)) {
-				
-				var f = "/"+@RightBack(context.getUrl().getAddress(),"/");
-				context.setSessionProperty("xsp.theme",theme);
-				context.redirectToPage(f);
-	
-			}
-		}
-	*/
-		
 		var currentUser = @UserName();
 		
 		//workaround here to re-init the session vars if another user has logged in:
@@ -34,7 +20,6 @@ function init( theme:String) {
 					sessionScope.put( key, null);
 				}
 			}
-			
 			
 			sessionScope.put("configLoaded", true);
 			sessionScope.put("userName", currentUser);
@@ -73,7 +58,7 @@ function init( theme:String) {
 				
 			}
 			
-			//dBar.debug("editor? " + isEditor + ", user? " + isUser + "");
+			dBar.debug("editor? " + isEditor + ", user? " + isUser + "");
 			
 			sessionScope.put("isEditor", isEditor);
 			sessionScope.put("isUser", isUser);
@@ -82,15 +67,32 @@ function init( theme:String) {
 			try {
 				sessionScope.put("canEdit", ( database.getCurrentAccessLevel()>=3));	
 			} catch (ee) { }
-							
-			//set default menu option
-			sessionScope.put("selectedMenu", (isEditor ? "miniConfigGuide" : "contactsList") );
+			
+			if ( !isUnplugged() ) {
+				//web ui only functions
+											
+				//set default menu option
+				if (isEditor) {
+					
+					//show mini guide to editors only once
+					if ( currentUserBean.isMiniGuideShown() ) {
+						sessionScope.put("selectedMenu", "scenariosList");
+					} else {
+						sessionScope.put("selectedMenu", "miniConfigGuide");
+						currentUserBean.setMiniGuideShown();
+					}
+				} else {
+					sessionScope.put("selectedMenu", "contactsList");
+				}
+				
+			}
 			
 			var ua = @LowerCase( context.getUserAgent().getUserAgent() );
 			
 			sessionScope.put("isPhoneSupported", !@Contains( ua, "ipad") && !@Contains( ua, "ipod") );
 			
 			if (null != docUser) {
+				
 				//retrieve settings from the user's profile
 				
 				//dBar.debug("init: found user doc");
@@ -117,7 +119,6 @@ function init( theme:String) {
 				//get number of new incidents for this user
 				var numNewIncidents = getNumNewItems( docUser.getItemValueString("lastViewedIncident"), "vwIncidents" );
 				sessionScope.put("numIncidents", numNewIncidents);
-			
 				
 				//store current login
 				docUser.replaceItemValue("lastLogin", session.createDateTime(@Now()) );
@@ -208,15 +209,15 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			applicationScope.put("toolbarConfig", "[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],  ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText'], ['NumberedList','BulletedList','Blockquote'], ['Link', 'Unlink']]");
 			
-			var vwSettings:NotesView = database.getView("vwSettings");
-			var docSettings:NotesDocument = vwSettings.getDocumentByKey("fSettings", true);
+			var vwAllByType:NotesView = database.getView("vwAllByType");
+			var docSettings:NotesDocument = vwAllByType.getDocumentByKey("fSettings", true);
 			
 			if (docSettings == null ) {
 				
 				print("error: settings document not found");
 				
 			} else {
-			
+				
 				applicationScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));
 				
 				//labels
@@ -249,8 +250,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 			var docTemp:NotesDocument = null;
 			
 			//get all roles
-			var vwRoles = database.getView("vwRoles");
-			var vecRoles:NotesViewEntryCollection = vwRoles.getAllEntries();
+			var vecRoles:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
 			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
 			
 			var veTemp:NotesViewEntry = null;
@@ -262,26 +262,25 @@ function loadAppConfig( forceUpdate:boolean ) {
 				
 				var colValues = veRole.getColumnValues();
 				
-				var id:String = colValues.get(3);
-				var name:String = colValues.get(1);
+				var id:String = colValues.get(1);
+				var name:String = colValues.get(2);
+				
 				roles[id] = name;
 				
-				var o = (name + "|" + id);
-				
-				dBar.debug(o);
-				
-				roleChoices.push( o );
+				roleChoices.push( (name + "|" + id) );
 				
 				veTemp = vecRoles.getNextEntry();
 				veRole.recycle();
 				veRole = veTemp;
 			}
+			
+			//sort ascending
+			roleChoices.sort();
 		
 			applicationScope.put("roleChoices", roleChoices);
 			applicationScope.put("roles", roles);
 			
 			vecRoles.recycle();
-			vwRoles.recycle();
 			
 			//get call tree order
 			vwRoles = database.getView("vwRolesCallTreeOrder");
@@ -309,8 +308,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 			var veTemp:NotesViewEntry = null;
 				
 			//store a list of all org units in the application scope
-			var vwOrgUnits:NotesView = database.getView("vwOrgUnits");
-			var vecOrgUnits:NotesViewEntryCollection = vwOrgUnits.getAllEntries();
+			var vecOrgUnits:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fOrgUnit", true);
 			var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
 		
 			var orgUnitChoices = [];
@@ -319,10 +317,11 @@ function loadAppConfig( forceUpdate:boolean ) {
 			while (null != veOrgUnit) {
 				
 				var colValues = veOrgUnit.getColumnValues();
-				var name = colValues.get(0);
-				var id = colValues.get(2);
 				
-				orgUnitChoices.push( colValues.get(1) );
+				var id = colValues.get(1);
+				var name = colValues.get(2);
+				
+				orgUnitChoices.push( colValues.get(3) );
 				
 				orgUnits[id] = name;
 				
@@ -331,32 +330,12 @@ function loadAppConfig( forceUpdate:boolean ) {
 				veOrgUnit = veTemp;
 			}
 			
+			orgUnitChoices.sort();
+			orgUnits.sort(sortByName);
+			
 			applicationScope.put("orgUnitChoices", orgUnitChoices);
 			applicationScope.put("orgUnits", orgUnits);
 			
-			vwOrgUnits.recycle();
-			
-			//store a list of all sites in the application scope (for combobox/ radio selections)
-			var vwAssets:NotesView = database.getView("vwAssets");
-			var vecSites:NotesViewEntryCollection = vwAssets.getAllEntries();
-			var veSite:NotesViewEntry = vecSites.getFirstEntry();
-			
-			var siteChoices = [];
-			
-			while (null != veSite) {
-				siteChoices.push( veSite.getColumnValues().get(1) );
-				
-				veTemp = vecSites.getNextEntry();
-				veSite.recycle();
-				veSite = veTemp;
-			}
-
-			applicationScope.put("siteChoices", siteChoices);
-			
-			vwAssets.recycle();
-			
-			dBar.debug("done");
-
 		} else {
 			
 			//dBar.debug("loadAppConfig: already loaded");
@@ -365,8 +344,6 @@ function loadAppConfig( forceUpdate:boolean ) {
 		
 	} catch (e) {
 		dBar.error( e.toString() );
-	} finally {
-		
 	}
 	
 }
@@ -532,92 +509,13 @@ function getProfilePhotoUrl( userName:String, forceUpdate:boolean ) {
 	
 }
 
-//sort an array of objects by a property of those objects
-Array.prototype.sortByField = function( fieldName:String, direction:String, fieldDataType:String ){
-	
-	var values = this;
-	var fieldA, fieldB;
-	
-	function lowerCaseSort( a, b ){
-
-		fieldA = a[fieldName];
-		fieldB = b[fieldName];
-		
-		if (fieldA=="" && fieldB=="") { 
-			return 0;
-		} else if (fieldA=="") { 
-			return 1;
-		} else if (fieldB=="") { 
-			return -1; 
-		}
-		
-		fieldA = fieldA.toLowerCase();
-		fieldB = fieldB.toLowerCase();
-		
-		if( fieldA > fieldB ){ return 1 * multiplier; }
-		if( fieldA < fieldB ){ return -1 * multiplier; }
-		return 0;
-	}
-	
-	function compareToSort(a,b) {
-		fieldA = a[fieldName];
-		fieldB = b[fieldName];
-		
-		if (fieldA==null && fieldB==null) { 
-			return 0;
-		} else if (fieldA==null) { 
-			return 1;
-		} else if (fieldB==null) { 
-			return -1; 
-		}
-		
-		return ( fieldA.compareTo(fieldB) * multiplier);
-	}
-	
-	function genericSort( a, b ){
-		
-		fieldA = a[fieldName];
-		fieldB = b[fieldName];
-		
-		if (fieldA==null && fieldB==null) { 
-			return 0;
-		} else if (fieldA==null) { 
-			return 1;
-		} else if (fieldB==null) { 
-			return -1; 
-		}
-		
-		if( fieldA > fieldB ){ return 1 * multiplier; }
-		if( fieldA < fieldB ){ return -1 * multiplier; }
-		return 0;
-	}
-	
-	try {
-		
-		if( !fieldName || values.length === 0 ){ return values; }
-		
-		direction = direction || 'ascending';
-		fieldDataType = fieldDataType || 'string';
-		
-		var multiplier = (direction === 'ascending') ? 1 : -1;
-		
-		var sortFunction;
-		if (fieldDataType.indexOf('string')>=0) {
-			sortFunction = lowerCaseSort;
-		} else if (fieldDataType.indexOf('date')>=0) {
-			sortFunction = compareToSort;
-		} else {
-			sortFunction = genericSort;
-		}
-		
-		values.sort(sortFunction);	
-		
-	} catch (e) {
-		dBar.error( e, "sortByField" );
-	}
-	
-	return values;
-	
+//function to sort an associative array by name
+function sortByName(a,b) {
+	if (a.name < b.name)
+		return -1;
+	if (a.name > b.name)
+		return 1;
+	return 0;
 }
 
 //check if we're running in Unplugged (cached in sessionScope)

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='113e' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='2'>
+<noteinfo noteid='113e' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='3'>
 <created><datetime dst='true'>20130405T100132,18+02</datetime></created>
-<modified><datetime dst='true'>20130412T111313,81+02</datetime></modified>
-<revised><datetime dst='true'>20130412T111313,80+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130412T111313,81+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130412T115110,83+02</datetime></modified>
+<revised><datetime dst='true'>20130412T115110,82+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130412T115110,83+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130405T100133,32+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -76,18 +76,22 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <item name='debugMode' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='$Fields'><textlist><text>debugMode</text><text>identifier</text><text
->orgUnitName</text><text>orgUnitId</text><text>isAlternate</text><text>roleName</text><text
->roleId</text><text>photos</text><text>jobTitle</text><text>phoneWork</text><text
->phoneHome</text><text>phoneMobile</text><text>email</text><text>status</text><text
->userName</text><text>userType</text><text>lastName</text><text>firstName</text></textlist></item>
+<item name='miniGuideShown' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>miniGuideShown</text><text>debugMode</text><text
+>identifier</text><text>orgUnitName</text><text>orgUnitId</text><text>isAlternate</text><text
+>roleName</text><text>roleId</text><text>photos</text><text>jobTitle</text><text
+>phoneWork</text><text>phoneHome</text><text>phoneMobile</text><text>email</text><text
+>status</text><text>userName</text><text>userType</text><text>lastName</text><text
+>firstName</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAmBAoMEAQCF/wgA
 AQAACYECgv9aAAIAAAAAAAAAAACgBQAAoAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAQAAAACUhQAAAACgBQYAAAAAAAEAAAAEAAAAgwQCAN0GAQD7//v/LAAAAAAA
-EQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAXP8+AAAAAAAAAAAAAAAAAAAAAAAA
+EgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAXP8+AAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAQAACgAAAAABAAAAAADeBgEA+/+jDqAFKAA8AAAA
 AAACAKQSAACgBdcNAABVAhERAQEAAIECgv9aAAMAAAAAAAAAAACvBdcNrwUAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGAQAAAABUhwAAAAAAAAAAAAAAAAEAAAAEAAAA
@@ -180,10 +184,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAIr/LgCKAAAFADACAAAAAAAAAgEAAAkAAAAAAAAAAAoAAAAAAGlkZW50aWZpZXJi
 DgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAQAJpBIQAsUhJzwAAFUCEREBAQAAgQKDBAUAhf9OAAEA
 AAl1c2VkIHRvIHVuaXF1ZWx5IGlkZW50aWZ5IGEgdXNlciB3aGVuIGltcG9ydGluZyBmcm9tIGFu
-IEFEIGltcG9ydCBmaWxlpQYAAAAAgQKDBAEAhf8IAAEAAAmBAoMEAQCF/xQAAQAACURlYnVnIG1v
-ZGU/IN0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsP8UAAAABCAAAAAAAAAAAAAAAACK/zwA
-ikIBBQIgAgAAAAAAAAIBAAAJAAAAAAAAAAAJAAAADgBkZWJ1Z01vZGUBAAoAZW5hYmxlfHllcwDe
-BgAAiv+F/wgAAQAACQ==
+IEFEIGltcG9ydCBmaWxlpBIRAKAF1w0AAFUCEREBAQAAgQKDBAMAhf8WAAEBAAltaW5pR3VpZGVT
+aG93bqQSEQHXDcUhAABVAhERAQEAAIECgwQEAIX/CAABAQAJ3QYAAIr//v9QAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAACK/zIAigAABQAwAgAAAAAAAAIBAAAJAAAAAAAAAAAOAAAAAABtaW5pR3VpZGVTaG93
+bmIOAQCEAAAAAAAAAAAA3gYAAIr/hf8IAAEBAAmkEhECxSEnPAAAVQIREQEBAACBAoMEBQCF/xMA
+AQAACXRydWUsIGZhbHNlAKUGAAAAAIECgwQBAIX/CAABAAAJgQKDBAEAhf8UAAEAAAlEZWJ1ZyBt
+b2RlPyDdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALD/FAAAAAQgAAAAAAAAAAAAAAAAiv88
+AIpCAQUCIAIAAAAAAAACAQAACQAAAAAAAAAACQAAAA4AZGVidWdNb2RlAQAKAGVuYWJsZXx5ZXMA
+3gYAAIr/hf8IAAEAAAk=
 </rawitemdata></item></note>
 

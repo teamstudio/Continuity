@@ -12,7 +12,7 @@
 	</style>
 	
 	-->
-	<xp:this.beforePageLoad><![CDATA[#{javascript:init("mobile");
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init();
 	
 	viewScope.put("pageTitle", compositeData.pageTitle);
 	viewScope.put("newDocTarget", compositeData.newDocTarget );
@@ -20,7 +20,7 @@
 	
 	}]]></xp:this.beforePageLoad>
 	
-	<xp:this.afterRestoreView><![CDATA[#{javascript:init("mobile");}]]></xp:this.afterRestoreView>
+	<xp:this.afterRestoreView><![CDATA[#{javascript:init();}]]></xp:this.afterRestoreView>
 
 	<xp:this.resources>
 		<xp:script src="/base.jss" clientSide="false"></xp:script>
@@ -64,7 +64,7 @@
 				<xc:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xc:this.rendered>
 				
 				<xc:this.menuItem>
-					<xc:menuItem itemId="contacts" disabled="false" label="Contacts" page="/mContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem itemId="contacts" disabled="false" label="Contacts" page="/UnpContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
 					<xc:menuItem itemId="plans" disabled="false" label="Plans" page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
 				</xc:this.menuItem>
 			</xc:unpNavigator>
@@ -73,12 +73,12 @@
 				<xc:this.menuItem>
 
 					<xc:menuItem itemId="activate" disabled="false" label="Activate team"
-						page="/mActivate.xsp" icon="activate.png" ajaxloadid="contentwrapper"
+						page="/UnpActivate.xsp" icon="activate.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 
 					<xc:menuItem itemId="contacts" disabled="false" label="Contacts"
-						page="/mContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper"
+						page="/UnpContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"

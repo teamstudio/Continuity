@@ -11,7 +11,7 @@
 		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
 	</xp:this.resources>
 
-	<xp:this.beforePageLoad><![CDATA[#{javascript:init("continuity");}]]></xp:this.beforePageLoad>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init();}]]></xp:this.beforePageLoad>
 	
 	<!-- control to keep a user's session alive -->
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>

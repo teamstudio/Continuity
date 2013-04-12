@@ -8,7 +8,7 @@
 
 	<xp:this.afterRenderResponse><![CDATA[#{javascript:try {
 	
-		init("mobile");
+		init();
 	
 		var exCon = facesContext.getExternalContext(); 
 var writer = facesContext.getResponseWriter();

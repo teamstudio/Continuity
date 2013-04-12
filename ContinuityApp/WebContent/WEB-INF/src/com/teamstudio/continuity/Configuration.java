@@ -58,16 +58,16 @@ public class Configuration implements Serializable {
 	public void reload() {
 	
 		Database dbCurrent = null;
-		View vwSettings = null;
+		View vwAllByType = null;
 		Document docSettings = null;
 
 		try {
 			
 			Session sessionAsSigner = Utils.getCurrentSessionAsSigner();
 			dbCurrent = sessionAsSigner.getCurrentDatabase();
-			vwSettings = dbCurrent.getView("vwSettings");
+			vwAllByType = dbCurrent.getView("vwAllByType");
 
-			docSettings = vwSettings.getDocumentByKey("fSettings", true);
+			docSettings = vwAllByType.getDocumentByKey("fSettings", true);
 			
 			if (docSettings == null) {
 				
@@ -79,10 +79,10 @@ public class Configuration implements Serializable {
 				
 				if ( !dataVersion.equals(DATA_VERSION) ) {
 					
-					Conversion.startConversion(vwSettings);
+					Conversion.startConversion(vwAllByType);
 					
 					//update version in settings document
-					docSettings = vwSettings.getDocumentByKey("fSettings", true);
+					docSettings = vwAllByType.getDocumentByKey("fSettings", true);
 					docSettings.replaceItemValue("dataVersion", DATA_VERSION);
 					docSettings.save();
 					
@@ -138,7 +138,7 @@ public class Configuration implements Serializable {
 			e.printStackTrace();
 		} finally {
 			
-			Utils.recycle(docSettings, vwSettings, dbCurrent);
+			Utils.recycle(docSettings, vwAllByType, dbCurrent);
 			
 		}
 	

@@ -46,8 +46,8 @@
 	<xc:unpScrollableArea>
 		<xp:this.facets>
 		
-		<xc:unpFormEditor showbuttons="true" closexpagename="mContacts.xsp"
-				viewxpagename="mContacts.xsp" formname="fContact" title="Contact"
+		<xc:unpFormEditor showbuttons="true" closexpagename="UnpContacts.xsp"
+				viewxpagename="UnpContacts.xsp" formname="fContact" title="Contact"
 				xp:key="facet_1">
 
 				<xp:this.facets>

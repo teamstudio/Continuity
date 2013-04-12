@@ -28,7 +28,7 @@
 							styleClass="data-row condensed">
 							<xp:this.attrs>
 								<xp:attr name="onClick">
-									<xp:this.value><![CDATA[#{javascript:"openDocument('mContactDetails.xsp?documentId=" + row.getUniversalID() + "&from=mContacts.xsp', 'contentwrapper');"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"openDocument('mContactDetails.xsp?documentId=" + row.getUniversalID() + "&from=UnpContacts.xsp', 'contentwrapper');"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 

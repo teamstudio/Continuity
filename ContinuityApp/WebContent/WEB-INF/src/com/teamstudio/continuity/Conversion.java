@@ -25,7 +25,7 @@ import lotus.domino.ViewEntryCollection;
 public class Conversion {
 	
 	@SuppressWarnings("unchecked")
-	public static void startConversion( View vwSettings ) {
+	public static void startConversion( View vwAllByType ) {
 
 		DocumentCollection dc = null;
 		View vwAllById = null;
@@ -42,9 +42,9 @@ public class Conversion {
 			String form;
 			int numUpdated = 0;
 			
-			Database dbCurrent = vwSettings.getParent();
+			Database dbCurrent = vwAllByType.getParent();
 			vwAllById = dbCurrent.getView("vwAllById");
-			docSettings = vwSettings.getDocumentByKey("fSettings", true);
+			docSettings = vwAllByType.getDocumentByKey("fSettings", true);
 			
 			if (docSettings.hasItem("coreDbPath")) {
 			

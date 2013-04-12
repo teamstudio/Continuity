@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.resources>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
+		<xp:script src="/unpCommon.jss" clientSide="false"></xp:script>
+
+		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
+		
+		<xp:metaData name="Content-Type"
+			content="text/html; charset=utf-8">
+		</xp:metaData>
+		<xp:metaData name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		</xp:metaData>
+		<xp:metaData name="apple-mobile-web-app-capable" content="yes"></xp:metaData>
+		<!--<xp:metaData name="apple-mobile-web-app-status-bar-style" content="black"></xp:metaData>
+		
+		--><xp:metaData name="apple-mobile-web-app-status-bar-style" content="black-translucent"></xp:metaData>
+		
+		<xp:metaData name="format-detection" content="telephone=no"></xp:metaData>
+
+		<xp:script src="unp/jquery-1.7.2.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/iscroll.min.js" clientSide="true"></xp:script>
+		
+		<xp:script src="workspace.js" clientSide="true"></xp:script>
+		<xp:script src="/unplugged.js" clientSide="true"></xp:script>
+		
+	</xp:this.resources>
 	
-	<xc:mLayoutBase></xc:mLayoutBase>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init();}]]></xp:this.beforePageLoad>
+	<xp:this.afterRestoreView><![CDATA[#{javascript:init();}]]></xp:this.afterRestoreView>
 
 	<xp:this.beforeRenderResponse><![CDATA[#{javascript:try {
 	
@@ -26,10 +56,6 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 	dBar.error(e.toString() );
 }}]]></xp:this.beforeRenderResponse>
 
-	<xp:this.resources>
-		<xp:script src="workspace.js" clientSide="true"></xp:script>
-	</xp:this.resources>
-	
 	<div id="page">
 	
 		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" title="Continuity"
@@ -46,7 +72,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 				<ul class="workspace-items">
 					
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mContacts.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpContacts.xsp';">
 							<span class="chicletimg imgContacts"></span>
 							<span>Contacts</span>
 						</a>
@@ -71,7 +97,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 				
 					<!--  activate team -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mActivate.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpActivate.xsp';">
 							<span class="chicletimg imgActivate"></span>
 							<span>Activate team</span>
 						</a>
@@ -79,7 +105,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 					
 					<!-- contacts -->	
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mContacts.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpContacts.xsp';">
 							<span class="chicletimg imgContacts"></span>
 							<span>Contacts</span>
 						</a>

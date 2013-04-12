@@ -34,11 +34,25 @@
 								<xp:attr name="maxlength" value="100"></xp:attr>
 							</xp:this.attrs></xp:inputText>
 						</li>
+						
+						<!-- asset -->
 						<li>
 							<xp:label value="#{javascript:applicationScope.labels['asset']}" id="label1" for="siteId"></xp:label>
-							<xp:comboBox id="siteId" value="#{docIncident.siteId}"
-								styleClass="xspListBox">
-								<xp:selectItems value="#{javascript:applicationScope.siteChoices}">
+							<xp:comboBox id="siteId" value="#{docIncident.siteId}" styleClass="xspListBox">
+								<xp:selectItems>
+									<xp:this.value><![CDATA[#{javascript:var assets = @DbLookup("", "vwAllByType", "fSite", 4);
+									
+									if (assets == null || typeof assets == 'undefined') {
+										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+									} else if (typeof assets == 'string' && assets.length == 0 ) {
+										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+									} else if (assets.length == 0) {
+										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+									} else {
+										assets.sort();
+									}
+									
+									return assets;}]]></xp:this.value>
 								</xp:selectItems>
 							</xp:comboBox>
 						</li>
@@ -70,7 +84,7 @@
 								
 								var options = [];
 								
-								options.push("<option value='none' selected>-none-</option>");
+								options.push("<option value='none' selected>- No scenario -</option>");
 								
 								for (var i=0; i<plans.length; i++) {
 								

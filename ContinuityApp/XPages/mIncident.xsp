@@ -40,7 +40,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 						<xp:panel id="editbutton" styleClass="editButton" tagName="li">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
-									<xp:this.value><![CDATA[#{javascript:"openDocument('mActivate.xsp?action=editDocument&documentId=" + docIncident.getDocument().getUniversalID() + "', 'contentwrapper');"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"openDocument('UnpActivate.xsp?action=editDocument&documentId=" + docIncident.getDocument().getUniversalID() + "', 'contentwrapper');"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 							<span>Edit</span>
