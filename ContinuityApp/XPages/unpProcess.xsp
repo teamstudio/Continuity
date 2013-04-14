@@ -55,32 +55,42 @@ if (!applicationScope.isReadOnlyMode) {
 			veTask = vecOpenTasks.getNextEntry();
 		}
 		
-		//ML: Update alert level of OU in org unit doc
-		var vwById = database.getView("vwAllById");
-		var docTemp = vwById.getDocumentByKey(doc.getItemValueString("orgUnitId"), true);
-		if (null != docTemp) {
-			
-			var alertLevel = "normal";
-			
-			//update alert level in OU document
-			dBar.debug("setting alert level in OU document to " + alertLevel);
-			
-			docTemp.replaceItemValue("alertLevel", alertLevel);
-			docTemp.replaceItemValue("activeScenarioId", "" );
-			docTemp.save();
-			docTemp.recycle();
-		}
-		
 		doc.replaceItemValue("status", "deactivated");
 		doc.save();
+		
+		//ML: Update alert level of OU in org unit doc
+		
+		var orgUnitId = doc.getItemValueString("orgUnitId");
+		var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
+		
+		//dBar.debug("get with: " + _unid);
+		
+		var docOU = database.getDocumentByUNID( _unid );
+		if (null != docOU) {
+			
+			var maxAlertLevel = getMaxAlertLevel( orgUnitId );
+			
+			//update alert level in OU document
+			dBar.debug("setting alert level in OU document to " + maxAlertLevel);
+			
+			docOU.replaceItemValue("alertLevel", maxAlertLevel);
+			docOU.replaceItemValue("activeScenarioId", "" );
+			docOU.save();
+			docOU.recycle();
+			
+			//ML: update alert level in session scope (if new incident was registered for current OU)
+			if (orgUnitId == sessionScope.get("orgUnitId") ) {
+				sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
+			}
+			
+		}
+		
 		
 		//ML: update number of assigned tasks
 		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 		
 		//ML: create update item for this deactivation
-		
 		var incidentDesc = doc.getItemValueString("description")
-		
 		
 		var updateText = (isRehearsal ? "Deactivated exercise " + applicationScope.labels['incident'].toLowerCase() : "Deactivated " + applicationScope.labels['incident'].toLowerCase()) + ": <b>" + incidentDesc + "</b><br />" +
 			"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +

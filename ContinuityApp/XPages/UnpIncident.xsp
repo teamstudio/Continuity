@@ -43,6 +43,12 @@ viewScope.put("numOpenTasks", numOpenTasks);
 									<xp:this.value><![CDATA[#{javascript:"openDocument('UnpActivate.xsp?action=editDocument&documentId=" + docIncident.getDocument().getUniversalID() + "', 'contentwrapper');"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
+							<xp:this.rendered><![CDATA[#{javascript://show edit link for user that registered this incident or any editor
+
+var a = docIncident.getItemValue("docAuthors"); 
+var isRegistrator = @IsMember( sessionScope.userName, a);
+
+(sessionScope.isEditor || isRegistrator) && !docIncident.getItemValueString("status").equals("deactivated")}]]></xp:this.rendered>
 							<span>Edit</span>
 						</xp:panel>
 						<xp:panel id="closebutton" styleClass="cancelButton" tagName="li">

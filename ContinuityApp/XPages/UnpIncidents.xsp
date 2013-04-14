@@ -4,6 +4,8 @@
 
 	<xp:this.beforePageLoad><![CDATA[#{javascript:setLastViewedItem(database.getView("vwIncidents"), "lastViewedIncident" );
 	sessionScope.put("numIncidents", 0);		//reset counter
+	
+	viewScope.put("totalIncidents", database.getView('vwIncidentsByCat').getEntryCount() );
 	}]]></xp:this.beforePageLoad>
 
 	
@@ -12,14 +14,14 @@
 
 			<xp:panel xp:key="contents" disableOutputTag="true">
 				<xp:div styleClass="box"
-					rendered="#{javascript:database.getView('vwIncidentsByCat').getEntryCount()==0}">
+					rendered="#{javascript:viewScope.totalIncidents == 0}">
 					<div class="content">
 						<xp:text value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
 					</div>
 				</xp:div>
 				
 				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncident.xsp"
-					position="menu-aligned" insetData="true">
+					position="menu-aligned" insetData="true" rendered="#{javascript:viewScope.totalIncidents > 0}">
 				</unp:unpAccordion>
 
 			</xp:panel>

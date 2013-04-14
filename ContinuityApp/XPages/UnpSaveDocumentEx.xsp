@@ -133,140 +133,154 @@ try{
 		var orgUnitId = doc.getItemValueString("orgUnitId");
 		var siteId = doc.getItemValueString("siteId");
 		var alertLevel = doc.getItemValueString("alertLevel");
+		var maxAlertLevel = alertLevel;
 		
 		var doSync = false;
 		
 		var vwById = database.getView("vwAllById");
-		
-		if (!applicationScope.isReadOnlyMode && isNew ) {
-		
-			if ( isTask ) {		//new task
-			
-				doSync = true;
-			
-				doc.replaceItemValue("status", "assigned" );
-				orgUnitId = sessionScope.orgUnitId
-				doc.replaceItemValue("orgUnitId", orgUnitId );
-				
-				//find incident name
-				var veTemp = vwById.getEntryByKey( doc.getItemValueString("incidentId"), true);
-				if (null != veTemp) {
-					doc.replaceItemValue("incidentName", veTemp.getColumnValues().get(1)  );
-					veTemp.recycle();
-				}
-			
-			}			
-		
-			if( orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident ) {
-				
-				//get org unit name and set alert level
-				if ( orgUnitId.length>0 ) {
-					var docTemp = vwById.getDocumentByKey(orgUnitId, true);
-					if (null != docTemp) {
-						doc.replaceItemValue("orgUnitName", docTemp.getItemValueString("name") );
-						
-						//update alert level in OU document
-						if (isIncident) {
-							dBar.debug("setting alert level in OU document to " + alertLevel);
-						
-							docTemp.replaceItemValue("alertLevel", alertLevel);
-							docTemp.replaceItemValue("activeScenarioId", scenarioId );
-							
-							docTemp.save();
-						}
-						
-						docTemp.recycle();
-					}
-				}
-				
-				//get scenario name (from current db)
-				var scenarioName = "";
-				if (scenarioId != "none") {
-					docTemp = vwById.getDocumentByKey(scenarioId, true);
-					if (null != docTemp) {
-					
-						assignTasks( doc, docTemp );
-					
-						scenarioName = docTemp.getItemValueString("name");
-						docTemp.recycle();
-					}
-				}
-				doc.replaceItemValue("scenarioName", scenarioName);
-				
-				//get site name
-				var siteName = "";
-				docTemp = vwById.getDocumentByKey(siteId, true);
-				if (null != docTemp) {
-					siteName = docTemp.getItemValueString("name");
-					docTemp.recycle();
-				}
-				doc.replaceItemValue("siteName", siteName );
-				
-				vwById.recycle();
-			}
-			
-			
-					
-		}
+		var docOU = null;
 		
 		if (!applicationScope.isReadOnlyMode) {
+		
+			if ( orgUnitId.length > 0 ) {
+			
+				//get org unit name and set/ update alert level
+				docOU = vwById.getDocumentByKey(orgUnitId, true);
+				
+				if (null != docOU) {
+					doc.replaceItemValue("orgUnitName", docOU.getItemValueString("name") );
+				}
+			}
+		
+			if ( isNew ) {
+			
+				if ( isTask ) {		//saving a new task
+				
+					doSync = true;
+				
+					doc.replaceItemValue("status", "assigned" );
+					orgUnitId = sessionScope.orgUnitId;
+					doc.replaceItemValue("orgUnitId", orgUnitId );
+					
+					//find incident name
+					var veTemp = vwById.getEntryByKey( doc.getItemValueString("incidentId"), true);
+					if (null != veTemp) {
+						doc.replaceItemValue("incidentName", veTemp.getColumnValues().get(1)  );
+						veTemp.recycle();
+					}
+				
+				}			
+			
+				if( orgUnitId.length>0 || scenarioId.length>0 || siteId.length>0 || isIncident ) {
+					
+					//get scenario name (from current db)
+					var scenarioName = "";
+					if (scenarioId != "none") {
+						docTemp = vwById.getDocumentByKey(scenarioId, true);
+						if (null != docTemp) {
+						
+							assignTasks( doc, docTemp );
+						
+							scenarioName = docTemp.getItemValueString("name");
+							docTemp.recycle();
+						}
+					}
+					doc.replaceItemValue("scenarioName", scenarioName);
+					
+					//get site name
+					var siteName = "";
+					docTemp = vwById.getDocumentByKey(siteId, true);
+					if (null != docTemp) {
+						siteName = docTemp.getItemValueString("name");
+						docTemp.recycle();
+					}
+					doc.replaceItemValue("siteName", siteName );
+					
+					vwById.recycle();
+				}
+				
+				
+						
+			}
 		
 			doc.save();
 			unid = doc.getUniversalID();
 			dBar.debug("document saved with id " +unid);
 			
+			if ( isIncident && orgUnitId.length > 0 ) {
+			
+				if (docOU == null) {
+					docOU = vwById.getDocumentByKey(orgUnitId, true);
+				}
+				
+				//update alert level in OU document
+				if ( alertLevel.equals("high") ) {
+					maxAlertLevel = "high";
+				} else {
+					maxAlertLevel = getMaxAlertLevel( sessionScope.get("orgUnitId") );
+				}
+				
+				docOU.replaceItemValue("alertLevel", maxAlertLevel);
+				docOU.replaceItemValue("activeScenarioId", scenarioId );
+				docOU.save();
+				
+				doSync = true; 
+			
+				docOU.recycle();
+				
+			}
+			
 		}
 		
 		resp = "OK";
 		
-		
-		
 		if ( !applicationScope.isReadOnlyMode ) {
 		
-		
-			if (isNew && isIncident) {
-			
-				var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
-			
+			if (isIncident) {
 				//ML: update alert level in session scope (if new incident was registered for current OU)
 				if (orgUnitId == sessionScope.get("orgUnitId") ) {
-					sessionScope.put("orgUnitAlertLevel", alertLevel);
+					sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
 				}
+		
+				if (isNew) {
 				
-				var incidentDesc = doc.getItemValueString("description");
-				
-				dBar.debug("create update");
-				//ML: create update item for new incidents
-				var updateText = (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() : applicationScope.labels['incident']) + ": <b>" + incidentDesc + "</b><br />" +
-				"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
-					"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
-					"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "<br />" +
-					"- plan: " + doc.getItemValueString("scenarioName");
-				
-				createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
-				
-				//ML: send email to all BC users in the system
-				dBar.debug("send mail to all users");
-				var vwBCUsers = database.getView("vwBCUsers");
-				var nav = vwBCUsers.createViewNav();
-				var ve = nav.getFirst();
-				while (null != ve) {
-				
-					sendMail( ve.getColumnValues().get(0) , 
-							"[continuity] " + (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() + " created" : applicationScope.labels['incident'] + " created"), 
-							sessionScope.name + " has just created an " + applicationScope.labels['incident'].toLowerCase() + " in Continuity:\r\n\r\n" +
-								applicationScope.labels['incident'] + ": " + doc.getItemValueString("description") + "\r\n\r\n" +
-				"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
-					"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
-					"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "\r\n" +
-					"- plan: " + doc.getItemValueString("scenarioName"),
-							sessionScope.email, sessionScope.name);
-				
-					ve = nav.getNext();
+					var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
+
+					var incidentDesc = doc.getItemValueString("description");
+					
+					dBar.debug("create update");
+					//ML: create update item for new incidents
+					var updateText = (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() : applicationScope.labels['incident']) + ": <b>" + incidentDesc + "</b><br />" +
+					"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
+						"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
+						"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "<br />" +
+						"- plan: " + doc.getItemValueString("scenarioName");
+					
+					createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
+					
+					//ML: send email to all BC users in the system
+					dBar.debug("send mail to all users");
+					var vwBCUsers = database.getView("vwBCUsers");
+					var nav = vwBCUsers.createViewNav();
+					var ve = nav.getFirst();
+					while (null != ve) {
+					
+						sendMail( ve.getColumnValues().get(0) , 
+								"[continuity] " + (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() + " created" : applicationScope.labels['incident'] + " created"), 
+								sessionScope.name + " has just created an " + applicationScope.labels['incident'].toLowerCase() + " in Continuity:\r\n\r\n" +
+									applicationScope.labels['incident'] + ": " + doc.getItemValueString("description") + "\r\n\r\n" +
+					"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
+						"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
+						"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "\r\n" +
+						"- plan: " + doc.getItemValueString("scenarioName"),
+								sessionScope.email, sessionScope.name);
+					
+						ve = nav.getNext();
+					}
+					
+					//force sync (for update)
+					doSync = true;
 				}
-				
-				//force sync (for update)
-				doSync = true;
 			}
 		
 			if (doc.getItemValueString("form")=="fMessage") {

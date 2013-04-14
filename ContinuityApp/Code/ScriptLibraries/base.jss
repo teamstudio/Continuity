@@ -128,13 +128,13 @@ function init() {
 				//profile photo
 				sessionScope.put("profilePhotoUrl", getProfilePhotoUrl(currentUser) );
 				
-				//get org unit alert level
+				//get org unit's alert level
 				var orgUnitId = sessionScope.get("orgUnitId");
 				if (orgUnitId.length>0) {
-				
-					var vwOrgUnits = database.getView("vwAllById");
-					var docOrgUnit = vwOrgUnits.getDocumentByKey( orgUnitId, true);
-				
+					
+					var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
+					var docOrgUnit = database.getDocumentByUNID( _unid );
+					
 					if (docOrgUnit != null) {
 						sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 					}
@@ -311,8 +311,9 @@ function loadAppConfig( forceUpdate:boolean ) {
 			var vecOrgUnits:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fOrgUnit", true);
 			var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
 		
-			var orgUnitChoices = [];
-			var orgUnits = getMap();
+			var orgUnitChoices = [];				//array containing all org units in 'combobox select options' syntax (key|value)
+			var orgUnits = getMap();				//map of org unit id / names
+			var orgUnitUnids = getMap();			//map of org unit id / unids
 						
 			while (null != veOrgUnit) {
 				
@@ -320,10 +321,12 @@ function loadAppConfig( forceUpdate:boolean ) {
 				
 				var id = colValues.get(1);
 				var name = colValues.get(2);
+				var unid = veOrgUnit.getUniversalID();
 				
 				orgUnitChoices.push( colValues.get(3) );
 				
 				orgUnits[id] = name;
+				orgUnitUnids[id] = unid;
 				
 				veTemp = vecOrgUnits.getNextEntry();
 				veOrgUnit.recycle();
@@ -334,6 +337,9 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			applicationScope.put("orgUnitChoices", orgUnitChoices);
 			applicationScope.put("orgUnits", orgUnits);
+			applicationScope.put("orgUnitUnids", orgUnitUnids);
+			
+			
 			
 		} else {
 			
@@ -345,6 +351,45 @@ function loadAppConfig( forceUpdate:boolean ) {
 		dBar.error( e.toString() );
 	}
 	
+}
+
+//returns the maximum alert level based on all open incidents
+function getMaxAlertLevel( orgUnitId ) {
+	
+	dBar.debug("get max alert level");
+	
+	//get all open incidents for the current OU
+	var vwIncidents = database.getView("vwIncidentsOpen");
+	var vec = vwIncidents.getAllEntriesByKey( orgUnitId, true);
+	
+	//determine highest level
+	var highest = "normal";
+	var ve = vec.getFirstEntry();
+	while (null != ve) {
+		
+		//options: normal, elevated, hight
+		var alertLevel = ve.getColumnValues().get(5);
+		
+		if ( highest.equals("normal") && (alertLevel.equals("elevated") || alertLevel.equals("high") ) ) {
+			dBar.debug("found one with " + alertLevel);
+			highest = alertLevel;
+		} else if ( highest.equals("elevated") && alertLevel.equals("high") ) {
+			dBar.debug("found one with " + alertLevel);
+			highest = alertLevel;
+		}
+		
+		if (highest.equals("high")) {		//stop processing if high is the highest
+			dBar.debug("return high")
+			return highest;
+		}
+		
+		ve = vec.getNextEntry();
+	}
+	
+	
+	dBar.debug("return: " + highest);
+	return highest
+
 }
 
 //sets the last viewed document for the current user (used to display number of new items on the dashboard)
