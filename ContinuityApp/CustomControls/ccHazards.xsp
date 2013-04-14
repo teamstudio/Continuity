@@ -2,6 +2,9 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:var lu = database.getView("vwHazards").getColumnValues(0);
+	viewScope.put("hazardTypes", @Trim(@Unique( lu )));}]]></xp:this.beforeRenderResponse>
+	
 	<xe:dynamicContent id="dynContentHazards" defaultFacet="hazardsList">
 	<xp:this.facets>
 	
@@ -44,7 +47,7 @@
 					
 					<xp:td>
 						<xp:text escape="true" id="computedField1"
-							tagName="h4" value="#{rowEntry.type}">
+							tagName="h4" value="#{javascript:(rowEntry.getColumnValue('type')==null || rowEntry.getColumnValue('type').length==0 ? '- No type specified -' : rowEntry.getColumnValue('type'))}">
 						</xp:text>
 					</xp:td>
 				</xp:tr>
@@ -115,6 +118,10 @@
 				
 				docHazard.replaceItemValue("id", "h" + doc.getUniversalID().toLowerCase() );
 			}
+			
+			if ( viewScope.get("hazardTypes").length == 0 || docHazard.getItemValueString("type").equals("new") ) {
+				docHazard.replaceItemValue("type", getComponent("inputTypeNew").getValue() );
+			}	
 											
 			docHazard.save();
 			
@@ -160,34 +167,48 @@
 						<xp:validateRequired message="Enter a name"></xp:validateRequired>
 					</xp:this.validators></xp:inputTextarea>
 				</xe:formRow>
-		
-				<xe:formRow id="formRow1" label="Hazard type:" for="inputType">
-					<xp:inputText value="#{docHazard.type}" id="inputType" style="width: 300px">
-					<xp:typeAhead mode="partial" minChars="1" ignoreCase="true" var="lupkey"
-						valueMarkup="true">
-						<xp:this.valueList><![CDATA[#{javascript://unique, sorted list of hazard types
-						var values = database.getView("vwHazards").getColumnValues(0);
-						var un = new java.util.ArrayList( new java.util.HashSet(values) );
-						var it = un.iterator();
+				
+				<xe:formRow id="formRow1" label="Hazard type:" for="comboBox1">
+				
+					<xp:div id="hazardType">
+						<xp:comboBox style="margin-right:5px" id="comboBox1" value="#{docHazard.type}">
+							<xp:this.rendererType><![CDATA[${javascript:var cb:com.ibm.xsp.component.xp.XspSelectOneMenu = getComponent("comboBox1");
+cb.isReadonly() ? "com.teamstudio.renderers.SelectOneType" : cb.getRendererType();}]]></xp:this.rendererType>
 						
-						var r = [];
-						while (it.hasNext() ) {
-							 
-							var i = it.next();
-							if (i.toLowerCase().startsWith( lupkey.toLowerCase() ) ) {
-								r.push(i);
-							}
-						}
 						
-		
-		"<ul><li>" + @Implode( r, "</li><li>") + "</li></ul>"}]]></xp:this.valueList>
-					</xp:typeAhead></xp:inputText>
+							<xp:this.defaultValue><![CDATA[#{javascript:return ( viewScope.get("hazardTypes").length == 0 ? "new" : "")}]]></xp:this.defaultValue>
+							<xp:this.rendered><![CDATA[#{javascript:viewScope.get("hazardTypes").length > 0}]]></xp:this.rendered>
+							<xp:selectItems>
+								<xp:this.value><![CDATA[#{javascript://unique, sorted list of hazard types
+	var r = ["- Select a hazard type -|"];
+	var o = viewScope.get("hazardTypes") || [];
+	
+	if (typeof o == 'string') { o = [o]; }
+	
+	for (var i=0; i<o.length; i++) {
+		r.push( o[i] + "|" + o[i]);
+	}
+	
+	r.push("New type:|new");
+			
+		r}]]></xp:this.value>
+							</xp:selectItems>
+							<xp:eventHandler event="onchange" submit="true" refreshMode="partial"
+								refreshId="hazardType" execMode="partial" execId="hazardType" disableValidators="true">
+							</xp:eventHandler>
+						</xp:comboBox>
+						<xp:inputText id="inputTypeNew" style="width: 200px">
+							<xp:this.rendered><![CDATA[#{javascript:var c = getComponent('comboBox1').getValue()
+'new'.equals(c) && docHazard.isEditable()}]]></xp:this.rendered>
+						</xp:inputText>
+					</xp:div>
+					
 				</xe:formRow>
 		
 			</xe:formTable>
 		</xp:panel>
 	
 	</xp:this.facets>
-	</xe:dynamicContent>
+	x</xe:dynamicContent>
 
 </xp:view>

@@ -190,7 +190,7 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccHelp xp:key="miniConfigGuide" helpTextId="miniConfigGuide">
 
 						</xc:ccHelp>
-						<xc:ccStarterLists xp:key="exampleLists"></xc:ccStarterLists>
+						<xc:ccExampleLists xp:key="exampleLists"></xc:ccExampleLists>
 						
 						<xp:panel xp:key="scenariosList" id="scenariosList">
 	

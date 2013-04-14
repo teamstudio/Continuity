@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config>
+  <render-kit>
+    <renderer>
+      <component-family>javax.faces.SelectOne</component-family>
+      <renderer-type>com.teamstudio.renderers.SelectOneType</renderer-type>
+      <renderer-class>com.teamstudio.renderers.SelectOne</renderer-class>
+    </renderer>
+  </render-kit>
   <managed-bean id="dBar">
     <managed-bean-name>dBar</managed-bean-name>
     <managed-bean-class>eu.linqed.debugtoolbar.DebugToolbar
