@@ -22,7 +22,7 @@
 				</div>
 			</xp:div>
 	
-			<xc:mTasksList viewName="vwTasksByRespId">
+			<xc:mTasksList showAssignedTo="false" allowMarkComplete="false" viewName="vwTasksByRespId">
 				<xc:this.categoryFilter><![CDATA[#{javascript:param.get("respId")}]]></xc:this.categoryFilter>
 				<xc:this.parentUrl><![CDATA[#{javascript:"mRoleTasks.xsp?respId=" + param.get("respId")}]]></xc:this.parentUrl>
 			</xc:mTasksList>

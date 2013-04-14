@@ -184,7 +184,7 @@ var isRegistrator = @IsMember( sessionScope.userName, a);
 					<!-- deactivate button -->
 					<xp:div>
 						<ul class="buttons">
-							<li class="buttonBlue">
+							<li class="buttonRed">
 								<xp:link escape="true" value="#" text="" id="link3">
 									<xp:this.attrs>
 										<xp:attr name="onclick">
@@ -207,7 +207,7 @@ var isRegistrator = @IsMember( sessionScope.userName, a);
 
 				<div class="mTop">
 
-					<xc:mTasksList showStatus="true" viewName="vwTasksByIncident">
+					<xc:mTasksList showAssignedTo="true" allowMarkComplete="false" showStatus="true" viewName="vwTasksByIncident">
 						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
 						<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncident.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:mTasksList>

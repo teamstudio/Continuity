@@ -114,7 +114,7 @@
 
 if (applicationScope.isReadOnlyMode) {
 	out += "alert('Continuity is running in read only mode.\\n\\nThis task won\\'t be saved.');";
-	out += "$.blockUI(); loadPageEx('" + getDbPath() + "/mTasks.xsp', 'contentwrapper', 0, true, true);";
+	out += "$.blockUI(); loadPageEx('" + getDbPath() + "/UnpTasks.xsp', 'contentwrapper', 0, true, true);";
 } else {
 	out += "saveDocument('" + getClientId("customform") + "', '" + docTask.getDocument().getUniversalID() + "', 'back', 'fTask'";
 			if (context.getUrlParameter("parentunid") != ""){

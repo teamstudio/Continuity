@@ -68,17 +68,20 @@ for (var i=0; i<list.length; i++ ) {
 
 viewScope.categorycount = list.length;
 return list;}]]></xp:this.value>
-				<xp:panel tagName="li" styleClass="categoryRow">
+				<xp:panel tagName="li" styleClass="categoryrow">
 					<xp:this.attrs>
 						<xp:attr name="onClick">
 							<xp:this.value><![CDATA[#{javascript:"fetchDetails(this,'" + @ReplaceSubstring(compositeData.viewName, "\\","\\\\") + "','" + rowData + "', '" + compositeData.xpage + "', '" + compositeData.dbName + "')"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
+
 					<!-- ML: set escape to false to not show html comments used for category ordering -->
-					<xp:text escape="false" id="computedField2"
-						value="#{rowData}" styleClass="catLabel">
+					<xp:text escape="false" id="computedField2" value="#{rowData}"
+						styleClass="catLabel">
 					</xp:text>
+
 				</xp:panel>
+
 				<div class="summaryDataRow">
 					<xp:panel tagName="ul"
 						style="padding:0px; margin: 0px;">
@@ -110,4 +113,16 @@ return out;}]]></xp:this.styleClass>
 			</xp:repeat>
 		</ul>
 	</xp:panel>
+
+	<xp:scriptBlock id="scriptBlock1">
+
+		<xp:this.value><![CDATA[//load live cat
+		
+		
+var _li = $('#summaryList li:first');
+if( _li.text() == 'Live incidents') { 
+	_li.click();
+}]]></xp:this.value>
+	</xp:scriptBlock>
+
 </xp:view>

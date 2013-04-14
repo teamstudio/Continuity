@@ -22,6 +22,8 @@
 	
 	viewScope.put("hasTasks", (numTaskCats > 0) );
 	
+	viewScope.put("todoLabel", (compositeData.viewName == "vwTasksByIncident" ? "To do: all team members" : "To do: " + sessionScope.name ) );
+	
 	}]]>
 	</xp:this.beforePageLoad>
 
@@ -47,7 +49,13 @@
 		isSecCat = true;
 	}
 	
-viewScope.put("cat", (isEmpty(c) ? "?" : c) );
+	catLabel = (isEmpty(c) ? "?" : c);
+	
+	if (catLabel == "<!--1-->To do") {
+		catLabel = viewScope.todoLabel;
+	}
+	 
+viewScope.put("cat", catLabel );
 	
 "categoryRowFixed" + (isSecCat ? " catGrey" : "")}]]></xp:this.styleClass>
 					
@@ -63,9 +71,9 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 					
 				
 					<xp:div id="markDone" styleClass="pull-right">
-						<xp:this.rendered><![CDATA[#{javascript:( !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
+						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 8px; margin-top: 3px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
-						
+
 						<xp:link id="cb" styleClass="unp-icon unp-checkbox-off">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
@@ -79,9 +87,9 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 							&#160;
 						</xp:link>
 					</xp:div>
-				
+
 					<xp:div id="markUndone" styleClass="pull-right">
-						<xp:this.rendered><![CDATA[#{javascript:( !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
+						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 8px; margin-top: 3px; display:" + (row.getColumnValue('status').equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 					
 						<xp:link id="span1" styleClass="unp-icon unp-checkbox-on">	
@@ -98,7 +106,7 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 						
 					</xp:div>
 							
-					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0) || (row.getColumnValue('quickGuideIds').length > 0)}" 
+					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0) || (row.getColumnValue('quickGuideIds').length > 0) || compositeData.showAssignedTo == 'true'}" 
 						url="/unp/arrow-down.png"
 						id="image1"	
 						styleClass="multilineIcon"
@@ -114,7 +122,14 @@ viewScope.put("cat", (isEmpty(c) ? "?" : c) );
 						<!-- description -->
 						<xp:text tagName="div" value="#{row.description}" escape="false" style="margin-right: 25px; line-height:normal;" 
 							rendered="#{javascript:(row.getColumnValue('description').length > 0)}" />
-							
+
+						<xp:text tagName="div" escape="false" style="margin: 5px 0">
+							<xp:this.rendered><![CDATA[#{javascript:compositeData.showAssignedTo == "true"}]]></xp:this.rendered>
+							<xp:this.value><![CDATA[#{javascript:var r = row.getColumnValue('roleNames')
+
+'<b>Assigned to:</b> ' + (typeof r == 'string' ? r : @Implode(r, ", "))}]]></xp:this.value>
+						</xp:text>
+
 						<!-- quick Guide link -->
 						<xp:div styleClass="buttons" style="margin-top: 5px;" rendered="#{javascript:(row.getColumnValue('quickGuideIds').length > 0)}">
 							<xp:link text="Guide" id="btnGuide" style="width: 80px">

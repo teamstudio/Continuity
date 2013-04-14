@@ -40,7 +40,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 						<xp:panel id="panel2" styleClass="cancelButton" tagName="li">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
-									<xp:this.value><![CDATA[#{javascript:"loadPageEx('mTasks.xsp?activeOnly=1', 'contentwrapper', 'tasks', true, true);"}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:"loadPageEx('UnpTasks.xsp?activeOnly=1', 'contentwrapper', 'tasks', true, true);"}]]></xp:this.value>
 								</xp:attr>
 							</xp:this.attrs>
 							<span>Close</span>
@@ -50,8 +50,9 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 				<div class="mTop">
 
-					<xc:mTasksList showStatus="true" viewName="vwTasksByIncident">
-						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
+					<xc:mTasksList showAssignedTo="false" allowMarkComplete="true" showStatus="true"
+						viewName="vwTasksByIncidentByRole">
+						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id") + sessionScope.get('roleId')}]]></xc:this.categoryFilter>
 						<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncidentTasks.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:mTasksList>
 

@@ -2167,7 +2167,16 @@ ul.buttons > li.buttonBlue span:hover {
 	border: 1px solid #2655B5;	
 	background: -webkit-linear-gradient(#2655B5,#2A5FC9);
 }
+ul.buttons > li.buttonRed span {
+	border: 1px solid #661111;
+	background: -webkit-linear-gradient(#a82e2e,#661111);
+	margin-right: 6px;
+}
 
+ul.buttons > li.buttonRed span:hover {	
+	border: 1px solid #661111;
+	background: -webkit-linear-gradient(#661111,#a82e2e);
+}
 
 ul.btnInline {
 	list-style: 0;

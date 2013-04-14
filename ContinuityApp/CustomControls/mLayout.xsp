@@ -101,7 +101,7 @@
 
 					<xc:menuItem
 						itemId="tasks" disabled="#{javascript:sessionScope.numAssignedTasks==0}"
-						label="Active tasks" page="/mTasks.xsp?activeOnly=1" icon="tasks.png"
+						label="Active tasks" page="/UnpTasks.xsp?activeOnly=1" icon="tasks.png"
 						ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper">
 					</xc:menuItem>
 					

@@ -95,7 +95,7 @@
 
 				--><!-- list of tasks -->
 				<div class="mTop">
-					<xc:mTasksList viewName="vwTasksByParentByTaskCat"
+					<xc:mTasksList showAssignedTo="false" allowMarkComplete="false" viewName="vwTasksByParentByTaskCat"
 						categoryFilter="#{javascript:docScenario.getItemValueString('id')}">
 						<xc:this.parentUrl><![CDATA[#{javascript:"mPlan.xsp?id=" + param.get('id')}]]></xc:this.parentUrl>
 					</xc:mTasksList>

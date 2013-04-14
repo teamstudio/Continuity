@@ -312,6 +312,16 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		//lazy load images
 		//$("img.lazy").lazyload({ threshold : 5 });
 		
+		if (url.indexOf('UnpTasks.xsp')>-1 || url.indexOf('UnpIncidents.xsp') > -1 ) {
+			
+			//load live cat
+			var _li = $('#summaryList li:first');
+			if( _li.text() == 'Live incidents') { 
+				_li.click();
+			}
+			
+		}
+		
 		return false;
 	});
 	

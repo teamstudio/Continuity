@@ -155,7 +155,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 						</a>
 					</xp:text>
 					<xp:text tagName="li" rendered="#{javascript:sessionScope.numAssignedTasks>0}">
-						<a href="#" onclick="$.blockUI();window.location.href='mTasks.xsp?activeOnly=1';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpTasks.xsp?activeOnly=1';">
 							<xp:text escape="true" styleClass="badge" id="computedField4">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numAssignedTasks}]]></xp:this.value>
 								<xp:this.converter>
