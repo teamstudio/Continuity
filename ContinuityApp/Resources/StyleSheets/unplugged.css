@@ -2269,3 +2269,27 @@ span.high {
 .tundra .dijitTextBox .dijitArrowButtonInner {
 	background-color: transparent !important;
 }
+
+
+.unp-icon {
+	height: 20px;
+	width: 20px;
+	background: #eee;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.4);
+	box-shadow: 0 1px 0 rgba(255,255,255,.4);
+	display: block;
+}
+.unp-checkbox-off {
+	background-color: #e2e2e2;
+	height: 18px;
+	width: 18px;
+	border: 1px solid #bbb;
+}
+.unp-checkbox-on {
+	background: url(tick_20@2x.png);
+	background-size: 20px 20px;
+	background-color: #67b800;
+	background-repeat: no-repeat;
+}

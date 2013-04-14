@@ -59,11 +59,8 @@ if (!applicationScope.isReadOnlyMode) {
 		doc.save();
 		
 		//ML: Update alert level of OU in org unit doc
-		
 		var orgUnitId = doc.getItemValueString("orgUnitId");
 		var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
-		
-		//dBar.debug("get with: " + _unid);
 		
 		var docOU = database.getDocumentByUNID( _unid );
 		if (null != docOU) {
