@@ -127,13 +127,12 @@ viewScope.put("cat", catLabel );
 							<xp:this.rendered><![CDATA[#{javascript:compositeData.showAssignedTo == "true"}]]></xp:this.rendered>
 							<xp:this.value><![CDATA[#{javascript:var r = row.getColumnValue('roleNames');
 							
-							var lbl = '<b>Assigned to:</b> ';
-							
-							if (typeof r == 'string') {
-								return lbl + r;
+							if (r == null || r.length == 0) {
+								return "<b>Assigned to:</b> not assigned";
 							} else {
-								return lbl + @Implode(r, ", ");
-							}}]]></xp:this.value>
+								return "<b>Assigned to:</b> " + r;
+							}
+							}]]></xp:this.value>
 						</xp:text>
 
 						<!-- quick Guide link -->
