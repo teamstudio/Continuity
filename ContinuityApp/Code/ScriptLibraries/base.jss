@@ -58,7 +58,7 @@ function init() {
 				
 			}
 			
-			dBar.debug("editor? " + isEditor + ", user? " + isUser + "");
+			//dBar.debug("editor? " + isEditor + ", user? " + isUser + "");
 			
 			sessionScope.put("isEditor", isEditor);
 			sessionScope.put("isUser", isUser);
@@ -356,7 +356,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 //returns the maximum alert level based on all open incidents
 function getMaxAlertLevel( orgUnitId ) {
 	
-	dBar.debug("get max alert level");
+	//dBar.debug("get max alert level");
 	
 	//get all open incidents for the current OU
 	var vwIncidents = database.getView("vwIncidentsOpen");
@@ -371,15 +371,15 @@ function getMaxAlertLevel( orgUnitId ) {
 		var alertLevel = ve.getColumnValues().get(5);
 		
 		if ( highest.equals("normal") && (alertLevel.equals("elevated") || alertLevel.equals("high") ) ) {
-			dBar.debug("found one with " + alertLevel);
+			//dBar.debug("found one with " + alertLevel);
 			highest = alertLevel;
 		} else if ( highest.equals("elevated") && alertLevel.equals("high") ) {
-			dBar.debug("found one with " + alertLevel);
+			//dBar.debug("found one with " + alertLevel);
 			highest = alertLevel;
 		}
 		
 		if (highest.equals("high")) {		//stop processing if high is the highest
-			dBar.debug("return high")
+			//dBar.debug("return high")
 			return highest;
 		}
 		
@@ -387,7 +387,7 @@ function getMaxAlertLevel( orgUnitId ) {
 	}
 	
 	
-	dBar.debug("return: " + highest);
+	//dBar.debug("return: " + highest);
 	return highest
 
 }

@@ -80,6 +80,8 @@ public class Unplugged {
 				docApp.replaceItemValue("form", "UserDatabase");
 				docApp.replaceItemValue("Path", correctedPath );
 				
+				docApp.replaceItemValue("ReplAttachmentExts", "");		//send all attachments
+				
 			} else {
 				
 				//update existing app document
