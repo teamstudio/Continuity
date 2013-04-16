@@ -57,7 +57,7 @@
 									</xp:image>
 									<xp:label id="label2"
 										value="#{javascript:thisRowData.getColumnValue('name');}"
-										styleClass="viewlistsummary wrap">
+										styleClass="viewlistsummary two-lines">
 									</xp:label>
 									<div>
 										<xp:label id="label1"

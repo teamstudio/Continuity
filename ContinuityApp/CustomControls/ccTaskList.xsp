@@ -136,10 +136,6 @@ row.getColumnValues().get(0).indexOf("- ") == -1}]]></xp:this.rendered>
 			
 				</xp:div>
 				
-				
-				
-				
-
 				<!-- description -->
 				<xp:div id="rowDetails"
 					style="display:none; margin-top:5px; margin-bottom:5px;">

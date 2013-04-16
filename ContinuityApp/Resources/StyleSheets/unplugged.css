@@ -637,6 +637,14 @@ body {
 	white-space: nowrap;
 }
 
+.two-lines {
+	display: -webkit-box; 
+	-webkit-line-clamp: 2;	/*num lines*/
+	-webkit-box-orient: vertical;
+	white-space: normal;
+	line-height: 22px;
+}
+
 .viewlistdetail {
 	font-weight: normal;
 	min-width: 100px;

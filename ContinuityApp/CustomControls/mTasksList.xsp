@@ -62,7 +62,7 @@ viewScope.put("cat", catLabel );
 					<xp:this.value><![CDATA[#{javascript:viewScope.cat}]]></xp:this.value>
 				</xp:text>
 
-				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row">
+				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row" style="padding: 10px">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
 							<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("taskDetails") + "'); event.stopPropagation();"}]]></xp:this.value>
@@ -72,7 +72,7 @@ viewScope.put("cat", catLabel );
 				
 					<xp:div id="markDone" styleClass="pull-right">
 						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
-						<xp:this.style><![CDATA[#{javascript:"margin-left: 8px; margin-top: 3px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
+						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 
 						<xp:link id="cb" styleClass="unp-icon unp-checkbox-off">
 							<xp:this.attrs>
@@ -90,7 +90,7 @@ viewScope.put("cat", catLabel );
 
 					<xp:div id="markUndone" styleClass="pull-right">
 						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
-						<xp:this.style><![CDATA[#{javascript:"margin-left: 8px; margin-top: 3px; display:" + (row.getColumnValue('status').equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
+						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 					
 						<xp:link id="span1" styleClass="unp-icon unp-checkbox-on">	
 							<xp:this.attrs>
@@ -110,20 +110,20 @@ viewScope.put("cat", catLabel );
 						url="/unp/arrow-down.png"
 						id="image1"	
 						styleClass="multilineIcon"
-						style="margin-top:7px;"></xp:image>
+						style="float: left; margin-top:7px;"></xp:image>
 
 					<!-- name -->
-					<xp:label id="label2" styleClass="viewlistsummary">
+					<xp:label id="label2" styleClass="viewlistsummary two-lines" style="margin-left: 24px">
 						<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
 					</xp:label>
 					
-					<xp:div id="taskDetails" style="display:none;">
+					<xp:div id="taskDetails" style="display:none; margin-left: 24px">
 
 						<!-- description -->
-						<xp:text tagName="div" value="#{row.description}" escape="false" style="margin-right: 25px; line-height:normal;" 
+						<xp:text tagName="div" value="#{row.description}" escape="false" style="line-height:normal" 
 							rendered="#{javascript:(row.getColumnValue('description').length > 0)}" />
 
-						<xp:text tagName="div" escape="false" style="margin: 5px 0">
+						<xp:text tagName="div" escape="false" style="margin: 5px 0; line-height: normal;">
 							<xp:this.rendered><![CDATA[#{javascript:compositeData.showAssignedTo == "true"}]]></xp:this.rendered>
 							<xp:this.value><![CDATA[#{javascript:var r = row.getColumnValue('roleNames');
 							

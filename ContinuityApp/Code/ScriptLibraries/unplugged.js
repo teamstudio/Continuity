@@ -587,6 +587,9 @@ function showListDetails(id) {
 //mark a task as done (from the tasks page), remove the button on completion
 function markDone(doneId, undoneId, id) {
 	
+	x$(doneId).hide();
+	x$(undoneId).show();
+	
 	$.ajax( {
 		type : 'GET',
 		url : "unpProcess.xsp?type=task&to=done&id=" + id,
@@ -595,12 +598,11 @@ function markDone(doneId, undoneId, id) {
 	function(response) {
 		
 		try {
-			
 			if (response.indexOf("error")>-1) {
+				x$(doneId).show();
+				x$(undoneId).hide();
 				alert(response);
-			} else 	{	
-				x$(doneId).hide();
-				x$(undoneId).show();
+				
 			}
 		} catch (e) {
 			console.log(e);
@@ -613,6 +615,9 @@ function markDone(doneId, undoneId, id) {
 //mark a task as undone (from the tasks page), remove the button on completion
 function markUndone(doneId, undoneId, id) {
 	
+	x$(doneId).show();
+	x$(undoneId).hide();
+	
 	$.ajax( {
 		type : 'GET',
 		url : "unpProcess.xsp?type=task&to=undone&id=" + id,
@@ -622,10 +627,9 @@ function markUndone(doneId, undoneId, id) {
 		
 		try {
 			if (response.indexOf("error")>-1) {
+				x$(doneId).hide();
+				x$(undoneId).show();
 				alert(response);
-			} else 	{	
-				x$(doneId).show();
-				x$(undoneId).hide();
 			}
 		} catch (e) {
 			console.log(e);
