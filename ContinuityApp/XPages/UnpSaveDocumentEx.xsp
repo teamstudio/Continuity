@@ -204,6 +204,7 @@ try{
 			}
 		
 			doc.save();
+			
 			unid = doc.getUniversalID();
 			dBar.debug("document saved with id " +unid);
 			
@@ -227,6 +228,8 @@ try{
 				doSync = true; 
 			
 				docOU.recycle();
+				
+				dBar.debug("ou level set to " + alertLevel);
 				
 			}
 			

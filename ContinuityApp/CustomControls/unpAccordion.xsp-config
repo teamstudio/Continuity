@@ -97,5 +97,15 @@ menu-aligned</editor-parameter>
       <small-icon>/icons/defaultLogoSmall.png</small-icon>
       <large-icon>/icons/defaultLogo.png</large-icon>
     </icon>
+    <property>
+      <property-name>showNumOpenTasks</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.std.Boolean</editor>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

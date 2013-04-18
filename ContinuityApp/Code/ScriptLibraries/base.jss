@@ -173,6 +173,8 @@ function getMap() {
 //get number of open tasks, assigned to the current user (based on bc role)
 function getNumAssignedTasks(orgUnitId, roleId) {
 	
+	//dBar.debug("get num assigned...")
+	
 	var numAssignedTasks = 0;
 	
 	try {
@@ -183,14 +185,41 @@ function getNumAssignedTasks(orgUnitId, roleId) {
 		var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
 		numAssignedTasks = vec.getCount();
 		
-		//dBar.debug("found " + numAssignedTasks + " assigned tasks for ou " + orgUnitId + " and role " + roleName);
+		//dBar.debug("found " + numAssignedTasks + " assigned tasks for ou " + orgUnitId + " and role " + roleId);
 		
 	} catch (e) {
 		dBar.error(e);	
 	}
 	
 	return numAssignedTasks;
+	
 }
+
+/*
+function getNumOpenTasks( vwTarget, incidentId, orgUnitId, roleId ) {
+	
+	var numOpenTasks = 0;
+	
+	try {
+	
+		var key = [];
+		key.push( incidentId );
+		key.push( orgUnitId + "-" + roleId);
+		
+		var vec = vwTarget.getAllEntriesByKey(key, true);
+		numOpenTasks = vec.getCount();
+		
+	} catch (e) {
+		
+		dBar.error(e);
+		
+	}
+	
+	return numOpenTasks;
+	
+}
+*/
+
 
 //load application config (if needed)
 function loadAppConfig( forceUpdate:boolean ) {
@@ -356,36 +385,44 @@ function loadAppConfig( forceUpdate:boolean ) {
 //returns the maximum alert level based on all open incidents
 function getMaxAlertLevel( orgUnitId ) {
 	
-	//dBar.debug("get max alert level");
-	
-	//get all open incidents for the current OU
-	var vwIncidents = database.getView("vwIncidentsOpen");
-	var vec = vwIncidents.getAllEntriesByKey( orgUnitId, true);
-	
-	//determine highest level
 	var highest = "normal";
-	var ve = vec.getFirstEntry();
-	while (null != ve) {
-		
-		//options: normal, elevated, hight
-		var alertLevel = ve.getColumnValues().get(5);
-		
-		if ( highest.equals("normal") && (alertLevel.equals("elevated") || alertLevel.equals("high") ) ) {
-			//dBar.debug("found one with " + alertLevel);
-			highest = alertLevel;
-		} else if ( highest.equals("elevated") && alertLevel.equals("high") ) {
-			//dBar.debug("found one with " + alertLevel);
-			highest = alertLevel;
-		}
-		
-		if (highest.equals("high")) {		//stop processing if high is the highest
-			//dBar.debug("return high")
-			return highest;
-		}
-		
-		ve = vec.getNextEntry();
-	}
 	
+	try {
+		//dBar.debug("get max alert level");
+		
+		//get all open incidents for the current OU
+		var vwIncidents = database.getView("vwIncidentsOpen");
+		var vec = vwIncidents.getAllEntriesByKey( orgUnitId, true);
+		
+		//determine highest level
+		
+		var ve = vec.getFirstEntry();
+		while (null != ve) {
+			
+			//options: normal, elevated, hight
+			var alertLevel = ve.getColumnValues().get(5);
+			
+			if ( highest.equals("normal") && (alertLevel.equals("elevated") || alertLevel.equals("high") ) ) {
+				//dBar.debug("found one with " + alertLevel);
+				highest = alertLevel;
+			} else if ( highest.equals("elevated") && alertLevel.equals("high") ) {
+				//dBar.debug("found one with " + alertLevel);
+				highest = alertLevel;
+			}
+			
+			if (highest.equals("high")) {		//stop processing if high is the highest
+				//dBar.debug("return high")
+				return highest;
+			}
+			
+			ve = vec.getNextEntry();
+		}
+	
+	} catch (e) {
+		
+		dBar.error("error while calculating max alert level:");
+		dBar.error(e);
+	}
 	
 	//dBar.debug("return: " + highest);
 	return highest

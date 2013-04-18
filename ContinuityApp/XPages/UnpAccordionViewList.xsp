@@ -54,6 +54,11 @@ if (start == ""){
 					<xp:this.value><![CDATA[#{javascript:thisRowData.getColumnValues()[1];}]]></xp:this.value>
 				</xp:label>
 				
+				<!-- placeholder for incident count per user -->
+				<xp:text escape="false" disableTheme="true">
+					<xp:this.value><![CDATA[#{javascript:"<span id=\"count-" + thisRowData.getColumnValues()[8] + "\" />"}]]></xp:this.value>
+				</xp:text>
+				
 				<!-- text -->
 				<xp:text tagName="div" id="detail" styleClass="viewlistdetail">
 					<xp:this.rendered><![CDATA[#{javascript:thisRowData.getColumnValues().length > 2 && thisRowData.getColumnValues()[2].indexOf("d/") == -1}]]></xp:this.rendered>

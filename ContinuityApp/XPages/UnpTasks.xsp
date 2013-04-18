@@ -15,7 +15,7 @@
 				</xp:div>
 
 				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncidentTasks.xsp"
-					position="menu-aligned" insetData="true">
+					position="menu-aligned" insetData="true" showNumOpenTasks="true">
 				</unp:unpAccordion>
 
 			</xp:panel>

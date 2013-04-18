@@ -21,7 +21,7 @@
 				</xp:div>
 				
 				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncident.xsp"
-					position="menu-aligned" insetData="true" rendered="#{javascript:viewScope.totalIncidents > 0}">
+					position="menu-aligned" insetData="true" rendered="#{javascript:viewScope.totalIncidents > 0}" showNumOpenTasks="false">
 				</unp:unpAccordion>
 
 			</xp:panel>
