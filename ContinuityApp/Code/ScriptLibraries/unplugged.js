@@ -28,7 +28,8 @@ $(window).load( function() {
 	} catch (e) {
 	}
 	
-	new NoClickDelay( document.getElementById('header') );
+	//new NoClickDelay( document.getElementById('header') );
+	//disabled because of problems with menu sliding in/out directly
 	new NoClickDelay( document.getElementById('menu') );
 	new NoClickDelay( document.getElementById('footer') );
 	
@@ -703,6 +704,17 @@ function syncAllDbs(){
 	});
 	
 	$.get("UnpSyncAll.xsp", syncFunc);
+}
+
+function getOpenTasksCount() {
+	
+	//call ajax page that returns all open tasks counts in JSON format
+	
+	//find (if any) span to add that count to
+	
+	//insert count
+	
+	
 }
 
 //remove click delay
