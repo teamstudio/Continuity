@@ -22,12 +22,12 @@
 			
 				<div style="margin-bottom: 10px">
 
-						<xp:button value="add organisation" id="button1"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:button id="button1" value="Add Continuity instance"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 		<xp:this.action>
 			<xp:openPage name="/organisation.xsp"></xp:openPage>
 		</xp:this.action></xp:eventHandler></xp:button>
 		
-					<xp:button value="settings" id="button2"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:button value="Settings" id="button2"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 		<xp:this.action>
 			<xp:openPage name="/settings.xsp"></xp:openPage>
 		</xp:this.action></xp:eventHandler></xp:button>
