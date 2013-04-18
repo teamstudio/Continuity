@@ -3,6 +3,7 @@ package com.teamstudio.continuity.selfservice;
 import java.io.File;
 import java.io.Serializable;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.teamstudio.apps.Unplugged;
 import com.teamstudio.continuity.utils.Authorizations;
@@ -105,9 +106,16 @@ public class Organisation implements Serializable {
 			aclEntry = Authorizations.createACLEntry(acl, "-Default-", ACLEntry.TYPE_UNSPECIFIED , ACL.LEVEL_NOACCESS );
 			aclEntry = Authorizations.createACLEntry(acl, "Anonymous", ACLEntry.TYPE_UNSPECIFIED , ACL.LEVEL_NOACCESS );
 			
-			//add default admin groups
+			//add default admin group with editor access and editor role
+			if ( StringUtil.isNotEmpty(config.getAdminGroup()) ) {
+				aclEntry = Authorizations.createACLEntry(acl, config.getAdminGroup(), ACLEntry.TYPE_PERSON_GROUP, ACL.LEVEL_EDITOR );
+				aclEntry.setCanDeleteDocuments(true);
+				aclEntry.enableRole( Configuration.ROLE_EDITOR );
+			}
+			
+			//add LocalDomainAdmins
 			Logger.info("add adminstrator group: " + ADMINS_GROUP);
-					
+
 			aclEntry = Authorizations.createACLEntry(acl, ADMINS_GROUP, ACLEntry.TYPE_PERSON_GROUP, ACL.LEVEL_MANAGER );
 			aclEntry.enableRole( Configuration.ROLE_EDITOR );
 			
@@ -139,6 +147,7 @@ public class Organisation implements Serializable {
 			Logger.info("add group (" + group + ")");
 			aclEntry = Authorizations.createACLEntry(acl, group, ACLEntry.TYPE_PERSON_GROUP, ACL.LEVEL_AUTHOR );
 			aclEntry.setCanCreateDocuments(true);
+			aclEntry.setCanDeleteDocuments(false);
 			
 			//editors
 			group = "group-editors/" + alias;
@@ -153,6 +162,7 @@ public class Organisation implements Serializable {
 			Logger.info("add group (" + group + ")");
 			aclEntry = Authorizations.createACLEntry(acl, group, ACLEntry.TYPE_PERSON_GROUP, ACL.LEVEL_AUTHOR );
 			aclEntry.setCanCreateDocuments(true);
+			aclEntry.setCanDeleteDocuments(false);
 			aclEntry.enableRole( Configuration.ROLE_USER );
 				
 			acl.save();

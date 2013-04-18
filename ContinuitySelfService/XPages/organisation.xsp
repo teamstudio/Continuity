@@ -24,7 +24,9 @@
 
 			<xp:div xp:key="facetMiddle">
 
-				<xp:table>
+			<xp:messages id="messages1"></xp:messages>
+
+			<xp:table>
 					<xp:tr>
 						<xp:td>
 							<xp:label value="Name:" id="name_Label1"

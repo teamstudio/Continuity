@@ -28,7 +28,9 @@ if (vw.getEntryCount()>0) {
 		<xp:this.facets>
 
 			<xp:div xp:key="facetMiddle">
-
+			
+			
+			<xp:messages id="messages1"></xp:messages>
 
 			<xp:table>
 				<xp:tr>
@@ -108,6 +110,24 @@ if (vw.getEntryCount()>0) {
 						</xp:this.validators></xp:inputText>
 					</xp:td>
 				</xp:tr>
+				
+				<xp:tr>
+					<xp:td>
+						<xp:label value="adminGroup:"
+							id="label1" for="inputText1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.adminGroup}"
+							id="inputText1" required="true">
+
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xp:td>
+				</xp:tr>
+				
+				
 			</xp:table>
 
 

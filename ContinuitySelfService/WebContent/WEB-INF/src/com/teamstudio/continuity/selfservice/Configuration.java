@@ -31,6 +31,8 @@ public class Configuration implements Serializable {
 	private String unpluggedDbPath;
 	private String relativeDbUrl;
 	
+	private String adminGroup;
+	
 	private String continuityDbTemplatePath;
 	private String installBasePath; 
 	
@@ -73,6 +75,8 @@ public class Configuration implements Serializable {
 				
 				continuityDbTemplatePath = docSettings.getItemValueString("continuityDbTemplatePath");
 				installBasePath = docSettings.getItemValueString("installBasePath");
+				
+				adminGroup = docSettings.getItemValueString("adminGroup"); 
 				
 			}
 			
@@ -272,6 +276,10 @@ public class Configuration implements Serializable {
 
 	public String getInstallBasePath() {
 		return installBasePath;
+	}
+	
+	public String getAdminGroup() {
+		return adminGroup;
 	}
 		
 	
