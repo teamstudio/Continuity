@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="docSettings" formName="fSettings" action="editDocument">
+			<xp:this.documentId><![CDATA[#{javascript:var vw = database.getView("vwSettings");
+if (vw.getEntryCount()>0) {
+	return vw.getFirstDocument().getUniversalID();
+}}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry type="DEFAULT" right="NOACCESS"></xp:aclEntry>
+				<xp:aclEntry right="NOACCESS" type="ANONYMOUS"></xp:aclEntry>
+				<xp:aclEntry type="ROLE" right="EDITOR">
+					<xp:this.name><![CDATA[[admin]]]></xp:this.name>
+					<xp:this.fullName><![CDATA[[admin]]]></xp:this.fullName>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xc:layout>
+		<xp:this.facets>
+
+			<xp:div xp:key="facetMiddle">
+
+
+			<xp:table>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Continuity (secondary) directory db path:" id="directoryDbPath_Label1"
+							for="directoryDbPath1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.directoryDbPath}"
+							id="directoryDbPath1" required="true">
+							
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Unplugged db path:" id="unpluggedDbPath_Label1"
+							for="unpluggedDbPath1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.unpluggedDbPath}"
+							id="unpluggedDbPath1" required="true">
+							
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Host url:" id="hostUrl_Label1" for="hostUrl1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.hostUrl}" id="hostUrl1" required="true">
+						
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators>
+						</xp:inputText>
+						
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Install base path:" id="installBasePath_Label1"
+							for="installBasePath1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.installBasePath}"
+							id="installBasePath1" required="true">
+							
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Continuity db template path:"
+							id="continuityDbTemplatePath_Label1" for="continuityDbTemplatePath1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.continuityDbTemplatePath}"
+							id="continuityDbTemplatePath1" required="true">
+
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+
+
+			<xp:button value="Save" id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:if ( docSettings.save() ) {
+	context.redirectToPage("organisations");
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+		</xp:div>
+	</xp:this.facets>
+	</xc:layout>
+	
+</xp:view>

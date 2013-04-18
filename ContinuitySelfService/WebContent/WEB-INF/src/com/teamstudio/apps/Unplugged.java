@@ -152,7 +152,8 @@ public class Unplugged {
 			
 			docApp.replaceItemValue("Active", "1");
 			docApp.replaceItemValue("ShowOnWS", ( hideFromWS ? "no" : "" ));
-			docApp.replaceItemValue("AutoLaunchApp", ( autoLaunch ? "yes" : "" )); 
+			docApp.replaceItemValue("AutoLaunchApp", ( autoLaunch ? "yes" : "" ));
+			docApp.replaceItemValue("ReplAttachmentExts", "");		//send all attachments
 			docApp.computeWithForm(true, true);
 			docApp.save();
 			

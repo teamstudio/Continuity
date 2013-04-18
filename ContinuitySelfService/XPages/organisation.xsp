@@ -10,6 +10,7 @@
 		<xp:acl>
 			<xp:this.entries>
 				<xp:aclEntry type="DEFAULT" right="NOACCESS"></xp:aclEntry>
+				<xp:aclEntry right="NOACCESS" type="ANONYMOUS"></xp:aclEntry>
 				<xp:aclEntry type="ROLE" right="EDITOR">
 					<xp:this.name><![CDATA[[admin]]]></xp:this.name>
 					<xp:this.fullName><![CDATA[[admin]]]></xp:this.fullName>

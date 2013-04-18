@@ -6,6 +6,7 @@
 		<xp:acl>
 			<xp:this.entries>
 				<xp:aclEntry type="DEFAULT" right="NOACCESS"></xp:aclEntry>
+				<xp:aclEntry right="NOACCESS" type="ANONYMOUS"></xp:aclEntry>
 				<xp:aclEntry type="ROLE" right="EDITOR">
 					<xp:this.name><![CDATA[[admin]]]></xp:this.name>
 					<xp:this.fullName><![CDATA[[admin]]]></xp:this.fullName>
@@ -24,6 +25,11 @@
 						<xp:button value="add organisation" id="button1"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 		<xp:this.action>
 			<xp:openPage name="/organisation.xsp"></xp:openPage>
+		</xp:this.action></xp:eventHandler></xp:button>
+		
+					<xp:button value="settings" id="button2"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+		<xp:this.action>
+			<xp:openPage name="/settings.xsp"></xp:openPage>
 		</xp:this.action></xp:eventHandler></xp:button>
 		
 				</div>
