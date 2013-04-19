@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="572" sequence="166" unid="EBC6F45B690F247BC1257AF6007D0758">
+<noteinfo noteid="572" sequence="179" unid="EBC6F45B690F247BC1257AF6007D0758">
 <created><datetime>20130117T234538,80+01</datetime></created>
-<modified><datetime dst="true">20130412T122420,20+02</datetime></modified>
-<revised><datetime dst="true">20130412T122420,19+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130412T122420,20+02</datetime></lastaccessed>
+<modified><datetime dst="true">20130418T135444,90+02</datetime></modified>
+<revised><datetime dst="true">20130418T135444,89+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130418T135444,90+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115518,81+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -11,10 +11,10 @@
 
 
 
-
-
 <item name="$TITLE" sign="true"><text>UnpContacts.xsp</text></item>
-<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
 
 
 <item name="$FileNames" sign="true"><text>UnpContacts.xsp</text></item></note>

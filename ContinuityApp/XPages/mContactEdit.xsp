@@ -1,117 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xp:this.beforeRenderResponse><![CDATA[#{javascript:
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
 	
-	try {
-	var unid = param.get("documentId");
-	
-	var docContact = database.getDocumentByUNID(unid );
-	
-	if (docContact==null) {
-		print("error: target document not found (id: " + unid + ")");
-	} else {
-	
-		viewScope.unid = unid;
-	
-		viewScope.firstName = docContact.getItemValueString("firstName");
-		viewScope.lastName = docContact.getItemValueString("lastName");
-		viewScope.name = @Trim(viewScope.firstName + " " + viewScope.lastName);
-		
-		var thumb = docContact.getItemValueString("photoThumbnailName")
-		var photo = docContact.getItemValueString("photoFileName");
-		
-		viewScope.photoUrl = thumb.length>0 ? "/0/" + viewScope.unid + "/$file/" + thumb :
-		             photo.length>0 ? "/0/" + unid + "/$file/" + photo :
-		             "noProfile.gif";
-		
-		viewScope.orgUnitName = docContact.getItemValueString("orgUnitName");
-		viewScope.jobTitle = docContact.getItemValueString("jobTitle");
-		viewScope.roleName = docContact.getItemValueString("roleName");
-		viewScope.isAlternate = docContact.getItemValueString("isAlternate");
-		viewScope.phoneHome = docContact.getItemValueString("phoneHome");
-		viewScope.phoneWork = docContact.getItemValueString("phoneWork");
-		viewScope.phoneMobile = docContact.getItemValueString("phoneMobile");
-		viewScope.email = docContact.getItemValueString("email");
-	}
-	
-	
-
-} catch (e) {
-	print(e);
-} finally {
-
-}
-}]]></xp:this.beforeRenderResponse>
-	<xc:unpScrollableArea>
+	<xc:mLayout showMenu="true" pageTitle="Contacts">
 		<xp:this.facets>
+
+			<xp:div xp:key="contents">
 		
-		<xc:unpFormEditor showbuttons="true" closexpagename="UnpContacts.xsp"
+				<xc:unpFormEditor showbuttons="true" closexpagename="UnpContacts.xsp"
 				viewxpagename="UnpContacts.xsp" formname="fContact" title="Contact"
 				xp:key="facet_1">
 
 				<xp:this.facets>
 					<xp:panel xp:key="facet_1">
 						
-						<div id="contactDetails" style="padding: 12px;background: #fff">
-						
-						<table style="width: 100%"><tbody>
+						<ul class="fieldlist">
 							
-							<tr style="vertical-align: top">
-							
-							<td style="width: 27%; text-align: right">
-								<xp:image id="image1" style="width: 75px; height: 75px;" >
-									<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + viewScope.photoUrl;}]]></xp:this.url>
-								</xp:image>
-							</td>
-							<td>
-									<xp:text escape="true" style="padding:0; border:0" id="computedField2" value="#{javascript:viewScope.roleName}">
-									</xp:text>
-									
-									<xp:text style="font-weight: bold;padding:0; border:0" value="- Alternate contact -">
-										<xp:this.rendered><![CDATA[#{javascript:"yes".equals( viewScope.isAlternate)}]]></xp:this.rendered>
-									</xp:text>
-									<i>
-										<xp:text escape="true" style="padding:0; border:0">
-											<xp:this.value><![CDATA[#{javascript:viewScope.jobTitle + (viewScope.orgUnitName.length>0 ? " (" + viewScope.orgUnitName + ")" : "")}]]></xp:this.value>
-										</xp:text>
-									</i>
-								</td></tr>
-							</tbody></table>			
-							
-							<ul class="fieldlist">
-							<li>
-								<xp:label value="Email:" id="label4" for="email" />
+								<li>
 								
-								<xp:inputText id="inputEmail" value="#{viewScope.email}"
-									type="email" styleClass="required xspInputFieldEditBox">
-								</xp:inputText>
+								
+									<div
+								style="float:left; clear:left; width:27%; text-align:right; min-width: 70px; padding-top:10px; padding-bottom:10px;">
+
+								<xp:image id="image2" style="width: 70px; height: 70px;"
+									styleClass="thumbnail roundedBorders">
+									<xp:this.url><![CDATA[#{javascript:var thumb = docContact.getItemValueString("photoThumbnailName");
+var photo = docContact.getItemValueString("photoFileName");
+
+var photoUrl = thumb.length>0 ? "/0/" + param.get("documentId") + "/$file/" + thumb :
+             photo.length>0 ? "/0/" + unid + "/$file/" + photo :
+             "noProfile.gif";
+									
+									(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + photoUrl;}]]></xp:this.url>
+								</xp:image>
+							</div>
+							
+								<div
+								style="padding-left: 31%; padding-top:10px; padding-bottom:10px;">
+
+								<b>
+									<xp:text escape="true" styleClass="reset"
+										style="font-weight: bold" value="#{docContact.name}" />
+								</b>
+
+								<!--  title/ org unit -->
+								<xp:text escape="true" style="padding:0; border:0">
+									<xp:this.value><![CDATA[#{javascript:var ou = docContact.getItemValueString("orgUnitName")
+
+docContact.getItemValueString("jobTitle") + 
+(ou.length > 0 ? " (" + ou + ")" : "") }]]></xp:this.value>
+								</xp:text>
+
+								<!-- contact type/ bc role-->
+								<xp:text escape="true" id="computedField2">
+									<xp:this.styleClass><![CDATA[#{javascript:var t = docContact.getItemValueString("contactType");
+
+if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
+	return "reset contactTypeGreen";
+} else if ( t.equals("Media") || t.equals("Regulatory") ) {
+	return "reset contactTypeRed";
+} else {
+	return "reset";
+}
+}]]></xp:this.styleClass>
+									<xp:this.value><![CDATA[#{javascript:var type = docContact.getItemValueString("contactType");
+									var role = docContact.getItemValueString('roleName');
+									
+									if ( type.equals("") || type.equals("Internal") || type.equals("Other") ) {
+										//show bc role
+										return (role.length>0 ? role : "(no BC role)") + 
+( docContact.getItemValueString("isAlternate").equals("yes") ? " (alternate)" : "")
+									} else {
+										//show type
+										return type
+									}
+									
+}]]></xp:this.value>
+								</xp:text>
+
+							</div>
+									
+								
+								</li>
+							
+							<li>
+								<xp:label value="Email" id="label4" for="email" />
+								<xp:inputText id="email" value="#{docContact.email}" type="email" styleClass="required xspInputFieldEditBox"></xp:inputText>
 							</li>
 							<li>
-								<xp:label value="Work:" id="label3" for="workPhone" />
-								<xp:inputText id="workPhone" value="#{viewScope.phoneWork}" styleClass="required xspInputFieldEditBox">
+							
+								<!-- NOTE: VALIDATION WILL FAIL IF CHANGED TO NUMBER TYPE!! -->
+								<xp:label value="Work" id="label3" for="workPhone" />
+								<xp:inputText id="phoneWork" value="#{docContact.phoneWork}" styleClass="required xspInputFieldEditBox">
 								</xp:inputText>
 
 							</li>
 							<li>
-								<xp:label value="Mobile:" id="label1" for="mobilePhone" />
-								<xp:inputText id="mobilePhone" value="#{viewScope.phoneMobile}" styleClass="xspInputFieldEditBox">
+								<xp:label value="Mobile" id="label1" for="mobilePhone" />
+								<xp:inputText id="phoneMobile" value="#{docContact.phoneMobile}" styleClass="xspInputFieldEditBox">
 								</xp:inputText>
 							</li>
 							<li>
-								<xp:label value="Home:" id="label2" for="homePhone" />
-								<xp:inputText id="homePhone" value="#{viewScope.phoneHome}" styleClass="xspInputFieldEditBox">
+								<xp:label value="Home" id="label2" for="homePhone" />
+								<xp:inputText id="phoneHome" value="#{docContact.phoneHome}" styleClass="xspInputFieldEditBox">
 								</xp:inputText>
 							</li>
 						</ul>
-				<xp:div rendered="#{javascript:viewScope.editMode}">
+				<!--<xp:div>
 					<div>Upload a new photo:</div>
 					<xp:fileUpload id="fileUpload1" value="#{docContact.photo}"></xp:fileUpload>
 				</xp:div>
-					</div>
+					-->
 					</xp:panel>
 				</xp:this.facets>
 			</xc:unpFormEditor>
-			</xp:this.facets>
-		</xc:unpScrollableArea>
+		</xp:div>
+	</xp:this.facets>
+	</xc:mLayout>
+		
 </xp:view>

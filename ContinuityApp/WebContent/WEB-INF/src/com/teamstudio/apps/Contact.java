@@ -55,6 +55,8 @@ public class Contact implements Serializable {
 	public static final String STATUS_ACTIVE = "active";
 	public static final String STATUS_INACTIVE = "inactive";
 	
+	public static final String DEFAULT_CONTACT_TYPE = "Internal";
+	
 	public Contact() { }
 	
 	//save the current contact document
@@ -199,6 +201,7 @@ public class Contact implements Serializable {
 				docContact.replaceItemValue("form", "fContact");
 				docContact.replaceItemValue("status", status);
 				docContact.replaceItemValue("identifier", importIdentifier);
+				docContact.replaceItemValue("contactType", Contact.DEFAULT_CONTACT_TYPE);
 				
 				//default authors
 				Utils.setAuthors(docContact, Authorizations.ROLE_EDITOR);
@@ -253,7 +256,7 @@ public class Contact implements Serializable {
 			
 			userName = "";
 			
-		} else {		//user should have an account
+		} else {		//user should have an account (standard user, sys admin)
 			
 			//create/ update account document
 			userName = Authorizations.createAccount( userName, firstName, lastName, email);
@@ -274,13 +277,14 @@ public class Contact implements Serializable {
 					
 					Authorizations.addMemberToGroup( userName, Authorizations.USER_TYPE_EDITOR);
 					
-				} else if (userType.equals(Authorizations.USER_TYPE_USER)) {		//add to user group
+				//} else if (userType.equals(Authorizations.USER_TYPE_USER)) {		//add to user group
+				} else {
 					
 					Authorizations.addMemberToGroup( userName, Authorizations.USER_TYPE_USER);
 					
-				} else {		//standard contact doesn't need to be in any groups: remove from all
+				//} else {		//standard contact doesn't need to be in any groups: remove from all
 					
-					Authorizations.removeMemberFromAllGroups(userName );
+				//	Authorizations.removeMemberFromAllGroups(userName );
 					
 				}
 				

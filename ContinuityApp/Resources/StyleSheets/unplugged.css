@@ -650,7 +650,7 @@ body {
 	min-width: 100px;
 	color: #666;
 	font-size: 12px;
-	line-height: 16px;
+	line-height: 15px;
 }
 
 .icon {
@@ -683,9 +683,11 @@ body {
 	-webkit-border-top-right-radius: 8px;	
 }
 
-.bordered>div>ul>li:last-child {
+.bordered>div>ul>li:last-child, ul.bordered {
 	-webkit-border-bottom-left-radius: 8px;
 	-webkit-border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 
@@ -1103,6 +1105,13 @@ body {
 #formholder ul.fieldlist li:last-child {
 	border-bottom: 0;
 	border-radius: 0 0 10px 10px;
+}
+
+#formholder ul.fieldlist li.noborders {
+	border-bottom: 0;
+	webkit-border-bottom: 0;
+	border-radius: 0;
+	webkit-border-radius: 0;
 }
 
 #formholder .xspTextComputedField {
@@ -1821,7 +1830,7 @@ table.reset {
 	box-shadow: inset 0 1px #6996f5;
 }
 .categoryRowFixed.condensed {
-	padding: 10px 15px 10px 12px !important;
+	padding: 4px 15px 4px 12px !important;
 }
 
 .catGrey {
@@ -2112,4 +2121,11 @@ span.high {
 	background-size: 20px 20px;
 	background-color: #67b800;
 	background-repeat: no-repeat;
+}
+
+.contactTypeGreen {
+	color: green;
+}
+.contactTypeRed {
+	color: red;
 }

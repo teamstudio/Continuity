@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='113e' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='9'>
+<noteinfo noteid='113e' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='10'>
 <created><datetime dst='true'>20130405T100132,18+02</datetime></created>
-<modified><datetime dst='true'>20130418T124951,22+02</datetime></modified>
-<revised><datetime dst='true'>20130418T124951,21+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130418T124951,22+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130418T130406,35+02</datetime></modified>
+<revised><datetime dst='true'>20130418T130406,34+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130418T130406,35+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130405T100133,32+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -33,6 +33,9 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <rawitemdata type='0'>
 </rawitemdata></item>
 <item name='userType' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='contactType' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
 <item name='userName' placeholder='true'>
@@ -83,15 +86,12 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <item name='debugMode' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='contactType' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>contactType</text><text>debugMode</text><text
->miniGuideShown</text><text>identifier</text><text>orgUnitName</text><text
->orgUnitId</text><text>isAlternate</text><text>roleName</text><text>roleId</text><text
->photos</text><text>jobTitle</text><text>phoneWork</text><text>phoneHome</text><text
->phoneMobile</text><text>email</text><text>status</text><text>userName</text><text
->userType</text><text>lastName</text><text>firstName</text></textlist></item>
+<item name='$Fields'><textlist><text>debugMode</text><text>miniGuideShown</text><text
+>identifier</text><text>orgUnitName</text><text>orgUnitId</text><text>isAlternate</text><text
+>roleName</text><text>roleId</text><text>photos</text><text>jobTitle</text><text
+>phoneWork</text><text>phoneHome</text><text>phoneMobile</text><text>email</text><text
+>status</text><text>userName</text><text>contactType</text><text>userType</text><text
+>lastName</text><text>firstName</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -124,8 +124,8 @@ Y29udGFjdFR5cGUApBIDAdcNxSEAAFUCEREBAQAAgQKDBAQAhf8IAAEBAAndBgAAiv/+/1AAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAIr/MACKAAAFADACAAAAAAAAAgEAAAkAAAAAAAAAAAsAAAAAAGNvbnRh
 Y3RUeXBlAGIOAQCEAAAAAAAAAAAA3gYAAIr/hf8IAAEBAAmkEgMCxSEnPAAAVQIREQEBAACBAoME
-BQCF/xQAAQAACWNvbnRhY3QgdHlwZYX/CgABAAAJICjdBgAAhf+F/zwAAQDfCWludGVybmFsLCB2
-ZW5kb3IsIG1lZGlhLCBsZWdhbCwgcmVndWxhdG9yeSwgYWR2aXNvcinSCAEAMzMzAN4GAACF/4EC
+BQCF/xQAAQAACWNvbnRhY3QgdHlwZYX/CgABAAAJICjdBgAAhf+F/zwAAQDfCUludGVybmFsLCBW
+ZW5kb3IsIE1lZGlhLCBMZWdhbCwgUmVndWxhdG9yeSwgQWR2aXNvcinSCAEAMzMzAN4GAACF/4EC
 gwQFAN0GAACF/4X/CAABAN8J0ggBADMzMwDeBgAAhf+BAoMEBQDdBgAAhf+F/yQAAQDfCWRlZmF1
 bHQ6IGludGVybmFsIChvciBibGFuaynSCAEAMzMzAN4GAACF/6QSBACgBdcNAABVAhERAQEAAIEC
 gwQDAIX/EAABAQAJdXNlck5hbWWkEgQB1w3FIQAAVQIREQEBAACBAoMEBACF/wgAAQAACd0GAACK

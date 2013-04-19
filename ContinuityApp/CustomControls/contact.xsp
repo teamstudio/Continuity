@@ -240,23 +240,35 @@
 			</xp:text>
 
 		</xe:formRow>
-
+		
+		<!-- only for editors: set contact type -->
+		<xe:formRow id="formRow5" label="Contact type:">
+		
+			<xp:comboBox id="comboBox3" value="#{docContact.contactType}" defaultValue="Internal" readonly="#{javascript:!sessionScope.isEditor}">
+				<xp:selectItem itemLabel="Internal" itemValue="Internal" />
+				<xp:selectItem itemLabel="Vendor" itemValue="Vendor" />
+				<xp:selectItem itemLabel="Media" itemValue="Media" />
+				<xp:selectItem itemLabel="Legal" itemValue="Legal" />
+				<xp:selectItem itemLabel="Regulatory" itemValue="Regulatory" />
+				<xp:selectItem itemLabel="Advisor" itemValue="Advisor" />
+				<xp:selectItem itemLabel="Other" itemValue="Other" />
+			</xp:comboBox>
+		</xe:formRow>
 
 		<!-- only for editors: set usertype -->
-		<xe:formRow id="formRow16" label="User type:">
+		<xe:formRow id="formRow16" label="Account type:">
 			<xp:radioGroup id="radioGroup3"
 				value="#{docContact.userType}" defaultValue="contact"
 				readonly="#{javascript:!sessionScope.isEditor}">
 
-				<xp:selectItem itemLabel="Standard user"
+				<xp:selectItem itemLabel="Standard account"
 					itemValue="user">
 				</xp:selectItem>
-				<xp:selectItem itemLabel="System administrator"
+				<xp:selectItem itemLabel="Sys Admin account"
 					itemValue="editor">
 				</xp:selectItem>
-				<xp:selectItem itemLabel="External contact"
-					itemValue="contact">
-				</xp:selectItem>
+				
+				<!-- can't change an account back to 'no account' if the user already has one -->
 				<xp:selectItem itemLabel="No account"
 					itemValue="none">
 					<xp:this.itemDisabled><![CDATA[#{javascript:!docContact.isNewNote() && docContact.getItemValueString("userName").length>0}]]></xp:this.itemDisabled>
@@ -318,7 +330,7 @@
 		<xe:formRow id="formRow11" label="Organisation unit:" for="comboBox2">
 			
 			<xp:comboBox id="comboBox2" value="#{docContact.orgUnitId}" readonly="#{javascript:!sessionScope.isEditor}">
-				<xp:selectItem itemLabel="-Select an organisation unit-" itemValue=""></xp:selectItem>
+				<xp:selectItem itemLabel="Select organisation unit" itemValue=""></xp:selectItem>
 				<xp:selectItems id="selectItems2">
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
 				</xp:selectItems>

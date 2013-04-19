@@ -45,7 +45,7 @@ the specific language governing permissions and limitations under the License
 								<xp:panel id="menulink" tagName="div" styleClass="menulink">
 									<xp:image url="#{javascript:menuItem.icon}" id="image2"
 										styleClass="iconleft">
-										<xp:this.rendered><![CDATA[#{javascript:menuItem.icon != ""}]]></xp:this.rendered>
+										<xp:this.rendered><![CDATA[#{javascript:!isEmpty(menuItem.icon)}]]></xp:this.rendered>
 									</xp:image>
 									<xp:text id="menutext" styleClass="menutext"
 										value="#{javascript:menuItem.label;}">

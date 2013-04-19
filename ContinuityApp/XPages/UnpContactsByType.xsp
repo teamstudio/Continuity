@@ -4,7 +4,7 @@
 
 	<xp:this.data>
 		<xp:dominoView var="view2">
-			<xp:this.viewName><![CDATA[#{javascript:"vwContactsCatByLastname"}]]></xp:this.viewName>
+			<xp:this.viewName><![CDATA[#{javascript:"vwContactsCatByType"}]]></xp:this.viewName>
 		</xp:dominoView>
 	</xp:this.data>
 	
@@ -21,7 +21,7 @@
 						<xp:text escape="false" tagName="li"
 							styleClass="categoryRowFixed condensed" disableTheme="true"
 							rendered="#{javascript:row.isCategory()}">
-							<xp:this.value><![CDATA[#{javascript:row.getColumnValue("category")}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:row.getColumnValue("$14")}]]></xp:this.value>
 						</xp:text>
 
 						<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li"
@@ -51,29 +51,11 @@
 
 									<td class="v-top">
 
-										<xp:label id="label2" styleClass="viewlistsummary" value="#{row.name}"></xp:label>
-										<xp:text escape="false" styleClass="viewlistdetail">
-											<xp:this.value><![CDATA[#{javascript:row.getColumnValue('jobTitle') + '&nbsp;'}]]></xp:this.value>
-										</xp:text>
-										<br />
-										<xp:label id="label3" value="#{row.contactType}">
-											<xp:this.rendered><![CDATA[#{javascript:var t = row.getColumnValue("contactType");
-											if ( t.length == 0 || t.equals("Internal") || t.equals("Other")) {
-	return false;
-} else  {
-	return true;
-}
-}]]></xp:this.rendered>
-										<xp:this.styleClass><![CDATA[#{javascript:var t = row.getColumnValue("contactType");
-
-if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
-	return "viewlistdetail contactTypeGreen";
-} else if ( t.equals("Media") || t.equals("Regulatory") ) {
-	return "viewlistdetail contactTypeRed";
-} else {
-	return "viewlistdetail";
-}
-}]]></xp:this.styleClass>
+										<xp:label id="label2" styleClass="viewlistsummary"
+											value="#{row.name}">
+										</xp:label>
+										<xp:label id="label1" styleClass="viewlistdetail">
+											<xp:this.value><![CDATA[#{javascript:row.getColumnValue("jobTitle")}]]></xp:this.value>
 										</xp:label>
 
 									</td>

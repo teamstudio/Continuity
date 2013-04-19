@@ -1,12 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+
 	<xc:mLayout showMenu="true" pageTitle="Contacts">
 		<xp:this.facets>
 
-			<xc:mContact xp:key="contents"></xc:mContact>
+			<xp:div xp:key="contents">
+				<div id="formholder">
+					<h2>
+						<xp:text escape="true" id="title" tagName="span"
+							value="#{docContact.name}" styleClass="formtitle">
+						</xp:text>
+					</h2>
+
+					<ul class="fieldlist">
+						<li>
+
+							<div
+								style="float:left; clear:left; width:27%; text-align:right; min-width: 70px; padding-top:10px; padding-bottom:10px;">
+
+								<xp:image id="image1" style="width: 70px; height: 70px;"
+									styleClass="thumbnail roundedBorders">
+									<xp:this.url><![CDATA[#{javascript:var thumb = docContact.getItemValueString("photoThumbnailName");
+var photo = docContact.getItemValueString("photoFileName");
+
+var photoUrl = thumb.length>0 ? "/0/" + param.get("documentId") + "/$file/" + thumb :
+             photo.length>0 ? "/0/" + unid + "/$file/" + photo :
+             "noProfile.gif";
+									
+									(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + photoUrl;}]]></xp:this.url>
+								</xp:image>
+							</div>
+
+							<div
+								style="padding-left: 31%; padding-top:10px; padding-bottom:10px;">
+
+								<b>
+									<xp:text escape="true" styleClass="reset"
+										style="font-weight: bold" value="#{docContact.name}" />
+								</b>
+
+								<!--  title/ org unit -->
+								<xp:text escape="true" style="padding:0; border:0">
+									<xp:this.value><![CDATA[#{javascript:var ou = docContact.getItemValueString("orgUnitName")
+
+docContact.getItemValueString("jobTitle") + 
+(ou.length > 0 ? " (" + ou + ")" : "") }]]></xp:this.value>
+								</xp:text>
+								
+								<!-- contact type/ bc role-->
+								<xp:text escape="true" id="computedField2">
+									<xp:this.styleClass><![CDATA[#{javascript:var t = docContact.getItemValueString("contactType");
+
+if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
+	return "reset contactTypeGreen";
+} else if ( t.equals("Media") || t.equals("Regulatory") ) {
+	return "reset contactTypeRed";
+} else {
+	return "reset";
+}
+}]]></xp:this.styleClass>
+									<xp:this.value><![CDATA[#{javascript:var type = docContact.getItemValueString("contactType");
+									var role = docContact.getItemValueString('roleName');
+									
+									if ( type.equals("") || type.equals("Internal") || type.equals("Other") ) {
+										//show bc role only
+										return (role.length>0 ? role : "(no BC role)") + 
+( docContact.getItemValueString("isAlternate").equals("yes") ? " (alternate)" : "")
+									} else {
+										//show type
+										return type;
+									}
+									
+}]]></xp:this.value>
+								</xp:text>
+
+							</div>
+
+						</li>
+
+						<li>
+							<xp:label value="Email" id="label4" for="email" />
+							<span class="xspTextComputedField">
+								<xp:link escape="true" text="#{docContact.email}" id="email">
+									<xp:this.value><![CDATA[#{javascript:"mailto:" + docContact.getItemValueString('email')}]]></xp:this.value>
+
+								</xp:link>
+							</span>
+						</li>
+						<li>
+							<xp:label value="Work" id="label3" for="workPhone" />
+
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<xp:text disableTheme="true"
+									value="#{docContact.phoneWork}">
+								</xp:text>
+							</xp:panel>
+
+							<xp:span styleClass="xspTextComputedField">
+								<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<xp:link escape="true" text="#{docContact.phoneWork}"
+									id="workPhone">
+									<xp:this.value><![CDATA[#{javascript:"tel:" + docContact.getItemValueString('phoneWork')}]]></xp:this.value>
+								</xp:link>
+							</xp:span>
+						</li>
+						<li>
+							<xp:label value="Mobile" id="label1" for="mobilePhone" />
+
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<xp:text disableTheme="true"
+									value="#{docContact.phoneMobile}">
+								</xp:text>
+							</xp:panel>
+
+							<xp:span styleClass="xspTextComputedField">
+								<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<xp:link escape="true" text="#{docContact.phoneMobile}"
+									id="mobilePhone">
+									<xp:this.value><![CDATA[#{javascript:"tel:" + docContact.getItemValueString('phoneMobile')}]]></xp:this.value>
+								</xp:link>
+							</xp:span>
+						</li>
+						<li class="noborders">
+							<xp:label value="Home" id="label2" for="homePhone" />
+
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<xp:text disableTheme="true"
+									value="#{docContact.phoneHome}">
+								</xp:text>
+							</xp:panel>
+
+							<xp:span styleClass="xspTextComputedField">
+								<xp:this.rendered><![CDATA[#{javascript:sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<xp:link escape="true" text="#{docContact.phoneHome}"
+									id="homePhone">
+									<xp:this.value><![CDATA[#{javascript:"tel:" + docContact.getItemValueString('phoneHome')}]]></xp:this.value>
+								</xp:link>
+							</xp:span>
+						</li>
+					</ul>
+
+					<xp:panel id="topbuttons" styleClass="buttons bordered" tagName="ul">
+						<xp:panel id="editbutton" styleClass="editButton" tagName="li">
+							<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("userName") ==  docContact.getItemValueString("userName")}]]></xp:this.rendered>
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"openDocument('mContactEdit.xsp?action=editDocument&documentId=" + param.get("documentId") + "', 'contentwrapper');"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span>Edit</span>
+						</xp:panel>
+						<xp:panel id="closebutton" styleClass="cancelButton" tagName="li">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"$.blockUI();window.location.href='" + param.get("from") + "';"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span>Close</span>
+						</xp:panel>
+					</xp:panel>
+
+					<br />
+					<br />
+				</div>
+
+			</xp:div>
 		</xp:this.facets>
 	</xc:mLayout>
 
-		
+
 </xp:view>

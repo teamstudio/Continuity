@@ -57,19 +57,25 @@
 
 		<div id="body">
 		
-			<!-- menu -->
-			
-			<!-- show only the contacts and plans option for standard contacts -->
+			<!-- contacts menu -->
 			<xc:unpNavigator>
-				<xc:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xc:this.rendered>
+				<xc:this.rendered><![CDATA[#{javascript:context.getUrl().toString().indexOf('UnpContacts')>-1}]]></xc:this.rendered>
 				
 				<xc:this.menuItem>
-					<xc:menuItem itemId="contacts" disabled="false" label="Contacts" page="/UnpContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
-					<xc:menuItem itemId="plans" disabled="false" label="Plans" page="/mPlans.xsp" icon="plans.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem itemId="contacts" disabled="false" label="Alphabetical" page="/UnpContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem itemId="plans" disabled="false" label="By type" page="/UnpContactsByType.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
 				</xc:this.menuItem>
 			</xc:unpNavigator>
-		
+			
+			<!-- default menu -->		
 			<xc:unpNavigator>
+				<xc:this.rendered><![CDATA[#{javascript:if ( compositeData.showMenu == 'false' ) {
+	return false;
+} else if (sessionScope.isUser || sessionScope.isEditor) {
+	return context.getUrl().toString().indexOf('UnpContacts')==-1;
+	//return true;
+}}]]></xc:this.rendered>
+			
 				<xc:this.menuItem>
 
 					<xc:menuItem itemId="activate" disabled="false" label="Activate team"
@@ -81,6 +87,7 @@
 						page="/UnpContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
 					</xc:menuItem>
+					
 					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"
 						page="/UnpCallTree.xsp?clearFrom=1" icon="calltree-blue.png" ajaxloadid="contentwrapper"
 						ajaxtargetid="contentwrapper">
@@ -114,11 +121,6 @@
 
 				</xc:this.menuItem>
 
-<xc:this.rendered><![CDATA[#{javascript:if ( compositeData.showMenu == 'false' ) {
-	return false;
-} else if (sessionScope.isUser || sessionScope.isEditor) {
-	return true;
-}}]]></xc:this.rendered>
 			</xc:unpNavigator>
 
 			<!-- main (scrollable) area -->

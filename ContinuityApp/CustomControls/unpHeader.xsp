@@ -60,7 +60,7 @@ the specific language governing permissions and limitations under the License
 			<span></span>
 		</xp:panel>
 		
-		<!-- ML: link to homepage-->
+		<!-- ML: link to homepage--><!--
 		<xp:panel id="homebutton"
 			styleClass="homeButton">
 			<xp:this.rendered><![CDATA[#{javascript:sessionScope.isDebug && context.getUrl().toString().indexOf("UnpMain") > -1}]]></xp:this.rendered>
@@ -71,18 +71,15 @@ the specific language governing permissions and limitations under the License
 			</xp:this.attrs>
 			<span></span>
 		</xp:panel>
-		<!-- ML: link to workspace -->
+		--><!-- ML: link to workspace -->
 		<xp:panel id="panel1"
 			styleClass="homeButton">
 			<xp:this.rendered><![CDATA[#{javascript:context.getUrl().toString().indexOf("UnpMain") == -1}]]></xp:this.rendered>
 			<xp:this.attrs>
 				<xp:attr name="onclick">
 
-					<xp:this.value><![CDATA[#{javascript:if (isUnpluggedServer()){
-	return "$.blockUI();window.location.href=\"/unpws.unp/\";";
-}else{
-	return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";
-}}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";
+}]]></xp:this.value>
 				</xp:attr>
 			</xp:this.attrs>
 			<span></span>

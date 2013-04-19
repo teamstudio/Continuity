@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='174a' unid='E947091E80BE6B0EC1257B4F003A2328' sequence='11'>
+<created><datetime dst='true'>20130416T123500,88+02</datetime></created>
+<modified><datetime dst='true'>20130418T125544,71+02</datetime></modified>
+<revised><datetime dst='true'>20130418T125544,70+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130418T125544,71+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130416T123502,06+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+ngACADIAAwAkMjAABQAJAG9yZ1VuaXRJZAABAAEALQAiAgUABwByb2xlSWRzACICBAADAAUAJAAg
+AAMACgADAAkAaW5jaWRlbnRJZCQyMCRDb25mbGljdAQABAAAADQABQAEAEZvcm0BAAUAZlRhc2sA
+CgIFAAYAc3RhdHVzAQAIAGFzc2lnbmVkCgIcAgMABwAOAAgACUwxUzRTNVM=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+IQACAABECGYHAAAKAIhmBwoAAwBpbmNpZGVudElkJDIw
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADABIAigAAAFZDAwQKAAoAAAAAAFAAAQAACQABAAAAAAAAAAICAAAAVkMDAAMAEwBEAAAAjQAB
+AAAJAAEAAAAAAAAAAgIAAABWQwAAAwABABAACgBSAAEAAAkAAAAAAAAAAAACAgAAAGluY2lkZW50
+SWRpbmNpZGVudElkJDIwb3JnVW5pdElkIC8gcm9sZUlkc0QAAgAyAAMAJDIwAAUACQBvcmdVbml0
+SWQAAQABAC0AIgIFAAcAcm9sZUlkcwAiAgQAAwAHABAACQAJMlMzUzRTNVMAJDE2IxAAAgAOAAMA
+JDE2AJIAAwABBQEABAB/QTD/JgABAAAAAQEACQEAAAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABX
+QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAA
+AAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAA
+AAQAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wABAO/v7wABAAAAAAAAAAAAAAAAAAEA
+////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$TITLE' sign='true'><text>vwTasksAssignedOpenByRole</text></item>
+<item name='$Comment' sign='true'><text>reserved for future use (show num tasks in active tasks)</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+

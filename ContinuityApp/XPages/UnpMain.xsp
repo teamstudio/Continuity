@@ -39,13 +39,13 @@
 	var orgUnid = param.get("orgUnid");
 
 //allowed only for bc editors: set context to a different OU
-if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
+if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 
-	var docOrgUnit = database.getDocumentByUNID( orgUnid);
+	var docOrgUnit = database.getDocumentByUNID(orgUnid);
 				
 	if (docOrgUnit != null) {
 	
-		sessionScope.put("orgUnitId", docOrgUnit.getItemValueString("name"));
+		sessionScope.put("orgUnitId", docOrgUnit.getItemValueString("id"));
 		sessionScope.put("orgUnitName", docOrgUnit.getItemValueString("name") );
 		sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 
@@ -67,7 +67,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 		<section id="wscontent">
 	
 			<!-- standard users --> 
-			<xp:div styleClass="wsscroll">
+			<!--<xp:div styleClass="wsscroll">
 				<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xp:this.rendered>
 				<ul class="workspace-items">
 					
@@ -90,7 +90,7 @@ if (sessionScope.isEditor && orgUnid != null && orgUnid.length>0) {
 	
 			</xp:div>
 			
-			<!-- Continuity editors/ users -->
+			--><!-- Continuity editors/ users -->
 			<xp:div styleClass="wsscroll" rendered="#{javascript:sessionScope.isUser || sessionScope.isEditor}">
 			
 				<ul class="workspace-items">
