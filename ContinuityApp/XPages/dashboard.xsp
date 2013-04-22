@@ -84,7 +84,7 @@
 
 								<xe:basicLeafNode
 									submitValue="incidentsList">
-									<xe:this.label><![CDATA[#{javascript:configBean.getLabel('incidents') + " (" + currentUserBean.numScenarios + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:configBean.getLabel('incidents') + " (" + currentUserBean.numIncidents + ")"}]]></xe:this.label>
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("incidentsList");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
