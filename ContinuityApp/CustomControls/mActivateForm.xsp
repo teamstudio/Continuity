@@ -44,8 +44,10 @@
 									
 									if (assets == null || typeof assets == 'undefined') {
 										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
-									} else if (typeof assets == 'string' && assets.length == 0 ) {
-										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+									} else if (typeof assets == 'string') {
+										if ( assets.length == 0 ) {
+											assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+										}
 									} else if (assets.length == 0) {
 										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
 									} else {
