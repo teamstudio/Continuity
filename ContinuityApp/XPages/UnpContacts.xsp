@@ -58,7 +58,7 @@
 										<br />
 										<xp:label id="label3" value="#{row.contactType}">
 											<xp:this.rendered><![CDATA[#{javascript:var t = row.getColumnValue("contactType");
-											if ( t.length == 0 || t.equals("Internal") || t.equals("Other")) {
+											if ( t.length == 0 || t.equals("Internal") ) {
 	return false;
 } else  {
 	return true;
@@ -66,7 +66,7 @@
 }]]></xp:this.rendered>
 										<xp:this.styleClass><![CDATA[#{javascript:var t = row.getColumnValue("contactType");
 
-if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
+if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") || t.equals("Other") ) {
 	return "viewlistdetail contactTypeGreen";
 } else if ( t.equals("Media") || t.equals("Regulatory") ) {
 	return "viewlistdetail contactTypeRed";

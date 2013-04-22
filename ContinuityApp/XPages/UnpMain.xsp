@@ -91,7 +91,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 			</xp:div>
 			
 			--><!-- Continuity editors/ users -->
-			<xp:div styleClass="wsscroll" rendered="#{javascript:sessionScope.isUser || sessionScope.isEditor}">
+			<xp:div styleClass="wsscroll">
 			
 				<ul class="workspace-items">
 				

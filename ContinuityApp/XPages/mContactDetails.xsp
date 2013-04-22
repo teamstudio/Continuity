@@ -55,7 +55,7 @@ docContact.getItemValueString("jobTitle") +
 								<xp:text escape="true" id="computedField2">
 									<xp:this.styleClass><![CDATA[#{javascript:var t = docContact.getItemValueString("contactType");
 
-if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
+if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") || t.equals("Other") ) {
 	return "reset contactTypeGreen";
 } else if ( t.equals("Media") || t.equals("Regulatory") ) {
 	return "reset contactTypeRed";
@@ -66,7 +66,7 @@ if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
 									<xp:this.value><![CDATA[#{javascript:var type = docContact.getItemValueString("contactType");
 									var role = docContact.getItemValueString('roleName');
 									
-									if ( type.equals("") || type.equals("Internal") || type.equals("Other") ) {
+									if ( type.equals("") || type.equals("Internal") ) {
 										//show bc role only
 										return (role.length>0 ? role : "(no BC role)") + 
 ( docContact.getItemValueString("isAlternate").equals("yes") ? " (alternate)" : "")
