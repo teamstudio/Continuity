@@ -44,7 +44,7 @@
 
 							<xe:basicContainerNode styleClass="pointer">
 								<xp:this.label>
-									<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : (sessionScope.isUser ? " (user)" : "") )}]]>
+									<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : "")}]]>
 								</xp:this.label>
 								<xe:this.children>
 									<xe:basicLeafNode label="My profile" submitValue="myProfile"

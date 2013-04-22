@@ -32,7 +32,7 @@ function init() {
 			}
 			
 			var isEditor = false;
-			var isUser = false;
+			//var isUser = false;
 			var isDebug = false;
 			
 			if ( isUnplugged() ) {
@@ -42,7 +42,8 @@ function init() {
 					
 					var userType:String = docUser.getItemValueString("userType");
 					isEditor = userType.equals("editor");
-					isUser = isEditor || userType.equals("user");
+					//isUser = isEditor || userType.equals("user");
+					//isUser = true;
 					
 					isDebug = docUser.getItemValueString("debugMode").equals("yes");
 					
@@ -53,7 +54,7 @@ function init() {
 				
 				var roles = context.getUser().getRoles();
 				isEditor = roles.contains("[bcEditor]");
-				isUser = isEditor || roles.contains("[bcUser]");
+				//isUser = isEditor || roles.contains("[bcUser]");
 				isDebug = roles.contains("[debug]");
 				
 			}
@@ -61,7 +62,7 @@ function init() {
 			//dBar.debug("editor? " + isEditor + ", user? " + isUser + "");
 			
 			sessionScope.put("isEditor", isEditor);
-			sessionScope.put("isUser", isUser);
+			//sessionScope.put("isUser", isUser);
 			sessionScope.put("isDebug", isDebug);
 			
 			try {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="5b6" sequence="144" unid="59F1D0B96CAA6228C1257ACA004382B1">
+<noteinfo noteid="5b6" sequence="151" unid="59F1D0B96CAA6228C1257ACA004382B1">
 <created><datetime>20121204T131723,69+01</datetime></created>
-<modified><datetime dst="true">20130412T153834,90+02</datetime></modified>
-<revised><datetime dst="true">20130412T153834,89+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130412T153834,90+02</datetime></lastaccessed>
+<modified><datetime dst="true">20130421T215405,82+02</datetime></modified>
+<revised><datetime dst="true">20130421T215405,81+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130421T215405,82+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115519,15+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -15,8 +15,8 @@
 
 
 <item name="$FileNames" sign="true"><text>orgUnit.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5.1</text></item>
 
 
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 </note>

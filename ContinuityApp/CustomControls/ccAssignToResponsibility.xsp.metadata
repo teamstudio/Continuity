@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="696" sequence="260" unid="C2771F6DFFDC2A05C1257B210055C736">
+<noteinfo noteid="696" sequence="263" unid="C2771F6DFFDC2A05C1257B210055C736">
 <created><datetime>20130301T163655,58+01</datetime></created>
-<modified><datetime>20130329T105619,96+01</datetime></modified>
-<revised><datetime>20130329T105619,95+01</datetime></revised>
-<lastaccessed><datetime>20130329T105619,96+01</datetime></lastaccessed>
+<modified><datetime dst="true">20130421T215406,64+02</datetime></modified>
+<revised><datetime dst="true">20130421T215406,63+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130421T215406,64+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T163655,59+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -15,7 +15,7 @@
 
 
 <item name="$FileNames" sign="true"><text>ccAssignToResponsibility.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5.1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 

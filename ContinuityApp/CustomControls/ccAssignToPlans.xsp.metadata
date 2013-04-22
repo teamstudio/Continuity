@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="79a" sequence="29" unid="A668112619742D1BC1257B2500785DCD">
+<noteinfo noteid="79a" sequence="35" unid="A668112619742D1BC1257B2500785DCD">
 <created><datetime>20130305T225443,33+01</datetime></created>
-<modified><datetime>20130306T172240,84+01</datetime></modified>
-<revised><datetime>20130306T172240,83+01</datetime></revised>
-<lastaccessed><datetime>20130306T172240,84+01</datetime></lastaccessed>
+<modified><datetime dst="true">20130421T215406,66+02</datetime></modified>
+<revised><datetime dst="true">20130421T215406,65+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130421T215406,66+02</datetime></lastaccessed>
 <addedtofile><datetime>20130305T225443,34+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -14,9 +14,9 @@
 
 
 
-
-
 <item name="$FileNames" sign="true"><text>ccAssignToPlans.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 </note>

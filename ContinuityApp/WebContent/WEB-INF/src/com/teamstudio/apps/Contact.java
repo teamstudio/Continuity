@@ -256,7 +256,7 @@ public class Contact implements Serializable {
 			
 			userName = "";
 			
-		} else {		//user should have an account (standard user, sys admin)
+		} else {		//user is a 'standard user' or a 'sys admin': setup an account and Unplugged profile
 			
 			//create/ update account document
 			userName = Authorizations.createAccount( userName, firstName, lastName, email);

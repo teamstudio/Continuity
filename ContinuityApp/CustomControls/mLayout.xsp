@@ -63,7 +63,7 @@
 				
 				<xc:this.menuItem>
 					<xc:menuItem itemId="contacts" disabled="false" label="Alphabetical" page="/UnpContacts.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
-					<xc:menuItem itemId="plans" disabled="false" label="By type" page="/UnpContactsByType.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
+					<xc:menuItem itemId="contactsByType" disabled="false" label="By type" page="/UnpContactsByType.xsp" icon="contacts-blue.png" ajaxloadid="contentwrapper" ajaxtargetid="contentwrapper"></xc:menuItem>
 				</xc:this.menuItem>
 			</xc:unpNavigator>
 			
@@ -71,7 +71,7 @@
 			<xc:unpNavigator>
 				<xc:this.rendered><![CDATA[#{javascript:if ( compositeData.showMenu == 'false' ) {
 	return false;
-} else if (sessionScope.isUser || sessionScope.isEditor) {
+} else {
 	return context.getUrl().toString().indexOf('UnpContacts')==-1;
 	//return true;
 }}]]></xc:this.rendered>

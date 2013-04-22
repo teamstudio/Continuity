@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="432" sequence="13" unid="4AE44539134F5945C1257AF7003DCB6D">
+<noteinfo noteid="432" sequence="16" unid="4AE44539134F5945C1257AF7003DCB6D">
 <created><datetime>20130118T121457,73+01</datetime></created>
-<modified><datetime>20130306T172243,98+01</datetime></modified>
-<revised><datetime>20130306T172243,97+01</datetime></revised>
-<lastaccessed><datetime>20130306T172243,98+01</datetime></lastaccessed>
+<modified><datetime dst="true">20130421T215405,90+02</datetime></modified>
+<revised><datetime dst="true">20130421T215405,89+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130421T215405,90+02</datetime></lastaccessed>
 <addedtofile><datetime>20130301T115517,23+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -12,8 +12,8 @@
 
 
 <item name="$FileNames" sign="true"><text>mToolbar.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5</text></item>
 
+<item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 
