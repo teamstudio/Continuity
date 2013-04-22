@@ -1,3 +1,7 @@
+.lotusContent {
+	overflow-x: auto;	
+}
+
 /* sections */
 .section {
 	margin: 0 0 15px 0;
