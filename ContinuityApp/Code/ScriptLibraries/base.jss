@@ -312,28 +312,6 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			vecRoles.recycle();
 			
-			//get call tree order
-			vwRoles = database.getView("vwRolesCallTreeOrder");
-			vecRoles = vwRoles.getAllEntries();
-			veRole = vecRoles.getFirstEntry();
-			
-			var callTreeOrder = [];
-			
-			while (null != veRole) {
-				
-				var colValues = veRole.getColumnValues();
-				callTreeOrder.push( colValues.get(1) );
-				
-				veTemp = vecRoles.getNextEntry();
-				veRole.recycle();
-				veRole = veTemp;
-			}
-
-			applicationScope.put("callTreeOrder", callTreeOrder);		//determines order in the calltree
-			
-			vecRoles.recycle();
-			vwRoles.recycle();
-		
 			//get all ou's
 			var veTemp:NotesViewEntry = null;
 				
@@ -381,6 +359,53 @@ function loadAppConfig( forceUpdate:boolean ) {
 		dBar.error( e.toString() );
 	}
 	
+}
+
+//retrieve the calltree order based on the bc roles in the calltree
+function getCallTreeOrder() {
+	
+	try {
+	
+		if (applicationScope.containsKey("callTreeOrder")) {
+			
+			dBar.debug("get");
+			
+			return applicationScope.get("callTreeOrder");
+			
+		} else {
+			
+			dBar.debug("set");
+			//get call tree order
+			var vwRoles:NotesView = database.getView("vwRolesCallTreeOrder");
+			var vecRoles:ViewEntryCollection = vwRoles.getAllEntries();
+			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
+			
+			var callTreeOrder = [];
+			
+			while (null != veRole) {
+				
+				var colValues = veRole.getColumnValues();
+				callTreeOrder.push( colValues.get(1) );
+				
+				veTemp = vecRoles.getNextEntry();
+				veRole.recycle();
+				veRole = veTemp;
+			}
+	
+			applicationScope.put("callTreeOrder", callTreeOrder);		//determines order in the calltree
+			
+			vecRoles.recycle();
+			vwRoles.recycle();
+			
+		}
+		
+		return applicationScope.get("callTreeOrder");
+		
+	} catch (e) {
+		dBar.error(e);
+		
+	}
+		
 }
 
 //returns the maximum alert level based on all open incidents

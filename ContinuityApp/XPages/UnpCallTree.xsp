@@ -23,7 +23,7 @@
 	//determine ID of the role to show
 var pos = param.get("pos");
 
-var callTreeOrder = applicationScope.get("callTreeOrder");
+var callTreeOrder = getCallTreeOrder();
 
 if (pos == null || pos.length == 0) {		//no calltree position in url: check my role
 
