@@ -210,6 +210,8 @@ public class Organisation implements Serializable {
 			docSettings.replaceItemValue("organisationName", name );
 			docSettings.replaceItemValue("unpluggedDbPath", config.getUnpluggedDbPath());
 			docSettings.replaceItemValue("directoryDbPath", config.getDirectoryDbPath());
+			docSettings.replaceItemValue("senderEmail", config.getSenderEmail());
+			docSettings.replaceItemValue("senderName", config.getSenderName());
 			docSettings.replaceItemValue("docAuthors", Configuration.ROLE_EDITOR).setAuthors(true);
 			
 			docSettings.save();

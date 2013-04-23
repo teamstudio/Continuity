@@ -31,6 +31,9 @@ public class Configuration implements Serializable {
 	private String unpluggedDbPath;
 	private String relativeDbUrl;
 	
+	private String senderEmail;
+	private String senderName;
+	
 	private String adminGroup;
 	
 	private String continuityDbTemplatePath;
@@ -45,6 +48,12 @@ public class Configuration implements Serializable {
 
 	//read the configuration for the logins/ self-service database
 	public Configuration() {
+		
+		this.reload();
+		
+	}
+	
+	public void reload() {
 		
 		Document docSettings = null;
 		Database dbCurrent = null;
@@ -76,7 +85,18 @@ public class Configuration implements Serializable {
 				continuityDbTemplatePath = docSettings.getItemValueString("continuityDbTemplatePath");
 				installBasePath = docSettings.getItemValueString("installBasePath");
 				
-				adminGroup = docSettings.getItemValueString("adminGroup"); 
+				adminGroup = docSettings.getItemValueString("adminGroup");
+				
+				senderEmail = docSettings.getItemValueString("senderEmail");
+				senderName = docSettings.getItemValueString("senderName");
+				
+				//defaults
+				if (senderEmail.length()==0) {
+					senderEmail = "no-reply@continuity.com";
+				}
+				if (senderName.length()==0) {
+					senderName = "Continuity";
+				}
 				
 			}
 			
@@ -88,7 +108,6 @@ public class Configuration implements Serializable {
 		} finally {
 			Utils.incinerate(docSettings, dbCurrent);
 		}
-		
 		
 	}
 	
@@ -280,6 +299,14 @@ public class Configuration implements Serializable {
 	
 	public String getAdminGroup() {
 		return adminGroup;
+	}
+
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+
+	public String getSenderName() {
+		return senderName;
 	}
 		
 	

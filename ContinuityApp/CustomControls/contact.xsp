@@ -149,7 +149,7 @@
 		<xe:formRow id="formRow14" labelPosition="none"
 			styleClass="formSection" disableTheme="true">
 			<xe:formColumn id="formColumn3" colSpan="3">
-				Organisation details
+				<span style="font-size:14px; font-weight: bold; padding: 10px 0;">Organisation details</span>
 			</xe:formColumn>
 		</xe:formRow>
 
@@ -342,7 +342,7 @@
 		<xe:formRow id="formRow6" labelPosition="none"
 			styleClass="formSection" disableTheme="true">
 			<xe:formColumn id="formColumn1" colSpan="3">
-				Contact details
+				<span style="font-size:14px; font-weight: bold; padding: 10px 0;">Contact details</span>
 			</xe:formColumn>
 		</xe:formRow>
 

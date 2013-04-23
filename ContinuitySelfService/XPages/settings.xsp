@@ -127,15 +127,108 @@ if (vw.getEntryCount()>0) {
 					</xp:td>
 				</xp:tr>
 				
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Sender name:"
+							id="label2" for="inputSenderName">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.senderName}"
+							id="inputSenderName" required="true">
+
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xp:td>
+				</xp:tr>
+				
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Sender email address:"
+							id="label3" for="inputSenderEmail">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{docSettings.senderEmail}"
+							id="inputSenderEmail" required="true">
+
+						<xp:this.validators>
+							<xp:validateRequired message="All fields are required"></xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xp:td>
+				</xp:tr>
+				
 				
 			</xp:table>
-
 
 			<xp:button value="Save" id="button1">
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="complete">
-						<xp:this.action><![CDATA[#{javascript:if ( docSettings.save() ) {
-	context.redirectToPage("organisations");
+						<xp:this.action><![CDATA[#{javascript:
+						
+						try {
+							if ( docSettings.save() ) {
+							
+								//reload config bean
+								dBar.info("reload config bean...");
+								configBean.reload();
+							
+							//copy setting to all instances
+							var vwInstances = database.getView("Organisations");
+							
+							dBar.info("copy settings to all instances");
+							
+							var docOrg = vwInstances.getFirstDocument();
+							while(null != docOrg) { 
+							
+								var path = docOrg.getItemValueString("continuityDbPath");
+								var name = docOrg.getItemValueString("name");
+							
+								dBar.info("copy to " + name + " (at: " + path + ")");
+								
+								if (path.length>0) {
+									
+									var dbOrg = session.getDatabase( database.getServer(), path );
+									
+									if (dbOrg.isOpen()) {
+									
+										var vwSettings = dbOrg.getView("vwAllByType");
+										var docSettingsOrg = vwSettings.getAllDocumentsByKey("fSettings", true).getFirstDocument();
+										if (null != docSettingsOrg) {
+										
+											docSettingsOrg.replaceItemValue("senderEmail", docSettings.getItemValueString("senderEmail") );
+											docSettingsOrg.replaceItemValue("senderName", docSettings.getItemValueString("senderName") );
+											docSettingsOrg.save();
+											docSettingsOrg.recycle();
+										
+											dBar.debug("- settings updated");
+										
+										}
+										
+										vwSettings.recycle();
+									
+									
+									} else {
+									
+										dBar.error("could not open Continuity database at " + path);
+									}
+									
+									dbOrg.recycle();
+								}
+							
+								
+								var docTemp = vwInstances.getNextDocument(docOrg)
+								docOrg.recycle();
+								docOrg = docTemp;
+							}
+							
+							
+		context.redirectToPage("organisations");
+	}
+	
+} catch (e) {
+	dBar.error(e);
 }}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>

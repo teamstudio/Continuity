@@ -138,6 +138,9 @@ public class AccountFunctions implements Serializable {
 				mail.setAsSigner(true);
 				mail.setTo(emailAddress);
 				
+				//set sender
+				mail.setSender(config.getSenderEmail(), config.getSenderName());
+				
 				if (isActivation()) {
 					
 					mail.setSubject("Activate your account");
@@ -147,7 +150,7 @@ public class AccountFunctions implements Serializable {
 					mail.addHTML("<p>To activate your Continuity account, open <a href=\"" + linkActive + "\">this</a> link and set a password.</p>" +
 							"<p>After doing so you can use this email address (" + emailAddress + ") and the password you created to configure the Continuity mobile app.</p>" +
 							AccountFunctions.txtLimitedUse);
-					
+										
 					mail.send();
 					
 					Utils.addInfoMessage("An email has been send to you containing instructions on how to complete the activation.");

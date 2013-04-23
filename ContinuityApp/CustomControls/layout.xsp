@@ -1,103 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
+	xmlns:xc="http://www.ibm.com/xsp/custom" dojoParseOnLoad="true">
 
 	<xp:this.resources>
 		<xp:script src="/base.jss" clientSide="false"></xp:script>
-		<xp:styleSheet
-			href="/.ibmxspres/dojoroot/dojox/image/resources/Lightbox.css">
+		<xp:styleSheet href="/.ibmxspres/dojoroot/dojox/image/resources/Lightbox.css">
 		</xp:styleSheet>
 		<xp:dojoModule name="dojox.image.Lightbox"></xp:dojoModule>
 		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
+		<xp:dojoModule name="dijit.Menu"></xp:dojoModule>
 	</xp:this.resources>
 
 	<xp:this.beforePageLoad><![CDATA[#{javascript:init();}]]></xp:this.beforePageLoad>
-	
+
 	<!-- control to keep a user's session alive -->
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
-	
+
 	<!-- debug toolbar -->
 	<xc:ccDebugToolbar defaultCollapsed="true" collapseTo="right">
 		<xc:this.loaded><![CDATA[${javascript:sessionScope.get("isDebug")}]]></xc:this.loaded>
 	</xc:ccDebugToolbar>
-	
+
 	<div class="lotusFrame">
-	
+
 		<div class="lotusBanner" role="banner">
 			<div class="lotusRightCorner">
 				<div class="lotusInner">
 					<!-- app logo -->
-					<span class="logo" style="float:left;vertical-align:middle;margin-right: 5px;">
+					<span class="logo"
+						style="float:left;vertical-align:middle;margin-right: 5px;">
 
-						<xp:link escape="true" text="" id="link1" value="#{applicationScope.thisDbUrl}" title="Continuity">
-							<xp:image url="/continuity_logo_white.png" id="image1" alt="Continuity logo"></xp:image>
+						<xp:link escape="true" text="" id="link1"
+							value="#{applicationScope.thisDbUrl}" title="Continuity">
+							<xp:image url="/continuity_logo_white.png" id="image1"
+								alt="Continuity logo">
+							</xp:image>
 						</xp:link>
 
 					</span>
-					
-					<xe:linksList id="linksList1" styleClass="lotusInlinelist lotusUtility">
-						<xe:this.treeNodes>
 
-							<!-- profile photo -->
-							<xe:basicLeafNode imageHeight="35px" imageWidth="35px"
-								image="#{sessionScope.profilePhotoUrl}" />
 
-							<xe:basicContainerNode styleClass="pointer">
-								<xp:this.label>
-									<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : "")}]]>
-								</xp:this.label>
-								<xe:this.children>
-									<xe:basicLeafNode label="My profile" submitValue="myProfile"
-										loaded="${javascript:sessionScope.profileUnid != null}">
-									</xe:basicLeafNode>
-									<xe:basicLeafNode label="Change password"
-										submitValue="changePassword" loaded="${javascript:sessionScope.profileUnid != null}"
-										rendered="#{javascript:sessionScope.canEdit}">
-									</xe:basicLeafNode>
-								</xe:this.children>
-							</xe:basicContainerNode>
-							<xe:separatorTreeNode></xe:separatorTreeNode>
 
-							<xe:basicLeafNode label="#{configBean.organisationName}"></xe:basicLeafNode>
+		
 
-							<xe:separatorTreeNode></xe:separatorTreeNode>
+					<ul class="lotusInlinelist lotusUtility">
 
-							<xe:basicLeafNode label="Logout" submitValue="logout"></xe:basicLeafNode>
-
-						</xe:this.treeNodes>
+						<xp:panel tagName="li" styleClass="lotusFirst" style="padding: 6px 7px;">
+							<xp:image url="#{sessionScope.profilePhotoUrl}" id="image2" height="35"
+								width="35">
+							</xp:image>
+						</xp:panel>
 						
-						<xp:eventHandler event="onItemClick" submit="true" refreshMode="partial" refreshId="lotusMain" immediate="true">
-							<xp:this.action><![CDATA[#{javascript:var c = context.getSubmittedValue();
-							switch (c ) {
+						<li>
+						
+							<xp:link escape="true" id="link3" text="">
 							
-							case "myProfile":
+								<xp:text escape="true" id="computedField1" style="font-weight: bold"><xp:this.value>
+								<![CDATA[#{javascript:sessionScope.name  + (sessionScope.isEditor ? " (editor)" : "")}]]>
+								</xp:this.value></xp:text>
 							
+								
+									<img class="lotusArrow lotusDropDownSprite"
+									src="/oneuiv2.1/images/blank.gif" style="margin-left: 3px" aria-label="Show Menu"
+									alt="Show Menu" />
+									
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.openMenu(thisEvent, #{javascript:getComponent('popupMenu1').getMenuCtor()})]]>
+									</xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+							<xe:popupMenu id="popupMenu1">
+								<xe:this.treeNodes>
+								
+									<xe:basicLeafNode label="My profile" submitValue="profile" loaded="${javascript:sessionScope.profileUnid != null}" />
+									<xe:basicLeafNode label="Change password" submitValue="changePassword" loaded="${javascript:sessionScope.profileUnid != null}"
+										rendered="#{javascript:sessionScope.canEdit}" />
+													
+								</xe:this.treeNodes>
+								<xp:eventHandler event="onItemClick" submit="true" refreshMode="partial"
+									refreshId="lotusMain" immediate="true">
+									<xp:this.action><![CDATA[#{javascript:switch (context.getSubmittedValue()) {
+
+							case "profile":
+
 								var id =  sessionScope.get("profileUnid");
 								getComponent("dynamicContent1").show("contactForm", {action:'openDocument',documentId:id });
 								break;
-							
+
 							case "changePassword":
-							
+
 								getComponent("dynamicContent1").show("changePasswordForm");
 								break;
+							}
 									
-					case "logout":
-					
-						//logout link clicked: clear sessionscope and logoff
-						var iter = sessionScope.keySet().iterator();
-						while( iter.hasNext() ){ 
-						   sessionScope.remove( iter.next() );
-						}
+						}]]></xp:this.action>
+								</xp:eventHandler>
+							</xe:popupMenu>
 						
-						//facesContext.getExternalContext().redirect("/names.nsf?logout&redirectTo=" + applicationScope.get("thisDbUrl") );
-						facesContext.getExternalContext().redirect("/names.nsf?logout&redirectTo=/");
-						
-						break;
-				
-				}}]]></xp:this.action>
-						</xp:eventHandler>
-					</xe:linksList>
-			
+						</li>
+
+						<xp:panel tagName="li"
+							style="color: #fff; padding: 7px 7px; font-weight:bold">
+							<xp:text escape="false" disableTheme="true"
+								value="#{configBean.organisationName}">
+							</xp:text>
+						</xp:panel>
+
+						<xp:panel tagName="li">
+							<xp:link escape="true" text="Logout" id="link2">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="norefresh" immediate="true">
+									<xp:this.action><![CDATA[#{javascript://logout link clicked: clear sessionscope and logoff
+	var iter = sessionScope.keySet().iterator();
+	while( iter.hasNext() ){ 
+	   sessionScope.remove( iter.next() );
+	}
+	
+	facesContext.getExternalContext().redirect("/names.nsf?logout&redirectTo=/");}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+
+
+					</ul>
+
 				</div>
 			</div>
 		</div>
@@ -121,24 +147,24 @@
 		</div>
 
 		<xp:div styleClass="lotusMain" id="lotusMain">
-		
+
 			<div class="lotusColLeft">
 
 				<xp:callback facetName="facetLeft" id="facetLeft"></xp:callback>
-			
+
 				<!-- version -->
 				<div class="lotusTiny" style="margin: 35px 0 5px 20px; color: #aaaaaa;">
 					<xp:text escape="false" disableTheme="true" value="#{configBean.appVersion}"></xp:text>
 				</div>
 
 			</div>
-			
+
 			<div class="lotusContent">
-			
+
 				<xp:callback facetName="facetMiddle" id="facetMiddle"></xp:callback>
-				
+
 			</div>
-			
+
 		</xp:div>
 	</div>
 

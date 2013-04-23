@@ -22,6 +22,8 @@ public class Configuration implements Serializable {
 	private String directoryDbPath;
 	private String unpluggedDbPath;
 	private String continuityDbPath;
+	private String senderEmail;
+	private String senderName;
 	
 	private static String DATA_VERSION = "100";
 	
@@ -88,6 +90,17 @@ public class Configuration implements Serializable {
 				directoryDbPath = docSettings.getItemValueString("directoryDbPath");
 				unpluggedDbPath = docSettings.getItemValueString("unpluggedDbPath");
 				
+				senderEmail = docSettings.getItemValueString("senderEmail");
+				senderName = docSettings.getItemValueString("senderName");
+				
+				//defaults
+				if (senderEmail.length()==0) {
+					senderEmail = "no-reply@continuity.com";
+				}
+				if (senderName.length()==0) {
+					senderName = "Continuity";
+				}
+				
 				//labels
 				if (docSettings.getItemValueString("riskNaming").equals("activities")) {
 					labels.put("assets", "Activities");
@@ -150,6 +163,14 @@ public class Configuration implements Serializable {
 
 	public String getServerName() {
 		return serverName;
+	}
+
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+
+	public String getSenderName() {
+		return senderName;
 	}
 		
 }

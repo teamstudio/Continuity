@@ -273,7 +273,8 @@ var dBarHelper = {
 				viewScope.put( 'expressionInfo', "" );		
 				eu.linqed.debugtoolbar.DebugToolbar.addInspectorMessage(exceptionString);
 				
-			} else {				
+			} else {
+				
 				viewScope.put( 'expressionInfo', {
 					className: className,	
 					value: expressionValue
