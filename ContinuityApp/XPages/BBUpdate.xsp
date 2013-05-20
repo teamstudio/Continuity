@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Update Details">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docUpdate" formName="fUpdate"
+			action="openDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:panel>
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Created By:"
+						id="createdByName_Label1" for="createdByName1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docUpdate.createdByName}"
+						id="createdByName1">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Created Date:" id="label1"></xp:label></xp:td>
+				<xp:td>
+				<xp:label value="#{javascript:@Text(docUpdate.getDocument().getCreated());}" id="label2"></xp:label>
+				</xp:td>
+			</xp:tr>
+			
+		</xp:table>
+	</xp:panel>
+	<xp:label value="" id="label3"></xp:label>
+	<xp:inputText value="#{docUpdate.message}" id="message1"
+		style="color:rgb(255,0,0)">
+	</xp:inputText>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="$$PreviousPage">
+		</xp:navigationRule>
+	</xp:this.navigationRules>
+	
+</xp:view>

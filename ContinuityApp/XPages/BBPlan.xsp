@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoDocument var="docScenario" formName="fScenario"
+			action="openDocument">
+		</xp:dominoDocument>
+		<xp:dominoView var="viewTasks"
+			viewName="BBvwTasksByParentByTaskCat">
+			<xp:this.categoryFilter><![CDATA[#{javascript:docScenario.getDocument().getItemValueString("id");}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+
+	</xp:this.data>
+
+	<xp:this.pageTitle><![CDATA[#{javascript:docScenario.getDocument().getItemValueString("Name");}]]></xp:this.pageTitle>
+	<xp:panel>
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:inputText value="#{docScenario.description}"
+						id="description1">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:panel>
+	<xp:label value="" id="label2"></xp:label>
+	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
+		showColumnHeader="false">
+
+		<xp:viewColumn columnName="categoryDesc" id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Category desc"
+					xp:key="header" id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="name" id="viewColumn2">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="description" id="viewColumn3">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Description" xp:key="header"
+					id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+	
+
+
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="$$PreviousPage">
+		</xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>

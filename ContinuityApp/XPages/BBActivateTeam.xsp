@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="New Incident">
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
+	</xp:this.data>
+	<xp:panel>
+		<xp:label id="label1"
+			value="Activate the BCM Team. Enter a short description of the current incident below. Linking this incident to an existing plan is optional.">
+		</xp:label>
+	</xp:panel>
+	<xp:panel>
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Description:"
+						id="description_Label1" for="description1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docIncident.description}"
+						id="description1">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Site:" id="siteName_Label1"
+						for="siteName1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+
+					<xp:comboBox id="comboBox3"
+						value="#{docIncident.siteName}">
+						<xp:selectItems id="selectItems1">
+							<xp:this.value><![CDATA[#{javascript:return sessionScope.get("siteNames");}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:comboBox>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Scenario:" id="scenarioName_Label1"
+						for="scenarioName1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docIncident.scenarioName}"
+						id="scenarioName1">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Alert level:"
+						id="alertLevel_Label1" for="alertLevel1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:comboBox id="comboBox2"
+						value="#{docIncident.alertLevel}">
+						<xp:selectItem itemLabel="Normal"
+							itemValue="Normal" id="selectItem1">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Elevated"
+							itemValue="Elevated" id="selectItem2">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="High Level"
+							itemValue="High Level" id="selectItem3">
+						</xp:selectItem>
+					</xp:comboBox>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Exercise?:" id="test_Label1"
+						for="test1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:comboBox id="comboBox1"
+						value="#{docIncident.isRehearsal}">
+						<xp:selectItem itemLabel="Yes"
+							itemValue="Yes" id="selectItem4">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="No" itemValue="No" id="selectItem5"></xp:selectItem>
+					</xp:comboBox>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+
+	</xp:panel>
+	
+	<xp:button id="button1" value="Activate"
+		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+
+				<xp:actionGroup>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:var out = "";
+
+if (applicationScope.isReadOnlyMode) {
+	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
+} else {
+	if ($('#scenarioId').val()=='none') { 
+		confirm('Are you sure you want to create an incident without linking it to a scenario?');
+	}
+	docIncident.getDocument().save();
+}}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:openPage name="/BBIncidents.xsp"
+						target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+		<xp:navigationRule outcome="xsp-failure" viewId="/BBMain.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:button value=" Cancel " id="button2"
+		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBMain.xsp" target="openDocument">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br><xp:button id="button3" value="Activate">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+
+				<xp:actionGroup>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:var out = "";
+
+if (applicationScope.isReadOnlyMode) {
+	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
+} else {
+	if ($('#scenarioId').val()=='none') { 
+		confirm('Are you sure you want to create an incident without linking it to a scenario?');
+	}
+	docIncident.getDocument().save();
+}}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:openPage name="/BBIncidents.xsp" target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+
+	
+	<xp:button value=" Cancel " id="button4">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBMain.xsp" target="openDocument">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button></xp:view>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Incident List:">
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="/BBMain.xsp">
+		</xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:this.data>
+		<xp:dominoView var="viewIncidents"
+			viewName="BBvwIncidentsByCat">
+		</xp:dominoView>
+	</xp:this.data>
+	
+	<xp:panel
+		rendered="#{javascript:viewIncidents.getEntryCount() == 0;}">
+		<xp:label id="label2" value="No incidents found!!"></xp:label>
+</xp:panel>
+
+	<xp:br></xp:br>
+	<xp:viewPanel rows="30" id="viewPanel1" pageName="/BBIncident.xsp"
+		showColumnHeader="false">
+
+		<xp:this.data>
+			<xp:dominoView var="viewIncidentsCat"
+				viewName="BBvwIncidentsByCat">
+			</xp:dominoView>
+		</xp:this.data>
+		<xp:viewColumn columnName="cat" id="viewColumn1">
+			<xp:viewColumnHeader value="cat" id="viewColumnHeader1"></xp:viewColumnHeader>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="description" id="viewColumn2" displayAs="link">
+			<xp:viewColumnHeader value="description"
+				id="viewColumnHeader2">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="createdDate" id="viewColumn3">
+			<xp:viewColumnHeader value="created"
+				id="viewColumnHeader3">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+	</xp:viewPanel></xp:view>

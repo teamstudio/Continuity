@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Call Tree:">
+	<xp:this.data>
+		<xp:dominoView var="viewContacts" viewName="vwContactsByRole">
+			<xp:this.categoryFilter><![CDATA[#{javascript:var ou = sessionScope.get("orgUnitId");
+var roleId = sessionScope.get("roleId");
+return ou + "-" + roleId;
+}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if(!applicationScope.containsKey("callTreeOrder")){
+	try{		
+		//get call tree order
+		vwRoles = database.getView("vwRolesCallTreeOrder");
+		vecRoles = vwRoles.getAllEntries();
+		veRole = vecRoles.getFirstEntry();
+			
+		var callTreeOrder = [];
+			
+		while (null != veRole) {
+				
+			var colValues = veRole.getColumnValues();
+			callTreeOrder.push( colValues.get(1) );
+				
+			veTemp = vecRoles.getNextEntry();
+			veRole.recycle();
+			veRole = veTemp;
+		}
+
+		applicationScope.put("callTreeOrder", callTreeOrder);		//determines order in the calltree
+			
+		vecRoles.recycle();
+		vwRoles.recycle();
+	}
+	catch(e){
+	}
+}}]]></xp:this.beforePageLoad>
+	<xp:viewPanel value="#{viewContacts}" id="viewPanel1"
+		pageName="/BBContactDetails.xsp" showColumnHeader="false">
+
+		<xp:viewColumn columnName="name" id="viewColumn1"
+			displayAs="link" openDocAsReadonly="true">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="jobTitle" id="viewColumn2">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Job title" xp:key="header"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel></xp:view>

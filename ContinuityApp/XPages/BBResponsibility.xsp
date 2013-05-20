@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Tasks:">
+	<xp:this.data>
+		<xp:dominoDocument var="docResponsibility"
+			formName="fResponsibility" action="openDocument">
+		</xp:dominoDocument>
+		<xp:dominoView var="viewTasks" viewName="BBvwTasksByRespId">
+			<xp:this.categoryFilter><![CDATA[#{javascript:docResponsibility.getDocument().getItemValueString("id");}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="$$PreviousPage">
+		</xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:panel>
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:text id="name1">
+					<xp:this.value><![CDATA[#{javascript:"Responsibility: " + docResponsibility.getItemValueString("name");}]]></xp:this.value>
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	</xp:panel>
+	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
+		showColumnHeader="false">
+
+		<xp:viewColumn columnName="planname" id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Planname" xp:key="header"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="name" id="viewColumn2"
+			style="color:rgb(0,0,255)">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="description" id="viewColumn3"
+			style="height: 2em">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Description" xp:key="header"
+					id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+	<xp:br></xp:br>
+</xp:view>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B71004D250E" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="6ea" sequence="4" unid="D02542572BB7FC2085257B71004D50C1">
+<created><datetime dst="true">20130520T100429,45-04</datetime></created>
+<modified><datetime dst="true">20130520T100434,94-04</datetime></modified>
+<revised><datetime dst="true">20130520T100434,93-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130520T100434,94-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130520T100429,48-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<item name="$TITLE"><text>BBIncidents.xsp</text></item>
+<item name="$Flags"><text>gC~4K</text></item>
+
+
+<item name="$FileNames" sign="true"><text>BBIncidents.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+
+</note>
