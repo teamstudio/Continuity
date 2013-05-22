@@ -90,14 +90,17 @@ while (null != entry) {
 	entry = entryCollection.getNextEntry();
 	 
 }
-var doc = docIncident.getDocument();
+/*var doc = docIncident.getDocument();
 docIncident.replaceItemValue(  "SendTo",  @Explode(contactList) );
 docIncident.replaceItemValue(  "From", "BC Global" );
 docIncident.replaceItemValue(  "Subject", "Continuity Test [from BB] - " + docIncident.getItemValueString("description") );
 docIncident.replaceItemValue(  "Body", docIncident.getItemValueString("message") + "\n");
 docIncident.save();
 doc.replaceItemValue("Form", "Memo");
-doc.send();
+doc.send();*/
+
+sendMail( contactList, "Continuity Test [from BB] - " + docIncident.getItemValueString("description"), docIncident.getItemValueString("message") + "\n", sessionScope.email, sessionScope.name )
+
 db = session.getCurrentDatabase();
 db.replicate();
 mailDb = @MailDbName();
@@ -105,7 +108,6 @@ dbMail = session.getDatabase(mailDb[0], mailDb[1]);
 dbMail.replicate();
 dbMail.close();
 
-context.redirectToPage("BBIncidents.xsp");
 }}]]></xp:this.script>
 					</xp:executeScript>
 				</xp:actionGroup>

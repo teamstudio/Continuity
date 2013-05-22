@@ -25,7 +25,7 @@
 	</xp:panel>
 	<xp:label value="" id="label2"></xp:label>
 	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
-		showColumnHeader="false">
+		showColumnHeader="false" pageName="/BBPlanDescription.xsp">
 
 		<xp:viewColumn columnName="categoryDesc" id="viewColumn1">
 			<xp:this.facets>
@@ -34,20 +34,14 @@
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="name" id="viewColumn2">
+		<xp:viewColumn columnName="name" id="viewColumn2" displayAs="link">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Name" xp:key="header"
 					id="viewColumnHeader2">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="description" id="viewColumn3">
-			<xp:this.facets>
-				<xp:viewColumnHeader value="Description" xp:key="header"
-					id="viewColumnHeader3">
-				</xp:viewColumnHeader>
-			</xp:this.facets>
-		</xp:viewColumn>
+		
 	</xp:viewPanel>
 	
 

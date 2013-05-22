@@ -19,7 +19,7 @@
 	</xp:table>
 	<xp:table style="background-color:rgb(61,61,61)">
 		<xp:tr>
-			<xp:td style="width:200.0px">
+			<xp:td>
 				<!--				<xp:label id="label13">-->
 				<!--
 					<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisUNID");}]]></xp:this.value>
@@ -32,9 +32,11 @@
 				-->
 				<!--				</xp:label>-->
 				<xp:label id="headeritem" style="color:rgb(255,255,255)">
-					<xp:this.value><![CDATA[#{javascript:applicationScope.get("name");}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:sessionScope.get("name");}]]></xp:this.value>
 				</xp:label>
 			</xp:td>
+			</xp:tr>
+			<xp:tr>
 			<xp:td>
 				<xp:text escape="false" value="#{javascript:sessionScope.roleName}"
 					id="computedField2" style="color:rgb(255,255,255)">

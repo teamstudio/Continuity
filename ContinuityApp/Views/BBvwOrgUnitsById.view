@@ -2,11 +2,11 @@
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
  replicaid='85257B71004D250E'>
-<noteinfo noteid='6b6' unid='D872138F519DB97985257B71004D3A4D' sequence='1'>
+<noteinfo noteid='6b6' unid='D872138F519DB97985257B71004D3A4D' sequence='2'>
 <created><datetime dst='true'>20130520T100331,97-04</datetime></created>
-<modified><datetime dst='true'>20130520T100332,03-04</datetime></modified>
-<revised><datetime dst='true'>20130520T100332,02-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130520T100332,03-04</datetime></lastaccessed>
+<modified><datetime dst='true'>20130521T221543,10-04</datetime></modified>
+<revised><datetime dst='true'>20130521T221543,09-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130521T221543,10-04</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130520T100332,03-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
@@ -25,11 +25,11 @@ bQEACABmT3JnVW5pdAoCAwAHAAoABAAJTDFT
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
-BgAAAABE
+DwABAABEAGYAAAACAGlk
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQAFAAYACAAAAFZDAAACAAIAAAAAAKUAAQAACgAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAUAAB
+AQAFAAYACAAAAFZDAQACAAIAAAAAAL4AAQAACgAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAZwAB
 AAAKAAAAAAAAAAAAAgIAAABWQwAAAgAKADoAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAJAAkA
 AAAAAKQAAQAACgAAAAAAAAAAAAICAAAAVkPAAAkACQA+AAAAUAABAAAKAAAAAAAAAAAAAgIAAABp
 ZGlkbmFtZW5hbWUkNWFsZXJ0TGV2ZWw6AAIALAACACQ1AQANAEFsZXJ0IGxldmVsOiAABQAKAGFs

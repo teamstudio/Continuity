@@ -4,6 +4,9 @@
 	<xp:this.data>
 		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
 	</xp:this.data>
+	<xp:this.resources>
+		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
 	<xp:panel>
 		<xp:label id="label1"
 			value="Activate the BCM Team. Enter a short description of the current incident below. Linking this incident to an existing plan is optional.">
@@ -23,19 +26,45 @@
 					</xp:inputText>
 				</xp:td>
 			</xp:tr>
-			
+
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Site:" id="siteName_Label1"
+					<xp:label value="Asset:" id="siteName_Label1"
 						for="siteName1">
 					</xp:label>
 				</xp:td>
 				<xp:td>
-
 					<xp:comboBox id="comboBox3"
 						value="#{docIncident.siteName}">
 						<xp:selectItems id="selectItems1">
-							<xp:this.value><![CDATA[#{javascript:return sessionScope.get("siteNames");}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:
+							var assetLookUp = @DbColumn("", "BBvwAssetDetails", 1);
+							var assets = "None found";
+if (assetLookUp != undefined){
+	var assets = (assetLookUp.constructor == Array) ? assetLookUp : [ assetLookUp ];
+}
+							return assets.sort();}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:comboBox>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Org unit" id="label4"
+						for="orgUnitId">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:comboBox id="orgUnitId"
+						value="#{docIncident.orgUnitId}"
+						defaultValue="#{javascript:sessionScope.orgUnitName}">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "vwOrgUnits", 2);
+var oUnits = "None found";
+if (DBLResult != undefined){
+	var oUnits = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
+}
+return oUnits;}]]></xp:this.value>
 						</xp:selectItems>
 					</xp:comboBox>
 				</xp:td>
@@ -47,9 +76,18 @@
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:inputText value="#{docIncident.scenarioName}"
-						id="scenarioName1">
-					</xp:inputText>
+					<xp:comboBox id="comboBox4"
+						value="#{docIncident.scenarioName}"
+						defaultValue="#{javascript:sessionScope.orgUnitId}">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
+var scenarios = "None found";
+if (DBLResult != undefined){
+	var scenarios = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
+}
+return scenarios;}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:comboBox>
 				</xp:td>
 			</xp:tr>
 			<xp:tr>
@@ -82,19 +120,85 @@
 				<xp:td>
 					<xp:comboBox id="comboBox1"
 						value="#{docIncident.isRehearsal}">
-						<xp:selectItem itemLabel="Yes"
-							itemValue="Yes" id="selectItem4">
+						<xp:selectItem itemLabel="Yes" itemValue="Yes"
+							id="selectItem4">
 						</xp:selectItem>
-						<xp:selectItem itemLabel="No" itemValue="No" id="selectItem5"></xp:selectItem>
+						<xp:selectItem itemLabel="No" itemValue="No"
+							id="selectItem5">
+						</xp:selectItem>
 					</xp:comboBox>
 				</xp:td>
 			</xp:tr>
 		</xp:table>
 
 	</xp:panel>
-	
+
 	<xp:button id="button1" value="Activate"
 		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+
+				<xp:actionGroup>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+if (applicationScope.isReadOnlyMode) {
+	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
+} else {
+	var doc = docIncident.getDocument();
+	doc.save();
+	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BASE.JS ONCE SUPPORTED
+	var DBScenarioResult = @DbLookup( "", "BBvwAllScenarios", doc.getItemValueString("scenarioName"),2);
+	var scenarioId = "None";
+	if (DBScenarioResult != undefined){
+		var scenarioId = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
+	}
+	doc.replaceItemValue("scenarioId", scenarioId);
+
+	var DBSiteIdResult = @DbLookup( "", "BBvwAssetDetails", doc.getItemValueString("siteName"),6);
+	if (DBSiteIdResult != undefined){
+		var siteId = (DBSiteIdResult.constructor == Array) ? DBSiteIdResult : [ DBSiteIdResult ];
+	}
+	doc.replaceItemValue("siteId", siteId);
+	
+	var DBOrgNameResult = @DbLookup( "", "BBvwOrgUnitsById", doc.getItemValueString("orgUnitId"),2);
+	if (DBOrgNameResult != undefined){
+		var orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
+	}
+	doc.replaceItemValue("orgUnitName", orgName);
+	
+	doc.replaceItemValue("formname", "fIncident");
+	
+	doc.save();	
+	
+	processNewActivation(doc);	
+}}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:openPage name="/BBIncidents.xsp"
+						target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+		<xp:navigationRule outcome="xsp-failure" viewId="/BBMain.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:button value=" Cancel " id="button2"
+		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBMain.xsp" target="openDocument">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	<xp:button id="button3" value="Activate">
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
@@ -121,12 +225,8 @@ if (applicationScope.isReadOnlyMode) {
 	</xp:button>
 	<xp:br></xp:br>
 
-	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
-		<xp:navigationRule outcome="xsp-failure" viewId="/BBMain.xsp"></xp:navigationRule>
-	</xp:this.navigationRules>
-	<xp:button value=" Cancel " id="button2"
-		style="-unp-menuButton:false;">
+
+	<xp:button value="Cancel" id="button4">
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
@@ -135,37 +235,4 @@ if (applicationScope.isReadOnlyMode) {
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
-	<xp:br></xp:br><xp:button id="button3" value="Activate">
-		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-			<xp:this.action>
-
-				<xp:actionGroup>
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:var out = "";
-
-if (applicationScope.isReadOnlyMode) {
-	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
-} else {
-	if ($('#scenarioId').val()=='none') { 
-		confirm('Are you sure you want to create an incident without linking it to a scenario?');
-	}
-	docIncident.getDocument().save();
-}}]]></xp:this.script>
-					</xp:executeScript>
-					<xp:openPage name="/BBIncidents.xsp" target="openDocument">
-					</xp:openPage>
-				</xp:actionGroup>
-			</xp:this.action>
-		</xp:eventHandler>
-	</xp:button>
-	<xp:br></xp:br>
-
-	
-	<xp:button value=" Cancel " id="button4">
-		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-			<xp:this.action>
-				<xp:openPage name="/BBMain.xsp" target="openDocument">
-				</xp:openPage>
-			</xp:this.action>
-		</xp:eventHandler>
-	</xp:button></xp:view>
+</xp:view>

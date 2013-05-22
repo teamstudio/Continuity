@@ -1,14 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1172' unid='CF344DC21EA9980FC1257B44002C4039' sequence='5'>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B71004D250E'>
+<noteinfo noteid='2da' unid='CF344DC21EA9980FC1257B44002C4039' sequence='5'>
 <created><datetime dst='true'>20130405T100320,25+02</datetime></created>
-<modified><datetime dst='true'>20130412T132809,93+02</datetime></modified>
-<revised><datetime dst='true'>20130412T132809,92+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130414T213333,70+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100322,66+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<modified><datetime dst='true'>20130521T175234,63-04</datetime></modified>
+<revised><datetime dst='true'>20130521T175234,62-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130521T175234,63-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130520T100244,05-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>vwAssets</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 mgACACIAAgAkMAUABABuYW1lAQABAHwAIgIFAAIAaWQiAgMAAgAQAAYAcGhvdG9zcwADAAUAPgA5
@@ -21,7 +24,7 @@ EQABAABEgGYAAAAEAG5hbWU=
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQAFAAUACAAAAFZDAQAEAAQAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIABwA0AAAAUAAB
+AQAFAAUACAAAAFZDAQAEAAQAAAAAAIEAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIABwA0AAAANgEB
 AAAKAAAAAAAAAAAAAgIAAABWQwAABwAHAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAHAAcA
 AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAYABgASAAAAUAABAAAKAAAAAAAAAAAAAgIAAABu
 YW1lbmFtZSQwbmFtZSBpZDQAAgAiAAIAJDAFAAQAbmFtZQEAAQB8ACICBQACAGlkIgIDAAcAEAAJ
@@ -36,6 +39,5 @@ AAAAAAgAAAAAAAEA
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$TITLE' sign='true'><text>vwAssets</text></item>
-<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
 

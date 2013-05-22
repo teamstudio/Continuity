@@ -11,7 +11,7 @@ return ou + "-" + roleId;
 	</xp:this.data>
 
 	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+		<xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule>
 	</xp:this.navigationRules>
 	<xp:this.beforePageLoad><![CDATA[#{javascript:if(!applicationScope.containsKey("callTreeOrder")){
 	try{		
