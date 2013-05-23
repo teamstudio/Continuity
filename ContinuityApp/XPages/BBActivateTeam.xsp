@@ -57,7 +57,7 @@ if (assetLookUp != undefined){
 				<xp:td>
 					<xp:comboBox id="orgUnitId"
 						value="#{docIncident.orgUnitId}"
-						defaultValue="#{javascript:sessionScope.orgUnitName}">
+						defaultValue="#{javascript:sessionScope.orgUnitId}">
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "vwOrgUnits", 2);
 var oUnits = "None found";
@@ -77,9 +77,8 @@ return oUnits;}]]></xp:this.value>
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="comboBox4"
-						value="#{docIncident.scenarioName}"
-						defaultValue="#{javascript:sessionScope.orgUnitId}">
-						<xp:selectItems>
+						value="#{docIncident.scenarioName}">
+						<xp:selectItem itemLabel="Please select..."></xp:selectItem><xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
 var scenarios = "None found";
 if (DBLResult != undefined){
@@ -87,6 +86,7 @@ if (DBLResult != undefined){
 }
 return scenarios;}]]></xp:this.value>
 						</xp:selectItems>
+						
 					</xp:comboBox>
 				</xp:td>
 			</xp:tr>
@@ -100,13 +100,13 @@ return scenarios;}]]></xp:this.value>
 					<xp:comboBox id="comboBox2"
 						value="#{docIncident.alertLevel}">
 						<xp:selectItem itemLabel="Normal"
-							itemValue="Normal" id="selectItem1">
+							itemValue="normal" id="selectItem1">
 						</xp:selectItem>
 						<xp:selectItem itemLabel="Elevated"
-							itemValue="Elevated" id="selectItem2">
+							itemValue="elevated" id="selectItem2">
 						</xp:selectItem>
-						<xp:selectItem itemLabel="High Level"
-							itemValue="High Level" id="selectItem3">
+						<xp:selectItem itemLabel="High"
+							itemValue="high" id="selectItem3">
 						</xp:selectItem>
 					</xp:comboBox>
 				</xp:td>
@@ -119,11 +119,11 @@ return scenarios;}]]></xp:this.value>
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="comboBox1"
-						value="#{docIncident.isRehearsal}">
-						<xp:selectItem itemLabel="Yes" itemValue="Yes"
+						value="#{docIncident.isRehearsal}" defaultValue="yes">
+						<xp:selectItem itemLabel="Yes" itemValue="yes"
 							id="selectItem4">
 						</xp:selectItem>
-						<xp:selectItem itemLabel="No" itemValue="No"
+						<xp:selectItem itemLabel="No" itemValue="no"
 							id="selectItem5">
 						</xp:selectItem>
 					</xp:comboBox>
@@ -135,16 +135,28 @@ return scenarios;}]]></xp:this.value>
 
 	<xp:button id="button1" value="Activate"
 		style="-unp-menuButton:false;">
-		<xp:eventHandler event="onclick" submit="true"
-			refreshMode="complete">
-			<xp:this.action>
+		
+	<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+		<xp:this.action>
+			<xp:actionGroup>
 
-				<xp:actionGroup>
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:
+
+
+				<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
+		alert("Description cannot be blank!");
+		return false;
+}
+if(docIncident.getItemValueString("scenarioName") == "Please select..."){
+		alert("Please select a scenario!");
+		return false;
+}	}]]></xp:this.condition>
+				<xp:executeScript>
+					<xp:this.script><![CDATA[#{javascript:						
 if (applicationScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
-} else {
+} 
+else {
+	
 	var doc = docIncident.getDocument();
 	doc.save();
 	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BASE.JS ONCE SUPPORTED
@@ -161,32 +173,46 @@ if (applicationScope.isReadOnlyMode) {
 	}
 	doc.replaceItemValue("siteId", siteId);
 	
+	var orgName = "none";
 	var DBOrgNameResult = @DbLookup( "", "BBvwOrgUnitsById", doc.getItemValueString("orgUnitId"),2);
 	if (DBOrgNameResult != undefined){
-		var orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
+		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
 	}
 	doc.replaceItemValue("orgUnitName", orgName);
+	sessionScope.put("orgUnitName", orgName);
+	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
 	
 	doc.replaceItemValue("formname", "fIncident");
 	
 	doc.save();	
+	print("OU NAME" + doc.getItemValue("orgUnitName"));
+	print("OU ID" + doc.getItemValue("orgUnitId"));
+	print("SCENARIO NAME" + doc.getItemValue("scenarioName"));
+	print("SCENARIO ID" + doc.getItemValue("scenarioId"));
+	print("SITE NAME" + doc.getItemValue("siteName"));
+	print("SITE ID" + doc.getItemValue("siteId"));
 	
-	processNewActivation(doc);	
-}}]]></xp:this.script>
-					</xp:executeScript>
-					<xp:openPage name="/BBIncidents.xsp"
-						target="openDocument">
-					</xp:openPage>
-				</xp:actionGroup>
-			</xp:this.action>
-		</xp:eventHandler>
-	</xp:button>
+	processNewActivation(doc);
+	var db = session.getCurrentDatabase();
+	db.replicate();
+	mailDb = @MailDbName();
+	dbMail = session.getDatabase(mailDb[0], mailDb[1]);
+	dbMail.replicate();
+	dbMail.close();
+	
+}
+}]]></xp:this.script>
+				</xp:executeScript>
+
+
+				<xp:openPage name="/BBIncidents.xsp"
+					target="openDocument">
+				</xp:openPage>
+			</xp:actionGroup>
+		</xp:this.action></xp:eventHandler></xp:button>
 	<xp:br></xp:br>
 
-	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
-		<xp:navigationRule outcome="xsp-failure" viewId="/BBMain.xsp"></xp:navigationRule>
-	</xp:this.navigationRules>
+	
 	<xp:button value=" Cancel " id="button2"
 		style="-unp-menuButton:false;">
 		<xp:eventHandler event="onclick" submit="true"
