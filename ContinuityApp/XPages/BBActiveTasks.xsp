@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"><xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument">
+		</xp:dominoDocument>
+		<xp:dominoView var="viewTasks" viewName="BBvwTasksByIncident">
+			<xp:this.categoryFilter><![CDATA[#{javascript:docIncident.getDocument().getItemValueString("id");}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data><xp:this.resources>
+		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
+	</xp:this.resources><xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBIncidents.xsp">
+		</xp:navigationRule>
+	</xp:this.navigationRules><xp:this.beforePageLoad>
+		<xp:executeScript>
+			<xp:this.script><![CDATA[#{javascript:var docThis = docIncident.getDocument();
+sessionScope.put("docUnid", docThis.getUniversalID());
+var numOpenTasks = 0;
+var t = @DbLookup( @DbName(), "vwTasksAssignedOpen", docIncident.getItemValueString("id"), 2, "[FailSilent]");
+if (t != null && t != "") {
+	numOpenTasks = @Elements(t);
+}
+print("OPEN TASKS = " + numOpenTasks);
+viewScope.put("numOpenTasks", numOpenTasks);
+
+}]]></xp:this.script>
+		</xp:executeScript>
+	</xp:this.beforePageLoad><xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle><xp:label id="label2" value="Tasks:"></xp:label>
+	<xp:br></xp:br>
+
+	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
+		showColumnHeader="false">
+
+		<xp:viewColumn columnName="cat" id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Cat" xp:key="header"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="name" id="viewColumn2"
+			style="color:rgb(0,0,255)">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="roleNames" id="viewColumn3">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Role names" xp:key="header"
+					id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+	<xp:br></xp:br>
+</xp:view>
+

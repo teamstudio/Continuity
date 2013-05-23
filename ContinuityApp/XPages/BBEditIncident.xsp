@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	pageTitle="New Incident">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Incident">
 	<xp:this.data>
 		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
 	</xp:this.data>
 	<xp:this.resources>
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
-
 	<xp:panel>
 		<xp:label id="label1"
 			value="Activate the BCM Team. Enter a short description of the current incident below. Linking this incident to an existing plan is optional.">
@@ -59,7 +57,7 @@ if (assetLookUp != undefined){
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="orgUnitId"
-						value="#{docIncident.orgUnitId}">
+						value="#{docIncident.orgUnitId}" readonly="true">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "vwOrgUnits", 2);
@@ -81,7 +79,7 @@ return oUnits;}]]></xp:this.value>
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="comboBox4"
-						value="#{docIncident.scenarioName}">
+						value="#{docIncident.scenarioName}" readonly="true">
 						<xp:selectItem itemLabel="Please select..."></xp:selectItem>
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
@@ -124,7 +122,7 @@ return scenarios;}]]></xp:this.value>
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="comboBox1"
-						value="#{docIncident.isRehearsal}" defaultValue="yes">
+						value="#{docIncident.isRehearsal}" defaultValue="yes" readonly="true">
 						<xp:selectItem itemLabel="Yes" itemValue="yes"
 							id="selectItem4">
 						</xp:selectItem>
@@ -138,7 +136,7 @@ return scenarios;}]]></xp:this.value>
 
 	</xp:panel>
 
-	<xp:button id="button1" value="Activate"
+	<xp:button id="button1" value="Save"
 		style="-unp-menuButton:false;">
 
 		<xp:eventHandler event="onclick" submit="true"
@@ -205,7 +203,7 @@ else {
 	print("SITE NAME" + doc.getItemValue("siteName"));
 	print("SITE ID" + doc.getItemValue("siteId"));
 	
-	processActivation(doc, true);
+	processActivation(doc, false);
 	var db = session.getCurrentDatabase();
 	db.replicate();
 	mailDb = @MailDbName();
@@ -225,7 +223,7 @@ else {
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
-
+	
 	<xp:br></xp:br>
 
 
@@ -241,8 +239,8 @@ else {
 	</xp:button>
 	<xp:br></xp:br>
 	
-
-	<xp:button id="button3" value="Activate">
+	
+	<xp:button id="button3" value="Save">
 
 		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
@@ -307,7 +305,7 @@ else {
 	print("SITE NAME" + doc.getItemValue("siteName"));
 	print("SITE ID" + doc.getItemValue("siteId"));
 	
-	processActivation(doc, true);
+	processActivation(doc, false);
 	var db = session.getCurrentDatabase();
 	db.replicate();
 	mailDb = @MailDbName();

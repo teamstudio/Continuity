@@ -100,8 +100,8 @@ function sendMail( to, subject, body, fromEmail, fromName ) {
 		
 		docMemo = database.createDocument();
 		docMemo.replaceItemValue("form", "Memo");
-		docMemo.replaceItemValue("SendTo", to );
-		//docMemo.replaceItemValue("SendTo", @Explode(to) );
+		//docMemo.replaceItemValue("SendTo", to );
+		docMemo.replaceItemValue("SendTo", @Explode(to) );
 		docMemo.replaceItemValue("Subject", subject );
 	
 		docMemo.replaceItemValue("From", fromName + "<" + fromEmail + "@NotesDomain>");
@@ -136,59 +136,63 @@ function setDefaultFields( doc ) {
 	//created date (also in milliseconds - stored as string - used in view lookups
 	var now = new Date();
 	var createdInMs = (now).getTime().toString();
+	doc.replaceItemValue("createdDateMs", createdInMs );
 
+	doc.save();
+	
+}
+
+function processActivation(doc, isNew){
+	print("PROCESS ACTIVATION");
+	
+	if(isNew){
+		doc.replaceItemValue("unid", doc.getUniversalID().toLowerCase());
+		doc.replaceItemValue("status", "active");
+		setDefaultFields(doc);
+	}
 	//Set Authors
 	var authors = [];
 	authors.push( "[bcEditor]");
 	authors.push( sessionScope.get("userName") );
 	
 	doc.replaceItemValue("docAuthors", authors);		//set to authors type in TMSRunAfterPush agent
-
-	doc.replaceItemValue("createdDateMs", createdInMs );
-	doc.save();
 	
-}
-
-function processNewActivation(doc){
-	print("PROCESS NEW ACTIVATION");
-	
-	doc.replaceItemValue("unid", doc.getUniversalID().toLowerCase());
-	doc.replaceItemValue("status", "active");
-	setDefaultFields(doc);
 	processOUAlertLevel(doc);
 	
 	//Create 'update' item for new incidents
 	var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
 	var incidentDesc = doc.getItemValueString("description");
 	
-	var updateText = (isRehearsal ? "Exercise incident" : "Incident: " + incidentDesc +
+	var updateText = ((isRehearsal ? "Exercise incident: " : "Incident: ") + incidentDesc +
 		"- alert level: " +	doc.getItemValueString("alertLevel") +
 			"- org unit: " + doc.getItemValue("orgUnitName") +
 			"- asset: " + doc.getItemValueString("siteName") +
 			"- plan: " + doc.getItemValueString("scenarioName"));
 		
 	createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
-	/*
-	//Send email to all BC users in the system
-	/*var vwBCUsers = database.getView("vwBCUsers");
-	var nav = vwBCUsers.createViewNav();
-	var ve = nav.getFirst();
-	while (null != ve) {
-	*/	
-			//sendMail( ve.getColumnValues().get(0) , 
+	
+	//Send email to all BC users in the system	
+	var BCUsersResult = @Unique(@DbColumn( "", "BBvwBCUsers",3));
+	if (BCUsersResult != undefined){
+		var BCUsers = (BCUsersResult.constructor == Array) ? BCUsersResult : [ BCUsersResult ];
+	}
+			
 	print("SENDING MAIL");
-			sendMail( "Richard_Sharpe@teamstudio.com", 								
-					"[continuity] " + (isRehearsal ? "Exercise incident created" : "Incident created"), 
-					sessionScope.name + " has just created an incident in Continuity:\r\n\r\n incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
+	//print("BCUSERS: " + @Explode(BCUsers))
+	//sendMail( @Explode(BCUsers) , 
+	var produced = "updated";			
+	if(isNew){
+		produced ="created";
+	}
+	sendMail( "Richard_Sharpe@teamstudio.com", 									
+					"[continuity] " + (isRehearsal ? "Exercise incident " + produced : "Incident " + produced), 
+					sessionScope.name + " has just "+ produced +" an incident in Continuity:\r\n\r\n incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 		"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
 			"- org unit: " + doc.getItemValue("orgUnitName") + "\r\n" +
 			"- asset: " + doc.getItemValueString("siteName") + "\r\n" +
 			"- plan: " + doc.getItemValueString("scenarioName"),
 			sessionScope.email, sessionScope.name);
-		
-			//ve = nav.getNext();
-	//}
-		
+	
 }
 
 function processOUAlertLevel(doc){
@@ -323,7 +327,7 @@ function deactivateIncident(doc){
 			//ML: create update item for this deactivation
 			var incidentDesc = doc.getItemValueString("description")
 			
-			var updateText = (isRehearsal ? "Deactivated exercise incident" : "Deactivated incident: " + incidentDesc +
+			var updateText = ((isRehearsal ? "Deactivated exercise incident: " : "Deactivated incident: ") + incidentDesc +
 				"- alert level: " +	doc.getItemValueString("alertLevel") +
 				"- org unit: " + doc.getItemValue("orgUnitName")  +
 				"- asset: " + doc.getItemValueString("siteName") +
@@ -331,15 +335,17 @@ function deactivateIncident(doc){
 			
 			createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
 			
-			//ML: send email to all BC users in the system
-			/*var vwBCUsers = database.getView("vwBCUsers");
-			var nav = vwBCUsers.createViewNav();
-			var ve = nav.getFirst();
-			while (null != ve) {
+			//Send email to all BC users in the system
 			
-				sendMail( ve.getColumnValues().get(0) , */
-			sendMail( "Richard_Sharpe@teamstudio.com" ,
-						"[continuity] " + (isRehearsal ? "Exercise incident deactivated" : "Incident deactivated"), 
+			var BCUsersResult = @Unique(@DbColumn( "", "BBvwBCUsers",3));
+			if (BCUsersResult != undefined){
+				var BCUsers = (BCUsersResult.constructor == Array) ? BCUsersResult : [ BCUsersResult ];
+			}
+			
+			//sendMail( @Explode(BCUsers) ,
+					
+				sendMail( "Richard_Sharpe@teamstudio.com" ,
+						"[BB continuity] " + (isRehearsal ? "Exercise incident deactivated" : "Incident deactivated"), 
 						sessionScope.name + " has just deactivated the following incident:\r\n\r\n" +
 							"incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 			"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
@@ -347,9 +353,7 @@ function deactivateIncident(doc){
 				"- asset: " + doc.getItemValueString("siteName") + "\r\n" +
 				"- plan: " + doc.getItemValueString("scenarioName"),
 						sessionScope.email, sessionScope.name);
-			
-				//ve = nav.getNext();
-			}
+		}
 	}		
 //get number of open tasks, assigned to the current user (based on bc role)
 function getNumAssignedTasks(orgUnitId, roleId) {

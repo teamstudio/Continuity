@@ -19,7 +19,7 @@
 </xp:panel>
 
 	<xp:br></xp:br>
-	<xp:viewPanel rows="30" id="viewPanel1" pageName="/BBIncident.xsp"
+	<xp:viewPanel rows="30" id="viewPanel1" pageName="/BBActiveTasks.xsp"
 		showColumnHeader="false" value="#{viewIncidents}">
 
 		<xp:viewColumn columnName="cat" id="viewColumn1">
