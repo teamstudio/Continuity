@@ -149,6 +149,7 @@ function processActivation(doc, isNew){
 		doc.replaceItemValue("unid", doc.getUniversalID().toLowerCase());
 		doc.replaceItemValue("status", "active");
 		setDefaultFields(doc);
+		assignTasksToIncident(doc);
 	}
 	//Set Authors
 	var authors = [];
@@ -377,5 +378,90 @@ function getNumAssignedTasks(orgUnitId, roleId) {
 	}
 	
 	return numAssignedTasks;
-	
 }
+
+//copy and assign tasks to new incidents
+function assignTasksToIncident(docIncident) {
+
+	print("IN ASSIGN TASKS TO INCIDENT!");
+	try {
+		
+		if (applicationScope.isReadOnlyMode) {		//don't assign tasks in demo mode
+			return false;
+		}
+		
+		var vwById = database.getView("vwAllById");	
+		var docScenario = vwById.getDocumentByKey(docIncident.getItemValue("scenarioId", true));
+		if (null != docScenario) {
+
+			var vwTasksByParent = database.getView("vwTasksByParent");
+			var parentId = docScenario.getItemValueString("id");
+		
+			//retrieve all tasks belonging to the selected scenario
+			var vecTasks = vwTasksByParent.getAllEntriesByKey( parentId, true);
+			print("found " + vecTasks.getCount() + " tasks for parent id " + parentId);
+		
+			var veTask = vecTasks.getFirstEntry();
+			while (null != veTask) {
+			
+				var docTask = veTask.getDocument();
+			
+				//copy all scenario tasks
+				var docTaskNew = database.createDocument();
+				docTaskNew.replaceItemValue("form", "fTask");
+				docTaskNew.replaceItemValue("incidentId", docIncident.getItemValueString("id") );
+				docTaskNew.replaceItemValue("incidentName", docIncident.getItemValueString("description") );
+			
+				docTaskNew.replaceItemValue("isRehearsal", docIncident.getItemValueString("isRehearsal") );
+			
+				docTaskNew.replaceItemValue("orgUnitId", docIncident.getItemValue("orgUnitId") );
+				docTaskNew.replaceItemValue("orgUnitName", docIncident.getItemValue("orgUnitName") );
+			
+				docTaskNew.replaceItemValue("status", "assigned");
+			
+				docTaskNew.replaceItemValue("name", docTask.getItemValueString("name") );
+				docTaskNew.replaceItemValue("description", docTask.getItemValueString("description") );
+				docTaskNew.replaceItemValue("type", docTask.getItemValueString("type") );
+			
+				docTaskNew.replaceItemValue("categoryId", docTask.getItemValueString("categoryId") );
+				docTaskNew.replaceItemValue("categoryName", docTask.getItemValueString("categoryName") );
+				docTaskNew.replaceItemValue("categoryOrder", docTask.getItemValueInteger("categoryOrder") );
+			
+				docTaskNew.replaceItemValue("responsibilityIds", docTask.getItemValue("responsibilityIds") );
+				docTaskNew.replaceItemValue("responsibilityNames", docTask.getItemValue("responsibilityNames") );
+			
+				docTaskNew.replaceItemValue("roleIds", docTask.getItemValue("roleIds") );
+				docTaskNew.replaceItemValue("roleNames", docTask.getItemValue("roleNames") );
+			
+				docTaskNew.replaceItemValue("planNames", docTask.getItemValue("planNames") );
+				docTaskNew.replaceItemValue("planIds", docTask.getItemValue("planIds") );
+				docTaskNew.replaceItemValue("scenarioId", docTask.getItemValueString("scenarioId") );
+				docTaskNew.replaceItemValue("scenarioName", docTask.getItemValueString("scenarioName") );
+			
+				docTaskNew.replaceItemValue("quickGuideIds", docTask.getItemValue("quickGuideIds") );
+			
+				docTaskNew.replaceItemValue("order", docTask.getItemValue("order") );
+			
+				var authors = [];
+				authors.push(sessionScope.userName);
+				authors.push( "[bcEditor]");
+				authors.push( "[bcUser]");
+			
+				docTaskNew.replaceItemValue("docAuthors", authors );
+				docTaskNew.save();
+			
+				//dBar.debug("saved a task, unid " + docTaskNew.getUniversalID() );
+			
+				veTask = vecTasks.getNextEntry();
+			}
+
+			//update number of open tasks, assigned to the current user (based on bc role)
+			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+			print("Num Assigned Tasks = " + sessionScope.get("numAssignedTasks"));
+		}
+		
+	} catch (e) {
+		print("ERROR ASSIGNING TASKS: " + e);
+	}
+}
+

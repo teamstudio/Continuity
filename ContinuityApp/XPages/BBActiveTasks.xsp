@@ -27,8 +27,9 @@ viewScope.put("numOpenTasks", numOpenTasks);
 	</xp:this.beforePageLoad><xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle><xp:label id="label2" value="Tasks:"></xp:label>
 	<xp:br></xp:br>
 
+	
 	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
-		showColumnHeader="false">
+		showColumnHeader="false" var="task">
 
 		<xp:viewColumn columnName="cat" id="viewColumn1">
 			<xp:this.facets>
@@ -44,7 +45,12 @@ viewScope.put("numOpenTasks", numOpenTasks);
 					id="viewColumnHeader2">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
-		</xp:viewColumn>
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:executeScript>
+					<xp:this.script><![CDATA[#{javascript:alert("Doc ID is: " + task.getDocument().getUniversalID());}]]></xp:this.script>
+				</xp:executeScript>
+			</xp:this.action></xp:eventHandler></xp:viewColumn>
 		<xp:viewColumn columnName="roleNames" id="viewColumn3">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Role names" xp:key="header"

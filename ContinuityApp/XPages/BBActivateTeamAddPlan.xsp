@@ -1,162 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	pageTitle="New Incident">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
 	<xp:this.data>
-		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
+		<xp:dominoDocument var="document1" formName="fIncident"
+			action="editDocument">
+			<xp:this.documentId><![CDATA[#{javascript:sessionScope.get("docUnid");}]]></xp:this.documentId>
+		</xp:dominoDocument>
 	</xp:this.data>
-	<xp:this.resources>
-		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
-	</xp:this.resources>
 
-	<xp:panel>
-		<xp:label id="label1"
-			value="Activate the BCM Team. Enter a short description of the current incident below. Linking this incident to an existing plan is optional.">
-		</xp:label>
-	</xp:panel>
-	<xp:panel>
-		<xp:table>
-			<xp:tr>
-				<xp:td>
-					<xp:label value="Description:"
-						id="description_Label1" for="description1">
-					</xp:label>
-				</xp:td>
-				<xp:td>
-					<xp:inputText value="#{docIncident.description}"
-						id="description1">
-					</xp:inputText>
-				</xp:td>
-			</xp:tr>
+<xp:button id="button1" value="Activate" style="-unp-menuButton:false;">
 
-			<xp:tr>
-				<xp:td>
-					<xp:label value="Asset:" id="siteName_Label1"
-						for="siteName1">
-					</xp:label>
-				</xp:td>
-				<xp:td>
-					<xp:comboBox id="comboBox3"
-						value="#{docIncident.siteName}">
-						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
-						<xp:selectItems id="selectItems1">
-							<xp:this.value><![CDATA[#{javascript:
-							var assetLookUp = @DbColumn("", "BBvwAssetDetails", 1);
-							var assets = "None found";
-if (assetLookUp != undefined){
-	var assets = (assetLookUp.constructor == Array) ? assetLookUp : [ assetLookUp ];
-}
-							return assets.sort();}]]></xp:this.value>
-						</xp:selectItems>
-
-					</xp:comboBox>
-				</xp:td>
-			</xp:tr>
-			<xp:tr>
-				<xp:td>
-					<xp:label value="Org unit" id="label4"
-						for="orgUnitId">
-					</xp:label>
-				</xp:td>
-				<xp:td>
-					<xp:comboBox id="orgUnitId"
-						value="#{docIncident.orgUnitId}">
-						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
-						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "vwOrgUnits", 2);
-var oUnits = "None found";
-if (DBLResult != undefined){
-	var oUnits = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
-}
-return oUnits;}]]></xp:this.value>
-						</xp:selectItems>
-
-					</xp:comboBox>
-				</xp:td>
-			</xp:tr>
-			<xp:tr>
-				<xp:td>
-					<xp:label id="scenarioName_Label1"
-						for="scenarioName1">
-					<xp:this.value><![CDATA[Plan & Scenario:]]></xp:this.value></xp:label>
-				</xp:td>
-				<xp:td>
-					<xp:comboBox id="comboBox4"
-						value="#{docIncident.scenarioName}">
-						<xp:selectItem itemLabel="Please select..."></xp:selectItem>
-						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
-var scenarios = "None found";
-if (DBLResult != undefined){
-	var scenarios = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
-}
-return scenarios;}]]></xp:this.value>
-						</xp:selectItems>
-
-					</xp:comboBox>
-				</xp:td>
-			</xp:tr>
-			<xp:tr>
-				<xp:td>
-					<xp:label value="Alert level:"
-						id="alertLevel_Label1" for="alertLevel1">
-					</xp:label>
-				</xp:td>
-				<xp:td>
-					<xp:comboBox id="comboBox2"
-						value="#{docIncident.alertLevel}">
-						<xp:selectItem itemLabel="Normal"
-							itemValue="normal" id="selectItem1">
-						</xp:selectItem>
-						<xp:selectItem itemLabel="Elevated"
-							itemValue="elevated" id="selectItem2">
-						</xp:selectItem>
-						<xp:selectItem itemLabel="High" itemValue="high"
-							id="selectItem3">
-						</xp:selectItem>
-					</xp:comboBox>
-				</xp:td>
-			</xp:tr>
-			<xp:tr>
-				<xp:td>
-					<xp:label value="Exercise?:" id="test_Label1"
-						for="test1">
-					</xp:label>
-				</xp:td>
-				<xp:td>
-					<xp:comboBox id="comboBox1"
-						value="#{docIncident.isRehearsal}" defaultValue="yes">
-						<xp:selectItem itemLabel="Yes" itemValue="yes"
-							id="selectItem4">
-						</xp:selectItem>
-						<xp:selectItem itemLabel="No" itemValue="no"
-							id="selectItem5">
-						</xp:selectItem>
-					</xp:comboBox>
-				</xp:td>
-			</xp:tr>
-		</xp:table>
-
-	</xp:panel>
-
-	<xp:button id="button1" value="Activate"
-		style="-unp-menuButton:false;">
-
-		<xp:eventHandler event="onclick" submit="true"
-			refreshMode="complete">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
 				<xp:actionGroup>
-					<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
-		alert("Description cannot be blank!");
-		return false;
-}
-if(docIncident.getItemValueString("siteName") == "Please select..."){
-		alert("Please select an Asset!");
-		return false;
-}	
-if(docIncident.getItemValueString("orgUnitId") == "Please select..."){
-		alert("Please select an OrgUnit!");
-		return false;
-}	
+					<xp:this.condition><![CDATA[#{javascript:
 if(docIncident.getItemValueString("scenarioName") == "Please select..."){
 		alert("Please select a scenario!");
 		return false;
@@ -218,8 +74,7 @@ else {
 					</xp:executeScript>
 
 
-					<xp:openPage name="/BBIncidents.xsp"
-						target="openDocument">
+					<xp:openPage name="/BBIncidents.xsp" target="openDocument">
 					</xp:openPage>
 				</xp:actionGroup>
 			</xp:this.action>
@@ -229,10 +84,8 @@ else {
 	<xp:br></xp:br>
 
 
-	<xp:button value=" Cancel " id="button2"
-		style="-unp-menuButton:false;">
-		<xp:eventHandler event="onclick" submit="true"
-			refreshMode="complete">
+	<xp:button value=" Cancel " id="button2" style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
 				<xp:openPage name="/BBMain.xsp" target="openDocument">
 				</xp:openPage>
@@ -329,12 +182,10 @@ else {
 
 
 	<xp:button value="Cancel" id="button4">
-		<xp:eventHandler event="onclick" submit="true"
-			refreshMode="complete">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
 				<xp:openPage name="/BBMain.xsp" target="openDocument">
 				</xp:openPage>
 			</xp:this.action>
 		</xp:eventHandler>
-	</xp:button>
-</xp:view>
+	</xp:button></xp:view>
