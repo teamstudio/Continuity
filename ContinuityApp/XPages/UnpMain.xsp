@@ -114,7 +114,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					<!-- Incidents -->
 					<li>
 						<a href="#" onclick="$.blockUI();window.location.href='UnpIncidents_1.xsp';">
-							<xp:text escape="true" styleClass="badge" id="computedField2">
+							<xp:text escape="true" styleClass="badge" id="computedField2" rendered="#{javascript:sessionScope.numIncidents>0}">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numIncidents}]]></xp:this.value>
 								<xp:this.converter>
 									<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
@@ -164,7 +164,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					<!-- Updates -->
 					<li>
 						<a href="#" onclick="$.blockUI();window.location.href='UnpUpdates_1.xsp';">
-							<xp:text escape="true" styleClass="badge" id="computedField1">
+							<xp:text escape="true" styleClass="badge" id="computedField1" rendered="#{javascript:sessionScope.numUpdates > 0}">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numUpdates}]]></xp:this.value>
 								<xp:this.converter>
 									<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>

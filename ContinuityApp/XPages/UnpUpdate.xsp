@@ -62,9 +62,6 @@
 									<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 										<xp:this.action><![CDATA[#{javascript:
 										try {
-			print("wtf");
-				dBar.debug("saving update");
-			
 										
 										//don't save in demo mode
 										if ( !applicationScope.isReadOnlyMode ) { 
