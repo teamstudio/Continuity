@@ -25,7 +25,7 @@ public class Configuration implements Serializable {
 	private String senderEmail;
 	private String senderName;
 	
-	private static String DATA_VERSION = "100";
+	private static String DATA_VERSION = "101";
 	
 	private String serverName;
 	

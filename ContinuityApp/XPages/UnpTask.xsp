@@ -5,7 +5,7 @@
 		<xp:dominoDocument var="docTask" formName="fTask"></xp:dominoDocument>
 	</xp:this.data>
 
-<xc:unpLayout showMenu="true" pageTitle="Task">
+<xc:unpLayoutBasic pageTitle="Task">
 		<xp:this.facets>
 
 			<xp:panel xp:key="contents">
@@ -145,6 +145,6 @@ return out;}]]></xp:this.value>
 			</xp:panel>
 
 		</xp:this.facets>
-	</xc:unpLayout>
+	</xc:unpLayoutBasic>
 
 </xp:view>

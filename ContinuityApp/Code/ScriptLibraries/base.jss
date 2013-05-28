@@ -958,7 +958,11 @@ function createUpdate( text:String, incidentId, incidentName) {
 		docUpdate.replaceItemValue("createdBy", sessionScope.get("userName") );
 		docUpdate.replaceItemValue("createdByName", sessionScope.get("name") );
 		
-		docUpdate.replaceItemValue("message", text );
+		docUpdate.replaceItemValue("messageHtml", text);
+		
+		var textPlain = @ReplaceSubstring(text, ["<b>", "</b>"], "" );
+		
+		docUpdate.replaceItemValue("message", @ReplaceSubstring( textPlain , ["<br>", "<br />"], @NewLine() ) );
 		
 		docUpdate.replaceItemValue("incidentId", incidentId);
 		docUpdate.replaceItemValue("incidentName", incidentName);

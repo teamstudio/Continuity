@@ -66,7 +66,7 @@
 						</xp:text>
 					</div>
 	
-					<xp:text tagName="p" id="title" escape="false" value="#{rowEntry.message}">
+					<xp:text tagName="p" id="title" escape="false" value="#{rowEntry.message2}">
 					</xp:text>
 					
 					<!-- attachment link -->

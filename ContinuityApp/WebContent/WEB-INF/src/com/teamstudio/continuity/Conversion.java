@@ -90,7 +90,7 @@ public class Conversion {
 				form = doc.getItemValueString("form");
 				updated = false;
 				
-				// update: add authors field and check createdDateMs field
+				// update: add authors field, check createdDateMs field, add messageHtml field
 				if (form.equals("fUpdate")) {
 					
 					if (!doc.hasItem("docAuthors")) {
@@ -113,6 +113,11 @@ public class Conversion {
 					}
 					
 					Utils.recycle(createdDateMs);
+					
+					if ( !doc.hasItem("messageHtml") ) {
+						doc.replaceItemValue("messageHtml", doc.getItemValueString("message") );
+						updated = true;
+					}
 
 				} else if (form.equals("fScenario")) {
 

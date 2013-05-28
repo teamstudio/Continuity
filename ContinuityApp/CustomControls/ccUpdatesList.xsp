@@ -62,7 +62,7 @@
 				</div>
 
 				<div style="clear:both">
-					<xp:text escape="false" disableTheme="true" value="#{row.message}"></xp:text>
+					<xp:text escape="false" disableTheme="true" value="#{row.message2}"></xp:text>
 					<br />
 
 					<!-- attachment  -->
