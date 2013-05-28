@@ -1,21 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="232a" sequence="7" unid="79B76DD51127A5F085257B71004D50BA">
-<created><datetime dst="true">20130520T100429,38-04</datetime></created>
-<modified><datetime dst="true">20130528T100305,66+02</datetime></modified>
-<revised><datetime dst="true">20130528T100305,65+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130528T100305,66+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130528T100216,19+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B79006658CC" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="77a" sequence="2" unid="B3E815836C098AD185257B7900668245">
+<created><datetime dst="true">20130528T143940,21-04</datetime></created>
+<modified><datetime dst="true">20130528T143940,24-04</datetime></modified>
+<revised><datetime dst="true">20130528T143940,23-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130528T143940,24-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130528T143940,22-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name="$TITLE"><text>BBIncident.xsp</text></item>
 <item name="$Flags"><text>gC~4K</text></item>
 
 
-<item name="$FileNames" sign="true"><text>BBIncident.xsp</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-
-
-
-
-</note>
+<item name="$FileNames" sign="true"><text>BBIncident.xsp</text></item></note>
