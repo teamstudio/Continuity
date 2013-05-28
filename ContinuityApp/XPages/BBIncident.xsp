@@ -177,7 +177,11 @@ viewScope.put("numOpenTasks", numOpenTasks);
 	</xp:button>
 	<xp:button value="        Call Tree        " id="button2"
 		style="-unp-menuButton:false;">
-	<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered></xp:button>
+	<xp:this.rendered><![CDATA[#{javascript:
+	//return docIncident.getItemValueString("status") != "deactivated";
+	return false;
+	}]]></xp:this.rendered>
+	</xp:button>
 	<xp:button id="button3" value="Deactivate Incident"
 		style="-unp-menuButton:false;">
 
@@ -229,7 +233,10 @@ confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
 		</xp:eventHandler>
 	</xp:button>
 	<xp:button value="Call Tree" id="button5">
-		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
+<xp:this.rendered><![CDATA[#{javascript:
+	//return docIncident.getItemValueString("status") != "deactivated";
+	return false;
+	}]]></xp:this.rendered>
 	</xp:button>
 	<xp:button id="button6" value="Deactivate Incident">
 

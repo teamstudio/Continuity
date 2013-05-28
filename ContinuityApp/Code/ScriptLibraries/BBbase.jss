@@ -1,5 +1,8 @@
 function configApp() {
-	var userName = "CN=ted.barnhouse/O=ZetaComm";
+	//var userName = "CN=ted.barnhouse/O=ZetaComm";
+	var userName = session.getEffectiveUserName();
+	print("USER: " + userName);
+	
 	if ( !applicationScope.configLoaded) {
 		try{
 			var userView = database.getView("BBUserInfo");
@@ -45,7 +48,7 @@ function configApp() {
 			return true;
 		}
 		catch (e){
-			applicationScope.put("error", e);
+			applicationScope.put("USER DEFINED ERROR: ", e);
 			print("error: " + e);
 			return false;
 		}	
@@ -55,7 +58,7 @@ function configApp() {
 //creates a new update item with the specified message
 function createUpdate( text, incidentId, incidentName) {
 
-	print("CREATING UPDATE");
+	//print("CREATING UPDATE");
 	
 	if (applicationScope.isReadOnlyMode) {
 		return false;
@@ -113,7 +116,7 @@ function sendMail( to, subject, body, fromEmail, fromName ) {
 		docMemo.replaceItemValue("Body", body );
 		
 		docMemo.send();
-		print("MAIL SENT");
+		//print("MAIL SENT");
 		
 	} catch (e) {
 		print("ERROR SENDING MAIL: " + e);
@@ -123,8 +126,6 @@ function sendMail( to, subject, body, fromEmail, fromName ) {
 
 //set default fields that should be available on all documents
 function setDefaultFields( doc ) {
-	
-	print("GOT TO SET DEFAULT FIELDS");
 	
 	//fixed id
 	doc.replaceItemValue("id", "x" + doc.getUniversalID().toLowerCase());
@@ -143,7 +144,7 @@ function setDefaultFields( doc ) {
 }
 
 function processActivation(doc, isNew){
-	print("PROCESS ACTIVATION");
+	//print("PROCESS ACTIVATION");
 	
 	if(isNew){
 		doc.replaceItemValue("unid", doc.getUniversalID().toLowerCase());
@@ -198,7 +199,7 @@ function processActivation(doc, isNew){
 
 function processOUAlertLevel(doc){
 	
-		print("PROCESS OU ALERT LEVEL");	
+		//print("PROCESS OU ALERT LEVEL");	
 	
 		var orgUnitId = doc.getItemValueString("orgUnitId");
 		var siteId = doc.getItemValueString("siteId");
@@ -270,9 +271,7 @@ function getMaxAlertLevel( orgUnitId ) {
 		}
 	
 	} catch (e) {
-		print("ERROR: GET MAX ALERT LEVEL");
-		print("ERROR IS: " + e);
-		
+		print("ERROR: GET MAX ALERT LEVEL: " + e);		
 	}
 	return highest
 }
@@ -359,8 +358,6 @@ function deactivateIncident(doc){
 //get number of open tasks, assigned to the current user (based on bc role)
 function getNumAssignedTasks(orgUnitId, roleId) {
 	
-	//dBar.debug("get num assigned...")
-	
 	var numAssignedTasks = 0;
 	
 	try {
@@ -370,11 +367,8 @@ function getNumAssignedTasks(orgUnitId, roleId) {
 		
 		var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
 		numAssignedTasks = vec.getCount();
-		
-		//dBar.debug("found " + numAssignedTasks + " assigned tasks for ou " + orgUnitId + " and role " + roleId);
-		
 	} catch (e) {
-		dBar.error(e);	
+		print("ERROR ASSIGN # TASKS:" + e);	
 	}
 	
 	return numAssignedTasks;
@@ -383,7 +377,6 @@ function getNumAssignedTasks(orgUnitId, roleId) {
 //copy and assign tasks to new incidents
 function assignTasksToIncident(docIncident) {
 
-	print("IN ASSIGN TASKS TO INCIDENT!");
 	try {
 		
 		if (applicationScope.isReadOnlyMode) {		//don't assign tasks in demo mode
@@ -457,7 +450,7 @@ function assignTasksToIncident(docIncident) {
 
 			//update number of open tasks, assigned to the current user (based on bc role)
 			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
-			print("Num Assigned Tasks = " + sessionScope.get("numAssignedTasks"));
+			//print("Num Assigned Tasks = " + sessionScope.get("numAssignedTasks"));
 		}
 		
 	} catch (e) {
