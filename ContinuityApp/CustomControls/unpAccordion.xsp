@@ -116,9 +116,7 @@ return out;}]]></xp:this.styleClass>
 
 	<xp:scriptBlock id="scriptBlock1">
 
-		<xp:this.value><![CDATA[//load live cat
-		
-		
+		<xp:this.value><![CDATA[//load live cat		
 var _li = $('#summaryList li:first');
 if( _li.text() == 'Live incidents') { 
 	_li.click();

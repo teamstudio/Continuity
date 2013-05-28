@@ -37,7 +37,7 @@ public class Configuration implements Serializable {
 	}
 	
 	public String getAppVersion() {
-		return "v1.11";		//current application version
+		return "v1.12";		//current application version
 	}
 	
 	public static Configuration get() {

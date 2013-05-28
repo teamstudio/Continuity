@@ -110,9 +110,5 @@ database</editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
-    <property>
-      <property-name>homeToWorkspace</property-name>
-      <property-class>boolean</property-class>
-    </property>
   </composite-component>
 </faces-config>

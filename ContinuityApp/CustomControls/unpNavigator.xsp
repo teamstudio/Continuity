@@ -16,64 +16,38 @@ the specific language governing permissions and limitations under the License
 		<div id="menuWrapper" class="iscrollmenu">
 		
 			<div id="menuPane" class="offScreen">
+			
 				<xp:panel styleClass="navScrollArea" id="navScrollArea" style="height: 100%;">
 					<ul id="menuitems">
-						<xp:repeat id="repeat1" rows="30" disableOutputTag="true" var="menuItem"
-							value="#{javascript:compositeData.menuItem;}">
+						<xp:repeat id="repeat1" rows="30" disableOutputTag="true" var="menuItem" value="#{javascript:compositeData.menuItem}">
 							
-							<xp:panel id="viewMenuItem" tagName="li"
-								rendered="#{javascript:menuItem.disabled != true}">
-								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + menuItem.itemId;
+							<xp:panel id="viewMenuItem" tagName="li">
+								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + menuItem.itemId + (menuItem.disabled == 'true' || menuItem.disabled == true ? " disabled" : "")
 								
-								var p = (menuItem.page.indexOf('?')>-1 ? @Left(menuItem.page, "?") : menuItem.page); 
+								var p = @Left(menuItem.page, ".xsp");
 								
-								if (("/" + getCurrentXPage()) == p){
-	
+								if ( getCurrentXPage().indexOf(p)>-1) {
 		return c += " viewMenuItemSelected";
 	}else{
 		return c += " viewMenuItem";
 	}}]]></xp:this.styleClass>
 								<xp:this.attrs>
 									<xp:attr name="onclick">
-										<xp:this.value><![CDATA[#{javascript:if (menuItem.ajaxloadid != null && menuItem.ajaxloadid != ""){
-		return "loadPageEx('" + getDbPath() + menuItem.page + "', '" + menuItem.ajaxtargetid + "', '" + menuItem.itemId + "');";
-	}else{
-		return "openPage('" + getDbPath() + menuItem.page + "', '" + menuItem.ajaxtargetid + "')";
-	}}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:if (menuItem.disabled == 'true' || menuItem.disabled == true) {
+										return "loadPageEx('" + getDbPath() + "/" + menuItem.page + "', 'contentwrapper', '" + menuItem.itemId + "');";
+										} else {
+										return "loadPageEx('" + getDbPath() + "/" + menuItem.page + "', 'contentwrapper', '" + menuItem.itemId + "');";
+										}
+										}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
+								
 								<xp:panel id="menulink" tagName="div" styleClass="menulink">
-									<xp:image url="#{javascript:menuItem.icon}" id="image2"
-										styleClass="iconleft">
-										<xp:this.rendered><![CDATA[#{javascript:!isEmpty(menuItem.icon)}]]></xp:this.rendered>
-									</xp:image>
-									<xp:text id="menutext" styleClass="menutext"
-										value="#{javascript:menuItem.label;}">
-									</xp:text>
-									<xp:image url="/unp/right-arrow-trans-white-large.png"
-										id="image1" styleClass="icon">
-									</xp:image>
+									<xp:image url="#{javascript:menuItem.icon}" id="image2" styleClass="iconleft"> </xp:image>
+									<xp:text id="menutext" styleClass="menutext" value="#{javascript:menuItem.label}"></xp:text>
+									<xp:image url="/unp/right-arrow-trans-white-large.png" id="image1" styleClass="icon"></xp:image>
 								</xp:panel>
-							</xp:panel>
-
-							<!-- disabled menu option -->
-							<xp:panel id="panel1" tagName="li"
-								rendered="#{javascript:menuItem.disabled == true}">
-								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + menuItem.itemId + " disabled";
-							return c += " viewMenuItem";
-	}]]></xp:this.styleClass>
-								<xp:panel id="panel2" tagName="div" styleClass="menulink">
-									<xp:image url="#{javascript:menuItem.icon}" id="image3"
-										styleClass="iconleft">
-										<xp:this.rendered><![CDATA[#{javascript:menuItem.icon != ""}]]></xp:this.rendered>
-									</xp:image>
-									<xp:text id="computedField1" styleClass="menutext"
-										value="#{javascript:menuItem.label;}">
-									</xp:text>
-									<xp:image url="/unp/right-arrow-trans-white-large.png"
-										id="image4" styleClass="icon">
-									</xp:image>
-								</xp:panel>
+								
 							</xp:panel>
 
 						</xp:repeat>
@@ -83,7 +57,6 @@ the specific language governing permissions and limitations under the License
 			</div>
 			
 		</div>
-	
 	</div>
 	
 </xp:view>

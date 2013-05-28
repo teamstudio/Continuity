@@ -42,9 +42,6 @@ function init() {
 					
 					var userType:String = docUser.getItemValueString("userType");
 					isEditor = userType.equals("editor");
-					//isUser = isEditor || userType.equals("user");
-					//isUser = true;
-					
 					isDebug = docUser.getItemValueString("debugMode").equals("yes");
 					
 				}
@@ -54,15 +51,11 @@ function init() {
 				
 				var roles = context.getUser().getRoles();
 				isEditor = roles.contains("[bcEditor]");
-				//isUser = isEditor || roles.contains("[bcUser]");
 				isDebug = roles.contains("[debug]");
 				
 			}
 			
-			//dBar.debug("editor? " + isEditor + ", user? " + isUser + "");
-			
 			sessionScope.put("isEditor", isEditor);
-			//sessionScope.put("isUser", isUser);
 			sessionScope.put("isDebug", isDebug);
 			
 			try {
@@ -151,6 +144,13 @@ function init() {
 			
 			//get number of open tasks, assigned to the current user (based on bc role)
 			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+			
+			if (!isUnplugged() ) {
+				
+				//web ui only
+				checkMaxAlertLevels();
+				
+			}
 						
 			dBar.debug("done");
 			
@@ -165,6 +165,37 @@ function init() {
 
 	}
 }		//end init()
+
+//check max alert level on all ou's, update if needed
+function checkMaxAlertLevels() {
+	
+	try {
+	
+		var dbCurrent = sessionAsSigner.getDatabase( database.getServer(), database.getFilePath() );
+		var vwOrgUnits = dbCurrent.getView("vwOrgUnits");
+		
+		var docOU = vwOrgUnits.getFirstDocument();
+		while (null != docOU) {
+			var id = docOU.getItemValueString("id");
+			var name = docOU.getItemValueString("name");
+			var alertLevel = docOU.getItemValue("alertLevel");
+			
+			var maxAlertLevel = getMaxAlertLevel( id );
+			
+			if (maxAlertLevel != alertLevel) {
+				docOU.replaceItemValue("alertLevel", maxAlertLevel);
+				docOU.save();
+			}
+			
+			var docTemp = vwOrgUnits.getNextDocument(docOU);
+			docOU.recycle();
+			docOU = docTemp;
+		}
+	} catch (e) {
+		dBar.error(e);	
+	}
+}
+
 
 //helper function to work with Maps/ associative arrays in Unplugged or a browser
 function getMap() {
@@ -277,41 +308,6 @@ function loadAppConfig( forceUpdate:boolean ) {
 				
 			}
 			
-			var docTemp:NotesDocument = null;
-			
-			//get all roles
-			var vecRoles:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
-			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
-			
-			var veTemp:NotesViewEntry = null;
-			
-			var roles = getMap();
-			var roleChoices = [];
-			
-			while (null != veRole) {
-				
-				var colValues = veRole.getColumnValues();
-				
-				var id:String = colValues.get(1);
-				var name:String = colValues.get(2);
-				
-				roles[id] = name;
-				
-				roleChoices.push( (name + "|" + id) );
-				
-				veTemp = vecRoles.getNextEntry();
-				veRole.recycle();
-				veRole = veTemp;
-			}
-			
-			//sort ascending
-			roleChoices.sort();
-		
-			applicationScope.put("roleChoices", roleChoices);
-			applicationScope.put("roles", roles);
-			
-			vecRoles.recycle();
-			
 			//get all ou's
 			var veTemp:NotesViewEntry = null;
 				
@@ -347,8 +343,6 @@ function loadAppConfig( forceUpdate:boolean ) {
 			applicationScope.put("orgUnits", orgUnits);
 			applicationScope.put("orgUnitUnids", orgUnitUnids);
 			
-			
-			
 		} else {
 			
 			//dBar.debug("loadAppConfig: already loaded");
@@ -361,20 +355,19 @@ function loadAppConfig( forceUpdate:boolean ) {
 	
 }
 
-//retrieve the calltree order based on the bc roles in the calltree
+//retrieve the calltree order based on the bc roles in the calltree, list is cached in the appScope
 function getCallTreeOrder() {
+	
+	var varName:String = "callTreeOrder";
 	
 	try {
 	
-		if (applicationScope.containsKey("callTreeOrder")) {
+		if (applicationScope.containsKey( varName )) {
 			
-			dBar.debug("get");
-			
-			return applicationScope.get("callTreeOrder");
+			return applicationScope.get( varName );
 			
 		} else {
 			
-			dBar.debug("set");
 			//get call tree order
 			var vwRoles:NotesView = database.getView("vwRolesCallTreeOrder");
 			var vecRoles:ViewEntryCollection = vwRoles.getAllEntries();
@@ -391,21 +384,120 @@ function getCallTreeOrder() {
 				veRole.recycle();
 				veRole = veTemp;
 			}
-	
-			applicationScope.put("callTreeOrder", callTreeOrder);		//determines order in the calltree
 			
 			vecRoles.recycle();
 			vwRoles.recycle();
+	
+			applicationScope.put( varName , callTreeOrder);		//determines order in the calltree
+			
+			return callTreeOrder;
 			
 		}
-		
-		return applicationScope.get("callTreeOrder");
 		
 	} catch (e) {
 		dBar.error(e);
 		
 	}
 		
+}
+
+//retrieve a list of bc roles, list is cached in the appScope
+function getRoles() {
+	
+	var varName:String = "roles";
+	
+	try {
+		
+		if (applicationScope.containsKey(varName) ) {
+			
+			return applicationScope.get(varName);
+			
+		} else {
+			
+			var vwAllByType:NotesView = database.getView("vwAllByType");
+			var vecRoles:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
+			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
+		
+			var roles = getMap();
+		
+			while (null != veRole) {
+			
+				var colValues = veRole.getColumnValues();
+				
+				var id:String = colValues.get(1);
+				var name:String = colValues.get(2);
+				
+				roles[id] = name;
+				
+				var veTemp = vecRoles.getNextEntry();
+				veRole.recycle();
+				veRole = veTemp;
+			}
+	
+			applicationScope.put(varName, roles);	
+			
+			vecRoles.recycle();
+			vwAllByType.recycle();
+			
+			return roles;
+			
+		}
+		
+	} catch (e) {
+		dBar.error(e);
+	}
+
+}
+
+//retrieve a list of bc roles, list is cached in the appScope
+function getRoleChoices() {
+	
+	var varName:String = "roleChoices";
+	
+	try {
+		
+		if (applicationScope.containsKey(varName) ) {
+			
+			return applicationScope.get(varName);
+			
+		} else {
+			
+			var vwAllByType:NotesView = database.getView("vwAllByType");
+			var vecRoles:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
+			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
+		
+			var roleChoices = [];
+		
+			while (null != veRole) {
+			
+				var colValues = veRole.getColumnValues();
+				
+				var id:String = colValues.get(1);
+				var name:String = colValues.get(2);
+				
+				roleChoices.push( (name + "|" + id) );
+				
+				var veTemp = vecRoles.getNextEntry();
+				veRole.recycle();
+				veRole = veTemp;
+			}
+		
+			//sort ascending
+			roleChoices.sort();
+	
+			applicationScope.put(varName, roleChoices);	
+			
+			vecRoles.recycle();
+			vwAllByType.recycle();
+			
+			return roleChoices;
+			
+		}
+		
+	} catch (e) {
+		dBar.error(e);
+	}
+
 }
 
 //returns the maximum alert level based on all open incidents
@@ -451,7 +543,7 @@ function getMaxAlertLevel( orgUnitId ) {
 	}
 	
 	//dBar.debug("return: " + highest);
-	return highest
+	return highest;
 
 }
 
@@ -1174,3 +1266,200 @@ function isPagerVisible(pager: com.ibm.xsp.component.xp.XspPager): boolean {
     var state: com.ibm.xsp.component.UIPager.PagerState = pager.createPagerState();
     return state.getRowCount() > state.getRows(); 
 }
+
+/* unpCommon */
+
+/**
+ * Copyright 2013 Teamstudio Inc 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+ * the specific language governing permissions and limitations under the License
+ */
+
+/*
+ * Returns the name of the current XPage e.g. UnpMain.xsp
+ */
+function getCurrentXPage(){
+	if (!viewScope.containsKey("currentxpage")){
+		var url = context.getUrl().toString();
+		url = @Left(url, ".xsp") + ".xsp";
+		if (url.indexOf(".nsf/") > -1){
+			url = @Right(url, ".nsf/");
+		}else{
+			url = @Right(url, ".unp/");
+		}
+		viewScope.currentxpage = url;
+	}
+	return viewScope.currentxpage;
+}
+
+/*
+ * Returns the current db path in the format "/dir/mydb.nsf"
+ */
+function getDbPath(){
+	if (!applicationScope.containsKey("dbpath")){
+		applicationScope.dbpath = "/" + @ReplaceSubstring(database.getFilePath(), "\\", "/");
+	}
+	return applicationScope.dbpath;
+}
+
+function isUnpluggedServer(){
+	if (!applicationScope.containsKey("unpluggedserver")){
+		try{
+			if (null != UnpluggedLib) {
+				applicationScope.unpluggedserver = true;
+				applicationScope.dominoserver = false;
+			}else{
+				applicationScope.unpluggedserver = false;
+				applicationScope.dominoserver = true;
+			}
+		}catch(e){
+			applicationScope.unpluggedserver = false;
+			applicationScope.dominoserver = true;
+		}
+	}
+	return applicationScope.unpluggedserver;
+}
+
+function $A( object ){
+	if( typeof object === 'undefined' || object === null ){ return []; }
+	if( typeof object === 'string' ){ return [ object ]; }
+	if( typeof object.toArray !== 'undefined' ){
+		return object.toArray();
+	}
+	if( object.constructor === Array ){ return object; }  
+	return [ object ];
+}
+
+
+/* unpDebugToolbar */
+
+/**
+ * Copyright 2013 Teamstudio Inc 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+ * the specific language governing permissions and limitations under the License
+ */
+
+if ( isUnplugged() ) {
+
+	dBar = {
+			
+		TYPE_DEBUG : "debug",
+		TYPE_INFO : "info",
+		TYPE_ERROR : "error",
+		TYPE_WARNING : "warning",
+		
+		_get : function() {
+		
+			return sessionScope.get("dBar") ||
+				{
+					isCollapsed : false,
+					isEnabled : false,
+					messages : [],
+					isInit : false
+				};
+		
+		}, 
+		
+		init : function( collapsed:boolean ) {
+			
+			var dBar = this._get();
+			if (!dBar.isInit) {
+				dBar.isInit = true;
+				dBar.isCollapsed = collapsed;
+			}
+			sessionScope.put("dBar", dBar);
+			
+		},
+	
+		setCollapsed : function( to:boolean ) {
+			
+			var dBar = this._get();
+			dBar.isCollapsed = to;
+			sessionScope.put("dBar", dBar);
+			
+		},
+		
+		setEnabled : function( to:boolean ) {
+			
+			var dBar = this._get();
+			dBar.isEnabled = to;
+			sessionScope.put("dBar", dBar);
+			
+		},
+		
+		//check if the toolbar is enabled
+		isEnabled : function() {
+			return this._get().isEnabled;
+		},
+		
+		//returns if the toolbar is in a collapsed or expanded state
+		isCollapsed : function() {
+			return this._get().isCollapsed;
+		},
+		
+		//retrieve a list of messages
+		getMessages : function() {
+			return this._get().messages;
+		},
+		
+		//clears the list of messages
+		clearMessages : function() {
+			var dBar = this._get();
+			dBar.messages = [];
+			sessionScope.put("dBar", dBar);
+		},
+			
+		//add a message to the toolbar
+		//note: this function doesn't do anything if the toolbar is disabled
+		addMessage : function(msg, type:String) {
+			
+			try {
+			
+				var dBar = this._get();
+				
+				if ( !dBar.isEnabled ) { return; }
+				
+				var messages = dBar.messages;
+				
+				if (typeof msg != "string") {
+					msg = msg.toString();
+				}
+				
+				var m = {"text": msg, "date" : @Now(), "type" : type};
+				messages.unshift( m );
+				
+				dBar.messages = messages;
+				
+				sessionScope.put("dBar", dBar);
+				
+			} catch (e) {		//error while logging
+				print(e.toString() );
+			}
+	
+		},
+		
+		//function to log different types of messages
+		debug : function(msg) {
+			this.addMessage(msg, this.TYPE_DEBUG);	
+		},
+		info : function(msg) {
+			this.addMessage(msg, this.TYPE_INFO);	
+		},
+		error : function(msg) {
+			this.addMessage(msg, this.TYPE_ERROR);	
+		},
+		warn : function(msg) {
+			this.addMessage(msg, this.TYPE_WARNING);	
+		}
+			
+	}
+}
+

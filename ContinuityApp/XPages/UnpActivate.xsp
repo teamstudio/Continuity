@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-
-
-	<xp:this.data>
-		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
-	</xp:this.data>
 	
-	<xc:mLayout showMenu="true" pageTitle="Activate team">
+	<xc:unpLayoutBasic pageTitle="Activate team">
 		<xp:this.facets>
 
-				<xc:mActivateForm xp:key="contents"></xc:mActivateForm>
+			<xc:mActivateForm xp:key="contents"></xc:mActivateForm>
 
 		</xp:this.facets>
-	</xc:mLayout>
+	</xc:unpLayoutBasic>
 
 </xp:view>

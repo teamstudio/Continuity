@@ -11,16 +11,14 @@
 	}
 	}]]></xp:this.beforePageLoad>
 	
-
 	<xp:this.data>
 		<xp:dominoDocument var="docScenario" action="openDocument">
 			<xp:this.documentId><![CDATA[#{javascript:database.getView("vwAllById").getEntryByKey( param.get("id"), true).getUniversalID()}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
 	
-	<!-- viewsButton false, backButtonURL, mPlans, searchPage:UnpSearch.xsp, search:none -->
-	<xc:mLayout showMenu="true" pageTitle="Plan"
-		backButtonURL="mPlans.xsp">
+	<xc:unpLayoutBasic pageTitle="Plan" backButtonURL="mPlans.xsp">
+	
 		<xp:this.facets>
 
 			<xp:panel xp:key="contents" disableOutputTag="true">
@@ -103,6 +101,6 @@
 			</xp:panel>
 
 		</xp:this.facets>
-	</xc:mLayout>
+	</xc:unpLayoutBasic>
 
 </xp:view>

@@ -190,6 +190,9 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 						//ML: go back to page from where this new document was opened
 						if (viewxpagename == 'back') {
 							goBack();
+						} else if (viewxpagename="UnpIncident.xsp") {
+							//ML: use ajax load
+							loadPageEx(viewxpagename + "?action=openDocument&documentId=" + response, "contentwrapper", null);
 						} else {
 							$.blockUI();
 							window.location.href = viewxpagename + "?action=openDocument&documentId=" + response;
@@ -263,6 +266,10 @@ function loadPage(url, target, menuitem) {
 	hideViewsMenu();
 }
 
+function load(url) {
+	loadPageEx(url, "contentwrapper", null, false, false);
+}
+
 //ML: extended loadPage to also update the header title and footer content
 function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 
@@ -281,41 +288,42 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 	
 	thisArea.load(url, function(data) {
 		
-
 		if (firedrequests != null) {
 			firedrequests = new Array();
 		}
 		
 		//extract footer content from ajax request and update footer
 		if (loadFooter) {
-			var footerNode = $(data).find(".footer")
-			$(".footer").html( footerNode );
+			
+			var footerNode = $(data).find(".footer");
+			if (footerNode) {
+				$(".footer").html( footerNode );
+			}
 		}
 		
 		//update header
 		if (loadHeader) {
+			
 			var h = $(data).find('.iHeader').html();
-			$(".iHeader").html(h);
-			
-			//re-add onclick event to views button
-			$('.viewsButton').unbind('click');
-			$('.viewsButton').click( function(event) {
-				toggleViewsMenu();
-				return false;
-			});
-			
+			if (h) {
+				$(".iHeader").html(h);
+				
+				//re-add onclick event to views button
+				$('.viewsButton').unbind('click');
+				$('.viewsButton').click( function(event) {
+					toggleViewsMenu();
+					return false;
+				});
+			}
 		}
 		
 		initiscroll();
 		
 		allowFormsInIscroll();
 		
-		//lazy load images
-		//$("img.lazy").lazyload({ threshold : 5 });
-		
-		if (url.indexOf('UnpTasks.xsp')>-1 || url.indexOf('UnpIncidents.xsp') > -1 ) {
+		if (url.indexOf('UnpTasks')>-1 || url.indexOf('UnpIncidents') > -1 ) {
 			
-			//load live cat
+			//load live (first) cat
 			var _li = $('#summaryList li:first');
 			if( _li.text() == 'Live incidents') { 
 				_li.click();
@@ -507,6 +515,12 @@ function accordionLoadMore(obj, viewName, catName, xpage, dbname){
 	var tempHolder = $(obj).nextAll(".summaryDataRow:first").children(".summaryDataRowHolder");
 	$(tempHolder).load(thisUrl + " #results", function(){
 		$(thisArea).append($(".summaryDataRow li"));
+
+		//check if there's only 1 expanded category and update the bottom border
+		if ( $("#summaryList .categoryrow").length == 1 ) {
+			$("#summaryList div.summaryDataRow ul.accordionRowSet li:last-child").addClass("roundedBottom");
+		}
+		
 		if ($(tempHolder).text().indexOf("NOMORERECORDS") > -1){
 			$(obj).nextAll(".summaryDataRow:first").children(".accLoadMoreLink").hide();
 		}else{
@@ -529,7 +543,7 @@ function fetchDetails(obj, viewName, catName, xpage, dbname)
 	$('.accordionRowSet').empty();
 	$('.accLoadMoreLink').hide();
 	
-	console.log('Category: ' + catName);
+	//console.log('Category: ' + catName);
 	if($(obj).hasClass("accordianExpanded")){
 		$(obj).nextAll('.summaryDataRow:first').children('.accordionRowSet').slideUp('fast', function(){ $(this).children().remove()});
 		$(obj).removeClass("accordianExpanded");
@@ -557,33 +571,41 @@ function x$(idTag, param){ //Updated 18 Feb 2012
 var clickCalled = 0;
 
 //expand/ collapse link
-function showListDetails(id) {
+function showListDetails(srcNode) {
 	
 	var now = new Date().getTime();
 	
-	if (clickCalled > 0 && (now-clickCalled) < 1250) {
-		//abort if this function is called twice within a 1250ms
+	if (clickCalled > 0 && (now-clickCalled) < 750) {
+		//abort if this function is called twice within a 750ms
 		return;
 	}
 	
 	clickCalled = now;
 	
-	var $div = x$(id);
-	if ($div.text().length==0) { return; }		//no content to show
+	//find the details node
+	var parentLi = srcNode.closest('li')
 	
-	var $image = $div.slideToggle(300, function() {
-		//refresh iscroll
-		scrollContent.refresh();
-	}).siblings("img");
-
-	if ($image.attr("src") == "unp/arrow-up.png") {
-		   $image.attr("src", "unp/arrow-down.png");
-	} else {
-		 $image.attr("src", "unp/arrow-up.png");
-	}
+	parentLi.children('.taskDetails').each( function() {
+		
+			if ( !$(this).is(":empty") ) {
+	
+				var $image = $(this).slideToggle(300, function() {
+					//refresh iscroll
+					scrollContent.refresh();
+				}).siblings("img");
+			
+				if ($image.attr("src") == "unp/arrow-up.png") {
+					   $image.attr("src", "unp/arrow-down.png");
+				} else {
+					 $image.attr("src", "unp/arrow-up.png");
+				}
+			}
+		
+		}
+	);
+	
 
 }
-
 
 //mark a task as done (from the tasks page), remove the button on completion
 function markDone(doneId, undoneId, id) {
@@ -656,7 +678,7 @@ function deactivateIncident(id, numOpenTasks) {
 		cache : false
 	}).done(
 	function(response) {
-		window.location.href = "UnpIncident.xsp?action=openDocument&documentId=" + id;
+		loadPageEx( "UnpIncident.xsp?action=openDocument&documentId=" + id, 'contentwrapper', null);
 	});
 }
 

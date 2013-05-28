@@ -16,7 +16,7 @@ if (id != null && id.length>0) {
 		</xp:dominoDocument>
 	</xp:this.data>
 
-	<xc:mLayout showMenu="true" pageTitle="Quick guide">
+	<xc:unpLayout showMenu="true" pageTitle="Quick guide">
 	
 		<xp:this.facets>
 		
@@ -65,5 +65,5 @@ if (id != null && id.length>0) {
 	
 	
 	
-	</xc:mLayout>
+	</xc:unpLayout>
 </xp:view>

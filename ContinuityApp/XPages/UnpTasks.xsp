@@ -2,25 +2,12 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:unp="http://unplugged.teamstudio.com">
 	
-	<xc:mLayout showMenu="true" pageTitle="Active tasks" newDocTarget="mTask.xsp">
+	<xc:unpLayoutBasic pageTitle="Active tasks" newDocTarget="UnpTask.xsp">
 		<xp:this.facets>
-
-			<xp:panel xp:key="contents" disableOutputTag="true">
-				<xp:div styleClass="box"
-					rendered="#{javascript:database.getView('vwIncidentsByCat').getEntryCount()==0}">
-					<div class="content">
-						<xp:text
-							value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
-					</div>
-				</xp:div>
-
-				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncidentTasks.xsp"
-					position="menu-aligned" insetData="true" showNumOpenTasks="true">
-				</unp:unpAccordion>
-
-			</xp:panel>
+		
+			<xc:unpTasksList xp:key="contents" />
 
 		</xp:this.facets>
-	</xc:mLayout>
+	</xc:unpLayoutBasic>
 
 </xp:view>

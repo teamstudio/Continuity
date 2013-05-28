@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:unp="http://unplugged.teamstudio.com">
+	
+	<xc:unpLayout showMenu="true" pageTitle="Active tasks" newDocTarget="UnpTask.xsp">
+		<xp:this.facets>
+		
+			<xc:unpTasksList xp:key="contents" />
+
+		</xp:this.facets>
+	</xc:unpLayout>
+
+</xp:view>

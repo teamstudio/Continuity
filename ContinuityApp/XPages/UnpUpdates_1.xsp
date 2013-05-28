@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:unpLayout showMenu="true" pageTitle="Updates" newDocTarget="UnpUpdate.xsp">
+		<xp:this.facets>
+		
+			<xc:unpUpdatesList xp:key="contents" />
+
+		</xp:this.facets>
+	</xc:unpLayout>
+	
+</xp:view>

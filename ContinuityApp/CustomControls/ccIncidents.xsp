@@ -12,13 +12,15 @@
 				escape="false" />
 		</div>
 	</div>
+	
+	<xp:text value="#{javascript:'No ' + configBean.getLabel('incidents').toLowerCase() + ' found'}" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
 
-	<xp:repeat id="repeat1" rows="50" value="#{vwIncidentsByCat}" var="row">
+	<xp:repeat id="repeat1" rows="50" value="#{vwIncidentsByCat}" var="row" rendered="#{javascript:getComponent('repeat1').getRowCount()>0}">
 
 		<xp:this.facets>
 			<xp:text escape="false" xp:key="header" disableTheme="true">
 				<xp:this.value>
-			<![CDATA[<table class="lotusTable"><thead><tr><th class="xspPanelViewColumnHeader">Description</th><th class="xspPanelViewColumnHeader">Registered</th><th class="xspPanelViewColumnHeader">Status</th><th class="xspPanelViewColumnHeader">Registered by</th><th class="xspPanelViewColumnHeader">Alert level</th><th class="xspPanelViewColumnHeader">Scenario</th><th class="xspPanelViewColumnHeader">&nbsp;</th></tr></thead><tbody>]]>
+			<![CDATA[<table class="lotusTable"><thead><tr><th class="xspPanelViewColumnHeader">Description</th><th class="xspPanelViewColumnHeader">Registered</th><th class="xspPanelViewColumnHeader">Status</th><th class="xspPanelViewColumnHeader">Registered by</th><th class="xspPanelViewColumnHeader">Org unit</th><th class="xspPanelViewColumnHeader">Alert level</th><th class="xspPanelViewColumnHeader">Scenario</th><th class="xspPanelViewColumnHeader">&nbsp;</th></tr></thead><tbody>]]>
 				</xp:this.value>
 			</xp:text>
 			<xp:text escape="false" xp:key="footer" disableTheme="true">
@@ -29,7 +31,7 @@
 		</xp:this.facets>
 
 		<xp:tr styleClass="highlight" rendered="#{javascript:row.isCategory()}">
-			<td colspan="7">
+			<td colspan="10">
 				<xp:text escape="false" id="computedField1" style="font-weight: bold">
 					<xp:this.value>
 <![CDATA[#{row.$12}]]>
@@ -79,6 +81,10 @@
 			<td>
 				<xp:text escape="true" id="computedField6" value="#{row.createdByName}" style="white-space:nowrap;" />
 			</td>
+			
+			<td>
+				<xp:text escape="true" id="computedField2" value="#{row.orgUnitName}" />
+			</td>
 
 			<td>
 				<xp:text escape="true" id="computedField5" value="#{row.alertLevel}" />
@@ -105,7 +111,12 @@
 					
 					dBar.info("removing incident");
 					row.getDocument().remove(true);
+					
 					currentUserBean.updateMenuOptionCounts();
+					
+					//check alert level on OU
+					checkMaxAlertLevels();
+					
 					}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>

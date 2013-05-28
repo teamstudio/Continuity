@@ -19,7 +19,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument"></xp:dominoDocument>
 	</xp:this.data>
 	
-	<xc:mLayout showMenu="true" newDocTarget="mTask.xsp">
+	<xc:unpLayoutBasic newDocTarget="UnpTask.xsp">
 		<xc:this.pageTitle><![CDATA[#{javascript:if (docIncident.isNewNote()) {
 	return "Activate team";
 } else {
@@ -60,7 +60,6 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 			</xp:panel>
 		</xp:this.facets>
-	</xc:mLayout>
-
+	</xc:unpLayoutBasic>
 
 </xp:view>

@@ -36,8 +36,8 @@
 		<ul id="summaryList">
 			<xp:repeat id="repeat3" rows="50" value="#{vwTasks}" var="row" disableOutputTag="true">
 
-				<xp:text escape="false" tagName="li"
-					disableTheme="true" rendered="#{javascript:row.isCategory()}">
+				<xp:text escape="false" tagName="li" id="c"
+					rendered="#{javascript:row.isCategory()}">
 					<xp:this.styleClass><![CDATA[#{javascript:var c = (viewScope.hasFilter ? 
 	row.getColumnValues().get(1) :
 	row.getColumnValues().get(0) );
@@ -65,11 +65,10 @@ viewScope.put("cat", catLabel );
 				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row" style="padding: 10px">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:"showListDetails('" + getClientId("taskDetails") + "'); event.stopPropagation();"}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:"showListDetails( $(event.srcElement || event.target) ); event.stopPropagation();"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-					
-				
+									
 					<xp:div id="markDone" styleClass="pull-right">
 						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
@@ -117,12 +116,13 @@ viewScope.put("cat", catLabel );
 						<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
 					</xp:label>
 					
-					<xp:div id="taskDetails" style="display:none; margin-left: 24px">
+					<xp:div styleClass="taskDetails" style="display:none; margin-left: 24px">
 
 						<!-- description -->
 						<xp:text tagName="div" value="#{row.description}" escape="false" style="line-height:normal" 
 							rendered="#{javascript:(row.getColumnValue('description').length > 0)}" />
 
+						<!-- assigned to -->
 						<xp:text tagName="div" escape="false" style="margin: 5px 0; line-height: normal;">
 							<xp:this.rendered><![CDATA[#{javascript:compositeData.showAssignedTo == "true"}]]></xp:this.rendered>
 							<xp:this.value><![CDATA[#{javascript:var r = row.getColumnValue('roleNames');
@@ -135,7 +135,7 @@ viewScope.put("cat", catLabel );
 							}]]></xp:this.value>
 						</xp:text>
 
-						<!-- quick Guide link -->
+						<!-- quick guide link -->
 						<xp:div styleClass="buttons" style="margin-top: 5px;" rendered="#{javascript:(row.getColumnValue('quickGuideIds').length > 0)}">
 							<xp:link text="Guide" id="btnGuide" style="width: 80px">
 								<xp:this.attrs>

@@ -41,7 +41,7 @@
 
 }]]></xp:this.beforeRenderResponse>
 
-	<xc:mLayout showMenu="true" pageTitle="Send message">
+	<xc:unpLayout showMenu="true" pageTitle="Send message">
 		<xp:this.facets>
 
 			<xc:unpFormEditor viewxpagename="UnpMain.xsp" formname="fMessage" title="New message"
@@ -98,6 +98,6 @@ $('#' + id + ' option').attr('selected', 'selected');
 				</xp:this.facets>
 			</xc:unpFormEditor>
 		</xp:this.facets>
-		</xc:mLayout>
+		</xc:unpLayout>
 
 </xp:view>

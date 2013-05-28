@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
+	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:unp="http://unplugged.teamstudio.com">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:setLastViewedItem(database.getView("vwIncidents"), "lastViewedIncident" );
+	sessionScope.put("numIncidents", 0);		//reset counter
+	
+	viewScope.put("totalIncidents", database.getView('vwIncidentsByCat').getEntryCount() );
+	}]]></xp:this.beforePageLoad>
+
+	
+	<xp:panel xp:key="contents" disableOutputTag="true">
+				<xp:div styleClass="box"
+					rendered="#{javascript:viewScope.totalIncidents == 0}">
+					<div class="content">
+						<xp:text value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
+					</div>
+				</xp:div>
+				
+				<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncident.xsp"
+					position="menu-aligned" insetData="true" rendered="#{javascript:viewScope.totalIncidents > 0}" showNumOpenTasks="false">
+				</unp:unpAccordion>
+
+	</xp:panel>
+
+
+</xp:view>

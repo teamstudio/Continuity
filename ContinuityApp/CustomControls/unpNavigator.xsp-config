@@ -65,24 +65,6 @@
         </property-extension>
       </property>
       <property>
-        <property-name>ajaxloadid</property-name>
-        <property-class>string</property-class>
-        <property-extension>
-          <designer-extension>
-            <default-value>contentwrapper</default-value>
-          </designer-extension>
-        </property-extension>
-      </property>
-      <property>
-        <property-name>ajaxtargetid</property-name>
-        <property-class>string</property-class>
-        <property-extension>
-          <designer-extension>
-            <default-value>content</default-value>
-          </designer-extension>
-        </property-extension>
-      </property>
-      <property>
         <property-name>disabled</property-name>
         <property-class>boolean</property-class>
         <property-extension>

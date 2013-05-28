@@ -7,6 +7,7 @@
 		<xp:dojoModule name="dijit.form.ComboBox"></xp:dojoModule>
 	</xp:this.resources>
 	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:currentUserBean.updateMenuOptionCounts()}]]></xp:this.beforePageLoad>
 	<xc:layout>
 
 		<xp:this.facets>

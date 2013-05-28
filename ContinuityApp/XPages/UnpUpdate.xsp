@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xc:unpLayout showMenu="true" pageTitle="New update">
+		<xp:this.facets>
+			<xc:unpUpdateForm xp:key="contents"></xc:unpUpdateForm>
+		</xp:this.facets>
+	</xc:unpLayout>
+	
+	
+</xp:view>

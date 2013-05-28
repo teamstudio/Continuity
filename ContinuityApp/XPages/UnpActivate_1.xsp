@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xc:unpLayout showMenu="true" pageTitle="Activate team">
+		<xp:this.facets>
+
+			<xc:mActivateForm xp:key="contents"></xc:mActivateForm>
+
+		</xp:this.facets>
+	</xc:unpLayout>
+
+</xp:view>

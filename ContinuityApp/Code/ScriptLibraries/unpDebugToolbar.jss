@@ -20,7 +20,7 @@ var dBar = {
 		return sessionScope.get("dBar") ||
 			{
 				isCollapsed : false,
-				isEnabled : true,
+				isEnabled : false,
 				messages : [],
 				isInit : false
 			};

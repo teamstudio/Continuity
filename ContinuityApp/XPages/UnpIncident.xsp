@@ -18,13 +18,13 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument"></xp:dominoDocument>
 	</xp:this.data>
 	
-	<xc:mLayout showMenu="true">
+	<xc:unpLayoutBasic>
 		<xc:this.pageTitle><![CDATA[#{javascript:if (docIncident.isNewNote()) {
 	return "Activate team";
 } else {
 	return applicationScope.labels['incident'];
 }}]]></xc:this.pageTitle>
-		<xc:this.newDocTarget><![CDATA[#{javascript:( docIncident.getItemValueString("status").equals("deactivated") ? "" : "mTask.xsp")}]]></xc:this.newDocTarget>
+		<xc:this.newDocTarget><![CDATA[#{javascript:( docIncident.getItemValueString("status").equals("deactivated") ? "" : "UnpTask.xsp")}]]></xc:this.newDocTarget>
 		<xp:this.facets>
 
 			<xp:panel xp:key="contents" disableOutputTag="true">
@@ -216,7 +216,6 @@ var isRegistrator = @IsMember( sessionScope.userName, a);
 
 			</xp:panel>
 		</xp:this.facets>
-	</xc:mLayout>
-
+	</xc:unpLayoutBasic>
 
 </xp:view>

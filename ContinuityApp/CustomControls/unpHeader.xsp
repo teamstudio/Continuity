@@ -30,7 +30,7 @@ the specific language governing permissions and limitations under the License
 		<xp:panel styleClass="backButton">
 			<xp:this.attrs>
 					<xp:attr name="onclick">
-						<xp:this.value><![CDATA[#{javascript:"$.blockUI();window.location.href='" + compositeData.backButtonURL + "';"}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:(compositeData.backButtonURL.indexOf("_1") == -1 ? "loadPageEx('" + compositeData.backButtonURL + "', 'contentwrapper', null, false, true);" : "$.blockUI();window.location.href='" + compositeData.backButtonURL + "';")}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
 		
@@ -55,29 +55,17 @@ the specific language governing permissions and limitations under the License
 		<xp:label styleClass="title" id="title"	value="#{javascript:compositeData.title}">
 		</xp:label>
 		
-		<xp:panel id="searchbutton" rendered="#{javascript:compositeData.search != 'none'}"
+		<!--<xp:panel id="searchbutton" rendered="#{javascript:compositeData.search != 'none'}"
 			styleClass="searchButton">
 			<span></span>
 		</xp:panel>
 		
-		<!-- ML: link to homepage--><!--
-		<xp:panel id="homebutton"
-			styleClass="homeButton">
-			<xp:this.rendered><![CDATA[#{javascript:sessionScope.isDebug && context.getUrl().toString().indexOf("UnpMain") > -1}]]></xp:this.rendered>
-			<xp:this.attrs>
-				<xp:attr name="onclick">
-					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";}]]></xp:this.value>
-				</xp:attr>
-			</xp:this.attrs>
-			<span></span>
-		</xp:panel>
 		--><!-- ML: link to workspace -->
 		<xp:panel id="panel1"
 			styleClass="homeButton">
 			<xp:this.rendered><![CDATA[#{javascript:context.getUrl().toString().indexOf("UnpMain") == -1}]]></xp:this.rendered>
 			<xp:this.attrs>
 				<xp:attr name="onclick">
-
 					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";
 }]]></xp:this.value>
 				</xp:attr>
@@ -87,29 +75,4 @@ the specific language governing permissions and limitations under the License
 		
 	</div>
 	
-	<xp:div id="input-search-frame" styleClass="input-search-frame"
-		rendered="#{javascript:compositeData.search != 'none'}">
-		<input placeholder="Search..." id="input-search" class="hiddensearch">
-		</input>
-	</xp:div>
-	<xp:panel id="searchscript" tagName="script">
-		<xp:this.attrs>
-			<xp:attr name="type" value="text/javascript"></xp:attr>
-			<xp:attr name="src">
-				<xp:this.value><![CDATA[#{javascript:if (compositeData.search == "local"){
-	return "unpSearchLocal.js";
-}else if (compositeData.search == "database"){
-	return "unpSearchDatabase.js";
-}}]]></xp:this.value>
-			</xp:attr>
-		</xp:this.attrs>
-		<xp:this.rendered><![CDATA[#{javascript:compositeData.search != "none"}]]></xp:this.rendered>
-	</xp:panel>
-	<xp:text id="searchvars" tagName="script" escape="false">
-		<xp:this.rendered><![CDATA[#{javascript:compositeData.search == "database"}]]></xp:this.rendered>
-		<xp:this.attrs>
-			<xp:attr name="type" value="text/javascript"></xp:attr>
-		</xp:this.attrs>
-		<xp:this.value><![CDATA[#{javascript:"var searchPage = \"" + compositeData.searchPage + "\";"}]]></xp:this.value>
-	</xp:text>
 </xp:view>

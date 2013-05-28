@@ -2,93 +2,38 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xp:this.data>
-		<xp:dominoView var="view2">
-			<xp:this.viewName><![CDATA[#{javascript:"vwContactsCatByLastname"}]]></xp:this.viewName>
-		</xp:dominoView>
-	</xp:this.data>
-	
-	<xc:mLayout showMenu="true" pageTitle="Contacts">
+	<xc:unpLayoutBasic pageTitle="Contacts">
 		<xp:this.facets>
+		
+			<xp:div xp:key="contents">
+			
+				<xp:div styleClass="box mBottom" style="padding: 11px">
 
-			<xp:panel xp:key="contents" disableOutputTag="true">
-	
-				<ul id="summaryList">
+					<xp:link id="link3" value="#" text="Alphabetical" style="float: left; width: 47%" styleClass="button disabled">
+						<xp:this.attrs>
+							<xp:attr name="onclick">
+								<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpContacts.xsp', 'contentwrapper'); return false;"}]]></xp:this.value>
+							</xp:attr>
+						</xp:this.attrs>
+					</xp:link>
+				
+					<xp:link id="link2" value="#" text="By type" style="float: right; width: 47%" styleClass="button">
+						<xp:this.attrs>
+							<xp:attr name="onclick">
+								<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpContactsByType.xsp', 'contentwrapper'); return false;"}]]></xp:this.value>
+							</xp:attr>
+						</xp:this.attrs>
+					</xp:link>
+					
+					<br style="clear:both" />
 
-					<xp:repeat id="repeat3" rows="50" var="row" disableOutputTag="true"
-						value="#{view2}">
-
-						<xp:text escape="false" tagName="li"
-							styleClass="categoryRowFixed condensed" disableTheme="true"
-							rendered="#{javascript:row.isCategory()}">
-							<xp:this.value><![CDATA[#{javascript:row.getColumnValue("category")}]]></xp:this.value>
-						</xp:text>
-
-						<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li"
-							styleClass="data-row condensed">
-							<xp:this.attrs>
-								<xp:attr name="onClick">
-									<xp:this.value><![CDATA[#{javascript:"openDocument('mContactDetails.xsp?documentId=" + row.getUniversalID() + "&from=UnpContacts.xsp', 'contentwrapper');"}]]></xp:this.value>
-								</xp:attr>
-							</xp:this.attrs>
-
-							<xp:image url="/unp/right-arrow-circle.png" id="image1" styleClass="multiLineIcon">
-							</xp:image>
-
-							<table class="reset"><tbody>
-								<tr>
-									<td class="thumbnail">
-
-										<xp:image id="image3" styleClass="roundedBorders">
-											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length>0}]]></xp:this.rendered>
-											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + row.getColumnValue("photo");}]]></xp:this.url>
-										</xp:image>
-										<xp:image id="image2" styleClass="roundedBorders">
-											<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("photo").length==0}]]></xp:this.rendered>
-											<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/noProfile.gif";}]]></xp:this.url>
-										</xp:image>
-									</td>
-
-									<td class="v-top">
-
-										<xp:label id="label2" styleClass="viewlistsummary" value="#{row.name}"></xp:label>
-										<xp:text escape="false" styleClass="viewlistdetail">
-											<xp:this.value><![CDATA[#{javascript:row.getColumnValue('jobTitle') + '&nbsp;'}]]></xp:this.value>
-										</xp:text>
-										<br />
-										<xp:label id="label3" value="#{row.contactType}">
-											<xp:this.rendered><![CDATA[#{javascript:var t = row.getColumnValue("contactType");
-											if ( t.length == 0 || t.equals("Internal") ) {
-	return false;
-} else  {
-	return true;
-}
-}]]></xp:this.rendered>
-										<xp:this.styleClass><![CDATA[#{javascript:var t = row.getColumnValue("contactType");
-
-if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") || t.equals("Other") ) {
-	return "viewlistdetail contactTypeGreen";
-} else if ( t.equals("Media") || t.equals("Regulatory") ) {
-	return "viewlistdetail contactTypeRed";
-} else {
-	return "viewlistdetail";
-}
-}]]></xp:this.styleClass>
-										</xp:label>
-
-									</td>
-
-								</tr>
-							</tbody></table>
-
-						</xp:panel>
-
-
-					</xp:repeat>
-
-				</ul>
-			</xp:panel>
+				</xp:div>
+		
+				<xc:unpContactsList  />
+				
+			</xp:div>
+			
 		</xp:this.facets>
-	</xc:mLayout>
+	</xc:unpLayoutBasic>
 
 </xp:view>

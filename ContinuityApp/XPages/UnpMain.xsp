@@ -48,7 +48,6 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 		sessionScope.put("orgUnitId", docOrgUnit.getItemValueString("id"));
 		sessionScope.put("orgUnitName", docOrgUnit.getItemValueString("name") );
 		sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
-
 	}
 
 }
@@ -58,11 +57,10 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 
 	<div id="page">
 	
-		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" title="Continuity"
-			homeToWorkspace="true">
+		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" title="Continuity">
 		</xc:unpHeader>
 		
-		<xc:mOrgUnit></xc:mOrgUnit>
+		<xc:unpOrgUnit></xc:unpOrgUnit>
 	
 		<section id="wscontent">
 	
@@ -97,7 +95,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 				
 					<!--  activate team -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpActivate.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpActivate_1.xsp';">
 							<span class="chicletimg imgActivate"></span>
 							<span>Activate team</span>
 						</a>
@@ -105,13 +103,13 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					
 					<!-- contacts -->	
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpContacts.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpContacts_1.xsp';">
 							<span class="chicletimg imgContacts"></span>
 							<span>Contacts</span>
 						</a>
 					</li>
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpCallTree.xsp?clearFrom=1';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpCallTree_1.xsp?clearFrom=1';">
 							<span class="chicletimg imgCalltree"></span>
 							<span>Call tree</span>
 						</a>
@@ -119,7 +117,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					
 					<!-- Incidents -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpIncidents.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpIncidents_1.xsp';">
 							<xp:text escape="true" styleClass="badge" id="computedField2">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numIncidents}]]></xp:this.value>
 								<xp:this.converter>
@@ -134,13 +132,13 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					
 					<!-- my role -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mRole.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='mRole_1.xsp';">
 							<span class="chicletimg imgRole"></span>
 							<span>My role</span>
 						</a>
 					</li>
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mPlans.xsp';">
+					<a href="#" onclick="$.blockUI();window.location.href='mPlans_1.xsp';">
 							<span class="chicletimg imgPlans"></span>
 							<span>Plans</span>
 						</a>
@@ -155,7 +153,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 						</a>
 					</xp:text>
 					<xp:text tagName="li" rendered="#{javascript:sessionScope.numAssignedTasks>0}">
-						<a href="#" onclick="$.blockUI();window.location.href='UnpTasks.xsp?activeOnly=1';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpTasks_1.xsp?activeOnly=1';">
 							<xp:text escape="true" styleClass="badge" id="computedField4">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numAssignedTasks}]]></xp:this.value>
 								<xp:this.converter>
@@ -169,7 +167,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					
 					<!-- Updates -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mUpdates.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpUpdates_1.xsp';">
 							<xp:text escape="true" styleClass="badge" id="computedField1">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numUpdates}]]></xp:this.value>
 								<xp:this.converter>

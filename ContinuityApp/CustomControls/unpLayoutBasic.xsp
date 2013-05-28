@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init();
+	
+	viewScope.put("pageTitle", compositeData.pageTitle);
+	viewScope.put("newDocTarget", compositeData.newDocTarget );
+	viewScope.put("backButtonURL", compositeData.backButtonURL );
+	
+	}]]></xp:this.beforePageLoad>
+	
+	<xp:this.resources>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<div id="page">
+
+		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="true"
+			title="#{javascript:viewScope.pageTitle}" backButtonText="Back">
+			<xc:this.backButtonURL><![CDATA[#{javascript:viewScope.backButtonURL}]]></xc:this.backButtonURL>
+		</xc:unpHeader>
+
+		<div id="body">
+
+			<!-- main (scrollable) area -->
+			<div id="contentwrapper" >
+				<xp:div id="iscrollcontent" styleClass="iscrollcontent">
+				
+					<div id="contentScroller">
+				
+						<xp:callback facetName="contents"></xp:callback>
+						
+					</div>
+				</xp:div>
+			</div>
+			
+		</div>
+		
+		<xc:unpFooter newDocTarget="#{javascript:viewScope.newDocTarget}">
+		</xc:unpFooter>
+
+	</div>
+
+</xp:view>

@@ -313,9 +313,15 @@ try{
 			
 			}
 			
-			if (doSync) {
-				//sync
-				@Command("[ReplicatorReplicateHigh]");
+			if ( doSync ) {
+			
+				if ( sessionScope.get("isDebug") ) {
+					dBar.debug("no sync in debug mode");
+				} else {
+					//sync
+					@Command("[ReplicatorReplicateHigh]");
+				}
+				
 			}
 		}
 		
@@ -336,7 +342,6 @@ writer.endDocument();
 facesContext.responseComplete();}]]></xp:this.afterRenderResponse>
 	
 	<xp:this.resources>
-		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
 		<xp:script src="/base.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
 

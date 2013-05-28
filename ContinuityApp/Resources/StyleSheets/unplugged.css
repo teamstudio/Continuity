@@ -2129,3 +2129,32 @@ span.high {
 .contactTypeRed {
 	color: red;
 }
+
+.button {
+	border-radius: 6px;
+	width: 48%;
+	margin-right: 6px;
+	height: 32px;
+	cursor: pointer;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+	padding: 0;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+	font-weight: bold;
+	line-height: 32px;
+	font-size: 16px;
+	text-align: center;
+	display: block;
+	border: 1px solid #2e2e2e;
+	background: #333333;
+	color: white;
+	background: -webkit-linear-gradient(#878787, #414141);
+}
+
+.button:hover {
+	background: -webkit-linear-gradient(#636363, #212121);
+	text-decoration: none;
+}
+.button.disabled, .button.disabled:hover {
+	background: #636363;
+	box-shadow: inherit;
+}

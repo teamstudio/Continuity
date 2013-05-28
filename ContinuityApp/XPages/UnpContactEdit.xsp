@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<xc:unpLayoutBasic pageTitle="Contact">
+		<xp:this.facets>
+
+			<xp:div xp:key="contents">
+		
+				<xc:unpFormEditor showbuttons="true" closexpagename="UnpContacts.xsp"
+				viewxpagename="UnpContacts.xsp" formname="fContact" title="Contact"
+				xp:key="facet_1">
+
+				<xp:this.facets>
+					<xp:panel xp:key="facet_1">
+						
+						<ul class="fieldlist">
+							
+								<li>
+								
+								
+									<div
+								style="float:left; clear:left; width:27%; text-align:right; min-width: 70px; padding-top:10px; padding-bottom:10px;">
+
+								<xp:image id="image2" style="width: 70px; height: 70px;"
+									styleClass="thumbnail roundedBorders">
+									<xp:this.url><![CDATA[#{javascript:var thumb = docContact.getItemValueString("photoThumbnailName");
+var photo = docContact.getItemValueString("photoFileName");
+
+var photoUrl = thumb.length>0 ? "/0/" + param.get("documentId") + "/$file/" + thumb :
+             photo.length>0 ? "/0/" + unid + "/$file/" + photo :
+             "noProfile.gif";
+									
+									(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + photoUrl;}]]></xp:this.url>
+								</xp:image>
+							</div>
+							
+								<div
+								style="padding-left: 31%; padding-top:10px; padding-bottom:10px;">
+
+								<b>
+									<xp:text escape="true" styleClass="reset"
+										style="font-weight: bold" value="#{docContact.name}" />
+								</b>
+
+								<!--  title/ org unit -->
+								<xp:text escape="true" style="padding:0; border:0">
+									<xp:this.value><![CDATA[#{javascript:var ou = docContact.getItemValueString("orgUnitName")
+
+docContact.getItemValueString("jobTitle") + 
+(ou.length > 0 ? " (" + ou + ")" : "") }]]></xp:this.value>
+								</xp:text>
+
+								<!-- contact type/ bc role-->
+								<xp:text escape="true" id="computedField2">
+									<xp:this.styleClass><![CDATA[#{javascript:var t = docContact.getItemValueString("contactType");
+
+if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") ) {
+	return "reset contactTypeGreen";
+} else if ( t.equals("Media") || t.equals("Regulatory") ) {
+	return "reset contactTypeRed";
+} else {
+	return "reset";
+}
+}]]></xp:this.styleClass>
+									<xp:this.value><![CDATA[#{javascript:var type = docContact.getItemValueString("contactType");
+									var role = docContact.getItemValueString('roleName');
+									
+									if ( type.equals("") || type.equals("Internal") || type.equals("Other") ) {
+										//show bc role
+										return (role.length>0 ? role : "(no BC role)") + 
+( docContact.getItemValueString("isAlternate").equals("yes") ? " (alternate)" : "")
+									} else {
+										//show type
+										return type
+									}
+									
+}]]></xp:this.value>
+								</xp:text>
+
+							</div>
+									
+								
+								</li>
+							
+							<li>
+								<xp:label value="Email" id="label4" for="email" />
+								<xp:inputText id="email" value="#{docContact.email}" type="email" styleClass="required xspInputFieldEditBox"></xp:inputText>
+							</li>
+							<li>
+							
+								<!-- NOTE: VALIDATION WILL FAIL IF CHANGED TO NUMBER TYPE!! -->
+								<xp:label value="Work" id="label3" for="workPhone" />
+								<xp:inputText id="phoneWork" value="#{docContact.phoneWork}" styleClass="required xspInputFieldEditBox">
+								</xp:inputText>
+
+							</li>
+							<li>
+								<xp:label value="Mobile" id="label1" for="mobilePhone" />
+								<xp:inputText id="phoneMobile" value="#{docContact.phoneMobile}" styleClass="xspInputFieldEditBox">
+								</xp:inputText>
+							</li>
+							<li>
+								<xp:label value="Home" id="label2" for="homePhone" />
+								<xp:inputText id="phoneHome" value="#{docContact.phoneHome}" styleClass="xspInputFieldEditBox">
+								</xp:inputText>
+							</li>
+						</ul>
+				<!--<xp:div>
+					<div>Upload a new photo:</div>
+					<xp:fileUpload id="fileUpload1" value="#{docContact.photo}"></xp:fileUpload>
+				</xp:div>
+					-->
+					</xp:panel>
+				</xp:this.facets>
+			</xc:unpFormEditor>
+		</xp:div>
+	</xp:this.facets>
+	</xc:unpLayoutBasic>
+		
+</xp:view>

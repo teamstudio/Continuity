@@ -17,7 +17,7 @@
 		</xp:acl>
 	</xp:this.acl>
 	
-	<xc:mLayout showMenu="false" pageTitle="Organisation unit">
+	<xc:unpLayout showMenu="false" pageTitle="Organisation unit">
 		<xp:this.facets>
 
 			<xp:div xp:key="contents">
@@ -71,7 +71,7 @@
 			</xp:div>
 
 		</xp:this.facets>
-	</xc:mLayout>
+	</xc:unpLayout>
 
 
 
