@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Emergency Contacts:">
+
+	<xp:viewPanel rows="30" id="viewPanel1"
+		pageName="/BBContactDetails.xsp" showColumnHeader="false">
+
+		<xp:this.data>
+			<xp:dominoView var="viewContacts"
+				viewName="BBContactsByLastname">
+			</xp:dominoView>
+		</xp:this.data>
+		<xp:viewColumn columnName="fullName" id="viewColumn1"
+			displayAs="link" openDocAsReadonly="true">
+			<xp:viewColumnHeader value="name" id="viewColumnHeader1"></xp:viewColumnHeader>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="jobTitle" id="viewColumn2"
+			style="color:rgb(0,0,255)">
+			<xp:viewColumnHeader value="jobTitle"
+				id="viewColumnHeader2">
+			</xp:viewColumnHeader>
+		</xp:viewColumn>
+	</xp:viewPanel>
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>

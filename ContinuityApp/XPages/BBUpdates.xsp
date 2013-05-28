@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Updates">
+	<xp:this.data>
+		<xp:dominoView var="viewUpdates" viewName="vwUpdates"></xp:dominoView>
+	</xp:this.data>
+
+	<xp:viewPanel value="#{viewUpdates}" id="viewPanel1"
+		showColumnHeader="false" pageName="/BBUpdate.xsp">
+
+		<xp:viewColumn columnName="createdByName" id="viewColumn2"
+			style="font-weight:bold" displayAs="link" openDocAsReadonly="true">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Created by name"
+					xp:key="header" id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="createdDate" id="viewColumn1"
+			style="color:rgb(128,128,128)">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Created date"
+					xp:key="header" id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+
+		<xp:viewColumn columnName="message" id="viewColumn3" style="height: 2em">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Message" xp:key="header"
+					id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="$$PreviousPage">
+		</xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>

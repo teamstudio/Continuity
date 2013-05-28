@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" style="background-color:rgb(46,46,46)">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:configApp();}]]></xp:this.beforePageLoad>
+	<xp:this.resources>
+		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xp:table style="background-color:rgb(1,1,1)">
+		<xp:tr>
+			<xp:td>
+				<xp:label value="" id="label9" style="font-size:2pt"></xp:label>
+				<xp:label value="Continuity" id="label7"
+					style="text-align:center;color:rgb(255,255,255);font-size:10pt">
+				</xp:label>
+				<xp:label value="" id="label10" style="font-size:2pt"></xp:label>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	<xp:table style="background-color:rgb(61,61,61)">
+		<xp:tr>
+			<xp:td>
+				<!--				<xp:label id="label13">-->
+				<!--
+					<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisUNID");}]]></xp:this.value>
+				-->
+				<!--				</xp:label>-->
+				<!--				<br />-->
+				<!--				<xp:label id="label8">-->
+				<!--
+					<xp:this.value><![CDATA[#{javascript:applicationScope.get("error");}]]></xp:this.value>
+				-->
+				<!--				</xp:label>-->
+				<xp:label id="headeritem" style="color:rgb(255,255,255)">
+					<xp:this.value><![CDATA[#{javascript:sessionScope.get("name");}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			</xp:tr>
+			<xp:tr>
+			<xp:td>
+				<xp:text escape="false" value="#{javascript:sessionScope.roleName}"
+					id="computedField2" style="color:rgb(255,255,255)">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	<xp:label id="label11"></xp:label>
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:link escape="true" text="Updates" id="link5"
+					value="/BBActivateTeam.xsp">
+					<xp:image id="image6" url="/activate.png"></xp:image>
+				</xp:link>
+				<xp:label value="Activate Team" id="label12"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+
+			</xp:td>
+			<xp:td>
+				<xp:link escape="true" text="Contacts" id="link1" value="/BBContacts.xsp">
+
+					<xp:image id="image1" url="/contacts-blue.png"></xp:image>
+				</xp:link>
+
+				<xp:label value="Contacts" id="label4"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:link escape="true" text="Updates" id="link7" value="/BBCallTree.xsp">
+					<xp:image id="image4" url="/calltree-blue.png"></xp:image>
+				</xp:link>
+				<xp:label value="Call Tree" id="label2"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="" id="label8" style="font-size:7pt"></xp:label>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:link escape="true" text="Incidents" id="link4"
+					value="/BBIncidents.xsp">
+					<xp:image id="image5" url="/incidents.png"></xp:image>
+				</xp:link>
+				<xp:label value="Incidents" id="label14"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:link escape="true" text="My Role" id="link6" value="/BBMyRole.xsp">
+					<xp:image id="image7" url="/role.png"></xp:image>
+				</xp:link>
+				<xp:label value="My Role" id="label1"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+
+			</xp:td>
+			<xp:td>
+				<xp:link escape="true" text="Plans" id="link2" value="/BBPlans.xsp">
+					<xp:image id="image2" url="/plans.png"></xp:image>
+				</xp:link>
+				<xp:label value="Plans" id="label5"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="" id="label13" style="font-size:7pt"></xp:label>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:link escape="true" text="Active Tasks" id="link8" value="/BBLiveIncidents.xsp">
+					<xp:image id="image8" url="/tasks.png"></xp:image>
+				</xp:link>
+				<xp:label value="Active Tasks" id="label15"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:link escape="true" text="Updates" id="link3" value="/BBUpdates.xsp">
+					<xp:image id="image3" url="/updates-blue.png"></xp:image>
+				</xp:link>
+				<xp:label value="Updates" id="label6"
+					style="color:rgb(255,255,255);text-align:center"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:label value="" id="label3"></xp:label>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="$$HomePage"></xp:navigationRule>
+	</xp:this.navigationRules>
+
+
+</xp:view>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B71004D250E'>
+<noteinfo noteid='6ce' unid='6988D5ECBD1A418C85257B71004D3A53' sequence='1'>
+<created><datetime dst='true'>20130520T100332,03-04</datetime></created>
+<modified><datetime dst='true'>20130520T100332,15-04</datetime></modified>
+<revised><datetime dst='true'>20130520T100332,14-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130524T121144,31-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130520T100332,15-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>BBvwTasksByRespId</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+tgECAGIACABwbGFubmFtZQUACQBwbGFuTmFtZXMAAQAAAAoCrwA8ACYAAQAbAC0gTm90IGFsbG9j
+YXRlZCB0byBhIHBsYW4gLQCuABYABQAJAHBsYW5OYW1lcwCuAAQAtQMDAAIAQgADACQxMAAFAAUA
+b3JkZXIAVgEBAAAACwKvACIAEAAFAAUAb3JkZXIArgASAAAAAAAAAAA4j0CuAAQAtQMDAAUASABE
+AAYAEQAIAAMABAALAAkAcmVzcG9uc2liaWxpdHlJZHNwbGFubmFtZSQxMG5hbWVkZXNjcmlwdGlv
+biRDb25mbGljdAQABAAHAE4ASABzaG93IHVuYXNzaWduZWQgdGFza3MgdGhhdCBhcmUgYWxsb2Nh
+dGVkIHRvIG9uZSBvciBtb3JlIHJlc3BvbnNpYmlsaXRpZXMHAAoAAwAJMVMAAABKAAUABABGb3Jt
+AQAFAGZUYXNrAAoCBQAGAHN0YXR1cwEAAAAKAhwCBQARAHJlc3BvbnNpYmlsaXR5SWRzAAEAAAAL
+AhwCAwAHACIAHAAJMFJMMVMyUzNTNFM1UzZTN1M4UzlTMTBTMTFT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+NwADAABEiGYHAAARAIhmBxEACACAZgAZAAMAcmVzcG9uc2liaWxpdHlJZHNwbGFubmFtZSQxMA==
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQAFABQAigAAAFZDAwQRABEAAAAAAFAAAQEACQABAAAAAAAAAAICAAAAVkMDBAgACQByAAAATgAB
+AQAJAAEAAAAAAAAAAgIAAABWQwEAAwAFAFgAAABgAAEAAAkAAAAAAAAAAAACAgAAAFZDAAAEAAQA
+AAAAALIAAQAACQAAAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAjQABAAAJAAAAAAAAAAAAAgIAAABy
+ZXNwb25zaWJpbGl0eUlkc3Jlc3BvbnNpYmlsaXR5SWRzcGxhbm5hbWVwbGFuTmFtZXNyAAIAYgAI
+AHBsYW5uYW1lBQAJAHBsYW5OYW1lcwABAAAACgKvADwAJgABABsALSBOb3QgYWxsb2NhdGVkIHRv
+IGEgcGxhbiAtAK4AFgAFAAkAcGxhbk5hbWVzAK4ABAC1AwMABwAOAAgACTJSVDZTOFIkMTBvcmRl
+clgAAgBCAAMAJDEwAAUABQBvcmRlcgBWAQEAAAALAq8AIgAQAAUABQBvcmRlcgCuABIAAAAAAAAA
+ADiPQK4ABAC1AwMABwAUAA0ACTJSVDZTN1M5UzExUgBuYW1lbmFtZWRlc2NyaXB0aW9uZGVzY3Jp
+cHRpb24mAAEAAAABAQAJAQAACgEBDgoAAD8ArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAA
+AAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAE
+AAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAA
+AAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABX
+QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8A
+AQDv7+8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAA
+AAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

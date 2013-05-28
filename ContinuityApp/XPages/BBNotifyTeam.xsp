@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Send Message:" xmlns:xp_1="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident"
+			action="editDocument">
+
+			<xp:this.documentId><![CDATA[#{javascript:sessionScope.get("docUnid");}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Incident:" id="description_Label1"
+					for="description1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.description}"
+					id="description1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Message" id="messageLabel"
+					for="message">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="message"
+					value="#{docIncident.message}">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	<xp:label value="" id="label1"></xp:label>
+	<xp:label value="" id="label2"></xp:label>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:label value="Message will be set to:" id="label3"></xp:label>
+	<xp:panel>
+		<xp:viewPanel rows="30" id="viewPanel1"
+			showColumnHeader="false">
+
+			<xp:this.data>
+				<xp:dominoView var="viewContacts"
+					viewName="vwContactsByOrgUnit">
+					<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId");}]]></xp:this.categoryFilter>
+				</xp:dominoView>
+			</xp:this.data>
+			<xp:viewColumn columnName="email" id="viewColumn1">
+				<xp:viewColumnHeader value="email"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:viewColumn>
+		</xp:viewPanel>
+	</xp:panel>
+
+	<xp:button id="button1" value="Send"
+		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+
+				<xp:actionGroup>
+
+
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:if(docIncident.getItemValueString("message") == ""){
+  alert("Message cannot be blank!");
+  return false;
+}
+else{
+var contactList = new Array;		
+var vwContacts = database.getView("vwContactsByOrgUnit");
+var entryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("orgUnitId"), true);
+var entry = entryCollection.getFirstEntry();
+		
+while (null != entry) {
+		
+	var mailAddress = entry.getColumnValues()[4];
+			
+	if (mailAddress.length>0) {
+		contactList.push( mailAddress );
+	}
+			
+	entry = entryCollection.getNextEntry();
+	 
+}
+/*var doc = docIncident.getDocument();
+docIncident.replaceItemValue(  "SendTo",  @Explode(contactList) );
+docIncident.replaceItemValue(  "From", "BC Global" );
+docIncident.replaceItemValue(  "Subject", "Continuity Test [from BB] - " + docIncident.getItemValueString("description") );
+docIncident.replaceItemValue(  "Body", docIncident.getItemValueString("message") + "\n");
+docIncident.save();
+doc.replaceItemValue("Form", "Memo");
+doc.send();*/
+
+sendMail( contactList, "Continuity Test [from BB] - " + docIncident.getItemValueString("description"), docIncident.getItemValueString("message") + "\n", sessionScope.email, sessionScope.name )
+
+db = session.getCurrentDatabase();
+db.replicate();
+mailDb = @MailDbName();
+dbMail = session.getDatabase(mailDb[0], mailDb[1]);
+dbMail.replicate();
+dbMail.close();
+
+}}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="Cancel" id="button2"
+		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="$$PreviousPage"
+					target="openDocument">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	
+</xp:view>

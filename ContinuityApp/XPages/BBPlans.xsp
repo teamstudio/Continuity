@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Plans">
+	<xp:this.data>
+		<xp:dominoView var="viewScenarios" viewName="BBvwScenarios">
+			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId");}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:viewPanel value="#{viewScenarios}" id="viewPanel1"
+		pageName="/BBPlan.xsp" showColumnHeader="false">
+
+		<xp:viewColumn columnName="category" id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Category" xp:key="header"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="name" id="viewColumn2"
+			displayAs="link" openDocAsReadonly="true">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="numTasks" id="viewColumn3"
+			style="display:inline;text-align:right;color:rgb(0,64,128)">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="No tasks" xp:key="header"
+					id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+</xp:view>

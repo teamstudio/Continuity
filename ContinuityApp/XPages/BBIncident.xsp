@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	
+	<xp:this.resources>
+		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
+	</xp:this.resources><xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBIncidents.xsp">
+		</xp:navigationRule>
+	</xp:this.navigationRules><xp:this.beforePageLoad>
+		<xp:executeScript>
+			<xp:this.script><![CDATA[#{javascript:var docThis = docIncident.getDocument();
+sessionScope.put("docUnid", docThis.getUniversalID());
+var numOpenTasks = 0;
+var t = @DbLookup( @DbName(), "vwTasksAssignedOpen", docIncident.getItemValueString("id"), 2, "[FailSilent]");
+if (t != null && t != "") {
+	numOpenTasks = @Elements(t);
+}
+print("OPEN TASKS = " + numOpenTasks);
+viewScope.put("numOpenTasks", numOpenTasks);
+
+}]]></xp:this.script>
+		</xp:executeScript>
+	</xp:this.beforePageLoad><xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle><xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument">
+		</xp:dominoDocument>
+		<xp:dominoView var="viewTasks" viewName="BBvwTasksByIncident">
+			<xp:this.categoryFilter><![CDATA[#{javascript:docIncident.getDocument().getItemValueString("id");}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+	
+	<xp:button value="Edit" id="button9">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBActivateTeam.xsp"
+					target="openDocument"
+					documentId="#{javascript:docIncident.getDocument().getUniversalID();}">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	
+	<xp:button value="Edit" id="button7"
+		style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBEditIncident.xsp"
+					target="editDocument"
+					documentId="#{javascript:docIncident.getDocument().getUniversalID();}">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Description:" id="description_Label1"
+					for="description1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.description}"
+					id="description1">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Asset:" id="siteName_Label1"
+					for="siteName1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.siteName}"
+					id="siteName1" readonly="true">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Org unit:" id="label4"
+					for="orgUnitId">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="orgUnitId"
+					value="#{docIncident.orgUnitName}">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Plan:" id="label7" for="planName"
+					rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="planName"
+					rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}"
+					value="#{docIncident.planName}">
+				</xp:text>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Scenario:" id="scenarioName_Label1"
+					for="scenarioName1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.scenarioName}"
+					id="scenarioName1" readonly="true">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Alert level:" id="alertLevel_Label1"
+					for="alertLevel1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.alertLevel}"
+					id="alertLevel1" readonly="true">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Status:" id="status_Label1"
+					for="status1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.status}"
+					id="status1" readonly="true">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Exercise?:" id="isRehearsal_Label1"
+					for="isRehearsal1">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText value="#{docIncident.isRehearsal}"
+					id="isRehearsal1" readonly="true">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	<xp:label id="label1"></xp:label>
+	<xp:br></xp:br>
+	
+	
+	
+	
+
+
+	<xp:button value="     Notify Team      " id="button1"
+		style="-unp-menuButton:false;">
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:openPage name="/BBNotifyTeam.xsp"
+						target="editDocument">
+
+
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="        Call Tree        " id="button2"
+		style="-unp-menuButton:false;">
+	<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered></xp:button>
+	<xp:button id="button3" value="Deactivate Incident"
+		style="-unp-menuButton:false;">
+
+
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+
+					<xp:this.condition><![CDATA[#{javascript:if (!sessionScope.get("isEditor")) {
+	alert("You are not authorized to update this document");
+	return false;
+}
+confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
+
+
+
+
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
+} else {
+	deactivateIncident(docIncident.getDocument());
+}}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:openPage name="/BBIncidents.xsp"
+						target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	
+	
+	<xp:button value="Notify Team" id="button4">
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:openPage name="/BBNotifyTeam.xsp"
+						target="editDocument">
+
+
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="Call Tree" id="button5">
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
+	</xp:button>
+	<xp:button id="button6" value="Deactivate Incident">
+
+
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+
+					<xp:this.condition><![CDATA[#{javascript:if (!sessionScope.get("isEditor")) {
+	alert("You are not authorized to update this document");
+	return false;
+}
+confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
+
+
+
+
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
+} else {
+	deactivateIncident(docIncident.getDocument());
+}}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:openPage name="/BBIncidents.xsp"
+						target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+
+
+	<xp:br></xp:br>
+	<xp:label id="label2" value="Tasks:"></xp:label>
+	<xp:br></xp:br>
+
+	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
+		showColumnHeader="false">
+
+		<xp:viewColumn columnName="cat" id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Cat" xp:key="header"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="name" id="viewColumn2"
+			style="color:rgb(0,0,255)">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header"
+					id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn columnName="roleNames" id="viewColumn3">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Role names" xp:key="header"
+					id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+	<xp:br></xp:br>
+</xp:view>

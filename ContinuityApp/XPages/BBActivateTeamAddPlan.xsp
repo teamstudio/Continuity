@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="fIncident"
+			action="editDocument">
+			<xp:this.documentId><![CDATA[#{javascript:sessionScope.get("docUnid");}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+<xp:button id="button1" value="Activate" style="-unp-menuButton:false;">
+
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:this.condition><![CDATA[#{javascript:
+if(docIncident.getItemValueString("scenarioName") == "Please select..."){
+		alert("Please select a scenario!");
+		return false;
+}	
+return true;}]]></xp:this.condition>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:	
+					
+if (applicationScope.isReadOnlyMode) {
+	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
+} 
+else {
+	print("IN SCRIPT!");
+	var doc = docIncident.getDocument();
+	doc.save();
+	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BASE.JS ONCE SUPPORTED
+	var DBScenarioResult = @DbLookup( "", "BBvwAllScenarios", doc.getItemValueString("scenarioName"),2);
+	var scenarioId = "None";
+	if (DBScenarioResult != undefined){
+		var scenarioId = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
+	}
+	doc.replaceItemValue("scenarioId", scenarioId);
+
+	var DBSiteIdResult = @DbLookup( "", "BBvwAssetDetails", doc.getItemValueString("siteName"),6);
+	if (DBSiteIdResult != undefined){
+		var siteId = (DBSiteIdResult.constructor == Array) ? DBSiteIdResult : [ DBSiteIdResult ];
+	}
+	doc.replaceItemValue("siteId", siteId);
+	
+	var orgName = "none";
+	var DBOrgNameResult = @DbLookup( "", "BBvwOrgUnitsById", doc.getItemValueString("orgUnitId"),2);
+	if (DBOrgNameResult != undefined){
+		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
+	}
+	doc.replaceItemValue("orgUnitName", orgName);
+	sessionScope.put("orgUnitName", orgName);
+	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
+	
+	doc.replaceItemValue("formname", "fIncident");
+	
+	doc.save();	
+	print("OU NAME" + doc.getItemValue("orgUnitName"));
+	print("OU ID" + doc.getItemValue("orgUnitId"));
+	print("SCENARIO NAME" + doc.getItemValue("scenarioName"));
+	print("SCENARIO ID" + doc.getItemValue("scenarioId"));
+	print("SITE NAME" + doc.getItemValue("siteName"));
+	print("SITE ID" + doc.getItemValue("siteId"));
+	
+	processActivation(doc, true);
+	var db = session.getCurrentDatabase();
+	db.replicate();
+	mailDb = @MailDbName();
+	dbMail = session.getDatabase(mailDb[0], mailDb[1]);
+	dbMail.replicate();
+	dbMail.close();
+	
+}
+}]]></xp:this.script>
+					</xp:executeScript>
+
+
+					<xp:openPage name="/BBIncidents.xsp" target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+
+	<xp:br></xp:br>
+
+
+	<xp:button value=" Cancel " id="button2" style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBMain.xsp" target="openDocument">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	
+
+	<xp:button id="button3" value="Activate">
+
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
+		alert("Description cannot be blank!");
+		return false;
+}
+if(docIncident.getItemValueString("siteName") == "Please select..."){
+		alert("Please select an Asset!");
+		return false;
+}	
+if(docIncident.getItemValueString("orgUnitId") == "Please select..."){
+		alert("Please select an OrgUnit!");
+		return false;
+}	
+if(docIncident.getItemValueString("scenarioName") == "Please select..."){
+		alert("Please select a scenario!");
+		return false;
+}	
+return true;}]]></xp:this.condition>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:	
+					
+if (applicationScope.isReadOnlyMode) {
+	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
+} 
+else {
+	print("IN SCRIPT!");
+	var doc = docIncident.getDocument();
+	doc.save();
+	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BASE.JS ONCE SUPPORTED
+	var DBScenarioResult = @DbLookup( "", "BBvwAllScenarios", doc.getItemValueString("scenarioName"),2);
+	var scenarioId = "None";
+	if (DBScenarioResult != undefined){
+		var scenarioId = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
+	}
+	doc.replaceItemValue("scenarioId", scenarioId);
+
+	var DBSiteIdResult = @DbLookup( "", "BBvwAssetDetails", doc.getItemValueString("siteName"),6);
+	if (DBSiteIdResult != undefined){
+		var siteId = (DBSiteIdResult.constructor == Array) ? DBSiteIdResult : [ DBSiteIdResult ];
+	}
+	doc.replaceItemValue("siteId", siteId);
+	
+	var orgName = "none";
+	var DBOrgNameResult = @DbLookup( "", "BBvwOrgUnitsById", doc.getItemValueString("orgUnitId"),2);
+	if (DBOrgNameResult != undefined){
+		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
+	}
+	doc.replaceItemValue("orgUnitName", orgName);
+	sessionScope.put("orgUnitName", orgName);
+	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
+	
+	doc.replaceItemValue("formname", "fIncident");
+	
+	doc.save();	
+	print("OU NAME" + doc.getItemValue("orgUnitName"));
+	print("OU ID" + doc.getItemValue("orgUnitId"));
+	print("SCENARIO NAME" + doc.getItemValue("scenarioName"));
+	print("SCENARIO ID" + doc.getItemValue("scenarioId"));
+	print("SITE NAME" + doc.getItemValue("siteName"));
+	print("SITE ID" + doc.getItemValue("siteId"));
+	
+	processActivation(doc, true);
+	var db = session.getCurrentDatabase();
+	db.replicate();
+	mailDb = @MailDbName();
+	dbMail = session.getDatabase(mailDb[0], mailDb[1]);
+	dbMail.replicate();
+	dbMail.close();
+	
+}
+}]]></xp:this.script>
+					</xp:executeScript>
+
+
+					<xp:openPage name="/BBIncidents.xsp" target="openDocument">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button><xp:br></xp:br>
+
+
+	<xp:button value="Cancel" id="button4">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBMain.xsp" target="openDocument">
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button></xp:view>

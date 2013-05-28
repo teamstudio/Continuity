@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoView var="viewOrgUnits" viewName="BBvwOrgUnitsById"></xp:dominoView>
+	</xp:this.data>
+
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+	<xp:viewPanel var="orgUnits" value="#{viewOrgUnits}" id="viewPanel1" showColumnHeader="false" pageName="/BBMain.xsp">
+
+		<xp:viewColumn columnName="name" id="viewColumn2" displayAs="link" openDocAsReadonly="true">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Name" xp:key="header" id="viewColumnHeader2">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:var thisOrgName = orgUnits.getDocument().getItemValueString("name");
+sessionScope.put("orgUnitName", thisOrgUnit);
+sessionScope.put("orgUnitId", orgUnits.getDocument().getItemValueString("id"));
+}]]></xp:this.action>
+			</xp:eventHandler></xp:viewColumn><xp:viewColumn columnName="alertLevel" id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="Image path" xp:key="header"
+					id="viewColumnHeader1">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		
+	</xp:viewPanel></xp:view>

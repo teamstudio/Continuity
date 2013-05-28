@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Contact Details">
+	<xp:this.data>
+		<xp:dominoDocument var="docContact" formName="fContact"></xp:dominoDocument>
+	</xp:this.data>
+
+
+	<xp:br></xp:br>
+	<xp:panel>
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+
+					<xp:image id="image1"
+						style="width: 200px; height: 200px;">
+						<xp:this.url><![CDATA[#{javascript:
+			//var thumb = docContact.getItemValueString("photoThumbnailName")
+			if(!docContact.getAttachmentList().isEmpty()){
+				return "/0/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getAttachmentList().get(0).getName();
+            }
+            else{
+            	return "noProfile.gif";
+            } 
+		}]]></xp:this.url>
+					</xp:image>
+				</xp:td>
+				<xp:td>
+					<xp:label id="label1"></xp:label>
+					<xp:br></xp:br>
+					<xp:inputText value="#{docContact.firstName}"
+						id="firstName1" readonly="true">
+					</xp:inputText>
+					<xp:br></xp:br>
+					<xp:inputText value="#{docContact.lastName}"
+						id="lastName1" readonly="true">
+					</xp:inputText>
+					<xp:br></xp:br>
+					<xp:inputText value="#{docContact.jobTitle}"
+						id="jobTitle1" readonly="true">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+
+			<xp:tr>
+
+				<xp:td>
+
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:panel>
+	<xp:panel>
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Email:" id="email_Label1"
+						for="email1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docContact.email}"
+						id="email1" style="color:rgb(0,0,255)">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Phone mobile:"
+						id="phoneMobile_Label1" for="phoneMobile1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docContact.phoneMobile}"
+						id="phoneMobile1" style="color:rgb(0,0,255)">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Phone home:" id="phoneHome_Label1"
+						for="phoneHome1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docContact.phoneHome}"
+						id="phoneHome1" style="color:rgb(0,0,255)">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Phone work:" id="phoneWork_Label1"
+						for="phoneWork1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{docContact.phoneWork}"
+						id="phoneWork1" style="color:rgb(0,0,255)">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Role:" id="jobTitle_Label1"
+						for="jobTitle1">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+
+					<xp:inputText value="#{docContact.roleName}"
+						id="roleName1">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+
+		</xp:table>
+	</xp:panel>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="$$PreviousPage">
+		</xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>
