@@ -44,7 +44,9 @@ if (start == ""){
 								}else{
 								  viewScope.accRowcount = viewScope.accRowcount + 1;
 								}
-								"openDocument('" + param.get("xpageDoc") + "?action=openDocument&documentId=" + thisRowData.getDocument().getUniversalID() + "', 'contentwrapper')"}]]></xp:this.value>
+								//"openDocument('" + param.get("xpageDoc") + "?action=openDocument&documentId=" + thisRowData.getDocument().getUniversalID() + "', 'contentwrapper')";
+								"loadPageEx('" + param.get("xpageDoc") + "?action=openDocument&documentId=" + thisRowData.getDocument().getUniversalID() + "', 'contentwrapper', null, true, true)";
+								}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
 				<xp:image url="/unp/right-arrow-circle.png" id="image1"

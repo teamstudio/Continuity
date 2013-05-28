@@ -467,26 +467,27 @@ function getRoleChoices() {
 			
 		} else {
 			
+			
 			var vwAllByType:NotesView = database.getView("vwAllByType");
 			var vecRoles:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
 			var veRole:NotesViewEntry = vecRoles.getFirstEntry();
 		
 			var roleChoices = [];
-		
+			
 			while (null != veRole) {
 			
-				var colValues = veRole.getColumnValues();
+				var colValues:java.util.Vector = veRole.getColumnValues();
 				
-				var id:String = colValues.get(1);
-				var name:String = colValues.get(2);
+				var id = @Text( colValues.get(1) );
+				var option = @Text( colValues.get(2) );
 				
-				roleChoices.push( (name + "|" + id) );
+				roleChoices.push( option.concat("|", id) );
 				
 				var veTemp = vecRoles.getNextEntry();
 				veRole.recycle();
 				veRole = veTemp;
 			}
-		
+			
 			//sort ascending
 			roleChoices.sort();
 	

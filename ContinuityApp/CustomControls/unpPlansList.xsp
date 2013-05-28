@@ -25,7 +25,7 @@
 				<xp:panel tagName="li" styleClass="data-row">
 					<xp:this.attrs>
 						<xp:attr name="onClick">
-							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/mPlan.xsp?id=" + scenario.id + "', 'contentwrapper', 0, false, true);"}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpPlan.xsp?id=" + scenario.id + "', 'contentwrapper', 0, false, true);"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 
