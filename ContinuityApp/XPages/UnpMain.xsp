@@ -4,14 +4,10 @@
 
 	<xp:this.resources>
 		<xp:script src="/base.jss" clientSide="false"></xp:script>
-		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
-		<xp:script src="/unpCommon.jss" clientSide="false"></xp:script>
 
 		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
 		
-		<xp:metaData name="Content-Type"
-			content="text/html; charset=utf-8">
-		</xp:metaData>
+		<xp:metaData name="Content-Type" content="text/html; charset=utf-8"></xp:metaData>
 		<xp:metaData name="viewport"
 			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		</xp:metaData>

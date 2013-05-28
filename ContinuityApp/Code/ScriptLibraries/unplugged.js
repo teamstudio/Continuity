@@ -615,7 +615,7 @@ function markDone(doneId, undoneId, id) {
 	
 	$.ajax( {
 		type : 'GET',
-		url : "unpProcess.xsp?type=task&to=done&id=" + id,
+		url : "UnpProcess.xsp?type=task&to=done&id=" + id,
 		cache : false
 	}).done(
 	function(response) {
@@ -643,7 +643,7 @@ function markUndone(doneId, undoneId, id) {
 	
 	$.ajax( {
 		type : 'GET',
-		url : "unpProcess.xsp?type=task&to=undone&id=" + id,
+		url : "UnpProcess.xsp?type=task&to=undone&id=" + id,
 		cache : false
 	}).done(
 	function(response) {
@@ -674,7 +674,7 @@ function deactivateIncident(id, numOpenTasks) {
 	
 	$.ajax( {
 		type : 'GET',
-		url : "unpProcess.xsp?type=incident&id=" + id,
+		url : "UnpProcess.xsp?type=incident&id=" + id,
 		cache : false
 	}).done(
 	function(response) {

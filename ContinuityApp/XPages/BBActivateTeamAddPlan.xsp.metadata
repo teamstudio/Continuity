@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B71004D250E" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="1a32" sequence="5" unid="4EA46BC0F7C8290E85257B7500580D8D">
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2342" sequence="7" unid="4EA46BC0F7C8290E85257B7500580D8D">
 <created><datetime dst="true">20130524T120146,37-04</datetime></created>
-<modified><datetime dst="true">20130524T120241,53-04</datetime></modified>
-<revised><datetime dst="true">20130524T120241,52-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130524T120241,53-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130524T120146,38-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<modified><datetime dst="true">20130528T100306,14+02</datetime></modified>
+<revised><datetime dst="true">20130528T100306,13+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130528T100306,14+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130528T100216,55+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$Flags"><text>gC~4K</text></item>
 <item name="$TITLE"><text>BBActivateTeamAddPlan.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>BBActivateTeamAddPlan.xsp</text></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 
 
-
-
-
-<item name="$FileNames" sign="true"><text>BBActivateTeamAddPlan.xsp</text></item></note>
+</note>

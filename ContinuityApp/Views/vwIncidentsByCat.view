@@ -1,29 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<<<<<<< HEAD
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1266' unid='08AFE3B015A1695DC1257B4400498EEC' sequence='23'>
-=======
-<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B71004D250E'>
-<noteinfo noteid='29a' unid='08AFE3B015A1695DC1257B4400498EEC' sequence='4'>
->>>>>>> branch 'master' of https://github.com/teamstudio/Continuity.git
-<created><datetime dst='true'>20130405T152327,16+02</datetime></created>
-<<<<<<< HEAD
-<modified><datetime dst='true'>20130523T111935,95+02</datetime></modified>
-<revised><datetime dst='true'>20130523T111935,94+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130523T111935,95+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T152328,03+02</datetime></addedtofile></noteinfo>
+<noteinfo noteid='239e' unid='517A88AEB6C53E9DC1257B79002C571C' sequence='1'>
+<created><datetime dst='true'>20130528T100418,84+02</datetime></created>
+<modified><datetime dst='true'>20130528T100419,77+02</datetime></modified>
+<revised><datetime dst='true'>20130528T100419,76+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130528T100419,77+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130528T100419,77+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-=======
-<modified><datetime dst='true'>20130520T152830,29-04</datetime></modified>
-<revised><datetime dst='true'>20130520T152830,28-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130520T162811,74-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130520T100243,41-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
->>>>>>> branch 'master' of https://github.com/teamstudio/Continuity.git
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>vwIncidentsByCat|unpIncidentsByCat</text></item>
 <item name='$Index' sign='true'><text/></item>

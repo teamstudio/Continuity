@@ -58,6 +58,11 @@ function init() {
 			sessionScope.put("isEditor", isEditor);
 			sessionScope.put("isDebug", isDebug);
 			
+			if (isDebug) {
+				dBar.setEnabled(true);
+				dBar.info("Continuity is running in debug mode")
+			}
+			
 			try {
 				sessionScope.put("canEdit", ( database.getCurrentAccessLevel()>=3));	
 			} catch (ee) { }
