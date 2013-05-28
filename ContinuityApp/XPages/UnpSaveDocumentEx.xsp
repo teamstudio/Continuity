@@ -19,8 +19,6 @@ var resp;
 var unid = "start";
 try{
 
-	dBar.debug("saving document");
-
 	resp = "Started";
 	var doc = null;
 	resp = "Gettings doc";
@@ -208,7 +206,7 @@ try{
 			unid = doc.getUniversalID();
 			dBar.debug("document saved with id " +unid);
 			
-			if ( isIncident && orgUnitId.length > 0 ) {
+			if ( isNew && isIncident && orgUnitId.length > 0 ) {
 			
 				if (docOU == null) {
 					docOU = vwById.getDocumentByKey(orgUnitId, true);
@@ -240,6 +238,7 @@ try{
 		if ( !applicationScope.isReadOnlyMode ) {
 		
 			if (isIncident) {
+			
 				//ML: update alert level in session scope (if new incident was registered for current OU)
 				if (orgUnitId == sessionScope.get("orgUnitId") ) {
 					sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
@@ -330,6 +329,8 @@ try{
 		resp = e;
 	}
 }catch(mainerror){
+
+	dBar.error(mainerror.toString() );
 	
 }
 if(resp == "OK")

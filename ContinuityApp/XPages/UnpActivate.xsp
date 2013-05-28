@@ -4,7 +4,7 @@
 	<xc:unpLayoutBasic pageTitle="Activate team">
 		<xp:this.facets>
 
-			<xc:mActivateForm xp:key="contents"></xc:mActivateForm>
+			<xc:unpActivateForm xp:key="contents"></xc:unpActivateForm>
 
 		</xp:this.facets>
 	</xc:unpLayoutBasic>

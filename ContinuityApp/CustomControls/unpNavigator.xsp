@@ -34,7 +34,7 @@ the specific language governing permissions and limitations under the License
 								<xp:this.attrs>
 									<xp:attr name="onclick">
 										<xp:this.value><![CDATA[#{javascript:if (menuItem.disabled == 'true' || menuItem.disabled == true) {
-										return "loadPageEx('" + getDbPath() + "/" + menuItem.page + "', 'contentwrapper', '" + menuItem.itemId + "');";
+										return "";
 										} else {
 										return "loadPageEx('" + getDbPath() + "/" + menuItem.page + "', 'contentwrapper', '" + menuItem.itemId + "');";
 										}

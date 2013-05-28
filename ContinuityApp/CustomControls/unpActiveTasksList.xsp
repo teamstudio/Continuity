@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:unp="http://unplugged.teamstudio.com">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.put("numEntries", database.getView('vwIncidentsByCat').getEntryCount())}]]></xp:this.beforePageLoad>
+	<xp:panel xp:key="contents" disableOutputTag="true">
+	
+		<xp:div styleClass="box"
+			rendered="#{javascript:viewScope.numEntries == 0}">
+			<div class="content">
+				<xp:text
+					value="#{javascript:'No ' + applicationScope.labels['incidents'].toLowerCase() + ' have been registered'}" />
+			</div>
+		</xp:div>
+		
+		<unp:unpAccordion viewName="vwIncidentsByCat" xpage="UnpIncidentTasks.xsp" rendered="#{javascript:viewScope.numEntries > 0}"
+			position="menu-aligned" insetData="true" showNumOpenTasks="true">
+		</unp:unpAccordion>
+
+	</xp:panel>
+
+</xp:view>

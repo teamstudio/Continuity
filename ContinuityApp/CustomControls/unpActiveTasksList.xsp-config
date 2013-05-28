@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>mActivateForm</component-type>
-    <composite-name>mActivateForm</composite-name>
-    <composite-file>/mActivateForm.xsp</composite-file>
+    <component-type>unpActiveTasksList</component-type>
+    <composite-name>unpActiveTasksList</composite-name>
+    <composite-file>/unpActiveTasksList.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

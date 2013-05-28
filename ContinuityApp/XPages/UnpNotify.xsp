@@ -44,8 +44,9 @@
 	<xc:unpLayout showMenu="true" pageTitle="Send message">
 		<xp:this.facets>
 
-			<xc:unpFormEditor viewxpagename="UnpMain.xsp" formname="fMessage" title="New message"
+			<xc:unpFormEditor formname="fMessage" title="New message"
 				xp:key="contents" showbuttons="true">
+				<xc:this.viewxpagename><![CDATA[#{javascript:"UnpIncident.xsp?action=openDocument&documentId=" + param.get("incidentId")}]]></xc:this.viewxpagename>
 				<xc:this.closexpagename><![CDATA[#{javascript:"UnpIncident.xsp?action=openDocument&documentId=" + param.get("incidentId")}]]></xc:this.closexpagename>
 				<xp:this.facets>
 					<xp:panel xp:key="facet_1">

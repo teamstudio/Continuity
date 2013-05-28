@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" rendered="false">
+
+	<xp:this.resources>
+		<xp:script src="/base.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xp:this.afterRenderResponse><![CDATA[#{javascript:try {
+	
+		init();
+	
+		var exCon = facesContext.getExternalContext(); 
+var writer = facesContext.getResponseWriter();
+var response = exCon.getResponse();
+response.setContentType("text/plain");
+
+var resp = "ok";
+
+var id = param.get("id");
+	
+if (id=="") {
+	throw("invalid input");
+}
+
+var doc = database.getDocumentByUNID(id);
+
+if (doc == null) {
+	throw("invalid id");
+}	
+
+if (!applicationScope.isReadOnlyMode) {
+
+	//incident deactivation
+	if (param.get("type").equals("incident") ) {
+	
+		//only allowed for bc editors
+		if (!sessionScope.get("isEditor")) {
+			throw("you're not authorized to update this document");
+		}
+		
+		var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
+		
+		//ML: close any open tasks in this incident
+		var vecOpenTasks = database.getView("vwTasksAssignedOpen").getAllEntriesByKey( doc.getItemValueString("id"), true);
+		var veTask = vecOpenTasks.getFirstEntry();
+		while (null != veTask) {
+			docTask = veTask.getDocument();
+		
+			docTask.replaceItemValue("status", "complete");
+			docTask.replaceItemValue("statusChangedBy", sessionScope.get("userName") );
+			docTask.replaceItemValue("statusChangedByName", sessionScope.get("name") );
+			docTask.save();
+			
+			veTask = vecOpenTasks.getNextEntry();
+		}
+		
+		doc.replaceItemValue("status", "deactivated");
+		doc.save();
+		
+		//ML: Update alert level of OU in org unit doc
+		var orgUnitId = doc.getItemValueString("orgUnitId");
+		var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
+		
+		var docOU = database.getDocumentByUNID( _unid );
+		if (null != docOU) {
+			
+			var maxAlertLevel = getMaxAlertLevel( orgUnitId );
+			
+			//update alert level in OU document
+			dBar.debug("setting alert level in OU document to " + maxAlertLevel);
+			
+			docOU.replaceItemValue("alertLevel", maxAlertLevel);
+			docOU.replaceItemValue("activeScenarioId", "" );
+			docOU.save();
+			docOU.recycle();
+			
+			//ML: update alert level in session scope (if new incident was registered for current OU)
+			if (orgUnitId == sessionScope.get("orgUnitId") ) {
+				sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
+			}
+			
+		}
+		
+		
+		//ML: update number of assigned tasks
+		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+		
+		//ML: create update item for this deactivation
+		var incidentDesc = doc.getItemValueString("description")
+		
+		var updateText = (isRehearsal ? "Deactivated exercise " + applicationScope.labels['incident'].toLowerCase() : "Deactivated " + applicationScope.labels['incident'].toLowerCase()) + ": <b>" + incidentDesc + "</b><br />" +
+			"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
+			"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
+			"- " + applicationScope.labels['asset'] + ": " + doc.getItemValueString("siteName") + "<br />" +
+			"- plan: " + doc.getItemValueString("scenarioName");
+		
+		createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
+		
+		//ML: send email to all BC users in the system
+		dBar.debug("send mail to all users");
+		var vwBCUsers = database.getView("vwBCUsers");
+		var nav = vwBCUsers.createViewNav();
+		var ve = nav.getFirst();
+		while (null != ve) {
+		
+			sendMail( ve.getColumnValues().get(0) , 
+					"[continuity] " + (isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() + " deactivated" : applicationScope.labels['incident'] + " deactivated"), 
+					sessionScope.name + " has just deactivated the following " + applicationScope.labels['incident'].toLowerCase() + ":\r\n\r\n" +
+						applicationScope.labels['incident'] + ": " + doc.getItemValueString("description") + "\r\n\r\n" +
+		"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
+			"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
+			"- " + applicationScope.labels['asset'] + ": " + doc.getItemValueString("siteName") + "\r\n" +
+			"- plan: " + doc.getItemValueString("scenarioName"),
+					sessionScope.email, sessionScope.name);
+		
+			ve = nav.getNext();
+		}
+		
+		//sync mail and current db
+		if (sessionScope.get("isDebug") ) {
+			dBar.debug("debug mode: no syncing");
+		} else {
+		
+			@Command("[ReplicatorReplicateHigh]");
+		}
+		
+	} else if (param.get("type").equals("task") ) {
+		
+		//mark a task as done/ undone
+		
+		var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
+		
+		if( @IsNotMember( sessionScope.roleId, doc.getItemValue("roleIds") ) ) {
+			throw("you're not authorized to update this document");
+		}
+		
+		doc.replaceItemValue("status", (param.get("to").equals("done") ? "complete" : "assigned") );
+		doc.replaceItemValue("statusChangedBy", sessionScope.get("userName") );
+		doc.replaceItemValue("statusChangedByName", sessionScope.get("name") );
+		doc.save();
+		
+		//ML: create update item for this completion
+		createUpdate( (isRehearsal ? "Exercise task" : "Task") + " marked as " + (param.get("to").equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
+			"- " + applicationScope.labels['incident'].toLowerCase() + ": " + doc.getItemValueString("incidentName") + "<br />" +
+			"- by: " +	sessionScope.get("name")
+		);
+		
+		//sync current database
+		//var db = session.getCurrentDatabase();
+		//db.replicate("someserver");
+	
+	}
+	
+	//update number of open tasks for this user
+	sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+	
+}
+
+} catch (e) { 
+	dBar.error(e);
+	resp = "error: " + e.toString();
+}
+
+writer.write(resp);
+writer.endDocument();
+facesContext.responseComplete();
+
+}]]></xp:this.afterRenderResponse>
+
+	
+</xp:view>

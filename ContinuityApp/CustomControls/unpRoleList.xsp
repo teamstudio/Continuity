@@ -43,7 +43,7 @@
 									<xp:this.attrs>
 										<xp:attr
 											name="onClick">
-											<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/mRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
+											<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/UnpRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
 			}]]></xp:this.value>
 										</xp:attr>
 									</xp:this.attrs>
@@ -74,7 +74,7 @@
 								<xp:this.attrs>
 										<xp:attr
 											name="onClick">
-											<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/mRoleTasks.xsp?respId=role-" + sessionScope.roleId + "', 'contentwrapper');"
+											<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/UnpRoleTasks.xsp?respId=role-" + sessionScope.roleId + "', 'contentwrapper');"
 			}]]></xp:this.value>
 										</xp:attr>
 									</xp:this.attrs>

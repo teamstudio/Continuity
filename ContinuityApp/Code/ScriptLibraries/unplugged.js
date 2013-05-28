@@ -193,6 +193,9 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 						} else if (viewxpagename="UnpIncident.xsp") {
 							//ML: use ajax load
 							loadPageEx(viewxpagename + "?action=openDocument&documentId=" + response, "contentwrapper", null);
+						} else if (viewxpagename.indexOf("UnpIncident.xsp") > -1 ) {
+							//save of notification message
+							loadPageEx(viewxpagename, "contentwrapper", null, true, true);
 						} else {
 							$.blockUI();
 							window.location.href = viewxpagename + "?action=openDocument&documentId=" + response;
@@ -321,7 +324,7 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		
 		allowFormsInIscroll();
 		
-		if (url.indexOf('UnpTasks')>-1 || url.indexOf('UnpIncidents') > -1 ) {
+		if (url.indexOf('UnpActiveTasks')>-1 || url.indexOf('UnpIncidents') > -1 ) {
 			
 			//load live (first) cat
 			var _li = $('#summaryList li:first');

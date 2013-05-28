@@ -2,12 +2,12 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:unp="http://unplugged.teamstudio.com">
 	
-	<xc:unpLayoutBasic pageTitle="Active tasks" newDocTarget="UnpTask.xsp">
+	<xc:unpLayout showMenu="true" pageTitle="Active tasks" newDocTarget="UnpTask.xsp">
 		<xp:this.facets>
 		
-			<xc:unpTasksList xp:key="contents" />
+			<xc:unpActiveTasksList xp:key="contents" />
 
 		</xp:this.facets>
-	</xc:unpLayoutBasic>
+	</xc:unpLayout>
 
 </xp:view>

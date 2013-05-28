@@ -74,7 +74,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					
 					
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mPlans.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpPlans.xsp';">
 							<span class="chicletimg imgPlans"></span>
 							<span>Plans</span>
 						</a>
@@ -128,13 +128,13 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 					
 					<!-- my role -->
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='mRole_1.xsp';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpRole_1.xsp';">
 							<span class="chicletimg imgRole"></span>
 							<span>My role</span>
 						</a>
 					</li>
 					<li>
-					<a href="#" onclick="$.blockUI();window.location.href='mPlans_1.xsp';">
+					<a href="#" onclick="$.blockUI();window.location.href='UnpPlans_1.xsp';">
 							<span class="chicletimg imgPlans"></span>
 							<span>Plans</span>
 						</a>
@@ -149,7 +149,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 						</a>
 					</xp:text>
 					<xp:text tagName="li" rendered="#{javascript:sessionScope.numAssignedTasks>0}">
-						<a href="#" onclick="$.blockUI();window.location.href='UnpTasks_1.xsp?activeOnly=1';">
+						<a href="#" onclick="$.blockUI();window.location.href='UnpActiveTasks_1.xsp?activeOnly=1';">
 							<xp:text escape="true" styleClass="badge" id="computedField4">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numAssignedTasks}]]></xp:this.value>
 								<xp:this.converter>

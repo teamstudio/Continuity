@@ -62,7 +62,7 @@ return out;}]]></xp:this.value>
 				<xp:panel id="closebutton" styleClass="cancelButton" tagName="li">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
-							<xp:this.value><![CDATA[#{javascript:return "$.blockUI(); window.location.href='" + compositeData.closexpagename + "';";}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/" + compositeData.closexpagename + "', 'contentwrapper', 0, true, true);";}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 					<span>Cancel</span>
