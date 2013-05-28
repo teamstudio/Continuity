@@ -962,7 +962,9 @@ function createUpdate( text:String, incidentId, incidentName) {
 		
 		var textPlain = @ReplaceSubstring(text, ["<b>", "</b>"], "" );
 		
-		docUpdate.replaceItemValue("message", @ReplaceSubstring( textPlain , ["<br>", "<br />"], @NewLine() ) );
+		//TOD: @newline doesn't work...
+		
+		docUpdate.replaceItemValue("message", @ReplaceSubstring( textPlain , ["<br>", "<br />"], "" ) );
 		
 		docUpdate.replaceItemValue("incidentId", incidentId);
 		docUpdate.replaceItemValue("incidentName", incidentName);
