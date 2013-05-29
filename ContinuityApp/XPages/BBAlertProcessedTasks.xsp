@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	pageTitle="Task Processed:">
+	<xp:this.data>
+		<xp:dominoDocument var="docTask" formName="fTask"
+			action="openDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:this.beforePageLoad>
+		<xp:executeScript>
+			<xp:this.script><![CDATA[#{javascript:var thisStatus = "To Do";
+if(docTask.getItemValueString("status") == "complete"){
+  thisStatus = "Complete";
+}
+var RNs = docTask.getDocument().getItemValue("roleNames");
+}]]></xp:this.script>
+		</xp:executeScript>
+	</xp:this.beforePageLoad>
+	
+
+	<xp:panel>
+		<xp:this.rendered><![CDATA[#{javascript:!sessionScope.containsKey("accessError");}]]></xp:this.rendered><xp:inputText value="#{docTask.name}" id="name1"
+			style="color:rgb(0,0,255)">
+		</xp:inputText>
+		<xp:label id="label1">
+			<xp:this.value><![CDATA[#{javascript:"Is updated to: " + thisStatus;  }]]></xp:this.value>
+		</xp:label>
+		<xp:label id="label2">
+			<xp:this.value><![CDATA[#{javascript:"By " + sessionScope.get("name");}]]></xp:this.value>
+		</xp:label></xp:panel>
+	
+	<xp:panel><xp:this.rendered><![CDATA[#{javascript:sessionScope.containsKey("accessError");}]]></xp:this.rendered>
+		<xp:label id="label3" value="You are not allowed to update the status of this task!"></xp:label>
+		<xp:br></xp:br>
+		<xp:label value="Only the following roles can perform an update to this task:" id="label4"></xp:label>
+		<xp:br></xp:br>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value><![CDATA[#{javascript:"Roles: " + RNs;}]]></xp:this.value>
+	</xp:text></xp:panel>
+	
+	<xp:br></xp:br>
+	<xp:button id="button1" value="Continue" style="-unp-menuButton:false;">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBActiveTasks.xsp"
+					target="openDocument">
+					<xp:this.documentId><![CDATA[#{javascript:sessionScope.get("docUnid");}]]></xp:this.documentId>
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br><xp:button id="button2" value="Continue">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/BBActiveTasks.xsp" target="openDocument">
+					<xp:this.documentId><![CDATA[#{javascript:sessionScope.get("docUnid");}]]></xp:this.documentId>
+				</xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+</xp:view>
