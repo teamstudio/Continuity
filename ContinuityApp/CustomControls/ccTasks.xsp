@@ -28,7 +28,7 @@
 						</div>
 					</xp:div>
 					
-					<xc:ccTaskList allowRemove="true" showScenario="false"
+					<xc:ccTaskList noItemsFoundMsg="#{javascript:compositeData.noItemsFoundMsg}" allowRemove="true" showScenario="false"
 						categoryFilter="#{javascript:compositeData.parentId}" viewName="vwTasksByParentByTaskCat">
 					</xc:ccTaskList>
 	
