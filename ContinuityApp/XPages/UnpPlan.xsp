@@ -42,7 +42,7 @@
 						id="computedField2" value="#{docScenario.name}" />
 					<div class="content">
 						<xp:text escape="false" id="computedField8"
-							value="#{docScenario.description}"
+							value="#{docScenario.descriptionHtml}"
 							rendered="#{javascript:viewScope.hasDescription}" />
 						<xp:text escape="false" id="computedField3"
 							value="(no description entered)"
