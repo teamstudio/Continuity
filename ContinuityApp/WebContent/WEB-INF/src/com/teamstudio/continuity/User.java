@@ -63,7 +63,11 @@ public class User implements Serializable{
 				vwContacts = dbCurrent.getView("vwContactsByUsername");
 				docContact = vwContacts.getDocumentByKey(userName, true);
 				
-				miniGuideShown = docContact.getItemValueString("miniGuideShown").equals("true");
+				if (null != docContact) {
+					miniGuideShown = docContact.getItemValueString("miniGuideShown").equals("true");
+				} else {
+					miniGuideShown = false;
+				}
 				
 				updateMenuOptionCounts();
 				
