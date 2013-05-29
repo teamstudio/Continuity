@@ -66,7 +66,7 @@ public class User implements Serializable{
 				if (null != docContact) {
 					miniGuideShown = docContact.getItemValueString("miniGuideShown").equals("true");
 				} else {
-					miniGuideShown = false;
+					miniGuideShown = true;
 				}
 				
 				updateMenuOptionCounts();
@@ -99,9 +99,12 @@ public class User implements Serializable{
 			Database dbCurrent = ExtLibUtil.getCurrentDatabase();
 			vwContacts = dbCurrent.getView("vwContactsByUsername");
 			docContact = vwContacts.getDocumentByKey(userName, true);
+			
+			if (null != docContact) {
 				
-			docContact.replaceItemValue("miniGuideShown", "true");
-			docContact.save();
+				docContact.replaceItemValue("miniGuideShown", "true");
+				docContact.save();
+			}
 			
 			miniGuideShown = true;
 				
