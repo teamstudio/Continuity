@@ -4,6 +4,7 @@
 
 	<select notetype="xpages" name="*" />
 	<select notetype="view" name="unp*" />
+	<select notetype="view" name="BB*" />
 	<select notetype="imageresource" name="*" />
 
 </designselection>

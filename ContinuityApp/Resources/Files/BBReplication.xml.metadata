@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="86a" sequence="14" unid="AE4BC79359A826A6C1257B27003D3796">
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B7A00499D0E" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="566" sequence="4" unid="AE4BC79359A826A6C1257B27003D3796">
 <created><datetime>20130307T120839,26+01</datetime></created>
-<modified><datetime>20130307T121613,45+01</datetime></modified>
-<revised><datetime>20130307T121613,44+01</datetime></revised>
-<lastaccessed><datetime>20130307T121613,45+01</datetime></lastaccessed>
-<addedtofile><datetime>20130307T120839,27+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<modified><datetime dst="true">20130529T095437,24-04</datetime></modified>
+<revised><datetime dst="true">20130529T095437,23-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130529T095437,24-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130529T092419,60-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name="$Flags"><text>345CgQ</text></item>
 <item name="$MimeCharSet" sign="true"><text>UTF-8</text></item>
 <item name="$TITLE" sign="true"><text>BBReplication.xml</text></item>
