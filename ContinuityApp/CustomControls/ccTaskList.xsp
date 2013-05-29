@@ -9,7 +9,8 @@
 		</xp:dominoView>
 	</xp:this.data>
 	
-	<xp:text value="No tasks found" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
+	<!--  no items found message -->
+	<xp:text value="#{javascript:(compositeData.noItemsFoundMsg == null ? 'No tasks found' : compositeData.noItemsFoundMsg)}" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
 
 	<xp:repeat id="repeatTasks" rows="500" value="#{vwTasks}" var="row" indexVar="rowIndex">
 

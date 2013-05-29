@@ -12,6 +12,7 @@ import com.teamstudio.continuity.utils.Utils;
 
 import lotus.domino.ACL;
 import lotus.domino.ACLEntry;
+import lotus.domino.DocumentCollection;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
 import lotus.domino.Database;
@@ -30,6 +31,8 @@ public class Organisation implements Serializable {
 	String adminEmail;
 	
 	String continuityDbPath;
+	
+	boolean copyStarterLists;
 	
 	Configuration config;
 	
@@ -63,6 +66,8 @@ public class Organisation implements Serializable {
 				name = docOrg.getItemValueString("name");
 				alias = docOrg.getItemValueString("alias");
 				
+				copyStarterLists = docOrg.getItemValueString("copyStarterLists").equals("true");
+				
 				continuityDbPath = config.getInstallBasePath() + File.separator + folder + File.separator + CONTINUITY_DB_FILENAME;
 				
 				Logger.info("setup new Continuity instance for " + name + ", " + alias + ", folder: " + folder);
@@ -73,13 +78,11 @@ public class Organisation implements Serializable {
 				result = true;
 				
 				docOrg.replaceItemValue("continuityDbPath", continuityDbPath);
-				
 				docOrg.replaceItemValue("setupPerformed", "true");
 				
 			}
 			
 			docOrg.save();
-			
 
 			//create Unplugged configuration for this user
 			Unplugged.createAppDefinition( continuityDbPath, false, true);
@@ -178,7 +181,7 @@ public class Organisation implements Serializable {
 	private void setupContinuityDb() {
 		
 		Database dbTemplate = null;
-		Database dbContinuity = null;
+		Database dbNewInstance = null;
 		
 		try {
 			
@@ -193,18 +196,20 @@ public class Organisation implements Serializable {
 			Logger.info("create database at " + continuityDbPath + " from template at " + config.getContinuityDbTemplatePath() );
 			
 			//create new database
-			dbContinuity = dbTemplate.createFromTemplate(null, continuityDbPath, true);
-
-			//cleanup target database
-			dbContinuity.getAllDocuments().removeAll(true);
+			dbNewInstance = dbTemplate.createFromTemplate(null, continuityDbPath, true);
 			
-			dbContinuity.setTitle( "Continuity (" + name + ")");
-			dbContinuity.setDesignLockingEnabled(false);		//disable design locking
+			//remove all documents
+			DocumentCollection dcAll = dbNewInstance.getAllDocuments();
+			dcAll.removeAll(true);
+			Utils.incinerate(dcAll);
 			
-			initACL(session, dbContinuity);
+			dbNewInstance.setTitle( "Continuity (" + name + ")");
+			dbNewInstance.setDesignLockingEnabled(false);		//disable design locking
+			
+			initACL(session, dbNewInstance);
 			
 			//create settings document (no authors needed)
-			Document docSettings = dbContinuity.createDocument();
+			Document docSettings = dbNewInstance.createDocument();
 			docSettings.replaceItemValue("form", "fSettings");
 			docSettings.replaceItemValue("organisationId", alias);
 			docSettings.replaceItemValue("organisationName", name );
@@ -217,15 +222,86 @@ public class Organisation implements Serializable {
 			docSettings.save();
 			docSettings.recycle();
 			
+			copyStarterLists(dbNewInstance, dbTemplate);
+			
 		} catch (Exception e) {
 			Logger.error(e);
 		} finally {
 			
-			Utils.incinerate(dbContinuity, dbTemplate);
+			Utils.incinerate(dbNewInstance, dbTemplate);
 			
 		}
 		
 	}
 
+	private void copyStarterLists( Database dbNewInstance, Database dbTemplate) throws NotesException {
+		
+		Logger.info("Copy starter lists? " + copyStarterLists);
+		
+		if (StringUtil.isEmpty(config.getStarterListsDbTemplatePath()) ) {
+			
+			Logger.info("cannot copy starter lists: database path not filled in");
+			
+		} else {
+			
+			Logger.info("start copy starter lists from database " + config.getStarterListsDbTemplatePath() );
+		
+			//copy starter lists
+			if ( !config.getStarterListsDbTemplatePath().equals( config.getContinuityDbTemplatePath() ) ) {
+				
+				Logger.info("start copy starter lists from database " + config.getStarterListsDbTemplatePath() );
+				
+				//use a different db
+				Session session = dbTemplate.getParent();
+				Utils.incinerate(dbTemplate);
+				dbTemplate = session.getDatabase(config.getServerName(), config.getStarterListsDbTemplatePath() );
+				
+			} else {
+				
+				Logger.info("use Continuity template database for starter lists" );
+			}
+			
+			
+			if (dbTemplate.isOpen()) {
+				
+				Logger.info("starter list database is open");
+				
+				DocumentCollection dcForStarters = null;
+				
+				if (copyStarterLists) {
+					
+					//copy from starter lists db
+					dcForStarters = dbTemplate.search( "Form = \"fHazard\":\"fHelp\":\"fScenario\":\"fPlan\":\"fRole\":\"fTaskCategory\"" );
+					
+				} else {
+					
+					//copy help only
+					dcForStarters = dbTemplate.search( "Form = \"fHelp\"" );
+					
+				}
+				
+				Logger.info("found " + dcForStarters.getCount() + " starter documents");
+				
+				Document docStarter = dcForStarters.getFirstDocument();
+				while (null != docStarter) {
+					
+					docStarter.copyToDatabase(dbNewInstance);
+				
+					Document docTemp = dcForStarters.getNextDocument(docStarter);
+					docStarter.recycle();
+					docStarter = docTemp;
+				}
+				
+				Logger.info("copied all documents");
+				
+			} else {
+			
+				Logger.error("could not open starter lists database at " + config.getStarterListsDbTemplatePath() );
+				
+			}
+		
+		}
+		
+	}
 	
 }
