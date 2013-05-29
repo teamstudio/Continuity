@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
-	
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="Continuity settings">
+
 	<xp:this.data>
-		<xp:dominoDocument var="docSettings" formName="fSettings" action="editDocument">
+		<xp:dominoDocument var="docSettings" formName="fSettings"
+			action="editDocument">
 			<xp:this.documentId><![CDATA[#{javascript:var vw = database.getView("vwSettings");
 if (vw.getEntryCount()>0) {
 	return vw.getFirstDocument().getUniversalID();
 }}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
-	
+
 	<xp:this.acl>
 		<xp:acl>
 			<xp:this.entries>
@@ -28,141 +30,191 @@ if (vw.getEntryCount()>0) {
 		<xp:this.facets>
 
 			<xp:div xp:key="facetMiddle">
-			
-			
-			<xp:messages id="messages1"></xp:messages>
 
-			<xp:table>
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Continuity (secondary) directory db path:" id="directoryDbPath_Label1"
-							for="directoryDbPath1">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.directoryDbPath}"
-							id="directoryDbPath1" required="true">
-							
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators>
-						</xp:inputText>
-					</xp:td>
-				</xp:tr>
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Unplugged db path:" id="unpluggedDbPath_Label1"
-							for="unpluggedDbPath1">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.unpluggedDbPath}"
-							id="unpluggedDbPath1" required="true">
-							
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators>
-						</xp:inputText>
-					</xp:td>
-				</xp:tr>
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Host url:" id="hostUrl_Label1" for="hostUrl1"></xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.hostUrl}" id="hostUrl1" required="true">
-						
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators>
-						</xp:inputText>
-						
-					</xp:td>
-				</xp:tr>
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Install base path:" id="installBasePath_Label1"
-							for="installBasePath1">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.installBasePath}"
-							id="installBasePath1" required="true">
-							
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators>
-						</xp:inputText>
-					</xp:td>
-				</xp:tr>
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Continuity db template path:"
-							id="continuityDbTemplatePath_Label1" for="continuityDbTemplatePath1">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.continuityDbTemplatePath}"
-							id="continuityDbTemplatePath1" required="true">
 
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators></xp:inputText>
-					</xp:td>
-				</xp:tr>
-				
-				<xp:tr>
-					<xp:td>
-						<xp:label value="adminGroup:"
-							id="label1" for="inputText1">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.adminGroup}"
-							id="inputText1" required="true">
+				<xp:messages id="messages1"></xp:messages>
 
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators></xp:inputText>
-					</xp:td>
-				</xp:tr>
-				
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Sender name:"
-							id="label2" for="inputSenderName">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.senderName}"
-							id="inputSenderName" required="true">
+				<xp:table>
+					<xp:tr>
+						<xp:td>
+							<xp:label
+								value="Continuity (secondary) directory database path:"
+								id="directoryDbPath_Label1" for="directoryDbPath1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.directoryDbPath}" id="directoryDbPath1"
+								required="true" style="width: 250px;">
 
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators></xp:inputText>
-					</xp:td>
-				</xp:tr>
-				
-				<xp:tr>
-					<xp:td>
-						<xp:label value="Sender email address:"
-							id="label3" for="inputSenderEmail">
-						</xp:label>
-					</xp:td>
-					<xp:td>
-						<xp:inputText value="#{docSettings.senderEmail}"
-							id="inputSenderEmail" required="true">
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Unplugged database path:"
+								id="unpluggedDbPath_Label1" for="unpluggedDbPath1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.unpluggedDbPath}" id="unpluggedDbPath1"
+								required="true" style="width: 250px;">
 
-						<xp:this.validators>
-							<xp:validateRequired message="All fields are required"></xp:validateRequired>
-						</xp:this.validators></xp:inputText>
-					</xp:td>
-				</xp:tr>
-				
-				
-			</xp:table>
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Host url:"
+								id="hostUrl_Label1" for="hostUrl1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText value="#{docSettings.hostUrl}"
+								id="hostUrl1" required="true" style="width: 250px;">
 
-			<xp:button value="Save" id="button1">
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Install base path:"
+								id="installBasePath_Label1" for="installBasePath1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.installBasePath}" id="installBasePath1"
+								required="true" style="width: 250px;">
+
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label
+								value="Continuity template database path:"
+								id="continuityDbTemplatePath_Label1"
+								for="continuityDbTemplatePath1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.continuityDbTemplatePath}"
+								id="continuityDbTemplatePath1" required="true"
+								style="width: 250px;">
+
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:label
+								value="Starter lists database path (optional):"
+								id="label4"
+								for="starterListsDb">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.starterListsDbTemplatePath}"
+								id="starterListsDb"
+								style="width: 250px;">
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Default admin group:"
+								id="label1" for="inputText1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.adminGroup}" id="inputText1"
+								required="true" style="width: 250px;">
+
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Sender name:" id="label2"
+								for="inputSenderName">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.senderName}" id="inputSenderName"
+								required="true" style="width: 250px;">
+
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+
+					<xp:tr>
+						<xp:td>
+							<xp:label value="Sender email address:"
+								id="label3" for="inputSenderEmail">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:inputText
+								value="#{docSettings.senderEmail}" id="inputSenderEmail"
+								required="true" style="width: 250px;">
+
+								<xp:this.validators>
+									<xp:validateRequired
+										message="All fields are required">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+
+
+				</xp:table>
+
+				<xp:button value="Save settings" id="button1">
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="complete">
 						<xp:this.action><![CDATA[#{javascript:
@@ -232,8 +284,16 @@ if (vw.getEntryCount()>0) {
 }}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
-		</xp:div>
-	</xp:this.facets>
+
+				<xp:link escape="true" text="Cancel" id="link1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:context.redirectToPage("organisations");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:div>
+		</xp:this.facets>
 	</xc:layout>
-	
+
 </xp:view>

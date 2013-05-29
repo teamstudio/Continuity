@@ -37,6 +37,7 @@ public class Configuration implements Serializable {
 	private String adminGroup;
 	
 	private String continuityDbTemplatePath;
+	private String starterListsDbTemplatePath;
 	private String installBasePath; 
 	
 	public static final String ROLE_ADMIN = "[admin]";
@@ -83,6 +84,8 @@ public class Configuration implements Serializable {
 				unpluggedDbPath = docSettings.getItemValueString("unpluggedDbPath");
 				
 				continuityDbTemplatePath = docSettings.getItemValueString("continuityDbTemplatePath");
+				starterListsDbTemplatePath = docSettings.getItemValueString("starterListsDbTemplatePath");
+				
 				installBasePath = docSettings.getItemValueString("installBasePath");
 				
 				adminGroup = docSettings.getItemValueString("adminGroup");
@@ -307,6 +310,10 @@ public class Configuration implements Serializable {
 
 	public String getSenderName() {
 		return senderName;
+	}
+
+	public String getStarterListsDbTemplatePath() {
+		return starterListsDbTemplatePath;
 	}
 		
 	

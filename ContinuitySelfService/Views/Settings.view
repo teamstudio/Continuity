@@ -1,13 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='1ee' unid='576B89398F17A366C1257854003BC81F' sequence='24'>
+<noteinfo noteid='1ee' unid='576B89398F17A366C1257854003BC81F' sequence='26'>
 <created><datetime>20110315T115258,55+01</datetime></created>
-<modified><datetime dst='true'>20130410T160901,05+02</datetime></modified>
-<revised><datetime dst='true'>20130410T160901,04+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130410T160901,05+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130529T160151,06+02</datetime></modified>
+<revised><datetime dst='true'>20130529T160151,05+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130529T160151,06+02</datetime></lastaccessed>
 <addedtofile><datetime>20130307T155644,79+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name
->CN=Mark Leusink/O=LinQed</name></updatedby>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$Index' sign='true'><text/></item>

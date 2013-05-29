@@ -76,7 +76,19 @@
 							</xp:this.validators></xp:inputText>
 						</xp:td>
 					</xp:tr>
-				</xp:table>
+					
+					<xp:tr>
+						<xp:td>&#160;</xp:td>
+						<xp:td>
+							<xp:checkBox
+								text="Copy starter lists (Hazards, Scenarios, Plans, Roles, Task Category, Help)"
+								id="checkBox1" value="#{docOrg.copyStarterLists}"
+								checkedValue="true" uncheckedValue="false">
+							</xp:checkBox>
+						</xp:td>
+					</xp:tr>
+
+</xp:table>
 				<!--<xp:table>
 					<xp:tr>
 						<xp:td>
@@ -126,6 +138,14 @@
 }}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
+				
+				<xp:link escape="true" text="Cancel" id="link1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:context.redirectToPage("organisations");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+				
 		</xp:div>
 	</xp:this.facets>
 	</xc:layout>
