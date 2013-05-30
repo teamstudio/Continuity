@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B7A00499D0E'>
+<noteinfo noteid='36e' unid='C5B5CF2DFFB7841785257B71004D3A4F' sequence='7'>
+<created><datetime dst='true'>20130520T100331,99-04</datetime></created>
+<modified><datetime dst='true'>20130529T233312,50-04</datetime></modified>
+<revised><datetime dst='true'>20130529T233312,49-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130529T233312,50-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130529T092412,26-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+kAACAC4ADgBPcmdBbmRTY2VuYXJpbwUACgBvcmdVbml0SWRzBQAEAG5hbWUiAgMABQA0AC8ABAAO
+AAgACQAEAE9yZ0FuZFNjZW5hcmlvY2F0ZWdvcnkkQ29uZmxpY3QkUkVGAAQABAAAAB4ABQAEAEZv
+cm0BAAkAZlNjZW5hcmlvAAoCAwAHAAoABAAJTDFT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+GwABAABEiGYAAAAOAE9yZ0FuZFNjZW5hcmlv
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAkACAAAAFZDAQAOAA4APAAAAGQBAQAACgABAAAAAAAAAAICAAAAVkMAAAgABAAAAAAAqAAB
+AAAKAAAAAAAAAAAAAgIAAABPcmdBbmRTY2VuYXJpb09yZ0FuZFNjZW5hcmlvPAACAC4ADgBPcmdB
+bmRTY2VuYXJpbwUACgBvcmdVbml0SWRzBQAEAG5hbWUiAgMABwAMAAUACTFTMlMAY2F0ZWdvcnlw
+bGFuJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
+AAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAA
+AAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8A
+AQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$TITLE' sign='true'><text>BBvwPlansByScenariosOrg|BBvwPlansByScenariosOrg</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+

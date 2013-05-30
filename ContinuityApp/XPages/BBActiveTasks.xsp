@@ -10,7 +10,7 @@
 	</xp:this.data><xp:this.resources>
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
 	</xp:this.resources><xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/BBIncidents.xsp">
+		<xp:navigationRule outcome="xsp-success" viewId="/BBLiveIncidents.xsp">
 		</xp:navigationRule>
 	</xp:this.navigationRules>
 	
@@ -30,11 +30,11 @@ viewScope.put("numOpenTasks", numOpenTasks);
 }]]></xp:this.script>
 		</xp:executeScript>
 	</xp:this.beforePageLoad>
-	<xp:label id="label2" value="Tasks:"></xp:label>
+	<xp:label id="label1"><xp:this.value><![CDATA[#{javascript:docIncident.getItemValueString("scenarioName") + ":";}]]></xp:this.value></xp:label>
 	<xp:br></xp:br>
 
 	
-	<xp:label value="Click the task you want to set to 'Complete' or reset to 'To do'" id="label3" style="color:rgb(0,0,255)"></xp:label>
+	<xp:label value="Click the task you want to set to 'Completed' or reset to 'To do'" id="label3" style="color:rgb(0,0,255)"></xp:label>
 	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
 		showColumnHeader="false" var="task" pageName="/BBAlertProcessedTasks.xsp">
 		<xp:viewColumn columnName="cat" id="viewColumn1">
