@@ -34,6 +34,13 @@
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
+		<xp:viewColumn columnName="scenarioName" id="viewColumn5" style="color:rgb(0,128,0)">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="scenarioName" xp:key="header"
+					id="viewColumnHeader5">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>		
 		<xp:viewColumn columnName="name" id="viewColumn2"
 			style="color:rgb(0,0,255)">
 			<xp:this.facets>
@@ -42,8 +49,7 @@
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="description" id="viewColumn3"
-			style="height: 2em">
+		<xp:viewColumn columnName="description" id="viewColumn3">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Description" xp:key="header"
 					id="viewColumnHeader3">

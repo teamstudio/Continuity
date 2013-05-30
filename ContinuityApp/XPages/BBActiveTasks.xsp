@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"><xp:this.data>
-		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument">
+		<xp:dominoDocument var="docIncident" formName="fIncident"
+			action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript:sessionScope.get("docUnid");}]]></xp:this.documentId>
 		</xp:dominoDocument>
 		<xp:dominoView var="viewTasks" viewName="BBvwTasksByIncident">
 			<xp:this.categoryFilter><![CDATA[#{javascript:docIncident.getDocument().getItemValueString("id");}]]></xp:this.categoryFilter>
@@ -8,9 +10,12 @@
 	</xp:this.data><xp:this.resources>
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
 	</xp:this.resources><xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/BBIncidents.xsp">
+		<xp:navigationRule outcome="xsp-success" viewId="/BBLiveIncidents.xsp">
 		</xp:navigationRule>
-	</xp:this.navigationRules><xp:this.beforePageLoad>
+	</xp:this.navigationRules>
+	
+	<xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle>
+	<xp:this.beforePageLoad>
 		<xp:executeScript>
 			<xp:this.script><![CDATA[#{javascript:var docThis = docIncident.getDocument();
 sessionScope.put("docUnid", docThis.getUniversalID());
@@ -24,13 +29,14 @@ viewScope.put("numOpenTasks", numOpenTasks);
 
 }]]></xp:this.script>
 		</xp:executeScript>
-	</xp:this.beforePageLoad><xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle><xp:label id="label2" value="Tasks:"></xp:label>
+	</xp:this.beforePageLoad>
+	<xp:label id="label1"><xp:this.value><![CDATA[#{javascript:docIncident.getItemValueString("scenarioName") + ":";}]]></xp:this.value></xp:label>
 	<xp:br></xp:br>
 
 	
+	<xp:label value="Click the task you want to set to 'Completed' or reset to 'To do'" id="label3" style="color:rgb(0,0,255)"></xp:label>
 	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
-		showColumnHeader="false" var="task">
-
+		showColumnHeader="false" var="task" pageName="/BBAlertProcessedTasks.xsp">
 		<xp:viewColumn columnName="cat" id="viewColumn1">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Cat" xp:key="header"
@@ -39,7 +45,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 			</xp:this.facets>
 		</xp:viewColumn>
 		<xp:viewColumn columnName="name" id="viewColumn2"
-			style="color:rgb(0,0,255)">
+			style="color:rgb(0,0,255)" displayAs="link">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Name" xp:key="header"
 					id="viewColumnHeader2">
@@ -48,16 +54,20 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
 				<xp:executeScript>
-					<xp:this.script><![CDATA[#{javascript:alert("Doc ID is: " + task.getDocument().getUniversalID());}]]></xp:this.script>
+					<xp:this.script><![CDATA[#{javascript:var role = sessionScope.roleName;
+var validRoleIds = task.getDocument().getItemValue("roleNames");
+if(@IsNotMember(role, validRoleIds)){
+	sessionScope.put("accessError", "InvalidRole");
+}else{
+	var nextStatus = "complete";
+	if(task.getDocument().getItemValueString("status") == "complete"){ nextStatus = "incomplete" }
+	processTask(task.getDocument().getUniversalID(), nextStatus);
+}
+
+}]]></xp:this.script>
 				</xp:executeScript>
 			</xp:this.action></xp:eventHandler></xp:viewColumn>
-		<xp:viewColumn columnName="roleNames" id="viewColumn3">
-			<xp:this.facets>
-				<xp:viewColumnHeader value="Role names" xp:key="header"
-					id="viewColumnHeader3">
-				</xp:viewColumnHeader>
-			</xp:this.facets>
-		</xp:viewColumn>
+		
 	</xp:viewPanel>
 	<xp:br></xp:br>
 </xp:view>

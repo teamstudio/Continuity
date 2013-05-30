@@ -45,12 +45,10 @@ function configApp() {
 			
 			applicationScope.put("configLoaded", true);	
 			
-			return true;
 		}
 		catch (e){
-			applicationScope.put("USER DEFINED ERROR: ", e);
-			print("error: " + e);
-			return false;
+			print("USER DEFINED ERROR: " + e);
+			applicationScope.put("userError", true);
 		}	
 	} 
 }
@@ -72,7 +70,11 @@ function createUpdate( text, incidentId, incidentName) {
 		docUpdate.replaceItemValue("createdBy", sessionScope.get("userName") );
 		docUpdate.replaceItemValue("createdByName", sessionScope.get("name") );
 		
-		docUpdate.replaceItemValue("message", text );
+		docUpdate.replaceItemValue("messageHTML", text );
+		
+		//BB cannot render HTML tags so plain text version must be used
+		var textPlain = @ReplaceSubstring(text, ["<b>", "</b>"], "" );
+		docUpdate.replaceItemValue("message", @ReplaceSubstring( textPlain , ["<br>", "<br />"], "" ) );
 		
 		docUpdate.replaceItemValue("incidentId", incidentId);
 		docUpdate.replaceItemValue("incidentName", incidentName);
@@ -165,10 +167,10 @@ function processActivation(doc, isNew){
 	var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
 	var incidentDesc = doc.getItemValueString("description");
 	
-	var updateText = ((isRehearsal ? "Exercise incident: " : "Incident: ") + incidentDesc +
-		"- alert level: " +	doc.getItemValueString("alertLevel") +
-			"- org unit: " + doc.getItemValue("orgUnitName") +
-			"- asset: " + doc.getItemValueString("siteName") +
+	var updateText = ((isRehearsal ? "Exercise incident: " : "Incident: <b>") + incidentDesc + "</b><br />" +
+		"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
+			"- org unit: " + doc.getItemValue("orgUnitName") + "<br />" +
+			"- asset: " + doc.getItemValueString("siteName") + "<br />" +
 			"- plan: " + doc.getItemValueString("scenarioName"));
 		
 	createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
@@ -325,12 +327,12 @@ function deactivateIncident(doc){
 			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
 			
 			//ML: create update item for this deactivation
-			var incidentDesc = doc.getItemValueString("description")
+			var incidentDesc = doc.getItemValueString("description")				
 			
-			var updateText = ((isRehearsal ? "Deactivated exercise incident: " : "Deactivated incident: ") + incidentDesc +
-				"- alert level: " +	doc.getItemValueString("alertLevel") +
-				"- org unit: " + doc.getItemValue("orgUnitName")  +
-				"- asset: " + doc.getItemValueString("siteName") +
+			var updateText = ((isRehearsal ? "Deactivated exercise incident: " : "Deactivated incident: <b>") + incidentDesc + "</b><br />" +
+				"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
+				"- org unit: " + doc.getItemValue("orgUnitName")  + "<br />" +
+				"- asset: " + doc.getItemValueString("siteName") + "<br />" +
 				"- plan: " + doc.getItemValueString("scenarioName"));
 			
 			createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
@@ -457,4 +459,37 @@ function assignTasksToIncident(docIncident) {
 		print("ERROR ASSIGNING TASKS: " + e);
 	}
 }
+function processTask(docUnid, status){
+	//mark a task as done/ undone
+  print("IN PROCESS TASK");
+  try{
+	print("GETTING DOC");  
+	var doc = database.getDocumentByUNID(docUnid);
+	if(null != doc) {
+		print("DOC NOT NULL");  
+		//var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
+		var isRehearsal = "yes";
 
+		print("REPLACING DOC ITEMS");
+		doc.replaceItemValue("status", (status.equals("complete") ? "complete" : "assigned") );
+		doc.replaceItemValue("statusChangedBy", sessionScope.get("userName") );
+		doc.replaceItemValue("statusChangedByName", sessionScope.get("name") );
+		doc.save();
+
+		print("CREATING UPDATE");
+		//Create update item for this completion
+		createUpdate( (isRehearsal ? "Exercise task" : "Task") + " marked as " + (status.equals("done") ? "completed" : "incomplete") + ": <b>" + doc.getItemValueString("name") + "</b><br />" +
+			"- incident: " + doc.getItemValueString("incidentName") + "<br />" +
+			"- by: " +	sessionScope.get("name")
+		);
+
+		print("UPDATING NUM TASKS");
+		//update number of open tasks for this user
+		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+  	}
+	print("DOC MUST BE NULL!! Unid = " + docUnid );  
+  }
+  catch(e){
+	  print("ERROR PROCESSING TASK: " + e);
+  }
+ }
