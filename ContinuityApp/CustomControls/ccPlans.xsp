@@ -213,6 +213,26 @@
 					value="#{docPlan.description}">
 				</xp:inputTextarea>
 			</xe:formRow>
+			
+			<xe:formRow id="formRow10" label="File:">
+			
+				<xe:djextListTextBox displayLabel="true"
+					id="djextListTextBoxQG" value="#{docPlan.quickGuideIds}"
+					readOnly="#{javascript:!docPlan.isEditable()}" styleClass="asBlock">
+					<xe:this.title><![CDATA[#{javascript:(!docPlan.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
+				</xe:djextListTextBox>
+	
+				<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
+					pickerText="Select" dialogTitle="Select a file">
+					<xe:this.dataProvider>
+						<xe:simpleValuePicker labelSeparator="|"
+							valueListSeparator=",">
+							<xe:this.valueList><![CDATA[#{javascript:@Implode(database.getView("vwQuickGuides").getColumnValues(2), ",")}]]></xe:this.valueList>
+						</xe:simpleValuePicker>
+					</xe:this.dataProvider>
+				</xe:valuePicker>
+				
+			</xe:formRow>
 	
 		</xe:formTable>
 	
