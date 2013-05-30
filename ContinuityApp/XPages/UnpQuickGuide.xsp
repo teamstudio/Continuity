@@ -4,7 +4,7 @@
 	
 	<xp:this.data>
 		<xp:dominoDocument var="docQuickGuide" formName="fQuickGuide" action="openDocument">
-			<xp:this.documentId><![CDATA[#{javascript://find quick guides UNID based on ID in query_string
+			<xp:this.documentId><![CDATA[#{javascript://find files UNID based on ID in query_string
 var id = param.get("id");
 
 if (id != null && id.length>0) {
@@ -16,7 +16,7 @@ if (id != null && id.length>0) {
 		</xp:dominoDocument>
 	</xp:this.data>
 
-	<xc:unpLayout showMenu="true" pageTitle="Quick guide">
+	<xc:unpLayout showMenu="true" pageTitle="File">
 	
 		<xp:this.facets>
 		

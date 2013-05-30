@@ -135,7 +135,7 @@ viewScope.put("cat", catLabel );
 							}]]></xp:this.value>
 						</xp:text>
 
-						<!-- quick guide link -->
+						<!-- file link -->
 						<xp:div styleClass="buttons" style="margin-top: 5px;" rendered="#{javascript:(row.getColumnValue('quickGuideIds').length > 0)}">
 							<xp:link text="Guide" id="btnGuide" style="width: 80px">
 								<xp:this.attrs>

@@ -69,9 +69,9 @@
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode
-									submitValue="quickGuidesList">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("quickGuidesList");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Quick guides (" + currentUserBean.numQuickGuides + ")"}]]></xe:this.label>
+									submitValue="filesList">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("filesList");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[#{javascript:"Files (" + currentUserBean.numQuickGuides + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:separatorTreeNode></xe:separatorTreeNode>
@@ -263,8 +263,10 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccIncidents xp:key="incidentsList"							id="incidentsList"></xc:ccIncidents>
 						<xc:ccIncident xp:key="incidentForm"							id="incidentForm"></xc:ccIncident>
 						<xc:updates id="updatesList"							xp:key="updatesList"></xc:updates>
-						<xc:ccQuickGuides id="quickGuidesList" xp:key="quickGuidesList"></xc:ccQuickGuides>
-						<xc:ccQuickGuide id="quickGuideForm" xp:key="quickGuideForm"></xc:ccQuickGuide>
+						
+						<xc:ccQuickGuides xp:key="filesList"></xc:ccQuickGuides>
+						<xc:ccQuickGuide xp:key="fileForm"></xc:ccQuickGuide>
+						
 						<xc:ccTasksCategorized id="tasks" xp:key="tasks"></xc:ccTasksCategorized>
 						<xc:orgUnits id="orgUnits" xp:key="orgUnits"></xc:orgUnits>
 						<xc:orgUnit id="orgUnit" xp:key="orgUnit"></xc:orgUnit>

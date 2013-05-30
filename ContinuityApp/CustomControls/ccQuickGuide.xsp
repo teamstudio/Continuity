@@ -4,11 +4,11 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	
 	<div class="section">
-		<div class="title">Quick guide</div>
+		<div class="title">File</div>
 	</div>
 
 	<xp:this.data>
-		<xp:dominoDocument var="docQuickGuide" action="openDocument"
+		<xp:dominoDocument var="docFile" action="openDocument"
 			formName="fQuickGuide">
 		</xp:dominoDocument>
 	</xp:this.data>
@@ -19,11 +19,11 @@
 			<xp:panel xp:key="footer" id="panel1">
 				<xp:button value="Edit" id="button1"
 					icon="pencil.png">
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docQuickGuide.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docFile.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynamicContent1">
 						<xp:this.action>
 							<xp:changeDocumentMode mode="edit"
-								var="docQuickGuide">
+								var="docFile">
 							</xp:changeDocumentMode>
 						</xp:this.action>
 					</xp:eventHandler>
@@ -31,63 +31,29 @@
 				
 								<xp:button value="Save" id="button3" icon="disk.png">
 
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docQuickGuide.isEditable()
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docFile.isEditable()
 }]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-						<xp:this.action><![CDATA[#{javascript:var blnIsNew = docQuickGuide.isNewNote(); 
-
-if ( blnIsNew ) {
-						
-							//set the owners: [bcEditor] and owner
-							docQuickGuide.replaceItemValue("docAuthors", "[bcEditor]");
-						
-							var docBE = docQuickGuide.getDocument(true);
-							docBE.getFirstItem("docAuthors").setAuthors(true);
-							docBE.getFirstItem("owner").setAuthors(true);
-			
-							docQuickGuide.replaceItemValue("id", "q" + docQuickGuide.getDocument().getUniversalID().toLowerCase() );
-							
-						}
-
-docQuickGuide.save();
-
-try {
-	//save contents of rich text field as string
-	var d = docQuickGuide.getDocument();
-		
-	var desc = d.getMIMEEntity("description_input");
-	docQuickGuide.replaceItemValue("description", (desc != null ? desc.getContentAsText() : "") );
-	docQuickGuide.save();
-	
-	if (blnIsNew) {
-	
-		currentUserBean.updateMenuOptionCounts();
-	}
-	
-	getComponent("dynamicContent1").show("quickGuidesList");
-	
-} catch (e) {
-	dBar.error(e);
-}
-}]]></xp:this.action>
+						<xp:this.action><![CDATA[#{javascript:if ( fileBean.save(docFile) ) {
+						getComponent("dynamicContent1").show("filesList");
+						}}]]></xp:this.action>
 					</xp:eventHandler>
 								</xp:button>
 				
 				<xp:button value="Remove" id="button2">
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docQuickGuide.isNewNote()}]]></xp:this.rendered>
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docFile.isNewNote()}]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 						refreshId="lotusMain" immediate="true">
-						<xp:this.action><![CDATA[#{javascript:docQuickGuide.getDocument().remove(true);
-
+						<xp:this.action><![CDATA[#{javascript:docFile.getDocument().remove(true);
 currentUserBean.updateMenuOptionCounts();
 
-getComponent("dynamicContent1").show("quickGuidesList");}]]></xp:this.action>
-						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this quick guide?")]]></xp:this.script>
+getComponent("dynamicContent1").show("filesList");}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this file?")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
 
 				<xp:link escape="true" text="Cancel" id="link1"
-					rendered="#{javascript:docQuickGuide.isEditable()}">
+					rendered="#{javascript:docFile.isEditable()}">
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynamicContent1" immediate="true">
 						<xp:this.action>
@@ -95,7 +61,7 @@ getComponent("dynamicContent1").show("quickGuidesList");}]]></xp:this.action>
 							<xp:actionGroup>
 
 								<xe:changeDynamicContentAction
-									facetName="quickGuidesList" for="dynamicContent1">
+									facetName="filesList" for="dynamicContent1">
 								</xe:changeDynamicContentAction>
 							</xp:actionGroup>
 						</xp:this.action>
@@ -104,10 +70,10 @@ getComponent("dynamicContent1").show("quickGuidesList");}]]></xp:this.action>
 				</xp:link>
 				
 				<xp:link escape="true" text="Back to list" id="link4"
-					rendered="#{javascript:!docQuickGuide.isEditable()}">
+					rendered="#{javascript:!docFile.isEditable()}">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 						refreshId="dynamicContent1" immediate="true">
-						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("quickGuidesList");}]]></xp:this.action>
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("filesList");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
 
@@ -115,49 +81,39 @@ getComponent("dynamicContent1").show("quickGuidesList");}]]></xp:this.action>
 			</xp:panel>
 		</xp:this.facets>
 
-<xe:formRow id="formRow2" label="Name:">
+<xe:formRow id="formRow2" label="Title:">
 
-			<xp:inputText id="inputText1" value="#{docQuickGuide.name}"
-				required="true">
+			<xp:inputText id="inputText1" value="#{docFile.name}"
+				required="true" maxlength="32">
 				<xp:this.validators>
 					<xp:validateRequired
-						message="Enter a name for this quick guide">
+						message="Enter a title for this file">
 					</xp:validateRequired>
 				</xp:this.validators>
 			</xp:inputText>
 
-		</xe:formRow>
-		
-		<xe:formRow label="Owner:">
+</xe:formRow>
 
-			<xc:ccSelectContact dataSource="#{docQuickGuide}"
-				fieldName="owner" dlgTitle="Select an owner"  required="true">
+	<xe:formRow id="formRow1" label="Description:">
+			<xp:inputTextarea id="inputTextarea1"
+				value="#{docFile.description}" style="height: 50px">
+				<xp:this.attrs>
+					<xp:attr name="maxlength" value="256"></xp:attr>
+				</xp:this.attrs>
+			</xp:inputTextarea>
+	</xe:formRow>
+		
+		<xe:formRow label="Created by:">
+
+			<xc:ccSelectContact dataSource="#{docFile}"
+				fieldName="owner" dlgTitle="Select the author of this file"
+				required="false">
 			</xc:ccSelectContact>
 
 		</xe:formRow>
 
-		
-
-		<xe:formRow id="formRow1" label="Contents:">
-
-			<xp:inputRichText id="inputRichText1"
-				value="#{docQuickGuide.description_input}"
-				rendered="#{javascript:docQuickGuide.isEditable()}">
-				<xp:this.dojoAttributes>
-					<xp:dojoAttribute name="toolbar">
-						<xp:this.value><![CDATA[#{javascript:applicationScope.toolbarConfig}]]></xp:this.value>
-					</xp:dojoAttribute>
-				</xp:this.dojoAttributes>
-			</xp:inputRichText>
-			<xp:text escape="false" disableTheme="true"
-				value="#{docQuickGuide.description}"
-				rendered="#{javascript:!docQuickGuide.isEditable()}">
-			</xp:text>
-
-		</xe:formRow>
-		
-		<xe:formRow label="File:">
-			<xc:ccFiles doc="#{docQuickGuide}" fieldName="files" allowMultiple="true"></xc:ccFiles>
+		<xe:formRow label="Attachment:">
+			<xc:ccFiles doc="#{docFile}" fieldName="files" allowMultiple="false"></xc:ccFiles>
 		</xe:formRow>
 
 	</xe:formTable>

@@ -1475,3 +1475,25 @@ if ( isUnplugged() ) {
 	}
 }
 
+//return the name of the image to be used for a file type
+function getFileImage( type:String ) {
+
+	if (type == null || type.length==0 ) {
+		return "";
+	} else if (type.equals("doc") ) {
+		return "file_extension_doc.png";
+	} else if (type.equals("pdf") ) {
+		return "file_extension_pdf.png";
+	} else if (type.equals("pps") ) {
+		return "file_extension_pps.png";
+	} else if (type.equals("xls") ) {
+		return "file_extension_xls.png";
+	} else if (type.equals("image") ) {
+		return "file_extension_jpg.png";
+	} else if (type.equals("video") ) {
+		return "file_extension_mpg.png";
+	} else {
+		return "";
+	}
+	
+}

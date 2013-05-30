@@ -131,7 +131,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 		</xe:formRow>
 		
-		<xe:formRow id="formRow10" label="Quick guide:">
+		<xe:formRow id="formRow10" label="File:">
 		
 			<xe:djextListTextBox displayLabel="true"
 				id="djextListTextBoxQG" value="#{docTask.quickGuideIds}"
@@ -140,7 +140,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 			</xe:djextListTextBox>
 			
 			<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
-				pickerText="Select" dialogTitle="Select one or more quick guides">
+				pickerText="Select" dialogTitle="Select a file">
 				<xe:this.dataProvider>
 					<xe:simpleValuePicker labelSeparator="|"
 						valueListSeparator=",">

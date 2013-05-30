@@ -102,26 +102,16 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 			</xp:inputRichText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow10" label="Quick guide:"><!--
-		
-			<xe:djextListTextBox multipleSeparator="," displayLabel="true"
-				id="djextListTextBoxQG" value="#{docScenario.quickGuideIds}"
-				readOnly="#{javascript:!docScenario.isEditable()}" styleClass="asBlock">
-				<xe:this.title><![CDATA[#{javascript:(!docScenario.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
-			</xe:djextListTextBox>
-			
-			-->
+		<xe:formRow id="formRow10" label="File:">
 			
 			<xe:djextListTextBox displayLabel="true"
 				id="djextListTextBoxQG" value="#{docScenario.quickGuideIds}"
 				readOnly="#{javascript:!docScenario.isEditable()}" styleClass="asBlock">
 				<xe:this.title><![CDATA[#{javascript:(!docScenario.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
 			</xe:djextListTextBox>
-			
-			
-			
+
 			<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
-				pickerText="Select" dialogTitle="Select a quick guides">
+				pickerText="Select" dialogTitle="Select a file">
 				<xe:this.dataProvider>
 					<xe:simpleValuePicker labelSeparator="|"
 						valueListSeparator=",">

@@ -10,12 +10,31 @@
 		</xp:this.facets>
 	
 		<tr>
-			<td style="padding:0 4px 4px 4px; padding-left: 0;">
+		
+			<xp:td>
+				<xp:this.rendered><![CDATA[#{javascript:compositeData.doc.hasItem("fileType")}]]></xp:this.rendered>
+				<xp:image id="image1"
+					style="margin-right: 4px; height: 16px; width: 16px;">
+					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + getFileImage( compositeData.doc.getItemValueString("fileType") )}]]></xp:this.url>
+				</xp:image>
+			</xp:td>
+
+			<td style="padding:1px 15px 4px 4px; padding-left: 0;">
 			
-			<xp:link escape="true" text="#{javascript:att.getName()}" id="link2" target="_blank">
+				<xp:link escape="true" text="#{javascript:att.getName()}" id="link2" target="_blank">
 	
-			<xp:this.value><![CDATA[#{javascript:"0/" + compositeData.doc.getDocument().getUniversalID() + "/$file/" + java.net.URLEncoder.encode (att.getName(), "utf-8")}]]></xp:this.value></xp:link>
-		</td>
+				<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + compositeData.doc.getDocument().getUniversalID() + "/$file/" + java.net.URLEncoder.encode (att.getName(), "utf-8")}]]></xp:this.value></xp:link>
+			</td>
+		
+			<td>
+
+				<xp:text escape="true" id="computedField1">
+					<xp:this.value><![CDATA[#{javascript:var s = att.getLength();
+return @Text(s/1024, "F0") + " KB";}]]></xp:this.value>
+				</xp:text>
+
+			</td>
+		
 		<xp:td style="padding:0 4px 4px 4px;" rendered="#{javascript:compositeData.doc.isEditable()}">
 			<xp:link escape="true" styleClass="lotusTiny" text="remove" id="link3">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
@@ -27,8 +46,17 @@
 	
 	</xp:repeat>
 	
-	<xp:fileUpload id="fileUpload1" value="#{compositeData.doc[compositeData.fieldName ]}">
+	<xp:fileUpload id="fileUpload1"
+		value="#{compositeData.doc[compositeData.fieldName ]}">
 
+		<xp:this.rendered><![CDATA[#{javascript:var f = compositeData.doc.getAttachmentList(compositeData.fieldName);
+
+if (!compositeData.doc.isEditable() ) {
+	return false;
+} else if (!compositeData.allowMultiple && f.size() > 0 ) {
+	return false;
+}
+return true;}]]></xp:this.rendered>
 	</xp:fileUpload>
 
 

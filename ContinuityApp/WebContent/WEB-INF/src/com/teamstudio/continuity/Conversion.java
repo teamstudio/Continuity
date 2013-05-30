@@ -3,6 +3,7 @@ package com.teamstudio.continuity;
 import java.util.Vector;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.acf.StripTagsProcessor;
 import com.teamstudio.apps.Unplugged;
 import com.teamstudio.continuity.utils.Authorizations;
 import com.teamstudio.continuity.utils.Logger;
@@ -16,7 +17,9 @@ import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.DocumentCollection;
 import lotus.domino.Item;
+import lotus.domino.MIMEEntity;
 import lotus.domino.NotesException;
+import lotus.domino.RichTextItem;
 import lotus.domino.View;
 import lotus.domino.ViewEntry;
 import lotus.domino.ViewEntryCollection;
@@ -283,9 +286,72 @@ public class Conversion {
 					}
 					
 					updated = true;
+					
+					if (doc.hasItem("description_input") && !doc.hasItem("descriptionConverted") ) {
+						//convert description to text only field
+						
+						Item d = doc.getFirstItem("description_input");
+						
+						if (d.getType() == Item.MIME_PART) {
+							d.recycle();
+							
+							MIMEEntity desc = doc.getMIMEEntity("description_input");
+							String text = StripTagsProcessor.instance.processMarkup( (desc != null ? desc.getContentAsText() : "") );
+							doc.replaceItemValue("description", text );
+							Utils.recycle(desc);
+							
+						} else if (d.getType() == Item.RICHTEXT) {
+							
+							RichTextItem rtDesc = (RichTextItem) d;
+							
+							String text = StripTagsProcessor.instance.processMarkup( rtDesc.getUnformattedText() );
+							doc.replaceItemValue("description", text);
+									
+							Utils.recycle(d);
+						
+						}
+						
+						//doc.removeItem("description_input");		//let's leave the old field intact for now
+						doc.replaceItemValue("descriptionConverted", "1");
+						updated=true;
+												
+					}
+					
 
+				} else if (form.equals("fQuickGuide")) {
+					
+					if (doc.hasItem("description_input") && !doc.hasItem("descriptionConverted") ) {
+						//convert description to text only field
+						
+						Item d = doc.getFirstItem("description_input");
+						
+						if (d.getType() == Item.MIME_PART) {
+							d.recycle();
+							
+							MIMEEntity desc = doc.getMIMEEntity("description_input");
+							String text = StripTagsProcessor.instance.processMarkup( (desc != null ? desc.getContentAsText() : "") );
+							doc.replaceItemValue("description", text );
+							Utils.recycle(desc);
+							
+						} else if (d.getType() == Item.RICHTEXT) {
+							
+							RichTextItem rtDesc = (RichTextItem) d;
+							
+							String text = StripTagsProcessor.instance.processMarkup( rtDesc.getUnformattedText() );
+							doc.replaceItemValue("description", text);
+									
+							Utils.recycle(d);
+						
+						}
+						
+						//doc.removeItem("description_input");		//let's leave the old field intact for now
+						doc.replaceItemValue("descriptionConverted", "1");
+						updated=true;
+												
+					}
+					
 				}
-
+				
 				if (!doc.hasItem("createdDateMs")) {
 
 					doc.replaceItemValue("createdDateMs", Long.toString(doc.getCreated().toJavaDate().getTime()));

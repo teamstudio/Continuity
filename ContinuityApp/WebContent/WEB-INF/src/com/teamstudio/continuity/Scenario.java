@@ -8,7 +8,6 @@ import lotus.domino.Document;
 import lotus.domino.DocumentCollection;
 import lotus.domino.MIMEEntity;
 
-import com.ibm.xsp.acf.StripTagsProcessor;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.wrapped.DominoDocument;
 import com.teamstudio.continuity.utils.Authorizations;
@@ -75,7 +74,7 @@ public class Scenario implements Serializable {
 			String description = (itemDescription != null ? itemDescription.getContentAsText() : "");
 			
 			//create plain text and html version
-			xspDocScenario.replaceItemValue("description", StripTagsProcessor.instance.processMarkup(description) );
+			xspDocScenario.replaceItemValue("description", com.ibm.xsp.acf.StripTagsProcessor.instance.processMarkup(description) );
 			xspDocScenario.replaceItemValue("descriptionHtml", description );
 			xspDocScenario.save();
 			
