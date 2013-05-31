@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='36e' unid='0160C52432C2C820C1257AA90035F3EE' sequence='31'>
-<created><datetime>20121101T104918,54+01</datetime></created>
-<modified><datetime dst='true'>20130405T152401,42+02</datetime></modified>
-<revised><datetime dst='true'>20130405T152401,41+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130405T152401,42+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,27+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B7A00499D0E'>
+<noteinfo noteid='59e' unid='0160C52432C2C820C1257AA90035F3EE' sequence='3'>
+<created><datetime dst='true'>20121101T114918,54+02</datetime></created>
+<modified><datetime dst='true'>20130531T091100,96-04</datetime></modified>
+<revised><datetime dst='true'>20130531T091100,95-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130531T091100,96-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130529T092420,18-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$HTMLCode' sign='true'>
 <rawitemdata type='1'>
@@ -45,15 +47,18 @@ hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 <item name='siteName' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='$Fields'><textlist><text>siteName</text><text>siteId</text><text
->scenarioName</text><text>scenarioId</text><text>alertLevel</text><text>description</text><text
->status</text><text>isRehearsal</text></textlist></item>
+<item name='planName' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>planName</text><text>siteName</text><text
+>siteId</text><text>scenarioName</text><text>scenarioId</text><text>alertLevel</text><text
+>description</text><text>status</text><text>isRehearsal</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoL/WgACAAAA
 AAAAAAAAoAUAAKAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA
-AAAAlIUAAAAAoAUIAAAAAAABAAAABAAAAIMEAgDdBgEA+//7/ywAAAAAAAgDAAAAAAAAAAAAAAAA
+AAAAlIUAAAAAoAUIAAAAAAABAAAABAAAAIMEAgDdBgEA+//7/ywAAAAAAAkDAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAEAAAAAAAAAAAAAAFz/PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAOAAAAAAAAAAEAAAoAAAAAAQAAAAAA3gYBAPv/ow6gBSgAPAAAAAAAAgCkEgAAoAW7DAAA
 VQIREQEBAACBAoL/WgADAAAAAAAAAAAArwW7DK8FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -104,6 +109,11 @@ BwCgBbsMAABVAhERAQEAAIECgwQDAIX/EAABAQAKc2l0ZU5hbWWkEgcBuwz8IwAAVQIREQEBAACB
 AoMEBACF/wgAAQAACt0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8sAIoAAAUAAAIAAAAA
 AAACAQAACgAAAAAAAAAACAAAAAAAc2l0ZU5hbWViDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAK
-pBIHAvwjtzAAAFUCEREBAQAAgQKDBAcAhf8IAAEAAAqlBgAAAACBAoMEAQCF/wgAAQAACg==
+pBIHAvwjtzAAAFUCEREBAQAAgQKDBAcAhf8IAAEAAAqkEggAoAW7DAAAVQIREQEBAACBAoMEAwCF
+/xAAAQEACnBsYW5OYW1lpBIIAbsM/CMAAFUCEREBAQAAgQKDBAQAhf8IAAEAAArdBgAAiv/+/1AA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAIr/LACKAAAFAAACAAAAAAAAAgEAAAoAAAAAAAAAAAgAAAAAAHBs
+YW5OYW1lYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACqQSCAL8I7cwAABVAhERAQEAAIECgwQH
+AIX/CAABAAAKpQYAAAAAgQKDBAEAhf8IAAEAAAo=
 </rawitemdata></item></note>
 
