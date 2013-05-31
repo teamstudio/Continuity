@@ -12,7 +12,7 @@
 	</xp:this.navigationRules>
 	
 	<xp:viewPanel value="#{viewScenarios}" id="viewPanel1"
-		showColumnHeader="false" pageName="/BBPlans.xsp">
+		showColumnHeader="false" pageName="/BBPlan.xsp">
 
 		<xp:viewColumn columnName="planNames" id="viewColumn1">
 			<xp:this.facets>
@@ -21,11 +21,17 @@
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="name" id="viewColumn2" displayAs="link">
+		<xp:viewColumn columnName="name" id="viewColumn2" displayAs="link" style="color:rgb(0,0,255)">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Name" xp:key="header"
 					id="viewColumnHeader2">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-	<xp:viewColumn columnName="numTasks" id="viewColumn3"><xp:this.facets><xp:viewColumnHeader value="No tasks" xp:key="header" id="viewColumnHeader3"></xp:viewColumnHeader></xp:this.facets></xp:viewColumn></xp:viewPanel></xp:view>
+		<xp:viewColumn columnName="numTasks" id="viewColumn3" style="display:inline;text-align:right">
+			<xp:this.facets>
+				<xp:viewColumnHeader value="No tasks" xp:key="header" id="viewColumnHeader3">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel></xp:view>
