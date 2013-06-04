@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="docQuickGuide" formName="fQuickGuide" action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript://find files UNID based on ID in query_string
+	var fileId = param.get("id");
+
+if ( !isEmpty(fileId) ) {
+	var file = getFileInfo(fileId);
+	return file.unid;
+}}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xc:unpLayout showMenu="true" pageTitle="File">
+	
+		<xp:this.facets>
+		
+			<xp:panel xp:key="contents">
+			
+				<!-- file -->
+				<xp:panel styleClass="box file">
+					<xp:this.attrs>
+						<xp:attr name="onclick">
+							<xp:this.value><![CDATA[#{javascript:"$.blockUI(); window.location.href = '0/" + docQuickGuide.getDocument().getUniversalID() + "/$file/" + docQuickGuide.getItemValueString("fileNameEncoded") + "';"}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>
+					
+					<div style="float:left; width: 44px">
+
+						<xp:image id="image1">
+							<xp:this.url><![CDATA[#{javascript:( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/" + getFileImage( docQuickGuide.getItemValueString("fileType") )}]]></xp:this.url>
+						</xp:image>
+
+					</div>
+					<div style="float:left;">
+
+						<xp:text tagName="label" escape="true"
+							id="computedField2" value="#{docQuickGuide.fileName}">
+						</xp:text>
+						
+						<div class="metadata">
+							<xp:text escape="true" id="computedField4"
+								value="#{docQuickGuide.fileExt}">
+							</xp:text>
+							&#160;
+							<xp:text escape="true" id="computedField3"
+								value="#{docQuickGuide.fileSize}">
+							</xp:text>
+						</div>
+
+					</div>
+					<br style="clear:both" />
+				</xp:panel>
+
+				<div id="formholder" class="box mTop">
+
+					<h2>
+						<xp:text escape="true" id="title" tagName="span"
+							value="#{docQuickGuide.name}" styleClass="formtitle">
+						</xp:text>
+					</h2>
+				
+					<div class="buttons content">
+						<xp:link value="#" text="Close" styleClass="red" style="width: 50%">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"$.blockUI(); window.location.href='" + param.get('back') + "'; return false;"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:link>
+					
+					</div>
+						
+					<!-- description -->
+					<ul class="fieldlist">
+					
+						<li>
+							<xp:text value="#{docQuickGuide.description}" style="padding:0 15px 15px 15px"></xp:text>
+						</li>
+					
+						<li>
+							<xp:label value="Created by" id="label2" for="siteId"></xp:label>
+							<xp:text escape="true" id="computedField5" value="#{docQuickGuide.ownerName}">
+							</xp:text>
+						</li>
+					
+						<li>
+							<xp:label value="Date" id="label1" for="siteId"></xp:label>
+							<xp:text escape="true" id="siteId"
+								value="#{docQuickGuide.createdDate}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"
+										timeStyle="short">
+									</xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+						</li>
+						
+					</ul>
+
+				</div>
+
+			</xp:panel>
+		
+		</xp:this.facets>
+
+	</xc:unpLayout>
+</xp:view>

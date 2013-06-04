@@ -12,7 +12,6 @@
 		<tr>
 		
 			<xp:td>
-				<xp:this.rendered><![CDATA[#{javascript:compositeData.doc.hasItem("fileType")}]]></xp:this.rendered>
 				<xp:image id="image1"
 					style="margin-right: 4px; height: 16px; width: 16px;">
 					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + getFileImage( compositeData.doc.getItemValueString("fileType") )}]]></xp:this.url>

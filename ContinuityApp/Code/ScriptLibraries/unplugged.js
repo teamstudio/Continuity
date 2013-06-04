@@ -194,7 +194,7 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 							//ML: use ajax load
 							loadPageEx(viewxpagename + "?action=openDocument&documentId=" + response, "contentwrapper", null);
 						} else if (viewxpagename.indexOf("UnpIncident.xsp") > -1 ) {
-							//save of notification message
+							//save of a notification message
 							loadPageEx(viewxpagename, "contentwrapper", null, true, true);
 						} else {
 							$.blockUI();

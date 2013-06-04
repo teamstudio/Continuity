@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xc:unpLayoutBasic pageTitle="Tasks" backButtonURL="UnpRole.xsp">
+	<xc:unpLayout showMenu="true" pageTitle="Tasks" backButtonURL="UnpRole.xsp">
 	
 		<xp:this.facets>
 		
@@ -9,6 +9,6 @@
 			
 		</xp:this.facets>
 	
-	</xc:unpLayoutBasic>
+	</xc:unpLayout>
 
 </xp:view>

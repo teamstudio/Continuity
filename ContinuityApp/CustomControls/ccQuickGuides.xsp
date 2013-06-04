@@ -38,6 +38,12 @@
 
 			<td style="width: 100%">
 				<h4>
+				
+					<xp:image id="image1"
+						style="margin-right: 5px; height: 16px; width: 16px;">
+						<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + getFileImage( rowEntry.getColumnValue("fileType") )}]]></xp:this.url>
+					</xp:image>
+				
 					<xp:link escape="true" text="#{rowEntry.name}"
 						id="link1">
 						<xp:eventHandler event="onclick" submit="true"
@@ -66,26 +72,21 @@
 						value="#{rowEntry.description}">
 					</xp:text>
 					
-					<xp:div style="margin-top:5px" rendered="#{javascript:rowEntry.getColumnValue('fileName').length==0}">
-						No files have been attached yet
+					<xp:div style="margin-top:10px" rendered="#{javascript:rowEntry.getColumnValue('fileName').length==0}">
+						No file has been attached
 					</xp:div>
 					
-					<xp:div style="margin-top:5px">
+					<xp:div style="margin-top:10px">
 
 						<xp:this.rendered><![CDATA[#{javascript:rowEntry.getColumnValue('fileName') != null && rowEntry.getColumnValue('fileName').length>0}]]></xp:this.rendered>
-						<xp:image id="image1"
-							style="margin-right: 4px; height: 16px; width: 16px;">
-							<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + getFileImage( rowEntry.getColumnValue("fileType") )}]]></xp:this.url>
-						</xp:image>
 
-						<xp:link style="padding-right: 15px"
+						<xp:link style="padding-right: 20px"
 							escape="true" text="#{rowEntry.fileName}" id="link2"
 							target="_blank">
-							<xp:this.value><![CDATA[#{javascript:"0/" + rowEntry.getUniversalID() + "/$file/" + java.net.URLEncoder.encode (rowEntry.getColumnValue("fileName"), "utf-8")}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + rowEntry.getUniversalID() + "/$file/" + java.net.URLEncoder.encode (rowEntry.getColumnValue("fileName"), "utf-8")}]]></xp:this.value>
 						</xp:link>
 
-						<xp:text escape="true" id="computedField1">
-							<xp:this.value><![CDATA[#{javascript:@Text(rowEntry.getColumnValue("fileSize")/1024, "F0") + " KB"}]]></xp:this.value>
+						<xp:text escape="true" id="computedField1" value="#{rowEntry.fileSize}">
 						</xp:text>
 
 					</xp:div>

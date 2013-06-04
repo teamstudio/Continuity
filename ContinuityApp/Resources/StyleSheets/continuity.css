@@ -291,3 +291,14 @@ a:active {
 }
 .xspDataTableFileDownload td {
 	padding: 4px !important;
+}
+
+.lotusFormRequired {
+	padding-right: 3px;
+}
+
+.xspMessage {
+	border:0;
+	background:none;
+	color: red;
+}

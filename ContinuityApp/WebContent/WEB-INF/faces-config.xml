@@ -72,13 +72,11 @@
     <managed-bean-class>com.teamstudio.continuity.User</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
-  
   <managed-bean>
     <managed-bean-name>fileBean</managed-bean-name>
     <managed-bean-class>com.teamstudio.continuity.File</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
-  
   <!-- phase listeners -->
   <lifecycle>
     <phase-listener>com.teamstudio.continuity.utils.MultiPageMessages</phase-listener>
