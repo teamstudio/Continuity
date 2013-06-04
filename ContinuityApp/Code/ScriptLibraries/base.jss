@@ -1136,11 +1136,23 @@ function isEmpty( input ) {
 	return false;
 }
 
+//retrieve an object containing information about the plans for a specific org unit
+//results are cached in the sessionScope
 function getScenariosByPlan( orgUnit ) {
 	
-	var plans = [];
+	var orgUnitPlans = [];
 	
 	try {
+		
+		var plans = sessionScope.plans;
+		
+		if (plans == null) {
+			plans = getMap();
+		}
+		
+		if ( plans[orgUnit] != null ) {
+			return plans[orgUnit];
+		}
 		
 		dBar.debug("retrieving plans for org unit " + orgUnit + "...");
 		
@@ -1149,6 +1161,8 @@ function getScenariosByPlan( orgUnit ) {
 		var nav:NotesViewNavigator = vwScenariosByOrgUnitId.createViewNavFromCategory( orgUnit );
 		
 		//dBar.debug("found " + nav.getCount() + "nav entries");
+		
+		var vwPlans:NotesView = database.getView("vwPlansById");
 		
 		var _plan = null;
 		
@@ -1159,13 +1173,13 @@ function getScenariosByPlan( orgUnit ) {
 		
 			if (ve.isCategory() ) {
 		
-				//dBar.debug("found cat: " + colValues.get(1) );
-		
-				if (_plan != null) { plans.push( _plan ); }
-								
+				if (_plan != null) { orgUnitPlans.push( _plan ); }
+				
+				var planName = colValues.get(1);
 				
 				_plan = {
 					"name" : colValues.get(1),
+					"fileId" : null,
 					"scenarios" : [],
 					"addedIds" : []
 				};
@@ -1205,16 +1219,60 @@ function getScenariosByPlan( orgUnit ) {
 					_plan.scenarios[ _plan.scenarios.length-1 ].numTasks = _plan.scenarios[ _plan.scenarios.length-1 ].numTasks + 1;
 				
 				}
+				
+				if ( _plan.fileId == null ) {		//get plan's file details
+					
+					//dBar.debug("get deatils for " + _plan.name );
+					
+					//get plan id
+					var doc = ve.getDocument();
+					var planIds = doc.getItemValue("planIds");
+					var planNames = doc.getItemValue("planNames");
+					
+					var fileId = "";
+					var planId = "";
+					
+					for (var i=0; i<planNames.length; i++) {
+						if (planNames[i] == _plan.name) {
+							//dBar.debug("plan id found");
+							planId = planIds[i];
+							//dBar.debug("id = " + planId);
+
+							var vePlan = vwPlans.getEntryByKey( planId, true);
+							if (null != vePlan) {
+								
+								//dBar.debug("found plan entry");
+								
+								fileId = vePlan.getColumnValues().get(1);
+								
+								//dBar.debug("id = " + fileId);
+							
+							}
+							
+							break;
+						}
+					
+					}
+					
+					_plan.fileId = fileId;
+					_plan.planId = planId;
+					
+				}
+				
 			
 			}
 			
 			ve = nav.getNext();
 		}
 			
-		if (_plan != null) { plans.push( _plan ); }
+		if (_plan != null) { orgUnitPlans.push( _plan ); }
 		
 		nav.recycle();
 		vwScenariosByOrgUnitId.recycle();
+		
+		//cache in sessionScope
+		plans[orgUnit] = orgUnitPlans;
+		sessionScope.put("plans", plans);
 		
 		//dBar.debug("finished");
 		
@@ -1223,7 +1281,7 @@ function getScenariosByPlan( orgUnit ) {
 
 	}
 		
-	return plans;
+	return orgUnitPlans;
 }
 
 function getOpenIncidentOptions(orgUnitId, selected) {
@@ -1480,13 +1538,13 @@ function getFileImage( type:String ) {
 
 	if (type == null || type.length==0 ) {
 		return "";
-	} else if (type.equals("doc") ) {
+	} else if (type.equals("document") ) {
 		return "file_extension_doc.png";
 	} else if (type.equals("pdf") ) {
 		return "file_extension_pdf.png";
-	} else if (type.equals("pps") ) {
+	} else if (type.equals("presentation") ) {
 		return "file_extension_pps.png";
-	} else if (type.equals("xls") ) {
+	} else if (type.equals("spreadsheet") ) {
 		return "file_extension_xls.png";
 	} else if (type.equals("image") ) {
 		return "file_extension_jpg.png";
@@ -1495,5 +1553,68 @@ function getFileImage( type:String ) {
 	} else {
 		return "";
 	}
+	
+}
+
+/*
+ * retrieve info (unid, type) of a file based on it's id
+ * results are cached in the sessionScope
+ */
+function getFileInfo( fileId:String ) {
+	
+	if (isEmpty(fileId) ) {
+		return { valid : false };
+	}
+	
+	//dBar.debug("get for " + fileId);
+	
+	var file = null;
+	
+	try {
+		var files = sessionScope.files;
+	
+		if (files == null) {
+			files = getMap();
+		}
+		
+		if ( files[fileId] != null ) {
+			return files[fileId];
+		}
+		
+		var vwAll = database.getView("vwQuickGuidesById");
+		var ve = vwAll.getEntryByKey(fileId, true);
+		
+		if (null == ve ) {
+			
+			file = { valid : false }
+			files[fileId] = file;		//entry not found
+			
+		} else {
+			
+			var unid = ve.getUniversalID();
+			var type = ve.getColumnValues().get(1);
+			var image = getFileImage(type);
+			
+			file = {
+				valid : true,
+				unid : unid,
+				type : type,
+				image : image 
+			}
+			
+			ve.recycle();
+			
+			files[fileId] = file;
+		}
+		
+		sessionScope.files = files;
+		
+		vwAll.recycle();
+		
+	} catch (e) {
+		dBar.error(e);
+	}
+	
+	return file;
 	
 }

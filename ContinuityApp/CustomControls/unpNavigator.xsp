@@ -22,7 +22,8 @@ the specific language governing permissions and limitations under the License
 						<xp:repeat id="repeat1" rows="30" disableOutputTag="true" var="menuItem" value="#{javascript:compositeData.menuItem}">
 							
 							<xp:panel id="viewMenuItem" tagName="li">
-								<xp:this.styleClass><![CDATA[#{javascript:var c = "menuitem" + menuItem.itemId + (menuItem.disabled == 'true' || menuItem.disabled == true ? " disabled" : "")
+								<xp:this.styleClass><![CDATA[#{javascript://var c = "menuitem" + menuItem.itemId + (menuItem.disabled == 'true' || menuItem.disabled == true ? " disabled" : "");
+								var c = "menuitem" + menuItem.itemId;
 								
 								var p = @Left(menuItem.page, ".xsp");
 								
@@ -33,11 +34,11 @@ the specific language governing permissions and limitations under the License
 	}}]]></xp:this.styleClass>
 								<xp:this.attrs>
 									<xp:attr name="onclick">
-										<xp:this.value><![CDATA[#{javascript:if (menuItem.disabled == 'true' || menuItem.disabled == true) {
-										return "";
-										} else {
+										<xp:this.value><![CDATA[#{javascript://if (menuItem.disabled == 'true' || menuItem.disabled == true) {
+										//return "";
+										//} else {
 										return "loadPageEx('" + getDbPath() + "/" + menuItem.page + "', 'contentwrapper', '" + menuItem.itemId + "');";
-										}
+										//}
 										}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>

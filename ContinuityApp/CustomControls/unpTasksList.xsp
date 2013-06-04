@@ -136,19 +136,25 @@ viewScope.put("cat", catLabel );
 						</xp:text>
 
 						<!-- file link -->
-						<xp:div styleClass="buttons" style="margin-top: 5px;" rendered="#{javascript:(row.getColumnValue('quickGuideIds').length > 0)}">
-							<xp:link text="Guide" id="btnGuide" style="width: 80px">
-								<xp:this.attrs>
-									<xp:attr name="onClick">
-										<xp:this.value>
-<!--											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpQuickGuide.xsp?id=" + row.getColumnValue('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>-->
-											<![CDATA[#{javascript:"var back = '" + compositeData.parentUrl + "'; window.location.href='" + getDbPath() + "/UnpQuickGuide.xsp?id=" + row.getColumnValue('quickGuideIds') + "&back=' + encodeURIComponent(back); event.stopPropagation(); return false;"}]]>
-										</xp:this.value>
-									</xp:attr>
-								</xp:this.attrs>
-							</xp:link>
-						</xp:div>
+						<xp:image id="image2" style="margin-top:5px;">
+							<xp:this.rendered><![CDATA[#{javascript:var id = row.getColumnValue('quickGuideIds');
+							var fileInfo = getFileInfo( id );
+return fileInfo.valid;}]]></xp:this.rendered>
 						
+							<xp:this.attrs>
+								<xp:attr name="onClick">
+									<xp:this.value>
+										<!--											<![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpFile.xsp?id=" + row.getColumnValue('quickGuideIds') + "', 'contentwrapper', null, false, false); event.stopPropagation(); return false;"}]]>-->
+										<![CDATA[#{javascript:"$.blockUI(); var back = '" + compositeData.parentUrl + "'; window.location.href='" + getDbPath() + "/UnpFile.xsp?id=" + row.getColumnValue('quickGuideIds') + "&back=' + encodeURIComponent(back); event.stopPropagation(); return false;"}]]>
+									</xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+
+							<xp:this.url><![CDATA[#{javascript:var file = getFileInfo( row.getColumnValue('quickGuideIds') );
+		( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
+							
+						</xp:image>
+
 					</xp:div>
 					
 				</xp:panel>

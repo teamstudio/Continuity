@@ -2,13 +2,13 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xc:unpLayoutBasic pageTitle="Plan" backButtonURL="UnpPlans.xsp">
+	<xc:unpLayout showMenu="true" pageTitle="Plan" backButtonURL="UnpPlans.xsp">
 
 		<xp:this.facets>
 		
 			<xc:unpPlanForm xp:key="contents" />
 
 		</xp:this.facets>
-	</xc:unpLayoutBasic>
+	</xc:unpLayout>
 
 </xp:view>

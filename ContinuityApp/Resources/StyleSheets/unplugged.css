@@ -1832,7 +1832,9 @@ table.reset {
 .categoryRowFixed.condensed {
 	padding: 4px 15px 4px 12px !important;
 }
-
+.categoryRowFixed .xspTextComputedField {
+	font-weight: bold;	
+}
 .catGrey {
 	background: #cccccc;
 	color: #444;	
@@ -1907,6 +1909,25 @@ div.buttons a:hover {
 	margin: 0 0 10px 0;
 }
 
+.file {
+	 padding: 11px;
+	 background: #777777;	
+	 border: 1px solid #222222;
+	 box-shadow: inset 0 1px #999;
+}
+.file label {
+	color: #fff;	
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+.file .metadata {
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #c3c3c3;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+	margin-top: 4px;
+}
+
 
 /* blue button */
 div.buttons a.blue {
@@ -1920,12 +1941,13 @@ div.buttons a.blue {
 }
 
 div.buttons a.red {
-	background: -webkit-linear-gradient(#a82e2e,#661111);
-	border: 1px solid #661111;
+	border: 1px solid #762121;
+	background: -webkit-linear-gradient(#b83e3e, #762121);
+
 }
 div.buttons a.red:hover {
-	background: -webkit-linear-gradient(#661111,a82e2e);
 	border: 1px solid #661111;
+	background: -webkit-linear-gradient(#a82e2e, #661111);
 }
 
 div.buttons a.green {
