@@ -10,31 +10,28 @@
 	<xp:this.navigationRules>
 		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
 	</xp:this.navigationRules>
+	
 	<xp:viewPanel value="#{viewScenarios}" id="viewPanel1"
-		pageName="/BBPlan.xsp" showColumnHeader="false">
+		showColumnHeader="false" pageName="/BBPlan.xsp">
 
-		<xp:viewColumn columnName="category" id="viewColumn1">
+		<xp:viewColumn columnName="planNames" id="viewColumn1">
 			<xp:this.facets>
-				<xp:viewColumnHeader value="Category" xp:key="header"
+				<xp:viewColumnHeader value="Plan  names" xp:key="header"
 					id="viewColumnHeader1">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="name" id="viewColumn2"
-			displayAs="link" openDocAsReadonly="true">
+		<xp:viewColumn columnName="name" id="viewColumn2" displayAs="link" style="color:rgb(0,0,255)">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Name" xp:key="header"
 					id="viewColumnHeader2">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="numTasks" id="viewColumn3"
-			style="display:inline;text-align:right;color:rgb(0,64,128)">
+		<xp:viewColumn columnName="numTasks" id="viewColumn3" style="display:inline;text-align:right">
 			<xp:this.facets>
-				<xp:viewColumnHeader value="No tasks" xp:key="header"
-					id="viewColumnHeader3">
+				<xp:viewColumnHeader value="No tasks" xp:key="header" id="viewColumnHeader3">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-	</xp:viewPanel>
-</xp:view>
+	</xp:viewPanel></xp:view>

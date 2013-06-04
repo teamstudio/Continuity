@@ -2,38 +2,38 @@
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
  replicaid='85257B7A00499D0E'>
-<noteinfo noteid='822' unid='4B84E9FBEF1ABC9985257B7B00126C50' sequence='5'>
-<created><datetime dst='true'>20130529T232113,76-04</datetime></created>
-<modified><datetime dst='true'>20130529T233303,46-04</datetime></modified>
-<revised><datetime dst='true'>20130529T233303,45-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130529T233303,46-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130529T232113,77-04</datetime></addedtofile></noteinfo>
+<noteinfo noteid='832' unid='FA0A5D8C012025ED85257B7B00786EB7' sequence='1'>
+<created><datetime dst='true'>20130530T175526,63-04</datetime></created>
+<modified><datetime dst='true'>20130530T175526,64-04</datetime></modified>
+<revised><datetime dst='true'>20130530T175526,63-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130530T175526,64-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130530T175526,64-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>BBvwScenarios|BBvwScenarios</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-bgAFAEAAOwAGAAoACAAEAAgACQAEAG9yZ1VuaXRJZHNjYXRlZ29yeW5hbWVudW1UYXNrcyRDb25m
-bGljdCRSRUYABAAEAAAAHgAFAAQARm9ybQEACQBmU2NlbmFyaW8ACgIDAAcACgAEAAlMMVM=
+bgAFAEAAPAAGAAoACQAEAAgACQAEAG9yZ1VuaXRJZHNwbGFuTmFtZXNuYW1lbnVtVGFza3MkQ29u
+ZmxpY3QkUkVGBAAEAAAAHgAFAAQARm9ybQEACQBmU2NlbmFyaW8ACgIDAAcACgAEAAlMMVM=
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
-MQADAABEiGYHAAAKAIhmBwoACAAAZgASAAQAb3JnVW5pdElkc2NhdGVnb3J5bmFtZQ==
+MgADAABEiGYHAAAKAIhmBwoACQAAZgATAAQAb3JnVW5pdElkc3BsYW5OYW1lc25hbWU=
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQAEAAYACAAAAFZDAwAKAAoAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMDAAgACAAAAAAAUAAB
+AQAEAAYACAAAAFZDAwAKAAoAAAAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMDAAkACgAAAAAAUAAB
 AAAKAAEAAAAAAAAAAgIAAABWQwEABAAEAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAIAAcA
-AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAb3JnVW5pdElkc09yZ1VuaXRJZHNjYXRlZ29yeWNhdGVn
-b3J5bmFtZW5hbWVudW1UYXNrc05vVGFza3MmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAA
-AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
-AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQA
-AAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wAFAP///wABAAAAAAAAAAAAAAAAAAEA////
-AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
+AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAb3JnVW5pdElkc09yZ1VuaXRJZHNwbGFuTmFtZXNQbGFu
+IE5hbWVzbmFtZW5hbWVudW1UYXNrc05vVGFza3MmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEA
+AQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABX
+QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAA
+AAQAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wAFAP///wABAAAAAAAAAAAAAAAAAAEA
+////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$TITLE' sign='true'><text>BBvwScenarios|BBvwScenarios</text></item>
-<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
 

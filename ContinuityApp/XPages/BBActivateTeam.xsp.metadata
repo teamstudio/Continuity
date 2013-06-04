@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B7A00499D0E" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="82a" sequence="4" unid="EDD32BC16EFA26DB85257B7B006B2D95">
-<created><datetime dst="true">20130530T153040,21-04</datetime></created>
-<modified><datetime dst="true">20130530T153041,79-04</datetime></modified>
-<revised><datetime dst="true">20130530T153041,78-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130530T153041,79-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130530T153040,22-04</datetime></addedtofile></noteinfo>
+<noteinfo noteid="852" sequence="4" unid="39FB065F73544BF285257B7C000EEFD4">
+<created><datetime dst="true">20130530T224309,00-04</datetime></created>
+<modified><datetime dst="true">20130530T224310,36-04</datetime></modified>
+<revised><datetime dst="true">20130530T224310,35-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130530T224310,36-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130530T224309,01-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name="$TITLE"><text>BBActivateTeam.xsp</text></item>
