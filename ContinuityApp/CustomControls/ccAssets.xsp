@@ -66,7 +66,7 @@
 				
 				<td>
 					<xp:link escape="true" text="#{row.images}" id="link1" target="_blank">
-					<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value></xp:link>
+					<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photos")}]]></xp:this.value></xp:link>
 				</td>
 		
 			</xp:tr>

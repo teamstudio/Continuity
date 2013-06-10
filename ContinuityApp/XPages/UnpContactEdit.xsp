@@ -34,7 +34,7 @@ var photoUrl = thumb.length>0 ? "/0/" + param.get("documentId") + "/$file/" + th
              photo.length>0 ? "/0/" + unid + "/$file/" + photo :
              "noProfile.gif";
 									
-									(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + photoUrl;}]]></xp:this.url>
+									applicationScope.get("thisDbUrl") + photoUrl;}]]></xp:this.url>
 								</xp:image>
 							</div>
 							

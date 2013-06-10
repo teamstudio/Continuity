@@ -3,8 +3,7 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	
 	<xp:this.data>
-		<xp:dominoView var="view2" viewName="vwContactsCatByLastname">
-		</xp:dominoView>
+		<xp:dominoView var="view2" viewName="vwContactsCatByLastname"></xp:dominoView>
 	</xp:this.data>
 
 	<ul id="summaryList">
@@ -34,13 +33,15 @@
 
 							<xp:image id="image3" styleClass="roundedBorders">
 								<xp:this.rendered><![CDATA[#{javascript:var photo = row.getColumnValue("photo");
+								var hasPhoto = (photo.length>0);
+								
 								viewScope.put("photo", photo);
-								return photo.length>0}]]></xp:this.rendered>
-								<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + viewScope.get("photo");}]]></xp:this.url>
+								viewScope.put("hasPhoto", hasPhoto);
+								return hasPhoto}]]></xp:this.rendered>
+								<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + viewScope.get("photo");}]]></xp:this.url>
 							</xp:image>
-							<xp:image id="image2" styleClass="roundedBorders">
-								<xp:this.rendered><![CDATA[#{javascript:viewScope.get("photo").length==0}]]></xp:this.rendered>
-								<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/noProfile.gif";}]]></xp:this.url>
+							<xp:image id="image2" styleClass="roundedBorders" rendered="#{javascript:!viewScope.hasPhoto}">
+								<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/noProfile.gif";}]]></xp:this.url>
 							</xp:image>
 						</td>
 

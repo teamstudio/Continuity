@@ -80,10 +80,12 @@ public class Contact implements Serializable {
 					status = Contact.STATUS_NEW;		//set default status: not activated/ new
 				}
 				
+				Document doc = xspDocContact.getDocument(true);
+				
+				xspDocContact.replaceItemValue("id", "c" + doc.getUniversalID().toLowerCase() );
 				xspDocContact.replaceItemValue("status", status);
 				
 				//set authors
-				Document doc = xspDocContact.getDocument(true);
 				Utils.setAuthors(doc, Authorizations.ROLE_EDITOR);
 
 			} else {
@@ -202,6 +204,8 @@ public class Contact implements Serializable {
 				docContact.replaceItemValue("status", status);
 				docContact.replaceItemValue("identifier", importIdentifier);
 				docContact.replaceItemValue("contactType", Contact.DEFAULT_CONTACT_TYPE);
+				
+				docContact.replaceItemValue("id", "c" + docContact.getUniversalID().toLowerCase() );
 				
 				//default authors
 				Utils.setAuthors(docContact, Authorizations.ROLE_EDITOR);

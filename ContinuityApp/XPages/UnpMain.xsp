@@ -105,11 +105,22 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 						</a>
 					</li>
 					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpCallTree_1.xsp?clearFrom=1';">
+						<xp:link value="#" escape="true" id="link1" text="">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"$.blockUI();window.location.href='" + applicationScope.callTreePrefix + "_1.xsp?clearFrom=1'; return false;"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span class="chicletimg imgCalltree"></span>
+							<span>Call tree</span>
+
+						</xp:link>
+
+						<!--<a href="#" onclick="$.blockUI();window.location.href='UnpCallTree_1.xsp?clearFrom=1';">
 							<span class="chicletimg imgCalltree"></span>
 							<span>Call tree</span>
 						</a>
-					</li>
+					--></li>
 					
 					<!-- Incidents -->
 					<li>

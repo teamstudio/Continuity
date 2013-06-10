@@ -102,6 +102,7 @@ function init() {
 				sessionScope.put("email", docUser.getItemValueString("email"));
 				
 				sessionScope.put("profileUnid", docUser.getUniversalID());
+				sessionScope.put("profileId", docUser.getItemValueString("id") );
 
 				//get user's bcm role
 				sessionScope.put("roleId", docUser.getItemValueString("roleId"));
@@ -271,7 +272,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			applicationScope.put("server", ( isUnplugged() ? "" : database.getServer() ));
 			applicationScope.put("thisDbPath", database.getFilePath() );
-			applicationScope.put("thisDbUrl", "/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") );
+			applicationScope.put("thisDbUrl", ( isUnplugged() ? "" : "/.ibmxspres/domino") + "/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") );
 			
 			applicationScope.put("toolbarConfig", "[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],  ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText'], ['NumberedList','BulletedList','Blockquote'], ['Link', 'Unlink']]");
 			
@@ -285,6 +286,18 @@ function loadAppConfig( forceUpdate:boolean ) {
 			} else {
 				
 				applicationScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));
+				
+				var callTreeType = docSettings.getItemValueString("callTreeType")
+				if (callTreeType == "" ) {
+					callTreeType = "role";
+				}
+				applicationScope.put("callTreeType", callTreeType);
+				
+				if (callTreeType == "role") {
+					applicationScope.put("callTreePrefix", "UnpCallTree");	
+				} else {
+					applicationScope.put("callTreePrefix", "UnpCallTreeCustom");	
+				}
 				
 				//labels
 				var labels = getMap();
@@ -405,6 +418,137 @@ function getCallTreeOrder() {
 	}
 		
 }
+
+//retrieve a JavaScript object representing the call tree for the specified org unit
+function getCallTree( orgUnitId:String ) {
+	
+	try {
+	
+		dBar.debug("get call tree for org unit: " + orgUnitId);
+		
+		//get root user
+		var dcRoot = database.search("Form=\"fContact\" & callTreeRoot=\"true\" & orgUnitId=\"" + orgUnitId + "\"");
+		
+		dBar.debug("found " + dcRoot.getCount() + " root user(s) for org unit " + orgUnitId);
+		
+		var docContact  = dcRoot.getFirstDocument();
+		
+		if (null != docContact) {		//no call tree/ root user
+			
+			var rootUserId = docContact.getItemValueString("id");
+			var vwCallTree:NotesView = database.getView("vwAllById");
+			return getCallTreeEntry( rootUserId, 1, vwCallTree );
+			
+		} else {
+			
+			return null;
+		}
+	} catch (e) {
+		
+		dBar.error(e);
+		return null;
+	}
+	
+}
+
+function getCallTreeDetails( toCall, level, vwCallTree:NotesView ) {
+
+	if (typeof toCall == 'string') { 
+	
+		if (toCall.length==0) {
+			return [];
+		}
+		toCall = [toCall];
+		
+	}
+	
+	var result = [];
+	
+	for (var i=0; i<toCall.length; i++) {
+		result.push( getCallTreeEntry( toCall[i], level, vwCallTree ));
+	}
+	
+	return result;
+}
+
+//retrieve an entry for the call tree for a specific user
+function getCallTreeEntry( contactId, level, vwCallTree:NotesView ) {
+	
+	var entry = {};
+
+	//dBar.debug("get for " + contactId + ", level: " + level);
+	
+	var doc = vwCallTree.getDocumentByKey(contactId, true);
+	
+	if (doc == null) {  //end of call tree
+		
+		//dBar.debug("no result");
+		return null;	
+	}
+
+	var userName = doc.getItemValueString("userName");
+	var name = doc.getItemValueString("name");
+	var calls = doc.getItemValue("callTreeContacts");
+	
+	var phoneTypePrimary = doc.getItemValueString("phoneTypePrimary");
+	if (phoneTypePrimary.length==0) {
+		phoneTypePrimary="mobile";
+	}
+	
+	var phoneNumber = doc.getItemValueString("phoneMobile");
+	
+	if (phoneTypePrimary == "work") {
+		phoneNumber = doc.getItemValueString("phoneWork");
+	} else if (phoneTypePrimary == "home") {
+		phoneNumber = doc.getItemValueString("phoneHome");
+	}
+	
+	var newLevel = level + 1;
+	
+	var entry = {
+		"unid" : doc.getUniversalID(),
+		"id" : contactId,
+		"level" : level,
+		"userName" : userName,
+		"name" : name, 
+		"phoneNumber" : phoneNumber,
+		"calls" : getCallTreeDetails(calls, newLevel, vwCallTree)
+	};
+
+
+	return entry;
+}
+
+//get the call trees root element
+function getCallTreeRootUser( orgUnitId:String ) {
+	
+	var root = sessionScope.get("callTreeRoot");
+	
+	if ( !sessionScope.containsKey("callTreeRoot") || root[orgUnitId] == null ) {
+
+		//get root contact for this OU from database
+		var vwRoot = database.getView("vwCallTreeRoot");
+		var veRoot = vwRoot.getEntryByKey( orgUnitId, true);
+
+		var rootUser = "";
+		
+		if (veRoot != null) {
+			rootUser = veRoot.getColumnValues().get(1);
+		}
+		
+		if (root == null) {
+			root = getMap();	
+		}
+		
+		root[orgUnitId] = rootUser;
+		
+		sessionScope.put("callTreeRoot", root );
+
+	}
+	
+	return root[orgUnitId];
+}
+
 
 //retrieve a list of bc roles, list is cached in the appScope
 function getRoles() {
@@ -665,7 +809,7 @@ function getProfilePhotoUrl( userName:String, forceUpdate:boolean ) {
 	
 		var profilePhotos = applicationScope.get("profilePhotos") || getMap();
 		
-		var profilePhotoBaseUrl:String = ( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl");
+		var profilePhotoBaseUrl:String = applicationScope.get("thisDbUrl");
 		var profilePhotoUrl:String = profilePhotoBaseUrl + "/noProfile.gif";
 		
 		if (!profilePhotos[userName] || forceUpdate) {
@@ -1553,6 +1697,37 @@ function getFileImage( type:String ) {
 	} else {
 		return "";
 	}
+	
+}
+
+/*
+ * retrieve the name of a document based on it's id
+ */
+function getName( id:String ) {
+	
+	var names = applicationScope.names || getMap();
+	
+	var name = names[id];
+	
+	if (name == null) {
+		
+		var vw = database.getView("vwAllById");
+		var ve = vw.getEntryByKey(id, true);
+		
+		if (ve != null) {
+			name = ve.getColumnValues().get(1);
+		} else {
+			name = "?";
+		}
+		
+		names[id] = name;
+		applicationScope.put("names", names);
+	
+	} else {
+		//return from cache
+	}
+	
+	return name;
 	
 }
 

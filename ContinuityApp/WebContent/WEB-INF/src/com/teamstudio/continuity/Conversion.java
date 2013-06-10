@@ -150,8 +150,8 @@ public class Conversion {
 							updated = true;
 						}
 					}
-					
-					
+
+
 				} else if (form.equals("fResponsibility")) {
 
 					// check if field id exists
@@ -165,6 +165,14 @@ public class Conversion {
 					// check if field id exists
 					if (!doc.hasItem("id")) {
 						doc.replaceItemValue("id", "i" + doc.getUniversalID().toLowerCase());
+						updated = true;
+					}
+					
+				} else if (form.equals("fContact")) {		//add/ set id
+					
+					// check if field id exists
+					if (!doc.hasItem("id")) {
+						doc.replaceItemValue("id", "c" + doc.getUniversalID().toLowerCase());
 						updated = true;
 					}
 

@@ -17,7 +17,7 @@
 			<li class="categoryRowFixed">
 			
 				<!-- file image & link -->	
-				<xp:image id="image2" styleClass="pull-right" style="margin-top: -3px; margin-right: -4px">
+				<xp:image id="image2" styleClass="pull-right link" style="margin-top: -3px; margin-right: -4px">
 					<xp:this.rendered><![CDATA[#{javascript:var id = plan.fileId
 					viewScope.put("fileId", id); 
 					var fileInfo = getFileInfo( id );
@@ -32,7 +32,7 @@
 					</xp:this.attrs>
 					
 					<xp:this.url><![CDATA[#{javascript:var file = getFileInfo( viewScope.fileId );
-	( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
+	applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
 				</xp:image>
 
 				<xp:text escape="false" id="t">

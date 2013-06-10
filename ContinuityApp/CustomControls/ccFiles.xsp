@@ -14,7 +14,7 @@
 			<xp:td>
 				<xp:image id="image1"
 					style="margin-right: 4px; height: 16px; width: 16px;">
-					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + getFileImage( compositeData.doc.getItemValueString("fileType") )}]]></xp:this.url>
+					<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/" + getFileImage( compositeData.doc.getItemValueString("fileType") )}]]></xp:this.url>
 				</xp:image>
 			</xp:td>
 
@@ -22,7 +22,7 @@
 			
 				<xp:link escape="true" text="#{javascript:att.getName()}" id="link2" target="_blank">
 	
-				<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + compositeData.doc.getDocument().getUniversalID() + "/$file/" + java.net.URLEncoder.encode (att.getName(), "utf-8")}]]></xp:this.value></xp:link>
+				<xp:this.value><![CDATA[#{javascript:@Right(applicationScope.get("thisDbUrl"), "/.ibmxspres/domino") + "/0/" + compositeData.doc.getDocument().getUniversalID() + "/$file/" + java.net.URLEncoder.encode (att.getName(), "utf-8")}]]></xp:this.value></xp:link>
 			</td>
 		
 			<td>
