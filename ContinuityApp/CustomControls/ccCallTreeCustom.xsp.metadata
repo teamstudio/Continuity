@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="26aa" sequence="120" unid="00677B4B18BD51FAC1257B840076575E">
+<created><datetime dst="true">20130608T233236,14+02</datetime></created>
+<modified><datetime dst="true">20130610T091111,18+02</datetime></modified>
+<revised><datetime dst="true">20130610T091111,17+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130610T091111,18+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130608T233236,15+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE"><text>ccCallTreeCustom.xsp</text></item>
+
+
+
+
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>ccCallTreeCustom.xsp</text></item>
+
+
+</note>

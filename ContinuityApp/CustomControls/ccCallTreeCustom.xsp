@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
+		if (!sessionScope.containsKey("callTreeOrgUnitId") ) {
+	sessionScope.put("callTreeOrgUnitId", sessionScope.orgUnitId);
+}
+	
+viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+} catch (e) {
+	dBar.error(e);
+}}]]></xp:this.beforePageLoad>
+
+	<xp:div id="callTree">
+
+	<div style="margin-bottom:10px; overflow:auto; width:100%">
+		<div style="float: left; width: 250px;">
+			<strong>Organisation unit:</strong>
+			&#160;
+			<xp:comboBox id="comboBox1" value="#{sessionScope.callTreeOrgUnitId}"
+				defaultValue="#{javascript:sessionScope.callTreeOrgUnitId}">
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:return applicationScope.get("orgUnitChoices");
+	}]]></xp:this.value>
+				</xp:selectItems>
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="callTree">
+					<xp:this.action><![CDATA[#{javascript:viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+	viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+		}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:comboBox>
+		</div>
+		
+		<xp:div style="float: left; width: 250px">
+				<xp:this.rendered><![CDATA[#{javascript://show only if a call tree has been started
+		viewScope.callTreeObj != null;}]]></xp:this.rendered>
+			(orientation:&#160;
+			<xp:link escape="true" text="horizontal" id="link2">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.callTreeOrientation=="vertical"}]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="callTree">
+					<xp:this.action><![CDATA[#{javascript:sessionScope.put("callTreeOrientation", "horizontal");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="vertical" id="link4">
+				<xp:this.rendered><![CDATA[#{javascript:!sessionScope.containsKey('callTreeOrientation') || sessionScope.callTreeOrientation=="horizontal"}]]></xp:this.rendered>
+ 	<xp:eventHandler event="onclick" submit="true"
+ 		refreshMode="partial" refreshId="callTree">
+ 		<xp:this.action><![CDATA[#{javascript:sessionScope.put("callTreeOrientation", "vertical");}]]></xp:this.action>
+ 			</xp:eventHandler></xp:link>)
+		</xp:div>
+		
+	</div>
+	
+	<xp:div>
+		<xp:this.rendered><![CDATA[#{javascript://show only if no call tree started yet
+		typeof callTreeObj == 'undefined' || callTreeObj == null;}]]></xp:this.rendered>
+
+		<xp:text escape="true" id="computedField1"
+			value="#{javascript:'Call tree has not been created yet for ' + applicationScope.orgUnits[sessionScope.callTreeOrgUnitId]}">
+		</xp:text>
+		<br />
+
+		<xp:button value="Start a call tree" id="link1" style="margin-top: 10px" rendered="#{javascript:!isEmpty(viewScope.contactOptions)}">
+
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="dlgChangeContacts"
+				>
+				<xp:this.action><![CDATA[#{javascript:viewScope.put("calledBy", null);
+				getComponent("dlgChangeContacts").show();}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		
+		<xp:text tagName="div" style="margin-top:10px" escape="true" id="computedField2" rendered="#{javascript:isEmpty(viewScope.contactOptions)}">
+			<xp:this.value><![CDATA[#{javascript:"(cannot start a call tree: no contacts found)"}]]></xp:this.value>
+		</xp:text>
+
+	</xp:div>
+	
+	<xp:div styleClass="#{javascript:(sessionScope.callTreeOrientation=='vertical' ? 'callTreeVert' : 'callTree')}"
+		style="#{javascript:(sessionScope.callTreeOrientation=='vertical' ? '' : 'width: 1500px')}"  
+		loaded="${javascript:viewScope.callTreeObj != null}">
+		<ul>
+			<xc:ccCallTreeEntry entry="#{viewScope.callTreeObj}" />
+		</ul>
+	</xp:div>
+
+
+	<xe:dialog id="dlgChangeContacts"
+		title="Add contact to call tree">
+
+		<xp:panel style="padding: 15px;">
+
+			<div style="margin-bottom:15px">
+				Choose a contact to add to the call tree.
+			</div>
+
+			<xp:div style="margin-bottom:10px;">
+			
+				<xp:comboBox id="cbCalledBy" style="white-space:nowrap"
+					rendered="#{javascript:viewScope.calledBy == null}">
+					<xp:selectItem itemLabel="- select a contact -"
+						itemValue="">
+					</xp:selectItem>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:viewScope.get('contactOptions');}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:comboBox>
+
+				<xp:text value="#{viewScope.calledBy.name}"
+					style="font-weight: bold"
+					rendered="#{javascript:viewScope.calledBy != null}" />
+
+				<span style="padding: 0 15px;">calls</span>
+
+				<xp:comboBox id="cbCalls" style="white-space:nowrap">
+					<xp:selectItem itemLabel="- select a contact -"
+						itemValue="">
+					</xp:selectItem>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:viewScope.get('contactOptions');}]]></xp:this.value>
+					</xp:selectItems>
+				</xp:comboBox>
+
+				<div style="margin: 5px 0">
+					<xp:message id="errorMsg" for="dlgChangeContacts" style="margin:0; padding:0;"></xp:message>
+				</div>
+			
+
+			</xp:div>
+
+
+			<!--
+				
+				<div style="margin-bottom:15px">
+				
+				<xp:checkBox id="cbAlternate" checkedValue="yes"
+				uncheckedValue="no">
+				<xp:this.text><![CDATA[#{javascript:"This contact is an alternate for the " + roleRow.getColumnValue("name") + " role within " + ouRow.getColumnValue("name") }]]></xp:this.text>
+				</xp:checkBox>
+				
+				</div>
+				
+			-->
+		</xp:panel>
+
+		<xe:dialogButtonBar id="dialogButtonBar1">
+
+			<xp:button value="Ok" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:try {
+					
+					var isRoot = "false";
+					
+					if (viewScope.calledBy == null) {
+						isRoot = "true";
+					} else if (viewScope.calledBy.level == 1) {
+						isRoot = "true";
+					}
+
+//determine caller and callee
+	var calledBy = (viewScope.calledBy != null ? viewScope.calledBy.unid : getComponent("cbCalledBy").getValue() );
+	var calls = getComponent("cbCalls").getValue();
+	
+	dBar.debug("user "  + calledBy + " calls " + calls + ", root? " + isRoot);
+	
+	var id = getComponent("dlgChangeContacts").getClientId(facesContext);
+	
+	viewScope.errorCode = "1";
+	
+	if (calledBy == "" || calls == "" ) {
+	
+		//no caller or callee: abort with error
+		dBar.debug("error 1");
+		var msg = "Please select 2 contacts";
+		facesContext.addMessage( id, 
+		new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg,msg ) );
+		return;
+		
+	} else if (calledBy == calls ) { 
+	
+		//caller is the same as the callee: abort with error
+		dBar.debug("error 2");
+		var msg = "Please select 2 different contacts";
+		facesContext.addMessage( id, 
+			new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg, msg ) );
+		return;
+		
+	}
+	
+	//get contact that calls and add the user he/she calls
+	var docCalledBy = database.getDocumentByUNID(calledBy );
+	var calledById = docCalledBy.getItemValueString("id");
+	
+	var docCalls = database.getDocumentByUNID( calls) ;
+	var callsId = docCalls.getItemValueString("id");
+	
+	//check if this user isn't somewhere in this call tree yet
+	var dc = database.search("Form=\"fContact\" & (@IsMember(\"" + callsId + "\"; callTreeContacts) | @IsMember(\"" + callsId + "\"; callTreeCalledBy))" );
+	
+	if (dc.getCount()>0) {
+	
+		dBar.debug("error 3");
+		var msg = docCalls.getItemValueString("name") + " is already in this call tree. A contact cannot be listed twice.";
+		facesContext.addMessage( id, 
+			new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg, msg) );
+		return;
+	}
+	
+	var currentContacts = docCalledBy.getItemValue("callTreeContacts");
+	
+	if( currentContacts.size()==1 && currentContacts.get(0)=="") {
+	
+		docCalledBy.replaceItemValue("callTreeContacts", callsId);
+		docCalledBy.replaceItemValue("callTreeRoot", isRoot);
+		docCalledBy.save();
+		
+	} else if ( currentContacts.size()==0 || !currentContacts.contains(calls) ) {
+	
+		currentContacts.add(callsId);
+		docCalledBy.replaceItemValue("callTreeContacts", currentContacts);
+		docCalledBy.replaceItemValue("callTreeRoot", isRoot);
+		docCalledBy.save();
+	
+	}
+	
+	//get the 'called' contact and add the id of the user that calls him
+	docCalls.replaceItemValue("callTreeCalledBy", calledById );
+	docCalls.save();
+	
+	//update call tree in the viewScope object
+	viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+	
+getComponent("dlgChangeContacts").hide();
+
+} catch (e) {
+	dBar.error(e);
+}
+}]]></xp:this.action>
+
+					<xp:this.onComplete><![CDATA[//refresh call tree if no errors found
+					if (dojo.byId("#{id:errorMsg}") == null) {
+						XSP.showContent("#{id:dynamicContent1}","callTree");
+					}]]></xp:this.onComplete>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:link escape="true" text="Cancel" id="link3">
+				<xp:eventHandler event="onclick" submit="false"
+					immediate="true">
+					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgChangeContacts}")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+
+		</xe:dialogButtonBar>
+	</xe:dialog>
+
+	</xp:div>
+	
+</xp:view>
