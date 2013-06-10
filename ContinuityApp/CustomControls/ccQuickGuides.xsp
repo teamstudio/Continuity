@@ -41,7 +41,7 @@
 				
 					<xp:image id="image1"
 						style="margin-right: 5px; height: 16px; width: 16px;">
-						<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + getFileImage( rowEntry.getColumnValue("fileType") )}]]></xp:this.url>
+						<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/" + getFileImage( rowEntry.getColumnValue("fileType") )}]]></xp:this.url>
 					</xp:image>
 				
 					<xp:link escape="true" text="#{rowEntry.name}"
@@ -83,7 +83,7 @@
 						<xp:link style="padding-right: 20px"
 							escape="true" text="#{rowEntry.fileName}" id="link2"
 							target="_blank">
-							<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + rowEntry.getUniversalID() + "/$file/" + java.net.URLEncoder.encode (rowEntry.getColumnValue("fileName"), "utf-8")}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:@Right(applicationScope.get("thisDbUrl"), "/.ibmxspres/domino") + "/0/" + rowEntry.getUniversalID() + "/$file/" + java.net.URLEncoder.encode (rowEntry.getColumnValue("fileName"), "utf-8")}]]></xp:this.value>
 						</xp:link>
 
 						<xp:text escape="true" id="computedField1" value="#{rowEntry.fileSize}">

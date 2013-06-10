@@ -31,7 +31,7 @@ if ( !isEmpty(fileId) ) {
 					<div style="float:left; width: 44px">
 
 						<xp:image id="image1">
-							<xp:this.url><![CDATA[#{javascript:( isUnplugged() ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/" + getFileImage( docQuickGuide.getItemValueString("fileType") )}]]></xp:this.url>
+							<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/" + getFileImage( docQuickGuide.getItemValueString("fileType") )}]]></xp:this.url>
 						</xp:image>
 
 					</div>

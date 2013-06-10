@@ -5,8 +5,9 @@
 	
 	<xp:this.resources>
 		<xp:dojoModule name="dijit.form.ComboBox"></xp:dojoModule>
+		<xp:dojoModule name="dojo.NodeList-traverse"></xp:dojoModule>
 	</xp:this.resources>
-	
+
 	<xp:this.beforePageLoad><![CDATA[#{javascript:currentUserBean.updateMenuOptionCounts()}]]></xp:this.beforePageLoad>
 	<xc:layout>
 
@@ -63,9 +64,9 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("rolesList");}]]></xe:this.selected>
 									<xe:this.label><![CDATA[#{javascript:"Responsibilities (" + currentUserBean.numResponsibilities + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
-								<xe:basicLeafNode label="Contact matrix"
-									submitValue="bcmRoleMatrix" style="margin-left:20px" loaded="${sessionScope.isEditor}">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("bcmRoleMatrix");}]]></xe:this.selected>
+								<xe:basicLeafNode label="Call tree"
+									submitValue="callTree" loaded="${sessionScope.isEditor}">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("callTree");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode
@@ -245,10 +246,8 @@ getComponent("dynamicContent1").show(c);
 							<xc:bcmRole dynContentId="dynamicContent1"></xc:bcmRole>
 						</xp:panel>
 						
-						<xc:bcmRoleMatrix id="bcmRoleMatrix"
-							xp:key="bcmRoleMatrix">
-						</xc:bcmRoleMatrix>
-
+						<xc:bcmRoleMatrix xp:key="callTree" />
+						
 						<xc:ccResponsibility id="responsibility"
 							xp:key="responsibility">
 						</xc:ccResponsibility>
@@ -274,6 +273,8 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccAsset xp:key="riskEntity"></xc:ccAsset>
 						<xc:ccTerms xp:key="terms"></xc:ccTerms>
 						<xc:ccTaskCategories xp:key="taskCats" id="taskCats"></xc:ccTaskCategories>
+						
+						
 						
 					</xp:this.facets>
 				</xe:dynamicContent>

@@ -65,7 +65,7 @@
 			<xp:div>
 				<xp:image id="image1"
 					style="width: 100px; height: 100px;">
-					<xp:this.url><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getItemValueString("photoThumbnailName");}]]></xp:this.url>
+					<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getItemValueString("photoThumbnailName");}]]></xp:this.url>
 					<xp:this.rendered><![CDATA[#{javascript:docContact.getItemValueString("photoThumbnailName").length>0}]]></xp:this.rendered>
 				</xp:image>
 			</xp:div>

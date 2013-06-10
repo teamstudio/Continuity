@@ -37,11 +37,11 @@
 								<xp:this.rendered><![CDATA[#{javascript:var photo = row.getColumnValue("photo");
 								viewScope.put("photo", photo);
 								return photo.length>0}]]></xp:this.rendered>
-								<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + viewScope.get("photo");}]]></xp:this.url>
+								<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + viewScope.get("photo");}]]></xp:this.url>
 							</xp:image>
 							<xp:image id="image2" styleClass="roundedBorders">
 								<xp:this.rendered><![CDATA[#{javascript:viewScope.get("photo").length==0}]]></xp:this.rendered>
-								<xp:this.url><![CDATA[#{javascript:(applicationScope.get("isUnplugged") ? "" : "/.ibmxspres/domino") + applicationScope.get("thisDbUrl") + "/noProfile.gif";}]]></xp:this.url>
+								<xp:this.url><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/noProfile.gif";}]]></xp:this.url>
 							</xp:image>
 						</td>
 

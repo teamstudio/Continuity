@@ -69,13 +69,13 @@
 					<xp:link escape="true" id="link1" text="#{row.photoFileName}">
 						<xp:this.rendered><![CDATA[#{javascript:var photo = row.getColumnValue("photoFileName");
 							photo != null && photo.length>0}]]></xp:this.rendered>
-						<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino" + applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photoFileName")}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + row.getColumnValue("photoFileName")}]]></xp:this.value>
 
 						<xp:this.attrs>
 							<xp:attr name="data-dojo-type" value="dojox.image.Lightbox"></xp:attr>
 							<xp:attr name="data-dojo-props">
 								<xp:this.value><![CDATA[#{javascript:var fileName = row.getColumnValue("photoFileName").replace("'", "\\'");
-									var href = applicationScope.get("thisDbUrl") + "/" + row.getUniversalID() + "/$file/" + fileName;
+									var href = @Right(applicationScope.get("thisDbUrl"), "/.ibmxspres/domino") + "/" + row.getUniversalID() + "/$file/" + fileName;
 "title:'" + fileName + "',href:'" + href + "'"}]]></xp:this.value>
 							</xp:attr>
 						</xp:this.attrs>

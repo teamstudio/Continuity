@@ -2180,3 +2180,15 @@ span.high {
 	background: #636363;
 	box-shadow: inherit;
 }
+img.link {
+	border: 1px solid white;
+	height: 26px;
+	width: 26px;
+	padding: 2px 15px;
+	border-radius: 5px;
+	webkit-border-radius: 5px;
+	moz-border-radius: 5px;
+}
+img.dark {
+	border: 1px solid #888;
+}

@@ -3,9 +3,12 @@ package com.teamstudio.continuity;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
 
 import lotus.domino.Database;
+import lotus.domino.NotesException;
 import lotus.domino.Session;
 import lotus.domino.View;
 import lotus.domino.Document;
@@ -16,6 +19,9 @@ public class Configuration implements Serializable {
 	
 	private static final String BEAN_NAME = "configBean";
 	
+	public static String CALLTREE_TYPE_ROLE = "role";
+	public static String CALLTREE_TYPE_CUSTOM = "custom";
+	
 	private String settingsUnid;
 	private String organisationName;
 	private String organisationId;
@@ -25,7 +31,10 @@ public class Configuration implements Serializable {
 	private String senderEmail;
 	private String senderName;
 	
-	private static String DATA_VERSION = "102";
+	private String callTreeType;
+	
+	private static String APP_VERSION = "v1.13";		//current application version
+	private static String DATA_VERSION = "103";			//data version (used for checking if a conversion is needed)
 	
 	private String serverName;
 	
@@ -37,7 +46,7 @@ public class Configuration implements Serializable {
 	}
 	
 	public String getAppVersion() {
-		return "v1.12";		//current application version
+		return APP_VERSION;		
 	}
 	
 	public static Configuration get() {
@@ -90,6 +99,12 @@ public class Configuration implements Serializable {
 				directoryDbPath = docSettings.getItemValueString("directoryDbPath");
 				unpluggedDbPath = docSettings.getItemValueString("unpluggedDbPath");
 				
+				callTreeType = docSettings.getItemValueString("callTreeType");
+				
+				if (callTreeType.length()==0) {
+					callTreeType = CALLTREE_TYPE_ROLE;		//default: role based
+				}
+				
 				senderEmail = docSettings.getItemValueString("senderEmail");
 				senderName = docSettings.getItemValueString("senderName");
 				
@@ -131,6 +146,37 @@ public class Configuration implements Serializable {
 			
 		}
 	
+	}
+	
+	public String getCallTreeType() {
+		return callTreeType;
+	}
+	
+	public void setCallTreeCustom() {
+		this.callTreeType = CALLTREE_TYPE_CUSTOM;
+		
+		try {
+			Document docSettings = ExtLibUtil.getCurrentDatabase().getDocumentByUNID(settingsUnid);
+			docSettings.replaceItemValue("callTreeType", callTreeType);
+			docSettings.save();
+			docSettings.recycle();
+		} catch (NotesException e) {
+			Logger.error(e);
+		}
+	
+	}
+	public void setCallTreeRoleBased() {
+	this.callTreeType = CALLTREE_TYPE_ROLE;
+		
+		try {
+			Document docSettings = ExtLibUtil.getCurrentDatabase().getDocumentByUNID(settingsUnid);
+			docSettings.replaceItemValue("callTreeType", callTreeType);
+			docSettings.save();
+			docSettings.recycle();
+		} catch (NotesException e) {
+			Logger.error(e);
+		}
+		
 	}
 	
 	public String getLabel(String key) {

@@ -63,7 +63,7 @@
 					</xc:menuItem>
 					
 					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"
-						page="UnpCallTree.xsp?clearFrom=1" icon="calltree-blue.png">
+						icon="calltree-blue.png" page="#{javascript:applicationScope.get('callTreePrefix') + '.xsp?clearFrom=1'}">
 					</xc:menuItem>
 
 					<xc:menuItem itemId="incidents" disabled="false" label="#{javascript:applicationScope.labels['incidents']}"
