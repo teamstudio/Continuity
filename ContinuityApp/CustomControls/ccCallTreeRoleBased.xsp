@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xp:dominoView var="vwRoles">
+			<xp:this.viewName><![CDATA[#{javascript:"vwRoles"}]]></xp:this.viewName>
+		</xp:dominoView>
+		<xp:dominoView var="vwOrgUnits">
+			<xp:this.viewName><![CDATA[#{javascript:"vwOrgUnits"}]]></xp:this.viewName>
+		</xp:dominoView>
+		<xp:dominoView var="vwContactsByRole">
+			<xp:this.viewName><![CDATA[#{javascript:"vwContactsByRole"}]]></xp:this.viewName>
+		</xp:dominoView>
+	</xp:this.data>
+
+	<!-- table header (x-axis): all rows -->
+	<xp:div id="bcmRoleMatrix">
+	
+		<table class="grid">
+			<thead>
+				<tr>
+					<th>&#160;</th>
+					<!-- show all configured bc roles -->
+					<xp:repeat disableOutputTag="true" id="repeat4" rows="100" value="#{vwRoles}" var="roleRow">
+						<th style="width:200px; text-align:center">
+							<xp:text escape="false" disableTheme="true" value="#{roleRow.name}"></xp:text>
+						</th>
+					</xp:repeat>
+				</tr>
+			</thead>
+			<tbody>
+	
+				<!-- repeat over OU's -->
+				<xp:repeat id="repeatOU" rows="100" value="#{vwOrgUnits}" var="ouRow" disableOutputTag="true">
+					<tr>
+						<td class="label noWrap">
+							<xp:text escape="false" disableTheme="true" value="#{ouRow.name}"></xp:text>
+						</td>
+
+						<!-- column for every bc role -->	
+						<xp:repeat disableTheme="true" id="repeatRole" rows="100" value="#{vwRoles}"	var="roleRow">
+	
+							<td>
+	
+								<!-- show all users that have this role in this OU -->
+								<xp:repeat id="repeat3" rows="100" var="userRow">
+									<xp:this.value><![CDATA[#{javascript:var keys = new java.util.Vector();
+	keys.add( ouRow.getColumnValue("id") + "-" + roleRow.getColumnValue("id"));	
+	vwContactsByRole.getAllEntriesByKey( keys, true);}]]></xp:this.value>
+	
+									<div style="clear:both">
+	
+										<div style="float:right">
+											<xp:link escape="true" text="x" id="link2">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="partial" refreshId="bcmRoleMatrix">
+												<xp:this.action><![CDATA[#{javascript://clear bc role for this user
+												var docContact = database.getDocumentByUNID( userRow.getUniversalID() );		
+		docContact.replaceItemValue("roleId", "none");
+		docContact.replaceItemValue("roleName", "");
+		docContact.save();
+		
+		vwContactsByRole.refresh();	
+		}]]></xp:this.action>
+											</xp:eventHandler></xp:link>
+										</div>
+										<div>
+											<xp:text escape="false" disableTheme="true" value="#{javascript:userRow.getColumnValues().get(1)}" />
+											<i><xp:text escape="false" disableTheme="true" value=" (alternate)" rendered="#{javascript:'yes'.equals(userRow.getColumnValues().get(4))}" /></i>
+										</div>
+									</div>
+									
+								</xp:repeat>
+								
+								<div style="clear:both;margin-top:3px;">
+	
+									<xp:link escape="true" text="add contact" styleClass="lotusTiny" id="link1">
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" refreshId="dlgChangeContacts">
+											<xp:this.action><![CDATA[#{javascript:getComponent("dlgChangeContacts").show();}]]></xp:this.action>
+										</xp:eventHandler></xp:link>
+								</div>
+	
+								<xe:dialog id="dlgChangeContacts" title="Add role to contact">
+									
+									<xp:panel style="padding: 15px;">
+									
+										<div style="margin-bottom:15px">
+											Choose a contact from the&#160;<strong>"
+											<xp:text escape="false" disableTheme="true" value="#{ouRow.name}" />
+											"</strong>&#160;organisation unit and click "Ok" to add the&#160;
+											<strong><xp:text escape="false" disableTheme="true" value="#{roleRow.name}" /></strong>&#160;role.
+										</div>
+										
+										<div style="margin-bottom:15px;">
+		
+											<xp:comboBox id="comboBoxSelectedContact"
+												style="white-space:nowrap">
+												<xp:selectItem itemLabel="- select a contact -"
+													itemValue="">
+												</xp:selectItem>
+												<xp:selectItems>
+													<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName() , "vwBCUsersByOrgUnit", ouRow.getColumnValue("id"), 2);}]]></xp:this.value>
+												</xp:selectItems>
+											</xp:comboBox>
+
+										</div>
+										
+										<div style="margin-bottom:15px">
+											
+											<xp:checkBox id="cbAlternate" checkedValue="yes"
+												uncheckedValue="no">
+												<xp:this.text><![CDATA[#{javascript:"This contact is an alternate for the " + roleRow.getColumnValue("name") + " role within " + ouRow.getColumnValue("name") }]]></xp:this.text>
+											</xp:checkBox>
+
+										</div>
+										
+									</xp:panel>
+
+									<xe:dialogButtonBar id="dialogButtonBar1">
+
+										<xp:button value="Ok" id="button1">
+											<xp:eventHandler event="onclick" submit="true"
+												refreshMode="partial" refreshId="facetMiddle">
+												<xp:this.action><![CDATA[#{javascript:try {
+												//update contact with new role
+var userName = getComponent("comboBoxSelectedContact").getValue();
+var isAlternate = getComponent("cbAlternate").getValue();
+
+//dBar.debug("user: " + userName +", alternate?" + isAlternate);
+												
+var docContact = database.getView("vwContactsByUsername").getDocumentByKey( userName, true);
+
+var currentRoleId = docContact.getItemValueString("roleId");
+var newRoleId = roleRow.getColumnValue("id");
+var newRoleName = roleRow.getColumnValue("name");
+
+docContact.replaceItemValue("roleId", newRoleId);
+docContact.replaceItemValue("roleName", newRoleName);
+docContact.replaceItemValue("isAlternate", isAlternate);
+docContact.save();
+	
+getComponent("dlgChangeContacts").hide();
+} catch (e) {
+	dBar.error(e);
+}
+}]]></xp:this.action>
+											</xp:eventHandler></xp:button>
+
+										<xp:link escape="true" text="Cancel" id="link3">
+											<xp:eventHandler event="onclick" submit="false" immediate="true">
+												<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgChangeContacts}")]]></xp:this.script>
+											</xp:eventHandler></xp:link>
+										
+										</xe:dialogButtonBar>
+								</xe:dialog>
+	
+							</td>
+	
+						</xp:repeat>
+	
+					</tr>
+	
+				</xp:repeat>
+	
+			</tbody>
+		</table>
+	</xp:div>
+
+</xp:view>

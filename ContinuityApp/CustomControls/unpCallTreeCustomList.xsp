@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:this.data>
+		<xp:dominoView var="vwCallTree" viewName="vwCallTree">
+			<xp:this.categoryFilter><![CDATA[#{javascript:return sessionScope.get("orgUnitId") + "-" + viewScope.forUser}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript://check if the calltree entry level is set in the URL
+var forUser = context.getUrlParameter("for");
+viewScope.put("hasCallTree", true);
+
+//if it's not: start at the call tree root
+if ( isEmpty(forUser) ) {
+
+	//default starting point for the call tree: user who the current user (I) should call
+	var rootUser = getCallTreeRootUser( sessionScope.get("orgUnitId") );
+	
+	if (isEmpty(rootUser)) {
+		viewScope.put("hasCallTree", false);
+	}
+	forUser = rootUser;
+	
+
+}
+
+viewScope.put("isCallTreeRoot", (forUser == rootUser) );
+viewScope.put("parentUser", context.getUrlParameter("parent") );
+viewScope.put("forUser", forUser);
+viewScope.put("baseUrl", applicationScope.get("thisDbUrl") );}]]></xp:this.beforePageLoad>
+
+	<xp:div rendered="#{javascript:viewScope.hasCallTree}" styleClass="box mBottom" style="padding: 10px; height: 54px; width: 100%; overflow: auto;">
+		
+		<xp:panel style="float: left; width: 85px;" id="panel1" rendered="#{javascript:!viewScope.isCallTreeRoot}">
+			<xp:link id="link3" value="#" text="Up" style="width: 75px" styleClass="button">
+				<xp:this.attrs>
+					<xp:attr name="onclick">
+						<xp:this.value><![CDATA[#{javascript:"goBack(); return false;"}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+			</xp:link>
+		</xp:panel>
+	
+		<div style="margin:0 auto; width: 160px; text-align: center; padding-top:8px">
+			<xp:text escape="false" id="computedField3">
+				<xp:this.value><![CDATA[#{javascript:"<b>" + getName(viewScope.forUser) + "</b>" + (viewScope.isCallTreeRoot ? ' (top)' : '')}]]></xp:this.value>
+			</xp:text>
+
+		</div>
+		
+	</xp:div>
+	
+	<xp:div styleClass="box"
+		rendered="#{javascript:!viewScope.hasCallTree}">
+		<div class="content">
+			<xp:text value="#{javascript:'Call tree hasn\'t been created yet for ' + sessionScope.get('orgUnitName')}" />
+		</div>
+	</xp:div>
+	
+	<ul id="summaryList" >
+
+		<xp:repeat id="repeat3" rows="250" var="row" disableOutputTag="true"
+			value="#{vwCallTree}">
+
+			<xp:panel tagName="li">
+				<xp:this.attrs>
+					<xp:attr name="onClick">
+						<xp:this.value><![CDATA[#{javascript:var shouldCall = (row.getColumnValue("numToCall") > 0);
+						
+viewScope.put("shouldCall", shouldCall);
+
+if (shouldCall) {
+	return "openDocument('UnpCallTreeCustom.xsp?for=" + row.getColumnValue("id") + "&parent=" + viewScope.forUser + "&from=UnpCallTreeCustom.xsp" + "', 'contentwrapper');";
+} else {
+	return "";
+}}]]></xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+
+				<xp:this.styleClass><![CDATA[#{javascript:if (viewScope.rowcount == null){
+	viewScope.rowcount = 1;
+}else{
+	viewScope.rowcount = viewScope.rowcount + 1;
+}
+var out = "data-row condensed ";
+if (viewScope.rowcount == 1 && compositeData.title == null){
+	out += " first-row";
+}
+return out;}]]></xp:this.styleClass>
+
+				<xp:image url="/unp/right-arrow-circle.png" id="image1"
+					styleClass="multiLineIcon" rendered="#{javascript:viewScope.shouldCall}">
+				</xp:image>
+
+				<table class="reset">
+					<tr>
+						<td class="thumbnail">
+
+							<xp:image id="image3" styleClass="roundedBorders">
+								<xp:this.rendered><![CDATA[#{javascript:viewScope.put("photo", row.getColumnValue("photo") );
+								
+								var hasPhoto = (viewScope.get("photo").length > 0)
+								
+								viewScope.put("hasPhoto", hasPhoto );
+								
+								return hasPhoto}]]></xp:this.rendered>
+								<xp:this.url><![CDATA[#{javascript:viewScope.get("baseUrl") + "/0/" + row.getUniversalID() + "/$FILE/" + viewScope.get("photo");}]]></xp:this.url>
+							</xp:image>
+							
+							<!-- default image -->
+							<xp:image id="image2" styleClass="roundedBorders">
+								<xp:this.rendered><![CDATA[#{javascript:!viewScope.hasPhoto}]]></xp:this.rendered>
+								<xp:this.url><![CDATA[#{javascript:viewScope.get("baseUrl")  + "/noProfile.gif";}]]></xp:this.url>
+							</xp:image>
+
+						</td>
+
+						<td class="v-top">
+
+							<xp:label id="label2" styleClass="viewlistsummary"
+								value="#{row.name}">
+							</xp:label>
+
+							<!-- primary phone number: show as link for phone capable devices -->
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName == row.getColumnValue("userName") || !sessionScope.isPhoneSupported}]]></xp:this.rendered>
+								<!-- show user's own phone number never as link -->
+								<xp:text escape="true" id="computedField2"
+									value="#{row.$15}">
+								</xp:text>
+							</xp:panel>
+							
+							<!-- no phone number -->
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName != row.getColumnValue("userName") && isEmpty(row.getColumnValue("$15"))}]]></xp:this.rendered>
+								
+								No phone number found
+							</xp:panel>
+
+							<!--  button to call -->
+							<xp:panel disableOutputTag="true">
+								<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName != row.getColumnValue("userName") && sessionScope.isPhoneSupported && !isEmpty( row.getColumnValue("$15") )}]]></xp:this.rendered>
+								
+								<ul class="btnInline">
+									<li>
+										<xp:link escape="true" text="" id="link1"
+											value="#">
+											<xp:this.attrs>
+												<xp:attr name="onclick">
+													<xp:this.value><![CDATA[#{javascript:"window.location.href='tel:" + row.getColumnValue("$15") + "'; event.stopPropagation(); return false;"}]]></xp:this.value>
+												</xp:attr>
+											</xp:this.attrs>
+
+											<xp:text escape="true" id="computedField1"
+												style="width: 150px;" value="#{row.primaryPhoneNr}">
+											</xp:text>
+										</xp:link>
+									</li>
+								</ul>
+							</xp:panel>
+
+						</td>
+
+					</tr>
+				</table>
+
+			</xp:panel>
+
+		</xp:repeat>
+
+	</ul>
+
+</xp:view>

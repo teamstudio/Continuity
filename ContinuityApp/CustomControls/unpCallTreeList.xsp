@@ -173,7 +173,8 @@ return out;}]]></xp:this.styleClass>
 
 										<!-- primary phone number: show as link for phone capable devices -->
 										<xp:panel>
-											<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName != row.getColumnValue("userName") && !sessionScope.isPhoneSupported}]]></xp:this.rendered>
+											<!-- show user's own phone number never as link -->
+											<xp:this.rendered><![CDATA[#{javascript:sessionScope.userName == row.getColumnValue("userName") || !sessionScope.isPhoneSupported}]]></xp:this.rendered>
 											<xp:text escape="true" id="computedField2"
 												value="#{row.$15}">
 											</xp:text>

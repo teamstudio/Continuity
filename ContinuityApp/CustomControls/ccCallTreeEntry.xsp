@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<li>
+
+		<div>
+
+			<xp:link styleClass="removeLink lotusDelete" escape="true"
+				text="" id="linkRemove" disableTheme="true">
+				<xp:this.title><![CDATA[#{javascript:"Remove this contact from the call tree"}]]></xp:this.title>
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
+				<img src="/oneuiv2/images/blank.gif" alt="sluiten" />
+				<span class="lotusAltText">X</span>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="norefresh">
+					<xp:this.action><![CDATA[#{javascript:if ( callTreeBean.removeContact(compositeData.entry.unid) ) {
+					viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+					}
+}]]></xp:this.action>
+					<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this contact from the call tree?");]]></xp:this.script>
+
+					<!--<xp:this.onComplete><![CDATA[console.log("klaar");
+						var id = "#{id:linkRemove}";
+console.log(id);
+console.log("#" + id);
+						var c = dojo.query("#" + id);
+						console.log(c);
+						console.log(c.length);
+
+var d = dojo.byId(id).closest("li");
+console.log(d);
+						var b = c.closest("li");
+						console.log(b);]]></xp:this.onComplete>
+					-->
+					<xp:this.onComplete><![CDATA[XSP.showContent("#{id:dynamicContent1}","callTree");]]></xp:this.onComplete>
+				</xp:eventHandler>
+			</xp:link>
+
+			<xp:link escape="true" text="#{compositeData.entry.name}"
+				id="link1">
+
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="dlgChangeContacts">
+					<xp:this.action><![CDATA[#{javascript:viewScope.put("calledBy", compositeData.entry);
+						getComponent("dlgChangeContacts").show();}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<br />
+
+			<xp:text escape="true" id="computedField1">
+				<xp:this.value><![CDATA[#{javascript:var p = compositeData.entry.phoneNumber;
+
+if (p.length ==0 ) {
+	return "(no phone number)";
+} else {
+	return "(" + p + ")";
+}}]]></xp:this.value>
+			</xp:text>
+
+		</div>
+
+		<xp:repeat id="repEnt" rows="50"
+			value="#{javascript:compositeData.entry.calls}"
+			 var="entryCall"
+			disableOutputTag="true" repeatControls="true">
+			<xp:this.rendered><![CDATA[#{javascript:compositeData.entry.calls != null && compositeData.entry.calls.length>0}]]></xp:this.rendered>
+			
+			<xp:this.facets>
+				<xp:text xp:key="header" disableTheme="true"
+					escape="false">
+					<xp:this.value><![CDATA[<ul>]]></xp:this.value>
+				</xp:text>
+				<xp:text xp:key="footer" disableTheme="true"
+					escape="false">
+					<xp:this.value><![CDATA[</ul>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+			
+			<xc:ccCallTreeEntry entry="#{entryCall}" />
+
+		</xp:repeat>
+
+	</li>
+
+</xp:view>
