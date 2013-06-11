@@ -21,7 +21,7 @@
 				</xp:viewColumnHeader>
 			</xp:this.facets>
 		</xp:viewColumn>
-		<xp:viewColumn columnName="numTasksInfo" id="viewColumn3"
+		<!--<xp:viewColumn columnName="numTasksInfo" id="viewColumn3"
 			style="color:rgb(128,128,128)">
 			<xp:this.facets>
 				<xp:viewColumnHeader value="Num tasks info"
@@ -37,7 +37,7 @@
 				</xp:this.action>
 			</xp:eventHandler>
 		</xp:viewColumn>
-	</xp:viewPanel>
+	--></xp:viewPanel>
 	<xp:this.navigationRules>
 		<xp:navigationRule outcome="xsp-success"
 			viewId="$$PreviousPage">

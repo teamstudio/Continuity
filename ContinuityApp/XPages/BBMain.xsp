@@ -31,8 +31,14 @@
 					<xp:this.value><![CDATA[#{javascript:applicationScope.get("error");}]]></xp:this.value>
 				-->
 				<!--				</xp:label>-->
-				<xp:label id="headeritem" style="color:rgb(255,255,255)">
-					<xp:this.value><![CDATA[#{javascript:sessionScope.get("name");}]]></xp:this.value>
+				<xp:label id="headeritem"
+					style="color:rgb(255,255,255)">
+					<xp:this.value><![CDATA[#{javascript:if(applicationScope.get("userError") == 'true'){
+  return "Error: Cannot User Profile! Please contact IT Support";
+}
+else { 
+	return sessionScope.get("name");
+}}]]></xp:this.value>
 				</xp:label>
 			</xp:td>
 			</xp:tr>
@@ -46,6 +52,11 @@
 	</xp:table>
 	<xp:label id="label11"></xp:label>
 	<xp:table>
+		<xp:this.rendered><![CDATA[#{javascript:if(applicationScope.get("userError") == "error"){
+  return false;
+}
+else{ true; }
+}]]></xp:this.rendered>
 		<xp:tr>
 			<xp:td>
 				<xp:link escape="true" text="Updates" id="link5"
@@ -53,33 +64,39 @@
 					<xp:image id="image6" url="/activate.png"></xp:image>
 				</xp:link>
 				<xp:label value="Activate Team" id="label12"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 
 			</xp:td>
 			<xp:td>
-				<xp:link escape="true" text="Contacts" id="link1" value="/BBContacts.xsp">
+				<xp:link escape="true" text="Contacts" id="link1"
+					value="/BBContacts.xsp">
 
 					<xp:image id="image1" url="/contacts-blue.png"></xp:image>
 				</xp:link>
 
 				<xp:label value="Contacts" id="label4"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 			</xp:td>
 			<!--<xp:td>
 				<xp:link escape="true" text="Updates" id="link7" value="/BBCallTree.xsp">
-					<xp:image id="image4" url="/calltree-blue.png"></xp:image>
+				<xp:image id="image4" url="/calltree-blue.png"></xp:image>
 				</xp:link>
 				<xp:label value="Call Tree" id="label2"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
-			</xp:td>
-		-->
-		<xp:td>
-				<xp:link escape="true" text="Updates" id="link3" value="/BBUpdates.xsp">
+				style="color:rgb(255,255,255);text-align:center"></xp:label>
+				</xp:td>
+			-->
+			<xp:td>
+				<xp:link escape="true" text="Updates" id="link3"
+					value="/BBUpdates.xsp">
 					<xp:image id="image3" url="/updates-blue.png"></xp:image>
 				</xp:link>
 				<xp:label value="Updates" id="label6"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
-			</xp:td></xp:tr>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
+			</xp:td>
+		</xp:tr>
 		<xp:tr>
 			<xp:td>
 				<xp:label value="" id="label8" style="font-size:7pt"></xp:label>
@@ -92,22 +109,27 @@
 					<xp:image id="image5" url="/incidents.png"></xp:image>
 				</xp:link>
 				<xp:label value="Incidents" id="label14"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 			</xp:td>
 			<xp:td>
-				<xp:link escape="true" text="My Role" id="link6" value="/BBMyRole.xsp">
+				<xp:link escape="true" text="My Role" id="link6"
+					value="/BBMyRole.xsp">
 					<xp:image id="image7" url="/role.png"></xp:image>
 				</xp:link>
 				<xp:label value="My Role" id="label1"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 
 			</xp:td>
 			<xp:td>
-				<xp:link escape="true" text="Plans" id="link2" value="/BBPlans.xsp">
+				<xp:link escape="true" text="Plans" id="link2"
+					value="/BBPlans.xsp">
 					<xp:image id="image2" url="/plans.png"></xp:image>
 				</xp:link>
 				<xp:label value="Plans" id="label5"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 			</xp:td>
 		</xp:tr>
 		<xp:tr>
@@ -117,19 +139,22 @@
 		</xp:tr>
 		<xp:tr>
 			<xp:td>
-				<xp:link escape="true" text="Active Tasks" id="link8" value="/BBLiveIncidents.xsp">
+				<xp:link escape="true" text="Active Tasks" id="link8"
+					value="/BBLiveIncidents.xsp">
 					<xp:image id="image8" url="/tasks.png"></xp:image>
 				</xp:link>
 				<xp:label value="Active Tasks" id="label15"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 			</xp:td>
 			<xp:td>
 				<!--<xp:link escape="true" text="Updates" id="link3" value="/BBUpdates.xsp">
 					<xp:image id="image3" url="/updates-blue.png"></xp:image>
-				</xp:link>
-				<xp:label value="Updates" id="label6"
+					</xp:link>
+					<xp:label value="Updates" id="label6"
 					style="color:rgb(255,255,255);text-align:center"></xp:label>
-			--></xp:td>
+				-->
+			</xp:td>
 			<xp:td>
 				<xp:label value="" id="label3"></xp:label>
 			</xp:td>
