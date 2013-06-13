@@ -137,6 +137,12 @@ tr.lotusFormFieldRow > td > table > tbody > tr > td {
 	padding-bottom: 0 !important;
 }
 
+td.lotusFormLabel {
+	white-space: nowrap;
+	padding-left: 5px;
+}
+
+
 fieldset.xspRadioButton input {
 	margin-top: 0;
 }
@@ -304,7 +310,6 @@ a:active {
 }
 
 /*call tree*/
-* {margin: 0; padding: 0;}
 .callTree ul { padding-top: 20px; position: relative;}
 .callTree li { 
 	float: left; text-align: center; 

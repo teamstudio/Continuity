@@ -303,9 +303,17 @@ function loadAppConfig( forceUpdate:boolean ) {
 				var labels = getMap();
 				
 				//labels
-				if (docSettings.getItemValueString("riskNaming").equals("activities")) {
+				var riskNaming = docSettings.getItemValueString("riskNaming");
+				
+				if ( riskNaming.equals("activities")) {
 					labels["assets"] = "Activities";
 					labels["asset"] = "Activity";
+				} else if ( riskNaming.equals("sites")) {	
+					labels["assets"] = "Sites";
+					labels["asset"] = "Site";
+				} else if ( riskNaming.equals("locations")) {	
+					labels["assets"] = "Locations";
+					labels["asset"] = "Location";
 				} else {
 					labels["assets"] = "Assets";
 					labels["asset"] = "Asset";

@@ -190,7 +190,7 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 						//ML: go back to page from where this new document was opened
 						if (viewxpagename == 'back') {
 							goBack();
-						} else if (viewxpagename="UnpIncident.xsp") {
+						} else if (viewxpagename=="UnpIncident.xsp") {
 							//ML: use ajax load
 							loadPageEx(viewxpagename + "?action=openDocument&documentId=" + response, "contentwrapper", null);
 						} else if (viewxpagename.indexOf("UnpIncident.xsp") > -1 ) {
