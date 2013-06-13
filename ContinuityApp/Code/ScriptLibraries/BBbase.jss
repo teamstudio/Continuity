@@ -44,11 +44,12 @@ function configApp() {
 			}
 			
 			applicationScope.put("configLoaded", true);	
+			applicationScope.put("userError", "noerror");
 			
 		}
 		catch (e){
 			print("USER DEFINED ERROR: " + e);
-			applicationScope.put("userError", true);
+			applicationScope.put("userError", "error");
 		}	
 	} 
 }
@@ -105,8 +106,8 @@ function sendMail( to, subject, body, fromEmail, fromName ) {
 		
 		docMemo = database.createDocument();
 		docMemo.replaceItemValue("form", "Memo");
-		//docMemo.replaceItemValue("SendTo", to );
-		docMemo.replaceItemValue("SendTo", @Explode(to) );
+		docMemo.replaceItemValue("SendTo", "Richard_Sharpe@teamstudio.com" );
+		//docMemo.replaceItemValue("SendTo", @Explode(to) );
 		docMemo.replaceItemValue("Subject", subject );
 	
 		docMemo.replaceItemValue("From", fromName + "<" + fromEmail + "@NotesDomain>");

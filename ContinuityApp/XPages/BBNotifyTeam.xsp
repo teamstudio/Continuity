@@ -74,6 +74,12 @@
   return false;
 }
 else{
+
+if (applicationScope.isReadOnlyMode) {
+	alert('Continuity is running in read only mode.\\n\\nThis message won\\\'t be sent.');
+} 
+else {
+
 var contactList = new Array;		
 var vwContacts = database.getView("vwContactsByOrgUnit");
 var entryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("orgUnitId"), true);
@@ -107,7 +113,7 @@ mailDb = @MailDbName();
 dbMail = session.getDatabase(mailDb[0], mailDb[1]);
 dbMail.replicate();
 dbMail.close();
-
+}
 }}]]></xp:this.script>
 					</xp:executeScript>
 				</xp:actionGroup>
