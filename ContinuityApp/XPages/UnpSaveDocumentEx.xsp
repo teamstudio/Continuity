@@ -299,7 +299,7 @@ try{
 					if (to.length > 0) {
 						
 						sendMail( to, 
-							"[continuity] new message", 
+							"[continuity] New message", 
 							sessionScope.name + " has sent you the following message:\r\n\r\n" +
 								(isRehearsal ? "Exercise " + applicationScope.labels['incident'].toLowerCase() : applicationScope.labels['incident']) + ": " + doc.getItemValueString("incidentName") + "\r\n" +
 								"Message: " + doc.getItemValueString("message") + "\r\n",

@@ -13,11 +13,11 @@
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 =======
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='234e' unid='6988D5ECBD1A418C85257B71004D3A53' sequence='4'>
+<noteinfo noteid='234e' unid='6988D5ECBD1A418C85257B71004D3A53' sequence='6'>
 <created><datetime dst='true'>20130520T100332,03-04</datetime></created>
-<modified><datetime dst='true'>20130530T214854,82+02</datetime></modified>
-<revised><datetime dst='true'>20130530T214854,81+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130530T214854,82+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130610T113535,79+02</datetime></modified>
+<revised><datetime dst='true'>20130610T113535,78+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130610T113535,79+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130528T100216,73+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>

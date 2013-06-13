@@ -77,29 +77,34 @@ viewScope.put("orderPosition", callTreeLevel);
 
 	<xp:div>
 
-				<xp:div styleClass="box mBottom">
+				<xp:div styleClass="box mBottom" style="padding:11px">
 
 					<div style="width: 100%;">
 					
-						<xp:panel style="float: left; width: 85px; padding: 11px" id="panel1"
-							styleClass="buttons" rendered="#{javascript:viewScope.hasPreviousPage}">
-							<xp:link id="link3" value="#">
+						<div style="float:left; width:45px;">
+							<xp:link id="link3" value="#" rendered="#{javascript:viewScope.hasPreviousPage}" escape="false" styleClass="button"
+								style="width: 100%; display:block;">
 								<xp:this.attrs>
 									<xp:attr name="onclick">
 										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpCallTree.xsp?pos=" + (viewScope.orderPosition-1) + "', 'contentwrapper'); return false;"}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
 								<xp:this.text>
-									<![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")-1)}]]>
+									<![CDATA[#{javascript:"&laquo;";
+	}]]>
 								</xp:this.text>
 							</xp:link>
-						</xp:panel>
-					
-						<xp:panel style="float: right; width: 85px; padding: 11px" id="panel2"
-							styleClass="buttons" rendered="#{javascript:viewScope.hasNextPage}">
-							<xp:link id="link2" value="#">
+							
+							<xp:text rendered="#{javascript:!viewScope.hasPreviousPage}" value="&#160;" />
+							
+						</div>
+						
+						<div style="float:right; width:45px;">
+						
+							<xp:link id="link2" value="#" rendered="#{javascript:viewScope.hasNextPage}" escape="false" styleClass="button"
+								style="width: 100%; display:block; margin-right: 0">
 								<xp:this.text>
-									<![CDATA[#{javascript:"Level " + (viewScope.get("orderPosition")+1)}]]>
+									<![CDATA[#{javascript:"&raquo;";}]]>
 								</xp:this.text>
 								
 								<xp:this.attrs>
@@ -108,13 +113,13 @@ viewScope.put("orderPosition", callTreeLevel);
 									</xp:attr>
 								</xp:this.attrs>
 							</xp:link>
-		
-						</xp:panel>
+							
+							<xp:text rendered="#{javascript:!viewScope.hasNextPage}" value="&#160;" />
+						</div>
 					
-						<div style="margin:0 auto; width: 85px; padding-top:19px; text-align: center">
-							Level&#160;
+						<div style="margin:0 auto; padding-top:8px; text-align: center">
 							<xp:text escape="true" id="computedField3"
-								value="#{javascript:viewScope.orderPosition}">
+								value="#{javascript:viewScope.roleName}">
 							</xp:text>
 						</div>
 					</div>

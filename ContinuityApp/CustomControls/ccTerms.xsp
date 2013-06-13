@@ -81,10 +81,17 @@ configBean.reload();}]]></xp:this.script>
 
 		<xe:formRow id="formRow2" label="Term used for entities at risk:">
 				
-			<xp:radioGroup id="radioGroup1" value="#{docSettings.riskNaming}"
-				defaultValue="asset">
+			<xp:radioGroup id="radioGroup1"
+				value="#{docSettings.riskNaming}" defaultValue="asset"
+				layout="lineDirection">
 				<xp:selectItem itemLabel="Assets" itemValue="assets"></xp:selectItem>
-				<xp:selectItem itemLabel="Activities" itemValue="activities"></xp:selectItem>
+				<xp:selectItem itemLabel="Activities"
+					itemValue="activities">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="Sites" itemValue="sites"></xp:selectItem>
+				<xp:selectItem itemLabel="Locations"
+					itemValue="locations">
+				</xp:selectItem>
 			</xp:radioGroup>
 
 		</xe:formRow>
@@ -92,7 +99,7 @@ configBean.reload();}]]></xp:this.script>
 		<xe:formRow id="formRow3" label="Term used for incidents:">
 		
 			<xp:radioGroup id="radioGroup2" value="#{docSettings.incidentNaming}"
-				defaultValue="incident">
+				defaultValue="incident" layout="lineDirection">
 				<xp:selectItem itemLabel="Incidents" itemValue="incidents"></xp:selectItem>
 				<xp:selectItem itemLabel="Crises" itemValue="crises"></xp:selectItem>
 				<xp:selectItem itemLabel="Emergencies" itemValue="emergencies"></xp:selectItem>

@@ -33,7 +33,7 @@ public class Configuration implements Serializable {
 	
 	private String callTreeType;
 	
-	private static String APP_VERSION = "v1.13";		//current application version
+	private static String APP_VERSION = "v1.2";		//current application version
 	private static String DATA_VERSION = "103";			//data version (used for checking if a conversion is needed)
 	
 	private String serverName;
@@ -117,18 +117,27 @@ public class Configuration implements Serializable {
 				}
 				
 				//labels
-				if (docSettings.getItemValueString("riskNaming").equals("activities")) {
+				String riskNaming = docSettings.getItemValueString("riskNaming");
+				String incidentNaming = docSettings.getItemValueString("incidentNaming");
+				
+				if (riskNaming.equals("activities")) {
 					labels.put("assets", "Activities");
 					labels.put("asset", "Activity");
+				} else if (riskNaming.equals("sites")) {
+					labels.put("assets", "Sites");
+					labels.put("asset", "Site");
+				} else if (riskNaming.equals("locations")) {
+					labels.put("assets", "Locations");
+					labels.put("asset", "Location");
 				} else {
 					labels.put("assets", "Assets");
 					labels.put("asset", "Asset");
 				}
 				
-				if (docSettings.getItemValueString("incidentNaming").equals("crises")) {
+				if (incidentNaming.equals("crises")) {
 					labels.put("incidents", "Crises");
 					labels.put("incident", "Crisis");
-				} else if (docSettings.getItemValueString("incidentNaming").equals("emergencies")) {
+				} else if (incidentNaming.equals("emergencies")) {
 					labels.put("incidents", "Emergencies");
 					labels.put("incident", "Emergency");
 				} else {

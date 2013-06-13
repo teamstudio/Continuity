@@ -179,7 +179,7 @@ if (applicationScope.isReadOnlyMode) {
 	out += "$.blockUI(); loadPageEx('" + getDbPath() + "/UnpIncidents.xsp', 'contentwrapper', 0, true, true);";
 } else {
 	out += "if ($('#scenarioId').val()=='none') { if (!confirm('Are you sure you want to create an incident without linking it to a scenario?') ) { return false;} }";
-	out += "saveDocument('" + getClientId("customform") + "', '" + docIncident.getDocument().getUniversalID() + "', 'UnpIncident_1.xsp', 'fIncident'";
+	out += "saveDocument('" + getClientId("customform") + "', '" + docIncident.getDocument().getUniversalID() + "', 'UnpIncident.xsp', 'fIncident'";
 			if (context.getUrlParameter("parentunid") != ""){
 				out += ", '" + context.getUrlParameter("parentunid") + "'";
 			}
