@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
-	
+
 	<xp:this.resources>
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
-	</xp:this.resources><xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="/BBIncidents.xsp">
+	</xp:this.resources>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="/BBIncidents.xsp">
 		</xp:navigationRule>
-	</xp:this.navigationRules><xp:this.beforePageLoad>
+	</xp:this.navigationRules>
+
+	<xp:this.beforePageLoad>
 		<xp:executeScript>
-			<xp:this.script><![CDATA[#{javascript:var docThis = docIncident.getDocument();
+			<xp:this.script><![CDATA[#{javascript:
+			var docThis = docIncident.getDocument();
 sessionScope.put("docUnid", docThis.getUniversalID());
-var numOpenTasks = 0;
+/*var numOpenTasks = 0;
 var t = @DbLookup( @DbName(), "vwTasksAssignedOpen", docIncident.getItemValueString("id"), 2, "[FailSilent]");
 if (t != null && t != "") {
 	numOpenTasks = @Elements(t);
 }
 print("OPEN TASKS = " + numOpenTasks);
 viewScope.put("numOpenTasks", numOpenTasks);
-
+*/
 }]]></xp:this.script>
 		</xp:executeScript>
-	</xp:this.beforePageLoad><xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle><xp:this.data>
-		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument">
+	</xp:this.beforePageLoad>
+	<xp:this.pageTitle><![CDATA[#{javascript:sessionScope.get('incidentLabel') + ": " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle>
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident"
+			action="openDocument">
 		</xp:dominoDocument>
 		<xp:dominoView var="viewTasks" viewName="BBvwTasksByIncident">
 			<xp:this.categoryFilter><![CDATA[#{javascript:docIncident.getDocument().getItemValueString("id");}]]></xp:this.categoryFilter>
 		</xp:dominoView>
 	</xp:this.data>
-	
+
 	<xp:button value="Edit" id="button9">
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
@@ -39,7 +47,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
-	
+
 	<xp:button value="Edit" id="button7"
 		style="-unp-menuButton:false;">
 		<xp:eventHandler event="onclick" submit="true"
@@ -134,8 +142,8 @@ viewScope.put("numOpenTasks", numOpenTasks);
 				</xp:label>
 			</xp:td>
 			<xp:td>
-				<xp:inputText value="#{docIncident.status}"
-					id="status1" readonly="true">
+				<xp:inputText value="#{docIncident.status}" id="status1"
+					readonly="true">
 				</xp:inputText>
 			</xp:td>
 		</xp:tr>
@@ -154,15 +162,16 @@ viewScope.put("numOpenTasks", numOpenTasks);
 	</xp:table>
 	<xp:label id="label1"></xp:label>
 	<xp:br></xp:br>
-	
-	
-	
-	
+
+
+
+
 
 
 	<xp:button value="     Notify Team      " id="button1"
 		style="-unp-menuButton:false;">
-		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
+		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
 				<xp:actionGroup>
@@ -177,7 +186,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 	</xp:button>
 	<xp:button value="        Call Tree        " id="button2"
 		style="-unp-menuButton:false;">
-	<xp:this.rendered><![CDATA[#{javascript:
+		<xp:this.rendered><![CDATA[#{javascript:
 	//return docIncident.getItemValueString("status") != "deactivated";
 	return false;
 	}]]></xp:this.rendered>
@@ -186,7 +195,8 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		style="-unp-menuButton:false;">
 
 
-		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
+		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
+		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
 				<xp:actionGroup>
@@ -201,7 +211,7 @@ confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
 
 
 					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+						<xp:this.script><![CDATA[#{javascript:if (sessionScope.isReadOnlyMode) {
 	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
 } else {
 	deactivateIncident(docIncident.getDocument());
@@ -215,8 +225,8 @@ confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
 		</xp:eventHandler>
 	</xp:button>
 	<xp:br></xp:br>
-	
-	
+
+
 	<xp:button value="Notify Team" id="button4">
 		<xp:this.rendered><![CDATA[#{javascript:return docIncident.getItemValueString("status") != "deactivated";}]]></xp:this.rendered>
 		<xp:eventHandler event="onclick" submit="true"
@@ -233,7 +243,7 @@ confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
 		</xp:eventHandler>
 	</xp:button>
 	<xp:button value="Call Tree" id="button5">
-<xp:this.rendered><![CDATA[#{javascript:
+		<xp:this.rendered><![CDATA[#{javascript:
 	//return docIncident.getItemValueString("status") != "deactivated";
 	return false;
 	}]]></xp:this.rendered>
@@ -257,7 +267,7 @@ confirm("Deactivate incident and all related tasks?");}]]></xp:this.condition>
 
 
 					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
+						<xp:this.script><![CDATA[#{javascript:if (sessionScope.isReadOnlyMode) {
 	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
 } else {
 	deactivateIncident(docIncident.getDocument());

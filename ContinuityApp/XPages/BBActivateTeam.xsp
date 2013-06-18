@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	pageTitle="New Incident">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="New Incident"
+	xmlns:xp_1="http://www.ibm.com/xsp/coreex">
 	<xp:this.data>
 		<xp:dominoDocument var="docIncident" formName="fIncident"></xp:dominoDocument>
 	</xp:this.data>
@@ -8,6 +8,13 @@
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
 
+	<xp:this.beforeRenderResponse>
+		<xp:executeScript
+			script="#{javascript:sessionScope.put('docUnid', docIncident.getDocument().getUniversalID());
+			docIncident.getDocument().save();
+			}">
+		</xp:executeScript>
+	</xp:this.beforeRenderResponse>
 	<xp:panel>
 		<xp:label id="label1"
 			value="Activate the BCM Team. Enter a short description of the current incident below. Linking this incident to an existing plan is optional.">
@@ -30,17 +37,18 @@
 
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Asset:" id="siteName_Label1"
-						for="siteName1">
+					<xp:label id="siteName_Label1" for="siteName1">
+						<xp:this.value><![CDATA[#{javascript:sessionScope.get("riskLabel");}]]></xp:this.value>
 					</xp:label>
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="comboBox3"
-						value="#{docIncident.siteName}">
+						value="#{docIncident.siteId}">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems id="selectItems1">
 							<xp:this.value><![CDATA[#{javascript:
-							var assetLookUp = @DbColumn("", "BBvwAssetDetails", 1);
+							//var assetLookUp = @DbColumn("", "BBvwAssetDetails", 1);
+							var assetLookUp = @DbLookup("", "BBvwAllByType", "fSite", 4);
 							var assets = "None found";
 if (assetLookUp != undefined){
 	var assets = (assetLookUp.constructor == Array) ? assetLookUp : [ assetLookUp ];
@@ -62,7 +70,9 @@ if (assetLookUp != undefined){
 						value="#{docIncident.orgUnitId}">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "vwOrgUnits", 2);
+							<xp:this.value><![CDATA[#{javascript:
+var DBLResult = @DbLookup("", "BBvwAllByType", "fOrgUnit", 4);
+							
 var oUnits = "None found";
 if (DBLResult != undefined){
 	var oUnits = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
@@ -77,14 +87,17 @@ return oUnits;}]]></xp:this.value>
 				<xp:td>
 					<xp:label id="scenarioName_Label1"
 						for="scenarioName1">
-					<xp:this.value><![CDATA[Plan & Scenario:]]></xp:this.value></xp:label>
+						<xp:this.value><![CDATA[Plan & Scenario:]]></xp:this.value>
+					</xp:label>
 				</xp:td>
 				<xp:td>
 					<xp:comboBox id="comboBox4"
-						value="#{docIncident.scenarioName}">
+						value="#{docIncident.scenarioId}">
 						<xp:selectItem itemLabel="Please select..."></xp:selectItem>
 						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
+							<xp:this.value><![CDATA[#{javascript:
+//var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
+var DBLResult = @DbLookup("", "BBvwAllByType", "fScenario", 4);
 var scenarios = "None found";
 if (DBLResult != undefined){
 	var scenarios = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
@@ -141,12 +154,13 @@ return scenarios;}]]></xp:this.value>
 	<xp:button id="button1" value="Activate"
 		style="-unp-menuButton:false;">
 
-		
-	<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-		<xp:this.action>
-			<xp:actionGroup>
 
-				<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+
+					<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
 		alert("Description cannot be blank!");
 		return false;
 }
@@ -163,54 +177,51 @@ if(docIncident.getItemValueString("scenarioName") == "Please select..."){
 		return false;
 }	
 return true;}]]></xp:this.condition>
-				<xp:actionGroup>
+					<xp:actionGroup>
 
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:	
-					
-if (applicationScope.isReadOnlyMode) {
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:	
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
 else {
 	var doc = docIncident.getDocument();
 	doc.save();
 	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BBbase.JS ONCE SUPPORTED
-	var DBScenarioResult = @DbLookup( "", "BBvwAllScenarios", doc.getItemValueString("scenarioName"),2);
-	var scenarioId = "None";
+	
+	var DBScenarioResult = @DbLookup( "", "vwAllById", doc.getItemValueString("scenarioId"),2);
+	var scenarioName = "None";
 	if (DBScenarioResult != undefined){
-		var scenarioId = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
+		var scenarioName = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
 	}
-	doc.replaceItemValue("scenarioId", scenarioId);
-
-	var DBSiteIdResult = @DbLookup( "", "BBvwAssetDetails", doc.getItemValueString("siteName"),6);
-	if (DBSiteIdResult != undefined){
-		var siteId = (DBSiteIdResult.constructor == Array) ? DBSiteIdResult : [ DBSiteIdResult ];
+	
+	doc.replaceItemValue("scenarioName", scenarioName);
+	
+	var DBSiteNameResult = @DbLookup( "", "vwAllById", doc.getItemValueString("siteId"),2);
+	if (DBSiteNameResult != undefined){
+		var siteName = (DBSiteNameResult.constructor == Array) ? DBSiteNameResult : [ DBSiteNameResult ];
 	}
-	doc.replaceItemValue("siteId", siteId);
+	doc.replaceItemValue("siteName", siteName);
 	
 	var orgName = "none";
-	var DBOrgNameResult = @DbLookup( "", "BBvwOrgUnitsById", doc.getItemValueString("orgUnitId"),2);
+	var DBOrgNameResult = @DbLookup( "", "vwAllById", doc.getItemValueString("orgUnitId"),2);
 	if (DBOrgNameResult != undefined){
 		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
 	}
 	doc.replaceItemValue("orgUnitName", orgName);
-	sessionScope.put("orgUnitName", orgName);
-	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
-	
 	doc.replaceItemValue("formname", "fIncident");
 	
 	doc.save();	
-}
+}					
+
 }]]></xp:this.script>
-					</xp:executeScript>
+						</xp:executeScript>
 
-
-
-
-				</xp:actionGroup>
-				<xp:actionGroup>
-					<xp:this.condition><![CDATA[#{javascript:
-	var OUScenario = doc.getItemValueString("orgUnitId")+doc.getItemValueString("scenarioName");
+					</xp:actionGroup>
+					<xp:actionGroup>
+						<xp:this.condition><![CDATA[#{javascript:
+	var OUScenario = doc.getItemValueString("orgUnitId") + scenarioName;
+	
 	var DBPlanNameRes = @DbLookup("", "BBvwPlansByScenariosOrg", OUScenario, 2);
 	if (DBPlanNameRes != undefined){
 		if(DBPlanNameRes.indexOf(';') > -1 ){
@@ -221,38 +232,45 @@ else {
 		}else{
 			return false;
 		}
-	}}]]></xp:this.condition>
+	}
+	else {
+		DBPlanNameRes = "";
+	}
+	}]]></xp:this.condition>
 
 
-					<xp:openPage name="/BBActivateTeamAddPlan.xsp"
-						target="editDocument">
-						<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
-					</xp:openPage>
-				</xp:actionGroup>
+						<xp:openPage name="/BBActivateTeamAddPlan.xsp"
+							target="editDocument">
+							<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
+						</xp:openPage>
+					</xp:actionGroup>
 
-				<xp:actionGroup>
-					<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
+					<xp:actionGroup>
+						<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
 	sessionScope.put("multiPlans", "false");
 	return false;
 }else{
   return true;
 }}]]>
-					</xp:this.condition>
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:
+						</xp:this.condition>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:
 var DBPlanIDResult = @DbLookup( "", "vwPlans", DBPlanNameRes,4);
 doc.replaceItemValue("planId", DBPlanIDResult);
 doc.replaceItemValue("planName", DBPlanNameRes);						
 doc.save();
-
-/*print("OU NAME" + doc.getItemValue("orgUnitName"));
+/*
+	print("OU NAME" + doc.getItemValue("orgUnitName"));
 	print("OU ID" + doc.getItemValue("orgUnitId"));
 	print("SCENARIO NAME" + doc.getItemValue("scenarioName"));
 	print("SCENARIO ID" + doc.getItemValue("scenarioId"));
 	print("SITE NAME" + doc.getItemValue("siteName"));
 	print("SITE ID" + doc.getItemValue("siteId"));
 	print("PLAN NAME" + doc.getItemValue("planName"));
-	print("PLAN ID" + doc.getItemValue("planId"));*/
+	print("PLAN ID" + doc.getItemValue("planId"));
+	print("OU Scenario" + OUScenario);
+*/
+
 
 processActivation(doc, true);
 var db = session.getCurrentDatabase();
@@ -261,14 +279,17 @@ mailDb = @MailDbName();
 dbMail = session.getDatabase(mailDb[0], mailDb[1]);
 dbMail.replicate();
 dbMail.close();
+
 			}]]></xp:this.script>
-					</xp:executeScript>
-					<xp:openPage name="/BBIncidents.xsp"
-						target="openDocument">
-					</xp:openPage>
+						</xp:executeScript>
+						<xp:openPage name="/BBIncidents.xsp"
+							target="openDocument">
+						</xp:openPage>
+					</xp:actionGroup>
 				</xp:actionGroup>
-			</xp:actionGroup>
-		</xp:this.action></xp:eventHandler></xp:button>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
 
 	<xp:br></xp:br>
 
@@ -278,22 +299,29 @@ dbMail.close();
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
-				<xp:openPage name="/BBMain.xsp" target="openDocument">
-				</xp:openPage>
+
+				<xp:actionGroup>
+					<xp:executeScript script="#{javascript:docIncident.getDocument().removePermanently(true);}">
+					</xp:executeScript><xp:openPage name="/BBMain.xsp"
+						target="openDocument">
+					</xp:openPage>
+					
+				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
 	<xp:br></xp:br>
-	
 
-	<xp:button id="button3" value="Activate" style="-unp-menuButton:false;">
 
-		
-	<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-		<xp:this.action>
-			<xp:actionGroup>
+	<xp:button id="button3" value="Activate">
 
-				<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
+
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+
+					<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
 		alert("Description cannot be blank!");
 		return false;
 }
@@ -310,63 +338,54 @@ if(docIncident.getItemValueString("scenarioName") == "Please select..."){
 		return false;
 }	
 return true;}]]></xp:this.condition>
-				<xp:actionGroup>
+					<xp:actionGroup>
 
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:	
-					
-if (applicationScope.isReadOnlyMode) {
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:	
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
 else {
-	print("IN SCRIPT!");
 	var doc = docIncident.getDocument();
 	doc.save();
 	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BBbase.JS ONCE SUPPORTED
-	var DBScenarioResult = @DbLookup( "", "BBvwAllScenarios", doc.getItemValueString("scenarioName"),2);
-	var scenarioId = "None";
+	
+	var DBScenarioResult = @DbLookup( "", "vwAllById", doc.getItemValueString("scenarioId"),2);
+	var scenarioName = "None";
 	if (DBScenarioResult != undefined){
-		var scenarioId = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
+		var scenarioName = (DBScenarioResult.constructor == Array) ? DBScenarioResult : [ DBScenarioResult ];
 	}
-	doc.replaceItemValue("scenarioId", scenarioId);
-
-	var DBSiteIdResult = @DbLookup( "", "BBvwAssetDetails", doc.getItemValueString("siteName"),6);
-	if (DBSiteIdResult != undefined){
-		var siteId = (DBSiteIdResult.constructor == Array) ? DBSiteIdResult : [ DBSiteIdResult ];
+	
+	doc.replaceItemValue("scenarioName", scenarioName);
+	
+	var DBSiteNameResult = @DbLookup( "", "vwAllById", doc.getItemValueString("siteId"),2);
+	if (DBSiteNameResult != undefined){
+		var siteName = (DBSiteNameResult.constructor == Array) ? DBSiteNameResult : [ DBSiteNameResult ];
 	}
-	doc.replaceItemValue("siteId", siteId);
+	doc.replaceItemValue("siteName", siteName);
 	
 	var orgName = "none";
-	var DBOrgNameResult = @DbLookup( "", "BBvwOrgUnitsById", doc.getItemValueString("orgUnitId"),2);
+	var DBOrgNameResult = @DbLookup( "", "vwAllById", doc.getItemValueString("orgUnitId"),2);
 	if (DBOrgNameResult != undefined){
 		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
 	}
 	doc.replaceItemValue("orgUnitName", orgName);
-	sessionScope.put("orgUnitName", orgName);
-	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
-	
 	doc.replaceItemValue("formname", "fIncident");
 	
 	doc.save();	
-}
+}					
+
 }]]></xp:this.script>
-					</xp:executeScript>
+						</xp:executeScript>
 
-
-
-
-				</xp:actionGroup>
-				<xp:actionGroup>
-					<xp:this.condition><![CDATA[#{javascript:
-	print("GETTING PLANS!");
-	var OUScenario = doc.getItemValueString("orgUnitId")+doc.getItemValueString("scenarioName");
-	print("OUScen = " + OUScenario);
+					</xp:actionGroup>
+					<xp:actionGroup>
+						<xp:this.condition><![CDATA[#{javascript:
+	var OUScenario = doc.getItemValueString("orgUnitId") + scenarioName;
+	
 	var DBPlanNameRes = @DbLookup("", "BBvwPlansByScenariosOrg", OUScenario, 2);
-	print("DBPlanNameRes = " + DBPlanNameRes);
 	if (DBPlanNameRes != undefined){
-	print("LOOKING FOR ;");
 		if(DBPlanNameRes.indexOf(';') > -1 ){
-		print("FOUND ;");
 			var planNames = DBPlanNameRes.split(';');
 			sessionScope.put("incidentPlans", planNames);
 			sessionScope.put("multiPlans", "true");			
@@ -374,31 +393,35 @@ else {
 		}else{
 			return false;
 		}
-	}}]]></xp:this.condition>
+	}
+	else {
+		DBPlanNameRes = "";
+	}
+	}]]></xp:this.condition>
 
-					<xp:openPage name="/BBActivateTeamAddPlan.xsp" target="openDocument">
-						<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
-					</xp:openPage>
-				</xp:actionGroup>
 
-				<xp:actionGroup>
-					<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
+						<xp:openPage name="/BBActivateTeamAddPlan.xsp"
+							target="editDocument">
+							<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
+						</xp:openPage>
+					</xp:actionGroup>
+
+					<xp:actionGroup>
+						<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
 	sessionScope.put("multiPlans", "false");
 	return false;
 }else{
   return true;
 }}]]>
-					</xp:this.condition>
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:
-print("GETTING PLAN ID!");
-print("SENDING PLAN: " + DBPlanNameRes);
+						</xp:this.condition>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:
 var DBPlanIDResult = @DbLookup( "", "vwPlans", DBPlanNameRes,4);
 doc.replaceItemValue("planId", DBPlanIDResult);
 doc.replaceItemValue("planName", DBPlanNameRes);						
 doc.save();
-
-print("OU NAME" + doc.getItemValue("orgUnitName"));
+/*
+	print("OU NAME" + doc.getItemValue("orgUnitName"));
 	print("OU ID" + doc.getItemValue("orgUnitId"));
 	print("SCENARIO NAME" + doc.getItemValue("scenarioName"));
 	print("SCENARIO ID" + doc.getItemValue("scenarioId"));
@@ -406,6 +429,9 @@ print("OU NAME" + doc.getItemValue("orgUnitName"));
 	print("SITE ID" + doc.getItemValue("siteId"));
 	print("PLAN NAME" + doc.getItemValue("planName"));
 	print("PLAN ID" + doc.getItemValue("planId"));
+	print("OU Scenario" + OUScenario);
+*/
+
 
 processActivation(doc, true);
 var db = session.getCurrentDatabase();
@@ -414,22 +440,31 @@ mailDb = @MailDbName();
 dbMail = session.getDatabase(mailDb[0], mailDb[1]);
 dbMail.replicate();
 dbMail.close();
+
 			}]]></xp:this.script>
-					</xp:executeScript>
-					<xp:openPage name="/BBIncidents.xsp" target="openDocument">
-					</xp:openPage>
+						</xp:executeScript>
+						<xp:openPage name="/BBIncidents.xsp"
+							target="openDocument">
+						</xp:openPage>
+					</xp:actionGroup>
 				</xp:actionGroup>
-			</xp:actionGroup>
-		</xp:this.action></xp:eventHandler></xp:button><xp:br></xp:br>
-
-
-	<xp:button value="Cancel" id="button4">
-		<xp:eventHandler event="onclick" submit="true"
-			refreshMode="complete">
-			<xp:this.action>
-				<xp:openPage name="/BBMain.xsp" target="openDocument">
-				</xp:openPage>
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
-</xp:view>
+	<xp:br></xp:br>
+
+
+	
+<xp:button value=" Cancel " id="button4">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+
+				<xp:actionGroup>
+					<xp:executeScript script="#{javascript:docIncident.getDocument().removePermanently(true);}">
+					</xp:executeScript><xp:openPage name="/BBMain.xsp" target="openDocument">
+					</xp:openPage>
+					
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button><xp:this.navigationRules><xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule></xp:this.navigationRules></xp:view>

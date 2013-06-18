@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="2316" sequence="7" unid="565F7F68E11AFD1685257B71004D50EC">
-<created><datetime dst="true">20130520T100429,88-04</datetime></created>
-<modified><datetime dst="true">20130528T100305,26+02</datetime></modified>
-<revised><datetime dst="true">20130528T100305,25+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130528T100305,26+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130528T100215,89+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B8E00454D65" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="872" sequence="4" unid="2A35635CB70EF9F785257B8E0045B7E7">
+<created><datetime dst="true">20130618T084130,63-04</datetime></created>
+<modified><datetime dst="true">20130618T084134,37-04</datetime></modified>
+<revised><datetime dst="true">20130618T084134,36-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130618T084134,37-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130618T084130,64-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<item name="$Class"><text>UHS - Continuity DEV</text></item>
 <item name="$TITLE"><text>BBNotifyTeam.xsp</text></item>
 <item name="$Flags"><text>gC~4K</text></item>
 

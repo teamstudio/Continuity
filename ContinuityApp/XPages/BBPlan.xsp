@@ -23,7 +23,6 @@
 			</xp:tr>
 		</xp:table>
 	</xp:panel>
-	<xp:label value="" id="label2"></xp:label>
 	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
 		showColumnHeader="false" pageName="/BBPlanDescription.xsp">
 

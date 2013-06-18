@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	pageTitle="Incident List:">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
 
 	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success"
-			viewId="/BBMain.xsp">
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp">
 		</xp:navigationRule>
 	</xp:this.navigationRules>
+	
 	<xp:this.data>
 		<xp:dominoView var="viewIncidents" viewName="BBvwLiveIncidents"
 			categoryFilter="active">
 		</xp:dominoView>
 	</xp:this.data>
-	
+
+	<xp:this.pageTitle><![CDATA[#{javascript: sessionScope.get("incidentsLabel") + " List";}]]></xp:this.pageTitle>
+	<xp:panel>
+		<xp:label id="label1">
+			<xp:this.value><![CDATA[#{javascript:"The following " + sessionScope.get("incidentsLabel") + " include one or more Tasks your role has responsibility to complete"}]]></xp:this.value>
+		</xp:label>
+	</xp:panel>
+
 	<xp:panel
 		rendered="#{javascript:viewIncidents.getEntryCount() == 0;}">
-		<xp:label id="label2" value="No incidents found!!"></xp:label>
-</xp:panel>
+		<xp:label id="label2">
+			<xp:this.value><![CDATA[#{javascript: "No " + sessionScope.get("incidentsLabel") + " found!!";}]]></xp:this.value>
+		</xp:label>
+	</xp:panel>
 
 	<xp:br></xp:br>
-	<xp:viewPanel rows="30" id="viewPanel1" pageName="/BBActiveTasks.xsp"
-		showColumnHeader="false" value="#{viewIncidents}">
+	<xp:viewPanel rows="30" id="viewPanel1"
+		pageName="/BBActiveTasks.xsp" showColumnHeader="false"
+		value="#{viewIncidents}">
 
 		<xp:viewColumn columnName="cat" id="viewColumn1">
 			<xp:viewColumnHeader value="cat" id="viewColumnHeader1"></xp:viewColumnHeader>
@@ -36,4 +45,5 @@
 				id="viewColumnHeader3">
 			</xp:viewColumnHeader>
 		</xp:viewColumn>
-	</xp:viewPanel></xp:view>
+	</xp:viewPanel>
+</xp:view>

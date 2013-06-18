@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" style="background-color:rgb(46,46,46)">
 
-	<xp:this.beforePageLoad><![CDATA[#{javascript:configApp();}]]></xp:this.beforePageLoad>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+	if(!sessionScope.configLoaded){
+		configApp();
+	}
+	}]]></xp:this.beforePageLoad>
 	<xp:this.resources>
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
@@ -33,7 +37,7 @@
 				<!--				</xp:label>-->
 				<xp:label id="headeritem"
 					style="color:rgb(255,255,255)">
-					<xp:this.value><![CDATA[#{javascript:if(applicationScope.get("userError") == 'true'){
+					<xp:this.value><![CDATA[#{javascript:if(sessionScope.get("userError") == 'true'){
   return "Error: Cannot User Profile! Please contact IT Support";
 }
 else { 
@@ -104,12 +108,13 @@ else{ true; }
 		</xp:tr>
 		<xp:tr>
 			<xp:td>
-				<xp:link escape="true" text="Incidents" id="link4"
+				<xp:link escape="true" id="link4"
 					value="/BBIncidents.xsp">
+					<xp:this.text><![CDATA[#{javascript:applicationScope.get('incidentsLabal');}]]></xp:this.text>
 					<xp:image id="image5" url="/incidents.png"></xp:image>
 				</xp:link>
-				<xp:label value="Incidents" id="label14"
-					style="color:rgb(255,255,255);text-align:center">
+				<xp:label id="label14"
+					style="color:rgb(255,255,255);text-align:center" value="#{javascript: sessionScope.get('incidentsLabel');}">
 				</xp:label>
 			</xp:td>
 			<xp:td>

@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2352' unid='0644D91F46C1BDEE85257B71004D3A52' sequence='2'>
-<created><datetime dst='true'>20130520T100332,02-04</datetime></created>
-<modified><datetime dst='true'>20130528T100216,79+02</datetime></modified>
-<revised><datetime dst='true'>20130528T100216,78+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T100216,79+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100216,77+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='836' unid='674FA2ED67A85D0485257B8E0045A042' sequence='1'>
+<created><datetime dst='true'>20130618T084030,10-04</datetime></created>
+<modified><datetime dst='true'>20130618T084045,09-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084045,08-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T084045,09-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084045,09-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>BBvwTasksByParentFlat|BBvwTasksByParentFlat</text></item>
 <item name='$Index' sign='true'><text/></item>
@@ -33,5 +35,6 @@ AAAAAAgAAAAAAAEA
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
 

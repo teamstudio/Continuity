@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='filter' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='4ce' unid='A436D470EF2FCC92C1257AA900738167' sequence='23'>
-<created><datetime>20121101T220137,67+01</datetime></created>
-<modified><datetime dst='true'>20130528T100215,39+02</datetime></modified>
-<revised><datetime dst='true'>20130528T100215,38+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T100215,39+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115517,99+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='filter' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='76a' unid='A436D470EF2FCC92C1257AA900738167' sequence='2'>
+<created><datetime dst='true'>20121101T230137,67+02</datetime></created>
+<modified><datetime dst='true'>20130618T083733,03-04</datetime></modified>
+<revised><datetime dst='true'>20130618T083733,02-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T083733,03-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T083733,01-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$TITLE' sign='true'><text>Development\Replace field value</text></item>
 <item name='$AssistType' sign='true'><number>65413</number></item>
 <item name='$AssistLastRun' sign='true'>
@@ -32,7 +34,7 @@ gQYAAAAA
 <item name='$DesignerVersion' sign='true'><text>8.5.2</text></item>
 <item name='$AssistRunInfo' summary='true'>
 <rawitemdata type='3'>
-BgAAAgAACADyIgAAAAAAAAUAAAAwAAAAAAAAAAAAAAAAAAAADgEAAAAAAAAAAAAAAAAAABAAAAAA
+BgAAAgAACABmBwAAAAAAAAUAAAAwAAAAAAAAAAAAAAAAAAAADgEAAAAAAAAAAAAAAAAAABAAAAAA
 AAAADL9EABl7JcEAAAAArNs7ABd7JcHZcHIA9HolwQAAAAAAAAAAAAAAAAAAAAAAAAAAU3RhcnRl
 ZCBydW5uaW5nIGFnZW50ICdEZXZlbG9wbWVudFxSZXBsYWNlIGZpZWxkIHZhbHVlJyBvbiAyMS0w
 Mi0yMDEzIDEzOjMwOjQ2DQpSdW5uaW5nIG9uIHNlbGVjdGVkIGRvY3VtZW50czogMiB0b3RhbA0K

@@ -13,7 +13,9 @@
 	
 	<xp:inputText value="#{docTask.name}" id="name1"></xp:inputText>
 	<xp:br></xp:br>
-	<xp:label value="No description entered" id="label1"></xp:label>
+	<xp:label value="No description entered" id="label1"
+		style="color:rgb(255,0,0)">
+	</xp:label>
 	<xp:inputText value="#{docTask.description}" id="description1">
 		<xp:this.rendered><![CDATA[#{javascript:return docTask.description == "";}]]></xp:this.rendered>
 	</xp:inputText></xp:view>

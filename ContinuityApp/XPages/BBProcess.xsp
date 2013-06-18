@@ -29,7 +29,7 @@ if (doc == null) {
 	throw("invalid id");
 }	
 
-if (!applicationScope.isReadOnlyMode) {
+if (!sessionScope.isReadOnlyMode) {
 
 	//incident deactivation
 	if (param.get("type").equals("incident") ) {

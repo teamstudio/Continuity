@@ -5,14 +5,20 @@
 			viewName="BBResponsibilitiesByRole">
 			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("roleId");}]]></xp:this.categoryFilter>
 		</xp:dominoView>
-
+	
+		<!--<xp:dominoView var="viewResponsibilities"
+			viewName="BBvwAllByType" categoryFilter="fResponsibility">
+		</xp:dominoView>-->
 	</xp:this.data>
 
 	<xp:this.pageTitle><![CDATA[#{javascript:"Your Role: " + sessionScope.get("roleName");}]]></xp:this.pageTitle>
-	<xp:viewPanel value="#{viewResponsibilities}" id="viewPanel1"
-		showColumnHeader="false" pageName="/BBResponsibility.xsp"
-		var="rowData">
-
+	<xp:panel>
+		<xp:label
+			value="Click a Plan to display Tasks you are responsible to complete"
+			id="label1">
+		</xp:label></xp:panel>
+	<xp:viewPanel id="viewPanel1" showColumnHeader="false"
+		pageName="/BBResponsibility.xsp" value="#{viewResponsibilities}">
 		<xp:viewColumn columnName="name" id="viewColumn2"
 			displayAs="link" openDocAsReadonly="true">
 			<xp:this.facets>
@@ -20,24 +26,35 @@
 					id="viewColumnHeader2">
 				</xp:viewColumnHeader>
 			</xp:this.facets>
+			<!--<xp:this.rendered><![CDATA[#{javascript:
+				var docRoleId = rowData.getDocument().getItemValueString("roleId");
+				var thisRoleId = sessionScope.get("roleId");
+				if(docRoleId != thisRoleId){
+				return false;
+				}
+				else{
+				return true;
+				}}]]></xp:this.rendered>
+			-->
 		</xp:viewColumn>
 		<!--<xp:viewColumn columnName="numTasksInfo" id="viewColumn3"
 			style="color:rgb(128,128,128)">
 			<xp:this.facets>
-				<xp:viewColumnHeader value="Num tasks info"
-					xp:key="header" id="viewColumnHeader3">
-				</xp:viewColumnHeader>
+			<xp:viewColumnHeader value="Num tasks info"
+			xp:key="header" id="viewColumnHeader3">
+			</xp:viewColumnHeader>
 			</xp:this.facets>
 			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:sessionScope.put("respId", viewResponsibilities.id);}]]></xp:this.script>
-					</xp:executeScript>
-				</xp:this.action>
+			refreshMode="complete">
+			<xp:this.action>
+			<xp:executeScript>
+			<xp:this.script><![CDATA[#{javascript:sessionScope.put("respId", viewResponsibilities.id);}]]></xp:this.script>
+			</xp:executeScript>
+			</xp:this.action>
 			</xp:eventHandler>
-		</xp:viewColumn>
-	--></xp:viewPanel>
+			</xp:viewColumn>
+		-->
+	</xp:viewPanel>
 	<xp:this.navigationRules>
 		<xp:navigationRule outcome="xsp-success"
 			viewId="$$PreviousPage">

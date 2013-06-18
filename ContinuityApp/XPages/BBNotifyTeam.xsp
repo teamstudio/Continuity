@@ -75,7 +75,7 @@
 }
 else{
 
-if (applicationScope.isReadOnlyMode) {
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis message won\\\'t be sent.');
 } 
 else {

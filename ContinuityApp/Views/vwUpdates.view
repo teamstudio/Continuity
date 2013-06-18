@@ -1,16 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2e6' unid='13B630F6F465F002C1257AED00577B35' sequence='49'>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='2ce' unid='13B630F6F465F002C1257AED00577B35' sequence='3'>
 <created><datetime>20130108T165531,73+01</datetime></created>
-<modified><datetime dst='true'>20130610T113534,83+02</datetime></modified>
-<revised><datetime dst='true'>20130610T113534,82+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130610T113534,83+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115515,53+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<modified><datetime dst='true'>20130618T084613,85-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084613,84-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T092416,96-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T083712,48-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>vwUpdates|unpUpdates</text></item>
-<item name='$Index' sign='true'><text/></item>
+<item name='$Index' sign='true'><text>/O</text></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 EgECABYACwBjcmVhdGVkRGF0ZQBpAAMAAgBOAAgAbWVzc2FnZTIFAAsAbWVzc2FnZUh0bWwAaAGv
 ACoAFgAFAAsAbWVzc2FnZUh0bWwArgAUAAUABwBtZXNzYWdlAK4ABAC1AwMAAgAQAAUAcGhvdG8A

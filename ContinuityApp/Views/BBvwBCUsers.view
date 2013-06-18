@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2376' unid='8091DCB18FE48E8B85257B7400641362' sequence='2'>
-<created><datetime dst='true'>20130523T141305,62-04</datetime></created>
-<modified><datetime dst='true'>20130528T100217,15+02</datetime></modified>
-<revised><datetime dst='true'>20130528T100217,14+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T100217,15+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100217,13+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='806' unid='8776389ED7A9FB4E85257B8E0045A036' sequence='1'>
+<created><datetime dst='true'>20130618T084029,98-04</datetime></created>
+<modified><datetime dst='true'>20130618T084044,78-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,77-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T084044,78-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,78-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>BBvwBCUsers|BBBCUsers</text></item>
 <item name='$Index' sign='true'><text/></item>
@@ -22,7 +24,7 @@ FQABAABEAGYAAAAIAHVzZXJOYW1l
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQADAAMACAAAAFZDAQAIAAgAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAUAAB
+AQADAAMACAAAAFZDAQAIAAgAAAAAALQAAQAACgAAAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAUAAB
 AAAKAAAAAAAAAAAAAgIAAABWQwAABQAFAAAAAACWAAEAAAoAAAAAAAAAAAACAgAAAHVzZXJOYW1l
 dXNlck5hbWVsYXN0TmFtZWxhc3ROYW1lZW1haWxlbWFpbCYAAQAAAAEBAAkBAAAKAQEOCgAAAQCt
 KwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAA
@@ -32,5 +34,6 @@ AQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
 

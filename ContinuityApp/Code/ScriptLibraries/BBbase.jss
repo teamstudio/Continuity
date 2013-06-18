@@ -3,15 +3,15 @@ function configApp() {
 	var userName = session.getEffectiveUserName();
 	print("USER: " + userName);
 	
-	if ( !applicationScope.configLoaded) {
+	if ( !sessionScope.configLoaded) {
 		try{
+			
+			//Setup User info
 			var userView = database.getView("BBUserInfo");
 			var userEntry = userView.getAllEntriesByKey(userName);
 			var userRow = userEntry.getFirstEntry();
-			var userDocId = userRow.getColumnValues()[1];
-			applicationScope.put("UNID", userDocId);
+			var userDoc = userRow.getDocument();
 			
-			var userDoc = database.getDocumentByUNID(userDocId);
 			applicationScope.put("thisUNID", userDoc.getUniversalID());
 			
 			var firstName = userDoc.getItemValueString("firstName");
@@ -30,10 +30,58 @@ function configApp() {
 			var orgUnitId = userDoc.getItemValueString("orgUnitId");
 			sessionScope.put("orgUnitId", orgUnitId);			
 			
-			applicationScope.put("status", "High Alert");
+			//Set up settings
+			var vwAllByType:NotesView = database.getView("BBvwAllByType");
+			var docSettings:NotesDocument = vwAllByType.getDocumentByKey("fSettings", true);
+			
+			if (docSettings == null ) {
+				
+				print("ERROR: settings document not found");
+				
+			} else {
+				
+				sessionScope.put("isReadOnlyMode", docSettings.getItemValueString("readOnlyMode").equals("yes"));
+								
+				//labels
+				var risksLabel = "Assets";
+				var riskLabel = "Asset";
+				if (docSettings.getItemValueString("riskNaming").equals("activities")) {
+					risksLabel = "Activities";
+					riskLabel = "Activity";
+				} else if(docSettings.getItemValueString("riskNaming").equals("sites")) {
+					risksLabel = "Sites";
+					riskLabel = "Site";
+				} else if(docSettings.getItemValueString("riskNaming").equals("locations")) {
+					risksLabel = "Locations";
+					riskLabel = "Location";
+				}
+				
+				var incidentsLabel = "Incidents";
+				var incidentLabel = "Incident";
+				if (docSettings.getItemValueString("incidentNaming").equals("crises")) {
+					incidentsLabel = "Crises";
+					incidentLabel = "Crisis";
+				} else if (docSettings.getItemValueString("incidentNaming").equals("emergencies")) {
+					incidentsLabel = "Emergencies";
+					incidentLabel = "Emergency";
+				} 
+				/*applicationScope.put("incidentLabel", incidentLabel);
+				applicationScope.put("incidentsLabel", incidentsLabel);
+				applicationScope.put("riskLabel", riskLabel);
+				applicationScope.put("risksLabel", risksLabel);
+				*/
+				sessionScope.put("incidentLabel", incidentLabel);
+				sessionScope.put("incidentsLabel", incidentsLabel);
+				sessionScope.put("riskLabel", riskLabel);
+				sessionScope.put("risksLabel", risksLabel);
+	
+			}
+			
+			
+			//applicationScope.put("status", "High Alert");
 			
 			//get org unit alert level
-			if (orgUnitId.length>0) {
+			/*if (orgUnitId.length>0) {
 			
 				var vwOrgUnits = database.getView("BBvwOrgUnitsById");
 				var docOrgUnit = vwOrgUnits.getDocumentByKey( orgUnitId, true);
@@ -41,15 +89,34 @@ function configApp() {
 				if (docOrgUnit != null) {
 					sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 				}
-			}
+			}*/
+			//Build views for use later (performace)
+			/*var vwBBLiveIncidents = database.getView("BBvwLiveIncidents");
+			var incEntry = vwBBLiveIncidents.getFirstDocument();
+			var vwBBContacts = database.getView("BBContactsByLastname");
+			var contactEntry = vwBBContacts.getFirstDocument();
+			var vwBBTaskInc = database.getView("BBvwTasksByIncident");
+			var taskDoc = vwBBTaskInc.getFirstDocument();
+			var vwBBUpdates = database.getView("vwUpdates");
+			var updateDoc = vwBBUpdates.getFirstDocument();	
+			var vwBBIncByCat = database.getView("BBvwIncidentsByCat");
+			var IncCatDoc = vwBBIncByCat.getFirstDocument();	
+			var vwScenarios = database.getView("BBvwScenarios");
+			var scenarioDoc = vwScenarios.getFirstDocument();	
+			var vwTasks = database.getView("BBvwTasksByParentByTaskCat");
+			var taskDoc2 = vwTasks.getFirstDocument();	
 			
-			applicationScope.put("configLoaded", true);	
-			applicationScope.put("userError", "noerror");
+			var vwTypes = database.getView("BBvwAllByType");
+			var typeDoc = vwTypes.getFirstDocument();	
+			*/
+			
+			sessionScope.put("configLoaded", true);	
+			sessionScope.put("userError", "noerror");
 			
 		}
 		catch (e){
 			print("USER DEFINED ERROR: " + e);
-			applicationScope.put("userError", "error");
+			sessionScope.put("userError", "error");
 		}	
 	} 
 }
@@ -59,7 +126,7 @@ function createUpdate( text, incidentId, incidentName) {
 
 	//print("CREATING UPDATE");
 	
-	if (applicationScope.isReadOnlyMode) {
+	if (sessionScope.isReadOnlyMode) {
 		return false;
 	}
 	
@@ -96,7 +163,7 @@ function createUpdate( text, incidentId, incidentName) {
 //create a new mail
 function sendMail( to, subject, body, fromEmail, fromName ) {
 	
-	if (applicationScope.isReadOnlyMode) {
+	if (sessionScope.isReadOnlyMode) {
 		return false;
 	}
 
@@ -168,16 +235,16 @@ function processActivation(doc, isNew){
 	var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
 	var incidentDesc = doc.getItemValueString("description");
 	
-	var updateText = ((isRehearsal ? "Exercise incident: " : "Incident: <b>") + incidentDesc + "</b><br />" +
+	var updateText = ((isRehearsal ? "Exercise " + sessionScope.get('incidentLabel').toLowerCase() : sessionScope.get('incidentLabel')) + ": <b>" + incidentDesc + "</b><br />" +
 		"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 			"- org unit: " + doc.getItemValue("orgUnitName") + "<br />" +
-			"- asset: " + doc.getItemValueString("siteName") + "<br />" +
-			"- plan: " + doc.getItemValueString("scenarioName"));
+			"- " + sessionScope.get('riskLabel').toLowerCase() + ": " + doc.getItemValue("siteName") + "<br />" +
+			"- plan: " + doc.getItemValue("scenarioName"));
 		
 	createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
 	
 	//Send email to all BC users in the system	
-	var BCUsersResult = @Unique(@DbColumn( "", "BBvwBCUsers",3));
+	var BCUsersResult = @Unique(@DbColumn( "", "BBUserInfo",3));
 	if (BCUsersResult != undefined){
 		var BCUsers = (BCUsersResult.constructor == Array) ? BCUsersResult : [ BCUsersResult ];
 	}
@@ -190,12 +257,12 @@ function processActivation(doc, isNew){
 		produced ="created";
 	}
 	sendMail( "Richard_Sharpe@teamstudio.com", 									
-					"[continuity] " + (isRehearsal ? "Exercise incident " + produced : "Incident " + produced), 
+					"[continuity] " + (isRehearsal ? "Exercise " + sessionScope.get('incidentLabel').toLowerCase() + " " + produced : sessionScope.get('incidentLabel') + " " + produced), 
 					sessionScope.name + " has just "+ produced +" an incident in Continuity:\r\n\r\n incident: " + doc.getItemValueString("description") + "\r\n\r\n" +
 		"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
 			"- org unit: " + doc.getItemValue("orgUnitName") + "\r\n" +
-			"- asset: " + doc.getItemValueString("siteName") + "\r\n" +
-			"- plan: " + doc.getItemValueString("scenarioName"),
+			"- " + sessionScope.get('riskLabel').toLowerCase() + ": " +  doc.getItemValue("siteName") + "\r\n" +
+			"- plan: " + doc.getItemValue("scenarioName"),
 			sessionScope.email, sessionScope.name);
 	
 }
@@ -281,7 +348,7 @@ function getMaxAlertLevel( orgUnitId ) {
 
 function deactivateIncident(doc){
 	
-	if (!applicationScope.isReadOnlyMode) {
+	if (!sessionScope.isReadOnlyMode) {
 			
 			var isRehearsal = doc.getItemValueString("isRehearsal").equals("yes");
 			
@@ -382,7 +449,7 @@ function assignTasksToIncident(docIncident) {
 
 	try {
 		
-		if (applicationScope.isReadOnlyMode) {		//don't assign tasks in demo mode
+		if (sessionScope.isReadOnlyMode) {		//don't assign tasks in demo mode
 			return false;
 		}
 		
@@ -452,7 +519,9 @@ function assignTasksToIncident(docIncident) {
 			}
 
 			//update number of open tasks, assigned to the current user (based on bc role)
+			//IS THIS NEEDED FOR BB VERSION?
 			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+
 			//print("Num Assigned Tasks = " + sessionScope.get("numAssignedTasks"));
 		}
 		

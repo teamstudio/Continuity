@@ -10,9 +10,10 @@
 	<xp:this.resources>
 		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
+	
 	<xp:panel>
 		<xp:label id="label1">
-			<xp:this.value><![CDATA[#{javascript:docIncident.getItemValueString("scenarioName") + " is found in more than one plan. Please select the Plan you wish to associated this scenario with:"}]]></xp:this.value>
+			<xp:this.value><![CDATA[#{javascript:docIncident.getDocument().getItemValue('scenarioName') + " is found in more than one plan. Please select the Plan you wish to associated this scenario with:"}]]></xp:this.value>
 		</xp:label>
 		<xp:label id="label2">
 			<xp:this.value><![CDATA[#{javascript:"Plans are: " + sessionScope.get("incidentPlans");}]]></xp:this.value>
@@ -45,7 +46,7 @@ return true;}]]></xp:this.condition>
 					<xp:executeScript>
 						<xp:this.script><![CDATA[#{javascript:	
 					
-if (applicationScope.isReadOnlyMode) {
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
 else {
@@ -114,7 +115,7 @@ return true;}]]></xp:this.condition>
 					<xp:executeScript>
 						<xp:this.script><![CDATA[#{javascript:	
 					
-if (applicationScope.isReadOnlyMode) {
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
 else {

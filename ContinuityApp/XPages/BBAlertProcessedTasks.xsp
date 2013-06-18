@@ -32,11 +32,12 @@ var RNs = docTask.getDocument().getItemValue("roleNames");
 	<xp:panel><xp:this.rendered><![CDATA[#{javascript:sessionScope.containsKey("accessError");}]]></xp:this.rendered>
 		<xp:label id="label3" value="You are not allowed to update the status of this task!"></xp:label>
 		<xp:br></xp:br>
-		<xp:label value="Only the following roles can perform an update to this task:" id="label4"></xp:label>
+		<xp:label value="Only the following can perform an update to this task:" id="label4"></xp:label>
 		<xp:br></xp:br>
-		<xp:text escape="true" id="computedField1">
-		<xp:this.value><![CDATA[#{javascript:"Roles: " + RNs;}]]></xp:this.value>
-	</xp:text></xp:panel>
+		<xp:text escape="true" id="computedField1"
+			style="color:rgb(0,0,255)">
+			<xp:this.value><![CDATA[#{javascript:"Roles: " + RNs;}]]></xp:this.value>
+		</xp:text></xp:panel>
 	
 	<xp:br></xp:br>
 	<xp:button id="button1" value="Continue" style="-unp-menuButton:false;">

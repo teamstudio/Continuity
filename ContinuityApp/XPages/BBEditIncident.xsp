@@ -28,8 +28,8 @@
 
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Asset:" id="siteName_Label1"
-						for="siteName1">
+					<xp:label id="siteName_Label1" for="siteName1" value="#{javascript: sessionScope.get('riskLabel');}">
+						
 					</xp:label>
 				</xp:td>
 				<xp:td>
@@ -38,7 +38,7 @@
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems id="selectItems1">
 							<xp:this.value><![CDATA[#{javascript:
-							var assetLookUp = @DbColumn("", "BBvwAssetDetails", 1);
+							var assetLookUp = @DbLookup("", "BBvwAllByType", "fSite", 3);
 							var assets = "None found";
 if (assetLookUp != undefined){
 	var assets = (assetLookUp.constructor == Array) ? assetLookUp : [ assetLookUp ];
@@ -60,7 +60,8 @@ if (assetLookUp != undefined){
 						value="#{docIncident.orgUnitId}" readonly="true">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "vwOrgUnits", 2);
+							<xp:this.value><![CDATA[#{javascript:
+var DBLResult = @DbLookup("", "BBvwAllByType", "fOrgUnit", 3);
 var oUnits = "None found";
 if (DBLResult != undefined){
 	var oUnits = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
@@ -82,7 +83,8 @@ return oUnits;}]]></xp:this.value>
 						value="#{docIncident.scenarioName}" readonly="true">
 						<xp:selectItem itemLabel="Please select..."></xp:selectItem>
 						<xp:selectItems>
-							<xp:this.value><![CDATA[#{javascript:var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
+							<xp:this.value><![CDATA[#{javascript:
+var DBLResult = @DbLookup("", "BBvwAllByType", "fScenario", 3);
 var scenarios = "None found";
 if (DBLResult != undefined){
 	var scenarios = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
@@ -163,7 +165,7 @@ return true;}]]></xp:this.condition>
 					<xp:executeScript>
 						<xp:this.script><![CDATA[#{javascript:	
 					
-if (applicationScope.isReadOnlyMode) {
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
 else {
@@ -265,7 +267,7 @@ return true;}]]></xp:this.condition>
 					<xp:executeScript>
 						<xp:this.script><![CDATA[#{javascript:	
 					
-if (applicationScope.isReadOnlyMode) {
+if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
 else {

@@ -14,8 +14,8 @@
 		</xp:navigationRule>
 	</xp:this.navigationRules>
 	
-	<xp:this.pageTitle><![CDATA[#{javascript:"Incident: " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle>
-	<xp:this.beforePageLoad>
+	<xp:this.pageTitle><![CDATA[#{javascript:sessionScope.get('incidentLabel') +" : " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle>
+	<!--<xp:this.beforePageLoad>
 		<xp:executeScript>
 			<xp:this.script><![CDATA[#{javascript:var docThis = docIncident.getDocument();
 sessionScope.put("docUnid", docThis.getUniversalID());
@@ -30,7 +30,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 }]]></xp:this.script>
 		</xp:executeScript>
 	</xp:this.beforePageLoad>
-	<xp:label id="label1"><xp:this.value><![CDATA[#{javascript:docIncident.getItemValueString("scenarioName") + ":";}]]></xp:this.value></xp:label>
+	--><xp:label id="label1"><xp:this.value><![CDATA[#{javascript:docIncident.getDocument().getItemValue('scenarioName') + ":";}]]></xp:this.value></xp:label>
 	<xp:br></xp:br>
 
 	
@@ -54,7 +54,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
 				<xp:executeScript>
-					<xp:this.script><![CDATA[#{javascript:var role = sessionScope.roleName;
+					<xp:this.script><![CDATA[#{javascript:var role = sessionScope.get("roleName");
 var validRoleIds = task.getDocument().getItemValue("roleNames");
 if(@IsNotMember(role, validRoleIds)){
 	sessionScope.put("accessError", "InvalidRole");

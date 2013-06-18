@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='33a' unid='0A5ED0B083A60B07C1257AA900362E1F' sequence='53'>
-<created><datetime>20121101T105147,51+01</datetime></created>
-<modified><datetime dst='true'>20130610T113535,31+02</datetime></modified>
-<revised><datetime dst='true'>20130610T113535,30+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130610T113535,31+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,01+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='33e' unid='0A5ED0B083A60B07C1257AA900362E1F' sequence='2'>
+<created><datetime dst='true'>20121101T115147,51+02</datetime></created>
+<modified><datetime dst='true'>20130618T083716,69-04</datetime></modified>
+<revised><datetime dst='true'>20130618T083716,68-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T083716,69-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T083716,67-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>vwIncidents|unpIncidents</text></item>
 <item name='$Index' sign='true'><text/></item>

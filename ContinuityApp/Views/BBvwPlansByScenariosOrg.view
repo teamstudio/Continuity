@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B7A00499D0E'>
-<noteinfo noteid='862' unid='49301F33BA7F1CD485257B7C004DDEE1' sequence='1'>
-<created><datetime dst='true'>20130531T101033,29-04</datetime></created>
-<modified><datetime dst='true'>20130531T101033,30-04</datetime></modified>
-<revised><datetime dst='true'>20130531T101033,29-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130531T101033,30-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130531T101033,30-04</datetime></addedtofile></noteinfo>
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='822' unid='1C928ACDADB77DE285257B8E0045A03D' sequence='1'>
+<created><datetime dst='true'>20130618T084030,05-04</datetime></created>
+<modified><datetime dst='true'>20130618T084044,92-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,91-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T084044,92-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,92-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
@@ -24,7 +24,7 @@ JAACAABEiGYAAAAOAJhmAA4AAgBPcmdBbmRTY2VuYXJpbyQ5
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQACAAoACAAAAFZDAQAOAA4APAAAAGQBAQAACgABAAAAAAAAAAICAAAAVkMAAAIABAAuAAAAqAAB
+AQACAAsACAAAAFZDAQAOAA4APAAAAGQBAQAACgABAAAAAAAAAAICAAAAVkMAAAIABAAuAAAAqAAB
 AAAKAAEAAAAAAAAAAgIAAABPcmdBbmRTY2VuYXJpb09yZ0FuZFNjZW5hcmlvPAACAC4ADgBPcmdB
 bmRTY2VuYXJpbwUACgBvcmdVbml0SWRzBQAEAG5hbWUiAgMABwAMAAUACTFTMlMAJDlwbGFuLgAC
 ACAAAgAkOQUACQBwbGFuTmFtZXMAAQABADsAhQIDAAcADAAFAAkwUzBFACYAAQAAAAEBAAkBAAAK
@@ -35,5 +35,6 @@ AAAAAQAAAAAAAAAIAAAAAAABAA==
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
 

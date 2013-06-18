@@ -1,28 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<<<<<<< HEAD
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B7A00499D0E'>
-<noteinfo noteid='866' unid='7D1FBA89507183A985257B7C004E0FB8' sequence='3'>
-<created><datetime dst='true'>20130531T101238,32-04</datetime></created>
-<modified><datetime dst='true'>20130531T101339,96-04</datetime></modified>
-<revised><datetime dst='true'>20130531T101339,95-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130531T101339,96-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130531T101238,33-04</datetime></addedtofile></noteinfo>
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='7fe' unid='E37AE6431F9FF44585257B8E0045A034' sequence='1'>
+<created><datetime dst='true'>20130618T084029,96-04</datetime></created>
+<modified><datetime dst='true'>20130618T084044,74-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,73-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T084044,74-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,74-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
-=======
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='237e' unid='EFBD62EF978454F785257B720048F18A' sequence='4'>
-<created><datetime dst='true'>20130521T091644,26-04</datetime></created>
-<modified><datetime dst='true'>20130610T113535,91+02</datetime></modified>
-<revised><datetime dst='true'>20130610T113535,90+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130610T113535,91+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100217,21+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
->>>>>>> refs/heads/dev-mark
 <item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>BBvwAllScenarios|BBvwAllScenarios</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 UgAFACQAHwAEAAQAAgAJAAQAbmFtZWlkJENvbmZsaWN0JFJFRgAEAAQAAAAeAAUABABGb3JtAQAJ
@@ -34,7 +23,7 @@ EQABAABEAGYAAAAEAG5hbWU=
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQACAAgACAAAAFZDAQAEAAQAAAAAAGUAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIAAgAAAAAAiAAB
+AQACAAgACAAAAFZDAQAEAAQAAAAAAI8AAQAACgAAAAAAAAAAAAICAAAAVkMAAAIAAgAAAAAAiAAB
 AAAKAAAAAAAAAAAAAgIAAABuYW1lbmFtZWlkaWQmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEA
 AQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABX
 QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8A
@@ -43,6 +32,6 @@ AAAAAQA=
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>Yw</text></item>
-<item name='$TITLE' sign='true'><text>BBvwAllScenarios|BBvwAllScenarios</text></item>
-<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
 

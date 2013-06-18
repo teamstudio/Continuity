@@ -11,6 +11,12 @@
 		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
 	</xp:this.navigationRules>
 	
+	<xp:panel>
+		<xp:label
+			value="Details of all plans for your Organizational Unit, showing the scenarios that make up the plan and linking through to the individual tasks required to be completed"
+			id="label1">
+		</xp:label></xp:panel>
+
 	<xp:viewPanel value="#{viewScenarios}" id="viewPanel1"
 		showColumnHeader="false" pageName="/BBPlan.xsp">
 

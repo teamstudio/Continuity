@@ -1,24 +1,26 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2382' unid='E5E1F17CBE4978BD85257B71004D3A49' sequence='2'>
-<created><datetime dst='true'>20130520T100331,93-04</datetime></created>
-<modified><datetime dst='true'>20130528T100217,27+02</datetime></modified>
-<revised><datetime dst='true'>20130528T100217,26+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T100217,27+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100217,25+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='7f6' unid='AF013539BF4F742E85257B8E0045A032' sequence='1'>
+<created><datetime dst='true'>20130618T084029,94-04</datetime></created>
+<modified><datetime dst='true'>20130618T084044,70-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,69-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T092415,43-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,70-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormatNote' summary='true' sign='true'>
 <rawitemdata type='4'>
 AQDrT2V3zLRgBBZoEwAoeyWF
 </rawitemdata></item>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>BBUserInfo</text></item>
-<item name='$Index' sign='true'><text/></item>
+<item name='$Index' sign='true'><text>/O</text></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-dAACABgAAgAkMwUACAB1c2VyTmFtZVYBAwACAA4AAgAkMpAAVgEDAAUAIgAdAAQAAgACAAkABAAk
-MyQyJENvbmZsaWN0JFJFRgAEAAQAAAAcAAUABABGb3JtAQAIAGZDb250YWN0CgIDAAcACgAEAAlM
-MVM=
+qgACABgAAgAkMwUACAB1c2VyTmFtZVYBAwACAA4AAgAkMpAAVgEDAAUAKAAkAAUAAgACAAUACQAE
+ACQzJDJlbWFpbCRDb25mbGljdCRSRUYEAAQAAABEAAUABABGb3JtAQAIAGZDb250YWN0CgIFAAYA
+cm9sZUlkAQAEAG5vbmUBAAcAY29udGFjdAAfAgoCBAAeARwCAwAHABIADAAJTDFTNFM1UzhTOVM=
 </formula></item>
 <item name='$Collation' summary='true'>
 <rawitemdata type='2'>
@@ -26,15 +28,17 @@ DwABAABEAGYAAAACACQz
 </rawitemdata></item>
 <item name='$ViewFormat' summary='true' sign='true'>
 <rawitemdata type='5'>
-AQACAAQACAAAAFZDAQACAAQAJgAAAJsAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIABAAcAAAAwwAB
-AAAKAAAAAAAAAAAAAgIAAAAkM05hbWUmAAIAGAACACQzBQAIAHVzZXJOYW1lVgEDAAcADAAFAAkw
-UzBFACQyVU5JRBwAAgAOAAIAJDKQAFYBAwAHAAwABQAJMFMwRQAmAAEAAAABAQAJAQAACgEBDgoA
-AAEArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAA
-AAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAQ
-AAAAAQD///8ABQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEA
-AAAAAAAACAAAAAAAAQA=
+AQADAAUACAAAAFZDAQACAAQAJgAAAJsAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIABAAcAAAAwwAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAABQAFAAAAAAClAAEAAAoAAAAAAAAAAAACAgAAACQzTmFtZSYA
+AgAYAAIAJDMFAAgAdXNlck5hbWVWAQMABwAMAAUACTBTMEUAJDJVTklEHAACAA4AAgAkMpAAVgED
+AAcADAAFAAkwUzBFAGVtYWlsZW1haWwmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAA
+AAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkA
+AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
+AAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAEAAAAAEA////AAUA////AAEAAAAAAAAAAAAA
+AAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
 </rawitemdata></item>
 <item name='$Comment' sign='true'><text/></item>
 <item name='$Flags'><text>PY</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
 

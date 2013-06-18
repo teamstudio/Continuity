@@ -6,13 +6,14 @@
 		pageName="/BBContactDetails.xsp" showColumnHeader="false">
 
 		<xp:this.data>
-			<xp:dominoView var="viewContacts"
-				viewName="BBContactsByLastname">
+			<xp:dominoView var="viewContacts" viewName="BBAllByType"
+				categoryFilter="fContact">
 			</xp:dominoView>
+
 		</xp:this.data>
-		<xp:viewColumn columnName="fullName" id="viewColumn1"
+		<xp:viewColumn columnName="name" id="viewColumn1"
 			displayAs="link" openDocAsReadonly="true">
-			<xp:viewColumnHeader value="name" id="viewColumnHeader1"></xp:viewColumnHeader>
+			<xp:viewColumnHeader value="ID" id="viewColumnHeader1"></xp:viewColumnHeader>
 		</xp:viewColumn>
 		<xp:viewColumn columnName="jobTitle" id="viewColumn2"
 			style="color:rgb(0,0,255)">

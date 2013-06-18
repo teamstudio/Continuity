@@ -1,16 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2372' unid='9E64056188F284B185257B71004D3A4A' sequence='2'>
-<created><datetime dst='true'>20130520T100331,94-04</datetime></created>
-<modified><datetime dst='true'>20130528T100217,11+02</datetime></modified>
-<revised><datetime dst='true'>20130528T100217,10+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T100217,11+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100217,09+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='80e' unid='127619137C85755585257B8E0045A038' sequence='1'>
+<created><datetime dst='true'>20130618T084030,00-04</datetime></created>
+<modified><datetime dst='true'>20130618T084044,82-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,81-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T092415,51-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,82-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>BBvwIncidents</text></item>
-<item name='$Index' sign='true'><text/></item>
+<item name='$Index' sign='true'><text>/O</text></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
 kgECAAwAAgAkMGkAAwACAFoAAgAkOAUACwBkZXNjcmlwdGlvbgAFAAsAaXNSZWhlYXJzYWwAAQAD
 AHllcwAKAq8AIgAWAAEADAAgKHJlaGVhcnNhbCmuAAwAAQAAAK4ABAC1AyICAwACAFwADQBzdW1t
@@ -31,7 +33,7 @@ GgABAABEAWYAAAANAGNyZWF0ZWREYXRlTXM=
 <item name='$ViewFormat' sign='true'>
 <rawitemdata type='5'>
 AQAKAAwACAAAAFZDBQANAA0AAAAAAJAAAQAACAAAAAEAAAAAAAICAAAAVkMAAAIACQAKAAoAUAAB
-AAAKAAAAAAAAAAAAAgIAAABWQwAAAgAHAA4AAABQAAEAAAgAAAAAAAAAAAACAgAAAFZDAAACAAsA
+AAAKAAAAAAAAAAAAAgIAAABWQwAAAgAHAA4AAACcAAEAAAgAAAAAAAAAAAACAgAAAFZDAAACAAsA
 bAAAAFAAAQAACAAAAAAAAAAAAAICAAAAVkMAAA0ADQAAAAAAfQABAAAIAAAAAAAAAAAAAgIAAABW
 QwAACgAKAAAAAABnAAEAAAgAAAAAAAAAAAACAgAAAFZDAAAMAAwAAAAAAIgAAQAACAAAAAAAAAAA
 AAICAAAAVkMAAA0ABwB4AAAAhQABAAAIAAAAAAAAAAAAAgIAAABWQwAABgAGAAAAAABQAAEAAAoA
@@ -57,5 +59,6 @@ AAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8A
 AQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEAWEMATIADAAAAAAABAgICAQEBAQcE
 AwAAAAAAAAAAIC0tOllDAAEAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA
 AAAAAAAAAAAsIAOA
-</rawitemdata></item></note>
+</rawitemdata></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
 

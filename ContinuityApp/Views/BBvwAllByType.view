@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='85257B8E00454D65'>
+<noteinfo noteid='7fa' unid='E8EFB750D5F6363185257B8E0045A033' sequence='1'>
+<created><datetime dst='true'>20130618T084029,95-04</datetime></created>
+<modified><datetime dst='true'>20130618T084044,72-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,71-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T084830,75-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,72-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>BBvwAllByType|BBAllByType</text></item>
+<item name='$Index' sign='true'><text>/O</text></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+tAECAFgAAgAkMgUABABGb3JtAQAFAGZUYXNrAAoCBQAGAHN0YXR1cwEAAAALAhwCrwAmABYAAQAM
+AHRhc2tBc3NpZ25lZK4AEAAFAAQARm9yba4ABAC1AwMAAgBaAAIASUQFAAQARm9ybQEACABmQ29u
+dGFjdAoCrwA4ACoABQAIAGxhc3ROYW1lAQABACAAIgIFAAkAZmlyc3ROYW1lACICrgAOAAUAAgBp
+ZK4ABAC1AwMAAgAiAAIAJDYFAAQAbmFtZQEAAQB8ACICBQACAGlkIgIDAAUAMAArAAYAAgACAAQA
+AgAIAAkAJDJJRG5hbWUkNmpvYlRpdGxlJENvbmZsaWN0AAQABAAAAHoABQAEAEZvcm0BAAUAZlRh
+c2sACgIFAAYAc3RhdHVzAQAAAAsCHAIEAB4BBQAEAEZvcm0BAAcAZlVwZGF0ZQABAA0AZlRhc2tD
+YXRlZ29yeQAfAgEABQBmSGVscAAfAgEABwBmSGF6YXJkAB8CCgIEAB4BHAIDAAcAMAAqAAlMMVM2
+UzdTOFM5UzExUzEyUzE1UzE2UzE4UzE5UzIwUzIxUzIyUzIzUw==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+IwADAABECGYHAAACAIBmAAIAAgCAZgAEAAQAJDJJRG5hbWU=
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQAFAAoAiwAAAFZDAwQCAAQAcgAAAD8AAQAACQABAAAAAAAAAAICAAAAVkMBAAIAAgB2AAAA4QAB
+AAAJAAAAAAAAAAAAAgIAAABWQwEABAAEAAAAAAClAAEAAAkAAAAAAAAAAAACAgAAAFZDAAACAAkA
+NAAAAJsAAQAACgAAAAAAAAAAAAICAAAAVkMAAAgACQAAAAAAoAABAAAKAAAAAAAAAAAAAgIAAAAk
+MkZvcm1yAAIAWAACACQyBQAEAEZvcm0BAAUAZlRhc2sACgIFAAYAc3RhdHVzAQAAAAsCHAKvACYA
+FgABAAwAdGFza0Fzc2lnbmVkrgAQAAUABABGb3JtrgAEALUDAwAHABgAEgAJMlJUNVM2UzdTOFMx
+MFMxMlJJRGlkdgACAFoAAgBJRAUABABGb3JtAQAIAGZDb250YWN0CgKvADgAKgAFAAgAbGFzdE5h
+bWUBAAEAIAAiAgUACQBmaXJzdE5hbWUAIgKuAA4ABQACAGlkrgAEALUDAwAHABoAEwAJM1M0UzZT
+N1M4UzlTMTBTMTJTAG5hbWVuYW1lJDZuYW1lICsgaWQ0AAIAIgACACQ2BQAEAG5hbWUBAAEAfAAi
+AgUAAgBpZCICAwAHABAACQAJMVMyUzNTNFMAam9iVGl0bGVKb2IgVGl0bGUmAAEAAAABAQAJAQAA
+CgEBDgoAAD8ArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//
+AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAA
+AAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAA
+AAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAA
+AAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAA
+AAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Yw</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
+
