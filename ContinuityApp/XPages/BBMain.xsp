@@ -24,21 +24,10 @@
 	<xp:table style="background-color:rgb(61,61,61)">
 		<xp:tr>
 			<xp:td>
-				<!--				<xp:label id="label13">-->
-				<!--
-					<xp:this.value><![CDATA[#{javascript:applicationScope.get("thisUNID");}]]></xp:this.value>
-				-->
-				<!--				</xp:label>-->
-				<!--				<br />-->
-				<!--				<xp:label id="label8">-->
-				<!--
-					<xp:this.value><![CDATA[#{javascript:applicationScope.get("error");}]]></xp:this.value>
-				-->
-				<!--				</xp:label>-->
 				<xp:label id="headeritem"
 					style="color:rgb(255,255,255)">
-					<xp:this.value><![CDATA[#{javascript:if(sessionScope.get("userError") == 'true'){
-  return "Error: Cannot User Profile! Please contact IT Support";
+					<xp:this.value><![CDATA[#{javascript:if(sessionScope.get("userError") == 'error'){
+  return "Error: Cannot Access User Profile! Please contact IT Support";
 }
 else { 
 	return sessionScope.get("name");
