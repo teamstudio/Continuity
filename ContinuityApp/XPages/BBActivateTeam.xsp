@@ -42,7 +42,7 @@
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:comboBox id="comboBox3"
+					<xp:comboBox id="siteId"
 						value="#{docIncident.siteId}">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems id="selectItems1">
@@ -93,7 +93,7 @@ return oUnits;}]]></xp:this.value>
 				<xp:td>
 					<xp:comboBox id="comboBox4"
 						value="#{docIncident.scenarioId}">
-						<xp:selectItem itemLabel="Please select..."></xp:selectItem>
+						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:
 //var DBLResult = @DbColumn( "", "BBvwAllScenarios", 1);
@@ -158,29 +158,40 @@ return scenarios;}]]></xp:this.value>
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
-				<xp:actionGroup>
 
-					<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
+				<xp:actionGroup>
+					<xp:actionGroup>
+						<xp:openPage
+								name="/BBActivateTeam.xsp" target="editDocument">
+								<xp:this.documentId><![CDATA[#{javascript:sessionScope.get('docUnid');;}]]></xp:this.documentId>
+							</xp:openPage>
+					</xp:actionGroup>
+					<xp:actionGroup>
+
+						<xp:this.condition><![CDATA[#{javascript:
+		docIncident.save();				
+		if(docIncident.getItemValueString("description") == ""){
 		alert("Description cannot be blank!");
 		return false;
 }
-if(docIncident.getItemValueString("siteName") == "Please select..."){
+
+if(docIncident.getItemValueString("siteId") == "Please Select..."){
 		alert("Please select an Asset!");
 		return false;
 }	
-if(docIncident.getItemValueString("orgUnitId") == "Please select..."){
+if(docIncident.getItemValueString("orgUnitId") == "Please Select..."){
 		alert("Please select an OrgUnit!");
 		return false;
 }	
-if(docIncident.getItemValueString("scenarioName") == "Please select..."){
+if(docIncident.getItemValueString("scenarioId") == "Please Select..."){
 		alert("Please select a scenario!");
 		return false;
 }	
 return true;}]]></xp:this.condition>
-					<xp:actionGroup>
+						<xp:actionGroup>
 
-						<xp:executeScript>
-							<xp:this.script><![CDATA[#{javascript:	
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:	
 if (sessionScope.isReadOnlyMode) {
 	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
 } 
@@ -215,11 +226,11 @@ else {
 }					
 
 }]]></xp:this.script>
-						</xp:executeScript>
+							</xp:executeScript>
 
-					</xp:actionGroup>
-					<xp:actionGroup>
-						<xp:this.condition><![CDATA[#{javascript:
+						</xp:actionGroup>
+						<xp:actionGroup>
+							<xp:this.condition><![CDATA[#{javascript:
 	var OUScenario = doc.getItemValueString("orgUnitId") + scenarioName;
 	
 	var DBPlanNameRes = @DbLookup("", "BBvwPlansByScenariosOrg", OUScenario, 2);
@@ -239,22 +250,22 @@ else {
 	}]]></xp:this.condition>
 
 
-						<xp:openPage name="/BBActivateTeamAddPlan.xsp"
-							target="editDocument">
-							<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
-						</xp:openPage>
-					</xp:actionGroup>
+							<xp:openPage
+								name="/BBActivateTeamAddPlan.xsp" target="editDocument">
+								<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
+							</xp:openPage>
+						</xp:actionGroup>
 
-					<xp:actionGroup>
-						<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
+						<xp:actionGroup>
+							<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
 	sessionScope.put("multiPlans", "false");
 	return false;
 }else{
   return true;
 }}]]>
-						</xp:this.condition>
-						<xp:executeScript>
-							<xp:this.script><![CDATA[#{javascript:
+							</xp:this.condition>
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:
 var DBPlanIDResult = @DbLookup( "", "vwPlans", DBPlanNameRes,4);
 doc.replaceItemValue("planId", DBPlanIDResult);
 doc.replaceItemValue("planName", DBPlanNameRes);						
@@ -281,10 +292,11 @@ dbMail.replicate();
 dbMail.close();
 
 			}]]></xp:this.script>
-						</xp:executeScript>
-						<xp:openPage name="/BBIncidents.xsp"
-							target="openDocument">
-						</xp:openPage>
+							</xp:executeScript>
+							<xp:openPage name="/BBIncidents.xsp"
+								target="openDocument">
+							</xp:openPage>
+						</xp:actionGroup>
 					</xp:actionGroup>
 				</xp:actionGroup>
 			</xp:this.action>
@@ -455,16 +467,21 @@ dbMail.close();
 
 
 	
-<xp:button value=" Cancel " id="button4">
-		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+	<xp:button value="Cancel " id="button4">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
 			<xp:this.action>
 
 				<xp:actionGroup>
-					<xp:executeScript script="#{javascript:docIncident.getDocument().removePermanently(true);}">
-					</xp:executeScript><xp:openPage name="/BBMain.xsp" target="openDocument">
+					<xp:executeScript
+						script="#{javascript:docIncident.getDocument().removePermanently(true);}">
+					</xp:executeScript>
+					<xp:openPage name="/BBMain.xsp"
+						target="openDocument">
 					</xp:openPage>
-					
+
 				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
-	</xp:button><xp:this.navigationRules><xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule></xp:this.navigationRules></xp:view>
+	</xp:button>
+	<xp:this.navigationRules><xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule></xp:this.navigationRules></xp:view>
