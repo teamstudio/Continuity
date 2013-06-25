@@ -11,41 +11,16 @@
 		<xp:table>
 			<xp:tr>
 				<xp:td>
-
-					<xp:image id="image1"
-						style="width: 200px; height: 200px;">
-						<xp:this.url><![CDATA[#{javascript:
-			//var thumb = docContact.getItemValueString("photoThumbnailName")
-			if(!docContact.getAttachmentList().isEmpty()){
-				return "/0/" + docContact.getDocument().getUniversalID() + "/$file/" + docContact.getAttachmentList().get(0).getName();
-            }
-            else{
-            	return "noProfile.gif";
-            } 
-		}]]></xp:this.url>
-					</xp:image>
+				<xp:label id="label3"></xp:label>
+				<xp:label id="label2">
+					<xp:this.value><![CDATA[#{javascript:docContact.firstName + " " + docContact.lastName;}]]></xp:this.value>
+				</xp:label>
 				</xp:td>
 				<xp:td>
 					<xp:label id="label1"></xp:label>
-					<xp:br></xp:br>
-					<xp:inputText value="#{docContact.firstName}"
-						id="firstName1" readonly="true">
-					</xp:inputText>
-					<xp:br></xp:br>
-					<xp:inputText value="#{docContact.lastName}"
-						id="lastName1" readonly="true">
-					</xp:inputText>
-					<xp:br></xp:br>
 					<xp:inputText value="#{docContact.jobTitle}"
 						id="jobTitle1" readonly="true">
 					</xp:inputText>
-				</xp:td>
-			</xp:tr>
-
-			<xp:tr>
-
-				<xp:td>
-
 				</xp:td>
 			</xp:tr>
 		</xp:table>
