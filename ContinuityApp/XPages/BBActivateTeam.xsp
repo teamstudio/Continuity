@@ -24,13 +24,12 @@
 		<xp:table>
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Description:"
-						id="description_Label1" for="description1">
+					<xp:label value="Description:" id="description_Label1"
+						for="description1">
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:inputText value="#{docIncident.description}"
-						id="description1">
+					<xp:inputText value="#{docIncident.description}" id="description1" defaultValue="#{javascript:viewScope.get('thisDescription');}">
 					</xp:inputText>
 				</xp:td>
 			</xp:tr>
@@ -42,8 +41,7 @@
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:comboBox id="siteId"
-						value="#{docIncident.siteId}">
+					<xp:comboBox id="siteId" value="#{docIncident.siteId}">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems id="selectItems1">
 							<xp:this.value><![CDATA[#{javascript:
@@ -61,13 +59,11 @@ if (assetLookUp != undefined){
 			</xp:tr>
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Org unit" id="label4"
-						for="orgUnitId">
+					<xp:label value="Org unit" id="label4" for="orgUnitId">
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:comboBox id="orgUnitId"
-						value="#{docIncident.orgUnitId}">
+					<xp:comboBox id="orgUnitId" value="#{docIncident.orgUnitId}">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:
@@ -85,14 +81,12 @@ return oUnits;}]]></xp:this.value>
 			</xp:tr>
 			<xp:tr>
 				<xp:td>
-					<xp:label id="scenarioName_Label1"
-						for="scenarioName1">
+					<xp:label id="scenarioName_Label1" for="scenarioName1">
 						<xp:this.value><![CDATA[Plan & Scenario:]]></xp:this.value>
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:comboBox id="comboBox4"
-						value="#{docIncident.scenarioId}">
+					<xp:comboBox id="comboBox4" value="#{docIncident.scenarioId}">
 						<xp:selectItem itemLabel="Please Select..."></xp:selectItem>
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:
@@ -110,18 +104,16 @@ return scenarios;}]]></xp:this.value>
 			</xp:tr>
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Alert level:"
-						id="alertLevel_Label1" for="alertLevel1">
+					<xp:label value="Alert level:" id="alertLevel_Label1" for="alertLevel1">
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:comboBox id="comboBox2"
-						value="#{docIncident.alertLevel}">
-						<xp:selectItem itemLabel="Normal"
-							itemValue="normal" id="selectItem1">
+					<xp:comboBox id="comboBox2" value="#{docIncident.alertLevel}">
+						<xp:selectItem itemLabel="Normal" itemValue="normal"
+							id="selectItem1">
 						</xp:selectItem>
-						<xp:selectItem itemLabel="Elevated"
-							itemValue="elevated" id="selectItem2">
+						<xp:selectItem itemLabel="Elevated" itemValue="elevated"
+							id="selectItem2">
 						</xp:selectItem>
 						<xp:selectItem itemLabel="High" itemValue="high"
 							id="selectItem3">
@@ -131,13 +123,12 @@ return scenarios;}]]></xp:this.value>
 			</xp:tr>
 			<xp:tr>
 				<xp:td>
-					<xp:label value="Exercise?:" id="test_Label1"
-						for="test1">
+					<xp:label value="Exercise?:" id="test_Label1" for="test1">
 					</xp:label>
 				</xp:td>
 				<xp:td>
-					<xp:comboBox id="comboBox1"
-						value="#{docIncident.isRehearsal}" defaultValue="yes">
+					<xp:comboBox id="comboBox1" value="#{docIncident.isRehearsal}"
+						defaultValue="yes">
 						<xp:selectItem itemLabel="Yes" itemValue="yes"
 							id="selectItem4">
 						</xp:selectItem>
@@ -151,8 +142,7 @@ return scenarios;}]]></xp:this.value>
 
 	</xp:panel>
 
-	<xp:button id="button1" value="Activate"
-		style="-unp-menuButton:false;">
+	<xp:button id="button1" value="Activate" style="-unp-menuButton:false;">
 
 
 		<xp:eventHandler event="onclick" submit="true"
@@ -161,15 +151,15 @@ return scenarios;}]]></xp:this.value>
 
 				<xp:actionGroup>
 					<xp:actionGroup>
-						<xp:openPage
-								name="/BBActivateTeam.xsp" target="editDocument">
-								<xp:this.documentId><![CDATA[#{javascript:sessionScope.get('docUnid');;}]]></xp:this.documentId>
-							</xp:openPage>
+						<xp:openPage name="/BBActivateTeam.xsp" target="editDocument">
+							<xp:this.documentId><![CDATA[#{javascript:sessionScope.get('docUnid');;}]]></xp:this.documentId>
+						</xp:openPage>
 					</xp:actionGroup>
 					<xp:actionGroup>
 
 						<xp:this.condition><![CDATA[#{javascript:
-		docIncident.save();				
+		viewScope.put('thisDescription', docIncident.getItemValueString("description"));
+						
 		if(docIncident.getItemValueString("description") == ""){
 		alert("Description cannot be blank!");
 		return false;
@@ -187,15 +177,16 @@ if(docIncident.getItemValueString("scenarioId") == "Please Select..."){
 		alert("Please select a scenario!");
 		return false;
 }	
+if (sessionScope.isReadOnlyMode) {
+		alert('Continuity is running in read only mode. This incident will not be saved.');
+		return false;
+}
 return true;}]]></xp:this.condition>
 						<xp:actionGroup>
 
 							<xp:executeScript>
 								<xp:this.script><![CDATA[#{javascript:	
-if (sessionScope.isReadOnlyMode) {
-	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
-} 
-else {
+
 	var doc = docIncident.getDocument();
 	doc.save();
 	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BBbase.JS ONCE SUPPORTED
@@ -222,8 +213,7 @@ else {
 	doc.replaceItemValue("orgUnitName", orgName);
 	doc.replaceItemValue("formname", "fIncident");
 	
-	doc.save();	
-}					
+	doc.save();					
 
 }]]></xp:this.script>
 							</xp:executeScript>
@@ -248,10 +238,8 @@ else {
 		DBPlanNameRes = "";
 	}
 	}]]></xp:this.condition>
-
-
-							<xp:openPage
-								name="/BBActivateTeamAddPlan.xsp" target="editDocument">
+							<xp:openPage name="/BBActivateTeamAddPlan.xsp"
+								target="editDocument">
 								<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
 							</xp:openPage>
 						</xp:actionGroup>
@@ -293,8 +281,7 @@ dbMail.close();
 
 			}]]></xp:this.script>
 							</xp:executeScript>
-							<xp:openPage name="/BBIncidents.xsp"
-								target="openDocument">
+							<xp:openPage name="/BBIncidents.xsp" target="openDocument">
 							</xp:openPage>
 						</xp:actionGroup>
 					</xp:actionGroup>
@@ -306,18 +293,18 @@ dbMail.close();
 	<xp:br></xp:br>
 
 
-	<xp:button value=" Cancel " id="button2"
-		style="-unp-menuButton:false;">
+	<xp:button value=" Cancel " id="button2" style="-unp-menuButton:false;">
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
 
 				<xp:actionGroup>
-					<xp:executeScript script="#{javascript:docIncident.getDocument().removePermanently(true);}">
-					</xp:executeScript><xp:openPage name="/BBMain.xsp"
-						target="openDocument">
+					<xp:executeScript
+						script="#{javascript:docIncident.getDocument().removePermanently(true);}">
+					</xp:executeScript>
+					<xp:openPage name="/BBMain.xsp" target="openDocument">
 					</xp:openPage>
-					
+
 				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
@@ -355,7 +342,7 @@ return true;}]]></xp:this.condition>
 						<xp:executeScript>
 							<xp:this.script><![CDATA[#{javascript:	
 if (sessionScope.isReadOnlyMode) {
-	alert('Continuity is running in read only mode.\\n\\nThis incident won\\\'t be saved.');
+	alert('Continuity is running in read only mode. This incident will not be saved.');
 } 
 else {
 	var doc = docIncident.getDocument();
@@ -412,8 +399,7 @@ else {
 	}]]></xp:this.condition>
 
 
-						<xp:openPage name="/BBActivateTeamAddPlan.xsp"
-							target="editDocument">
+						<xp:openPage name="/BBActivateTeamAddPlan.xsp" target="editDocument">
 							<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
 						</xp:openPage>
 					</xp:actionGroup>
@@ -455,8 +441,7 @@ dbMail.close();
 
 			}]]></xp:this.script>
 						</xp:executeScript>
-						<xp:openPage name="/BBIncidents.xsp"
-							target="openDocument">
+						<xp:openPage name="/BBIncidents.xsp" target="openDocument">
 						</xp:openPage>
 					</xp:actionGroup>
 				</xp:actionGroup>
@@ -466,7 +451,7 @@ dbMail.close();
 	<xp:br></xp:br>
 
 
-	
+
 	<xp:button value="Cancel " id="button4">
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
@@ -476,12 +461,14 @@ dbMail.close();
 					<xp:executeScript
 						script="#{javascript:docIncident.getDocument().removePermanently(true);}">
 					</xp:executeScript>
-					<xp:openPage name="/BBMain.xsp"
-						target="openDocument">
+					<xp:openPage name="/BBMain.xsp" target="openDocument">
 					</xp:openPage>
 
 				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
-	<xp:this.navigationRules><xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule></xp:this.navigationRules></xp:view>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>
