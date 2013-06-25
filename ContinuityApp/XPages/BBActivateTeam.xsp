@@ -148,6 +148,15 @@ return scenarios;}]]></xp:this.value>
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
+			<xp:actionGroup>
+
+						<xp:this.condition><![CDATA[#{javascript:
+if (sessionScope.isReadOnlyMode) {
+		alert('Continuity is running in read only mode. This incident will not be saved.');
+		return false;
+}
+return true;}]]></xp:this.condition>
+
 
 				<xp:actionGroup>
 					<xp:actionGroup>
@@ -177,11 +186,10 @@ if(docIncident.getItemValueString("scenarioId") == "Please Select..."){
 		alert("Please select a scenario!");
 		return false;
 }	
-if (sessionScope.isReadOnlyMode) {
-		alert('Continuity is running in read only mode. This incident will not be saved.');
-		return false;
-}
 return true;}]]></xp:this.condition>
+
+
+
 						<xp:actionGroup>
 
 							<xp:executeScript>
@@ -286,6 +294,7 @@ dbMail.close();
 						</xp:actionGroup>
 					</xp:actionGroup>
 				</xp:actionGroup>
+				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
@@ -312,39 +321,59 @@ dbMail.close();
 	<xp:br></xp:br>
 
 
+	
 	<xp:button id="button3" value="Activate">
 
 
-		<xp:eventHandler event="onclick" submit="true"
-			refreshMode="complete">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
-				<xp:actionGroup>
+			<xp:actionGroup>
 
-					<xp:this.condition><![CDATA[#{javascript:if(docIncident.getItemValueString("description") == ""){
+						<xp:this.condition><![CDATA[#{javascript:
+if (sessionScope.isReadOnlyMode) {
+		alert('Continuity is running in read only mode. This incident will not be saved.');
+		return false;
+}
+return true;}]]></xp:this.condition>
+
+
+				<xp:actionGroup>
+					<xp:actionGroup>
+						<xp:openPage name="/BBActivateTeam.xsp" target="editDocument">
+							<xp:this.documentId><![CDATA[#{javascript:sessionScope.get('docUnid');;}]]></xp:this.documentId>
+						</xp:openPage>
+					</xp:actionGroup>
+					<xp:actionGroup>
+
+						<xp:this.condition><![CDATA[#{javascript:
+		viewScope.put('thisDescription', docIncident.getItemValueString("description"));
+						
+		if(docIncident.getItemValueString("description") == ""){
 		alert("Description cannot be blank!");
 		return false;
 }
-if(docIncident.getItemValueString("siteName") == "Please select..."){
+
+if(docIncident.getItemValueString("siteId") == "Please Select..."){
 		alert("Please select an Asset!");
 		return false;
 }	
-if(docIncident.getItemValueString("orgUnitId") == "Please select..."){
+if(docIncident.getItemValueString("orgUnitId") == "Please Select..."){
 		alert("Please select an OrgUnit!");
 		return false;
 }	
-if(docIncident.getItemValueString("scenarioName") == "Please select..."){
+if(docIncident.getItemValueString("scenarioId") == "Please Select..."){
 		alert("Please select a scenario!");
 		return false;
 }	
 return true;}]]></xp:this.condition>
-					<xp:actionGroup>
 
-						<xp:executeScript>
-							<xp:this.script><![CDATA[#{javascript:	
-if (sessionScope.isReadOnlyMode) {
-	alert('Continuity is running in read only mode. This incident will not be saved.');
-} 
-else {
+
+
+						<xp:actionGroup>
+
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:	
+
 	var doc = docIncident.getDocument();
 	doc.save();
 	// CURRENTLY UNP DOES NOT SUPPORT @FUNCS IN EXT SSJS FILES - MOVE THIS TO BBbase.JS ONCE SUPPORTED
@@ -371,15 +400,14 @@ else {
 	doc.replaceItemValue("orgUnitName", orgName);
 	doc.replaceItemValue("formname", "fIncident");
 	
-	doc.save();	
-}					
+	doc.save();					
 
 }]]></xp:this.script>
-						</xp:executeScript>
+							</xp:executeScript>
 
-					</xp:actionGroup>
-					<xp:actionGroup>
-						<xp:this.condition><![CDATA[#{javascript:
+						</xp:actionGroup>
+						<xp:actionGroup>
+							<xp:this.condition><![CDATA[#{javascript:
 	var OUScenario = doc.getItemValueString("orgUnitId") + scenarioName;
 	
 	var DBPlanNameRes = @DbLookup("", "BBvwPlansByScenariosOrg", OUScenario, 2);
@@ -397,23 +425,21 @@ else {
 		DBPlanNameRes = "";
 	}
 	}]]></xp:this.condition>
+							<xp:openPage name="/BBActivateTeamAddPlan.xsp" target="editDocument">
+								<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
+							</xp:openPage>
+						</xp:actionGroup>
 
-
-						<xp:openPage name="/BBActivateTeamAddPlan.xsp" target="editDocument">
-							<xp:this.documentId><![CDATA[#{javascript:doc.getUniversalID();}]]></xp:this.documentId>
-						</xp:openPage>
-					</xp:actionGroup>
-
-					<xp:actionGroup>
-						<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
+						<xp:actionGroup>
+							<xp:this.condition><![CDATA[#{javascript:if(sessionScope.get("multiPlans") == "true"){
 	sessionScope.put("multiPlans", "false");
 	return false;
 }else{
   return true;
 }}]]>
-						</xp:this.condition>
-						<xp:executeScript>
-							<xp:this.script><![CDATA[#{javascript:
+							</xp:this.condition>
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:
 var DBPlanIDResult = @DbLookup( "", "vwPlans", DBPlanNameRes,4);
 doc.replaceItemValue("planId", DBPlanIDResult);
 doc.replaceItemValue("planName", DBPlanNameRes);						
@@ -440,15 +466,16 @@ dbMail.replicate();
 dbMail.close();
 
 			}]]></xp:this.script>
-						</xp:executeScript>
-						<xp:openPage name="/BBIncidents.xsp" target="openDocument">
-						</xp:openPage>
+							</xp:executeScript>
+							<xp:openPage name="/BBIncidents.xsp" target="openDocument">
+							</xp:openPage>
+						</xp:actionGroup>
 					</xp:actionGroup>
+				</xp:actionGroup>
 				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
-	</xp:button>
-	<xp:br></xp:br>
+	</xp:button><xp:br></xp:br>
 
 
 
