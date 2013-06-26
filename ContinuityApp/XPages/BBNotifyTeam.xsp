@@ -76,7 +76,7 @@
 else{
 
 if (sessionScope.isReadOnlyMode) {
-	alert('Continuity is running in read only mode.\\n\\nThis message won\\\'t be sent.');
+	alert('Continuity is running in read only mode. This incident will not be saved.');
 } 
 else {
 

@@ -2,12 +2,21 @@
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
 <noteinfo noteid='276a' unid='1C928ACDADB77DE285257B8E0045A03D' sequence='2'>
 <created><datetime dst='true'>20130618T084030,05-04</datetime></created>
+<<<<<<< HEAD
 <modified><datetime dst='true'>20130618T233729,87+02</datetime></modified>
 <revised><datetime dst='true'>20130618T233729,86+02</datetime></revised>
 <lastaccessed><datetime dst='true'>20130618T233729,87+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130618T233729,85+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+=======
+<modified><datetime dst='true'>20130618T084044,92-04</datetime></modified>
+<revised><datetime dst='true'>20130618T084044,91-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130625T114546,26-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T084044,92-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+>>>>>>> branch 'master' of https://github.com/teamstudio/Continuity.git
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>BBvwPlansByScenariosOrg|BBvwPlansByScenariosOrg</text></item>
 <item name='$Index' sign='true'><text/></item>

@@ -2,12 +2,21 @@
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
 <noteinfo noteid='1156' unid='5BA9DC57C574482DC1257B44002C4032' sequence='5'>
 <created><datetime dst='true'>20130405T100320,18+02</datetime></created>
+<<<<<<< HEAD
 <modified><datetime dst='true'>20130618T233728,09+02</datetime></modified>
 <revised><datetime dst='true'>20130618T233728,08+02</datetime></revised>
 <lastaccessed><datetime dst='true'>20130618T233728,09+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130405T100322,52+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+=======
+<modified><datetime dst='true'>20130618T083717,01-04</datetime></modified>
+<revised><datetime dst='true'>20130618T083717,00-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130625T100320,49-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T083716,99-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
+<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+>>>>>>> branch 'master' of https://github.com/teamstudio/Continuity.git
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$Index' sign='true'><text/></item>
 <item name='$Formula' summary='true' sign='true'><formula compiled='true'>
