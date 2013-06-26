@@ -1,15 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B8E00454D65'>
-<noteinfo noteid='80a' unid='72706FDC41857CA485257B8E0045A037' sequence='1'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
+<noteinfo noteid='2772' unid='72706FDC41857CA485257B8E0045A037' sequence='2'>
 <created><datetime dst='true'>20130618T084029,99-04</datetime></created>
-<modified><datetime dst='true'>20130618T084044,80-04</datetime></modified>
-<revised><datetime dst='true'>20130618T084044,79-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130618T084044,80-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130618T084044,80-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<modified><datetime dst='true'>20130618T233729,95+02</datetime></modified>
+<revised><datetime dst='true'>20130618T233729,94+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130618T233729,95+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130618T233729,93+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name='$FormulaClass' sign='true'><text>1</text></item>
 <item name='$TITLE' sign='true'><text>BBvwContactsByRole|BBvwContactsByRole</text></item>
 <item name='$Index' sign='true'><text/></item>
