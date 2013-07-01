@@ -27,10 +27,11 @@
 	}]]>
 	</xp:this.beforePageLoad>
 
-	<xp:div styleClass="box" rendered="#{javascript:viewScope.hasTasks == false}">
+	<xp:div styleClass="box">
+		<xp:this.rendered><![CDATA[#{javascript:viewScope.hasTasks == false && !compositeData.showDeactivationTask}]]></xp:this.rendered>
 		<div class="content">No tasks found</div>
 	</xp:div>
-		
+
 	<div>
 				
 		<ul id="summaryList">
@@ -68,9 +69,9 @@ viewScope.put("cat", catLabel );
 							<xp:this.value><![CDATA[#{javascript:"showListDetails( $(event.srcElement || event.target) ); event.stopPropagation();"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-									
+					
 					<xp:div id="markDone" styleClass="pull-right">
-						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
+						<xp:this.rendered><![CDATA[#{javascript:( (compositeData.allowMarkComplete=="true" || compositeData.allowMarkComplete==true) && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 
 						<xp:link id="cb" styleClass="unp-icon unp-checkbox-off">
@@ -88,7 +89,7 @@ viewScope.put("cat", catLabel );
 					</xp:div>
 
 					<xp:div id="markUndone" styleClass="pull-right">
-						<xp:this.rendered><![CDATA[#{javascript:( compositeData.allowMarkComplete=="true" && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
+						<xp:this.rendered><![CDATA[#{javascript:( (compositeData.allowMarkComplete=="true" || compositeData.allowMarkComplete==true) && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 					
 						<xp:link id="span1" styleClass="unp-icon unp-checkbox-on">	
@@ -162,6 +163,39 @@ return fileInfo.valid;}]]></xp:this.rendered>
 			</xp:repeat>
 
 		</ul>
+		
+		<!-- deactivation task -->
+		<xp:div style="margin-top: 10px">
+			<xp:this.rendered><![CDATA[#{javascript:compositeData.showDeactivationTask}]]></xp:this.rendered>
+			<ul id="summaryList">
+				<xp:panel tagName="li" styleClass="data-row" style="padding: 10px">
+					
+					<xp:div id="div1" styleClass="pull-right">
+						<xp:this.rendered><![CDATA[#{javascript:(compositeData.allowMarkComplete=="true" || compositeData.allowMarkComplete==true)}]]></xp:this.rendered>
+						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:block;margin-right:0;"}]]></xp:this.style>
+
+						<xp:link id="link1" styleClass="unp-icon unp-checkbox-off">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+							<xp:this.value><![CDATA[#{javascript:javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
+} else {
+												"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "', 'UnpActiveTasks.xsp?activeOnly=1'); return false;"
+												}
+												}]]></xp:this.value>
+						</xp:attr>
+							</xp:this.attrs>
+							&#160;
+						</xp:link>
+					</xp:div>
+					
+					<xp:label id="label1" styleClass="viewlistsummary two-lines" style="#{javascript:'margin-left: ' + (viewScope.hasTasks == false ? '5px' : '24px')}" value="Deactivate incident">
+					</xp:label>
+					
+				</xp:panel>
+			</ul>
+		</xp:div>
+		
 						
 	</div>
 

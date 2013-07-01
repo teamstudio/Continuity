@@ -70,5 +70,12 @@
         <required>true</required>
       </property-extension>
     </property>
+    <property>
+      <property-name>showDeactivationTask</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

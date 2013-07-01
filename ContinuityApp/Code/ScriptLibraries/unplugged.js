@@ -666,7 +666,7 @@ function markUndone(doneId, undoneId, id) {
 }
 
 //deactivate an incident, reopen the incident when done
-function deactivateIncident(id, numOpenTasks) {
+function deactivateIncident(id, numOpenTasks, returnTo) {
 	
 	//confirmation for open tasks
 	if (numOpenTasks>0) {
@@ -680,9 +680,10 @@ function deactivateIncident(id, numOpenTasks) {
 		url : "UnpProcess.xsp?type=incident&id=" + id,
 		cache : false
 	}).done(
-	function(response) {
-		loadPageEx( "UnpIncident.xsp?action=openDocument&documentId=" + id, 'contentwrapper', null);
-	});
+		function(response) {
+			loadPageEx( returnTo, 'contentwrapper', null);
+		}
+	);
 }
 
 var syncFunc = function(data) {

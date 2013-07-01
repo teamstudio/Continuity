@@ -33,17 +33,19 @@ viewScope.put("numOpenTasks", numOpenTasks);
 							<xp:this.value><![CDATA[#{javascript:"loadPageEx('UnpActiveTasks.xsp?activeOnly=1', 'contentwrapper', 'tasks', true, true);"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-					<span>Close</span>
+					<span style="margin-left:3px">Close</span>
 				</xp:panel>
 			</xp:panel>
 		</div>
 
 		<div class="mTop">
 
-			<xc:unpTasksList showAssignedTo="false" allowMarkComplete="true" showStatus="true"
+			<xc:unpTasksList showAssignedTo="false"
+				allowMarkComplete="true" showStatus="true"
 				viewName="vwTasksByIncidentByRole">
 				<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id") + sessionScope.get('roleId')}]]></xc:this.categoryFilter>
 				<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncidentTasks_1.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
+				<xc:this.showDeactivationTask><![CDATA[#{javascript:sessionScope.get('isEditor') && docIncident.getItemValueString('status').equals('active')}]]></xc:this.showDeactivationTask>
 			</xc:unpTasksList>
 
 		</div>

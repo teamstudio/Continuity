@@ -235,7 +235,7 @@ var isRegistrator = @IsMember( sessionScope.userName, a);
 											<xp:this.value><![CDATA[#{javascript:javascript:if (applicationScope.isReadOnlyMode) {
 	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
 } else {
-												"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "'); return false;"
+												"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "', '" + "UnpIncident.xsp?action=openDocument&documentId=" + docIncident.getDocument().getUniversalID() + "'); return false;"
 												}
 												}]]></xp:this.value>
 										</xp:attr>
@@ -251,7 +251,7 @@ var isRegistrator = @IsMember( sessionScope.userName, a);
 
 				<div class="mTop">
 
-					<xc:unpTasksList showAssignedTo="true" allowMarkComplete="false" showStatus="true" viewName="vwTasksByIncident">
+					<xc:unpTasksList showDeactivationTask="false" showAssignedTo="true" allowMarkComplete="false" showStatus="true" viewName="vwTasksByIncident">
 						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
 						<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncident_1.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:unpTasksList>
