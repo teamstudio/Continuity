@@ -85,6 +85,9 @@ public class Task implements Serializable {
 			
 			docTaskUI.save();
 			
+			//stamp all scenarios with all plannames
+			Scenario.stampWithPlans();
+			
 			if (isNew) {
 				
 				com.teamstudio.continuity.User.get().updateMenuOptionCounts();
@@ -115,7 +118,14 @@ public class Task implements Serializable {
 			
 			com.teamstudio.continuity.User.get().updateMenuOptionCounts();
 			
-			dbCurrent.getView("vwTasksByParent").refresh();
+			View vwTasksByParent = dbCurrent.getView("vwTasksByParent");
+			
+			vwTasksByParent.refresh();
+			
+			Utils.recycle(vwTasksByParent);
+			
+			//stamp all scenarios with all plannames
+			Scenario.stampWithPlans();
 			
 		} catch (NotesException e) {
 			Logger.error(e);

@@ -39,7 +39,8 @@
 
 			<xp:button value="Ok" id="button1">
 				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="partial" refreshId="#{javascript:compositeData.refreshId}">
+					refreshMode="partial"
+					refreshId="#{javascript:compositeData.refreshId}">
 					<xp:this.action><![CDATA[#{javascript:try {
 					//update tasks
 var assignedTo = getComponent("checkBoxGroup1").getValue();
@@ -70,6 +71,9 @@ if (assignedTo != null) {
 
 	docTarget.replaceItemValue("planNames", planNames);
 	docTarget.save();
+
+	//stamp all scenarios	
+	com.teamstudio.continuity.Scenario.stampWithPlans();
 
 	getComponent("dlgAssignTo").hide();
 } catch (e) {

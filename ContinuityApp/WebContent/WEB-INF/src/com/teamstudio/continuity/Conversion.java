@@ -400,6 +400,8 @@ public class Conversion {
 			
 			updateACL(dbCurrent);
 			
+			Scenario.stampWithPlans();
+			
 			DebugToolbar.get().info("Finished Continuity conversion");
 
 		} catch (Exception e) {

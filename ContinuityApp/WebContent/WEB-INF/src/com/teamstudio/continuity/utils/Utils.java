@@ -1,5 +1,7 @@
 package com.teamstudio.continuity.utils;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Pattern;
@@ -40,6 +42,31 @@ public class Utils {
 		}
 		
 		return s;		
+	}
+	
+	//makes a list unique, returns a vector
+	public static Vector<String> getUniqueValues( Collection<String> in ) {
+		
+		Vector<String> uniqueList = new Vector<String>(new LinkedHashSet<String>(in));
+		
+		return uniqueList;
+		
+	}
+	
+	public static boolean areListsEqual(Vector<String> one, Vector<String> two) {
+		
+		if (one.size() != two.size()) {
+			return false;
+		}
+		
+		for (String o : one) {
+			if (!two.contains(o)) {
+				return false;
+			}
+		}
+		
+		return true;
+		
 	}
 	
 	//print a message to the console (once per session) indicating that the sessionAsSigner
