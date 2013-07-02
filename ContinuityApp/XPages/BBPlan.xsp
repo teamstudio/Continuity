@@ -17,7 +17,7 @@
 			<xp:tr>
 				<xp:td>
 					<xp:inputText value="#{docScenario.description}"
-						id="description1">
+						id="description1" readonly="true">
 					</xp:inputText>
 				</xp:td>
 			</xp:tr>
