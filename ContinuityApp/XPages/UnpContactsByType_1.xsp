@@ -3,7 +3,7 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:unp="http://unplugged.teamstudio.com">
 
-	<xc:unpLayoutContacts pageTitle="Contacts">
+	<xc:unpLayoutContacts showMenu="true" pageTitle="Contacts">
 		<xp:this.facets>
 		
 			<xc:unpContactsByTypeList xp:key="contents" />

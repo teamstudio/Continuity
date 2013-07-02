@@ -111,7 +111,10 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 
 	<xp:br></xp:br>
 
-	<xc:ccTasks  showTitle="true" allowAdd="false" allowEdit="true" setResponsibleFor="false" parentId="#{javascript:docResp.getItemValueString('id')}" rendered="#{javascript:!docResp.isNewNote()}">
-	</xc:ccTasks>
+	<!--  tasks assigned to this responsibility -->	
+	<xp:div rendered="#{javascript:!docResp.isNewNote()}">
+		<xc:ccTasks  showTitle="true" allowAdd="false" allowEdit="true" setResponsibleFor="false" parentId="#{javascript:docResp.getItemValueString('id')}">
+		</xc:ccTasks>
+	</xp:div>
 
 </xp:view>

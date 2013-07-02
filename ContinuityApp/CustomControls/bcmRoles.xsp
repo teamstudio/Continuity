@@ -32,7 +32,7 @@
 			</xp:this.facets>
 
 			<tr>
-				<th colspan="2" style="min-width: 400px;">
+				<th colspan="2" style="min-width: 600px;">
 
 					<!-- action to add a responsibility -->
 					<div style="float: right; margin: 0 5px" class="lotusTiny">
