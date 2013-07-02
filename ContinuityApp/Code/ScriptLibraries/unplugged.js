@@ -40,12 +40,31 @@ $(window).load( function() {
 		
 	}
 	
+	doKeyboardScrollFix();
+	
 	//new NoClickDelay( document.getElementById('header') );
 	//disabled because of problems with menu sliding in/out directly
 	new NoClickDelay( document.getElementById('menu') );
 	new NoClickDelay( document.getElementById('footer') );
 	
 });
+
+function doKeyboardScrollFix() {
+	
+	//workaround for fixed header/footer moving around when iPad virtual keyboard is turned on/off
+	$('input, textarea')
+		.on('focus', function (e) {
+		    $('.iHeader, .footer').css('position', 'absolute');
+		})
+		.on('blur', function (e) {
+			$('.iHeader, .footer').css('position', 'fixed');
+		    
+			//force redraw
+		    setTimeout( function() {
+		        window.scrollTo( $(window).scrollLeft(), $(window).scrollTop() );
+		    }, 20 );
+		});
+}
 
 $(window).scroll( function() {
 	if ($(window).scrollTop() + $(window).height() == $(document).height()) {
@@ -342,6 +361,8 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 			}
 			
 		}
+
+		doKeyboardScrollFix();
 
 		$("img.lazy").lazy();
 		
