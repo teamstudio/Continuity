@@ -272,6 +272,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 			
 			applicationScope.put("server", ( isUnplugged() ? "" : database.getServer() ));
 			applicationScope.put("thisDbPath", database.getFilePath() );
+			applicationScope.put("thisDbUrlDefault", "/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") );
 			applicationScope.put("thisDbUrl", ( isUnplugged() ? "" : "/.ibmxspres/domino") + "/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") );
 			
 			applicationScope.put("toolbarConfig", "[['FontSize'], ['Bold','Italic','Underline','Strike','TextColor'], ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],  ['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText'], ['NumberedList','BulletedList','Blockquote'], ['Link', 'Unlink']]");

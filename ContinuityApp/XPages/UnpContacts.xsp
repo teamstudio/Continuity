@@ -2,38 +2,12 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xc:unpLayoutBasic pageTitle="Contacts">
+	<xc:unpLayoutBasicContacts pageTitle="Contacts">
 		<xp:this.facets>
 		
-			<xp:div xp:key="contents">
-			
-				<xp:div styleClass="box mBottom" style="padding: 11px">
-
-					<xp:link id="link3" value="#" text="Alphabetical" style="float: left; width: 47%" styleClass="button disabled">
-						<xp:this.attrs>
-							<xp:attr name="onclick">
-								<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpContacts.xsp', 'contentwrapper'); return false;"}]]></xp:this.value>
-							</xp:attr>
-						</xp:this.attrs>
-					</xp:link>
-				
-					<xp:link id="link2" value="#" text="By type" style="float: right; width: 47%" styleClass="button">
-						<xp:this.attrs>
-							<xp:attr name="onclick">
-								<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpContactsByType.xsp', 'contentwrapper'); return false;"}]]></xp:this.value>
-							</xp:attr>
-						</xp:this.attrs>
-					</xp:link>
-					
-					<br style="clear:both" />
-
-				</xp:div>
-		
-				<xc:unpContactsList  />
-				
-			</xp:div>
+			<xc:unpContactsList xp:key="contents" />
 			
 		</xp:this.facets>
-	</xc:unpLayoutBasic>
+	</xc:unpLayoutBasicContacts>
 
 </xp:view>

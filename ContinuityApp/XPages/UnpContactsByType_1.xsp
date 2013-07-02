@@ -3,12 +3,11 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:unp="http://unplugged.teamstudio.com">
 
-	<xc:unpLayoutBasicContacts pageTitle="Contacts">
+	<xc:unpLayoutContacts pageTitle="Contacts">
 		<xp:this.facets>
 		
 			<xc:unpContactsByTypeList xp:key="contents" />
-
 			</xp:this.facets>
-	</xc:unpLayoutBasicContacts>
+	</xc:unpLayoutContacts>
 
 </xp:view>

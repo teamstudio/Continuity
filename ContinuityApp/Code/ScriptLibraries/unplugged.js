@@ -8,11 +8,12 @@
  * the specific language governing permissions and limitations under the License
  */
 $(window).load( function() {
-
+	
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	allowFormsInIscroll();
 
 	initiscroll();
+	
 	$("#menupane").addClass("offScreen");
 	$('.viewsButton').unbind('click');
 	$('.viewsButton').click( function(event) {
@@ -28,10 +29,8 @@ $(window).load( function() {
 	} catch (e) {
 	}
 	
-	//new NoClickDelay( document.getElementById('header') );
-	//disabled because of problems with menu sliding in/out directly
-	new NoClickDelay( document.getElementById('menu') );
-	new NoClickDelay( document.getElementById('footer') );
+	//delayed image loading
+	$("img.lazy").lazy();
 	
 	try{
 		$(".opendialoglink").click( function (event){
@@ -40,6 +39,12 @@ $(window).load( function() {
 	}catch(e){
 		
 	}
+	
+	//new NoClickDelay( document.getElementById('header') );
+	//disabled because of problems with menu sliding in/out directly
+	new NoClickDelay( document.getElementById('menu') );
+	new NoClickDelay( document.getElementById('footer') );
+	
 });
 
 $(window).scroll( function() {
@@ -93,8 +98,6 @@ function loadmore(url) {
 		url = url + "?start=" + pos + "&dataMode=1";
 		thisArea.load(url + " #summaryList", function() {
 			
-			console.log("lets inser...")
-			
 			$("#summaryList").append($(".summaryDataRow li"));
 			if ($(".summaryDataRow").text().indexOf("NOMORERECORDS") > -1) {
 				$("#pullUp").hide();
@@ -106,10 +109,16 @@ function loadmore(url) {
 				$("#loadmorespinner").hide();
 			}
 			$(".summaryDataRow").empty();
+			
+			
 			try {
 				scrollContent.refresh();
+				
 			} catch (e) {
 			}
+			
+			$("img.lazy").lazy();
+			
 			return false;
 		});
 	} catch (e) {
@@ -333,6 +342,8 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 			}
 			
 		}
+
+		$("img.lazy").lazy();
 		
 		return false;
 	});
@@ -785,3 +796,44 @@ NoClickDelay.prototype = {
 		}
 	}
 };
+
+(function($, window, document)
+{
+	$.fn.lazy = function(settings)
+	{
+
+		var items = this;
+		
+		lazyImgLoad();
+
+		function lazyImgLoad() {
+			
+			items.each(function() {
+				
+				var element = $(this);
+
+				if( element.attr("data-src") && 
+					element.attr("data-src") != element.attr("src") && 
+					!element.data("loaded") && 
+					(element.is(":visible") || !true) ) {
+
+					//load image and mark as loaded
+					element
+						.attr("src", element.attr("data-src") )
+						.data("loaded", true)
+						.removeAttr("data-src");
+				}
+			});
+
+			//remove items that are already loaded
+			items = $(items).filter(function()
+			{
+				return !$(this).data("loaded");
+			});
+		}
+
+		return this;
+	}
+
+}
+)(jQuery, window, document);

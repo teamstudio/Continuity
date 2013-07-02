@@ -96,6 +96,7 @@ $('#' + id + ' option').attr('selected', 'selected');
 						</xp:scriptBlock>
 
 					</xp:panel>
+					
 				</xp:this.facets>
 			</xc:unpFormEditor>
 		</xp:this.facets>

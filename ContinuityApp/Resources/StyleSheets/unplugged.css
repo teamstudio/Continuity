@@ -2192,3 +2192,61 @@ img.link {
 img.dark {
 	border: 1px solid #888;
 }
+
+/*tabbed footer*/
+.tabfootertext {
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  width: 150px;
+  color: #999999;
+}
+#tabfooter {
+  position: absolute;
+  top: 0px;
+  width: 50%;
+  text-align: center;
+  left: 25%;
+}
+
+#tabfooter ul {
+	-webkit-padding-start:0px;
+	margin: 0px;
+	display: inline-table;
+}
+
+#tabfooter li {
+	display:block;
+	float:left;
+	width: 140px;
+	text-align:center;
+	padding-top:5px;
+	
+}
+
+@media screen and (max-width: 700px) {
+	#tabfooter li {
+		width: 90px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	#tabfooter li {
+		width: 70px;
+	}
+}
+
+.footerTabtext{
+  color:white;
+  font-size: 12px;
+}
+
+.tabSelected{
+	padding-bottom:10px;
+}
+.tabSelected .footerTabtext {
+	font-weight: bold;	
+}
+.tabSelected img {
+		
+}
