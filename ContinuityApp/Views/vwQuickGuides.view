@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='742' unid='D1CF15A2CD8091A0C1257B250038106E' sequence='24'>
+<noteinfo noteid='742' unid='D1CF15A2CD8091A0C1257B250038106E' sequence='26'>
 <created><datetime>20130305T111222,22+01</datetime></created>
-<modified><datetime dst='true'>20130618T233727,53+02</datetime></modified>
-<revised><datetime dst='true'>20130618T233727,52+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130618T233727,53+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130626T170126,62+02</datetime></modified>
+<revised><datetime dst='true'>20130626T170126,61+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130626T170126,62+02</datetime></lastaccessed>
 <addedtofile><datetime>20130305T111222,26+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
