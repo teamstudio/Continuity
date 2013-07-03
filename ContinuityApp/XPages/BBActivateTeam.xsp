@@ -11,7 +11,6 @@
 	<xp:this.beforeRenderResponse>
 		<xp:executeScript
 			script="#{javascript:sessionScope.put('docUnid', docIncident.getDocument().getUniversalID());
-			docIncident.getDocument().save();
 			}">
 		</xp:executeScript>
 	</xp:this.beforeRenderResponse>
@@ -167,6 +166,7 @@ return true;}]]></xp:this.condition>
 					<xp:actionGroup>
 
 						<xp:this.condition><![CDATA[#{javascript:
+		docIncident.getDocument().save();
 		viewScope.put('thisDescription', docIncident.getItemValueString("description"));
 						
 		if(docIncident.getItemValueString("description") == ""){
@@ -346,6 +346,7 @@ return true;}]]></xp:this.condition>
 					<xp:actionGroup>
 
 						<xp:this.condition><![CDATA[#{javascript:
+		docIncident.getDocument().save();
 		viewScope.put('thisDescription', docIncident.getItemValueString("description"));
 						
 		if(docIncident.getItemValueString("description") == ""){
@@ -496,6 +497,6 @@ dbMail.close();
 		</xp:eventHandler>
 	</xp:button>
 	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
 	</xp:this.navigationRules>
 </xp:view>
