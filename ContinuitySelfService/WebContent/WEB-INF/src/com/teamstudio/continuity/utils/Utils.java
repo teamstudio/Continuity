@@ -16,7 +16,7 @@ import com.ibm.xsp.extlib.util.ExtLibUtil;
 public class Utils extends com.ibm.xsp.extlib.util.ExtLibUtil {
 	
 	public static final Pattern rfc2822 = Pattern.compile(
-	        "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+	        "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
 	);
 	
 	public static String VIEW_ALL_BY_ID = "vAllByIdLU";
