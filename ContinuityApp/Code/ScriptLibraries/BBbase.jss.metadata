@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="85257B8E00454D65" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="896" sequence="1" unid="6C972B3197221E1A85257B8E0045C2A6">
-<created><datetime dst="true">20130618T084158,14-04</datetime></created>
-<modified><datetime dst="true">20130618T084200,09-04</datetime></modified>
-<revised><datetime dst="true">20130618T084200,08-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130618T084200,09-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130618T084200,09-04</datetime></addedtofile></noteinfo>
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="85257B9C00665D52" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="812" sequence="1" unid="9DD3B5C1FA1DEA1085257B9F001632B6">
+<created><datetime dst="true">20130705T000227,74-04</datetime></created>
+<modified><datetime dst="true">20130705T000229,24-04</datetime></modified>
+<revised><datetime dst="true">20130705T000229,23-04</datetime></revised>
+<lastaccessed><datetime dst="true">20130705T000229,24-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130705T000229,24-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
 <wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
+<item name="$POID"><datetime dst="true">20130702T143830,75-04</datetime></item>
 <item name="$TITLE" sign="true"><text>BBbase</text></item>
 <item name="$Flags"><text>.5834Q</text></item>
 <item name="$PublicAccess" sign="true"><text>1</text></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
-
-<item name="$Class"><text>UHS - Continuity DEV</text></item></note>
+</note>

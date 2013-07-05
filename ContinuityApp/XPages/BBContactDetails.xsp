@@ -13,7 +13,7 @@
 				<xp:td>
 				<xp:label id="label3"></xp:label>
 				<xp:label id="label2">
-					<xp:this.value><![CDATA[#{javascript:docContact.firstName + " " + docContact.lastName;}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:docContact.getItemValueString("firstName") + " " + docContact.getItemValueString("lastName");}]]></xp:this.value>
 				</xp:label>
 				</xp:td>
 				<xp:td>

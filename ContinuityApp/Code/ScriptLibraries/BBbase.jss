@@ -1,4 +1,5 @@
 function configApp() {
+	//For BB Public Demo
 	//var userName = "CN=ted.barnhouse/O=ZetaComm";
 	var userName = session.getEffectiveUserName();
 	print("USER: " + userName);
@@ -10,8 +11,9 @@ function configApp() {
 			var userView = database.getView("BBUserInfo");
 			var userEntry = userView.getAllEntriesByKey(userName);
 			var userRow = userEntry.getFirstEntry();
+			print("Got here");
 			var userDoc = userRow.getDocument();
-			
+			print("Not here");
 			applicationScope.put("thisUNID", userDoc.getUniversalID());
 			
 			var firstName = userDoc.getItemValueString("firstName");
@@ -65,11 +67,7 @@ function configApp() {
 					incidentsLabel = "Emergencies";
 					incidentLabel = "Emergency";
 				} 
-				/*applicationScope.put("incidentLabel", incidentLabel);
-				applicationScope.put("incidentsLabel", incidentsLabel);
-				applicationScope.put("riskLabel", riskLabel);
-				applicationScope.put("risksLabel", risksLabel);
-				*/
+				
 				sessionScope.put("incidentLabel", incidentLabel);
 				sessionScope.put("incidentsLabel", incidentsLabel);
 				sessionScope.put("riskLabel", riskLabel);
@@ -173,8 +171,7 @@ function sendMail( to, subject, body, fromEmail, fromName ) {
 		
 		docMemo = database.createDocument();
 		docMemo.replaceItemValue("form", "Memo");
-		docMemo.replaceItemValue("SendTo", "Richard_Sharpe@teamstudio.com" );
-		//docMemo.replaceItemValue("SendTo", @Explode(to) );
+		docMemo.replaceItemValue("SendTo", @Explode(to) );
 		docMemo.replaceItemValue("Subject", subject );
 	
 		docMemo.replaceItemValue("From", fromName + "<" + fromEmail + "@NotesDomain>");
