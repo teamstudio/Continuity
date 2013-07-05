@@ -45,7 +45,7 @@ else {
 	</xp:table>
 	<xp:label id="label11"></xp:label>
 	<xp:table>
-		<xp:this.rendered><![CDATA[#{javascript:if(applicationScope.get("userError") == "error"){
+		<xp:this.rendered><![CDATA[#{javascript:if(sessionScope.get("userError") == "error"){
   return false;
 }
 else{ true; }
