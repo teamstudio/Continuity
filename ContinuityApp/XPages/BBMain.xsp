@@ -72,22 +72,12 @@ else{ true; }
 					style="color:rgb(255,255,255);text-align:center">
 				</xp:label>
 			</xp:td>
-			<!--<xp:td>
-				<xp:link escape="true" text="Updates" id="link7" value="/BBCallTree.xsp">
+			<xp:td>
+				<xp:link escape="true" text="Call Tree" id="link7" value="/BBCallTree.xsp">
 				<xp:image id="image4" url="/calltree-blue.png"></xp:image>
 				</xp:link>
 				<xp:label value="Call Tree" id="label2"
 				style="color:rgb(255,255,255);text-align:center"></xp:label>
-				</xp:td>
-			-->
-			<xp:td>
-				<xp:link escape="true" text="Updates" id="link3"
-					value="/BBUpdates.xsp">
-					<xp:image id="image3" url="/updates-blue.png"></xp:image>
-				</xp:link>
-				<xp:label value="Updates" id="label6"
-					style="color:rgb(255,255,255);text-align:center">
-				</xp:label>
 			</xp:td>
 		</xp:tr>
 		<xp:tr>
@@ -142,12 +132,13 @@ else{ true; }
 				</xp:label>
 			</xp:td>
 			<xp:td>
-				<!--<xp:link escape="true" text="Updates" id="link3" value="/BBUpdates.xsp">
-					<xp:image id="image3" url="/updates-blue.png"></xp:image>
-					</xp:link>
-					<xp:label value="Updates" id="label6"
-					style="color:rgb(255,255,255);text-align:center"></xp:label>
-				-->
+				<xp:link escape="true" text="Updates" id="link9"
+					value="/BBUpdates.xsp">
+					<xp:image id="image9" url="/updates-blue.png"></xp:image>
+				</xp:link>
+				<xp:label value="Updates" id="label16"
+					style="color:rgb(255,255,255);text-align:center">
+				</xp:label>
 			</xp:td>
 			<xp:td>
 				<xp:label value="" id="label3"></xp:label>

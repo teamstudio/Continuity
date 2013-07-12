@@ -11,9 +11,7 @@ function configApp() {
 			var userView = database.getView("BBUserInfo");
 			var userEntry = userView.getAllEntriesByKey(userName);
 			var userRow = userEntry.getFirstEntry();
-			print("Got here");
 			var userDoc = userRow.getDocument();
-			print("Not here");
 			applicationScope.put("thisUNID", userDoc.getUniversalID());
 			
 			var firstName = userDoc.getItemValueString("firstName");
@@ -75,6 +73,11 @@ function configApp() {
 	
 			}
 			
+			//Set Call Tree flag if user has role that can see all OUs
+			//var vwAllById:NotesView = database.getView("vwAllById");
+			//var docRole:NotesDocument = vwAllById.getDocumentByKey(sessionScope.get("roleId"), true);
+			
+			//sessionScope.put("globalUser", docRole.getItemValue("canAccessAllOrgUnits"));
 			
 			//applicationScope.put("status", "High Alert");
 			
@@ -190,6 +193,53 @@ function sendMail( to, subject, body, fromEmail, fromName ) {
 	}
 	
 }
+
+function setCallTreeLevels(){
+	var DBLResult = @DbColumn("", "BBvwCallTreeLevel", 2);
+	var roles = [];
+	if (DBLResult != undefined){
+		var roles = (DBLResult.constructor == Array) ? DBLResult : [ DBLResult ];
+	}
+	var DBLResultIds = @DbColumn("", "BBvwCallTreeLevel", 3);
+	var roleIds = [];
+	if (DBLResultIds != undefined){
+		var roleIds = (DBLResultIds.constructor == Array) ? DBLResultIds : [ DBLResultIds ];
+	}
+	//Get roles for users OrgUnit
+	var vc = database.getView("BBvwContactsOrg").getAllEntriesByKey(sessionScope.get("orgUnitId"), true);
+	var ve = vc.getFirstEntry();
+	var roleName = "";
+	var orgRoles = [];
+	while (null != ve) {
+		
+			roleName = ve.getColumnValues()[1];
+			if(orgRoles.indexOf(roleName) == -1){
+				orgRoles.push(roleName);
+			}
+			ve = vc.getNextEntry();
+	}
+	
+	print("No of Roles: " + orgRoles.length);
+	
+	//Strip roles from ordered list if empty in users orgUnit
+	var adjRoles = [];
+	var adjRoleIds = [];
+	
+	for(var i=0; i< roles.length; i++){
+		var index = orgRoles.indexOf(roles[i]);
+		if(index == -1){
+			roles = roles.splice([i],1);
+			roleIds = roleIds.splice([i],1);
+			i--;
+		}
+	}
+	print("Roles length: " + roles.length);
+	
+	sessionScope.put("callTreeRoles", roles);
+	sessionScope.put("callTreeRoleIds", roleIds);	
+	
+}
+
 
 //set default fields that should be available on all documents
 function setDefaultFields( doc ) {

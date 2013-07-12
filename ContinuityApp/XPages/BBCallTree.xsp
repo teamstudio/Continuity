@@ -1,61 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	pageTitle="Call Tree:">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
 	<xp:this.data>
-		<xp:dominoView var="viewContacts" viewName="vwContactsByRole">
-			<xp:this.categoryFilter><![CDATA[#{javascript:var ou = sessionScope.get("orgUnitId");
-var roleId = sessionScope.get("roleId");
-return ou + "-" + roleId;
-}]]></xp:this.categoryFilter>
+		<xp:dominoView var="viewContacts" viewName="BBvwContactsOrg">
+
+			<xp:this.keys><![CDATA[#{javascript:var thisKey = [sessionScope.get("orgUnitId"), sessionScope.get("thisRole")];
+return thisKey;}]]></xp:this.keys>
 		</xp:dominoView>
 	</xp:this.data>
 
 	<xp:this.navigationRules>
-		<xp:navigationRule outcome="xsp-success" viewId="$$PreviousPage"></xp:navigationRule>
+		<xp:navigationRule outcome="xsp-success" viewId="/BBMain.xsp"></xp:navigationRule>
 	</xp:this.navigationRules>
-	<xp:this.beforePageLoad><![CDATA[#{javascript:if(!applicationScope.containsKey("callTreeOrder")){
-	try{		
-		//get call tree order
-		vwRoles = database.getView("vwRolesCallTreeOrder");
-		vecRoles = vwRoles.getAllEntries();
-		veRole = vecRoles.getFirstEntry();
-			
-		var callTreeOrder = [];
-			
-		while (null != veRole) {
-				
-			var colValues = veRole.getColumnValues();
-			callTreeOrder.push( colValues.get(1) );
-				
-			veTemp = vecRoles.getNextEntry();
-			veRole.recycle();
-			veRole = veTemp;
+	<xp:this.resources>
+		<xp:script src="/BBbase.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript: 
+		if(!sessionScope.containsKey("callTreeRoles")){
+			setCallTreeLevels();
 		}
-
-		applicationScope.put("callTreeOrder", callTreeOrder);		//determines order in the calltree
+		if(!sessionScope.containsKey("thisRole")){
+			sessionScope.put("thisRole", sessionScope.get("roleName"));
+			sessionScope.put("thisRoleId", sessionScope.get("roleId"));
 			
-		vecRoles.recycle();
-		vwRoles.recycle();
-	}
-	catch(e){
-	}
-}}]]></xp:this.beforePageLoad>
-	<xp:viewPanel value="#{viewContacts}" id="viewPanel1"
-		pageName="/BBContactDetails.xsp" showColumnHeader="false">
+			var i=0;
+			var callTreeRoles = sessionScope.get("callTreeRoles");
+			do{
+				sessionScope.put("thisRoleIndex", i);
+				i++;
+			}
+			while (!callTreeRoles[i-1].equals(sessionScope.get("roleName")));		
+		}
+	
+	}]]></xp:this.beforePageLoad>
 
-		<xp:viewColumn columnName="name" id="viewColumn1"
-			displayAs="link" openDocAsReadonly="true">
-			<xp:this.facets>
-				<xp:viewColumnHeader value="Name" xp:key="header"
-					id="viewColumnHeader1">
-				</xp:viewColumnHeader>
-			</xp:this.facets>
-		</xp:viewColumn>
-		<xp:viewColumn columnName="jobTitle" id="viewColumn2">
-			<xp:this.facets>
-				<xp:viewColumnHeader value="Job title" xp:key="header"
-					id="viewColumnHeader2">
-				</xp:viewColumnHeader>
-			</xp:this.facets>
-		</xp:viewColumn>
-	</xp:viewPanel></xp:view>
+	
+	<xp:this.pageTitle><![CDATA[#{javascript:"Call Tree: " + sessionScope.get("orgUnitName");}]]></xp:this.pageTitle>
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:button id="button1" style="-unp-menuButton:false;">
+					<xp:this.rendered><![CDATA[#{javascript:
+					var currRole = sessionScope.get("thisRole");
+					return !sessionScope.get("callTreeRoles").indexOf(currRole) == 0;
+					//!sessionScope.get("thisRoleIndex") == 0;
+					}]]></xp:this.rendered>
+					<xp:this.value><![CDATA[< Prev Level]]></xp:this.value><xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+
+							<xp:actionGroup>
+
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:var newIndex = sessionScope.get("thisRoleIndex") -1;
+var roles = sessionScope.get("callTreeRoles");
+var roleIds = sessionScope.get("callTreeRoleIds");
+var newRole = roles[newIndex];
+var newRoleId = roleIds[newIndex];
+sessionScope.put("thisRole", newRole);
+sessionScope.put("thisRoleId", newRoleId);
+sessionScope.put("thisRoleIndex", newIndex);}]]></xp:this.script>
+								</xp:executeScript>
+								<xp:openPage name="/BBCallTree.xsp" target="openDocument">
+								</xp:openPage>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+			
+			<xp:td>
+				<xp:button id="button2" style="-unp-menuButton:false;">
+					<xp:this.rendered><![CDATA[#{javascript:
+					var currRole = sessionScope.get("thisRole");
+					var orgRoles = sessionScope.get("callTreeRoles");
+					return !orgRoles.indexOf(currRole) == orgRoles.length -1;
+					
+					}]]></xp:this.rendered>
+					<xp:this.value><![CDATA[Next Level >]]></xp:this.value><xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+
+							<xp:actionGroup>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:var newIndex = sessionScope.get("thisRoleIndex") +1;
+var roles = sessionScope.get("callTreeRoles");
+var roleIds = sessionScope.get("callTreeRoleIds");
+var newRole = roles[newIndex];
+var newRoleId = roleIds[newIndex];
+sessionScope.put("thisRole", newRole);
+sessionScope.put("thisRoleId", newRoleId);
+sessionScope.put("thisRoleIndex", newIndex);}]]></xp:this.script>
+								</xp:executeScript>
+								<xp:openPage name="/BBCallTree.xsp" target="openDocument">
+								</xp:openPage>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+	<xp:panel>
+		<xp:label id="label1">
+			<xp:this.value><![CDATA[#{javascript:"My Role: " + sessionScope.get("roleName"); }]]></xp:this.value>
+		</xp:label>
+		<xp:label id="label2" style="color:rgb(0,0,255);font-weight:bold">
+			<xp:this.value><![CDATA[#{javascript:"Contacts For Role: " + sessionScope.get("thisRole");}]]></xp:this.value>
+		</xp:label>
+		
+	</xp:panel>
+	<xp:panel>
+		<xp:viewPanel value="#{viewContacts}" id="viewPanel1"
+			pageName="/BBContactDetails.xsp" showColumnHeader="false">
+
+			<xp:viewColumn columnName="name" id="viewColumn1"
+				displayAs="link" openDocAsReadonly="true">
+				<xp:this.facets>
+					<xp:viewColumnHeader value="Name" xp:key="header"
+						id="viewColumnHeader1">
+					</xp:viewColumnHeader>
+				</xp:this.facets>
+			</xp:viewColumn>
+			<xp:viewColumn columnName="jobTitle" id="viewColumn2">
+				<xp:this.facets>
+					<xp:viewColumnHeader value="Job title" xp:key="header"
+						id="viewColumnHeader2">
+					</xp:viewColumnHeader>
+				</xp:this.facets>
+			</xp:viewColumn>
+		</xp:viewPanel>
+	</xp:panel>
+
+
+</xp:view>
