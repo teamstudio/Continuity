@@ -15,10 +15,14 @@
 	</xp:this.navigationRules>
 	
 	<xp:this.pageTitle><![CDATA[#{javascript:sessionScope.get('incidentLabel') +" : " + docIncident.getItemValueString("description");}]]></xp:this.pageTitle>
-	<!--<xp:this.beforePageLoad>
+	<xp:this.beforePageLoad>
 		<xp:executeScript>
 			<xp:this.script><![CDATA[#{javascript:var docThis = docIncident.getDocument();
 sessionScope.put("docUnid", docThis.getUniversalID());
+}]]></xp:this.script>
+		</xp:executeScript>
+	</xp:this.beforePageLoad>
+<!--
 var numOpenTasks = 0;
 var t = @DbLookup( @DbName(), "vwTasksAssignedOpen", docIncident.getItemValueString("id"), 2, "[FailSilent]");
 if (t != null && t != "") {
@@ -30,11 +34,27 @@ viewScope.put("numOpenTasks", numOpenTasks);
 }]]></xp:this.script>
 		</xp:executeScript>
 	</xp:this.beforePageLoad>
-	--><xp:label id="label1"><xp:this.value><![CDATA[#{javascript:docIncident.getDocument().getItemValue('scenarioName') + ":";}]]></xp:this.value></xp:label>
+	--><xp:label id="label1">
+		<xp:this.value><![CDATA[#{javascript:docIncident.getDocument().getItemValue('scenarioName') + ":";}]]></xp:this.value>
+		<xp:this.rendered><![CDATA[#{javascript:var scenario = docIncident.getDocument().getItemValue('scenarioName');
+if(scenario == "" || scenario == "none"){
+	return false;
+}
+else{
+	return true;
+}}]]></xp:this.rendered>
+</xp:label>
 	<xp:br></xp:br>
 
 	
-	<xp:label value="Click the task you want to set to 'Completed' or reset to 'To do'" id="label3" style="color:rgb(0,0,255)"></xp:label>
+	<xp:label id="label3" style="color:rgb(0,0,255)">
+		<xp:this.value><![CDATA[#{javascript:if(scenario == "" || scenario == "none"){
+  return "No tasks found!";
+}
+else{
+  return "Click the task you want to set to 'Completed' or reset to 'To do'";
+}}]]></xp:this.value>
+	</xp:label>
 	<xp:viewPanel value="#{viewTasks}" id="viewPanel1"
 		showColumnHeader="false" var="task" pageName="/BBAlertProcessedTasks.xsp">
 		<xp:viewColumn columnName="cat" id="viewColumn1">
@@ -53,8 +73,19 @@ viewScope.put("numOpenTasks", numOpenTasks);
 			</xp:this.facets>
 		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 			<xp:this.action>
+			<xp:actionGroup>
+
+						<xp:this.condition><![CDATA[#{javascript:
+if (sessionScope.isReadOnlyMode) {
+		alert('Continuity is running in read only mode. This incident will not be saved.');
+		return false;
+}
+return true;}]]></xp:this.condition>
+			<xp:actionGroup>
 				<xp:executeScript>
-					<xp:this.script><![CDATA[#{javascript:var role = sessionScope.get("roleName");
+					<xp:this.script><![CDATA[#{javascript:
+
+var role = sessionScope.get("roleName");
 var validRoleIds = task.getDocument().getItemValue("roleNames");
 if(@IsNotMember(role, validRoleIds)){
 	sessionScope.put("accessError", "InvalidRole");
@@ -66,7 +97,9 @@ if(@IsNotMember(role, validRoleIds)){
 
 }]]></xp:this.script>
 				</xp:executeScript>
-			</xp:this.action></xp:eventHandler></xp:viewColumn>
+				</xp:actionGroup></xp:actionGroup>
+			</xp:this.action>
+			</xp:eventHandler></xp:viewColumn>
 		
 	</xp:viewPanel>
 	<xp:br></xp:br>
