@@ -305,8 +305,6 @@ public abstract class Authorizations {
 		Session session = null;
 		Database dbDirectory = null;
 		
-		Name nmUser = null;
-		
 		try {
 			
 			//open (secondary) directory db
@@ -343,8 +341,7 @@ public abstract class Authorizations {
 				Configuration config = Configuration.get();
 				
 				//generate username
-				nmUser = createUserName(session, dbDirectory, firstName, lastName, email, config.getOrganisationId() );
-				userName = nmUser.getCanonical();
+				userName = createUserName(session, dbDirectory, firstName, lastName, email, config.getOrganisationId() );
 				
 				Logger.debug("username=" + userName );
 				
@@ -352,7 +349,7 @@ public abstract class Authorizations {
 				
 				docUser.replaceItemValue("Form", "Person");
 				docUser.replaceItemValue("Type", "Person");
-				docUser.replaceItemValue("FullName", nmUser.getCanonical() );
+				docUser.replaceItemValue("FullName", userName );
 				docUser.replaceItemValue("MailSystem", "5");			//Other Internet Mail
 				docUser.replaceItemValue("$SecurePassword", "1");		//set "more secure" passwords
 				//note: password is not set, so this account can't be used (yet) from a browser/ Unplugged
@@ -378,7 +375,7 @@ public abstract class Authorizations {
 			Logger.error(e);
 		} finally {
 			
-			Utils.recycle(docUser, dbDirectory, nmUser, session);
+			Utils.recycle(docUser, dbDirectory, session);
 		}
 		
 		return userName;
@@ -386,7 +383,7 @@ public abstract class Authorizations {
 	}
 	
 	//generate a unique username
-	private static Name createUserName(Session session, Database dbDirectory, String firstName, String lastName, String email, String organisation) {
+	private static String createUserName(Session session, Database dbDirectory, String firstName, String lastName, String email, String organisation) {
 		
 		View viewUsers = null;
 		Document docUser = null;
@@ -434,8 +431,6 @@ public abstract class Authorizations {
 				userNameBase += "xx";
 			}		//short names: append xx by default
 			
-			Name nmUser = null;
-			
 			//loop until a unique username was found
 			do {
 
@@ -448,16 +443,15 @@ public abstract class Authorizations {
 					return null;
 				}
 				
-				nmUser = session.createName( userNameBase + (addSuffix ? s : "") + "/" + organisation);
+				String nmUser = "CN=" + userNameBase + (addSuffix ? s : "") + "/O=" + organisation;
 				
-				Logger.debug("check with name: " + nmUser.getCanonical()); 
-				docUser = viewUsers.getDocumentByKey( nmUser.getCanonical() , true);
+				Logger.debug("check with name: " + nmUser); 
+				docUser = viewUsers.getDocumentByKey( nmUser , true);
 				
 				if (docUser==null) {		//no person document found with this username: use it
 					return nmUser;
 				}
 				
-				nmUser.recycle();
 				docUser.recycle();
 				
 				addSuffix = true;
