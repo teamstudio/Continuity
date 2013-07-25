@@ -163,6 +163,10 @@
 	docTarget.replaceItemValue("responsibilityNames", respNames );
 	
 	docTarget.save();
+	
+	//update tasks by plan view to immediately reflect changes in 'plans' menu option
+	var v = database.getView("vwTasksByPlanId");
+	v.refresh();
 
 	getComponent("dlgAssignTo").hide();
 } catch (e) {

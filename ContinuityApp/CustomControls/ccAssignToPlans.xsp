@@ -38,9 +38,7 @@
 			<xe:dialogButtonBar id="dialogButtonBar1">
 
 			<xp:button value="Ok" id="button1">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="partial"
-					refreshId="#{javascript:compositeData.refreshId}">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="#{javascript:compositeData.refreshId}">
 					<xp:this.action><![CDATA[#{javascript:try {
 					//update tasks
 var assignedTo = getComponent("checkBoxGroup1").getValue();
@@ -74,6 +72,13 @@ if (assignedTo != null) {
 
 	//stamp all scenarios	
 	com.teamstudio.continuity.Scenario.stampWithPlans();
+	
+	//clear cached session scope variable: gets re-added when opening the plans section
+	sessionScope.remove("plans");
+	
+	//update tasks by plan view to immediately reflect changes in 'plans' menu option
+	var v = database.getView("vwTasksByPlanId");
+	v.refresh();
 
 	getComponent("dlgAssignTo").hide();
 } catch (e) {

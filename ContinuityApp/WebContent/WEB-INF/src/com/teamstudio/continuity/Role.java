@@ -83,6 +83,8 @@ public class Role implements Serializable {
 			Utils.fieldValueChange("roleId", id, "roleName", name );
 			
 			success = true;
+
+			com.teamstudio.continuity.User.get().updateMenuOptionCounts();
 			
 		} catch (Exception e) {
 			

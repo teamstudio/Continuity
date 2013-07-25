@@ -112,7 +112,7 @@
 					<xp:this.value><![CDATA[#{javascript:vwResponsibilitiesByRole.getAllEntriesByKey(roleRow.getColumnValue("id"), true);}]]></xp:this.value>
 
 					<tr>
-						<td class="grid" style="min-width: 500px;">
+						<td colspan="2" class="grid" style="min-width: 500px;">
 
 							<xp:link escape="true"
 								text="#{javascript:respRow.getColumnValues().get(2);}" style="font-weight:bold"

@@ -1,44 +1,39 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1346' unid='D6AF617CF1F9A625C1257B49002955E0' sequence='35'>
+<view name='vwAllByType' alias='unpAllByType' xmlns='http://www.lotus.com/dxl'
+ version='9.0' replicaid='C1257BB300265024' hide='web' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='true' showresponsehierarchy='false'
+ showmargin='true' shrinkrows='false' extendlastcolumn='false' showhierarchies='false'
+ unreadcolor='black' rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white'
+ altrowcolor='#efefef' totalscolor='black' headerbgcolor='white' boldunreadrows='false'
+ evaluateactions='false' allownewdocuments='false' allowcustomizations='true'
+ hidemarginborder='false' marginwidth='0px' marginbgcolor='white' uniquekeys='false'
+ indexrefresh='automatic' initialbuildrestricted='false' noemptycategories='false'>
+<noteinfo noteid='37e' unid='D6AF617CF1F9A625C1257B49002955E0' sequence='5'>
 <created><datetime dst='true'>20130410T093129,60+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,54+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,53+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,54+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130410T093129,64+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T090942,31+02</datetime></modified>
+<revised><datetime dst='true'>20130725T090942,30+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T090942,31+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T090342,89+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwAllByType|unpAllByType</text></item>
-<item name='$Index' sign='true'><text>/O</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-UAECAFgAAgAkMgUABABGb3JtAQAFAGZUYXNrAAoCBQAGAHN0YXR1cwEAAAALAhwCrwAmABYAAQAM
-AHRhc2tBc3NpZ25lZK4AEAAFAAQARm9yba4ABAC1AwMAAgAiAAIAJDYFAAQAbmFtZQEAAQB8ACIC
-BQACAGlkIgIDAAUAJgAhAAUAAgACAAQAAgAJACQyaWRuYW1lJDYkQ29uZmxpY3QABAAEAAAAegAF
-AAQARm9ybQEABQBmVGFzawAKAgUABgBzdGF0dXMBAAAACwIcAgQAHgEFAAQARm9ybQEABwBmVXBk
-YXRlAAEADQBmVGFza0NhdGVnb3J5AB8CAQAFAGZIZWxwAB8CAQAHAGZIYXphcmQAHwIKAgQAHgEc
-AgMABwAwACoACUwxUzZTN1M4UzlTMTFTMTJTMTVTMTZTMTdTMThTMTlTMjBTMjFTMjJT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-GAACAABECGYHAAACAIBmAAIAAgAkMmlk
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAEAAcAiwAAAFZDAwQCAAQAcgAAACEAAQAACQABAAAAAAAAAAICAAAAVkMBAAIAAgAAAAAAtQAB
-AAAJAAAAAAAAAAAAAgIAAABWQwAABAAEAAAAAADCAAEAAAkAAAAAAAAAAAACAgAAAFZDAAACAAkA
-NAAAAFAAAQAACgAAAAAAAAAAAAICAAAAJDJGb3JtcgACAFgAAgAkMgUABABGb3JtAQAFAGZUYXNr
-AAoCBQAGAHN0YXR1cwEAAAALAhwCrwAmABYAAQAMAHRhc2tBc3NpZ25lZK4AEAAFAAQARm9yba4A
-BAC1AwMABwAYABIACTJSVDVTNlM3UzhTMTBTMTJSaWRpZG5hbWVuYW1lJDZuYW1lICsgaWQ0AAIA
-IgACACQ2BQAEAG5hbWUBAAEAfAAiAgUAAgBpZCICAwAHABAACQAJMVMyUzNTNFMAJgABAAAAAQEA
-CQEAAAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAA
-AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
-AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8AAQDv
-7+8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAA
-AQA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT !(Form="fTask" &amp; status != "") &amp; !(Form = "fUpdate" : "fTaskCategory" : "fHelp")</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='$2' width='4.1250'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' categorized='true' twisties='true'><font size='9pt'/><columnheader
+ title='Form'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@If(
+	Form="fTask" &amp; status != ""; "taskAssigned";
+Form)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='id' width='22.6250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='id'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='name' width='24.2500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$6' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='name + id'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>name + "|" + id</formula></code></column></view>
 

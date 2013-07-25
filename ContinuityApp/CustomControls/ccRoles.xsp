@@ -2,21 +2,21 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xe:dynamicContent id="dynContentRoles" defaultFacet="rolesList">
-	<xp:this.facets>
-
-		<xp:panel readonly="true" xp:key="rolesList">
-
-			<div class="lotusActionBar lotusBtnContainer">
-				<xp:button value="Add role" id="button1" icon="page_add.png"
+		<xp:panel readonly="true">
+		
+			<div class="section">
+		<div class="title">Roles</div>
+		<div class="actions">
+			<xp:button value="Add role" id="button1" icon="page_add.png"
 					rendered="#{javascript:sessionScope.isEditor}">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynContentRoles">
-						<xp:this.action><![CDATA[#{javascript:getComponent("dynContentRoles").show("roleForm");}]]></xp:this.action>
+						refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("roleForm");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
-			</div>
-
+		</div>
+	</div>
+		
 			<xp:this.data>
 				<xp:dominoView var="vwRoles" viewName="vwRoles"></xp:dominoView>
 			</xp:this.data>
@@ -45,10 +45,10 @@
 						<h4>
 							<xp:link escape="true" text="#{rowEntry.name}">
 								<xp:eventHandler event="onclick" submit="true"
-									refreshMode="partial" refreshId="dynContentRoles">
+									refreshMode="partial" refreshId="dynamicContent1">
 									<xp:this.action>
 										<xe:changeDynamicContentAction
-											facetName="roleForm" for="dynContentRoles">
+											facetName="roleForm" for="dynamicContent1">
 											<xe:this.parameters>
 												<xp:parameter name="documentId"
 													value="#{javascript:rowEntry.getUniversalID()}">
@@ -67,9 +67,4 @@
 			</xp:repeat>
 
 		</xp:panel>
-
-		<xc:bcmRole xp:key="roleForm" dynContentId="dynContentRoles"></xc:bcmRole>
-
-	</xp:this.facets>
-	</xe:dynamicContent>
 </xp:view>

@@ -156,6 +156,33 @@
 			</div>
 
 			<div class="lotusContent">
+			
+				<!-- incorrect setup message -->
+				<xc:ccMessage rendered="#{javascript:currentUserBean.getNumAssets()==0 || currentUserBean.getNumOrgUnits() ==0 }">
+					<xc:this.message><![CDATA[#{javascript:var msg = "Setup is not complete yet: define at least ";
+					
+					
+					if (currentUserBean.getNumAssets()==0) {
+
+	if (currentUserBean.getNumOrgUnits()==0) {
+	
+		return msg + "one " + configBean.getLabel("asset").toLowerCase() + " and organisation unit.";
+	
+	} else {
+	
+		return msg + "one " + configBean.getLabel("asset").toLowerCase() + "."
+	
+	}
+
+
+} else {
+
+	return msg + "one organisation unit";
+
+}
+
+}]]></xc:this.message>
+				</xc:ccMessage>
 
 				<xp:callback facetName="facetMiddle" id="facetMiddle"></xp:callback>
 

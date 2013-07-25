@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
-
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+	
 	<div class="section">
 		<div class="title">Terms</div>
 	</div>
@@ -10,24 +10,21 @@
 			<xp:this.documentId><![CDATA[#{javascript:configBean.settingsUnid}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
-	
+
 	<xe:formTable id="formTable1" disableErrorSummary="true">
 		<xp:this.facets>
 			<xp:panel xp:key="footer" id="panel1">
 
 				<xp:button value="Edit" id="button1" icon="pencil.png">
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docSettings.isEditable()}]]></xp:this.rendered>
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 						<xp:this.action>
-							<xp:changeDocumentMode mode="edit" var="docSettings">
-							</xp:changeDocumentMode>
+							<xp:changeDocumentMode mode="edit" var="docSettings"></xp:changeDocumentMode>
 						</xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 
-				<xp:button value="Save" id="button3" icon="disk.png"
-					rendered="#{javascript:docSettings.isEditable()}">
+				<xp:button value="Save" id="button3" icon="disk.png" rendered="#{javascript:docSettings.isEditable()}">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
 
 						<xp:this.action>
@@ -64,11 +61,9 @@ configBean.reload();}]]></xp:this.script>
 						</xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
-				
-				<xp:link escape="true" text="Cancel" id="link1"
-					rendered="#{javascript:docSettings.isEditable()}">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-						refreshId="dynamicContent1" immediate="true">
+
+				<xp:link escape="true" text="Cancel" id="link1" rendered="#{javascript:docSettings.isEditable()}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1" immediate="true">
 						<xp:this.action>
 							<xp:changeDocumentMode mode="readOnly" var="docSettings"></xp:changeDocumentMode>
 						</xp:this.action>
@@ -80,26 +75,19 @@ configBean.reload();}]]></xp:this.script>
 		</xp:this.facets>
 
 		<xe:formRow id="formRow2" label="Term used for entities at risk:">
-				
-			<xp:radioGroup id="radioGroup1"
-				value="#{docSettings.riskNaming}" defaultValue="asset"
-				layout="lineDirection">
+
+			<xp:radioGroup id="radioGroup1" value="#{docSettings.riskNaming}" defaultValue="asset" layout="lineDirection">
 				<xp:selectItem itemLabel="Assets" itemValue="assets"></xp:selectItem>
-				<xp:selectItem itemLabel="Activities"
-					itemValue="activities">
-				</xp:selectItem>
+				<xp:selectItem itemLabel="Activities" itemValue="activities"></xp:selectItem>
 				<xp:selectItem itemLabel="Sites" itemValue="sites"></xp:selectItem>
-				<xp:selectItem itemLabel="Locations"
-					itemValue="locations">
-				</xp:selectItem>
+				<xp:selectItem itemLabel="Locations" itemValue="locations"></xp:selectItem>
 			</xp:radioGroup>
 
 		</xe:formRow>
-		
+
 		<xe:formRow id="formRow3" label="Term used for incidents:">
-		
-			<xp:radioGroup id="radioGroup2" value="#{docSettings.incidentNaming}"
-				defaultValue="incident" layout="lineDirection">
+
+			<xp:radioGroup id="radioGroup2" value="#{docSettings.incidentNaming}" defaultValue="incident" layout="lineDirection">
 				<xp:selectItem itemLabel="Incidents" itemValue="incidents"></xp:selectItem>
 				<xp:selectItem itemLabel="Crises" itemValue="crises"></xp:selectItem>
 				<xp:selectItem itemLabel="Emergencies" itemValue="emergencies"></xp:selectItem>
@@ -108,6 +96,10 @@ configBean.reload();}]]></xp:this.script>
 		</xe:formRow>
 
 	</xe:formTable>
+
+<div style="margin-top:15px">
+	<xc:ccTaskCategories></xc:ccTaskCategories>
+</div>
 
 
 </xp:view>

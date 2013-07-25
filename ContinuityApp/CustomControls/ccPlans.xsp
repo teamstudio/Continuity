@@ -2,245 +2,203 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
-	
-	<xe:dynamicContent id="dynContentPlans" defaultFacet="plansList">
-	<xp:this.facets>
 
-		<xp:panel readonly="true" xp:key="plansList">
-	
+	<xp:panel>
+
 		<xp:this.data>
 			<xp:dominoView var="vwPlans" viewName="vwPlans"></xp:dominoView>
+			<xp:dominoView var="vwTasksByPlanId" viewName="vwTasksByPlanId"></xp:dominoView>
 		</xp:this.data>
-		
-		<div class="lotusActionBar lotusBtnContainer">
-	
-			<xp:button value="Add plan" id="button1"
-				icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="partial" refreshId="dynContentPlans">
-					<xp:this.action><![CDATA[#{javascript:getComponent("dynContentPlans").show("planForm");}]]></xp:this.action>
-				</xp:eventHandler>
-			</xp:button>
+
+		<div class="section">
+			<div class="title">
+				<xp:text value="Plans" disableTheme="true" escape="false" />
+			</div>
+			<div class="actions">
+
+				<xp:button value="Add plan" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("planForm");}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</div>
 		</div>
-		
+
 		<xp:text value="No plans found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
-		
-		<xp:repeat id="repeat1" rows="100" var="rowEntry"
-			disableOutputTag="true" value="#{vwPlans}"
-			indexVar="rowIndex">
+
+		<xp:repeat id="repeat1" rows="100" var="rowEntry" disableOutputTag="true" value="#{vwPlans}" indexVar="rowIndex">
 			<xp:this.facets>
-				<xp:text xp:key="header" disableTheme="true"
-					escape="false">
+				<xp:text xp:key="header" disableTheme="true" escape="false">
 					<xp:this.value><![CDATA[<table class="lotusTable lotusClear"><tbody>]]></xp:this.value>
 				</xp:text>
-				<xp:text xp:key="footer" disableTheme="true"
-					escape="false">
+				<xp:text xp:key="footer" disableTheme="true" escape="false">
 					<xp:this.value><![CDATA[</tbody></table>]]></xp:this.value>
 				</xp:text>
 			</xp:this.facets>
-	
+
 			<xp:tr>
 				<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
-	
-				<td style="width:100%">
+
+				<td colspan="2" style="width:100%">
 					<h4>
-						<xp:link escape="true" text="#{rowEntry.name}"
-							id="link1">
-							<xp:eventHandler event="onclick" submit="true"
-								refreshMode="partial" refreshId="dynContentPlans">
+						<xp:link escape="true" text="#{rowEntry.name}" id="link1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 								<xp:this.action>
-									<xe:changeDynamicContentAction
-										facetName="planForm" for="dynContentPlans">
+									<xe:changeDynamicContentAction facetName="planForm" for="dynamicContent1">
 										<xe:this.parameters>
-											<xp:parameter name="documentId"
-												value="#{javascript:rowEntry.getUniversalID()}">
-											</xp:parameter>
-											<xp:parameter name="action"
-												value="openDocument">
-											</xp:parameter>
+											<xp:parameter name="documentId" value="#{javascript:rowEntry.getUniversalID()}"></xp:parameter>
+											<xp:parameter name="action" value="openDocument"></xp:parameter>
 										</xe:this.parameters>
 									</xe:changeDynamicContentAction>
 								</xp:this.action>
-	
+
 							</xp:eventHandler>
 						</xp:link>
 					</h4>
-					
+
 					<xp:div id="rowDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
-						<xp:text escape="false" id="computedField3"
-							value="#{rowEntry.description}">
-						</xp:text>
+						<xp:text escape="false" id="computedField3" value="#{rowEntry.description}"></xp:text>
 					</xp:div>
-	
+
 				</td>
-				
+
 				<td class="lotusRight lotusLastCell">
-	
-					<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imageShowDetails" 
-						width="16" height="16" title="Show details" styleClass="lotusIcon16 lotusIconShow pointer">
+
+					<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imageShowDetails" width="16" height="16"
+						title="Show details" styleClass="lotusIcon16 lotusIconShow pointer">
 						<xp:this.rendered><![CDATA[#{javascript:rowEntry.getColumnValue("description").length>0}]]></xp:this.rendered>
-						
-					<xp:eventHandler event="onclick" submit="false">
-						<xp:this.script>
-							<xp:executeClientScript>
-								<xp:this.script><![CDATA[toggleDetails( "#{id:imageShowDetails}", "#{id:rowDetails}" );]]></xp:this.script>
-							</xp:executeClientScript>
-						</xp:this.script></xp:eventHandler></xp:image>
-				
+
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script>
+								<xp:executeClientScript>
+									<xp:this.script><![CDATA[toggleDetails( "#{id:imageShowDetails}", "#{id:rowDetails}" );]]></xp:this.script>
+								</xp:executeClientScript>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:image>
+
 				</td>
-				
+
 			</xp:tr>
-	
-		</xp:repeat>
-		
-	</xp:panel>
-	
-	<xp:panel xp:key="planForm">
-	
-		<xp:this.data>
-			<xp:dominoDocument var="docPlan" action="openDocument"
-				formName="fPlan">
-			</xp:dominoDocument>
-		</xp:this.data>
-	
-		<xe:formTable id="formTable1" labelPosition="left"
-			disableErrorSummary="true">
-			<xp:this.facets>
-				<xp:panel xp:key="footer" id="panel1">
-					<xp:button value="Edit" id="button4"
-						icon="pencil.png">
-						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docPlan.isEditable()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
-							refreshMode="partial" refreshId="dynContentPlans">
-							<xp:this.action>
-								<xp:changeDocumentMode mode="edit"
-									var="docPlan">
-								</xp:changeDocumentMode>
-							</xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-					
-					<xp:button value="Save" id="button3" icon="disk.png">
-	
-						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docPlan.isEditable()
-	}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
-							refreshMode="partial" refreshId="lotusMain">
-							<xp:this.action><![CDATA[#{javascript:try {
-							var blnIsNew = docPlan.isNewNote();
-							if ( blnIsNew ) {
-							
-								//set the owners: [bcEditor] and owner
-								docPlan.replaceItemValue("docAuthors", "[bcEditor]");
-							
-								var docBE = docPlan.getDocument(true);
-								docBE.getFirstItem("docAuthors").setAuthors(true);
-								docBE.getFirstItem("owner").setAuthors(true);
+
+			<!-- inner repeat for all tasks belongning to this plan -->
+			<xp:tr rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}">
+				<td style="padding-left: 20px; width:100%">
+				<xp:text value="No tasks assigned"  escape="true" />
+			</td></xp:tr>
+			
+			<xp:repeat id="repeatTasks" rows="100"  var="taskEntry" disableOutputTag="true">
+				<xp:this.value><![CDATA[#{javascript:vwTasksByPlanId.getAllEntriesByKey(rowEntry.getColumnValue('id'), true)}]]></xp:this.value>
 				
-								docPlan.replaceItemValue("id", "p" + docPlan.getDocument().getUniversalID().toLowerCase() );
+				<xp:tr >					
+
+					<td style="padding-left: 20px; width:100%">
+
+						<xp:text tagName="h4" value="#{javascript:taskEntry.getColumnValues().get(2)}"></xp:text>
+
+						<!-- responsible -->
+						<xp:div styleClass="lotusMeta" id="taskMetaInfo">
+
+							<b>Responsibility:</b>
+							&#160;
+							<xp:text escape="false" disableTheme="true">
+								<xp:this.value><![CDATA[#{javascript:var res = taskEntry.getColumnValues().get(7);
+								if (res.length==0) {
+					return "not allocated";
+				} else {
+					return @Implode(res, ", ");
+				}
+				
+				}]]></xp:this.value>
+							</xp:text>
+
+							<!-- dialog to change assignment -->
+							<xc:ccAssignToResponsibility refreshId="dynamicContent1" taskUnid="#{javascript:taskEntry.getUniversalID()}">
+								<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
+							</xc:ccAssignToResponsibility>
+
+							<!-- type -->
+							<span class="lotusDivider">|</span>
+							<b>Type:</b>
+							&#160;
+							<xp:text escape="false" disableTheme="true" value="#{javascript:taskEntry.getColumnValues().get(9)}"></xp:text>
+
+							<!-- status -->
+							<xp:text escape="false" disableTheme="true">
+								<xp:this.value><![CDATA[#{javascript:var status = taskEntry.getColumnValues().get(8);
+								(status.length>0 ? '<span class="lotusDivider">|</span><b>Status:</b> ' + status : '')}]]></xp:this.value>
+							</xp:text>
+
+							<br />
+							<b>Plans:</b>
+							&#160;
+							<xp:text escape="false" disableTheme="true">
+								<xp:this.value><![CDATA[#{javascript:var plans = taskEntry.getColumnValues().get(10);
 								
-							} 
-		
-		docPlan.save();
-		
-		if (blnIsNew) {
-			
-			currentUserBean.updateMenuOptionCounts();
-		
-		
-		} else {
-									
-								//replace this name everywhere
-								com.teamstudio.continuity.utils.Utils.fieldValueChange("planIds", docPlan.getItemValueString("id"), "planNames", docPlan.getItemValueString("name") );
-		}
-		
-		context.setDocumentMode("readOnly");
-		
-	} catch (e) {
-		dBar.error(e);
-	}
-	}]]></xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-					
-					<xp:button value="Remove" id="button2">
-						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docPlan.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-							refreshId="lotusMain" immediate="true">
-							<xp:this.action><![CDATA[#{javascript:try {
-							docPlan.getDocument().remove(true);
-							currentUserBean.updateMenuOptionCounts();
-			
-	getComponent("dynContentPlans").show("plansList");
-	} catch (e) {
-		dBar.error(e);
-	}}]]></xp:this.action>
-							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this plan?")]]></xp:this.script>
-						</xp:eventHandler>
-					</xp:button>
-					
-					<xp:link escape="true" text="Back to list" id="link3">
-						<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-							refreshId="dynContentPlans" immediate="true">
-							<xp:this.action><![CDATA[#{javascript:getComponent("dynContentPlans").show("plansList");}]]></xp:this.action>
-						</xp:eventHandler>
-					</xp:link>
-	
-				</xp:panel>
-			</xp:this.facets>
-	
-			<xe:formRow id="formRow2" label="Name:">
-	
-				<xp:inputText id="inputText1" value="#{docPlan.name}"
-					required="true">
-					<xp:this.validators>
-						<xp:validateRequired
-							message="Enter a name for this plan">
-						</xp:validateRequired>
-					</xp:this.validators>
-				</xp:inputText>
-	
-			</xe:formRow>
-			
-			<xe:formRow label="Owner:">
-	
-				<xc:ccSelectContact dataSource="#{docPlan}"
-					fieldName="owner" dlgTitle="Select an owner" required="true">
-				</xc:ccSelectContact>
-	
-			</xe:formRow>
-	
-			<xe:formRow id="formRow3" label="Description:"
-				for="inputDescription">
-				<xp:inputTextarea style="height:50px" id="inputDescription"
-					value="#{docPlan.description}">
-				</xp:inputTextarea>
-			</xe:formRow>
-			
-			<xe:formRow id="formRow10" label="File:">
-			
-				<xe:djextListTextBox displayLabel="true"
-					id="djextListTextBoxQG" value="#{docPlan.quickGuideIds}"
-					readOnly="#{javascript:!docPlan.isEditable()}" styleClass="asBlock">
-					<xe:this.title><![CDATA[#{javascript:(!docPlan.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
-				</xe:djextListTextBox>
-	
-				<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
-					pickerText="Select" dialogTitle="Select a file">
-					<xe:this.dataProvider>
-						<xe:simpleValuePicker labelSeparator="|"
-							valueListSeparator=",">
-							<xe:this.valueList><![CDATA[#{javascript:@Implode(database.getView("vwQuickGuides").getColumnValues(2), ",")}]]></xe:this.valueList>
-						</xe:simpleValuePicker>
-					</xe:this.dataProvider>
-				</xe:valuePicker>
+								if (plans.length==0) {
+					return "not allocated";
+				} else {
+					return @Implode(plans, ", ");
+				}
 				
-			</xe:formRow>
-	
-		</xe:formTable>
-	
-	
-	
+				}]]></xp:this.value>
+							</xp:text>
+
+							<!-- plan(s) -->
+							<xc:ccAssignToPlans refreshId="dynamicContent1" taskUnid="#{javascript:taskEntry.getUniversalID()}">
+								<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
+							</xc:ccAssignToPlans>
+
+							<xp:text escape="false" disableTheme="true">
+								<xp:this.value>
+									<![CDATA[#{javascript:" | <b>Scenario:</b> " + taskEntry.getColumnValues().get(11)}]]>
+								</xp:this.value>
+							</xp:text>
+
+						</xp:div>
+
+						<!-- description -->
+						<xp:div id="divTaskDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
+							<xp:text escape="false" id="computedField1" value="#{javascript:taskEntry.getColumnValues().get(5)}"></xp:text>
+						</xp:div>
+
+						<!-- remove -->
+						<xp:td>
+							<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xp:this.rendered>
+							<xp:link escape="true" text="remove" id="link5" styleClass="lotusTiny">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain">
+									<xp:this.action><![CDATA[#{javascript:taskBean.remove(taskEntry.getUniversalID());}]]></xp:this.action>
+									<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this task?");]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:td>
+
+					</td>
+
+					<td class="lotusRight lotusLastCell">
+
+						<xp:image url="/.ibmxspres/domino/oneuiv2.1/images/blank.gif" id="imgTaskDetails" width="16" height="16" title="Show details"
+							styleClass="lotusIcon16 lotusIconShow pointer">
+							<xp:this.rendered><![CDATA[#{javascript:taskEntry.getColumnValues().get(5).length>0}]]></xp:this.rendered>
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script>
+									<xp:executeClientScript>
+										<xp:this.script><![CDATA[toggleDetails( "#{id:imgTaskDetails}", "#{id:divTaskDetails}" );]]></xp:this.script>
+									</xp:executeClientScript>
+								</xp:this.script>
+							</xp:eventHandler>
+						</xp:image>
+
+					</td>
+
+				</xp:tr>
+
+
+			</xp:repeat>
+
+
+		</xp:repeat>
+
 	</xp:panel>
-	
-</xp:this.facets>
-</xe:dynamicContent>
 
 </xp:view>

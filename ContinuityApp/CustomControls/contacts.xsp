@@ -13,6 +13,16 @@
 				</xp:eventHandler>
 			</xp:button>
 			
+	&#160;
+			
+			<xp:button value="Import contacts" id="button2" icon="group_add.png">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+					refreshId="facetMiddle">
+					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactsImport");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			
 		</div>
 	</div>
 

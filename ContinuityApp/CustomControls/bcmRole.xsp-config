@@ -18,13 +18,5 @@
 &lt;/xp:view&gt;</render-markup>
       </designer-extension>
     </composite-extension>
-    <property>
-      <property-name>dynContentId</property-name>
-      <property-class>string</property-class>
-      <description/>
-      <property-extension>
-        <required>true</required>
-      </property-extension>
-    </property>
   </composite-component>
 </faces-config>

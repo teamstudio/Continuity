@@ -193,6 +193,12 @@ display: none;
 	color: inherit !important;
 	border:0;
 }
+.lotusMenu li.lotusSelected a.lotusTwistyClosedMenu {
+	background-image: url(/oneuiv2.1/images/lotusSprite-8bit.png) !important;
+	background-repeat: no-repeat !important;
+	border:0 !important;
+	background-color: inherit;
+}
 
 /*remove dotted links from ff*/
 a:active {

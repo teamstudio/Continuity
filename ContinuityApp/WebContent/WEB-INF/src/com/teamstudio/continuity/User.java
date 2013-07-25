@@ -32,6 +32,8 @@ public class User implements Serializable{
 	private int numIncidents;
 	private int numContacts;
 	private int numOrgUnits;
+	private int numHazards;
+	private int numRoles;
 	
 	public User() {
 		init(false);
@@ -132,6 +134,14 @@ public class User implements Serializable{
 			numAssets = nav.getCount();
 			Utils.recycle(nav);
 			
+			nav = vwTarget.createViewNavFromCategory("fRole");
+			numRoles = nav.getCount();
+			Utils.recycle(nav);
+			
+			nav = vwTarget.createViewNavFromCategory("fHazard");
+			numHazards = nav.getCount();
+			Utils.recycle(nav);
+			
 			nav = vwTarget.createViewNavFromCategory("fScenario");
 			numScenarios = nav.getCount();
 			Utils.recycle(nav);
@@ -175,6 +185,12 @@ public class User implements Serializable{
 	
 	public int getNumAssets() {
 		return numAssets;
+	}
+	public int getNumHazards() {
+		return numHazards;
+	}
+	public int getNumRoles() {
+		return numRoles;
 	}
 	public int getNumScenarios() {
 		return numScenarios;
