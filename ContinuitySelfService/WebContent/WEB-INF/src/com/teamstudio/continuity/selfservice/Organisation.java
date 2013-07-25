@@ -243,8 +243,6 @@ public class Organisation implements Serializable {
 			Logger.info("cannot copy starter lists: database path not filled in");
 			
 		} else {
-			
-			Logger.info("start copy starter lists from database " + config.getStarterListsDbTemplatePath() );
 		
 			//copy starter lists
 			if ( !config.getStarterListsDbTemplatePath().equals( config.getContinuityDbTemplatePath() ) ) {
@@ -258,13 +256,13 @@ public class Organisation implements Serializable {
 				
 			} else {
 				
-				Logger.info("use Continuity template database for starter lists" );
+				Logger.info("start copy starter lists from Continuity template database" );
 			}
 			
 			
 			if (dbTemplate.isOpen()) {
 				
-				Logger.info("starter list database is open");
+				Logger.info("- starter list database succesfully opened");
 				
 				DocumentCollection dcForStarters = null;
 				
@@ -285,7 +283,14 @@ public class Organisation implements Serializable {
 				Document docStarter = dcForStarters.getFirstDocument();
 				while (null != docStarter) {
 					
-					docStarter.copyToDatabase(dbNewInstance);
+					Document docCopied = docStarter.copyToDatabase(dbNewInstance);
+					
+					//clear quick guide link from copied document 
+					if ( docCopied.hasItem("quickGuideIds") ) {
+						docCopied.replaceItemValue("quickGuideIds", "");
+						docCopied.save();
+						Utils.incinerate(docCopied);
+					}
 				
 					Document docTemp = dcForStarters.getNextDocument(docStarter);
 					docStarter.recycle();
