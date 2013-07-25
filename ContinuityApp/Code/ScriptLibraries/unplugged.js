@@ -219,8 +219,21 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 						if (viewxpagename == 'back') {
 							goBack();
 						} else if (viewxpagename=="UnpIncident.xsp") {
-							//ML: use ajax load
-							loadPageEx(viewxpagename + "?action=openDocument&documentId=" + response, "contentwrapper", null);
+							//ML: incident activation - use ajax load
+							loadPageEx(
+									viewxpagename + "?action=openDocument&documentId=" + response, 
+									"contentwrapper", 
+									null,
+									true,
+									true,
+									function() { alert('Your BCM team has been activated')}
+								);
+							
+							if (arguments.length<4) {
+								loadFooter = true;
+								loadHeader = true;
+							}
+							
 						} else if (viewxpagename.indexOf("UnpIncident.xsp") > -1 ) {
 							//save of a notification message
 							loadPageEx(viewxpagename, "contentwrapper", null, true, true);
@@ -298,11 +311,11 @@ function loadPage(url, target, menuitem) {
 }
 
 function load(url) {
-	loadPageEx(url, "contentwrapper", null, false, false);
+	loadPageEx(url, "contentwrapper", null, false, false, null);
 }
 
 //ML: extended loadPage to also update the header title and footer content
-function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
+function loadPageEx(url, target, menuitem, loadFooter, loadHeader, callback) {
 
 	storeRequest(url);
 	
@@ -365,6 +378,11 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader) {
 		doKeyboardScrollFix();
 
 		$("img.lazy").lazy();
+
+		//optional callback function after loading a page
+		if (callback != null) {
+			callback.call(this);
+		}
 		
 		return false;
 	});
