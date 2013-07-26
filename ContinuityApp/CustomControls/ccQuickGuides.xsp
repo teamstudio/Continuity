@@ -19,6 +19,9 @@
 		</div>
 	</div>
 	
+	<xp:text escape="true" value="No files have been uploaded yet" id="computedField2" 
+		rendered="#{javascript:getComponent('repeat1').getRowCount()==0}"></xp:text>
+	
 	<xp:repeat id="repeat1" rows="100" var="rowEntry"
 		disableOutputTag="true" value="#{vwQuickGuides}"
 		indexVar="rowIndex">

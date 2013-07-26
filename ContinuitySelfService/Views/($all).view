@@ -1,86 +1,92 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='2c6' unid='918FD0D283BB9728C1257B300046453D' sequence='5'>
+<view name='($all)' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'
+ hide='web' showinmenu='false' publicaccess='false' designerversion='8.5.3'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
+ opencollapsed='false' showresponsehierarchy='true' showmargin='true' shrinkrows='false'
+ extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='false' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false' indexdiscard='inactivebyinterval'
+ indexdiscardinterval='336' initialbuildrestricted='false' noemptycategories='false'>
+<noteinfo noteid='2c6' unid='918FD0D283BB9728C1257B300046453D' sequence='9'>
 <created><datetime>20130316T134732,45+01</datetime></created>
-<modified><datetime dst='true'>20130529T160151,18+02</datetime></modified>
-<revised><datetime dst='true'>20130529T160151,17+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130529T160151,18+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20130725T104149,03+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104149,02+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T104149,03+02</datetime></lastaccessed>
 <addedtofile><datetime>20130316T134733,54+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>($all)</text></item>
-<item name='$Index' sign='true'><text>/P=336</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-OgECAEgAAgAkNgUABABGb3JtAQACACwgIgIFAAUAdGl0bGUAIgIBAA4AIChtb2RpZmllZDogKyAi
-AqQAVgEiAgEAAQApACICAwACAAwAAgAkMaQAAwACAA4AAwAkMTEAaQADAAIAXgACACQ4BQAEAG5h
-bWVoAa8ASAAOAAUABABuYW1lrgA6AAUACwBkZXNjcmlwdGlvbgBoAa8AJAAWAAUACwBkZXNjcmlw
-dGlvbgCuAA4AAQABAD8ArgAEALUFAwACABAAAwAkMTAAkABWAQMAAgAMAAIAJDmfAAMABQA+ADkA
-CgAEAAIAAgADAAIAAgADAAIACQAEAEZvcm0kNiQxJDExJDhpZCQxMCQ5JENvbmZsaWN0JFJFRgAE
-AAQAAAAMAGYAygAdAgMABwAOAAgACUwxUzJTM1M=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-JAADAABECGYHAAAEAIFmAAQAAgCBZgAGAAMARm9ybSQxJDEx
-</rawitemdata></item>
-<item name='$Collation1' summary='true'>
-<rawitemdata type='2'>
-DwABAABEgWYAAAACACQx
-</rawitemdata></item>
-<item name='$Collation2' summary='true'>
-<rawitemdata type='2'>
-DwABAABEgGYAAAACAGlk
-</rawitemdata></item>
-<item name='$Collation3' summary='true'>
-<rawitemdata type='2'>
-EAABAABEgGYAAAADACQxMA==
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ViewFormat' sign='true'>
-<rawitemdata type='5'>
-AQAIAAwAiAAAAFZDAwQEAAAAAAAAABkAAQEACQABAAAAAAAAAAICAAAAVkMQAAIABABoAAAAIQAB
-AAoJAAAAAAAAAAAAAgIAAABWQwUCAgANAA4AAABgAAEAAAkAAAAACAAAAAACAgAAAFZDBQADAAcA
-EAAAAGAAAQAACQAAAAAAAAAAAAICAAAAVkMAAAIACwB2AAAAvQABAAAJAAAAAAAAAAAAAgIAAABW
-QwABAgACAAAAAAC/AAEAAAkAAAAAAAAAAAACAgAAAFZDAAEDAAQAHgAAAL8AAQAACQAAAAAAAAAA
-AAICAAAAVkMAAAIABAAOAAAAUAABAAAJAAAAARAAAAAAAgIAAABGb3JtJDZyZXNwaAACAEgAAgAk
-NgUABABGb3JtAQACACwgIgIFAAUAdGl0bGUAIgIBAA4AIChtb2RpZmllZDogKyAiAqQAVgEiAgEA
-AQApACICAwAHAB4AFwAJMVMyUzNTNFM1UzZTN1M4UzEyUzEzUwAkMWxhc3QgbW9kaWZpZWQOAAIA
-DAACACQxpAADACQxMWNyZWF0ZWQQAAIADgADACQxMQBpAAMAJDhkZXNjcmlwdGlvbnYAAgBeAAIA
-JDgFAAQAbmFtZWgBrwBIAA4ABQAEAG5hbWWuADoABQALAGRlc2NyaXB0aW9uAGgBrwAkABYABQAL
-AGRlc2NyaXB0aW9uAK4ADgABAAEAPwCuAAQAtQUDAAcAFgAPAAkyUlQ3UzlSVDE0UzE2UgBpZGlk
-JDEwdW5pZB4AAgAQAAMAJDEwAJAAVgEDAAcADAAFAAkwUzBFACQ5c2l6ZQ4AAgAMAAIAJDmfAAMA
-JgABAAAAAQEACQEAAAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA
-//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAMQAAAAAAP//AAAAAAAAAAAA
-AAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJ
-AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAA
-AAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAA
-AAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAAA//8AAAAAAAAA
-AAAAAAAAAEIAEAAAAAEA////AAEA7+/vAAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAA
-AAABAAAAAAABAAAAAAAAAAgAAAAAAAEAWEMATIADAAAAAAABAgICAQEBAQcEAwAAAAAAAAAAIC0t
-OlhDAEyAAwAAAAAAAQICAgEBAQEHBAMAAAAAAAAAACAtLTpZQwAACAAAAAEAAAABAAAAAAAAAAAA
-AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAALCADgFlDAAEQAAAAAQAAAAEAAAAAAAAAAAAA
-AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAsIAOA
-</rawitemdata></item>
-<item name='$V5ACTIONS' sign='true'>
-<rawitemdata type='1'>
-vRw/AAAAAQABAAAAAQAAAAAAAAAAAAAACAACAHn/bAABAPDw8AABAAAAAAAJAAAAAAABAPDw8AAA
-AB8AAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAC+/yYAAAAFAAAAnQEAAAsAAAAAAAAAQ2F0ZWdvcmlfemUA
-AQBOfL7/KAAAAAUAAACdAQAADgAAAAAAAABfRWRpdCBEb2N1bWVudAIAAgq+/ygAAAAFAAAAnQEA
-AA4AAAAAAAAAX1NlbmQgRG9jdW1lbnQDAAMKvv8iAAAABQAAAJ0BAAAIAAAAAAAAAF9Gb3J3YXJk
-BAAECr7/LAAAAAUAAACdAQAAEgAAAAAAAABfTW92ZSBUbyBGb2xkZXIuLi4FAD18vv8uAAAABQAA
-AJ0BAAATAAAAAAAAAF9SZW1vdmUgRnJvbSBGb2xkZXIPBgA+fL7/IAAAAAUAAACdAQAABQAAAAAA
-AABfUmVhZAAHAF58vv8iAAAABQAAAJ0BAAAHAAAAAAAAAF9VbnJlYWQACABufL7/LgAAAAUAAACd
-AQAAEwAAAAAAAABfT3BlbiBpbiBOZXcgV2luZG936wkAfny+/yQAAAAFAAAAnQEAAAkAAAAAAAAA
-X1ByaW50Li4uZgoAjny+/yIAAAAFAAAAnQEAAAcAAAAAAAAAX0RlbGV0ZQALAJ58vv8uAAAABQAA
-AJ0BAAAUAAAAAAAAAF9Eb2N1bWVudCBQcm9wZXJ0aWVzDACufL7/HgAAAAUAAACdAQAABAAAAAAA
-AABDX3V0DQC+fL7/IAAAAAUAAACdAQAABQAAAAAAAABfQ29weQAOAM58vv8wAAAABQAAAJ0BAAAW
-AAAAAAAAAENvcHkgYXMgRG9jdW1lbnQgX0xpbmsPAN58vv8oAAAABQAAAJ0BAAAOAAAAAAAAAENv
-cHkgYXMgX1RhYmxlEADufL7/IAAAAAUAAACdAQAABgAAAAAAAABQX2FzdGURAP58vv8gAAAABQAA
-AJ0BAAAFAAAAAAAAAF9PcGVuABIADn2+/yIAAAAFAAAAnQEAAAgAAAAAAAAAQm9va21hcmsTAB59
-</rawitemdata></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT @All | @AllDescendants</formula></code>
+<actionbar bgcolor='#f0f0f0' bordercolor='black'>
+<actionbuttonstyle bgcolor='#f0f0f0'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' systemcommand='categorize'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Send Document' showinbar='false' systemcommand='send'/>
+<action title='_Forward' showinbar='false' systemcommand='forward'/>
+<action title='_Move To Folder...' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove From Folder' showinbar='false' systemcommand='removefromfolder'/>
+<action title='_Read' showinbar='false' systemcommand='markread'/>
+<action title='_Unread' showinbar='false' systemcommand='markunread'/>
+<action title='_Open in New Window' showinbar='false' systemcommand='openinnewwindow'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='_Document Properties' showinbar='false' systemcommand='properties'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<action title='Bookmark' showinbar='false' systemcommand='bookmark'/></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='Form' width='3.1250'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' categorized='true' twisties='true'><font size='9pt' style='bold'/><columnheader
+><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$6' width='4.1250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ responsesonly='true'><font size='9pt' color='navy'/><columnheader title='resp'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>Form + ", " + title + " (modified: + " + @Text(@Modified) + ")"</formula></code></column>
+<column sort='descending' resort='descending' hidedetailrows='false' itemname='$1'
+ width='12' resizable='true' separatemultiplevalues='false' sortnoaccent='false'
+ sortnocase='true' showaslinks='false'><font size='9pt'/><columnheader title='last modified'><font
+ size='9pt' style='bold'/></columnheader><datetimeformat show='datetime' date='yearmonthday'
+ fourdigityearfor21stcentury='true' time='hourminutesecond' zone='never' dateformat='weekdaydaymonthyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='-' dateseparator3='-'
+ timeseparator=':' timeformat24='true' preference='usersetting'/><numberformat
+ format='general' varying='true' punctuated='false' parens='false' percent='false'
+ bytes='false' decimalsym=',' thousandssep=' ' currencysymtype='custom' currencysym='€'
+ usecustomsym='false'/><code event='value'><formula>@Modified</formula></code></column>
+<column sort='descending' hidedetailrows='false' itemname='$11' width='12'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='created'><font
+ size='9pt' style='bold'/></columnheader><datetimeformat show='datetime' date='yearmonthday'
+ fourdigityearfor21stcentury='true' time='hourminutesecond' zone='never' dateformat='weekdaydaymonthyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='-' dateseparator3='-'
+ timeseparator=':' timeformat24='true' preference='usersetting'/><code event='value'><formula
+>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='$8' width='23.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='description'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	@IsAvailable(name); name;
+	@IsAvailable(description); description;
+"?")</formula></code></column>
+<column resort='ascending' hidedetailrows='false' itemname='id' width='23.8750'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='id'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column resort='ascending' hidedetailrows='false' itemname='$10' width='23.8750'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='unid'><font size='9pt'
+ style='bold'/></columnheader><code event='value'><formula>@Text(@DocumentUniqueID)</formula></code></column>
+<column hidedetailrows='false' itemname='$9' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><font size='9pt'/><columnheader
+ title='size'><font size='9pt' style='bold'/></columnheader><numberformat
+ format='fixed' punctuated='false' parens='false' percent='false' bytes='true'
+ decimalsym=',' thousandssep=' ' currencysymtype='custom' currencysym='€'
+ usecustomsym='false'/><code event='value'><formula>@DocLength</formula></code></column></view>
 

@@ -237,36 +237,49 @@ if (vw.getEntryCount()>0) {
 								var path = docOrg.getItemValueString("continuityDbPath");
 								var name = docOrg.getItemValueString("name");
 							
-								dBar.info("copy to " + name + " (at: " + path + ")");
+								dBar.info("copy to: " + name + " (at: " + path + ")");
 								
 								if (path.length>0) {
 									
-									var dbOrg = session.getDatabase( database.getServer(), path );
+									var dbOrg = null;
 									
-									if (dbOrg.isOpen()) {
+									try {
+										dbOrg = session.getDatabase( database.getServer(), path );
+									} catch (ee) { }
 									
-										var vwSettings = dbOrg.getView("vwAllByType");
-										var docSettingsOrg = vwSettings.getAllDocumentsByKey("fSettings", true).getFirstDocument();
-										if (null != docSettingsOrg) {
+									if (dbOrg == null) {
+										dBar.error("could not open Continuity database at " + path);
 										
-											docSettingsOrg.replaceItemValue("senderEmail", docSettings.getItemValueString("senderEmail") );
-											docSettingsOrg.replaceItemValue("senderName", docSettings.getItemValueString("senderName") );
-											docSettingsOrg.save();
-											docSettingsOrg.recycle();
+									} else { 
+									
+									
+									 	if (dbOrg.isOpen() ) {
+									
+											var vwSettings = dbOrg.getView("vwAllByType");
+											var docSettingsOrg = vwSettings.getAllDocumentsByKey("fSettings", true).getFirstDocument();
+											if (null != docSettingsOrg) {
+											
+												docSettingsOrg.replaceItemValue("senderEmail", docSettings.getItemValueString("senderEmail") );
+												docSettingsOrg.replaceItemValue("senderName", docSettings.getItemValueString("senderName") );
+												docSettingsOrg.save();
+												docSettingsOrg.recycle();
+											
+												dBar.debug("- settings updated");
+											
+											}
+											
+											vwSettings.recycle();
 										
-											dBar.debug("- settings updated");
+										} else {
 										
+											dBar.error("could not open Continuity database at " + path);
 										}
 										
-										vwSettings.recycle();
-									
-									
-									} else {
-									
-										dBar.error("could not open Continuity database at " + path);
+										dbOrg.recycle();
+										
 									}
 									
-									dbOrg.recycle();
+									
 								}
 							
 								
