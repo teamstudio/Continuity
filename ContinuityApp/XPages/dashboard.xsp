@@ -15,10 +15,10 @@
 			<xp:div xp:key="facetLeft">
 
 				<!--  menu -->
-				<xe:navigator id="outline" expandable="true">
+				<xe:navigator id="outline">
 					<xe:this.treeNodes>
 						
-						<xe:basicContainerNode label="Configuration" enabled="false" expanded="true">
+						<xe:basicContainerNode label="Configuration" enabled="false">
 							<xe:this.children>
 								<xe:basicLeafNode submitValue="miniConfigGuide" label="Mini configuration guide">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("miniConfigGuide");}]]></xe:this.selected>
@@ -34,7 +34,7 @@
 						
 						<xe:separatorTreeNode></xe:separatorTreeNode>
 						
-						<xe:basicContainerNode enabled="false" expanded="true">
+						<xe:basicContainerNode enabled="false">
 							<xe:this.children>
 
 								<xe:basicLeafNode label="#{javascript:configBean.getLabel('assets') + ' (' + currentUserBean.numAssets + ')'}"
@@ -63,7 +63,7 @@
 						
 						<xe:separatorTreeNode></xe:separatorTreeNode>
 
-						<xe:basicContainerNode enabled="false" expanded="true">
+						<xe:basicContainerNode enabled="false">
 							<xe:this.label><![CDATA[Responsibilities, Roles & Tasks]]></xe:this.label>
 							<xe:this.children>
 							
