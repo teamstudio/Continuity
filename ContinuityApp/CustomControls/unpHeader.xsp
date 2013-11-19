@@ -60,13 +60,19 @@ the specific language governing permissions and limitations under the License
 			<span></span>
 		</xp:panel>
 		
-		--><!-- ML: link to workspace -->
+		--><!-- ML: link to Continuity workspace or main workspace -->
 		<xp:panel id="panel1"
 			styleClass="homeButton">
-			<xp:this.rendered><![CDATA[#{javascript:context.getUrl().toString().indexOf("UnpMain") == -1}]]></xp:this.rendered>
 			<xp:this.attrs>
 				<xp:attr name="onclick">
-					<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";
+					<xp:this.value><![CDATA[#{javascript:if ( context.getUrl().toString().indexOf("UnpMain") == -1) {
+					
+					return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\";";
+					
+					} else {
+						return "$.blockUI();window.location.href=\"/unpws.unp/\";";
+					}
+				
 }]]></xp:this.value>
 				</xp:attr>
 			</xp:this.attrs>
