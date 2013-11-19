@@ -1532,31 +1532,40 @@ only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
 	.workspace-items .imgActivate {
 		background: url(activate@2x.png) no-repeat scroll 0 0 transparent;
+		background-size: 100%;
 	}
 	.workspace-items .imgContacts {
 		background: url(contacts-blue@2x.png) no-repeat scroll 0 0 transparent;
+		background-size: 100%;
 	}
 	.workspace-items .imgCalltree {
 		background: url(calltree-blue@2x.png) no-repeat scroll 0 0 transparent;
+		background-size: 100%;
 	}
 	.workspace-items .imgIncidents {
 		background: url(incidents@2x.png) no-repeat scroll 0 0 transparent;
+		background-size: 100%;
 	}
 	.workspace-items .imgRole {
 		 background: url(role@2x.png) no-repeat scroll 0 0 transparent;
+		 background-size: 100%;
 	}
 	.workspace-items .imgPlans {
 		 background: url(plans@2x.png) no-repeat scroll 0 0 transparent;
+		 background-size: 100%;
 	}
 	.workspace-items .imgTasks {
 		 background: url(tasks@2x.png) no-repeat scroll 0 0 transparent;
+		 background-size: 100%;
 	}
 	.workspace-items .imgUpdates {
 		 background: url(updates-blue@2x.png) no-repeat scroll 0 0 transparent;
+		 background-size: 100%;
 	}
 	
 	.companylogo > span {
 		background: url(teamstudio_white@2x.png) no-repeat scroll 0 0 transparent;
+		background-size: 100%;
 	}
 }
 
