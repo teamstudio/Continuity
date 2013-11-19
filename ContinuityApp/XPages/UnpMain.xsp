@@ -198,7 +198,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 			}	
 		</style>
 						
-		<xc:unpFooter settingsurl="/unpws.unp/UnpOptions.xsp"></xc:unpFooter>
+		<xc:unpFooter></xc:unpFooter>
 		
 	</div>
 
