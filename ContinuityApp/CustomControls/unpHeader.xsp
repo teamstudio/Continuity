@@ -27,19 +27,20 @@ the specific language governing permissions and limitations under the License
 			<span></span>
 		</a>
 		
-		<xp:panel styleClass="backButton">
-			<xp:this.attrs>
+		<xp:div styleClass="backButtonHolder">
+			<xp:this.rendered><![CDATA[#{javascript:!isEmpty(compositeData.backButtonURL)}]]></xp:this.rendered>
+			
+			<xp:text tagName="div" id="computedField1" styleClass="backButton">
+				<xp:this.attrs>
 					<xp:attr name="onclick">
 						<xp:this.value><![CDATA[#{javascript:(compositeData.backButtonURL.indexOf("_1") == -1 ? "loadPageEx('" + compositeData.backButtonURL + "', 'contentwrapper', null, false, true);" : "$.blockUI();window.location.href='" + compositeData.backButtonURL + "';")}]]></xp:this.value>
 					</xp:attr>
+					<xp:attr name="data-title">
+						<xp:this.value><![CDATA[#{javascript:compositeData.backButtonText}]]></xp:this.value>
+					</xp:attr>
 				</xp:this.attrs>
-		
-			<xp:this.rendered><![CDATA[#{javascript:!isEmpty(compositeData.backButtonURL)}]]></xp:this.rendered>
-			<xp:label id="backlink" styleClass="backlabel"
-				value="#{javascript:compositeData.backButtonText}">
-				
-			</xp:label>
-		</xp:panel>
+			</xp:text>
+		</xp:div>
 	
 		<xp:panel styleClass="viewsButton">
 		
