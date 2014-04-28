@@ -630,6 +630,14 @@ body {
 	text-align: center;
 }
 
+.footer .version {
+	color: #464646;
+	font-size: 12px;	
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+
 .input-search-frame input {
 	width: 100%;
 	height: 36px;
@@ -742,7 +750,10 @@ body {
 		height: 60px;
 	}
 	.footer span.updated {
-		margin-top: 21px;
+		margin-top: 23px;
+	}
+	.footer div.version {
+		top: 23px;
 	}
 	.searchButton {
 		display: none;
@@ -789,6 +800,9 @@ body {
 	}
 	.footer span.updated {
 		margin-top: 16px;
+	}
+	.footer div.version {
+		top: 16px;
 	}
 	.searchButton,
 	.homeButton,

@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	
-	<xc:unpLayout showMenu="true" newDocTarget="UnpTask.xsp">
+	<xp:this.data>
+		<xp:dominoDocument
+			var="docIncident"
+			formName="fIncident"
+			action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+
+	<xc:unpLayout
+		showMenu="true"
+		newDocTarget="UnpTask.xsp">
 		<xc:this.pageTitle><![CDATA[#{javascript:if (docIncident.isNewNote()) {
 	return "Activate team";
 } else {
 	return applicationScope.labels['incident'];
 }}]]></xc:this.pageTitle>
 		<xp:this.facets>
-		
-			<xc:unpIncidentTasksForm xp:key="contents" />
+
+			<xc:unpIncidentTasksForm
+				xp:key="contents" />
 
 		</xp:this.facets>
-		
+
 	</xc:unpLayout>
 
 </xp:view>

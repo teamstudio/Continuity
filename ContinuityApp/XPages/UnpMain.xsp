@@ -198,7 +198,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 			}	
 		</style>
 						
-		<xc:unpFooter></xc:unpFooter>
+		<xc:unpFooter showVersion="true"></xc:unpFooter>
 		
 	</div>
 

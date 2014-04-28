@@ -60,7 +60,7 @@ if (rep == "01/01/70"){
 return "Updated: " + rep;}]]></xp:this.value>
 			</xp:text>
 			
-	
+			<!-- new button -->
 			<xp:panel tagName="div" id="newButton" styleClass="newButton"
 				rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
 				<xp:this.attrs>
@@ -74,16 +74,24 @@ return "Updated: " + rep;}]]></xp:this.value>
 				</xp:this.attrs>
 				<xp:text value="#{javascript:(compositeData.newDocTarget == 'UnpTask.xsp' ? 'New task' : 'New')}" />
 			</xp:panel>
+			
+			<!-- settings button -->
 			<xp:panel tagName="div" id="settingsButton"
 				styleClass="settingsButton">
+				<xp:this.rendered><![CDATA[#{javascript:!isEmpty(compositeData.settingsurl)}]]></xp:this.rendered>
 				<xp:this.attrs>
 					<xp:attr name="onclick">
 						<xp:this.value><![CDATA[#{javascript:"window.location.href='" + compositeData.settingsurl + "';"}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
-				<xp:this.rendered><![CDATA[#{javascript:!isEmpty(compositeData.settingsurl)}]]></xp:this.rendered>
 				<span>Settings</span>
 			</xp:panel>
+			
+			<!-- version -->
+			<xp:div styleClass="version">
+				<xp:this.rendered><![CDATA[#{javascript:compositeData.showVersion == true}]]></xp:this.rendered>
+				v1.31
+			</xp:div>
 		
 		</div>
 	

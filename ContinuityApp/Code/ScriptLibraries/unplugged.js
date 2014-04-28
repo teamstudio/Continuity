@@ -43,7 +43,7 @@ $(window).load( function() {
 	doKeyboardScrollFix();
 	
 	//new NoClickDelay( document.getElementById('header') );
-	//disabled because of problems with menu sliding in/out directly
+	//disabled for header because of problems with menu sliding in/out directly
 	new NoClickDelay( document.getElementById('menu') );
 	new NoClickDelay( document.getElementById('footer') );
 	
@@ -795,8 +795,10 @@ function getOpenTasksCount() {
 
 //remove click delay
 function NoClickDelay(el) {
-	this.element = el;
-	if( window.Touch ) this.element.addEventListener('touchstart', this, false);
+	if (el) {
+		this.element = el;
+		if( window.Touch ) this.element.addEventListener('touchstart', this, false);
+	}
 }
 
 NoClickDelay.prototype = {

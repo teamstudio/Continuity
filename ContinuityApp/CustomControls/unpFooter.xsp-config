@@ -53,5 +53,9 @@
       <property-name>settingsurl</property-name>
       <property-class>string</property-class>
     </property>
+    <property>
+      <property-name>showVersion</property-name>
+      <property-class>boolean</property-class>
+    </property>
   </composite-component>
 </faces-config>
