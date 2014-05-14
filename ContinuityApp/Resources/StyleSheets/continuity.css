@@ -401,3 +401,8 @@ callTreeVert > ul {
 .callTreeVert a.removeLink {
 	position: absolute; top: 0px; right: 3px; 
 }
+
+/*format a list of checkboxes*/
+.appOptions table td {
+	padding-bottom: 0 !important;
+}

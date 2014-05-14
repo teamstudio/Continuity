@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><stylesheetresource charset="UTF-8" designerversion="8.5.3" name="continuity.css" publicaccess="false" replicaid="C1257BB300265024" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="3e2" sequence="7" unid="D6E4B3F5455F2DD8C1257AA1004A9248">
+<?xml version="1.0" encoding="UTF-8"?><stylesheetresource charset="UTF-8" designerversion="8.5.3" maintenanceversion="1.0" name="continuity.css" publicaccess="false" replicaid="C1257BB300265024" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3e2" sequence="10" unid="D6E4B3F5455F2DD8C1257AA1004A9248">
 <created><datetime dst="true">20121024T153431,12+02</datetime></created>
-<modified><datetime dst="true">20130725T091001,88+02</datetime></modified>
-<revised><datetime dst="true">20130725T091001,87+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130725T091001,88+02</datetime></lastaccessed>
+<modified><datetime dst="true">20130725T104113,41+02</datetime></modified>
+<revised><datetime dst="true">20130725T104113,40+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T104113,41+02</datetime></lastaccessed>
 <addedtofile><datetime dst="true">20130725T090343,97+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby></stylesheetresource>
