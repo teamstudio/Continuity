@@ -1,118 +1,115 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1f2' unid='0B8B5CE988BBEBC7C1257AF40078FCD3' sequence='32'>
+<form name='fSettings' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='312' unid='0B8B5CE988BBEBC7C1257AF40078FCD3' sequence='37'>
 <created><datetime>20130115T230130,43+01</datetime></created>
-<modified><datetime dst='true'>20130528T093749,98+02</datetime></modified>
-<revised><datetime dst='true'>20130528T093749,97+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T093749,98+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,21+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105605,15+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,66+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105605,13+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093717,74+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fSettings</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$WindowTitle' sign='true'><formula>"Continuity database - Settings"</formula></item>
-<item name='$Flags'><text>w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fSettings</text></item>
-<item name='readOnlyMode' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='organisationName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='organisationId' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='directoryDbPath' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='unpluggedDbPath' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='incidentNaming' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='riskNaming' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>riskNaming</text><text>incidentNaming</text><text
->unpluggedDbPath</text><text>directoryDbPath</text><text>organisationId</text><text
->organisationName</text><text>readOnlyMode</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-AoMEAgCF/wgAAQIACg==
-</rawitemdata></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='windowtitle'><formula
+>"Continuity database - Settings"</formula></code>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'><run><font style='bold'/>Continuity instance - Settings</run></par>
+<par def='1'><run><font style='bold'/></run></par>
+<table widthtype='fixedleft' colorstyle='left' bgcolor='#0062e1' altbgcolor='white'
+ rowspacing='0.0396in' columnspacing='0.0396in' refwidth='7.9819in'><tablecolumn
+ width='1.0667in'/><tablecolumn width='3.7403in'/><tablecolumn width='2.9375in'/>
+<tablerow>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font style='bold' color='white'/>readOnlyMode</run></par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><field borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='readOnlyMode'><keywords helperbutton='false'
+ columns='2' ui='radiobutton'><textlist><text>Yes|yes</text><text>No|no</text></textlist></keywords><code
+ event='defaultvalue'><formula>"no"</formula></code></field></par>
+<par def='4'/></tablecell>
+<tablecell>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'>yes/ no</par>
+<par def='5'/>
+<par def='5'>If set to yes: doesn't allow creating new items in the mobile interface.</par></tablecell></tablerow></table>
+<par def='1'/>
+<table widthtype='fixedleft' colorstyle='left' bgcolor='#0062e1' altbgcolor='white'
+ rowspacing='0.0396in' columnspacing='0.0396in' refwidth='8.5868in'><tablecolumn
+ width='1.5194in'/><tablecolumn width='2.7750in'/><tablecolumn width='4.0549in'/>
+<tablerow>
+<tablecell>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font style='bold' color='white'/>organisationName</run></par></tablecell>
+<tablecell>
+<pardef id='7' keepwithnext='true' keeptogether='true'/>
+<par def='7'><field type='text' kind='editable' name='organisationName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<pardef id='8' keepwithnext='true' keeptogether='true'/>
+<par def='8'>Name for this organisation</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='6'><run><font style='bold' color='white'/>organisationId</run></par></tablecell>
+<tablecell>
+<par def='7'><field type='text' kind='editable' name='organisationId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='8'>Used in backend only as a 'virtual' organisation identifier using in userNames, minimum of 3 characters, use only a..z, A..Z or 0..9.</par>
+<par def='8'>Value is not shown to users of this application</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='6'><run><font style='bold' color='white'/>directoryDbPath</run></par></tablecell>
+<tablecell>
+<par def='7'><field type='text' kind='editable' name='directoryDbPath'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='8'>Path to the directory database used to register new users</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='6'><run><font style='bold' color='white'/>unpluggedDbPath</run></par></tablecell>
+<tablecell>
+<par def='7'><field type='text' kind='editable' name='unpluggedDbPath'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='8'>Path to the Unplugged config database (normally: unplugged.nsf)</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='6'><run><font style='bold' color='white'/>incidentNaming</run></par></tablecell>
+<tablecell>
+<par def='7'><field type='text' kind='editable' name='incidentNaming'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata> </par></tablecell>
+<tablecell>
+<par def='8'>incidents, crises, emergencies</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='6'><run><font style='bold' color='white'/>riskNaming</run></par></tablecell>
+<tablecell>
+<par def='7'><field type='text' kind='editable' name='riskNaming'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='8'>asset, activity</par></tablecell></tablerow></table>
+<pardef id='2' firstlineleftmargin='1in'/>
+<par def='2'><run><font style='italic'/></run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fSettings</text></item></form>
 

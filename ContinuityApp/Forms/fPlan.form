@@ -1,90 +1,103 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='202' unid='6CEA24E1B60C0A39C1257B1E00342380' sequence='11'>
+<form name='fPlan' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='512' unid='6CEA24E1B60C0A39C1257B1E00342380' sequence='18'>
 <created><datetime>20130226T102929,60+01</datetime></created>
-<modified><datetime dst='true'>20130530T214115,76+02</datetime></modified>
-<revised><datetime dst='true'>20130530T214115,75+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130530T214115,76+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,30+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105605,00+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,86+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105604,98+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093720,04+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fPlan</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fPlan</text></item>
-<item name='name' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='description' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitIds' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitNames' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='owner' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='quickGuideIds' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>quickGuideIds</text><text>owner</text><text
->orgUnitNames</text><text>orgUnitIds</text><text>description</text><text>name</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-</rawitemdata></item></note>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'/>
+<table widthtype='fixedleft' refwidth='7.5083in'><tablecolumn width='2.5028in'/><tablecolumn
+ width='2.5028in'/><tablecolumn width='2.5028in'/>
+<tablerow>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'>name</par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'>description</par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='description'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'>orgUnitIds</par></tablecell>
+<tablecell>
+<par def='4'><field type='text' allowmultivalues='true' kind='editable' name='orgUnitIds'
+ listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'>(optional)</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'>orgUnitNames</par></tablecell>
+<tablecell>
+<par def='4'><field type='text' allowmultivalues='true' kind='editable' name='orgUnitNames'
+ listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'>owner</par></tablecell>
+<tablecell>
+<par def='4'><field type='authors' kind='editable' name='owner'/></par></tablecell>
+<tablecell>
+<par def='5'>(optional)</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'>quickGuideIds</par></tablecell>
+<tablecell>
+<par def='4'><field type='text' allowmultivalues='true' kind='editable' name='quickGuideIds'
+ listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'/></tablecell>
+<tablecell>
+<par def='4'/></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'/></tablecell>
+<tablecell>
+<par def='4'/></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow></table>
+<par def='1'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fPlan</text></item></form>
 

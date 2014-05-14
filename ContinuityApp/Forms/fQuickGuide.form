@@ -1,131 +1,140 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='236' unid='FC13C6968CC401DEC1257ABC00453330' sequence='31'>
+<form name='fQuickGuide' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' nocompose='true' publicaccess='false'
+ designerversion='8.5.3' renderpassthrough='true'>
+<noteinfo noteid='206' unid='FC13C6968CC401DEC1257ABC00453330' sequence='38'>
 <created><datetime>20121120T133550,88+01</datetime></created>
-<modified><datetime dst='true'>20130531T152331,41+02</datetime></modified>
-<revised><datetime dst='true'>20130531T152331,40+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130531T152331,41+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,59+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105605,03+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,82+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105605,01+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093716,63+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fQuickGuide</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>Cw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'/>
+<table widthtype='fixedleft' columnspacing='0.0396in' refwidth='6.0639in'><tablecolumn
+ width='2.9528in'/><tablecolumn width='2.9528in'/>
+<tablerow>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font style='bold'/>name</run></par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>description</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='description'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>description_input (obsolete)</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font style='bold'/></run><field type='richtext' kind='editable'
+ name='description_input'/><compositedata type='98' prevtype='65418' nexttype='222'
+ afterparcount='6' containertype='65418' aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata><run
+><font style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>files</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='richtext' kind='editable' name='files'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>owner</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='owner'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>ownerName</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='ownerName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>createdDate</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='datetime' kind='editable' name='createdDate'><datetimeformat
+ show='date' date='yearmonthday' fourdigityearfor21stcentury='true' zone='never'
+ dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='-'
+ dateseparator3='-' timeseparator=':' timeformat24='true' preference='usersetting'/></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>fileName</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='fileName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>fileNameEncoded</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='fileNameEncoded'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>fileExt</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='fileExt'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>fileType</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='fileType'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>fileSize</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='fileSize'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>fileSizeBytes</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='number' kind='editable' name='fileSizeBytes'><numberformat
+ format='general' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/></field></par></tablecell></tablerow></table>
+<par def='1'/></richtext></body>
 <item name='$$ScriptName' summary='false' sign='true'><text>fCommGuidelines</text></item>
-<item name='name' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='description' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='files' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='owner' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='ownerName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='createdDate' summary='false'>
-<rawitemdata type='400'>
-AAAAAAAAAAA=
-</rawitemdata></item>
-<item name='fileName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='fileNameEncoded' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='fileExt' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='fileType' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='fileSize' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='fileSizeBytes' summary='false'><number>0</number></item>
-<item name='description_input' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>description_input</text><text>fileSizeBytes</text><text
->fileSize</text><text>fileType</text><text>fileExt</text><text>fileNameEncoded</text><text
->fileName</text><text>createdDate</text><text>ownerName</text><text>owner</text><text
->files</text><text>description</text><text>name</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-</rawitemdata></item></note>
+<item name='fileSizeBytes' summary='false'><number>0</number></item></form>
 

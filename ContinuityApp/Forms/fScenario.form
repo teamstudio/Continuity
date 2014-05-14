@@ -1,89 +1,71 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='3ce' unid='38E76B3F710AE1BCC1257AA0003DBA40' sequence='43'>
+<form name='fScenario' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='14e' unid='38E76B3F710AE1BCC1257AA0003DBA40' sequence='48'>
 <created><datetime dst='true'>20121023T131413,76+02</datetime></created>
-<modified><datetime dst='true'>20130402T214541,49+02</datetime></modified>
-<revised><datetime dst='true'>20130402T214541,48+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130402T214541,49+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,72+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105605,12+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,70+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105605,10+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093715,64+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'>name:			<field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>description:		<field type='text' kind='editable' name='description'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>orgUnitTarget:		<field type='text' allowmultivalues='true' kind='editable'
+ name='orgUnitTarget' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>orgUnitIds:		<field type='text' allowmultivalues='true' kind='editable'
+ name='orgUnitIds' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>orgUnitNames:		<field type='text' allowmultivalues='true' kind='editable'
+ name='orgUnitNames' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>hazardIds:		<field type='text' allowmultivalues='true' kind='editable'
+ name='hazardIds' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>hazardNames:		<field type='text' allowmultivalues='true' kind='editable'
+ name='hazardNames' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>quickGuideIds:			<field type='text' allowmultivalues='true' kind='editable'
+ name='quickGuideIds' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></richtext></body>
 <item name='impactCostsRecurringCosts' summary='false'><number>0</number></item>
 <item name='impactCostsOneTime' summary='false'><number>0</number></item>
 <item name='impactCostsRecurring' summary='false'><number>0</number></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fScenario</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item>
 <item name='$XPageAlt'><text>scenario.xsp</text></item>
 <item name='$XPageAltClient'><text>scenario.xsp</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fScenario</text></item>
-<item name='name' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='description' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitTarget' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitIds' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitNames' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='hazardIds' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='hazardNames' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='quickGuideIds' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>quickGuideIds</text><text>hazardNames</text><text
->hazardIds</text><text>orgUnitNames</text><text>orgUnitIds</text><text>orgUnitTarget</text><text
->description</text><text>name</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-AAEAAAo=
-</rawitemdata></item></note>
+<item name='$$ScriptName' summary='false' sign='true'><text>fScenario</text></item></form>
 

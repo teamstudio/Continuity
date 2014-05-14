@@ -1,57 +1,41 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='27a' unid='99CE26560841437EC1257AA0003DA7C4' sequence='31'>
+<form name='fResponsibility' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web' publicaccess='false'
+ designerversion='8.5.3' renderpassthrough='true'>
+<noteinfo noteid='146' unid='99CE26560841437EC1257AA0003DA7C4' sequence='36'>
 <created><datetime dst='true'>20121023T131326,44+02</datetime></created>
-<modified><datetime>20130329T115738,24+01</datetime></modified>
-<revised><datetime>20130329T115738,23+01</datetime></revised>
-<lastaccessed><datetime>20130329T115738,24+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,95+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105605,06+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,78+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105605,04+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093715,61+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fResponsibility</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'/>
+<par def='1'>name:			<field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>order: 			<field type='number' kind='editable' name='order'><numberformat
+ format='general' digits='2' punctuated='false' parens='false' percent='false'
+ bytes='false'/></field>			determines the position/ order of this role</par>
+<par def='1'>description		<field type='text' kind='editable' name='description'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'/>
+<par def='1'>roleId:			<field type='text' kind='editable' name='roleId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></richtext></body>
 <item name='$XPageAlt'><text>responsibility.xsp</text></item>
 <item name='$XPageAltClient'><text>responsibility.xsp</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$$ScriptName' summary='false' sign='true'><text>fResponsibility</text></item>
-<item name='name' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='order' summary='false'><number>0</number></item>
-<item name='description' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='roleId' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>roleId</text><text>description</text><text
->order</text><text>name</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoMEAQCF/wgA
-AQAACoECgwQBAIX/EAABAAAKbmFtZToJCQndBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/
-KACKAAAFADACAAAAAAAAAgEAAAoAAAAAAAAAAAQAAAAAAG5hbWViDgEAhAAAAAAAAAAAAN4GAACK
-/4X/CAABAAAKgQKDBAEAhf8SAAEAAApvcmRlcjogCQkJ3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAACK/yoAigAAAwAwAgAAAAAAAAIBAAAKAAAAAAAAAAAFAAAAAABvcmRlcgDeBgAAiv+F/zYA
-AQAACgkJCWRldGVybWluZXMgdGhlIHBvc2l0aW9uLyBvcmRlciBvZiB0aGlzIHJvbGWBAoMEAQCF
-/xUAAQAACmRlc2NyaXB0aW9uCQkA3QYAAIr//v9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAeAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK/zAAigAA
-BQAwAgAAAAAAAAIBAAAKAAAAAAAAAAALAAAAAABkZXNjcmlwdGlvbgBiDgEAhAAAAAAAAAAAAN4G
-AACK/4X/CAABAAAKgQKDBAEAhf8IAAEAAAqBAoMEAQCF/wgAAQAACoECgwQBAIX/EgABAAAKcm9s
-ZUlkOgkJCd0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8qAIoAAAUAMAIAAAAAAAACAQAA
-CgAAAAAAAAAABgAAAAAAcm9sZUlkYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACg==
-</rawitemdata></item></note>
+<item name='order' summary='false'><number>0</number></item></form>
 

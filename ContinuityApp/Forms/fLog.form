@@ -1,44 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='226' unid='9310A2E80129F4B0C1257ABD0047A493' sequence='20'>
+<form name='fLog' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='20a' unid='9310A2E80129F4B0C1257ABD0047A493' sequence='25'>
 <created><datetime>20121121T140231,87+01</datetime></created>
-<modified><datetime>20130329T115738,13+01</datetime></modified>
-<revised><datetime>20130329T115738,12+01</datetime></revised>
-<lastaccessed><datetime>20130329T115738,13+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,50+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name
->CN=Mark Leusink/O=LinQed</name></updatedby>
+<modified><datetime dst='true'>20130725T105604,91+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,98+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105604,89+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093716,64+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fLog</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fLog</text></item>
-<item name='logEntries' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='userName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>userName</text><text>logEntries</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAmBAoMEAQCF/xIA
-AQAACXVzZXJOYW1lOgndBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/LACKAAAFADACAAAA
-AAAAAgEAAAkAAAAAAAAAAAgAAAAAAHVzZXJOYW1lYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAA
-CYECgwQBAIX/CAABAAAJgQKDBAEAhf8SAAEFAAlsb2dFbnRyaWVzgQKDBAEAhf8IAAEAAAndBgAA
-iv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/LgCKAAEFDkACAAAAAAAAAgEAAAkAAAAAAAAAAAoA
-AAAAAGxvZ0VudHJpZXNiDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAJ
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item></note>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/>userName:	</run><run><font size='9pt'/><field
+ type='text' kind='editable' name='userName'/></run><compositedata type='98'
+ prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt' style='bold underline'/>logEntries</run></par>
+<par def='1'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ allowmultivalues='true' kind='editable' name='logEntries' listinputseparators='comma semicolon newline'
+ listdisplayseparator='newline'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fLog</text></item></form>
 

@@ -1,238 +1,330 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='113e' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='13'>
+<form name='fContact' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true' conflictaction='mergeconflicts'>
+<noteinfo noteid='606' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='21'>
 <created><datetime dst='true'>20130405T100132,18+02</datetime></created>
-<modified><datetime dst='true'>20130605T160745,38+02</datetime></modified>
-<revised><datetime dst='true'>20130605T160745,37+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130605T160745,38+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100133,32+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140505T163059,43+02</datetime></modified>
+<revised><datetime dst='true'>20140505T160717,78+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140505T163059,42+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,28+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Fonts'>
-<rawitemdata type='1'>
-i/8oAAEABSZBcmlhbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fContact</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ConflictAction'><text>1</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fContact</text></item>
-<item name='firstName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='lastName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='userType' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='contactType' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='userName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='status' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='email' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='phoneMobile' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='phoneHome' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='phoneWork' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='jobTitle' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='photos' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='roleId' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='roleName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='isAlternate' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitId' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='orgUnitName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='identifier' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='miniGuideShown' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='callTreeContacts' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='callTreeCalledBy' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='debugMode' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='callTreeRoot' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>callTreeRoot</text><text>debugMode</text><text
->callTreeCalledBy</text><text>callTreeContacts</text><text>miniGuideShown</text><text
->identifier</text><text>orgUnitName</text><text>orgUnitId</text><text>isAlternate</text><text
->roleName</text><text>roleId</text><text>photos</text><text>jobTitle</text><text
->phoneWork</text><text>phoneHome</text><text>phoneMobile</text><text>email</text><text
->status</text><text>userName</text><text>contactType</text><text>userType</text><text
->lastName</text><text>firstName</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-</rawitemdata></item></note>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/></run></par>
+<table widthtype='fixedleft' refwidth='9.6938in'><tablecolumn width='1.4604in'/><tablecolumn
+ width='3.5431in'/><tablecolumn width='4.6903in'/>
+<tablerow>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font size='9pt' style='bold'/>firstName</run></par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='firstName'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>lastName</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='lastName'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>userType</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='userType'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>none, contact, user, or editor (=sys admin)</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>contactType</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='text' kind='editable' name='contactType'/></run><compositedata type='98'
+ prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>contact type</run><run><font size='9pt'/> (</run><run
+><font size='9pt' color='#333333'/>Internal, Vendor, Media, Legal, Regulatory, Advisor)</run></par>
+<par def='5'><run><font size='9pt' color='#333333'/></run></par>
+<par def='5'><run><font size='9pt' color='#333333'/>default: internal (or blank)</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>userName</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='authors'
+ kind='editable' name='userName'/></run><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>user name in the directory account</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>status</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/><field type='text' kind='editable' name='status'/></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>active (active user), inactive (deactivated user), new (not activated yet)</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>email		</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='email'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>phoneMobile	</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='phoneMobile'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>phoneHome	</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='phoneHome'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>phoneWork	</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='phoneWork'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>jobTitle</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='jobTitle'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>photos</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='richtext'
+ kind='editable' name='photos'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>roleId</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='roleId'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>roleName</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='roleName'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>isAlternate</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='isAlternate'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>indicates if this contact is an alternate for his BCM role (yes, no)</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>orgUnitId</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run></par>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='orgUnitId'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>orgUnitName</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='orgUnitName'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>identifier</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='text' kind='editable' name='identifier'/></run><compositedata type='98'
+ prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>used to uniquely identify a user when importing from an AD import file</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>miniGuideShown</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='text' kind='editable' name='miniGuideShown'/></run><compositedata type='98'
+ prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>true, false</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>callTreeContacts</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='text' allowmultivalues='true' kind='editable' name='callTreeContacts'
+ listinputseparators='comma semicolon' listdisplayseparator='semicolon'/></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'
+ style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>callTreeCalledBy</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/><field type='text' kind='editable' name='callTreeCalledBy'/></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>callTreeRoot</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
+ type='text' kind='editable' name='callTreeRoot'/></run><compositedata type='98'
+ prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>appMenuOptions</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='appMenuOptions'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>Note: copied from fRole on saving.</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/>appMenuOptionsActive</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ allowmultivalues='true' kind='editable' name='appMenuOptionsActive' listinputseparators='comma semicolon'
+ listdisplayseparator='semicolon'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>Note: copied from fRole on saving.</run></par></tablecell></tablerow></table>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/>Debug mode? </run><run><font size='9pt'/><field
+ borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='debugMode' listinputseparators='comma'
+ listdisplayseparator='comma'><keywords helperbutton='false' columns='1' ui='checkbox'><textlist
+><text>enable|yes</text></textlist></keywords></field></run><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='9pt'/>(set debug mode on a per user level)</run></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fContact</text></item></form>
 

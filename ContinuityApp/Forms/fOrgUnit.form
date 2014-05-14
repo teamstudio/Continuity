@@ -1,64 +1,46 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1142' unid='18FA54C97D37DF8BC1257B44002C1603' sequence='2'>
+<form name='fOrgUnit' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='602' unid='18FA54C97D37DF8BC1257B44002C1603' sequence='7'>
 <created><datetime dst='true'>20130405T100132,19+02</datetime></created>
-<modified><datetime dst='true'>20130414T213628,76+02</datetime></modified>
-<revised><datetime dst='true'>20130414T213628,75+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130414T213628,76+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100133,34+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105604,97+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,90+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105604,95+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,25+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fOrgUnit</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fOrgUnit</text></item>
-<item name='name' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='alertLevel' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='siteIds' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='siteNames' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='photos' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>photos</text><text>siteNames</text><text
->siteIds</text><text>alertLevel</text><text>name</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoMEAQCF/wgA
-AQAACoECgwQBAIX/DwABAAAKbmFtZToJCQDdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/
-KACKAAAFADACAAAAAAAAAgEAAAoAAAAAAAAAAAQAAAAAAG5hbWViDgEAhAAAAAAAAAAAAN4GAACK
-/4X/CAABAAAKgQKDBAEAhf8UAAEAAAphbGVydExldmVsOgndBgAAiv/+/1AAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAALD/FAAAAAQkAAAAAAAAAAAAAAAAiv9IAIqCAAUAIAIAAAAAAAACAQAACgAAAAAAAAAA
-CgAAABoAYWxlcnRMZXZlbAMABgAIAAQAbm9ybWFsZWxldmF0ZWRoaWdo3gYAAIr/hf8gAAEAAAoJ
-CW5vcm1hbCwgZWxldmF0ZWQsIGhpZ2iBAoMEAQCF/wgAAQAACoECgwQBAIX/EgABAAAKc2l0ZUlk
-czoJCd0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8sAIoAAQUGMAIAAAAAAAACAQAACgAA
-AAAAAAAABwAAAAAAc2l0ZUlkcwBiDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAKgQKDBAEAhf8T
-AAEAAApzaXRlTmFtZXM6CQDdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/LgCKAAEFBjAC
-AAAAAAAAAgEAAAoAAAAAAAAAAAkAAAAAAHNpdGVOYW1lcwBiDgEAhAAAAAAAAAAAAN4GAACK/4X/
-CAABAAAKgQKDBAEAhf8IAAEAAAqBAoMEAQCF/xEAAQAACnBob3RvczoJCQDdBgAAiv/+/1AAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAIr/KgCCAAEAAAACAAAAAAAAAgEAAAoAAAAAAAAAAAYAAAAAAHBob3Rv
-c2IOAQCEAAAAAAAAAAAA3gYAAIr/hf8IAAEAAAo=
-</rawitemdata></item></note>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'/>
+<par def='1'>name:		<field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>alertLevel:	<field borderstyle='none' lookupeachchar='false'
+ lookupaddressonrefresh='false' type='keyword' kind='editable' name='alertLevel'><keywords
+ helperbutton='false' columns='3' ui='radiobutton'><textlist><text>normal</text><text
+>elevated</text><text>high</text></textlist></keywords></field>		normal, elevated, high</par>
+<par def='1'/>
+<par def='1'>siteIds:		<field type='text' allowmultivalues='true' kind='editable'
+ name='siteIds' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>siteNames:	<field type='text' allowmultivalues='true' kind='editable'
+ name='siteNames' listinputseparators='comma semicolon' listdisplayseparator='semicolon'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>photos:		<field type='richtext' kind='editable' name='photos'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fOrgUnit</text></item></form>
 

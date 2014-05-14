@@ -1,64 +1,63 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='892' unid='FA1B23748AEA7125C1257B28005331DF' sequence='5'>
+<form name='fMessage' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='5a6' unid='FA1B23748AEA7125C1257B28005331DF' sequence='10'>
 <created><datetime>20130308T160842,55+01</datetime></created>
-<modified><datetime>20130329T115738,16+01</datetime></modified>
-<revised><datetime>20130329T115738,15+01</datetime></revised>
-<lastaccessed><datetime>20130329T115738,16+01</datetime></lastaccessed>
-<addedtofile><datetime>20130308T160842,75+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105604,94+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,94+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105604,92+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093720,91+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fMessage</text></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fMessage</text></item>
-<item name='message' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='incidentName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='incidentId' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>incidentId</text><text>incidentName</text><text
->message</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoMEAQDdBgEA
-+//7/ywAAAAAAAQDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAFz/PgAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAEAAAoAAAAAAQAAAAAA3gYBAPv/
-ow6gBSgAPAAAAAAAAgCkEgAAoAUyEwAAVQIREQEBAACBAoL/WgACAAAAAAAAAAAArwUyE68FAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhgEAAAAAVIcAAAAAAAAAAAAA
-AAABAAAABAAAAIMEAgCF/w8AAQAACm1lc3NhZ2UApBIAATITxCAAAFUCEREBAQAAgQKC/1oAAwAA
-AAAAAAAAAEETxCBBEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIYB
-AAAAAFSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAMAhf8IAAEAAArdBgAAiv/+/1AAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAIr/LACKAAAFADACAAAAAAAAAgEAAAoAAAAAAAAAAAcAAAAAAG1lc3NhZ2UAYg4B
-AIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACqQSAALEIFYuAABVAhERAQEAAIECgv9aAAQAAAAAAAAA
-AADTIFYu0yAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGAQAAAABU
-hwAAAAAAAAAAAAAAAAEAAAAEAAAAgwQEAIX/CAABAAAKpBIBAKAFMhMAAFUCEREBAQAAgQKDBAIA
-hf8UAAEAAAppbmNpZGVudE5hbWWkEgEBMhPEIAAAVQIREQEBAACBAoMEAwCF/wgAAQAACt0GAACK
-//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv8wAIoAAAUAMAIAAAAAAAACAQAACgAAAAAAAAAADAAA
-AAAAaW5jaWRlbnROYW1lYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACqQSAQLEIFYuAABVAhER
-AQEAAIECgwQEAIX/CAABAAAKpBICAKAFMhMAAFUCEREBAQAAgQKDBAIAhf8SAAEAAAppbmNpZGVu
-dElkpBICATITxCAAAFUCEREBAQAAgQKDBAMAhf8IAAEAAArdBgAAiv/+/1AAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAIr/LgCKAAAFADACAAAAAAAAAgEAAAoAAAAAAAAAAAoAAAAAAGluY2lkZW50SWRiDgEA
-hAAAAAAAAAAAAN4GAACK/4X/CAABAAAKpBICAsQgVi4AAFUCEREBAQAAgQKDBAQAhf8IAAEAAAqk
-EgMAoAUyEwAAVQIREQEBAACBAoMEAgCF/wgAAQAACqQSAwEyE8QgAABVAhERAQEAAIECgwQDAIX/
-CAABAAAKpBIDAsQgVi4AAFUCEREBAQAAgQKDBAQAhf8IAAEAAAqlBgAAAACBAoMEAQCF/wgAAQAA
-Cg==
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item></note>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<table widthtype='fixedleft' refwidth='7.2375in'><tablecolumn width='2.4125in'/><tablecolumn
+ width='2.4125in'/><tablecolumn width='2.4125in'/>
+<tablerow>
+<tablecell>
+<pardef id='2' keepwithnext='true' keeptogether='true'/>
+<par def='2'>message</par></tablecell>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><field type='text' kind='editable' name='message'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'>incidentName</par></tablecell>
+<tablecell>
+<par def='3'><field type='text' kind='editable' name='incidentName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='4'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'>incidentId</par></tablecell>
+<tablecell>
+<par def='3'><field type='text' kind='editable' name='incidentId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='4'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='2'/></tablecell>
+<tablecell>
+<par def='3'/></tablecell>
+<tablecell>
+<par def='4'/></tablecell></tablerow></table>
+<par def='1'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fMessage</text></item></form>
 

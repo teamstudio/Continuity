@@ -1,94 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='30e' unid='B9B003C407B017DBC1257AED0057494C' sequence='30'>
+<form name='fUpdate' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='2e6' unid='B9B003C407B017DBC1257AED0057494C' sequence='37'>
 <created><datetime>20130108T165323,96+01</datetime></created>
-<modified><datetime dst='true'>20130528T142945,67+02</datetime></modified>
-<revised><datetime dst='true'>20130528T142945,66+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130528T142945,67+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115515,76+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105605,27+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104120,50+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105605,25+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093717,53+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'>createdBy:		<field type='names' kind='editable' name='createdBy'/></par>
+<par def='1'>createdByName:	<field type='text' kind='editable' name='createdByName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>createdDateMs:	<field type='text' kind='editable' name='createdDateMs'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>message: 		<field type='text' kind='editable' name='message'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>messageHtml: 		<field type='text' kind='editable' name='messageHtml'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>photo:			<field type='richtext' kind='editable' name='photo'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<pardef id='2' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='2'>photoFileName:	<field type='text' kind='editable' name='photoFileName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'>incidentId:		<field type='text' kind='editable' name='incidentId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'/>
+<par def='1'/></richtext></body>
 <item name='created' summary='false' sign='true'>
 <rawitemdata type='400'>
 AAAAAAAAAAA=
 </rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
 <item name='createdDate' summary='false'>
 <rawitemdata type='400'>
 AAAAAAAAAAA=
 </rawitemdata></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fUpdate</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fNews</text></item>
-<item name='createdBy' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='createdByName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='createdDateMs' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='message' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='photo' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='photoFileName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='incidentId' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='messageHtml' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>messageHtml</text><text>incidentId</text><text
->photoFileName</text><text>photo</text><text>message</text><text>createdDateMs</text><text
->createdByName</text><text>createdBy</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-AIX/CAABAAAK
-</rawitemdata></item></note>
+<item name='$$ScriptName' summary='false' sign='true'><text>fNews</text></item></form>
 
