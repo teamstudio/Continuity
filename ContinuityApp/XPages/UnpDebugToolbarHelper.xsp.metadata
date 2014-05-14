@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1856" sequence="7" unid="3D461C6AD29B2F33C1257CD00049288D">
+<created><datetime dst="true">20140506T151905,09+02</datetime></created>
+<modified><datetime dst="true">20140506T152053,38+02</datetime></modified>
+<revised><datetime dst="true">20140506T152128,49+02</datetime></revised>
+<lastaccessed><datetime dst="true">20140506T152053,37+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140506T152053,37+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$TITLE"><text>UnpDebugToolbarHelper.xsp</text></item>
+<item name="$Flags"><text>gC~4K</text></item>
+
+
+<item name="$FileNames" sign="true"><text>UnpDebugToolbarHelper.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+
+</note>

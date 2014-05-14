@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" rendered="false">
+
+	<xp:this.resources>
+		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xp:this.afterPageLoad><![CDATA[#{javascript:var type = context.getUrlParameter("type") + "";
+var msg = context.getUrlParameter("msg") + "";
+
+switch (type) {
+
+	case "debug":
+		dBar.debug(msg);
+		break;
+	case "time":
+		dBar.time(msg);
+		break;
+	case "clear":
+		dBar.clear();
+		break;
+	case "save":
+		dBar.save();
+		break;
+
+
+}
+
+}]]></xp:this.afterPageLoad>
+
+</xp:view>
