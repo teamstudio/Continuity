@@ -21,7 +21,9 @@ the specific language governing permissions and limitations under the License
 					<ul id="menuitems">
 						<xp:repeat id="repeat1" rows="30" disableOutputTag="true" var="menuItem" value="#{javascript:compositeData.menuItem}">
 							
-							<xp:panel id="viewMenuItem" tagName="li">
+							<!-- we only render menu items with a label specified -->
+							<xp:panel id="viewMenuItem" tagName="li"
+								rendered="#{javascript:menuItem.available==true}">
 								<xp:this.styleClass><![CDATA[#{javascript://var c = "menuitem" + menuItem.itemId + (menuItem.disabled == 'true' || menuItem.disabled == true ? " disabled" : "");
 								var c = "menuitem" + menuItem.itemId;
 								

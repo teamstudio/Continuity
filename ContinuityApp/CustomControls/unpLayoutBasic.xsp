@@ -7,6 +7,7 @@
 	viewScope.put("pageTitle", compositeData.pageTitle);
 	viewScope.put("newDocTarget", compositeData.newDocTarget );
 	viewScope.put("backButtonURL", compositeData.backButtonURL );
+	viewScope.put("showVersion", compositeData.showVersion );
 	
 	}]]></xp:this.beforePageLoad>
 	
@@ -37,7 +38,7 @@
 			
 		</div>
 		
-		<xc:unpFooter newDocTarget="#{javascript:viewScope.newDocTarget}">
+		<xc:unpFooter newDocTarget="#{viewScope.newDocTarget}" showVersion="#{viewScope.showVersion}">
 		</xc:unpFooter>
 
 	</div>

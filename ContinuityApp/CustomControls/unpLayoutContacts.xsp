@@ -56,36 +56,44 @@
 				<xc:this.menuItem>
 
 					<xc:menuItem itemId="activate" disabled="false" label="Activate team"
-						page="UnpActivate.xsp" icon="activate.png">
+						page="UnpActivate.xsp" icon="activate.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('activate', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 
 					<xc:menuItem itemId="contacts" disabled="false" label="Contacts"
-						page="UnpContacts.xsp" icon="contacts-blue.png">
+						page="UnpContacts.xsp" icon="contacts-blue.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('contacts', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 					
 					<xc:menuItem itemId="calltree" disabled="false" label="Call tree"
-						icon="calltree-blue.png" page="#{javascript:applicationScope.get('callTreePrefix') + '.xsp?clearFrom=1'}">
+						icon="calltree-blue.png" page="#{javascript:applicationScope.get('callTreePrefix') + '.xsp?clearFrom=1'}"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('calltree', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 
 					<xc:menuItem itemId="incidents" disabled="false" label="#{javascript:applicationScope.labels['incidents']}"
-						page="UnpIncidents.xsp" icon="incidents.png">
+						page="UnpIncidents.xsp" icon="incidents.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('incidents', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 
 					<xc:menuItem itemId="role" disabled="false" label="My role" page="UnpRole.xsp"
-						icon="role.png">
+						icon="role.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('role', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 					
 					<xc:menuItem itemId="plans" disabled="false" label="Plans" page="UnpPlans.xsp"
-						icon="plans.png">
+						icon="plans.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('plans', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 
 					<xc:menuItem
 						itemId="tasks" disabled="#{javascript:sessionScope.numAssignedTasks==0}"
-						label="Active tasks" page="UnpActiveTasks.xsp?activeOnly=1" icon="tasks.png">
+						label="Active tasks" page="UnpActiveTasks.xsp?activeOnly=1" icon="tasks.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('tasks', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 					
 					<xc:menuItem itemId="updates" disabled="false" label="Updates"
-						page="UnpUpdates.xsp" icon="updates-blue.png">
+						page="UnpUpdates.xsp" icon="updates-blue.png"
+						available="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('updates', sessionScope.appMenuOptionsActive)==true}">
 					</xc:menuItem>
 
 				</xc:this.menuItem>

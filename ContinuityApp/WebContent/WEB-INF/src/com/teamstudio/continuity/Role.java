@@ -1,6 +1,7 @@
 package com.teamstudio.continuity;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
@@ -10,6 +11,7 @@ import com.teamstudio.continuity.utils.Utils;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
+import lotus.domino.DocumentCollection;
 import lotus.domino.NotesException;
 import lotus.domino.View;
 import lotus.domino.ViewEntry;
@@ -78,6 +80,13 @@ public class Role implements Serializable {
 			
 			this.id = xspDocRole.getItemValueString("id");
 			this.name = xspDocRole.getItemValueString("name");
+			
+			//find contacts for this role: update menuOptions
+			DocumentCollection dc = xspDocRole.getParentDatabase().search("Form=\"fContact\" & roleId=\"" + id + "\"");
+			if (dc.getCount()>0) {
+				dc.stampAll("appMenuOptions", xspDocRole.getItemValue("appMenuOptions"));
+				dc.stampAll("appMenuOptionsActive", xspDocRole.getItemValue("appMenuOptionsActive"));
+			}
 			
 			//update role name in all documents that use this role (e.g. contacts)
 			Utils.fieldValueChange("roleId", id, "roleName", name );

@@ -53,5 +53,14 @@
         </designer-extension>
       </property-extension>
     </property>
+    <property>
+      <property-name>showVersion</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.std.Boolean</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

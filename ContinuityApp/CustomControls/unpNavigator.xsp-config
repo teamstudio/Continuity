@@ -82,6 +82,17 @@
           <required>true</required>
         </property-extension>
       </property>
+      <property>
+        <property-name>available</property-name>
+        <property-class>boolean</property-class>
+        <property-extension>
+          <designer-extension>
+            <editor>com.ibm.std.Boolean</editor>
+            <default-value>false</default-value>
+          </designer-extension>
+          <required>true</required>
+        </property-extension>
+      </property>
     </property-type>
   </composite-component>
 </faces-config>
