@@ -60,8 +60,14 @@ if (rep == "01/01/70"){
 return "Updated: " + rep;}]]></xp:this.value>
 			</xp:text>
 			
+			<!-- version -->
+			<xp:div styleClass="version">
+				<xp:this.rendered><![CDATA[#{javascript:compositeData.showVersion == true}]]></xp:this.rendered>
+				v1.4
+			</xp:div>
+			
 			<!-- new button -->
-			<xp:panel tagName="div" id="newButton" styleClass="newButton"
+			<xp:panel tagName="div" id="newButton" styleClass="#{javascript:'newButton' + (compositeData.newDocTarget == 'UnpPhoto.xsp' ? ' newPhoto' : '')}"
 				rendered="#{javascript:!isEmpty( compositeData.newDocTarget )}">
 				<xp:this.attrs>
 					<xp:attr name="onclick">
@@ -72,26 +78,20 @@ return "Updated: " + rep;}]]></xp:this.value>
 }}]]></xp:this.value>
 					</xp:attr>
 				</xp:this.attrs>
-				<xp:text value="#{javascript:(compositeData.newDocTarget == 'UnpTask.xsp' ? 'New task' : 'New')}" />
+				<xp:text>
+					<xp:this.value><![CDATA[#{javascript:var t = compositeData.newDocTarget;
+if (t == 'UnpTask.xsp') {
+	return 'New task';
+} else if (t == 'UnpUpdate.xsp') {
+	return 'New update';
+} else if (t == 'UnpPhoto.xsp') {
+	return 'Add photo';
+} else {
+	return 'New';
+}}]]></xp:this.value>
+				</xp:text>
 			</xp:panel>
 			
-			<!-- settings button -->
-			<xp:panel tagName="div" id="settingsButton"
-				styleClass="settingsButton">
-				<xp:this.rendered><![CDATA[#{javascript:!isEmpty(compositeData.settingsurl)}]]></xp:this.rendered>
-				<xp:this.attrs>
-					<xp:attr name="onclick">
-						<xp:this.value><![CDATA[#{javascript:"window.location.href='" + compositeData.settingsurl + "';"}]]></xp:this.value>
-					</xp:attr>
-				</xp:this.attrs>
-				<span>Settings</span>
-			</xp:panel>
-			
-			<!-- version -->
-			<xp:div styleClass="version">
-				<xp:this.rendered><![CDATA[#{javascript:compositeData.showVersion == true}]]></xp:this.rendered>
-				v1.31
-			</xp:div>
 		
 		</div>
 	

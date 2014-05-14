@@ -9,10 +9,12 @@
 			formName="fUpdate"
 			action="newDocument"></xp:dominoDocument>
 	</xp:this.data>
+	
+
 
 	<xc:unpLayout
 		showMenu="true"
-		pageTitle="New update">
+		pageTitle="Add photo">
 		<xp:this.facets>
 
 			<xp:div
@@ -23,16 +25,37 @@
 					class="editmode">
 					<div
 						class="customform">
-
+					
 						<h2>
 							<span
-								class="formtitle">New update</span>
+								class="formtitle">Add photo</span>
 						</h2>
 
 						<!-- start form controls -->
 						<div>
 							<ul
 								class="fieldlist">
+								
+								<!-- photo upload -->
+								<li>
+									<xp:label
+										value="Photo"
+										id="label1"
+										for="fileUpload1"></xp:label>
+
+									<xp:fileUpload
+										id="fileUpload1"
+										value="#{docUpdate.photo}"
+										styleClass="uploadInput required">
+										<xp:this.attrs>
+											<xp:attr
+												name="accept"
+												value="image/*">
+											</xp:attr>
+										</xp:this.attrs>
+									</xp:fileUpload>
+							
+								</li>
 
 								<li>
 
@@ -45,7 +68,7 @@
 										value="#{docUpdate.incidentId}"
 										styleClass="xspListBox">
 										<xp:selectItem
-											itemLabel="#{javascript:'- Select an ' + applicationScope.labels['incident'].toLowerCase() + ' -'}"></xp:selectItem>
+											itemLabel="#{javascript:'- Select an ' + applicationScope.labels['incident'].toLowerCase() + ' (optional) -'}"></xp:selectItem>
 										<xp:selectItems>
 											<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwIncidentsOpen", sessionScope.get("orgUnitId"), 3, "[FAILSILENT]")}]]></xp:this.value>
 										</xp:selectItems>
@@ -65,30 +88,11 @@
 									<xp:inputText
 										id="inputMessage"
 										value="#{docUpdate.message}"
-										styleClass="required xspInputTextField"></xp:inputText>
+										styleClass="xspInputTextField"></xp:inputText>
 
 								</li>
 
-								<!-- photo upload -->
-								<li>
-									<xp:label
-										value="Photo"
-										id="label1"
-										for="fileUpload1"></xp:label>
-
-									<xp:fileUpload
-										id="fileUpload1"
-										value="#{docUpdate.photo}"
-										styleClass="uploadInput">
-										<xp:this.attrs>
-											<xp:attr
-												name="accept"
-												value="image/*">
-											</xp:attr>
-										</xp:this.attrs>
-									</xp:fileUpload>
-							
-								</li>
+								
 							</ul>
 						</div>
 
@@ -185,7 +189,7 @@
 								<xp:this.attrs>
 									<xp:attr
 										name="onclick">
-										<xp:this.value><![CDATA[#{javascript:return "loadPageEx('UnpUpdates.xsp', 'contentwrapper', null, true, true);";}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:return "$.blockUI();window.location.href=\"/" + @ReplaceSubstring(database.getFilePath(), "\\", "/") + "/UnpMain.xsp\"";}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
 								<span>Cancel</span>

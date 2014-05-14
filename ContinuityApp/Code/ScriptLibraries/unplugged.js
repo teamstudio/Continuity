@@ -253,12 +253,15 @@ function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname)
 function validate() {
 	var valid = true;
 	$(".required").each( function() {
-		var v = $(this).val();
+		var $this = $(this);
+		var v = $this.val();
 		//ML: can't add 'empty' values to computed combos in unplugged
 		if (v == "" || v =="~") {
-			var label = $("label[for='" + $(this).attr('id') + "']");
-			alert("Please complete " + label.text());
-			$(this).focus();
+			var label = $("label[for='" + $this.attr('id') + "']");
+			var type = $this.attr('type');
+			
+			alert(( type == 'file' ? "Please select a " + label.text().toLowerCase() : "Please complete " + label.text()) );
+			$this.focus();
 			valid = false;
 		}
 	})
@@ -741,7 +744,8 @@ var syncFunc = function(data) {
 	if ("true" === data) {
 		
 		setTimeout(function() { 
-			$.get("/_$$unp/replStatus", syncFunc).error(					//ios doesn't have this page
+			$.get("/_$$unp/replStatus", syncFunc).error(			
+				//ios doesn't have this page
 				function() {
 					reloadAfterSync();
 				});
@@ -754,14 +758,12 @@ var syncFunc = function(data) {
 }
 
 function reloadAfterSync() {
-	
+
 	//register handlers again
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	
 	if ( _ajaxRequests.length > 0 ) {
 		loadPageEx( _ajaxRequests[_ajaxRequests.length-1] , 'contentwrapper', null, true, false );
-	} else if (location.href.toLowerCase().indexOf('unpmain.xsp')>-1) {
-		location.href = "/unpws.unp/";		//redir to Unplugged workspace -> will auto launch correct continuity db
 	} else { 
 		location.reload();
 	}

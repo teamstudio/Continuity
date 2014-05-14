@@ -80,6 +80,17 @@ the specific language governing permissions and limitations under the License
 			<span></span>
 		</xp:panel>
 		
+		<!-- settings button -->
+		<xp:panel tagName="div" id="settingsButton"
+			styleClass="settingsButton">
+			<xp:this.attrs>
+				<xp:attr name="onclick">
+					<xp:this.value><![CDATA[#{javascript:"window.location.href='unp:settings';"}]]></xp:this.value>
+				</xp:attr>
+			</xp:this.attrs>
+			<span>Settings</span>
+		</xp:panel>
+		
 	</div>
 	
 </xp:view>
