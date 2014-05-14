@@ -1,34 +1,27 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='253a' unid='34129A4313A0F66EC1257B7C004621E2' sequence='10'>
+<view name='vwPlansById' alias='unpPlansById' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='7aa' unid='34129A4313A0F66EC1257B7C004621E2' sequence='17'>
 <created><datetime dst='true'>20130531T144601,94+02</datetime></created>
-<modified><datetime dst='true'>20130626T170126,66+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,65+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,66+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130531T144602,00+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,27+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104111,34+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T105611,25+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093723,10+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-VgAFACwAKAAEAAIADQAJAAQAaWRxdWlja0d1aWRlSWRzJENvbmZsaWN0JFJFRgQABAAAABoABQAE
-AEZvcm0BAAUAZlBsYW4ACgIDAAcACgAEAAlMMVM=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-DwABAABEAGYAAAACAGlk
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQACAAIACAAAAFZDAQACAAIAAAAAAK4AAQAACgAAAAAAAAAAAAICAAAAVkMAAA0ADQAAAAAAywAB
-AAAKAAAAAAAAAAAAAgIAAABpZGlkcXVpY2tHdWlkZUlkc3F1aWNrR3VpZGVJZHMmAAEAAAABAQAJ
-AQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
-AAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAA
-AAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$TITLE' sign='true'><text>vwPlansById|unpPlansById</text></item>
-<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fPlan"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='id' width='21.7500'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='id'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='quickGuideIds' width='25.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='quickGuideIds'><font size='9pt' style='bold'/></columnheader></column></view>
 

@@ -1,42 +1,39 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='742' unid='D1CF15A2CD8091A0C1257B250038106E' sequence='26'>
+<view name='vwQuickGuides' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='false' showresponsehierarchy='false'
+ showmargin='true' shrinkrows='false' extendlastcolumn='false' showhierarchies='false'
+ unreadcolor='black' rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='53e' unid='D1CF15A2CD8091A0C1257B250038106E' sequence='33'>
 <created><datetime>20130305T111222,22+01</datetime></created>
-<modified><datetime dst='true'>20130626T170126,62+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,61+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,62+02</datetime></lastaccessed>
-<addedtofile><datetime>20130305T111222,26+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,33+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104111,30+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140505T164331,18+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093720,26+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwQuickGuides</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-mgACACIAAgAkMwUABABuYW1lAQABAHwAIgIFAAIAaWQiAgMABQBIAEQABwAEAAsAAgAIAAgACAAJ
-AG5hbWVkZXNjcmlwdGlvbiQzZmlsZU5hbWVmaWxlVHlwZWZpbGVTaXplJENvbmZsaWN0BAAEAAAA
-IAAFAAQARm9ybQEACwBmUXVpY2tHdWlkZQAKAgMABwAKAAQACUwxUw==
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-EQABAABEAGYAAAAEAG5hbWU=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAGAAcACgAAAFZDAQAEAAQAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAUAAB
-AAAKAAAAAAAAAAAAAgIAAABWQwAAAgAHADQAAADVAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAIAAgA
-AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAUAABAAAKAAAAAAAAAAAAAgIAAABW
-QwAACAAIAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAG5hbWVuYW1lZGVzY3JpcHRpb25kZXNjcmlw
-dGlvbiQzbmFtZS9pZDQAAgAiAAIAJDMFAAQAbmFtZQEAAQB8ACICBQACAGlkIgIDAAcAEAAJAAkx
-UzJTM1M0UwBmaWxlTmFtZWZpbGVOYW1lZmlsZVR5cGVmaWxlVHlwZWZpbGVTaXplZmlsZVNpemUm
-AAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD/
-/wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAA
-AAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkA
-AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
-AAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAA
-AAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fQuickGuide"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='description' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='description'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$3' width='26.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='name/id'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>name + "|" + id</formula></code></column>
+<column hidedetailrows='false' itemname='fileName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='fileName'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='fileType' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='fileType'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='fileSize' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='fileSize'><font size='9pt' style='bold'/></columnheader></column></view>
 

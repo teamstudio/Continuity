@@ -1,46 +1,42 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='111a' unid='F232A7D6E4B3F811C1257B3C00814074' sequence='28'>
+<view name='vwIncidentsOpen' alias='unpIncidentsOpen' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' altrowcolor='#efefef' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='5c6' unid='F232A7D6E4B3F811C1257B3C00814074' sequence='35'>
 <created><datetime>20130329T003146,44+01</datetime></created>
-<modified><datetime dst='true'>20130626T170126,78+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,77+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,78+02</datetime></lastaccessed>
-<addedtofile><datetime>20130329T003146,46+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,18+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104111,46+02</datetime></revised>
+<lastaccessed><datetime>20140313T085029,73+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,03+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwIncidentsOpen|unpIncidentsOpen</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-6gACAAwAAgAkMmkAAwACAEoAAgAkMAUACwBkZXNjcmlwdGlvbgABAAEAIAAiAmkATwFWASICAQAB
-AC8AIgJpAFABVgEiAgEAAQAvACICaQBOAVYBIgIDAAUASgBFAAgACQACAAIAAgALAAoACQAEAG9y
-Z1VuaXRJZCQyJDBpZGlzUmVoZWFyc2FsYWxlcnRMZXZlbCRDb25mbGljdCRSRUYABAAEAAAANgAF
-AAQARm9ybQEACQBmSW5jaWRlbnQACgIFAAYAc3RhdHVzAQAGAGFjdGl2ZQoCHAIDAAcADgAIAAlM
-MVM0UzVT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-HwACAABEiGYHAAAJAIFmAAkAAgBvcmdVbml0SWQkMg==
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAGAAYAiAAAAFZDAwAJAAkAAAAAAFAAAQEACQABAAAAAAAAAAICAAAAVkMFAAIABwAOAAAAUAAB
-AAAJAAAAAAAAAAAAAgIAAABWQwAAAgAEAHQAAADHAAEAAAkAAAAAAAAAAAACAgAAAFZDAAACAAIA
-AAAAAFAAAQAACQAAAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAUAABAAAJAAAAAAAAAAAAAgIAAABW
-QwAACgAKAAAAAABQAAEAAAkAAAAAAAAAAAACAgAAAG9yZ1VuaXRJZG9yZ1VuaXRJZCQyY3JlYXRl
-ZA4AAgAMAAIAJDJpAAMAJDBuYW1ldAACAEoAAgAkMAUACwBkZXNjcmlwdGlvbgABAAEAIAAiAmkA
-TwFWASICAQABAC8AIgJpAFABVgEiAgEAAQAvACICaQBOAVYBIgIDAAcAKAAhAAkxUzJTM1M0UzEx
-UzEyUzEzUzE0UzIxUzIyUzIzUzI0UwBpZGlkaXNSZWhlYXJzYWxpc1JlaGVhcnNhbGFsZXJ0TGV2
-ZWxhbGVydExldmVsJgABAAAAAQEACQEAAAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABXQwEBAAkA
-AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
-AAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
-AAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEA
-CQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wABAO/v
-7wABAAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAAB
-AA==
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fIncident" &amp; status="active"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='orgUnitId' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt' style='bold'/><columnheader
+ title='orgUnitId'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='descending' hidedetailrows='false' itemname='$2' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='created'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='$0' width='24.8750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='name'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>description + " " + @Text(@Month(@Created)) + "/" + @Text(@Day(@Created)) + "/" + @Text(@Year(@Created))</formula></code></column>
+<column hidedetailrows='false' itemname='id' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><font size='9pt'/><columnheader
+ title='id'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='isRehearsal' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='isRehearsal'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='alertLevel' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='alertLevel'><font size='9pt' style='bold'/></columnheader></column></view>
 

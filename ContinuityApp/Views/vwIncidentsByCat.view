@@ -1,61 +1,58 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='239e' unid='517A88AEB6C53E9DC1257B79002C571C' sequence='5'>
+<view name='vwIncidentsByCat' alias='unpIncidentsByCat' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='6d6' unid='517A88AEB6C53E9DC1257B79002C571C' sequence='12'>
 <created><datetime dst='true'>20130528T100418,84+02</datetime></created>
-<modified><datetime dst='true'>20130626T170126,82+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,81+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,82+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100419,77+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,15+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104111,50+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140509T020200,52+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093722,18+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwIncidentsByCat|unpIncidentsByCat</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-5gECAK4AAwAkMTIABQAGAHN0YXR1cwEACwBkZWFjdGl2YXRlZAAKAq8AhAAoAAEAHQA8IS0tMy0t
-PkRlYWN0aXZhdGVkIGluY2lkZW50cwCuAFwABQALAGlzUmVoZWFyc2FsAAEAAwB5ZXMACgKvAD4A
-HAABABEAPCEtLTItLT5FeGVyY2lzZXMArgAiAAEAFgA8IS0tMS0tPkxpdmUgaW5jaWRlbnRzrgAE
-ALUFAwACAGwADQBzdW1tYXJ5Q29sdW1uAAEAAgBkL2kATgFWASICAQABAC8AIgIBAAEAMABpAE8B
-VgEiAgAAAAAAAAAAAEBgAiICAQABAC8AIgIBAAEAMABpAFABVgEiAgAAAAAAAAAAAEBgAiICAwAC
-AAwAAgAkMGkAAwACABoAAgAkNgUACgBhbGVydExldmVsYwEDAAUAeAB0AAwAAwALAA0AAgANAAIA
-BgAMAAIACwAJAAQAJDEyZGVzY3JpcHRpb25zdW1tYXJ5Q29sdW1uJDBjcmVhdGVkQnlOYW1lJDZz
-dGF0dXNzY2VuYXJpb05hbWVpZG9yZ1VuaXROYW1lJENvbmZsaWN0JFJFRgQABAAAAB4ABQAEAEZv
-cm0BAAkAZkluY2lkZW50AAoCAwAHAAoABAAJTDFT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-JAACAABEiGYHAAADAIFmAAMADQAkMTJzdW1tYXJ5Q29sdW1u
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ViewFormat' sign='true'>
-<rawitemdata type='5'>
-AQAKABAACAAAAFZDAwADAAMAxgAAAFAAAQAACgABAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAUAAB
-AAAIAAAAAAAAAAAAAgIAAABWQwUADQAHAKIAAACFAAEAAAgAAAAAAAAAAAACAgAAAFZDAAACAAcA
-DgAAAFAAAQAACAAAAAAAAAAAAAICAAAAVkMAAA0ADQAAAAAAfQABAAAIAAAAAAAAAAAAAgIAAABW
-QwAAAgAKACgAAABnAAEAAAgAAAAAAAAAAAACAgAAAFZDAAAGAAYAAAAAAFAAAQAACgAAAAAAAAAA
-AAICAAAAVkMAAAwADAAAAAAAiAABAAAIAAAAAAAAAAAAAgIAAABWQwAAAgACAAAAAABQAAEAAAoA
-AAAAAAAAAAACAgAAAFZDAAALAAsAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAJDEyY2F0xgACAK4A
-AwAkMTIABQAGAHN0YXR1cwEACwBkZWFjdGl2YXRlZAAKAq8AhAAoAAEAHQA8IS0tMy0tPkRlYWN0
-aXZhdGVkIGluY2lkZW50cwCuAFwABQALAGlzUmVoZWFyc2FsAAEAAwB5ZXMACgKvAD4AHAABABEA
-PCEtLTItLT5FeGVyY2lzZXMArgAiAAEAFgA8IS0tMS0tPkxpdmUgaW5jaWRlbnRzrgAEALUFAwAH
-ABYADwAJMlJUNlM4UlQxMlMxNFIAZGVzY3JpcHRpb25kZXNjcmlwdGlvbnN1bW1hcnlDb2x1bW5z
-dW1tYXJ5ogACAGwADQBzdW1tYXJ5Q29sdW1uAAEAAgBkL2kATgFWASICAQABAC8AIgIBAAEAMABp
-AE8BVgEiAgAAAAAAAAAAAEBgAiICAQABAC8AIgIBAAEAMABpAFABVgEiAgAAAAAAAAAAAEBgAiIC
-AwAHADQALgAJMVMyUzlTMTBTMTFTMTJTMTVTMTZTMjRTMjZTMjdTMjhTMjlTMzJTMzNTNDFTJDBj
-cmVhdGVkDgACAAwAAgAkMGkAAwBjcmVhdGVkQnlOYW1lY3JlYXRlZEJ5TmFtZSQ2YWxlcnRMZXZl
-bCgAAgAaAAIAJDYFAAoAYWxlcnRMZXZlbGMBAwAHAAwABQAJMFMwRQBzdGF0dXNzdGF0dXNzY2Vu
-YXJpb05hbWVzY2VuYXJpb05hbWVpZGlkb3JnVW5pdE5hbWVvcmdVbml0TmFtZSYAAQAAAAEBAAkB
-AAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA
-//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAA
-AAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJ
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAA
-AAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAA
-AAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAA
-AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
-AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAA
-AAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAA
-AAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
-</rawitemdata></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fIncident"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='$12' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><columnheader title='cat'><font size='9pt'
+ style='bold'/></columnheader><code event='value'><formula>@If(
+	status="deactivated"; "&lt;!--3--&gt;Deactivated incidents";
+	isRehearsal="yes"; "&lt;!--2--&gt;Exercises";
+"&lt;!--1--&gt;Live incidents")</formula></code></column>
+<column hidedetailrows='false' itemname='description' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='description'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='descending' hidedetailrows='false' itemname='summaryColumn'
+ width='16.6250' resizable='true' separatemultiplevalues='false' sortnoaccent='false'
+ sortnocase='true' showaslinks='false'><font size='8pt'/><columnheader title='summary'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>"d/" + @Text(@Year(@Created)) + "/" + @Right("0" + @Text(@Month(@Created)); 2) + "/" + @Right("0" + @Text(@Day(@Created)); 2)</formula></code></column>
+<column hidedetailrows='false' itemname='$0' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='true' sortnocase='true' showaslinks='false'><font size='8pt'/><columnheader
+ title='created'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='createdByName' width='15.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='createdByName'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$6' width='12.8750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='alertLevel'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@ProperCase(alertLevel)</formula></code></column>
+<column hidedetailrows='false' itemname='status' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='status'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='scenarioName' width='17' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='scenarioName'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='id' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='id'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='orgUnitName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='orgUnitName'><font size='9pt' style='bold'/></columnheader></column></view>
 

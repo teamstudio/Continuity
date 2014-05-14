@@ -1,42 +1,41 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='116e' unid='19C7872DF1F1057AC1257B44002C4038' sequence='7'>
+<view name='vwOrgUnits' alias='unpOrgUnits' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='5d6' unid='19C7872DF1F1057AC1257B44002C4038' sequence='14'>
 <created><datetime dst='true'>20130405T100320,24+02</datetime></created>
-<modified><datetime dst='true'>20130626T170126,74+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,73+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,74+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100322,64+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,24+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104111,42+02</datetime></revised>
+<lastaccessed><datetime>20140313T085028,99+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,11+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwOrgUnits|unpOrgUnits</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-pAACACIAAgAkMAUABABuYW1lAQABAHwAIgIFAAIAaWQiAgMAAgAQAAYAcGhvdG9zcwADAAUARgBC
-AAgABAACAAIACQAKAAYACQAEAG5hbWUkMGlkc2l0ZU5hbWVzYWxlcnRMZXZlbHBob3RvcyRDb25m
-bGljdCRSRUYEAAQAAAAcAAUABABGb3JtAQAIAGZPcmdVbml0CgIDAAcACgAEAAlMMVM=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-EQABAABEgGYAAAAEAG5hbWU=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAGAAcACAAAAFZDAQAEAAQAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIABwA0AAAAxAAB
-AAAKAAAAAAAAAAAAAgIAAABWQwAAAgACAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAJAAkA
-AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAoACgAAAAAAUAABAAAKAAAAAAAAAAAAAgIAAABW
-QwAABgAGABIAAABQAAEAAAoAAAAAAAAAAAACAgAAAG5hbWVuYW1lJDBuYW1lIGlkNAACACIAAgAk
-MAUABABuYW1lAQABAHwAIgIFAAIAaWQiAgMABwAQAAkACTFTMlMzUzRTAGlkaWRzaXRlTmFtZXNz
-aXRlTmFtZXNhbGVydExldmVsYWxlcnRMZXZlbHBob3Rvc2ltYWdlcxIAAgAQAAYAcGhvdG9zcwAD
-ACYAAQAAAAEBAAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
-AAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
-AAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEA
-CQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
-AAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAA
-AAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fOrgUnit"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$0' width='24.5000' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='name id'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>name + "|" + id</formula></code></column>
+<column hidedetailrows='false' itemname='id' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='id'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='siteNames' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='siteNames'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='alertLevel' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='alertLevel'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='photos' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='images'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@AttachmentNames</formula></code></column></view>
 

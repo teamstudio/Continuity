@@ -1,36 +1,36 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='33a' unid='0A5ED0B083A60B07C1257AA900362E1F' sequence='57'>
+<view name='vwIncidents' alias='unpIncidents' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='1ce' unid='0A5ED0B083A60B07C1257AA900362E1F' sequence='64'>
 <created><datetime>20121101T105147,51+01</datetime></created>
-<modified><datetime dst='true'>20130626T170126,86+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,85+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,86+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,01+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,21+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104111,54+02</datetime></revised>
+<lastaccessed><datetime>20140313T085011,63+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093716,35+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwIncidents|unpIncidents</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-VgAFACgAJAADAA0ACQAEAGNyZWF0ZWREYXRlTXMkQ29uZmxpY3QkUkVGBAAEAAAAHgAFAAQARm9y
-bQEACQBmSW5jaWRlbnQACgIDAAcACgAEAAlMMVM=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-GgABAABEAWYAAAANAGNyZWF0ZWREYXRlTXM=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQACAAwACAAAAFZDBQANAA0AAAAAAJAAAQAACAAAAAEAAAAAAAICAAAAVkMAAAIACQAKAAoAUAAB
-AAAKAAAAAAAAAAAAAgIAAABjcmVhdGVkRGF0ZU1zY3JlYXRlZERhdGVNcyQ5ZG9jTnVtYmVyCgAA
-AAgAkgADAAEFAQAEAH9BMP8mAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdD
-AQEACQAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAA
-AAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAA
-AAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQBYQwBMgAMA
-AAAAAAECAgIBAQEBBwQDAAAAAAAAAAAgLS06WUMAAQAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAA
-AAAAAgAAAAAAAAAAAAAAAAAAAAAAACwgA4A=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fIncident"</formula></code>
+<column sort='descending' hidedetailrows='false' itemname='createdDateMs'
+ width='18' resizable='true' separatemultiplevalues='false' sortnoaccent='true'
+ sortnocase='true' showaslinks='false'><font size='8pt'/><columnheader title='createdDateMs'><font
+ size='9pt' style='bold'/></columnheader><datetimeformat show='datetime' date='yearmonthday'
+ fourdigityearfor21stcentury='true' time='hourminutesecond' zone='never' dateformat='weekdaydaymonthyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='-' dateseparator3='-'
+ timeseparator=':' timeformat24='true' preference='usersetting'/><numberformat
+ format='fixed' punctuated='false' parens='false' percent='false' bytes='false'
+ decimalsym=',' thousandssep=' ' currencysymtype='custom' currencysym='€'
+ usecustomsym='false'/></column>
+<column hidedetailrows='false' itemname='$9' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='docNumber'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@DocNumber</formula></code></column></view>
 

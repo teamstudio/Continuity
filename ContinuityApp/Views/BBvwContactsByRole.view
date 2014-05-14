@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='BBvwContactsByRole' alias='BBvwContactsByRole' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' fromtemplate='UHS - Continuity DEV'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
+ opencollapsed='false' showresponsehierarchy='true' showmargin='true' shrinkrows='false'
+ extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='7ee' unid='72706FDC41857CA485257B8E0045A037' sequence='9'>
+<created><datetime dst='true'>20130618T084029,99-04</datetime></created>
+<modified><datetime dst='true'>20130725T093723,37+02</datetime></modified>
+<revised><datetime dst='true'>20130715T145222,11+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T093723,36+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093723,36+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fContact"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='category' width='13.6250'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='orgUnitId + roleId'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>orgUnitId + "-" + roleName</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='15'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='name'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='jobTitle' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='jobTitle'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='photo' width='15' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='photo'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	photoThumbnailName != ""; photoThumbnailName;
+photoFileName)</formula></code></column>
+<column hidedetailrows='false' itemname='isAlternate' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='isAlternate'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='details' width='17.1250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='details'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>jobTitle + @If(isAlternate="yes"; " (alternate)"; "")</formula></code></column>
+<column hidedetailrows='false' itemname='$15' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='primaryPhoneNr'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	phoneTypePrimary="work"; phoneWork;
+	phoneTypePrimary="home"; phoneHome;
+phoneMobile)</formula></code></column>
+<column hidedetailrows='false' itemname='userName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='userName'><font size='9pt' style='bold'/></columnheader></column></view>
+

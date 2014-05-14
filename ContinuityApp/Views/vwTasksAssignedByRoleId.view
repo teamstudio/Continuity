@@ -1,39 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='88e' unid='6C7352BA2F8F199FC1257B280042EFED' sequence='17'>
+<view name='vwTasksAssignedByRoleId' alias='unpTasksAssignedByRoleId' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='false' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' altrowcolor='#efefef' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='5a2' unid='6C7352BA2F8F199FC1257B280042EFED' sequence='24'>
 <created><datetime>20130308T131107,97+01</datetime></created>
-<modified><datetime dst='true'>20130626T170126,34+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170126,33+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170126,34+02</datetime></lastaccessed>
-<addedtofile><datetime>20130308T131109,01+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T105611,57+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104110,98+02</datetime></revised>
+<lastaccessed><datetime>20140313T085028,07+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093720,89+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-3gACADIAAwAkMjAABQAJAG9yZ1VuaXRJZAABAAEALQAiAgUABwByb2xlSWRzACICBAADAAIAQgAD
-ACQxOAAFAAUAb3JkZXIAVgEBAAAACwKvACIAEAAFAAUAb3JkZXIArgASAAAAAAAAAAA4j0CuAAQA
-tQMDAAUAHgAZAAMAAwADAAkAJDIwJDE4JENvbmZsaWN0AAQABAAAADQABQAEAEZvcm0BAAUAZlRh
-c2sACgIFAAYAc3RhdHVzAQAIAGFzc2lnbmVkCgIcAgMABwASAAwACUwxUzRTNVM2UzdT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-GgACAABEiGYHAAADAIBmAAMAAwAkMjAkMTg=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQACABUAigAAAFZDAwADABMARAAAAFAAAQAACQABAAAAAAAAAAICAAAAVkMBAAMABQBYAAAAYAAB
-AAAJAAAAAAAAAAAAAgIAAAAkMjBvcmdVbml0SWQgLyByb2xlSWRzRAACADIAAwAkMjAABQAJAG9y
-Z1VuaXRJZAABAAEALQAiAgUABwByb2xlSWRzACICBAADAAcAEAAJAAkyUzNTNFM1UwAkMThvcmRl
-clgAAgBCAAMAJDE4AAUABQBvcmRlcgBWAQEAAAALAq8AIgAQAAUABQBvcmRlcgCuABIAAAAAAAAA
-ADiPQK4ABAC1AwMABwAUAA0ACTJSVDZTN1M5UzExUgAmAAEAAAABAQAJAQAACgEBDgoAAD8ArSsB
-AAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAA
-AABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD/
-//8AAQDv7+8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAA
-CAAAAAAAAQA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$TITLE' sign='true'><text>vwTasksAssignedByRoleId|unpTasksAssignedByRoleId</text></item>
-<item name='$DesignerVersion' sign='true'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fTask" &amp; status = "assigned"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='$20' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='orgUnitId / roleIds'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>(orgUnitId + "-" + roleIds)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='$18' width='12'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='order'><font size='9pt'
+ style='bold'/></columnheader><code event='value'><formula>@If(
+	@Text(order) != ""; order;
+999)</formula></code></column></view>
 
