@@ -8,7 +8,7 @@
 			</xp:eventHandler>
 		</xp:link>)
 
-	<xe:dialog id="dlgAssignTo" title="Allocate task to plans">
+	<xe:dialog id="dlgAssignTo" title="Allocate task to checklists">
 									
 		<xp:panel>
 			<xp:this.data>
@@ -21,7 +21,7 @@
 			
 			<div class="showScrollbar" style="padding:15px;height: 250px; overflow-y:auto; overflow-x:hidden">
 			
-				Select one or more plans to allocate this task to.
+				Select one or more checklists to allocate this task to.
 				
 				<div style="margin-top:10px">
 				
@@ -43,7 +43,7 @@
 					//update tasks
 var assignedTo = getComponent("checkBoxGroup1").getValue();
 
-dBar.debug("assigned to plan id: " + assignedTo);
+dBar.debug("assigned to checklist id: " + assignedTo);
 
 //get plan names
 

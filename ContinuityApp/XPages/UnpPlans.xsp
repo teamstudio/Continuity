@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xc:unpLayoutBasic pageTitle="Plans">
+	<xc:unpLayoutBasic pageTitle="Checklists" showVersion="true">
 	
 		<xp:this.facets>
 

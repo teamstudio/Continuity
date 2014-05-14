@@ -19,7 +19,7 @@
 
 	<xp:panel disableOutputTag="true">
 
-		<!-- plan name  & description -->
+		<!-- checklist (plan) name  & description -->
 		<div class="box">
 			
 			<!-- file image & link -->	

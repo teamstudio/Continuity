@@ -11,8 +11,10 @@
 		
 				
 		<div class="section">
-		<div class="title"><xp:text value="Plan" disableTheme="true" escape="false" /></div>
-		</div>		
+			<div class="title">
+				Checklist
+			</div>		
+		</div>
 	
 		<xe:formTable id="formTable1" labelPosition="left"
 			disableErrorSummary="true">
@@ -83,7 +85,7 @@
 	} catch (e) {
 		dBar.error(e);
 	}}]]></xp:this.action>
-							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this plan?")]]></xp:this.script>
+							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this checklist?")]]></xp:this.script>
 						</xp:eventHandler>
 					</xp:button>
 					
@@ -103,7 +105,7 @@
 					required="true">
 					<xp:this.validators>
 						<xp:validateRequired
-							message="Enter a name for this plan">
+							message="Enter a name for this checklist">
 						</xp:validateRequired>
 					</xp:this.validators>
 				</xp:inputText>

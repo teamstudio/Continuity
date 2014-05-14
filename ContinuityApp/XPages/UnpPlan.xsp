@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	
-	<xc:unpLayoutBasic pageTitle="Plan" backButtonURL="UnpPlans.xsp">
+	<xc:unpLayoutBasic pageTitle="Checklist" backButtonURL="UnpPlans.xsp">
 
 		<xp:this.facets>
 		

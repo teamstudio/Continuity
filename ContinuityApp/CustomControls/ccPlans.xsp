@@ -12,11 +12,11 @@
 
 		<div class="section">
 			<div class="title">
-				<xp:text value="Plans" disableTheme="true" escape="false" />
+				Checklists
 			</div>
 			<div class="actions">
 
-				<xp:button value="Add plan" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+				<xp:button value="Add checklist" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("planForm");}]]></xp:this.action>
 					</xp:eventHandler>
