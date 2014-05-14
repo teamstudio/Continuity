@@ -40,6 +40,16 @@
 					</span>
 
 					<ul class="lotusInlinelist lotusUtility">
+					
+						<xp:panel tagName="li">
+							<xp:this.rendered><![CDATA[#{javascript:context.getUser().getRoles().contains("[hostingAdmin]");}]]></xp:this.rendered>
+							<xp:link
+								escape="true"
+								text="System test"
+								id="link4"
+								value="/systemTest.xsp">
+							</xp:link>
+						</xp:panel>
 
 						<xp:panel tagName="li" styleClass="lotusFirst" style="padding: 6px 7px;">
 							<xp:image url="#{sessionScope.profilePhotoUrl}" id="image2" height="35"

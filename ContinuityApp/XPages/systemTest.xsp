@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xe:objectData
+			var="systemTests"
+			createObject="#{javascript:new com.teamstudio.continuity.SystemTests()}">
+		</xe:objectData>
+	</xp:this.data>
+
+	<xc:layout>
+
+		<xp:this.facets>
+
+			<xp:div
+				xp:key="facetMiddle"
+				id="facetMiddle">
+
+				<div
+					class="section">
+					<div
+						class="title">System tests</div>
+				</div>
+
+				<div
+					style="margin: 10px 0;">
+					E-mail address to use for mail test:&#160;
+					<xp:inputText
+						id="inputText1"
+						value="#{viewScope.testEmail}"></xp:inputText>
+
+					<br />
+
+
+					<xp:button
+						style="margin-top: 15px;"
+						value="Run all tests"
+						id="button1">
+						<xp:eventHandler
+							event="onclick"
+							submit="true"
+							refreshMode="partial"
+							refreshId="facetMiddle">
+							<xp:this.action><![CDATA[#{javascript:systemTests.executeAll()}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+
+				</div>
+
+
+				<div
+					class="section">
+					<div
+						class="title">Test results</div>
+				</div>
+
+				<xp:table
+					styleClass="lotusTable">
+
+					<xp:tr>
+
+						<xp:td>
+							<b>Test name</b>
+						</xp:td>
+						<xp:td>
+							<b>Result</b>
+						</xp:td>
+						<xp:td></xp:td>
+						<xp:td>
+							<b>Last run</b>
+						</xp:td>
+						<xp:td><b>Messages</b></xp:td>
+					</xp:tr>
+
+					<xp:repeat
+						id="repeat1"
+						rows="30"
+						value="#{systemTests.tests}"
+						var="test"
+						disableOutputTag="true">
+
+						<xp:tr>
+							<xp:td style="width: 300px">
+								<xp:text
+									value="#{test.description}" />
+							</xp:td>
+
+							<xp:td style="width: 90px;">
+								<xp:div
+									rendered="#{javascript:test.isRun()}">
+									<xp:text
+										escape="true"
+										id="computedField1"
+										rendered="#{test.success}"
+										style="font-weight: bold; color: green;"
+										value="pass">
+									</xp:text>
+									<xp:text
+										escape="true"
+										id="computedField2"
+										rendered="#{!test.success}"
+										style="font-weight: bold; color: red;"
+										value="fail">
+									</xp:text>
+								</xp:div>
+
+								<xp:text
+									escape="true"
+									id="computedField3"
+									rendered="#{javascript:!test.isRun()}"
+									value="not run">
+								</xp:text>
+
+							</xp:td>
+							<xp:td style="width:90px">
+								<xp:button
+									value="run test"
+									id="button2">
+									<xp:eventHandler
+										event="onclick"
+										submit="true"
+										refreshMode="partial"
+										refreshId="facetMiddle">
+										<xp:this.action><![CDATA[#{javascript:test.execute()}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:button>
+							</xp:td>
+							
+							<xp:td style="width: 130px">
+								<xp:text
+									escape="true"
+									id="computedField5"
+									value="#{test.runAt}">
+									<xp:this.converter>
+										<xp:convertDateTime
+											type="both"
+											timeStyle="medium">
+										</xp:convertDateTime>
+									</xp:this.converter>
+								</xp:text>
+							</xp:td>
+
+							<xp:td>
+								<xp:text
+									escape="true"
+									id="computedField4"
+									style="#{javascript:(test.isSuccess() ? 'color: green;' : 'color: red;')}"
+									value="#{test.message}">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+
+
+
+					</xp:repeat>
+				</xp:table>
+
+
+			</xp:div>
+
+		</xp:this.facets>
+
+	</xc:layout>
+
+
+</xp:view>
