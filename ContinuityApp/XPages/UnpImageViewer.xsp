@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-	
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
 	<xp:this.data>
-		<xp:dominoDocument var="docImages"
+		<xp:dominoDocument
+			var="docImages"
 			action="openDocument"
 			formName="fUpdate">
 		</xp:dominoDocument>
-   </xp:this.data>
-   
-   	<xp:this.resources>
-		<xp:styleSheet href="/unplugged.css"></xp:styleSheet>
+	</xp:this.data>
+
+	<xp:this.resources>
+		<xp:styleSheet
+			href="/unplugged.css"></xp:styleSheet>
 	</xp:this.resources>
-	
+
 	<xp:this.beforePageLoad>
 		<xp:executeScript>
 			<xp:this.script><![CDATA[#{javascript:var images = new Array;
@@ -50,22 +54,27 @@ for(var i=0; i<attachmentList.length; i++){
 }]]></xp:this.script>
 		</xp:executeScript>
 	</xp:this.beforePageLoad>
-	
-	<xc:unpLayout showMenu="true" pageTitle="Image">
+
+	<xc:unpLayout
+		showMenu="true"
+		pageTitle="Image">
 		<xp:this.facets>
 
-			<xp:div xp:key="contents">
-				<xp:image id="image1" styleClass="imgViewer">
-					<xp:this.url><![CDATA[#{javascript:viewScope.image.src}]]></xp:this.url>
-				</xp:image>
-
-				<div style="margin-top: 10px;">
-					<ul class="buttons">
-						<li class="buttonBlue">
-							<xp:link escape="true"
-								value="javascript:void('');" id="link1">
+			<xp:div
+				xp:key="contents">
+				<div
+					style="margin-bottom: 10px;">
+					<ul
+						class="buttons">
+						<li
+							class="buttonBlue">
+							<xp:link
+								escape="true"
+								value="javascript:void('');"
+								id="link1">
 								<xp:this.attrs>
-									<xp:attr name="onclick">
+									<xp:attr
+										name="onclick">
 										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpUpdates.xsp #contentwrapper', 'contentwrapper', null, false, false);"}]]></xp:this.value>
 									</xp:attr>
 								</xp:this.attrs>
@@ -75,6 +84,13 @@ for(var i=0; i<attachmentList.length; i++){
 						</li>
 					</ul>
 				</div>
+				<xp:image
+					id="image1"
+					styleClass="imgViewer">
+					<xp:this.url><![CDATA[#{javascript:viewScope.image.src}]]></xp:this.url>
+				</xp:image>
+
+
 			</xp:div>
 
 		</xp:this.facets>
