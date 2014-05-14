@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="63a" sequence="17" unid="6C916477BE95CFD4C1257AF50044FB4F">
-<created><datetime>20130116T133327,83+01</datetime></created>
-<modified><datetime dst="true">20130421T215405,62+02</datetime></modified>
-<revised><datetime dst="true">20130421T215405,61+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130421T215405,62+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115519,81+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1862" sequence="40" unid="CA1E2EDCA33D9790C1257CD00049313B">
+<created><datetime dst="true">20140506T151927,31+02</datetime></created>
+<modified><datetime dst="true">20140506T152053,52+02</datetime></modified>
+<revised><datetime dst="true">20140506T152128,57+02</datetime></revised>
+<lastaccessed><datetime dst="true">20140506T152053,51+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140506T152053,51+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$TITLE"><text>unpDebugToolbar.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
 
 
 <item name="$FileNames" sign="true"><text>unpDebugToolbar.xsp</text></item>
 
 
-
-
-
-
-<item name="$Flags"><text>gC~4;</text></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+
 
 </note>
