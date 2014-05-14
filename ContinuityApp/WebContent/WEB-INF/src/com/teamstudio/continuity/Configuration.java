@@ -7,7 +7,10 @@ import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
 
+import eu.linqed.debugtoolbar.DebugToolbar;
+
 import lotus.domino.Database;
+import lotus.domino.DocumentCollection;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
 import lotus.domino.View;
@@ -33,11 +36,10 @@ public class Configuration implements Serializable {
 	
 	private String callTreeType;
 	
-	private static String APP_VERSION = "v1.31";		//current application version
-	private static String DATA_VERSION = "104";			//data version (used for checking if a conversion is needed)
+	private static String APP_VERSION = "v1.4";		//current application version
+	private static String DATA_VERSION = "105";			//data version (used for checking if a conversion is needed)
 	
 	private String serverName;
-	
 	
 	private HashMap<String,String> labels = new HashMap<String,String>();
 	
@@ -81,7 +83,17 @@ public class Configuration implements Serializable {
 				
 				if ( !dataVersion.equals(DATA_VERSION) ) {
 					
-					Conversion.startConversion(vwAllByType);
+					DebugToolbar.get().info("start conversion: role > appMenuOptions");
+					DocumentCollection dc;
+					dc = dbCurrent.search("form=\"fRole\" & @IsUnavailable(appMenuOptions)");
+					if (dc.getCount()>0) {
+						dc.stampAll("appMenuOptions", "all");
+					}
+					
+					dc = dbCurrent.search("form=\"fContact\" & @IsUnavailable(appMenuOptions)");
+					if (dc.getCount()>0) {
+						dc.stampAll("appMenuOptions", "all");
+					}
 					
 					//update version in settings document
 					docSettings = vwAllByType.getDocumentByKey("fSettings", true);
