@@ -43,8 +43,10 @@
 	}else{
 		viewScope.rowcount = viewScope.rowcount + 1;
 	}
-											
-												getProfilePhotoUrl(rowEntry.getColumnValue('createdBy'))}]]></xp:this.url>
+				
+	var photoFileName = rowEntry.getColumnValue("photoFileName");
+	
+	return (photoFileName.length>0 ? "0/" + rowEntry.getUniversalID() + "/$FILE/" + photoFileName : getProfilePhotoUrl(rowEntry.getColumnValue('createdBy') ) )}]]></xp:this.url>
 							</xp:image>
 	
 						</td>
@@ -57,7 +59,6 @@
 					<div class="smaller">
 						<xp:text id="computedField3"
 							value="#{rowEntry.createdDate}">
-							
 							<xp:this.converter>
 								<xp:convertDateTime
 									type="both" timeStyle="short">
