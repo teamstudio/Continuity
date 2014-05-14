@@ -5,9 +5,26 @@ function init() {
 		//load the application configuration
 		loadAppConfig(false);
 
+		/*
+		 * The sessionScope needs to be initialised/ updated if:
+		 * - it hasn't been loaded yet
+		 * - a different user is logging in
+		 * - (Unplugged only) the user performed a sync after Unplugged filled the sessionScope
+		 */
+		
 		var currentUser = @UserName();
 		
-		//workaround here to re-init the session vars if another user has logged in:
+		if ( isUnplugged() && sessionScope.containsKey("configLoadedAt") ) {
+		
+			var lastSyncMs = session.getEnvironmentString("ro.last.sync", true)
+			
+			if (lastSyncMs > sessionScope.get("configLoadedAt") ) {
+				sessionScope.put("configLoaded", null);
+				sessionScope.put("configLoadedAt", null);
+			}
+		
+		}
+		
 		if ( !sessionScope.configLoaded || sessionScope.get("userName") != currentUser) {
 			
 			dBar.debug("load sessionScope for " + currentUser);
@@ -21,14 +38,17 @@ function init() {
 				}
 			}
 			
+			//store the name of the user for which the sessionScope is initialized
 			sessionScope.put("configLoaded", true);
+			sessionScope.put("configLoadedAt", (new Date()).getTime() );
 			sessionScope.put("userName", currentUser);
 			
 			//retrieve information from user's profile
-			var docUser:NotesDocument = database.getView("vwContactsByUsername").getDocumentByKey( currentUser, true);
+			var vwContacts:NotesView = database.getView("vwContactsByUsername");
+			var docUser:NotesDocument = vwContacts.getDocumentByKey( currentUser, true);
 			
 			if (docUser==null) {
-				dBar.error("could not retrieve user profile");	
+				dBar.error("could not retrieve user profile for " + currentUser);	
 			}
 			
 			var isEditor = false;
@@ -60,7 +80,7 @@ function init() {
 			
 			if (isDebug) {
 				dBar.setEnabled(true);
-				dBar.info("Continuity is running in debug mode")
+				dBar.warn("Continuity is running in DEBUG mode")
 			}
 			
 			try {
@@ -107,6 +127,10 @@ function init() {
 				//get user's bcm role
 				sessionScope.put("roleId", docUser.getItemValueString("roleId"));
 				sessionScope.put("roleName", docUser.getItemValueString("roleName"));
+				
+				//get active menu options
+				sessionScope.put("appMenuOptions", docUser.getItemValueString("appMenuOptions"));
+				sessionScope.put("appMenuOptionsActive", docUser.getItemValue("appMenuOptionsActive"));
 					
 				//get user's org unit
 				sessionScope.put("orgUnitId", docUser.getItemValueString("orgUnitId"));
@@ -158,7 +182,7 @@ function init() {
 				
 			}
 						
-			dBar.debug("done");
+			dBar.debug("INIT function finished");
 			
 		} else {
 			
@@ -205,7 +229,7 @@ function checkMaxAlertLevels() {
 
 //helper function to work with Maps/ associative arrays in Unplugged or a browser
 function getMap() {
-	return (isUnplugged() ? [] : new java.util.HashMap() );	
+	return (isUnplugged() ? {} : new java.util.HashMap() );	
 }
 
 //get number of open tasks, assigned to the current user (based on bc role)
@@ -841,8 +865,6 @@ function getProfilePhotoUrl( userName:String, forceUpdate:boolean ) {
 				veUser.recycle();
 				
 			}
-			
-			
 			
 			vwContacts.recycle();
 			

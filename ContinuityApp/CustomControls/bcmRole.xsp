@@ -234,6 +234,13 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 			</xp:checkBox>
 			
 		</xe:formRow>
+		
+		<!--select available menu options-->
+		<xe:formRow id="formRow6" label="Active app menu options:">
+		
+			<xc:ccSelectAppMenuOptions doc="#{docRole}" />
+				
+		</xe:formRow>
 
 	</xe:formTable>
 

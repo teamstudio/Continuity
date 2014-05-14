@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core">
+	
+	<xp:radio
+		text="All options"
+		id="radio3"
+		selectedValue="all"
+		groupName="rgAppMenu"
+		value="#{compositeData.doc.appMenuOptions}"
+		defaultSelected="true">
+		<xp:eventHandler
+			event="onchange"
+			submit="false">
+			<xp:this.script><![CDATA[dojo.style( "#{id:cbAppOptions}", "display", "none")]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:radio>
+	<br />
+	<xp:radio
+		text="Selected options"
+		id="radio4"
+		selectedValue="selected"
+		groupName="rgAppMenu"
+		value="#{compositeData.doc.appMenuOptions}">
+		<xp:eventHandler
+			event="onchange"
+			submit="false">
+			<xp:this.script><![CDATA[dojo.style("#{id:cbAppOptions}", "display", "block")]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:radio>
+	<br />
+
+	<xp:div
+		id="cbAppOptions" styleClass="#{javascript:(compositeData.doc.isEditable() ? '' : 'appOptions')}">
+		<xp:this.rendered><![CDATA[#{javascript:compositeData.doc.isEditable() || compositeData.doc.getItemValueString("appMenuOptions") == "selected"}]]></xp:this.rendered>
+		<xp:this.style><![CDATA[#{javascript:var o = compositeData.doc.getItemValueString("appMenuOptions");
+		"margin-left: 20px; display: " + (o=="all" || o=="" ? "none" : "block" )}]]></xp:this.style>
+
+		<xp:checkBoxGroup
+			id="cbGroupAppOptions"
+			value="#{compositeData.doc.appMenuOptionsActive}">
+			<xp:selectItem
+				itemLabel="Activate team"
+				itemValue="activate">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Contacts"
+				itemValue="contacts">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Call tree"
+				itemValue="calltree">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Incidents"
+				itemValue="incidents">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="My role"
+				itemValue="role">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Checklists"
+				itemValue="plans">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Active tasks"
+				itemValue="tasks">
+			</xp:selectItem>
+			<xp:selectItem
+				itemLabel="Updates"
+				itemValue="updates">
+			</xp:selectItem>
+		</xp:checkBoxGroup>
+	</xp:div>
+
+</xp:view>

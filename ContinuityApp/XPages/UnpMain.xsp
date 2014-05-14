@@ -12,9 +12,7 @@
 			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		</xp:metaData>
 		<xp:metaData name="apple-mobile-web-app-capable" content="yes"></xp:metaData>
-		<!--<xp:metaData name="apple-mobile-web-app-status-bar-style" content="black"></xp:metaData>
-		
-		--><xp:metaData name="apple-mobile-web-app-status-bar-style" content="black-translucent"></xp:metaData>
+		<xp:metaData name="apple-mobile-web-app-status-bar-style" content="black-translucent"></xp:metaData>
 		
 		<xp:metaData name="format-detection" content="telephone=no"></xp:metaData>
 
@@ -27,6 +25,8 @@
 		
 	</xp:this.resources>
 	
+	<xc:unpDebugToolbarLoader rendered="#{javascript:sessionScope.isDebug == true}"></xc:unpDebugToolbarLoader>
+
 	<xp:this.beforePageLoad><![CDATA[#{javascript:init();}]]></xp:this.beforePageLoad>
 	<xp:this.afterRestoreView><![CDATA[#{javascript:init();}]]></xp:this.afterRestoreView>
 
@@ -60,51 +60,32 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 	
 		<section id="wscontent">
 	
-			<!-- standard users --> 
-			<!--<xp:div styleClass="wsscroll">
-				<xp:this.rendered><![CDATA[#{javascript:!sessionScope.isUser && !sessionScope.isEditor}]]></xp:this.rendered>
-				<ul class="workspace-items">
-					
-					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpContacts.xsp';">
-							<span class="chicletimg imgContacts"></span>
-							<span>Contacts</span>
-						</a>
-					</li>
-					
-					
-					<li>
-						<a href="#" onclick="$.blockUI();window.location.href='UnpPlans.xsp';">
-							<span class="chicletimg imgPlans"></span>
-							<span>Plans</span>
-						</a>
-					</li>
-					
-				</ul>
-	
-			</xp:div>
-			
-			--><!-- Continuity editors/ users -->
+			<!-- Continuity editors/ users -->
 			<xp:div styleClass="wsscroll">
 			
 				<ul class="workspace-items">
 				
 					<!--  activate team -->
-					<li>
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('activate', sessionScope.appMenuOptionsActive)==true}">
 						<a href="#" onclick="$.blockUI();window.location.href='UnpActivate_1.xsp';">
 							<span class="chicletimg imgActivate"></span>
 							<span>Activate team</span>
 						</a>
-					</li>
+					</xp:panel>
 					
 					<!-- contacts -->	
-					<li>
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('contacts', sessionScope.appMenuOptionsActive)==true}">
 						<a href="#" onclick="$.blockUI();window.location.href='UnpContacts_1.xsp';">
 							<span class="chicletimg imgContacts"></span>
 							<span>Contacts</span>
 						</a>
-					</li>
-					<li>
+					</xp:panel>
+					
+					<!-- call tree -->
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('calltree', sessionScope.appMenuOptionsActive)==true}">
 						<xp:link value="#" escape="true" id="link1" text="">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
@@ -115,15 +96,11 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 							<span>Call tree</span>
 
 						</xp:link>
-
-						<!--<a href="#" onclick="$.blockUI();window.location.href='UnpCallTree_1.xsp?clearFrom=1';">
-							<span class="chicletimg imgCalltree"></span>
-							<span>Call tree</span>
-						</a>
-					--></li>
+					</xp:panel>
 					
 					<!-- Incidents -->
-					<li>
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('incidents', sessionScope.appMenuOptionsActive)==true}">
 						<a href="#" onclick="$.blockUI();window.location.href='UnpIncidents_1.xsp';">
 							<xp:text escape="true" styleClass="badge" id="computedField2" rendered="#{javascript:sessionScope.numIncidents>0}">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numIncidents}]]></xp:this.value>
@@ -135,45 +112,69 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 							<span class="chicletimg imgIncidents"></span>
 							<xp:text value="#{javascript:applicationScope.labels['incidents']}" escape="false"></xp:text>
 						</a>
-					</li>
+					</xp:panel>
 					
 					<!-- my role -->
-					<li>
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('role', sessionScope.appMenuOptionsActive)==true}">
 						<a href="#" onclick="$.blockUI();window.location.href='UnpRole_1.xsp';">
 							<span class="chicletimg imgRole"></span>
 							<span>My role</span>
 						</a>
-					</li>
-					<li>
+					</xp:panel>
+					
+					<!-- checklist (formerly: plans) -->
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('plans', sessionScope.appMenuOptionsActive)==true}">
 					<a href="#" onclick="$.blockUI();window.location.href='UnpPlans_1.xsp';">
 							<span class="chicletimg imgPlans"></span>
-							<span>Plans</span>
+							<span>Checklists</span>
 						</a>
-					</li>
-	
+					</xp:panel>
+
 				
 					<!--  my active tasks -->
-					<xp:text tagName="li" styleClass="disabled" rendered="#{javascript:sessionScope.numAssignedTasks==0}">
-						<a href="#" onclick="return false">
+					
+					<!-- active tasks: disabled option -->
+					<xp:text
+						tagName="li"
+						styleClass="disabled">
+						<xp:this.rendered><![CDATA[#{javascript:(sessionScope.appMenuOptions=='all' || @IsMember('tasks', sessionScope.appMenuOptionsActive)==true) && sessionScope.numAssignedTasks==0}]]></xp:this.rendered>
+						<a
+							href="#"
+							onclick="return false">
 							<span class="chicletimg imgTasks"></span>
 							<span>Active tasks</span>
 						</a>
 					</xp:text>
-					<xp:text tagName="li" rendered="#{javascript:sessionScope.numAssignedTasks>0}">
-						<a href="#" onclick="$.blockUI();window.location.href='UnpActiveTasks_1.xsp?activeOnly=1';">
-							<xp:text escape="true" styleClass="badge" id="computedField4">
+
+					<!-- active tasks: active option -->
+					<xp:text tagName="li">
+						<xp:this.rendered><![CDATA[#{javascript:(sessionScope.appMenuOptions=='all' || @IsMember('tasks', sessionScope.appMenuOptionsActive)==true)
+&& sessionScope.numAssignedTasks>0}]]></xp:this.rendered>
+						<a
+							href="#"
+							onclick="$.blockUI();window.location.href='UnpActiveTasks_1.xsp?activeOnly=1';">
+							<xp:text
+								escape="true"
+								styleClass="badge"
+								id="computedField4">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numAssignedTasks}]]></xp:this.value>
 								<xp:this.converter>
-									<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+									<xp:convertNumber
+										type="number"
+										integerOnly="true">
+									</xp:convertNumber>
 								</xp:this.converter>
 							</xp:text>
 							<span class="chicletimg imgTasks"></span>
 							<span>Active tasks</span>
 						</a>
 					</xp:text>
-					
+
 					<!-- Updates -->
-					<li>
+					<xp:panel readonly="true" tagName="li"
+						rendered="#{javascript:sessionScope.appMenuOptions=='all' || @IsMember('updates', sessionScope.appMenuOptionsActive)==true}">
 						<a href="#" onclick="$.blockUI();window.location.href='UnpUpdates_1.xsp';">
 							<xp:text escape="true" styleClass="badge" id="computedField1" rendered="#{javascript:sessionScope.numUpdates > 0}">
 								<xp:this.value><![CDATA[#{javascript:sessionScope.numUpdates}]]></xp:this.value>
@@ -185,8 +186,8 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 							<span class="chicletimg imgUpdates"></span>
 							<span>Updates</span>
 						</a>
-					</li>
-				
+					</xp:panel>
+					
 				</ul>
 	
 			</xp:div>
@@ -198,7 +199,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 			}	
 		</style>
 						
-		<xc:unpFooter showVersion="true"></xc:unpFooter>
+		<xc:unpFooter newDocTarget="UnpPhoto.xsp"></xc:unpFooter>
 		
 	</div>
 
