@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var numOpenTasks = 0;
+
+var t = @DbLookup( @DbName(), "vwTasksAssignedOpen", docIncident.getItemValueString("id"), 2, "[FailSilent]");
+
+if (t != null && t != "") {
+	numOpenTasks = @Elements(t);
+}
+
+viewScope.put("numOpenTasks", numOpenTasks);
+}]]></xp:this.beforePageLoad>
+	
+	<xp:this.data>
+		<xp:dominoDocument var="docIncident" formName="fIncident" action="openDocument"></xp:dominoDocument>
+	</xp:this.data>
+	
+	<xc:unpLayout showMenu="true">
+		<xc:this.pageTitle><![CDATA[#{javascript:return applicationScope.labels['incident'];}]]></xc:this.pageTitle>
+		<xc:this.newDocTarget><![CDATA[#{javascript:( docIncident.getItemValueString("status").equals("deactivated") ? "" : "UnpTask.xsp")}]]></xc:this.newDocTarget>
+		<xp:this.facets>
+
+			<xp:panel xp:key="contents" disableOutputTag="true">
+
+				<div id="formholder">
+					<xp:div id="customform" styleClass="customform">
+				
+					<h2>
+						<xp:text escape="true" id="title" tagName="span"
+							value="#{javascript:applicationScope.labels['incident'] + ': ' + docIncident.getItemValueString('description')}"
+							styleClass="formtitle">
+						</xp:text>
+					</h2>
+					
+					<xp:panel id="topbuttons" styleClass="buttons" tagName="ul"  rendered="#{javascript:!docIncident.isEditable()}">
+					
+						<!-- edit -->
+						<xp:panel id="editbutton" styleClass="editButton" tagName="li">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:"openDocument('UnpIncident.xsp?action=editDocument&documentId=" + docIncident.getDocument().getUniversalID() + "', 'contentwrapper');"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<xp:this.rendered><![CDATA[#{javascript://show edit link for user that registered this incident or any editor
+
+var a = docIncident.getItemValue("docAuthors"); 
+var isRegistrator = @IsMember( sessionScope.userName, a);
+
+(sessionScope.isEditor || isRegistrator) && !docIncident.getItemValueString("status").equals("deactivated")}]]></xp:this.rendered>
+							<span>Edit</span>
+						</xp:panel>
+						<xp:panel id="closebutton" styleClass="cancelButton" tagName="li">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<!--<xp:this.value><![CDATA[#{javascript:"goBack();"}]]></xp:this.value>
+									--><xp:this.value><![CDATA[#{javascript:"loadPageEx('UnpIncidents.xsp', 'contentwrapper', 'incidents', true, true);"}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span>Close</span>
+						</xp:panel>
+					</xp:panel>
+					
+					<xp:panel id="panel2" styleClass="buttons" tagName="ul" rendered="#{javascript:docIncident.isEditable()}">
+						<xp:panel tagName="li" id="saveButton" styleClass="saveButton">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:var out = "";
+		
+		if (applicationScope.isReadOnlyMode) {
+			out += "alert('Continuity is running in read only mode.\\n\\nThis document won\\'t be saved.');";
+			out += "$.blockUI(); loadPageEx('" + getDbPath() + "/" + compositeData.closexpagename + "', 'contentwrapper', 0, true, true);";
+		} else {
+								
+			out = "saveDocument('" + getClientId("customform") + "', '" + docIncident.getDocument().getUniversalID() + 
+				"', 'back', 'fIncident'"
+				if (context.getUrlParameter("parentunid") != ""){
+					out += ", '" + context.getUrlParameter("parentunid") + "'";
+				}
+				if (compositeData.dbName != null){
+					out += ", '" + compositeData.dbName + "'";
+				}
+				out += ");"
+		}
+		return out;}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span>Save</span>
+						</xp:panel>
+						<xp:panel id="panel1" styleClass="cancelButton" tagName="li">
+							<xp:this.attrs>
+								<xp:attr name="onclick">
+									<xp:this.value><![CDATA[#{javascript:return "goBack();";}]]></xp:this.value>
+								</xp:attr>
+							</xp:this.attrs>
+							<span>Cancel</span>
+						</xp:panel>
+					</xp:panel>
+
+
+					<ul class="fieldlist">
+						<li>
+							<xp:label value="Description" id="namelabel" for="description"></xp:label>
+							
+							<xp:text escape="true" id="description_d"
+								value="#{docIncident.description}" rendered="#{javascript:!docIncident.isEditable()}">
+							</xp:text>
+							
+							<xp:inputText id="description"
+								value="#{docIncident.description}"
+								styleClass="required xspInputFieldEditBox" rendered="#{javascript:docIncident.isEditable()}">
+							<xp:this.attrs>
+								<xp:attr name="maxlength" value="100"></xp:attr>
+							</xp:this.attrs></xp:inputText>
+
+						</li>
+						<li>
+							<xp:label value="#{javascript:applicationScope.labels['asset']}"
+								id="label1" for="siteId">
+							</xp:label>
+							<xp:text escape="true" id="siteId" value="#{docIncident.siteName}">
+							</xp:text>
+						</li>
+						<li>
+							<xp:label value="Org unit" id="label4" for="orgUnitId"></xp:label>
+							<xp:text escape="true" id="orgUnitId"
+								value="#{docIncident.orgUnitName}">
+							</xp:text>
+						</li>
+
+						<li>
+							<xp:label value="Plan" id="label7" for="planName"></xp:label>
+							<xp:text escape="true" id="planName"
+								rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}"
+								value="#{docIncident.planName}">
+							</xp:text>
+							<xp:text escape="true" id="computedField3"
+								rendered="#{javascript:docIncident.getItemValueString('scenarioId')=='none'}"
+								value="-none-">
+							</xp:text>
+						</li>
+
+						<li>
+							<xp:label value="Scenario" id="label2" for="scenarioId"></xp:label>
+							<xp:text escape="true" id="scenarioId"
+								rendered="#{javascript:docIncident.getItemValueString('scenarioId')!='none'}"
+								value="#{docIncident.scenarioName}">
+							</xp:text>
+							<xp:text escape="true" id="computedField1"
+								rendered="#{javascript:docIncident.getItemValueString('scenarioId')=='none'}"
+								value="-none-">
+							</xp:text>
+						</li>
+
+						<li>
+
+							<xp:label value="Alert level" id="label3" for="alertLevel"></xp:label>
+							<xp:text escape="true" id="alertLevel"
+								value="#{javascript:var level = docIncident.getItemValueString('alertLevel');
+									if (level == 'elevated') {
+										return 'Elevated';
+									} else if (level == 'high') {
+										return 'High alert';
+									} else {
+										return 'Normal';
+									}}">
+							</xp:text>
+
+						</li>
+
+						<li>
+
+							<xp:label value="Status" id="label6" for="status"></xp:label>
+							<xp:text escape="true" id="status"
+								value="#{javascript:@ProperCase( docIncident.getItemValueString('status') )}">
+							</xp:text>
+
+						</li>
+
+						<li>
+
+							<xp:label value="Exercise" id="label5" for="isRehearsal"></xp:label>
+							<xp:text escape="true" id="isRehearsal"
+								value="#{javascript:(docIncident.getItemValueString('isRehearsal').equals('yes') ? 'Yes' : 'No')}">
+							</xp:text>
+
+						</li>
+
+					</ul>
+
+					</xp:div>
+
+				</div>
+
+				<xp:div styleClass="box mTop">
+					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get('isEditor') && docIncident.getItemValueString('status').equals('active')}]]></xp:this.rendered>
+
+					<ul class="buttons">
+						<li class="buttonBlue">
+							<xp:link escape="true" text="" value="" id="link1">
+
+								<xp:this.attrs>
+									<xp:attr name="onClick">
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpNotify.xsp?incidentId=" + docIncident.getDocument().getUniversalID() + "', 'contentwrapper', null, false, true); return false;"}]]></xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+								<span>Notify team</span>
+							</xp:link>
+
+						</li>
+
+						<li class="buttonBlue">
+							<xp:link escape="true" text="" id="link2" value="">
+								<xp:this.attrs>
+									<xp:attr name="onClick">
+										<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/" + applicationScope.callTreePrefix + ".xsp?setFrom=' + encodeURIComponent('UnpIncident.xsp?action=openDocument&documentId=" + docIncident.getDocument().getUniversalID() + "'), 'contentwrapper', null, true, true); return false;"}]]></xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+
+
+								<span>Call tree</span>
+							</xp:link>
+						</li>
+					</ul>
+
+					<!-- deactivate button -->
+					<xp:div>
+						<ul class="buttons">
+							<li class="buttonRed">
+								<xp:link escape="true" value="#" text="" id="link3">
+									<xp:this.attrs>
+										<xp:attr name="onclick">
+											<xp:this.value><![CDATA[#{javascript:javascript:if (applicationScope.isReadOnlyMode) {
+	"alert('Continuity is running in read only mode.\\n\\nYou cannot deactivate this incident.'); return false;";
+} else {
+												"deactivateIncident('" + docIncident.getDocument().getUniversalID() + "','" + viewScope.numOpenTasks + "', '" + "UnpIncident.xsp?action=openDocument&documentId=" + docIncident.getDocument().getUniversalID() + "'); return false;"
+												}
+												}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
+									<span>Deactivate</span>
+								</xp:link>
+
+							</li>
+						</ul>
+					</xp:div>
+
+				</xp:div>
+
+				<div class="mTop">
+
+					<xc:unpTasksList showDeactivationTask="false" showAssignedTo="true" allowMarkComplete="false" showStatus="true" viewName="vwTasksByIncident">
+						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
+						<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncident_1.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
+					</xc:unpTasksList>
+
+				</div>
+
+			</xp:panel>
+		</xp:this.facets>
+	</xc:unpLayout>
+
+</xp:view>
