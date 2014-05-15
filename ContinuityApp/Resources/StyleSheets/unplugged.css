@@ -496,7 +496,7 @@ body {
 .homeButton {
 	position: absolute;
 	top: 10px;
-	left: 10px;
+	right: 10px;
 	width: 36px;
 	height: 36px;
 	border-radius: 6px;
@@ -594,7 +594,7 @@ body {
 .settingsButton {
 	position: absolute;
 	top: 10px;
-	right: 10px;
+	left: 10px;
 	height: 36px;
 	border-radius: 6px;
 	background: -webkit-linear-gradient(#808080,#464646);
@@ -676,14 +676,14 @@ body {
 	top:45px;
 	left:0;
 	width:100%;
-	height:70px;
+	height:60px;
 	overflow: hidden;
 	padding: 14px 0;
 }
 
 #wscontent {
 	position:absolute;
-	top:144px;
+	top:140px;
 	left:0;
 	width:100%;
 	bottom:46px;
@@ -810,28 +810,37 @@ body {
 	.footer div.version {
 		top: 16px;
 	}
-	.searchButton,
-	.homeButton,
-	.viewsButton, 
 	.syncButton,
-	.newButton, 
-	.settingsButton {
+	.newButton 
+	 {
 		top: 6px;
 		height: 34px;
 	}
+	.searchButton,
 	.homeButton,
-	.newButton, 
-	.settingsButton {
-		right:4px;
+	.viewsButton, 
+	.settingsButton
+	 {
+		top: 4px;
+		height: 34px;
 	}
+	
+	.homeButton,
+	.newButton 
+    {
+		right: 4px;
+	}
+	
 	.searchButton {
 		right: 40px;
 	}
 	.viewsButton,
-	.syncButton {
+	.syncButton,
+	.settingsButton {
 		left: 4px;
 	}
 	.homeButton,
+	.settingsButton,
 	.searchButton,
 	.viewsButton { 
 		background: none; 
@@ -2571,6 +2580,32 @@ img.dark {
 }
 
 /* debug toolbar styles */
+#dBar {
+	background: silver;
+	position: absolute;
+	top:0; 
+	z-index: 999;
+	right: 0;
+	font-size: 12px;
+}
+#dBarContents {
+	width: 300px;
+	display: none;
+	padding: 6px;
+}
+#dBarLoad {
+	font-weight: bold; 
+	width: 60px; 
+	padding: 7px;
+	text-align: center;
+}
+
+@media screen and (min-width: 700px) {
+	#dBarContents {
+		width: 400px;
+	}
+}
+
 div.dBar {
 	background: #dddddd; 
 	text-shadow:none;
@@ -2581,6 +2616,7 @@ div.dBar .header {
 	padding: 5px; 
 	color: #ffffff;
 	text-align: middle;
+	font-size:14px;
 }
 div.dBar table {
 	width: 100%;
@@ -2614,6 +2650,9 @@ div.dBar div.title {
 	padding:5px; 
 	font-weight: bold;
 	border-bottom: 1px solid #000000;
+	text-align: left !important;
+	text-shadow: none;
+	font-size: 12px;
 }
 div.dBar .content {
 	margin: 7px 5px;
@@ -2627,5 +2666,7 @@ div.dBar .debugbutton {
 	padding-left: 6px;
 	padding-right: 6px;
 	font-size: 10px;
+	height: 28px;
+	line-height: 28px;
 }
 
