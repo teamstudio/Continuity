@@ -24,8 +24,9 @@
 			</div>
 		</div>
 
-		<xp:text value="No plans found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
+		<xp:text value="No checklists found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
 
+		<!-- show a list of checklists -->
 		<xp:repeat id="repeat1" rows="100" var="rowEntry" disableOutputTag="true" value="#{vwPlans}" indexVar="rowIndex">
 			<xp:this.facets>
 				<xp:text xp:key="header" disableTheme="true" escape="false">
@@ -130,21 +131,21 @@
 							</xp:text>
 
 							<br />
-							<b>Plans:</b>
+							<b>Checklists:</b>
 							&#160;
 							<xp:text escape="false" disableTheme="true">
-								<xp:this.value><![CDATA[#{javascript:var plans = taskEntry.getColumnValues().get(10);
+								<xp:this.value><![CDATA[#{javascript:var checklists = taskEntry.getColumnValues().get(10);
 								
-								if (plans.length==0) {
+								if (checklists.length==0) {
 					return "not allocated";
 				} else {
-					return @Implode(plans, ", ");
+					return @Implode(checklists, ", ");
 				}
 				
 				}]]></xp:this.value>
 							</xp:text>
 
-							<!-- plan(s) -->
+							<!-- checklists -->
 							<xc:ccAssignToPlans refreshId="dynamicContent1" taskUnid="#{javascript:taskEntry.getUniversalID()}">
 								<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
 							</xc:ccAssignToPlans>

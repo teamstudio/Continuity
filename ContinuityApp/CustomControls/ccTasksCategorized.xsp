@@ -29,7 +29,7 @@
 
 		</xp:tabPanel>
 
-		<xp:tabPanel label="By plan" id="tabPanel2">
+		<xp:tabPanel label="By checklist" id="tabPanel2">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 				<xp:this.action><![CDATA[#{javascript:viewScope.tasksView = "vwTasksByPlan";
 				viewScope.categoryFilter = null;
@@ -37,7 +37,7 @@
 			</xp:eventHandler>
 
 		</xp:tabPanel>
-		<xp:tabPanel label="By plan (unallocated)" id="tabPanel3">
+		<xp:tabPanel label="By checklist (unallocated)" id="tabPanel3">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 				<xp:this.action><![CDATA[#{javascript:viewScope.tasksView = "vwTasksByPlan";
 				viewScope.categoryFilter = "- Not allocated -";

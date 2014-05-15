@@ -83,7 +83,7 @@
 								<xe:basicLeafNode
 									submitValue="scenariosByPlan">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosByPlan");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Plans (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Checklists (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								--><xe:basicLeafNode

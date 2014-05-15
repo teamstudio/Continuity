@@ -165,7 +165,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 			
 		</xe:formRow>
 		
-		<xe:formRow id="formRow6" label="Plans:">
+		<xe:formRow id="formRow6" label="Checklists:">
 		
 			<xp:text escape="true" disableTheme="true"
 				value="Not allocated">
