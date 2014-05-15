@@ -9,8 +9,6 @@ if (t != null && t != "") {
 	numOpenTasks = @Elements(t);
 }
 
-//dBar.debug("num open: " + numOpenTasks);
-
 viewScope.put("numOpenTasks", numOpenTasks);
 }]]></xp:this.beforePageLoad>
 	

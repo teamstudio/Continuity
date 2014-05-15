@@ -1,130 +1,132 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='filter' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='23ae' unid='FA72D6866160B73FC1257B79002C5C56' sequence='6'>
+<agent name='TMSRunAfterPush' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web v3' publicaccess='false'
+ designerversion='8.5.3' comment='runs after every sync'>
+<noteinfo noteid='6ce' unid='FA72D6866160B73FC1257B79002C5C56' sequence='12'>
 <created><datetime dst='true'>20130528T100432,22+02</datetime></created>
-<modified><datetime dst='true'>20130626T170128,51+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170128,50+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170128,51+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100433,22+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T094232,28+02</datetime></modified>
+<revised><datetime dst='true'>20130725T090821,53+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T094232,27+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093722,13+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<designchange><datetime dst='true'>20130528T100833,76+02</datetime></designchange>
+<trigger type='actionsmenu'/>
+<documentset type='modified'/><code event='action'><javaproject class='JavaAgent.class'
+ codepath='c:\Program Files (x86)\IBM\Notes\Data'><java name='JavaAgent.java'>import lotus.domino.*;
+
+public class JavaAgent extends AgentBase {
+
+	View directoryUsers = null;
+	Database dbCurrent = null;
+	
+    public void NotesMain() {
+
+      try {
+          Session session = getSession();
+          AgentContext agentContext = session.getAgentContext();
+          
+          DocumentCollection dc = agentContext.getUnprocessedDocuments();
+
+          System.out.println("Run Unplugged after-sync agent for Continuity (for " + dc.getCount() + " documents)");
+          
+          dbCurrent = agentContext.getCurrentDatabase();
+          
+          Document doc = dc.getFirstDocument();
+          while (null != doc) {
+        	  
+        	  String form = doc.getItemValueString("form");
+        	  boolean updated = false;
+
+        	  //System.out.println("processing " + doc.getNoteID() + " _ " + form);
+        	  
+        	  //add authors field
+        	  Item itAuthors = doc.getFirstItem("docAuthors");
+        	  
+        	  if (itAuthors != null) {
+        		  if (itAuthors.getType() != Item.AUTHORS) {
+        			  itAuthors.setAuthors(true);
+        			  updated = true;
+        		  }
+        		  itAuthors.recycle();
+        	  }
+        	  
+        	  if (form.equals("fContact")) {		//contact form edited
+        		  
+        		  String email = doc.getItemValueString("email");
+        		  String userName = doc.getItemValueString("userName");
+        		  
+        		  if ( userName.length()&gt;0 &amp;&amp; !email.equals( doc.getItemValueString("emailPrevious"))) {
+        			  
+        			  System.out.println("update email for " + userName + " to " + email);
+        			  
+        			  doc.replaceItemValue("emailPrevious", email);
+        			  updated = true;
+        			  
+        			  //update email in person document
+        			  Document docUser = getDirectoryView().getDocumentByKey(userName, true);
+        			  if (null != docUser) {
+        				  
+        				  docUser.replaceItemValue("MailAddress", email);
+        				  docUser.replaceItemValue("InternetAddress", email);
+        				  if ( docUser.save() ) {
+        					  //done
+        					  
+        				  }
+        				  
+        			  }
+        			  
+        		  }
+        		  
+        		  
+        	  }
+        	  
+        	  if (updated) {
+        		  doc.save();
+        	  }
+        	  
+        	  
+        	  agentContext.updateProcessedDoc(doc);
+        	  
+        	  Document docTemp = dc.getNextDocument();
+        	  doc.recycle();
+        	  doc = docTemp;
+          }
+          
+      } catch(Exception e) {
+          e.printStackTrace();
+       }
+   }
+    
+   private View getDirectoryView() throws NotesException {
+	
+	   if (directoryUsers == null ) {
+		   
+		   Database dbDirectory = null;
+		  
+		   Document docSettings = dbCurrent.getView("vwAllByType").getDocumentByKey("fSettings", true);
+		   String path = docSettings.getItemValueString("directoryDbPath");
+		   
+		   dbDirectory = dbCurrent.getParent().getDatabase( dbCurrent.getServer(), path);
+		   
+		   directoryUsers = dbDirectory.getView("($Users)");
+		   
+	   }
+	   
+	   return directoryUsers;
+	   
+   }
+}</java></javaproject></code>
+<rundata processeddocs='0' exitcode='0' agentdata='9B670192AA80A64AC1257BB3002C2D90'>
+<agentmodified><datetime dst='true'>20130725T094232,28+02</datetime></agentmodified>
+<agentrun><datetime dst='true'>20140512T080509,33+02</datetime></agentrun>
+<runlog>Started running agent 'TMSRunAfterPush' on 05/12/2014 08:05:09 AM
+Running on new or modified documents: 4 total
+Found 4 document(s) that match search criteria
+Ran Java Agent Class
+Done running agent 'TMSRunAfterPush' on 05/12/2014 08:05:09 AM
+</runlog></rundata>
 <item name='$JavaCompilerSource'><text>1.3</text></item>
 <item name='$JavaCompilerTarget'><text>1.2</text></item>
-<item name='$AssistVersion'><datetime dst='true'>20130528T100833,76+02</datetime></item>
-<item name='$TITLE' sign='true'><text>TMSRunAfterPush</text></item>
-<item name='$AssistType' sign='true'><number>65427</number></item>
-<item name='$AssistLastRun' sign='true'>
-<rawitemdata type='400'>
-AAAAAAAAAAA=
-</rawitemdata></item>
-<item name='$AssistDocCount' sign='true'><number>0</number></item>
-<item name='$Comment' sign='true'><text>runs after every sync</text></item>
-<item name='$FlagsExt' sign='true'><text/></item>
-<item name='$AssistFlags' sign='true'><text>Es</text></item>
-<item name='$AssistTrigger'><text>4</text></item>
-<item name='$AssistInfo' sign='true'>
-<rawitemdata type='11'>
-AQAEAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-</rawitemdata></item>
-<item name='$AssistQuery' sign='true'>
-<rawitemdata type='f'>
-gQYAAAAA
-</rawitemdata></item>
-<item name='$AssistAction' sign='true'>
-<rawitemdata type='10'>
-gQKT/2YADwAlAB8AAQAAAAAAAABKYXZhQWdlbnQuY2xhc3NjOlxQcm9ncmFtIEZpbGVzICh4ODYp
-XElCTVxOb3Rlc1xEYXRhJSVzb3VyY2UlJS5qYXIAJSVvYmplY3QlJS5qYXIAAAA=
-</rawitemdata></item>
-<item name='$AssistAction_Ex' sign='true'>
-<rawitemdata type='14'>
-gQI=
-</rawitemdata></item>
-<item name='$Restricted' sign='true'><number>1</number></item>
-<item name='$Flags'><text>fJj3w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$AssistRunInfo' summary='true'>
-<rawitemdata type='3'>
-BgABAAAACADuJwAAAAAAAAUAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAsLosAHl7JcEa+zsAIXslwQAAAAAAAAAAAAAAAAAAAAAAAAAAqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-qqqqqqqqqqqqqqqqqqqqqqqq
-</rawitemdata></item>
-<item name='$FILE' summary='true' sign='true' seal='true'><object><file hosttype='msdos'
- compression='none' flags='sign' encoding='none' name='%%source%%.jar' size='1149'>
-<created><datetime>20130204T161729,58+01</datetime></created>
-<modified><datetime dst='true'>20130528T100833,76+02</datetime></modified><filedata
->
-UEsDBBQACAAIABBRvEIAAAAAAAAAAAAAAAAOAAAASmF2YUFnZW50LmphdmGVVl9v4zYMf06BfgfV
-GA721iV7LzIgbTasG9YVl/ZeB8VmEmGK5MlyesYh3/1IyXYsOc1ufkhMi/zxPymxL7WxTGpbV9NC
-74XS0+/vrq+ur8p6LUXOcsmriv3OD3yxBWUZfLagioo56p5XwL4Q9+STgDdWCAO51aZ5rcBUbM5U
-LSWiTZbc8jUxF+uH2hgCOh1eXzF8Wn0HLQr2pC1Uf3Kh0szDM/dY0xDJ+mcFVSW0YlX7P2dbsO3H
-NLsbsjp7H7Sy6ADjQ2LeiU9ReMgWIQzflzqv945TSvSYdBc5Ig2BCe5VlUbnCA9FJ1I52MCLprKw
-n+raTksjlJUqTT7WiqGwrLdbKBjfWDA/Vo3KvQa20YaRGqFqYRuWEp2wH9AI0vqga4XWI52wolOb
-Je+7M8xK7EJ70mXwG4JCOhHI2/KrMJXtTiLht52QwFKqA3YzJ7FsmN/JEB6JlcXobMn3PXPchP+I
-ofvEZQ3+NE3oOHAVJddaS+CK1WXBLcZzzjZcVhDkAdlms3OpaDNIql2IvV4q0cdlG+S/3QlpjhRH
-8LzAXNZ2p7E5NgJkEZyTK0zYRcvQu+hCSIdpgl/a49jFgBAblp6AbnyrhbGNuUjRS1NifomftE0X
-ry+//fVxFcmRYC9UQfeaWlNDYBNxngJOx3eh/mNkTo+KQ6TJZVhqEf8Zhyn8U/i3xsxiFVAF89wm
-GZo/mcxmuad99UAh0KpQfUi1tQZ7LuSFYnPnYSpOwjUOwSe+hwvyHcsIYpypHm4qQW3tLs1+/ol9
-+MBunA2d45ctfTZwELrG4snGWY3Ic63g09lGpZs5vZvUCVa7b45jVA0RSaYaKCXPoTc3NvT2HagL
-hTVWNJsFhgvFSlxPNLPbuRTxDwcZbTK/V5bdcqNVl2YU5Y7xvvkDmrQLxC072wuUxMGoI+A4CbHp
-PkjEeSZQuB/loigMzqZ3wnRR/BEnvFHYv/8F4Yqvw6n4gUbEyHAX5UIrGH2O4Y4XPY7P4044XmqT
-/zMt2gIaDUUqSu/kNw+fgAjWp1fyPLgCpLTkLkzuYem9wL7s9+gT4p1do30jnZ2Z7Sr2YMHyPQ6J
-7v3Icm7zXfrL5xxKd62BLLxygZ8GKxym/7wYLKmhRo/ZIrtfZD5Q57nr4biJmN0Z/Vb5C99J6Rd3
-K0TzXariW6VfZ74GKWWs/RtcMns1g2vm5MQ4CPIKLN6itm7ddrcgirezLzm8LaS8b2gxJmc6Ptl0
-4smp6Z2KdgWU3O58/DvGs8O593C5fkaJpIdp/0KHAjufuXEV4Yzr7mghywrMAUya3TpzRtjxnX2g
-7BSI9Dt3nAWm+VyfCAO2NipCvOs4PPfxK1BLBwi1rsIx7wMAAHIMAABQSwECFAAUAAgACAAQUbxC
-ta7CMe8DAAByDAAADgAAAAAAAAAAAAAAAAAAAAAASmF2YUFnZW50LmphdmFQSwUGAAAAAAEAAQA8
-AAAAKwQAAAAA
-</filedata></file></object></item>
-<item name='$FILE' summary='true' sign='true' seal='true'><object><file hosttype='msdos'
- compression='none' flags='sign' encoding='none' name='%%object%%.jar' size='1633'>
-<created><datetime>20130204T161729,58+01</datetime></created>
-<modified><datetime dst='true'>20130528T100833,76+02</datetime></modified><filedata
->
-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
-</filedata></file></object></item></note>
+<item name='$POID'><datetime dst='true'>20130725T090821,53+02</datetime></item></agent>
 

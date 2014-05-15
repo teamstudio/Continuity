@@ -35,9 +35,7 @@ public class Conversion {
 		Document docSettings = null;
 		
 		try {
-			
-			//need to perform a data conversion first
-
+		
 			DebugToolbar.get().info("Starting Continuity conversion");
 
 			boolean updated = false;
@@ -510,5 +508,7 @@ public class Conversion {
 		}
 		
 	}
+	
+	
 
 }

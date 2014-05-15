@@ -5,27 +5,27 @@
 		<xp:script src="/unpDebugToolbar.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
 	
-	<div id="dBar" style="background: silver; position: absolute; top:0; z-index: 2500; right: 0;font-size: 12px;">
-
-		<div id="dBarLoad" style="font-weight: bold; width: 80px; padding: 6px" onclick="loadDebugToolbar();">Show toolbar</div>
-
-		<div id="dBarContents" style="width: 375px; display:none; padding: 6px">
-
-		</div>
-
+	<div id="dBar">
+		<div id="dBarLoad">dBar</div>
+		<div id="dBarContents"></div>
 	</div>
 	
 	<script type="text/javascript">
-		function loadDebugToolbar() {
-			
-			$("#dBarLoad").hide();
-	
-			$("#dBarContents")
-				.text("Loading...")
-				.show()
-				.load("UnpDebugToolbarMain.xsp .dBar", function() {});
+		$(document).ready( function() {
+		
+			$("#dBarLoad").on("click", function() {
+		
+				$(this).hide();
+		
+				$("#dBarContents")
+					.text("Loading...")
+					.show()
+					.load("UnpDebugToolbarMain.xsp .dBar", function() {
+						
+					});
+			} );
 
-		}
+		} );
 	</script>
 
 </xp:view>

@@ -53,7 +53,7 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 
 	<div id="page">
 	
-		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" title="Continuity">
+		<xc:unpHeader search="none" searchPage="UnpSearch.xsp" viewsButton="false" title="Continuity" settingsButton="true">
 		</xc:unpHeader>
 		
 		<xc:unpOrgUnit></xc:unpOrgUnit>

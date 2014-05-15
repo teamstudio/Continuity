@@ -256,7 +256,7 @@ try{
 					"- alert level: " +	doc.getItemValueString("alertLevel") + "<br />" +
 						"- org unit: " + doc.getItemValueString("orgUnitName") + "<br />" +
 						"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "<br />" +
-						"- plan: " + doc.getItemValueString("scenarioName");
+						"- checklist: " + doc.getItemValueString("scenarioName");
 					
 					createUpdate( updateText, doc.getItemValueString("id"), incidentDesc );
 					
@@ -274,7 +274,7 @@ try{
 					"- alert level: " +	doc.getItemValueString("alertLevel") + "\r\n" +
 						"- org unit: " + doc.getItemValueString("orgUnitName") + "\r\n" +
 						"- " + applicationScope.labels['asset'].toLowerCase() + ": " + doc.getItemValueString("siteName") + "\r\n" +
-						"- plan: " + doc.getItemValueString("scenarioName"),
+						"- checklist: " + doc.getItemValueString("scenarioName"),
 								sessionScope.email, sessionScope.name);
 					
 						ve = nav.getNext();

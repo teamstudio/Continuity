@@ -10,8 +10,8 @@
 
 			<xp:div xp:key="contents">
 		
-				<xc:unpFormEditor showbuttons="true" closexpagename="UnpContacts.xsp"
-				viewxpagename="UnpContacts.xsp" formname="fContact" title="Contact"
+				<xc:unpFormEditor showbuttons="true" closexpagename="UnpContacts_1.xsp"
+				viewxpagename="UnpContacts_1.xsp" formname="fContact" title="Contact"
 				xp:key="facet_1">
 
 				<xp:this.facets>

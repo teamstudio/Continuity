@@ -95,8 +95,27 @@ the specific language governing permissions and limitations under the License
 						<xp:this.attrs>
 							<xp:attr name="onclick">
 								<xp:this.value><![CDATA[
-								$('.dBar button').attr('disabled', 'disabled');
-								window.location.href = '/unpws.unp/';
+								window.location.href = 'unp:workspace';
+								]]></xp:this.value>
+							</xp:attr>
+						</xp:this.attrs>
+					</xp:button>
+					
+					<xp:button styleClass="button debugbutton" value="settings">
+						<xp:this.attrs>
+							<xp:attr name="onclick">
+								<xp:this.value><![CDATA[
+								window.location.href = 'unp:settings';
+								]]></xp:this.value>
+							</xp:attr>
+						</xp:this.attrs>
+					</xp:button>
+					
+					<xp:button styleClass="button debugbutton" value="sync">
+						<xp:this.attrs>
+							<xp:attr name="onclick">
+								<xp:this.value><![CDATA[
+								window.location.href = 'unp:sync';
 								]]></xp:this.value>
 							</xp:attr>
 						</xp:this.attrs>

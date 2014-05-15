@@ -1,26 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note default='true' class='helpusingdocument' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1b2' unid='8C02A6D6207BB18FC1257AD4004D108C' sequence='1'>
+<helpusingdocument xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' noreplace='true' publicaccess='false' designerversion='8.5.3'
+ default='true' renderpassthrough='true'>
+<noteinfo noteid='29a' unid='8C02A6D6207BB18FC1257AD4004D108C' sequence='3'>
 <created><datetime>20121214T150145,08+01</datetime></created>
-<modified><datetime>20130301T115513,86+01</datetime></modified>
-<revised><datetime>20121214T150145,18+01</datetime></revised>
-<lastaccessed><datetime>20130301T115513,86+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115513,86+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T093717,28+02</datetime></modified>
+<revised><datetime dst='true'>20130715T144438,23+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T093717,27+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093717,27+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-</rawitemdata></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text>P</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAo=
-</rawitemdata></item></note>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/></richtext></body></helpusingdocument>
 
