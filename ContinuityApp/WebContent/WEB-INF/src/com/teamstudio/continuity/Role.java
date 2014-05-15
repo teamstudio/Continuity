@@ -1,7 +1,7 @@
 package com.teamstudio.continuity;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Vector;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
@@ -12,9 +12,7 @@ import com.teamstudio.continuity.utils.Utils;
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.DocumentCollection;
-import lotus.domino.NotesException;
 import lotus.domino.View;
-import lotus.domino.ViewEntry;
 
 public class Role implements Serializable {
 
@@ -22,19 +20,20 @@ public class Role implements Serializable {
 	
 	private String id;
 	private String name;
+	private String appMenuOptions;
+	private Vector<String> appMenuOptionsActive;
 
 	public Role() {
 		
 	}
 	
-	//retrieve a role name based on a role id
-	public static String getName(String roleId) {
+	//initialize the role based on a role id
+	@SuppressWarnings("unchecked")
+	public Role( String roleId ) {
 		
 		Database dbCurrent = null;
 		View vwAllById = null;
-		ViewEntry veRole = null;
-		
-		String roleName = "";
+		Document docRole = null;
 		
 		try {
 			
@@ -43,23 +42,38 @@ public class Role implements Serializable {
 				dbCurrent = ExtLibUtil.getCurrentDatabase();
 				vwAllById = dbCurrent.getView("vwAllByID");
 				
-				veRole = vwAllById.getEntryByKey(roleId, true);
-				if (veRole != null) {
-					roleName = (String) veRole.getColumnValues().get(1);
+				docRole = vwAllById.getDocumentByKey(roleId, true);
+				if (docRole != null) {
+					this.id = roleId;
+					this.name = docRole.getItemValueString("name");
+					this.appMenuOptions =  docRole.getItemValueString("appMenuOptions");
+					this.appMenuOptionsActive = docRole.getItemValue("appMenuOptionsActive");
 				}
 			}
-		} catch (NotesException e) {
+		} catch (Exception e) {
 			Logger.error(e);
 		} finally {
 			
-			Utils.recycle(veRole, vwAllById, dbCurrent);
+			Utils.recycle(docRole, vwAllById);
 		}
 		
-		return roleName;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public String getId() {
+		return id;
+	}
+	public String getAppMenuOptions() {
+		return appMenuOptions;
+	}
+	public Vector<String> getAppMenuOptionsActive() {
+		return appMenuOptionsActive;
 	}
 	
-	
 	//saves the role document, updates related items
+	@SuppressWarnings("unchecked")
 	public boolean save( com.ibm.xsp.model.domino.wrapped.DominoDocument xspDocRole ) {
 		
 		boolean success = false;
@@ -80,12 +94,14 @@ public class Role implements Serializable {
 			
 			this.id = xspDocRole.getItemValueString("id");
 			this.name = xspDocRole.getItemValueString("name");
+			this.appMenuOptions = xspDocRole.getItemValueString("appMenuOptions");
+			this.appMenuOptionsActive = xspDocRole.getItemValue("appMenuOptionsActive");
 			
 			//find contacts for this role: update menuOptions
 			DocumentCollection dc = xspDocRole.getParentDatabase().search("Form=\"fContact\" & roleId=\"" + id + "\"");
 			if (dc.getCount()>0) {
-				dc.stampAll("appMenuOptions", xspDocRole.getItemValue("appMenuOptions"));
-				dc.stampAll("appMenuOptionsActive", xspDocRole.getItemValue("appMenuOptionsActive"));
+				dc.stampAll("appMenuOptions", this.appMenuOptions);
+				dc.stampAll("appMenuOptionsActive", this.appMenuOptionsActive);
 			}
 			
 			//update role name in all documents that use this role (e.g. contacts)
