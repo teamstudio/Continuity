@@ -168,8 +168,9 @@
 										<xp:this.script><![CDATA[if (isReadOnlyMode) { 
 											alert("Continuity is running in read only mode.\n\nThis update won't be saved.");
 											return true;
-										} else {
-										return validate();
+										} else if (validate()) {
+											$.blockUI();
+											return true;
 										}
 										]]></xp:this.script>
 									</xp:eventHandler>

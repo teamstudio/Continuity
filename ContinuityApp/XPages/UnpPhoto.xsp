@@ -9,7 +9,7 @@
 			formName="fUpdate"
 			action="newDocument"></xp:dominoDocument>
 	</xp:this.data>
-	
+
 
 
 	<xc:unpLayout
@@ -25,7 +25,7 @@
 					class="editmode">
 					<div
 						class="customform">
-					
+
 						<h2>
 							<span
 								class="formtitle">Add photo</span>
@@ -35,7 +35,7 @@
 						<div>
 							<ul
 								class="fieldlist">
-								
+
 								<!-- photo upload -->
 								<li>
 									<xp:label
@@ -54,7 +54,7 @@
 											</xp:attr>
 										</xp:this.attrs>
 									</xp:fileUpload>
-							
+
 								</li>
 
 								<li>
@@ -92,7 +92,7 @@
 
 								</li>
 
-								
+
 							</ul>
 						</div>
 
@@ -116,64 +116,56 @@
 										event="onclick"
 										submit="true"
 										refreshMode="complete">
-										<xp:this.action><![CDATA[#{javascript:
-										try {
+										<xp:this.action><![CDATA[#{javascript:try {
+
+	//don't save in demo mode
+	if (applicationScope.isReadOnlyMode) {
+		context.redirectToPage("UnpMain.xsp");
+		return;
+	}
 										
-										//don't save in demo mode
-										if ( !applicationScope.isReadOnlyMode ) { 
-						
-							setDefaultFields( docUpdate.getDocument() );
-							
-							var a = [];
-							a.push("[bcEditor]");
-							a.push( sessionScope.get("userName") );
-							
-							docUpdate.replaceItemValue("docAuthors", a );	//set as authors field not supported in Unpluged: done in TMSRunAfterPush agent
-							
-							var attachments = docUpdate.getAttachmentList();
-							
-							if (attachments.length>0)  {
-								docUpdate.replaceItemValue("photoFileName", docUpdate.getAttachmentList().get(0).getName() );
-							}
-							
-							var incidentId = docUpdate.getItemValueString("incidentId");
-							
-							if ( !isEmpty( incidentId) ) {
-								var incidentName = @DbLookup( @DbName(), "vwAllById", incidentId, "description", "[FAILSILENT]");
-								docUpdate.replaceItemValue("incidentName", incidentName);
-							}
-							
-							docUpdate.replaceItemValue("messageHtml", docUpdate.getItemValueString("message") );
-							
-							if ( docUpdate.save() ) {
-							
-								if (!sessionScope.isDebug) {
-							
-									//force replication
-									var db = session.getCurrentDatabase();
-									db.replicate("someserver");
-								} else {
-								
-									dBar.debug("debug mode - no syncing");
-								}
-							
-							}
-			
-						}
-						
-						context.redirectToPage("UnpUpdates_1.xsp");
-				
-				} catch (e) {
-					dBar.error(e);
-				}
-			
-												
-												}]]></xp:this.action>
+	setDefaultFields( docUpdate.getDocument() );
+	
+	var a = [];
+	a.push("[bcEditor]");
+	a.push( sessionScope.get("userName") );
+	
+	docUpdate.replaceItemValue("docAuthors", a );	//set as authors field not supported in Unpluged: done in TMSRunAfterPush agent
+	
+	var attachments = docUpdate.getAttachmentList();
+	
+	if (attachments.length>0)  {
+		docUpdate.replaceItemValue("photoFileName", docUpdate.getAttachmentList().get(0).getName() );
+	}
+	
+	var incidentId = docUpdate.getItemValueString("incidentId");
+	
+	if ( !isEmpty( incidentId) ) {
+		var incidentName = @DbLookup( @DbName(), "vwAllById", incidentId, "description", "[FAILSILENT]");
+		docUpdate.replaceItemValue("incidentName", incidentName);
+	}
+	
+	docUpdate.replaceItemValue("messageHtml", docUpdate.getItemValueString("message") );
+	
+	var saved = docUpdate.save();
+	
+	if (saved) {
+		var numUpdates = sessionScope.get("numUpdates");
+		numUpdates = numUpdates + 1;
+		sessionScope.put("numUpdates", numUpdates);
+	}
+	
+	context.redirectToPage("UnpMain.xsp");
+
+} catch (e) {
+	dBar.error(e);
+}							}]]></xp:this.action>
 										<xp:this.script><![CDATA[if (isReadOnlyMode) { 
 											alert("Continuity is running in read only mode.\n\nThis update won't be saved.");
 											return true;
-										} else {
-										return validate();
+										} else if (validate()) {
+											$.blockUI();
+											return true;
 										}
 										]]></xp:this.script>
 									</xp:eventHandler>
