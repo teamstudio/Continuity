@@ -166,6 +166,23 @@ try{
 						doc.replaceItemValue("incidentName", veTemp.getColumnValues().get(1)  );
 						veTemp.recycle();
 					}
+					
+					//find role name
+					var roleChoices = applicationScope.get("roleChoices");
+					var selectedRoleId = doc.getItemValueString("roleIds");
+					var selectedRoleName = "";
+					
+					for(var i=0; i<roleChoices.length && selectedRoleName == ""; i++) {
+						
+						var r = roleChoices[i];
+						var _id = r.substring( r.indexOf("|") + 1);
+						
+						if (_id == selectedRoleId) {
+							selectedRoleName = r.substring( 0, r.indexOf("|") );
+							doc.replaceItemValue("roleNames", selectedRoleName);
+						}
+					
+					}
 				
 				}			
 			
