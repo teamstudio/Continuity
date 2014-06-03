@@ -131,16 +131,11 @@ table.lotusFormTable > tbody > tr:first-child > td {
 tr.lotusFormFieldRow > td > table {
 	border-collapse: collapse;	
 }
-tr.lotusFormFieldRow > td > table > tbody > tr > td {
-	padding-right: 0 !important;
-	padding-left: 0 !important;
-	padding-bottom: 0 !important;
-}
 
 td.lotusFormLabel {
 	white-space: nowrap;
 	padding-left: 5px;
-}
+} 
 
 
 fieldset.xspRadioButton input {
