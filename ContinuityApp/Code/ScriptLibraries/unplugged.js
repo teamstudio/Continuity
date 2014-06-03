@@ -263,6 +263,10 @@ function validate() {
 			alert(( type == 'file' ? "Please select a " + label.text().toLowerCase() : "Please complete " + label.text()) );
 			$this.focus();
 			valid = false;
+			
+			//ML 3/6/14: abort after first invalid field
+			return valid;
+			
 		}
 	})
 	return valid;
