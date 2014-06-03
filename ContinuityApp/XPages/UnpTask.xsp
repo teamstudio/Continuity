@@ -29,7 +29,12 @@
 								<ul class="fieldlist">
 								
 									<li>
-										<xp:label value="#{javascript:applicationScope.labels['incident']}" id="label3" for="incidentId"></xp:label>
+										
+										<label for="incidentId">
+											<xp:text value="#{javascript:applicationScope.labels['incident']}" disableTheme="true"></xp:text>
+										</label>
+										
+										<!-- the combobox is generated manually to be able to use optgroups -->
 										<xp:text disableTheme="true" escape="false" style="padding:0; display:inline; margin:0">
 											<xp:this.value>
 											<![CDATA[#{javascript:var selected = "";
