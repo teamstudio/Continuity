@@ -347,7 +347,7 @@ public class ContactsImport {
 			
 		} catch (Exception e) {
 			numFailed++;
-			Logger.error("invalid contact object (" + e.getMessage() + ")" );
+			Logger.error("error while creating contact: " + e.getMessage() );
 		}
 		
 	}

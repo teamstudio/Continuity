@@ -213,7 +213,7 @@ a:active {
  * maximum width of messages
  */
 .lotusMessage {
-	max-width: 550px;	
+	max-width: 600px;	
 	background-image: url(/oneuiv2/images/iconError16.png);
 	background-repeat: no-repeat;
 	background-position: 8px 5px;
