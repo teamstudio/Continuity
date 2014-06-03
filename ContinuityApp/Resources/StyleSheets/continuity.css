@@ -406,3 +406,8 @@ callTreeVert > ul {
 .appOptions table td {
 	padding-bottom: 0 !important;
 }
+
+/*disable help option in ck editor */
+table.cke_editor tr:last-child {
+	display: none;
+}
