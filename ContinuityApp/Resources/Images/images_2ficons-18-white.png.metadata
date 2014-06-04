@@ -1,20 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="37e" sequence="12" unid="CCD664B4D2747C4BC1257AC400762C5E">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" imagename="icons-18-white.png" maintenanceversion="1.0" name="images/icons-18-white.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="23a" sequence="19" unid="CCD664B4D2747C4BC1257AC400762C5E">
 <created><datetime>20121128T223046,06+01</datetime></created>
-<modified><datetime>20130306T172243,07+01</datetime></modified>
-<revised><datetime>20130306T172243,06+01</datetime></revised>
-<lastaccessed><datetime>20130306T172243,07+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,35+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
+<modified><datetime dst="true">20130725T105605,87+02</datetime></modified>
+<revised><datetime dst="true">20130725T104117,24+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105605,85+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093716,85+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+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
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime dst="true">20121009T215025,50+02</datetime></item>
-<item name="$ImageNames" sign="true"><text>icons-18-white.png</text></item>
-<item name="$TITLE" sign="true"><text>images/icons-18-white.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-<item name="$Flags"><text>34CiQ</text></item></note>
+</imageresource>

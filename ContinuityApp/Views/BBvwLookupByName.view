@@ -1,38 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='276e' unid='F5433FFFA946EAA385257B8E0045A03B' sequence='4'>
+<view name='BBvwLookupByName' alias='BBvwLookupByName' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' fromtemplate='UHS - Continuity DEV'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
+ opencollapsed='true' showresponsehierarchy='false' showmargin='true' shrinkrows='false'
+ extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false' indexrefresh='automatic'
+ initialbuildrestricted='false' noemptycategories='false'>
+<noteinfo noteid='7f6' unid='F5433FFFA946EAA385257B8E0045A03B' sequence='11'>
 <created><datetime dst='true'>20130618T084030,03-04</datetime></created>
-<modified><datetime dst='true'>20130626T170127,90+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,89+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,90+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130618T233729,89+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144247,52+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144247,51+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144247,51+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093723,39+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>BBvwLookupByName|BBvwLookupByName</text></item>
-<item name='$Index' sign='true'><text>/O</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-xAACAEQAAgAkOQUABABGb3JtAQAIAGZDb250YWN0CgKvACIAEgAFAAgAdXNlck5hbWWuABAABQAE
-AG5hbWWuAAQAtQMDAAUAHAAXAAMAAgACAAkAJDlpZCRDb25mbGljdAAEAAQAAABCAAUABABGb3Jt
-AQAFAGZTaXRlAAEACABmT3JnVW5pdB8CAQAFAGZQbGFuAB8CAQAIAGZDb250YWN0HwIKAgMABwAc
-ABUACUwxUzJTM1M1UzZTN1M4UzlTMTBTAA==
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-GAACAABECGYAAAACAIBmAAIAAgAkOWlk
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQACAAoAiwAAAFZDAQQCAAQAVgAAAKYAAQAACQABAAAAAAAAAAICAAAAVkMBAAIAAgAAAAAA4QAB
-AAAJAAAAAAAAAAAAAgIAAAAkOU5hbWVWAAIARAACACQ5BQAEAEZvcm0BAAgAZkNvbnRhY3QKAq8A
-IgASAAUACAB1c2VyTmFtZa4AEAAFAAQAbmFtZa4ABAC1AwMABwAQAAkACTNTNFM2UzhTAGlkaWQm
-AAEAAAABAQAJAQAACgEBDgoAAD8ArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD/
-/wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAAABAP///wABAP//
-/wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form = "fSite": "fOrgUnit" : "fPlan" : "fContact"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='$9' width='20.7500'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' twisties='true'><font size='9pt'/><columnheader title='Name'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>@If(Form = "fContact"; userName; name)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='id' width='28.1250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='id'><font size='9pt'
+ style='bold'/></columnheader></column></view>
 

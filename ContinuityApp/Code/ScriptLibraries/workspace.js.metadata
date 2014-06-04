@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="filter" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="39a" sequence="15" unid="3A9E8CF21E9D38C4C1257B11004307DA">
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="1.0" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="4ca" sequence="22" unid="3A9E8CF21E9D38C4C1257B11004307DA">
 <created><datetime>20130213T131209,22+01</datetime></created>
-<modified><datetime>20130306T172248,19+01</datetime></modified>
-<revised><datetime>20130306T172248,18+01</datetime></revised>
-<lastaccessed><datetime>20130306T172248,19+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,51+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<modified><datetime dst="true">20130725T105613,76+02</datetime></modified>
+<revised><datetime dst="true">20130725T104127,60+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105613,74+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093719,75+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$TITLE" sign="true"><text>workspace.js</text></item>
 <item name="$Flags"><text>h534Q</text></item>
 <item name="$PublicAccess" sign="true"><text>1</text></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
-</note>
+
+<item name="$POID"><datetime dst="true">20130725T104127,60+02</datetime></item></note>

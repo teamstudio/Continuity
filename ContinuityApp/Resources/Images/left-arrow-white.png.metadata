@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="1da" sequence="8" unid="01FE9A7F25F6C680C1257AFC00402379">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="left-arrow-white.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="4a6" sequence="15" unid="01FE9A7F25F6C680C1257AFC00402379">
 <created><datetime>20130123T124033,85+01</datetime></created>
-<modified><datetime>20130306T172243,17+01</datetime></modified>
-<revised><datetime>20130306T172243,16+01</datetime></revised>
-<lastaccessed><datetime>20130306T172243,17+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,08+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>left-arrow-white.png</text></item>
-<item name="$Flags"><text>34CiQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
+<modified><datetime dst="true">20130725T105606,05+02</datetime></modified>
+<revised><datetime dst="true">20130725T104116,94+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105606,03+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093719,58+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+iVBORw0KGgoAAAANSUhEUgAAAAsAAAAQCAYAAADAvYV+AAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACQSURBVHjaYvz//z8DHtADxE+BuB/MAynG
+gbv/I0AB2FAcCrv+o4J/QJyPTWHHf+xgMrrCNhwKpwExI7LCFhwKZ4AUIru5CYfCWTCFMMUNOBTO
+QVYIwkzA0GPCEcb/MESIdS96OOMNCWyR0o5DwxT0oCMUKROJjW5w+sCXkHqQFBaCxFjwJM8SaLDC
+kyhAgAEAoRH6AHHLGP4AAAAASUVORK5CYII=
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime>20130123T124030,84+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>left-arrow-white.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+</imageresource>

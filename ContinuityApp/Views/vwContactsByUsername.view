@@ -1,50 +1,47 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1162' unid='98E2890034EB9453C1257B44002C4035' sequence='11'>
+<view name='vwContactsByUsername' alias='unpContactsByUsername' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='5f2' unid='98E2890034EB9453C1257B44002C4035' sequence='20'>
 <created><datetime dst='true'>20130405T100320,21+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,10+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,09+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,10+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100322,58+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144244,27+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144244,26+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144244,26+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,21+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwContactsByUsername|unpContactsByUsername</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-iAECAGIABQBwaG90bwAFABIAcGhvdG9UaHVtYm5haWxOYW1lAQAAAAsCrwA2ABwABQASAHBob3Rv
-VGh1bWJuYWlsTmFtZa4AGgAFAA0AcGhvdG9GaWxlTmFtZQCuAAQAtQMDAAIAjgADACQxNQAFABAA
-cGhvbmVUeXBlUHJpbWFyeQEABAB3b3JrCgKvAGIAFAAFAAkAcGhvbmVXb3JrAK4ATgAFABAAcGhv
-bmVUeXBlUHJpbWFyeQEABABob21lCgKvACwAFAAFAAkAcGhvbmVIb21lAK4AGAAFAAsAcGhvbmVN
-b2JpbGUArgAEALUFAwAFAFAASwAIAAgABgAFAAQAEAADAAkABAB1c2VyTmFtZXJvbGVJZHBob3Rv
-bmFtZWNhbGxUcmVlQ29udGFjdHMkMTUkQ29uZmxpY3QkUkVGAAQABAAAADAABQAEAEZvcm0BAAgA
-ZkNvbnRhY3QKAgUACAB1c2VyTmFtZQEAAAALAhwCAwAHABIADAAJTDFTNFM1UzZTN1M=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-FQABAABEAGYAAAAIAHVzZXJOYW1l
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAGAAkACAAAAFZDAQAIAAgAAAAAAKUAAQAACAAAAAAAAAAAAAICAAAAVkMAAAYABgAAAAAAuwAB
-AAAIAAAAAAAAAAAAAgIAAABWQwAABQAFAHYAAAB4AAEAAAkAAAAAAAAAAAACAgAAAFZDAAAEAAQA
-AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAABAAEAAAAAAAkAABAAAKAAAAAAAAAAAAAgIAAABW
-QwAAAwAOAKYAAABQAAEAAAoAAAAAAAAAAAACAgAAAHVzZXJOYW1ldXNlck5hbWVyb2xlSWRyb2xl
-SWRwaG90b3Bob3RvdgACAGIABQBwaG90bwAFABIAcGhvdG9UaHVtYm5haWxOYW1lAQAAAAsCrwA2
-ABwABQASAHBob3RvVGh1bWJuYWlsTmFtZa4AGgAFAA0AcGhvdG9GaWxlTmFtZQCuAAQAtQMDAAcA
-EgAMAAkyUlQzUzRTNlM4Um5hbWVuYW1lY2FsbFRyZWVDb250YWN0c2NhbGxUcmVlQ29udGFjdHMk
-MTVwcmltYXJ5UGhvbmVOcqYAAgCOAAMAJDE1AAUAEABwaG9uZVR5cGVQcmltYXJ5AQAEAHdvcmsK
-Aq8AYgAUAAUACQBwaG9uZVdvcmsArgBOAAUAEABwaG9uZVR5cGVQcmltYXJ5AQAEAGhvbWUKAq8A
-LAAUAAUACQBwaG9uZUhvbWUArgAYAAUACwBwaG9uZU1vYmlsZQCuAAQAtQUDAAcAFgAPAAkyUlQ2
-UzhSVDEyUzE0UgAmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAA
-AAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA
-//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAA
-AAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJ
-AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////
-AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fContact" &amp; userName != ""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='userName' width='20.6250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='8pt'/><columnheader title='userName'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='roleId' width='23.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='roleId'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='photo' width='15' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='photo'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	photoThumbnailName != ""; photoThumbnailName;
+photoFileName)</formula></code></column>
+<column hidedetailrows='false' itemname='name' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='callTreeContacts' width='18' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='callTreeContacts'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$15' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='primaryPhoneNr'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	phoneTypePrimary="work"; phoneWork;
+	phoneTypePrimary="home"; phoneHome;
+phoneMobile)</formula></code></column></view>
 

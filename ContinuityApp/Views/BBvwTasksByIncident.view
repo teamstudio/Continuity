@@ -1,58 +1,57 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='235a' unid='F4C30715A6AC095485257B71004D3A50' sequence='8'>
+<view name='BBvwTasksByIncident' alias='BBvwTasksByIncident' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' fromtemplate='UHS - Continuity DEV'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
+ opencollapsed='false' showresponsehierarchy='true' showmargin='true' shrinkrows='false'
+ extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false' indexrefresh='automatic' initialbuildrestricted='false'
+ noemptycategories='false'>
+<noteinfo noteid='706' unid='F4C30715A6AC095485257B71004D3A50' sequence='15'>
 <created><datetime dst='true'>20130520T100332,00-04</datetime></created>
-<modified><datetime dst='true'>20130626T170127,74+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,73+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,74+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100216,85+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144246,78+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144246,77+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144246,77+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093722,32+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>BBvwTasksByIncident|BBvwTasksByIncident</text></item>
-<item name='$Index' sign='true'><text>/O</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-rgECAHoAAwBjYXQABQAGAHN0YXR1cwEACABjb21wbGV0ZQoCrwBUABQAAQAJAENvbXBsZXRlZACu
-AEAABQAEAHR5cGUBAAcAb25nb2luZwAKAq8AJgAUAAEACgBCYWNrZ3JvdW5krgASAAEABQBUbyBk
-bwCuAAQAtQUDAAIAHgACACQ5BQAHAHJvbGVJZHMAAQABAC0AhQIDAAIAZAAJAHJvbGVOYW1lcwAB
-AA0AQXNzaWduZWQgdG86IABWAQUACQByb2xlTmFtZXMAAQAAAAoCrwAmABAAAQAGAE5vIG9uZa4A
-FgAFAAkAcm9sZU5hbWVzAK4ABAC1AyICAwAFAGoAZQALAAoAAwAEAAsABAAGAA0AAgAJAAkABABp
-bmNpZGVudElkY2F0bmFtZWRlc2NyaXB0aW9udHlwZXN0YXR1c3F1aWNrR3VpZGVJZHMkOXJvbGVO
-YW1lcyRDb25mbGljdCRSRUYABAAEAAAAMAAFAAQARm9ybQEABQBmVGFzawAKAgUACgBpbmNpZGVu
-dElkAQAAAAsCHAIDAAcAEgAMAAlMMVM0UzVTNlM3Uw==
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-LAADAABECGYHAAAKAIlmBwoAAwCAZgANAAQAaW5jaWRlbnRJZGNhdG5hbWU=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ViewFormat' sign='true'>
-<rawitemdata type='5'>
-AQAJAAwACAAAAFZDAwAKAAoAAAAAAFAAAQAACQABAAAAAAAAAAICAAAAVkMHAAMAAwCWAAAAaQAB
-AAAJAAEAAAAAAAAAAgIAAABWQwEABAAEAAAAAAB3AAEAAAkAAAAAAAAAAAACAgAAAFZDAAALAAsA
-AAAAAHoAAQAACQAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAUAABAAAJAAAAAAAAAAAAAgIAAABW
-QwAABgAGAAAAAABQAAEAAAkAAAAAAAAAAAACAgAAAFZDAAANAA0AAAAAAFAAAQAACQAAAAAAAAAA
-AAICAAAAVkMAAAIABwAqAAAAUAABAAAKAAAAAAAAAAAAAgIAAABWQwAACQAJAHYAAACSAQEAAAoA
-AAAAAAAAAAACAgAAAGluY2lkZW50SWRpbmNpZGVudElkY2F0Y2F0lgACAHoAAwBjYXQABQAGAHN0
-YXR1cwEACABjb21wbGV0ZQoCrwBUABQAAQAJAENvbXBsZXRlZACuAEAABQAEAHR5cGUBAAcAb25n
-b2luZwAKAq8AJgAUAAEACgBCYWNrZ3JvdW5krgASAAEABQBUbyBkbwCuAAQAtQUDAAcAGgAUAAky
-UlQ2UzhSVDlTMTBTMTJTMTRSbmFtZW5hbWVkZXNjcmlwdGlvbmRlc2NyaXB0aW9udHlwZXR5cGVz
-dGF0dXNzdGF0dXNxdWlja0d1aWRlSWRzcXVpY2tHdWlkZUlkcyQ5cm9sZUlkcyoAAgAeAAIAJDkF
-AAcAcm9sZUlkcwABAAEALQCFAgMABwAKAAMACTRTAHJvbGVOYW1lc3JvbGVOYW1lc3YAAgBkAAkA
-cm9sZU5hbWVzAAEADQBBc3NpZ25lZCB0bzogAFYBBQAJAHJvbGVOYW1lcwABAAAACgKvACYAEAAB
-AAYATm8gb25lrgAWAAUACQByb2xlTmFtZXMArgAEALUDIgIDAAcAEAAJAAk0UzVTOFM5UwAmAAEA
-AAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAA
-AAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAA
-AFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAA
-AAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAA
-AAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//
-AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAA
-AAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA
-////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAA
-AAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fTask" &amp; incidentId != ""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='incidentId' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='incidentId'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column sort='descending' hidedetailrows='false' itemname='cat' width='13.1250'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='cat'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>@If(
+	status="complete"; "Completed";
+	type = "ongoing"; "Background";
+"To do")</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='14.8750'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='name'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='description' width='15.2500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='description'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='type' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='type'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='status' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='status'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='quickGuideIds' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='quickGuideIds'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$9' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='roleIds'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Implode(roleIds; "-")</formula></code></column>
+<column hidedetailrows='false' itemname='roleNames' width='50.2500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='roleNames'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Text("Assigned to: ") + @If(roleNames = "";"No one";roleNames)</formula></code></column></view>
 

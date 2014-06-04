@@ -1,21 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="312e" sequence="2" unid="0070907778784B80C1257B9B0053BFF4">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" imagename="id_card_selected.png" maintenanceversion="1.0" name="icons/id_card_selected.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="812" sequence="11" unid="0070907778784B80C1257B9B0053BFF4">
 <created><datetime dst="true">20130701T171446,28+02</datetime></created>
-<modified><datetime dst="true">20130702T115952,26+02</datetime></modified>
-<revised><datetime dst="true">20130702T115952,25+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130702T115952,26+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130701T171447,27+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Matt White/O=Exhilarate</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-<item name="$TITLE" sign="true"><text>icons/id_card_selected.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
+<modified><datetime dst="true">20130725T105605,48+02</datetime></modified>
+<revised><datetime dst="true">20130725T104118,02+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105605,46+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093723,50+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC
+N0lEQVRIie2WP0wTYRjGf9/dlZMrpUEoBKJVEwKKQ01aBiLBCUeJu25O/llNOjAQJ52MmOhsDKuB
+wWg00fgnagATalKMQcVBGoFioeWgvet9DrYJJUepNWUwPtv3fN89v+99783lhJSSvZCyJ5R/EiRo
+vdSntl7Yr+ldNQHY2S/kF++uiODppYlE0ttRE0pB7c3rC8ITNqcQfAKZrg1G+JB0ab8X7pBTEbWp
+Xkd9H8+vLf4kVx1IpkGguW0dbtc8Y9c1eaJLOYDAmP8u56O3LGv8ub1SHWyHqRuNqmbkmHJWU+nT
+FEKdB8XQyEUPel31U+paUX9I1ANNW73uoPB3B5VcbM7JFD2BM1ouXKJcKQtaM7G9Rqm3kSOVWCa7
+U9Bucm3FvQknk7Pku+LasuXM2EM7sZRyrEqDt8u1ouE7OSNP3YszA8oHQHn81klGb1peROm5v24d
+oDx9Yx9aWBQNAPHPsgEhU+WCdlMpSCr5I+3yyev79Z0tfgaBnsJOfHmVqZPnNua+JsQgwlErBRRV
++DLIaQAFxjcnDS9wFYhsOzsF3NjXa647MAR/0DopwiUVZXXjJXAeCLg8FwACWd145MmaQyVBFcht
+6mLAMyCxxUsUvFilwdtVUpG+aQ7ovc63a5c9D/pDnlm/j2aA1TTJVzPWx+HbVkqXyoAj3MPKqfiO
+ZgC72tvuIg0pQlqL7wfJTGtAIsxaUATSaDRW0I62TcdnZbgnmWmrBYdGI8nxjsm4+P+7Va1+Acot
+yE1jdF4yAAAAAElFTkSuQmCC
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime dst="true">20130528T113259,00+01</datetime></item>
-<item name="$Flags"><text>34CiQ</text></item>
-<item name="$ImageNames" sign="true"><text>id_card_selected.png</text></item></note>
+</imageresource>

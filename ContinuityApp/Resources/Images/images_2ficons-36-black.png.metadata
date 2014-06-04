@@ -1,20 +1,76 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="41e" sequence="12" unid="8E0EDCC0331B9ABCC1257AC400762E25">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" imagename="icons-36-black.png" maintenanceversion="1.0" name="images/icons-36-black.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="23e" sequence="19" unid="8E0EDCC0331B9ABCC1257AC400762E25">
 <created><datetime>20121128T223050,61+01</datetime></created>
-<modified><datetime>20130306T172243,09+01</datetime></modified>
-<revised><datetime>20130306T172243,08+01</datetime></revised>
-<lastaccessed><datetime>20130306T172243,09+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115517,13+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
+<modified><datetime dst="true">20130725T105605,90+02</datetime></modified>
+<revised><datetime dst="true">20130725T104117,18+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105605,88+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093716,86+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+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
+uLiYPqb0uG8AAAAASUVORK5CYII=
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime dst="true">20121009T215025,47+02</datetime></item>
-<item name="$ImageNames" sign="true"><text>icons-36-black.png</text></item>
-<item name="$TITLE" sign="true"><text>images/icons-36-black.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-<item name="$Flags"><text>34CiQ</text></item></note>
+</imageresource>

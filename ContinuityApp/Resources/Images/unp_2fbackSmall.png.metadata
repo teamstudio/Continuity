@@ -1,20 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="2ca" sequence="9" unid="4E85B2F30616B597C1257AF5004529F1">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" imagename="back.png" maintenanceversion="1.0" name="unp/backSmall.png" publicaccess="false" readonly="true" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="37e" sequence="16" unid="4E85B2F30616B597C1257AF5004529F1">
 <created><datetime>20130116T133527,21+01</datetime></created>
-<modified><datetime>20130306T172245,21+01</datetime></modified>
-<revised><datetime>20130306T172245,20+01</datetime></revised>
-<lastaccessed><datetime>20130306T172245,21+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115515,38+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE" sign="true"><text>unp/backSmall.png</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-<item name="$ImageNames" sign="true"><text>back.png</text></item>
+<modified><datetime dst="true">20130725T105609,02+02</datetime></modified>
+<revised><datetime dst="true">20130725T104115,86+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105609,00+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093718,32+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+iVBORw0KGgoAAAANSUhEUgAAACcAAAAeCAYAAACv1gdQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAzxJREFUWMPNWE9ImmEYf/1UPEQqURFGB0NyBdXBQfPQ2sCDQR26OGsQ
+tqMVDSEaNDqMok4T94dtbJOuMQbdduuQ4E4b7BjMLNYS+2upZWa63/PCJ2XN7ZC+PfDzkxe/7/19
+z5/f87xK/f39rBgGBgaY0+ms6uzs9La3t/9ubm6OlQqtra0xi8US7O3ttdO+EitiCoWCZbNZbSgU
++nx2dvbYZrMZhoaGdC6X69pBz3U4HDqTyWRdW1tbTCaTdgnGroJSqeTXcDjsq6ysvNfX18eMRiNT
+q9VMo9FcO+i5Wq2WdXV1MXhRs7Gx8Uwq5rX9/X1nKpVyIaRMpVKx4+Njlslk2Onp6bWDnptOpxn2
+I3Ls5OSkScIHKwT9OJFImFZXV19brVam1+v5OkJcchBJcgSuCok8VAjkl2p9ff0NwljV2NjI34Zu
+xHrJIe8Dy13KOWK9tbX1BN9tHR0d/E0I5SB2HmSSvDmBWB8cHNxFrj2lcFJRUB6Um1ie3PkFENEh
+nO/MZrOmtraW55kIYuQkTk6uzFwux1C+L6qrq2+1tLTwPBNBTAbxyZOLx+MP4anBtra2vFycD3m5
+IO+bzzmocdPm5uYrtCdWUVEhLM8u5Ry8pYxEIm/r6+v1dXV1PJwiPFYITm5nZ+cl2sd9UmVZMije
+oiGTe1RTU0OhZbu7uywWi1HbEgriQBUr9fT0fFxZWWHRaJQv7u3tCQfx4J7z+XwTDQ0NQegbd2c5
++uf/gEsJRpXE3NzcKCr0kMIqN1/RyIsweuj34eHhCcxufCyiorgx5MjcbveH7u7uTxRekaQuiLBM
+DuHNTE5OjmHqDW1vbwv13oX2JRvm98js7OwoJpP00dFRnqCwDlE4nkNavuDU9ZykhVwsyoNXkiOb
+mZmZxtgUoOq9ceTQzpIkL8jDGIVXhM7RsPTX0xfk5cfIyMg4Kbacd+UsCCBX9FAN7fPj9L1ABOUJ
+tRygCRyj28+i5BDW7NTU1BjGqa9EkG6iWa+UoCaAvdIej2e6KDkyHA+j8/PzD+DB93ibqE6ni5cK
+OPEfGgyGb16vdxC2+E9yZBjdf/n9fncwGLyzvLx8OxAIlAqWpaUlO/43WaAj6h9ksMcr/2tIEAAA
+AABJRU5ErkJggg==
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime dst="true">20110519T090849,00+01</datetime></item>
-<item name="$Flags"><text>34CiQ&amp;</text></item>
-<item name="$FlagsExt" sign="true"><text>D</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-</note>
+</imageresource>

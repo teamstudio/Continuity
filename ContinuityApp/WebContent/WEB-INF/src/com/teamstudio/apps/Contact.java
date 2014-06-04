@@ -35,7 +35,7 @@ public class Contact implements Serializable {
 	private String userName;
 	private String userType;
 	private String importIdentifier;
-
+ 
 	private String firstName;
 	private String lastName;
 	private String name;

@@ -1,42 +1,39 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B9C00665D52'>
-<noteinfo noteid='836' unid='F22756BA276BF97285257BA6005BAD79' sequence='2'>
+<view name='BBvwContactsOrg' alias='BBvwContactsOrg' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' altrowcolor='#efefef' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false' indexrefresh='automatic' initialbuildrestricted='false'
+ noemptycategories='false'>
+<noteinfo noteid='822' unid='F22756BA276BF97285257BA6005BAD79' sequence='7'>
 <created><datetime dst='true'>20130712T124121,85-04</datetime></created>
-<modified><datetime dst='true'>20130712T124139,01-04</datetime></modified>
-<revised><datetime dst='true'>20130712T124139,00-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130712T124139,01-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130712T124123,87-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>BBvwContactsOrg|BBvwContactsOrg</text></item>
-<item name='$Index' sign='true'><text>/O</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-dAAFAEgARAAHAAkACAAEAAgACAAJAAQAb3JnVW5pdElkcm9sZU5hbWVuYW1lam9iVGl0bGVyb2xl
-TmFtZSRDb25mbGljdCRSRUYEAAQAAAAcAAUABABGb3JtAQAIAGZDb250YWN0CgIDAAcACgAEAAlM
-MVM=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-MAADAABEiGYAAAAJAIhmAAkACAAAZgARAAQAb3JnVW5pdElkcm9sZU5hbWVuYW1l
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAFABMAiAAAAFZDAQAJAAkAAAAAAJ0AAQAACQABAAAAAAAAAAICAAAAVkMBAAgABgAAAAAAwgAB
-AAAKAAEAAAAAAAAAAgIAAABWQwEABAAEAAAAAAB4AAEAAAkAAAAAAAAAAAACAgAAAFZDAAAIAAgA
-AAAAAGcAAQAACQAAAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAgAABAAAKAAAAAAAAAAAAAgIAAABv
-cmdVbml0SWRvcmdVbml0SWRyb2xlTmFtZXJvbGVJZG5hbWVuYW1lam9iVGl0bGVqb2JUaXRsZXJv
-bGVOYW1lcm9sZU5hbWUmAAEAAAABAQAJAQAACgEBDgoAAD8ArSsBAAEAAQAAAAAAAAAAAFdDAQEA
-CQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
-AAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAA
-AAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAA
-AAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEA
-AAAAAAAACAAAAAAAAQA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<modified><datetime dst='true'>20140514T144248,27+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144248,26+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144248,26+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093723,55+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fContact"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='orgUnitId' width='19.6250'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='orgUnitId'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column sort='ascending' hidedetailrows='false' itemname='roleName' width='24.2500'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><columnheader title='roleId'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='15'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='name'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='jobTitle' width='12.8750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='jobTitle'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='roleName' width='16' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='roleName'><font size='9pt' style='bold'/></columnheader></column></view>
 

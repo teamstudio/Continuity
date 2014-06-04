@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="856" sequence="8" unid="96CAE9A69D7C8B80C1257B270034A7E6">
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="586" sequence="20" unid="96CAE9A69D7C8B80C1257B270034A7E6">
 <created><datetime>20130307T103508,54+01</datetime></created>
-<modified><datetime>20130307T103713,23+01</datetime></modified>
-<revised><datetime>20130307T103713,22+01</datetime></revised>
-<lastaccessed><datetime>20130307T103713,23+01</datetime></lastaccessed>
-<addedtofile><datetime>20130307T103508,55+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst="true">20130725T105602,55+02</datetime></modified>
+<revised><datetime dst="true">20130725T104131,41+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105602,53+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093720,77+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$TITLE"><text>ccDebugToolbar.xsp</text></item>
@@ -13,9 +13,9 @@
 
 
 
+
+
 <item name="$FileNames" sign="true"><text>ccDebugToolbar.xsp</text></item>
-
-
 <item name="$DesignerVersion"><text>8.5.3</text></item>
 
 

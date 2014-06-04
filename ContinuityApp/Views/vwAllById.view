@@ -1,36 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1de' unid='FDE11C6DDF05FFB1C1257AA1003DA474' sequence='38'>
+<view name='vwAllById' alias='unpAllById' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false' indexrefresh='automatic' initialbuildrestricted='false'
+ noemptycategories='false'>
+<noteinfo noteid='166' unid='FDE11C6DDF05FFB1C1257AA1003DA474' sequence='47'>
 <created><datetime dst='true'>20121024T131317,96+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,58+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,57+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,58+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,11+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144246,16+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144246,15+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144246,15+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093715,75+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwAllById|unpAllById</text></item>
-<item name='$Index' sign='true'><text>/O</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-kgACAEoAAgAkMgUABABGb3JtAQAJAGZJbmNpZGVudAAKAq8AJgAWAAUACwBkZXNjcmlwdGlvbgCu
-ABAABQAEAG5hbWWuAAQAtQMDAAUAIgAdAAQAAgACAAkABABpZCQyJENvbmZsaWN0JFJFRgAEAAQA
-AAASAAUAAgBpZAEAAAALAgMABwAOAAgACUwxUzJTM1M=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-DwABAABEAGYAAAACAGlk
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQACAAMACAAAAFZDAQACAAIAAAAAAP4AAQAACQAAAAAAAAAAAAICAAAAVkMAAAIABABaAAAAJwEB
-AAAJAAAAAAAAAAAAAgIAAABpZGlkJDJuYW1lWgACAEoAAgAkMgUABABGb3JtAQAJAGZJbmNpZGVu
-dAAKAq8AJgAWAAUACwBkZXNjcmlwdGlvbgCuABAABQAEAG5hbWWuAAQAtQMDAAcADgAIAAkyUlQ2
-UzhSJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAA
-AAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8A
-AQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT id != ""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='id' width='31.7500'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='id'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$2' width='36.8750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='name'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	Form="fIncident"; description;
+name)</formula></code></column></view>
 

@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="filter" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="85a" sequence="1" unid="A69F3E1A0E0D1464C1257B270034AD2C">
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="1.0" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="576" sequence="10" unid="A69F3E1A0E0D1464C1257B270034AD2C">
 <created><datetime>20130307T103522,04+01</datetime></created>
-<modified><datetime>20130307T103522,08+01</datetime></modified>
-<revised><datetime>20130307T103522,07+01</datetime></revised>
-<lastaccessed><datetime>20130307T103522,08+01</datetime></lastaccessed>
-<addedtofile><datetime>20130307T103522,08+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Daan Maliepaard/O=CITC</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Daan Maliepaard/O=CITC</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Daan Maliepaard/O=CITC</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<modified><datetime dst="true">20130725T105613,79+02</datetime></modified>
+<revised><datetime dst="true">20130725T104127,53+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105613,77+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093720,60+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$TITLE" sign="true"><text>xpDebugToolbar</text></item>
 <item name="$Flags"><text>.5834Q</text></item>
 <item name="$PublicAccess" sign="true"><text>1</text></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
-</note>
+
+<item name="$POID"><datetime dst="true">20130725T104127,53+02</datetime></item></note>

@@ -1,22 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="386" sequence="18" unid="D652E3104A29029DC1257AC6007C1CF8">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="UnpLogo.gif" publicaccess="false" refresh="true" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="24e" sequence="24" unid="D652E3104A29029DC1257AC6007C1CF8">
 <created><datetime>20121130T233538,80+01</datetime></created>
-<modified><datetime dst="true">20130619T134743,19+02</datetime></modified>
-<revised><datetime dst="true">20130619T134743,18+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130619T134743,19+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,41+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<modified><datetime dst="true">20130725T105607,94+02</datetime></modified>
+<revised><datetime dst="true">20130725T104119,16+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105607,92+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093716,93+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>UnpLogo.gif</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-
-<item name="$MimeType" sign="true"><text>image/gif</text></item>
 <item name="$FileModDT" sign="true"><datetime>20130122T133826,49+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>UnpLogo.gif</text></item>
 <item name="$EditFilePath"><text>C:\Users\MARKLE~1\AppData\Local\Temp\notes90C43B\~UnpLogo.gif</text></item>
-<item name="$Flags"><text>34CiQ$</text></item></note>
+</imageresource>

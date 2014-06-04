@@ -1,42 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
-	<div class="section">
-		<div class="title">Organisation Unit</div>
+	<div
+		class="section">
+		<div
+			class="title">Organisation Unit</div>
 	</div>
 
-<xp:this.data>
-				<xp:dominoDocument var="docOU" formName="fOrgUnit" action="editDocument"
-					documentId="#{javascript:viewScope.docId}">
-				</xp:dominoDocument>
-			</xp:this.data>
+	<xp:this.data>
+		<xp:dominoDocument
+			var="docOU"
+			formName="fOrgUnit"
+			action="editDocument"
+			documentId="#{javascript:viewScope.docId}">
+		</xp:dominoDocument>
+	</xp:this.data>
 
-	<xe:formTable id="formTable1" disableErrorSummary="true">
+	<xe:formTable
+		id="formTable1"
+		disableErrorSummary="true">
 		<xp:this.facets>
-			<xp:div xp:key="footer">
-			
-				<xp:button value="Edit" id="button2"
+			<xp:div
+				xp:key="footer">
+
+				<xp:button
+					value="Edit"
+					id="button2"
 					icon="pencil.png">
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor") && !docOU.isEditable()}]]></xp:this.rendered>
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynamicContent1">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="dynamicContent1">
 						<xp:this.action>
-							<xp:changeDocumentMode mode="edit"
+							<xp:changeDocumentMode
+								mode="edit"
 								var="docOU">
 							</xp:changeDocumentMode>
 						</xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
-			
-			
-			<xp:button value="Save" id="button1" icon="disk.png" rendered="#{javascript:docOU.isEditable()}">
 
-				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
-					<xp:this.action>
 
-						<xp:actionGroup>
-							<xp:executeScript>
-								<xp:this.script><![CDATA[#{javascript:try {		
+				<xp:button
+					value="Save"
+					id="button1"
+					icon="disk.png"
+					rendered="#{javascript:docOU.isEditable()}">
+
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+
+							<xp:actionGroup>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:try {		
 								
 								var blnIsNew = 	docOU.isNewNote()					
 
@@ -94,19 +117,25 @@ if ( docOU.save() ) {
 	dBar.error(e);
 }	
 }]]></xp:this.script>
-							</xp:executeScript>
-							<xe:changeDynamicContentAction facetName="orgUnits"
-								for="dynamicContent1">
-							</xe:changeDynamicContentAction>
-						</xp:actionGroup>
-					</xp:this.action>
-				</xp:eventHandler>
-			</xp:button>
-			
-			<xp:button value="Remove" id="button3">
+								</xp:executeScript>
+								<xe:changeDynamicContentAction
+									facetName="orgUnits"
+									for="dynamicContent1">
+								</xe:changeDynamicContentAction>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:button
+					value="Remove"
+					id="button3">
 					<xp:this.rendered><![CDATA[#{javascript:!docOU.isNewNote() && sessionScope.get("isEditor")}]]></xp:this.rendered>
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="lotusMain"
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="lotusMain"
 						immediate="true">
 						<xp:this.action><![CDATA[#{javascript:if ( docOU.getDocument().remove(true) ) {
 							currentUserBean.updateMenuOptionCounts();
@@ -116,45 +145,79 @@ if ( docOU.save() ) {
 					</xp:eventHandler>
 				</xp:button>
 
-			<xp:link escape="true" text="Back to list" id="link2">
-				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
-					refreshId="dynamicContent1" immediate="true">
-					<xp:this.action>
-						<xe:changeDynamicContentAction facetName="orgUnits" for="dynamicContent1"></xe:changeDynamicContentAction>
-					</xp:this.action></xp:eventHandler>
-			</xp:link>
+				<xp:link
+					escape="true"
+					text="Back to list"
+					id="link2">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="dynamicContent1"
+						immediate="true">
+						<xp:this.action>
+							<xe:changeDynamicContentAction
+								facetName="orgUnits"
+								for="dynamicContent1"></xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
 			</xp:div>
-		
-		
+
+
 		</xp:this.facets>
 
-		<xe:formRow id="formRow1" for="name" label="Name:">
-			<xp:inputText value="#{docOU.name}" id="name" required="true"
+		<xe:formRow
+			id="formRow1"
+			for="name"
+			label="Name:">
+			<xp:inputText
+				value="#{docOU.name}"
+				id="name"
+				required="true"
 				disableClientSideValidation="true">
 				<xp:this.validators>
-					<xp:validateRequired message="Name is required"></xp:validateRequired>
+					<xp:validateRequired
+						message="Name is required"></xp:validateRequired>
 				</xp:this.validators>
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow2" for="checkBoxGroup2" label="#{javascript:configBean.getLabel('assets') + ':'}">
-			<xp:checkBoxGroup id="checkBoxGroup2" value="#{docOU.siteIds}">
+		<xe:formRow
+			id="formRow2"
+			for="checkBoxGroup2"
+			label="#{javascript:configBean.getLabel('assets') + ':'}">
+			<xp:checkBoxGroup
+				id="checkBoxGroup2"
+				value="#{docOU.siteIds}">
 				<xp:selectItems>
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwAssets", 2)}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:checkBoxGroup>
 		</xe:formRow>
-		
-		
-		<xe:formRow id="formRow3" label="Image:">
-			<xp:fileUpload id="fileUpload1" value="#{docOU.photos}"></xp:fileUpload>
-			<xp:fileDownload rows="30" id="fileDownload1" displayLastModified="false"
-				value="#{docOU.photos}" hideWhen="true" displayType="false" displayCreated="false"
+
+
+		<xe:formRow
+			id="formRow3"
+			label="Image:">
+			<xp:fileUpload
+				id="fileUpload1"
+				value="#{docOU.photos}"
+				rendered="#{javascript:!docOU.isEditable()}"></xp:fileUpload>
+
+			<xp:fileDownload
+				rows="30"
+				id="fileDownload1"
+				displayLastModified="false"
+				value="#{docOU.photos}"
+				hideWhen="true"
+				displayType="false"
+				displayCreated="false"
 				allowDelete="true">
 			</xp:fileDownload>
 		</xe:formRow>
-			
-		
+
+
 	</xe:formTable>
 
 </xp:view>

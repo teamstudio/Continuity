@@ -1,38 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='2352' unid='0644D91F46C1BDEE85257B71004D3A52' sequence='6'>
+<view name='BBvwTasksByParentFlat' alias='BBvwTasksByParentFlat' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' fromtemplate='UHS - Continuity DEV'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
+ opencollapsed='false' showresponsehierarchy='false' showmargin='true' shrinkrows='false'
+ extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='6d2' unid='0644D91F46C1BDEE85257B71004D3A52' sequence='13'>
 <created><datetime dst='true'>20130520T100332,02-04</datetime></created>
-<modified><datetime dst='true'>20130626T170127,66+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,65+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,66+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130528T100216,77+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144246,43+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144246,42+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140603T143658,78+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093722,16+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>BBvwTasksByParentFlat|BBvwTasksByParentFlat</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-egAFADoANgAEABEABAAMAAkAcmVzcG9uc2liaWxpdHlJZHNuYW1lY2F0ZWdvcnlOYW1lJENvbmZs
-aWN0BAAEAAAALAAFAAQARm9ybQEABQBmVGFzawAKAgUABgBzdGF0dXMBAAAACgIcAgMABwAOAAgA
-CUwxUzRTNVM=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-HgABAABECGYHAAARAHJlc3BvbnNpYmlsaXR5SWRz
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQADAA4ACgAAAFZDAwARAAYAAAAAAMAAAQAACgABAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAhQAB
-AAAKAAAAAAAAAAAAAgIAAABWQwAADAAMAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAHJlc3BvbnNp
-YmlsaXR5SWRzcGFyZW50bmFtZW5hbWVjYXRlZ29yeU5hbWVjYXRlZ29yeU5hbWUmAAEAAAABAQAJ
-AQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
-AAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAA
-AAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAA
-AAAAAAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$Class'><text>UHS - Continuity DEV</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fTask" &amp; status=""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='responsibilityIds'
+ width='24' resizable='true' separatemultiplevalues='true' sortnoaccent='true'
+ sortnocase='true' showaslinks='false' categorized='true'><columnheader title='parent'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='name' width='16.6250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='categoryName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='categoryName'><font size='9pt' style='bold'/></columnheader></column></view>
 

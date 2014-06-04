@@ -1,21 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="247a" sequence="1" unid="7933513FC4F86A05C1257B7B004F0556">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="file_extension_pdf.png" noquery="true" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="776" sequence="10" unid="7933513FC4F86A05C1257B7B004F0556">
 <created><datetime dst="true">20130530T162307,10+02</datetime></created>
-<modified><datetime dst="true">20130530T162307,14+02</datetime></modified>
-<revised><datetime dst="true">20130530T162307,13+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130530T162307,14+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130530T162307,14+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst="true">20130725T105604,79+02</datetime></modified>
+<revised><datetime dst="true">20130725T104118,32+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105604,77+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093722,89+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>file_extension_pdf.png</text></item>
-<item name="$Flags"><text>D34CiQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAABTJJREFUeNq0V2tMXEUU/ubOvfsGGltUahCwKhhDICgKqIml1jYkxCDV
+EI0/jP5utWlif2p8xUQrvhq1QWtiQ6VQWiA+fvkgsSRoxVgTbNKEkCZQlmeVbQu7O54z9+6yu91d
+WEInmb1353HON+fxnblCKYVYE0KYfX19x+nZig1o4XC4u6WlpY1eI+nmtW7+iXVqef39/Wqj2sTE
+hOru7j5BcmUmAGbKmDv2cnbkTxiGsfoxhWBJ8b/RaBQ11VXo6elBa2srGhoa9tD7D+3t7U2Dg4NL
+qdtTAcQ1WpYLUhpZFSvThLFwGSrgI802iEgkqp9SSszNzaOoqAj19fU7TNP8hwDcTVPLaRWmNoOU
+swUydeGyUPBRB/K+6oIwrZW5BNAerwfB4LQGUVtbW9rb23uez7YmACYJk9k6nVBYJsKNDyetNR23
+sX+9Hg8CeYG4Jerq6kopyC8kgjAzW0BmjQGl5yV8R77G5c/fg4jFAccEtbKyMtCJObMc10R0TND/
+YvpLPsNCVgDSMWmWIEC0tBjm0FlIk6yxbK81SOH0zAyqq6t1z9Dca7DAKgDY12W3Q9DDIFeIpZW1
+i6EQ/ltcTFoeJQvdUVKC1bIgQX52F4ACzzzzG+S5UViTQaibNpGdoxmXc3qmPWhGC5BZtRXSdZ7z
+umGd+h7LX7bDfeA1GJSKq+3JCYBJFpCZussNs/MUVNU9wK5GKHKFdfAtyPx8SK8X0sPdA6m5xNR7
+WF5aPRldQKhjEXwd8/m9EK8fgvrlNCSb9uO3Ie7bCaPpGajtDU4hIPp/6AGgrka/J9acNQHQZJMO
+ABEQjp2EuqsM4uQARHCGEupf4LmngG0lEEe/gfr5V+DJZuDDDohHHtQsmTMANlsSAH4n5WpyCtH3
+P4N84yBE3f1AfiBWWajTc/cOUApA/fEXRx7xg+CUWocFEl3A2eBxI/Lqu1B/j0K+8CyZmxRdW+Ka
+m7xxiUzvdgENtbHw1ymbCYCRjYji3e1G+Pl9MKrvhZqehbX3RcjlMCQBTEvTPE4KdU9Yk5sLTDMx
+IMik5xAZuwj/d51QkbBtlQ1oWak44eYA/8AxyOKt9Bq1CedGAYj6vPaEmTJFyu1gNJgk1q0wJj8j
+gPJmug7W1mJ0eJh0ZVHEQZUuTTMtp2CsILnlJDcrAOWjSun3w1NYaNcCKqPq6lUtQGeFZUHwXYAY
+LzI762QoreOC5HLpqE9aT0woKCt0JSC5Wn5oYZUYoNO5KPIZgFoMoejSxfhU6HgX5ve+jK3jF5K2
+hLq6sXDgFb03cX1kfBxT2x/X1zekScWMNmYAFp3IcmJh6ubbMLe7Gb62p+GtrNRj83vaECy5EzOV
+NbDoArL5iyMwnao3dWsxgtsqMPdYE1x0apaXUxbwBjahWrbvkJ5AHsSlSXvulkL7WUDFZ8sWTbVL
+nxyG/2gHXNIW6aGCJKggscu4q1zT0M2I2YcOAN87b8J8gvidbjvy9xF7M1c6x7TCdNn7WCm1/LHz
+dk060YPIoQ+4uuUAgARajqAY1coff4I6MwQ1NAzXpgL76l5RTr61dD0Q+18CBr6FK2DXhmgVUTGZ
+3qDTGxx4Kd8Pa6qGDiHYkT5CxYVyWAT8wJUr9tj+fYgnYmcXcPhTuqjYeW7k5wFe7zqYkJEm5j+j
+b9xFH22BlXEee3SnzYjC2cNAKc30KXk9r0nlEf6fwh3XAaD6FiQSKoRS2PBGyll+0lDK1zE7t5T6
+ZgBi4xHoZKAbDMb4u4B1pwKwnI8GN25cu8a8xd+IrPt/AQYAntHxL2P1ZVwAAAAASUVORK5CYII=
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime>20121214T160722,57+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>file_extension_pdf.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+</imageresource>

@@ -1,37 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B9C00665D52'>
-<noteinfo noteid='832' unid='2219B94E22DEBA6085257BA6005BAD78' sequence='1'>
+<view name='BBvwCallTreeLevel' alias='BBvwCallTreeLevel' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' showinmenu='false'
+ noreplace='true' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='81e' unid='2219B94E22DEBA6085257BA6005BAD78' sequence='5'>
 <created><datetime dst='true'>20130712T124121,84-04</datetime></created>
-<modified><datetime dst='true'>20130712T124123,76-04</datetime></modified>
-<revised><datetime dst='true'>20130712T124123,75-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130712T124123,76-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130712T124123,76-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>BBvwCallTreeLevel|BBvwCallTreeLevel</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-VAAFACoAJgAFAAUABAACAAkABABvcmRlcm5hbWVpZCRDb25mbGljdCRSRUYEAAQAAAAaAAUABABG
-b3JtAQAFAGZSb2xlAAoCAwAHAAoABAAJTDFT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-EgABAABEAGYAAAAFAG9yZGVy
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQADAAcACAAAAFZDAQAFAAUAAAAAADQAAQAACgAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAAvAAB
-AAAKAAAAAAAAAAAAAgIAAABWQwAAAgACAAAAAAC2AAEAAAoAAAAAAAAAAAACAgAAAG9yZGVyT3Jk
-ZXJuYW1lTmFtZWlkSUQmAAEAAAABAQAJAQAACgEBDgoAAAEArSsBAAEAAQAAAAAAAAAAAFdDAQEA
-CQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
-AAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAA
-AAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8A
-AQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>PY</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<modified><datetime dst='true'>20140514T144248,41+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144248,40+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144248,40+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093723,54+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fRole"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='order' width='6.5000'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='Order'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='name' width='23.5000' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='id' width='22.7500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='ID'><font size='9pt' style='bold'/></columnheader></column></view>
 

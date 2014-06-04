@@ -1,17 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="262" sequence="11" unid="86DD4238ED4C8AC4C1257AD4004F6929">
+<?xml version="1.0" encoding="UTF-8"?><fileresource designerversion="8.5.3" maintenanceversion="1.0" name="page_add.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2aa" sequence="18" unid="86DD4238ED4C8AC4C1257AD4004F6929">
 <created><datetime>20121214T152722,65+01</datetime></created>
-<modified><datetime>20130306T172244,17+01</datetime></modified>
-<revised><datetime>20130306T172244,16+01</datetime></revised>
-<lastaccessed><datetime>20130306T172244,17+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115514,83+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>page_add.png</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-
-<item name="$FileModDT" sign="true"><datetime>20121214T150620,95+01</datetime></item>
-
-<item name="$FileNames" sign="true"><text>page_add.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-<item name="$Flags"><text>345CgQ</text></item></note>
+<modified><datetime dst="true">20130725T105606,23+02</datetime></modified>
+<revised><datetime dst="true">20130725T104119,88+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105606,21+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093717,32+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby></fileresource>

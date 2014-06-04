@@ -1,21 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="246e" sequence="1" unid="131D3B9172171AE6C1257B7B004F0550">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="file_extension_doc.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="76e" sequence="10" unid="131D3B9172171AE6C1257B7B004F0550">
 <created><datetime dst="true">20130530T162307,04+02</datetime></created>
-<modified><datetime dst="true">20130530T162307,07+02</datetime></modified>
-<revised><datetime dst="true">20130530T162307,06+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130530T162307,07+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130530T162307,07+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst="true">20130725T105604,70+02</datetime></modified>
+<revised><datetime dst="true">20130725T104118,50+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105604,68+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093722,86+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>file_extension_doc.png</text></item>
-<item name="$Flags"><text>34CiQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+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
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime>20121214T160721,47+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>file_extension_doc.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+</imageresource>

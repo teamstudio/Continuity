@@ -1,21 +1,91 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="872" sequence="1" unid="52BD7A21BF1AB00BC1257B27004ADB91">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="incidents.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="592" sequence="8" unid="52BD7A21BF1AB00BC1257B27004ADB91">
 <created><datetime>20130307T143738,73+01</datetime></created>
-<modified><datetime>20130307T143738,77+01</datetime></modified>
-<revised><datetime>20130307T143738,76+01</datetime></revised>
-<lastaccessed><datetime>20130307T143738,77+01</datetime></lastaccessed>
-<addedtofile><datetime>20130307T143738,77+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst="true">20130725T105605,96+02</datetime></modified>
+<revised><datetime dst="true">20130725T104117,06+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105605,94+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093720,83+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>incidents.png</text></item>
-<item name="$Flags"><text>34CiQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+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
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime>20130307T143558,71+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>incidents.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+</imageresource>

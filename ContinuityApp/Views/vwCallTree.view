@@ -1,67 +1,62 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='25ba' unid='DE5D5FE2378F682FC1257B80006F9F18' sequence='14'>
+<view name='vwCallTree' alias='unpCallTree' xmlns='http://www.lotus.com/dxl'
+ version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' altrowcolor='#efefef' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='7c2' unid='DE5D5FE2378F682FC1257B80006F9F18' sequence='23'>
 <created><datetime dst='true'>20130604T221912,24+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,30+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,29+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,30+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130604T221913,14+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144245,13+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144245,12+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140603T143700,13+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093723,22+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwCallTree|unpCallTree</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-ogICADwACABjYXRlZ29yeQUACQBvcmdVbml0SWQAAQABAC0AIgIFABAAY2FsbFRyZWVDYWxsZWRC
-eSICAwACAGIABQBwaG90bwAFABIAcGhvdG9UaHVtYm5haWxOYW1lAQAAAAsCrwA2ABwABQASAHBo
-b3RvVGh1bWJuYWlsTmFtZa4AGgAFAA0AcGhvdG9GaWxlTmFtZQCuAAQAtQMDAAIAXAAHAGRldGFp
-bHMABQAIAGpvYlRpdGxlBQALAGlzQWx0ZXJuYXRlAAEAAwB5ZXMACgKvACIAFgABAAwAIChhbHRl
-cm5hdGUprgAMAAEAAACuAAQAtQMiAgMAAgCOAAMAJDE1AAUAEABwaG9uZVR5cGVQcmltYXJ5AQAE
-AHdvcmsKAq8AYgAUAAUACQBwaG9uZVdvcmsArgBOAAUAEABwaG9uZVR5cGVQcmltYXJ5AQAEAGhv
-bWUKAq8ALAAUAAUACQBwaG9uZUhvbWUArgAYAAUACwBwaG9uZU1vYmlsZQCuAAQAtQUDAAIAXAAJ
-AG51bVRvQ2FsbAAFABAAY2FsbFRyZWVDb250YWN0cwEAAAAKAq8ALgAQAAAAAAAAAAAAAACuAB4A
-BQAQAGNhbGxUcmVlQ29udGFjdHNqAa4ABAC1AwMABQBuAGoADAAIAAQACAAFAAsABwADAAgAAgAJ
-AAkABABjYXRlZ29yeW5hbWVqb2JUaXRsZXBob3RvaXNBbHRlcm5hdGVkZXRhaWxzJDE1dXNlck5h
-bWVpZG51bVRvQ2FsbCRDb25mbGljdCRSRUYEAAQAAAA4AAUABABGb3JtAQAIAGZDb250YWN0CgIF
-ABAAY2FsbFRyZWVDYWxsZWRCeQEAAAALAhwCAwAHABIADAAJTDFTNFM1UzZTN1M=
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-IAACAABEiGYHAAAIAABmAAgABABjYXRlZ29yeW5hbWU=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ViewFormat' sign='true'>
-<rawitemdata type='5'>
-AQAKABMAiAAAAFZDAwAIABwATgAAAG0AAQAACQABAAAAAAAAAAICAAAAVkMBAAQABAAAAAAAeAAB
-AAAJAAAAAAAAAAAAAgIAAABWQwAACAAIAAAAAABQAAEAAAkAAAAAAAAAAAACAgAAAFZDAAAFAAUA
-dgAAAHgAAQAACQAAAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAUAABAAAJAAAAAAAAAAAAAgIAAABW
-QwAABwAHAG4AAACJAAEAAAkAAAAAAAAAAAACAgAAAFZDAAADAA4ApgAAAFAAAQAACgAAAAAAAAAA
-AAICAAAAVkMAAAgACAAAAAAAUAABAAAKAAAAAAAAAAAAAgIAAABWQwAAAgACAAAAAABQAAEAAAoA
-AAAAAAAAAAACAgAAAFZDAAAJAAkAcgAAAFAAAQAACgAAAAAAAAAAAAICAAAAY2F0ZWdvcnlvcmdV
-bml0SWQgKyBjYWxsVHJlZUNhbGxlZEJ5TgACADwACABjYXRlZ29yeQUACQBvcmdVbml0SWQAAQAB
-AC0AIgIFABAAY2FsbFRyZWVDYWxsZWRCeSICAwAHABAACQAJMVMyUzNTNFMAbmFtZW5hbWVqb2JU
-aXRsZWpvYlRpdGxlcGhvdG9waG90b3YAAgBiAAUAcGhvdG8ABQASAHBob3RvVGh1bWJuYWlsTmFt
-ZQEAAAALAq8ANgAcAAUAEgBwaG90b1RodW1ibmFpbE5hbWWuABoABQANAHBob3RvRmlsZU5hbWUA
-rgAEALUDAwAHABIADAAJMlJUM1M0UzZTOFJpc0FsdGVybmF0ZWlzQWx0ZXJuYXRlZGV0YWlsc2Rl
-dGFpbHNuAAIAXAAHAGRldGFpbHMABQAIAGpvYlRpdGxlBQALAGlzQWx0ZXJuYXRlAAEAAwB5ZXMA
-CgKvACIAFgABAAwAIChhbHRlcm5hdGUprgAMAAEAAACuAAQAtQMiAgMABwAQAAoACTFTMlM4UzEw
-UyQxNXByaW1hcnlQaG9uZU5ypgACAI4AAwAkMTUABQAQAHBob25lVHlwZVByaW1hcnkBAAQAd29y
-awoCrwBiABQABQAJAHBob25lV29yawCuAE4ABQAQAHBob25lVHlwZVByaW1hcnkBAAQAaG9tZQoC
-rwAsABQABQAJAHBob25lSG9tZQCuABgABQALAHBob25lTW9iaWxlAK4ABAC1BQMABwAWAA8ACTJS
-VDZTOFJUMTJTMTRSAHVzZXJOYW1ldXNlck5hbWVpZGlkbnVtVG9DYWxsbnVtVG9DYWxscgACAFwA
-CQBudW1Ub0NhbGwABQAQAGNhbGxUcmVlQ29udGFjdHMBAAAACgKvAC4AEAAAAAAAAAAAAAAArgAe
-AAUAEABjYWxsVHJlZUNvbnRhY3RzagGuAAQAtQMDAAcAFAAOAAkzUzRTNVM2UzhTMTJTJgABAAAA
-AQEACQEAAAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAE
-AAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAA
-AAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABX
-QwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAA
-AAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAA
-AAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAA
-AAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAA
-AFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAA
-AAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8AAQDv7+8AAQAA
-AAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
-</rawitemdata></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fContact" &amp; callTreeCalledBy != ""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='category' width='13.6250'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='orgUnitId + callTreeCalledBy'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>orgUnitId + "-" + callTreeCalledBy</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='15'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='name'><font size='9pt'
+ style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='jobTitle' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='jobTitle'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='photo' width='15' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='photo'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	photoThumbnailName != ""; photoThumbnailName;
+photoFileName)</formula></code></column>
+<column hidedetailrows='false' itemname='isAlternate' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='isAlternate'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='details' width='17.1250' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='details'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>jobTitle + @If(isAlternate="yes"; " (alternate)"; "")</formula></code></column>
+<column hidedetailrows='false' itemname='$15' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='primaryPhoneNr'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	phoneTypePrimary="work"; phoneWork;
+	phoneTypePrimary="home"; phoneHome;
+phoneMobile)</formula></code></column>
+<column hidedetailrows='false' itemname='userName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='userName'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='id' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='id'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='numToCall' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='numToCall'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@If(callTreeContacts = "" ; 0; @Elements(callTreeContacts) )</formula></code></column></view>
 

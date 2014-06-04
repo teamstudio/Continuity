@@ -1,20 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="32e" sequence="9" unid="C81C0E66257F7270C1257AF5004529EF">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" imagename="about.png" maintenanceversion="1.0" name="unp/about.png" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="376" sequence="16" unid="C81C0E66257F7270C1257AF5004529EF">
 <created><datetime>20130116T133527,19+01</datetime></created>
-<modified><datetime>20130306T172245,14+01</datetime></modified>
-<revised><datetime>20130306T172245,13+01</datetime></revised>
-<lastaccessed><datetime>20130306T172245,14+01</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115515,92+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE" sign="true"><text>unp/about.png</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-<item name="$ImageNames" sign="true"><text>about.png</text></item>
+<modified><datetime dst="true">20130725T105608,93+02</datetime></modified>
+<revised><datetime dst="true">20130725T104116,10+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105608,91+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093718,29+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3NENBQTYzN0JGMjA2ODExODhDNkU3QzJGNjA0
+MTNFNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGMUIzNjQ0ODhCOTQxMUUwQkI1OUJBRTA0
+OUZEREFDRCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGMUIzNjQ0NzhCOTQxMUUwQkI1OUJB
+RTA0OUZEREFDRCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9z
+aCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjIzQTYwMzIx
+RkMyMDY4MTE4NzFGRTY0NEMwMjc0MkMxIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjc0Q0FB
+NjM3QkYyMDY4MTE4OEM2RTdDMkY2MDQxM0U1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpS
+REY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+YIvjDQAAAd1JREFUeNqUVE1LAlEU
+1WoRKQoSCG50U7gL/QcV1G9QM9wEwkA7QWkjoSs3FrRWXIR/ocUgLrIQEcWEIjchSDkUfjY2Mzjd
+O02DTu8NdOHwfO+ec2buu94xybJs0sEOiAFYwED+iYG6j6l5ja+FziQ8n88/ZINQ82EjoxRN3Ov1
+xoTjFMkoQjOJx+M1oF0xDHNPSEd+fVYADlEUL02U8Hg8RRAwXq83r8+hDnIOZTMej8+M7kSSJCyr
+COuAlEc9+qxNp9OQ1WpdetJsNpMqlcpruVzmXC6XORAIHNhsNjvpjVEPS3oFTNz6ZLPZ7Hc6nbtu
+t3sRjUZTwWCwRCtd0xuVBd06x2ZkMpk92ThW8Y6+aFl4m1M0AsM0jYN6pWntdvuNRGg0GhwQ3Pi0
+yWTC0YxQr7S/Wq22SLUDoQW8l+Fw6LFYLJu0O6rVam3lh9/vD5HKY1n2GstKJBLbYPoO3RFIZfl8
+vrB28clk8lZPEgRhimPAcdxJPp8vjUYjXs9BHeq1EYHYLxQKT/I/IpfLPaLuz9BCHONckUpYDMyr
+83dE/YxA7DqdzmI2m32o1+t9nudFFOOKezzHPPL0nxHzkisemM0bsBwCdgBbgHWcGsAz/ukBN6D5
+XOAr67cAAwBrcysH5X50UQAAAABJRU5ErkJggg==
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime>20121212T092908,00+00</datetime></item>
-<item name="$Flags"><text>34CiQ</text></item>
-<item name="$FlagsExt" sign="true"><text>D</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-</note>
+</imageresource>

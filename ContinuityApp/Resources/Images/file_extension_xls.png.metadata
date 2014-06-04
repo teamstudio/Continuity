@@ -1,21 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="2482" sequence="1" unid="5212C1D0D4B579D8C1257B7B004F0559">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="file_extension_xls.png" noquery="true" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="772" sequence="10" unid="5212C1D0D4B579D8C1257B7B004F0559">
 <created><datetime dst="true">20130530T162307,13+02</datetime></created>
-<modified><datetime dst="true">20130530T162307,18+02</datetime></modified>
-<revised><datetime dst="true">20130530T162307,17+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130530T162307,18+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130530T162307,18+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst="true">20130725T105604,85+02</datetime></modified>
+<revised><datetime dst="true">20130725T104118,20+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105604,83+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093722,88+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>file_extension_xls.png</text></item>
-<item name="$Flags"><text>D34CiQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/png</text></item>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><jpeg>
+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
+sZcIAAAAAElFTkSuQmCC
+</jpeg>
 <item name="$FileModDT" sign="true"><datetime>20121214T160723,88+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>file_extension_xls.png</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+</imageresource>

@@ -1,16 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257B7A00499D0E" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="566" sequence="4" unid="AE4BC79359A826A6C1257B27003D3796">
+<?xml version="1.0" encoding="UTF-8"?><fileresource charset="UTF-8" designerversion="8.5.3" maintenanceversion="1.0" name="BBReplication.xml" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="58a" sequence="33" unid="AE4BC79359A826A6C1257B27003D3796">
 <created><datetime>20130307T120839,26+01</datetime></created>
-<modified><datetime dst="true">20130529T095437,24-04</datetime></modified>
-<revised><datetime dst="true">20130529T095437,23-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130529T095437,24-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130529T092419,60-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
-<item name="$Flags"><text>345CgQ</text></item>
-<item name="$MimeCharSet" sign="true"><text>UTF-8</text></item>
-<item name="$TITLE" sign="true"><text>BBReplication.xml</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item>
-
-
-<item name="$FileNames" sign="true"><text>BBReplication.xml</text></item></note>
+<modified><datetime dst="true">20130725T105601,83+02</datetime></modified>
+<revised><datetime dst="true">20130725T104120,42+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105601,81+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093720,78+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby></fileresource>

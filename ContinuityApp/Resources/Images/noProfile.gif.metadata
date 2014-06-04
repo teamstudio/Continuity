@@ -1,21 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="1182" sequence="1" unid="1BC7EF090CF7B85BC1257B4400354677">
+<?xml version="1.0" encoding="UTF-8"?><imageresource designerversion="8.5.3" maintenanceversion="1.0" name="noProfile.gif" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="612" sequence="7" unid="1BC7EF090CF7B85BC1257B4400354677">
 <created><datetime dst="true">20130405T114154,47+02</datetime></created>
-<modified><datetime dst="true">20130405T114155,59+02</datetime></modified>
-<revised><datetime dst="true">20130405T114155,58+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130405T114155,59+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130405T114155,59+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<modified><datetime dst="true">20130725T105606,14+02</datetime></modified>
+<revised><datetime dst="true">20130725T104116,76+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105606,12+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093721,32+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>noProfile.gif</text></item>
-<item name="$Flags"><text>34CiQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-<item name="$ImagesWide" sign="true"><number>1</number></item>
-<item name="$ImagesHigh" sign="true"><number>1</number></item>
-<item name="$ImagesColorize" sign="true"><number>0</number></item>
-
-
-<item name="$MimeType" sign="true"><text>image/gif</text></item>
 <item name="$FileModDT" sign="true"><datetime>20130109T114503,00+01</datetime></item>
-<item name="$ImageNames" sign="true"><text>noProfile.gif</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+</imageresource>

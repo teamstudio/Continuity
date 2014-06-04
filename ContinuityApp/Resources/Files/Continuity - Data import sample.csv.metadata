@@ -1,17 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="155e" sequence="1" unid="17D24ED8F3A44D35C1257B4B00485745">
+<?xml version="1.0" encoding="UTF-8"?><fileresource designerversion="8.5.3" maintenanceversion="1.0" name="Continuity - Data import sample.csv" publicaccess="false" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="64a" sequence="7" unid="17D24ED8F3A44D35C1257B4B00485745">
 <created><datetime dst="true">20130412T151009,33+02</datetime></created>
-<modified><datetime dst="true">20130412T151009,35+02</datetime></modified>
-<revised><datetime dst="true">20130412T151009,34+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130412T151009,35+02</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130412T151009,35+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name="$TITLE"><text>Continuity - Data import sample.csv</text></item>
-<item name="$Flags"><text>345CgQ</text></item>
-<item name="$FlagsExt"><text>D</text></item>
-
-<item name="$FileModDT" sign="true"><datetime dst="true">20130412T150747,60+02</datetime></item>
-
-<item name="$FileNames" sign="true"><text>Continuity - Data import sample.csv</text></item>
-<item name="$DesignerVersion"><text>8.5.3</text></item></note>
+<modified><datetime dst="true">20130725T105604,31+02</datetime></modified>
+<revised><datetime dst="true">20130725T104120,36+02</datetime></revised>
+<lastaccessed><datetime dst="true">20130725T105604,29+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093721,59+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby></fileresource>

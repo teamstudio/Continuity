@@ -1,41 +1,37 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1172' unid='CF344DC21EA9980FC1257B44002C4039' sequence='13'>
+<view name='vwAssets' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='5fe' unid='CF344DC21EA9980FC1257B44002C4039' sequence='22'>
 <created><datetime dst='true'>20130405T100320,25+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,50+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,49+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,50+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100322,66+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144245,89+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144245,88+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144245,88+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,24+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwAssets</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-mgACACIAAgAkMAUABABuYW1lAQABAHwAIgIFAAIAaWQiAgMAAgAQAAYAcGhvdG9zcwADAAUAPgA5
-AAcABAACAAcABwAGAAkABABuYW1lJDBhZGRyZXNzY291bnRyeXBob3RvcyRDb25mbGljdCRSRUYA
-BAAEAAAAGgAFAAQARm9ybQEABQBmU2l0ZQAKAgMABwAKAAQACUwxUw==
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-EQABAABEgGYAAAAEAG5hbWU=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQAFAAUACAAAAFZDAQAEAAQAAAAAAIEAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIABwA0AAAANgEB
-AAAKAAAAAAAAAAAAAgIAAABWQwAABwAHAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAHAAcA
-AAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAYABgASAAAAUAABAAAKAAAAAAAAAAAAAgIAAABu
-YW1lbmFtZSQwbmFtZSBpZDQAAgAiAAIAJDAFAAQAbmFtZQEAAQB8ACICBQACAGlkIgIDAAcAEAAJ
-AAkxUzJTM1M0UwBhZGRyZXNzYWRkcmVzc2NvdW50cnljb3VudHJ5cGhvdG9zaW1hZ2VzEgACABAA
-BgBwaG90b3NzAAMAJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkA
-AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA
-AP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
-AAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAA
-AAEA////AAUA////AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAA
-AAAAAAgAAAAAAAEA
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fSite"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='16.1250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$0' width='38.7500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='name id'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>name + "|" + id</formula></code></column>
+<column hidedetailrows='false' itemname='address' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='address'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='country' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='country'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='photos' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='images'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@AttachmentNames</formula></code></column></view>
 

@@ -1,32 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='1152' unid='955EDF1DFE13C1F6C1257B44002C4031' sequence='9'>
+<view name='vwContactsByIdentifier' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' comment='used by batch import to check if a user already exists'
+ unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
+ opencollapsed='false' showresponsehierarchy='true' showmargin='true' shrinkrows='false'
+ extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
+ headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='5ee' unid='955EDF1DFE13C1F6C1257B44002C4031' sequence='18'>
 <created><datetime dst='true'>20130405T100320,17+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,18+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,17+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,18+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100322,50+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144244,76+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144244,74+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140603T143324,26+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,19+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwContactsByIdentifier</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-cAAFACYAIQADAAoACQAEAGlkZW50aWZpZXIkQ29uZmxpY3QkUkVGAAQABAAAADIABQAEAEZvcm0B
-AAgAZkNvbnRhY3QKAgUACgBpZGVudGlmaWVyAQAAAAsCHAIDAAcAEgAMAAlMMVM0UzVTNlM3Uw==
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-FwABAABEAGYAAAAKAGlkZW50aWZpZXI=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQABAAEAiAAAAFZDAQAKAAoAAAAAACABAQAACQAAAAAAAAAAAAICAAAAaWRlbnRpZmllcmlkZW50
-aWZpZXImAAEAAAABAQAJAQAACgEBDgoAAD8ArSsBAAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wABAO/v7wABAAAAAAAA
-AAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text>used by batch import to check if a user already exists</text></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fContact" &amp; identifier != ""</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='identifier' width='36'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='identifier'><font
+ size='9pt' style='bold'/></columnheader></column></view>
 

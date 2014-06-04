@@ -1,75 +1,76 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='3d2' unid='B1E6129EB79EEEE4C1257B190043531A' sequence='29'>
+<view name='vwAuditLog' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BB30029DCD4' hide='web' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='4fe' unid='B1E6129EB79EEEE4C1257B190043531A' sequence='38'>
 <created><datetime>20130221T131521,86+01</datetime></created>
-<modified><datetime dst='true'>20130626T170127,46+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,45+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,46+02</datetime></lastaccessed>
-<addedtofile><datetime>20130301T115516,75+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144245,75+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144245,73+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140515T135059,27+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093719,94+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwAuditLog</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-fgMCAA4AAwAkMTEAaQADAAIArgAKAF9jcmVhdGVkQnkFAAQARm9ybQEABwBmVXBkYXRlAAoCrwCE
-ABQABQAJAGNyZWF0ZWRCeQCuAHAABQAEAEZvcm0BAAUAZlRhc2sACgKvAFgAGgAFAA8Ac3RhdHVz
-Q2hhbmdlZEJ5AK4APgAFAAQARm9ybQEACQBmSW5jaWRlbnQACgKvACIAFAAFAAkAY3JlYXRlZEJ5
-AK4ADgABAAEAPwCuAAQAtQcDAAIAFgALAGNyZWF0ZWREYXRlAGkAAwACAFoAAwAkMTIABQAEAEZv
-cm0BAAUAZlRhc2sACgKvADgAHgAFABMAc3RhdHVzQ2hhbmdlZEJ5TmFtZQCuABoABQANAGNyZWF0
-ZWRCeU5hbWUArgAEALUDAwACAK4ABQBfdHlwZQAFAAQARm9ybQEABwBmVXBkYXRlAAoCrwCIABAA
-AQAGAFVwZGF0Za4AeAAFAAQARm9ybQEABQBmVGFzawAKAq8AYAAYAAEADgBUYXNrIGNvbXBsZXRl
-ZK4ASAAFAAQARm9ybQEACQBmSW5jaWRlbnQACgKvACwAHgABABMASW5jaWRlbnQgcmVnaXN0ZXJl
-ZACuAA4AAQABAD8ArgAEALUHAwACAKIACQBfY29udGVudHMABQAEAEZvcm0BAAcAZlVwZGF0ZQAK
-Aq8AeAASAAUABwBNZXNzYWdlAK4AZgAFAAQARm9ybQEABQBmVGFzawAKAq8ATgAOAAUABABuYW1l
-rgBAAAUABABGb3JtAQAJAGZJbmNpZGVudAAKAq8AJAAWAAUACwBEZXNjcmlwdGlvbgCuAA4AAQAB
-AD8ArgAEALUHAwACABAABQBwaG90bwBzAAMABQBkAGAACgADAA0ACgALAAMABQAJAAUACQAEACQx
-MXBob3RvRmlsZU5hbWVfY3JlYXRlZEJ5Y3JlYXRlZERhdGUkMTJfdHlwZV9jb250ZW50c3Bob3Rv
-JENvbmZsaWN0JFJFRgQABAAAAGgABQAEAEZvcm0BAAcAZlVwZGF0ZQAKAgUABABGb3JtAQAFAGZU
-YXNrAAoCBQAGAHN0YXR1cwEACABjb21wbGV0ZQoCHAIEAB0CBQAEAEZvcm0BAAkAZkluY2lkZW50
-AAoCHQIDAAcAIAAZAAlMMVM0UzVTOVMxMFMxMVMxMlMxNFMxNVMA
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-EAABAABEAWYAAAADACQxMQ==
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ViewFormat' sign='true'>
-<rawitemdata type='5'>
-AQAJAA0AiAAAAFZDBQADAAcAEAAAAJAAAQAACAAAAAEAAAAAAAICAAAAVkMAAAIACQAKAAoAUAAB
-AAAIAAAAAAAAAAAAAgIAAABWQwAADQANAAAAAAB8AAEAAAgAAAAAAAAAAAACAgAAAFZDAAAKAAoA
-ygAAAFAAAQAACAAAAAAAAAAAAAICAAAAVkMAAAsACwAYAAAAUAABAAAIAAAAAAAAAAAAAgIAAABW
-QwAAAwANAGoAAACjAAEAAAgAAAAAAAAAAAACAgAAAFZDAAAFAAUAygAAAFAAAQAACAAAAAAAAAAA
-AAICAAAAVkMAAAkACQC+AAAA2wEBAAAIAAAAAAAAAAAAAgIAAABWQwAABQAFABIAAABQAAEAAAgA
-AAAAAAAAAAACAgAAACQxMWNyZWF0ZWQQAAIADgADACQxMQBpAAMAJDlkb2NOdW1iZXIKAAAACACS
-AAMAAQUBAAQAf0Ew/3Bob3RvRmlsZU5hbWVwaG90b0ZpbGVOYW1lX2NyZWF0ZWRCeV9jcmVhdGVk
-QnnKAAIArgAKAF9jcmVhdGVkQnkFAAQARm9ybQEABwBmVXBkYXRlAAoCrwCEABQABQAJAGNyZWF0
-ZWRCeQCuAHAABQAEAEZvcm0BAAUAZlRhc2sACgKvAFgAGgAFAA8Ac3RhdHVzQ2hhbmdlZEJ5AK4A
-PgAFAAQARm9ybQEACQBmSW5jaWRlbnQACgKvACIAFAAFAAkAY3JlYXRlZEJ5AK4ADgABAAEAPwCu
-AAQAtQcDAAcAGgAUAAkyVFI2UzhSMTJTMTRSMThTMjBSY3JlYXRlZERhdGVjcmVhdGVkRGF0ZRgA
-AgAWAAsAY3JlYXRlZERhdGUAaQADACQxMmNyZWF0ZWRCeU5hbWVqAAIAWgADACQxMgAFAAQARm9y
-bQEABQBmVGFzawAKAq8AOAAeAAUAEwBzdGF0dXNDaGFuZ2VkQnlOYW1lAK4AGgAFAA0AY3JlYXRl
-ZEJ5TmFtZQCuAAQAtQMDAAcADgAIAAkyUlQ2UzhSX3R5cGVfdHlwZcoAAgCuAAUAX3R5cGUABQAE
-AEZvcm0BAAcAZlVwZGF0ZQAKAq8AiAAQAAEABgBVcGRhdGWuAHgABQAEAEZvcm0BAAUAZlRhc2sA
-CgKvAGAAGAABAA4AVGFzayBjb21wbGV0ZWSuAEgABQAEAEZvcm0BAAkAZkluY2lkZW50AAoCrwAs
-AB4AAQATAEluY2lkZW50IHJlZ2lzdGVyZWQArgAOAAEAAQA/AK4ABAC1BwMABwAaABQACTJUUjZT
-OFIxMlMxNFIxOFMyMFJfY29udGVudHNfY29udGVudHO+AAIAogAJAF9jb250ZW50cwAFAAQARm9y
-bQEABwBmVXBkYXRlAAoCrwB4ABIABQAHAE1lc3NhZ2UArgBmAAUABABGb3JtAQAFAGZUYXNrAAoC
-rwBOAA4ABQAEAG5hbWWuAEAABQAEAEZvcm0BAAkAZkluY2lkZW50AAoCrwAkABYABQALAERlc2Ny
-aXB0aW9uAK4ADgABAAEAPwCuAAQAtQcDAAcAGgAUAAkyVFI2UzhSMTJTMTRSMThTMjBScGhvdG9w
-aG90bxIAAgAQAAUAcGhvdG8AcwADACYAAQAAAAEBAAkBAAAKAQEOCgAAPwCtKwEAAQABAAAAAAAA
-AAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAA
-AAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAA
-AAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA
-//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAA
-AAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJ
-AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAA
-AAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAA
-AAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAAABAP///wAB
-AP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQBYQwBMgAMAAAAAAAECAgIBAQEBBwQD
-AAAAAAAAAAAgLS06WUMAAQAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA
-AAAAAAAAACwgA4A=
-</rawitemdata></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fUpdate" | (Form="fTask" &amp; status = "complete") | Form="fIncident"</formula></code>
+<column sort='descending' hidedetailrows='false' itemname='$11' width='18'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><font size='8pt'/><columnheader title='created'><font
+ size='9pt' style='bold'/></columnheader><datetimeformat show='datetime' date='yearmonthday'
+ fourdigityearfor21stcentury='true' time='hourminutesecond' zone='never' dateformat='weekdaydaymonthyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='-' dateseparator3='-'
+ timeseparator=':' timeformat24='true' preference='usersetting'/><numberformat
+ format='fixed' punctuated='false' parens='false' percent='false' bytes='false'
+ decimalsym=',' thousandssep=' ' currencysymtype='custom' currencysym='€'
+ usecustomsym='false'/><code event='value'><formula>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='$9' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><font size='8pt'/><columnheader
+ title='docNumber'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@DocNumber</formula></code></column>
+<column hidedetailrows='false' itemname='photoFileName' width='15.5000' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='photoFileName'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='_createdBy' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='_createdBy'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(	
+Form="fUpdate"; createdBy;
+Form="fTask"; statusChangedBy;
+Form="fIncident"; createdBy;
+"?")</formula></code></column>
+<column hidedetailrows='false' itemname='createdDate' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='createdDate'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='$12' width='20.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='createdByName'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(
+	Form="fTask"; statusChangedByName;
+createdByName)</formula></code></column>
+<column hidedetailrows='false' itemname='_type' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='_type'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(	
+Form="fUpdate"; "Update";
+Form="fTask"; "Task completed";
+Form="fIncident"; "Incident registered";
+"?")</formula></code></column>
+<column hidedetailrows='false' itemname='_contents' width='59.3750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='_contents'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(	
+Form="fUpdate"; Message;
+Form="fTask"; name;
+Form="fIncident"; Description;
+"?")</formula></code></column>
+<column hidedetailrows='false' itemname='photo' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='8pt'/><columnheader title='photo'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@AttachmentNames</formula></code></column></view>
 

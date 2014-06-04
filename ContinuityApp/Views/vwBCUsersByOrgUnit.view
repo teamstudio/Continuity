@@ -1,40 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257B1A0041F8CF'>
-<noteinfo noteid='114a' unid='202B72B48DB9765DC1257B44002C402F' sequence='10'>
+<view name='vwBCUsersByOrgUnit' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web' showinmenu='false'
+ publicaccess='false' designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='false' showresponsehierarchy='true'
+ showmargin='true' shrinkrows='false' extendlastcolumn='false' showhierarchies='false'
+ unreadcolor='black' rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white'
+ totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
+<noteinfo noteid='5da' unid='202B72B48DB9765DC1257B44002C402F' sequence='19'>
 <created><datetime dst='true'>20130405T100320,15+02</datetime></created>
-<modified><datetime dst='true'>20130626T170127,34+02</datetime></modified>
-<revised><datetime dst='true'>20130626T170127,33+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130626T170127,34+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130405T100322,46+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20140514T144245,30+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144245,29+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144245,29+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093721,13+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>vwBCUsersByOrgUnit</text></item>
-<item name='$Index' sign='true'><text/></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-8AACACoAAwAkMTEABQAEAG5hbWUBAAEAfAAiAgUACAB1c2VyTmFtZSICAwACACAAAgAkMwUABABu
-YW1lAQABAHwAIgKQAFYBIgIDAAUALgApAAUACQADAAIACQAEAG9yZ1VuaXRJZCQxMSQzJENvbmZs
-aWN0JFJFRgAEAAQAAABcAAUABABGb3JtAQAIAGZDb250YWN0CgIFAAkAb3JnVW5pdElkAAEAAAAL
-AhwCBQAIAHVzZXJUeXBlAQAEAG5vbmUBAAcAY29udGFjdAAfAgoCBAAeARwCAwAHABYAEAAJTDFT
-NFM1UzZTN1M4UzlT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-IAACAABEiGYHAAAJAIBmAAkAAwBvcmdVbml0SWQkMTE=
-</rawitemdata></item>
-<item name='$ViewFormat' summary='true' sign='true'>
-<rawitemdata type='5'>
-AQADAAQACAAAAFZDAwAJAAkAAAAAAFAAAQAACQABAAAAAAAAAAICAAAAVkMBAAMADQA8AAAAiQAB
-AAAJAAAAAAAAAAAAAgIAAABWQwAAAgAJADIAAABQAAEAAAoAAAAAAAAAAAACAgAAAG9yZ1VuaXRJ
-ZG9yZ1VuaXRJZCQxMW5hbWV8dXNlcm5hbWU8AAIAKgADACQxMQAFAAQAbmFtZQEAAQB8ACICBQAI
-AHVzZXJOYW1lIgIDAAcAEAAJAAkxUzJTM1M0UwAkM25hbWV8dW5pZDIAAgAgAAIAJDMFAAQAbmFt
-ZQEAAQB8ACICkABWASICAwAHABAACQAJMVMyUzNTNFMAJgABAAAAAQEACQEAAAoBAQ4KAAABAK0r
-AQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAA
-AAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAA
-AAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wAFAP///wAB
-AAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fContact" &amp; orgUnitId != "" &amp; !(userType="none":"contact")</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='orgUnitId' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='orgUnitId'><font
+ size='9pt' style='bold'/></columnheader></column>
+<column sort='ascending' hidedetailrows='false' itemname='$11' width='17.1250'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='name|username'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>name + "|" + userName</formula></code></column>
+<column hidedetailrows='false' itemname='$3' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='name|unid'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>name + "|" + @Text(@DocumentUniqueID)</formula></code></column></view>
 

@@ -1,67 +1,69 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
- replicaid='85257B9C00665D52'>
-<noteinfo noteid='38e' unid='F84675FD5738731985257B71004D3A51' sequence='3'>
+<view name='BBvwTasksByParentByTaskCat' alias='BBvwTasksByParentByTaskCat'
+ xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4'
+ hide='web' showinmenu='false' publicaccess='false' designerversion='8.5.3'
+ fromtemplate='UHS - Continuity DEV' unreadmarks='none' onopengoto='lastopened'
+ onrefresh='displayindicator' headers='beveled' opencollapsed='false' showresponsehierarchy='false'
+ showmargin='true' shrinkrows='false' extendlastcolumn='false' showhierarchies='false'
+ unreadcolor='black' rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white'
+ altrowcolor='#efefef' totalscolor='black' headerbgcolor='white' boldunreadrows='false'
+ evaluateactions='false' allownewdocuments='false' allowcustomizations='true'
+ hidemarginborder='false' marginwidth='0px' marginbgcolor='white' uniquekeys='false'
+ indexrefresh='automatic' initialbuildrestricted='false' noemptycategories='false'>
+<noteinfo noteid='70a' unid='F84675FD5738731985257B71004D3A51' sequence='15'>
 <created><datetime dst='true'>20130520T100332,01-04</datetime></created>
-<modified><datetime dst='true'>20130705T000340,39-04</datetime></modified>
-<revised><datetime dst='true'>20130705T000340,38-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130705T000340,39-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130702T143815,04-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Richard Sharpe/O=Teamstudio</name></updatedby>
-<wassignedby><name>CN=Richard Sharpe/O=Teamstudio</name></wassignedby>
-<item name='$FormulaClass' sign='true'><text>1</text></item>
-<item name='$TITLE' sign='true'><text>BBvwTasksByParentByTaskCat|BBvwTasksByParentByTaskCat</text></item>
-<item name='$Index' sign='true'><text>/O</text></item>
-<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
-pAECAGAAAgAkMAUABgBzdGF0dXMBAAAACgKvAEQALgAFAAoAc2NlbmFyaW9JZAUAEQByZXNwb25z
-aWJpbGl0eUlkcwAfAl4BrgAWAAUACgBpbmNpZGVudElkrgAEALUDAwACADoAAwAkMjAABQANAGNh
-dGVnb3J5T3JkZXIAVgEBAAEAIAAiAgUADABjYXRlZ29yeU5hbWUiAgMAAgBCAAMAJDEwAAUABQBv
-cmRlcgBWAQEAAAALAq8AIgAQAAUABQBvcmRlcgCuABIAAAAAAAAAADiPQK4ABAC1AwMABQCeAJoA
-DgACAAMAAwAEAA0ACgALABEAEwAGAAQACQAMAAkAJDAkMjAkMTBuYW1lY2F0ZWdvcnlPcmRlcmNh
-dGVnb3J5SWRkZXNjcmlwdGlvbnJlc3BvbnNpYmlsaXR5SWRzcmVzcG9uc2liaWxpdHlOYW1lc3N0
-YXR1c3R5cGVwbGFuTmFtZXNzY2VuYXJpb05hbWUkQ29uZmxpY3QEAAQAAAAaAAUABABGb3JtAQAF
-AGZUYXNrAAoCAwAHAAoABAAJTDFT
-</formula></item>
-<item name='$Collation' summary='true'>
-<rawitemdata type='2'>
-IwADAABECGYHAAACAIhmBwIAAwCAZgAFAAMAJDAkMjAkMTA=
-</rawitemdata></item>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$Flags'><text>Yw</text></item>
-<item name='$Class'><text>UHS - Continuity DEV</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$ViewFormat' sign='true'>
-<rawitemdata type='5'>
-AQANABUAigAAAFZDAwQCAAsAfAAAAFAAAQAACQABAAAAAAAAAAICAAAAVkMDBAMADABMAAAAUAAB
-AAAJAAEAAAAAAAAAAgIAAABWQwEAAwAFAFgAAABgAAEAAAkAAAAAAAAAAAACAgAAAFZDAAAEAAQA
-AAAAAFIAAQAACQAAAAAAAAAAAAICAAAAVkMAAA0ADQAAAAAAZwABAAAJAAAAAAAAAAAAAgIAAABW
-QwAACgAKAAAAAABQAAEAAAkAAAAAAAAAAAACAgAAAFZDAAALAAsAAAAAAFAAAQAACQAAAAAAAAAA
-AAICAAAAVkMAABEAEQAAAAAAUAABAAAKAAAAAAAAAAAAAgIAAABWQwAAEwATAAAAAABQAAEAAAoA
-AAAAAAAAAAACAgAAAFZDAAAGAAYAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAQABAAAAAAA
-UAABAAAKAAAAAAAAAAAAAgIAAABWQwAACQAJAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAM
-AAwAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAJDBwYXJlbnQgdW5pZHwAAgBgAAIAJDAFAAYAc3Rh
-dHVzAQAAAAoCrwBEAC4ABQAKAHNjZW5hcmlvSWQFABEAcmVzcG9uc2liaWxpdHlJZHMAHwJeAa4A
-FgAFAAoAaW5jaWRlbnRJZK4ABAC1AwMABwAaABMACTJSVDZTOFM5UzEwUzExUzEzUgAkMjBjYXRl
-Z29yeURlc2NMAAIAOgADACQyMAAFAA0AY2F0ZWdvcnlPcmRlcgBWAQEAAQAgACICBQAMAGNhdGVn
-b3J5TmFtZSICAwAHABAACQAJNFM1UzZTN1MAJDEwb3JkZXJYAAIAQgADACQxMAAFAAUAb3JkZXIA
-VgEBAAAACwKvACIAEAAFAAUAb3JkZXIArgASAAAAAAAAAAA4j0CuAAQAtQMDAAcAFAANAAkyUlQ2
-UzdTOVMxMVIAbmFtZW5hbWVjYXRlZ29yeU9yZGVyY2F0ZWdvcnlPcmRlcmNhdGVnb3J5SWRjYXRl
-Z29yeUlkZGVzY3JpcHRpb25kZXNjcmlwdGlvbnJlc3BvbnNpYmlsaXR5SWRzcmVzcG9uc2liaWxp
-dHlJZHNyZXNwb25zaWJpbGl0eU5hbWVzcmVzcG9uc2liaWxpdHlOYW1lc3N0YXR1c3N0YXR1c3R5
-cGV0eXBlcGxhbk5hbWVzcGxhbk5hbWVzc2NlbmFyaW9OYW1lc2NlbmFyaW9OYW1lJgABAAAAAQEA
-CQEAAAoBAQ4KAAA/AK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAA
-AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
-AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAA
-AAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQA
-AAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAA
-AAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdD
-AQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAA
-AAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAA
-BAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAA
-AAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAA
-QgAAAAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAA
-AAEAAAAAAAAACAAAAAAAAQA=
-</rawitemdata></item></note>
+<modified><datetime dst='true'>20140514T144246,58+02</datetime></modified>
+<revised><datetime dst='true'>20140514T144246,57+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140514T144246,57+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20130725T093722,33+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
+>SELECT Form="fTask"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='$0' width='10' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ categorized='true' twisties='true'><font size='9pt'/><columnheader title='parent unid'><font
+ size='9pt' style='bold'/></columnheader><code event='value'><formula>@If(
+	status=""; @Trim( scenarioId : responsibilityIds );
+incidentId)</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='$20' width='10'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true' twisties='true'><font size='9pt'/><columnheader
+ title='categoryDesc'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@Text(categoryOrder) + " " + categoryName</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='$10' width='12'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><font size='9pt'/><columnheader title='order'><font size='9pt'
+ style='bold'/></columnheader><code event='value'><formula>@If(
+	@Text(order) != ""; order;
+999)</formula></code></column>
+<column hidedetailrows='false' itemname='name' width='10.2500' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='categoryOrder' width='12.8750' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='categoryOrder'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='categoryId' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='categoryId'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='description' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><font
+ size='9pt'/><columnheader title='description'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='responsibilityIds' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='responsibilityIds'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='responsibilityNames' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='responsibilityNames'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='status' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='status'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='type' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='type'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='planNames' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='planNames'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='scenarioName' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='scenarioName'><font size='9pt' style='bold'/></columnheader></column></view>
 

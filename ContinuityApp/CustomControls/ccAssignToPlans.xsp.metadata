@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C1257B1A0041F8CF" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="79a" sequence="35" unid="A668112619742D1BC1257B2500785DCD">
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="556" sequence="70" unid="A668112619742D1BC1257B2500785DCD">
 <created><datetime>20130305T225443,33+01</datetime></created>
-<modified><datetime dst="true">20130421T215406,66+02</datetime></modified>
-<revised><datetime dst="true">20130421T215406,65+02</datetime></revised>
-<lastaccessed><datetime dst="true">20130421T215406,66+02</datetime></lastaccessed>
-<addedtofile><datetime>20130305T225443,34+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst="true">20140515T164148,54+02</datetime></modified>
+<revised><datetime dst="true">20140515T164148,52+02</datetime></revised>
+<lastaccessed><datetime dst="true">20140515T164148,52+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130725T093720,41+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
 <item name="$Flags"><text>gC~4;</text></item>
-
-
 <item name="$TITLE" sign="true"><text>ccAssignToPlans.xsp</text></item>
 
 
 
+
 <item name="$FileNames" sign="true"><text>ccAssignToPlans.xsp</text></item>
-
-
 <item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
 
 </note>
