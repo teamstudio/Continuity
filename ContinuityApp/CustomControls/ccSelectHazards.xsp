@@ -13,7 +13,8 @@
 		title="Select one or more hazards">
 
 		<xp:panel style="padding:15px">
-
+		
+			<!-- loop over hazard types -->
 			<xp:repeat id="repeat1" rows="100" var="hazardCat"
 				indexVar="hazardIndex" styleClass="showScrollbar" style="height: 375px; overflow-y:auto">
 				<xp:this.value><![CDATA[#{javascript:@Trim(database.getView("vwHazards").getColumnValues(0))}]]></xp:this.value>
@@ -22,7 +23,8 @@
 					value="#{hazardCat}">
 					<xp:this.style><![CDATA[#{javascript:"margin-bottom:5px;" + (hazardIndex>0 ? "margin-top:10px;" : "")}]]></xp:this.style>
 				</xp:text>
-
+				
+				<!-- loop over hazards for this type --> 
 				<xp:repeat id="repeat2" rows="100" var="hazard">
 					<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwHazards", hazardCat, 3, "[FailSilent]")}]]></xp:this.value>
 
@@ -31,6 +33,7 @@
 							<xp:this.value><![CDATA[#{javascript:var checked = false;
 										var hazardId = @Right(hazard, "|");
 										if (compositeData.doc.hasItem("hazardIds") ) {
+										
 											checked = @IsMember( hazardId, compositeData.doc.getItemValue("hazardIds") );
 										}
 										
@@ -80,8 +83,10 @@
 			dBar.error(e);
 		}}]]></xp:this.action>
 					<xp:this.script><![CDATA[var ids = [];
-			
-			dojo.query('input.hazardIds:checked').forEach( function(cb) {
+					
+					var root = dojo.byId("#{id:repeat1}");
+					
+			dojo.query("input.hazardIds:checked", root ).forEach( function(cb) {
 				ids.push( cb.value);
 			});
 			
