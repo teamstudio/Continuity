@@ -776,7 +776,7 @@ body {
 	}
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 400px) {
 	.syncButton span,
 	.newButton span, 
 	.settingsButton span {
@@ -2558,7 +2558,7 @@ img.dark {
 	}
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 400px) {
 	#tabfooter li {
 		width: 70px;
 	}
