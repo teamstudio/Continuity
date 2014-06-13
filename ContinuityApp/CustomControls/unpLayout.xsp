@@ -25,9 +25,8 @@
 		
 		<xp:metaData name="format-detection" content="telephone=no"></xp:metaData>
 
-		<xp:script src="unp/jquery-1.7.2.min.js" clientSide="true"></xp:script>
+		<xp:script src="unp/jquery-1.11.0.min.js" clientSide="true"></xp:script>
 		<xp:script src="unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
-		<xp:script src="unp/iscroll.min.js" clientSide="true"></xp:script>
 		<xp:script src="/unplugged.js" clientSide="true"></xp:script>
 		
 	</xp:this.resources>

@@ -12,27 +12,8 @@
 	-->
 
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
-	<style>
-		body {
-		padding-bottom: 45px !important;
-		}
-		@media screen and
-		(min-width: 701px) {
-		body {
-		padding-bottom: 60px !important;
-		}
-		}
-		@media
-		screen and (max-width: 700px) {
-		body {
-		padding-bottom: 45px !important;
-		}
-		}
-	</style>
 	<xp:this.resources>
-
 		<xp:script src="/unp/jquery.blockUI.min.js" clientSide="true"></xp:script>
-		<xp:script src="/unp/iScroll.min.js" clientSide="true"></xp:script>
 		<xp:script src="/unplugged.js" clientSide="true"></xp:script>
 		<xp:script src="/unpCommon.jss" clientSide="false"></xp:script>
 	</xp:this.resources>

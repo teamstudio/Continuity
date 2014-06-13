@@ -3,14 +3,19 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+ * Unless required by applicable law unpor agreed to in writing, software distributed under the License is distributed 
  * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
  * the specific language governing permissions and limitations under the License
  */
+
+var unp = unp || {};
+
 $(window).load( function() {
 	
+	$.blockUI.defaults.message = '';
+	
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
-	allowFormsInIscroll();
+	unp.allowFormsInIscroll();
 
 	initiscroll();
 	
@@ -40,15 +45,18 @@ $(window).load( function() {
 		
 	}
 	
-	doKeyboardScrollFix();
+	//doKeyboardScrollFix();
 	
 	//new NoClickDelay( document.getElementById('header') );
 	//disabled for header because of problems with menu sliding in/out directly
 	new NoClickDelay( document.getElementById('menu') );
 	new NoClickDelay( document.getElementById('footer') );
 	
+	unp.disableRubberBanding();
+	
 });
 
+/*
 function doKeyboardScrollFix() {
 	
 	//workaround for fixed header/footer moving around when iPad virtual keyboard is turned on/off
@@ -62,29 +70,32 @@ function doKeyboardScrollFix() {
 			//force redraw
 		    setTimeout( function() {
 		        window.scrollTo( $(window).scrollLeft(), $(window).scrollTop() );
-		    }, 20 );
+		    }, 50 );
 		});
+		
 }
 
 $(window).scroll( function() {
 	if ($(window).scrollTop() + $(window).height() == $(document).height()) {
 		$(".loadmorebutton").click();
 	}
-});
+});*/
 
 window.addEventListener("orientationchange", function() {
 	hideViewsMenu();
 	initiscroll();
 }, false);
 
-function allowFormsInIscroll() {
-	[].slice.call(document.querySelectorAll('input, select, button, textarea')).forEach(function(el) {
-		el.addEventListener(
-				('ontouchstart' in window) ? 'touchstart'
-						: 'mousedown', function(e) {
-					e.stopPropagation();
-				})
-	});
+unp.allowFormsInIscroll = function() {
+	[].slice.call(document.querySelectorAll('input, select, button, textarea'))
+			.forEach(
+					function(el) {
+						el.addEventListener(
+								('ontouchstart' in window) ? 'touchstart'
+										: 'mousedown', function(e) {
+									e.stopPropagation();
+								})
+					});
 }
 
 var firedrequests = new Array();
@@ -129,13 +140,6 @@ function loadmore(url) {
 			}
 			$(".summaryDataRow").empty();
 			
-			
-			try {
-				scrollContent.refresh();
-				
-			} catch (e) {
-			}
-			
 			$("img.lazy").lazy();
 			
 			return false;
@@ -161,7 +165,7 @@ function openDocument(url, target, title) {
 				initiscroll();
 				if (url.indexOf("editDocument") > -1
 						|| url.indexOf("newDocument") > -1) {
-					allowFormsInIscroll();
+					unp.allowFormsInIscroll();
 					try {
 						if ($('.richtextfield').val().indexOf("<") > -1) {
 							var val = $($('.richtextfield').val()).text();
@@ -182,7 +186,6 @@ function openDocument(url, target, title) {
 }
 
 function saveDocument(formid, unid, viewxpagename, formname, parentunid, dbname) {
-	scrollContent.scrollTo(0, -60, 0);
 	var data = $(".customform :input").serialize();
 	//var url = 'UnpSaveDocument.xsp?unid=' + unid + "&formname=" + formname
 		//	+ "&rnd=" + Math.floor(Math.random() * 1001);
@@ -277,13 +280,13 @@ function toggleViewsMenu() {
 		$("#menuPane").removeClass("offScreen").addClass("onScreen");
 		$("#menuPane").animate( {
 			"left" : "+=700px"
-		}, "slow");
+		}, 400);
 		//$("#content").fadeOut();
 	} else {
 		$("#menuPane").removeClass("onScreen").addClass("offScreen");
 		$("#menuPane").animate( {
 			"left" : "-=700px"
-		}, "slow");
+		}, 400);
 		//$("#content").fadeIn();
 	}
 }
@@ -370,7 +373,7 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader, callback) {
 		
 		initiscroll();
 		
-		allowFormsInIscroll();
+		unp.allowFormsInIscroll();
 		
 		if (url.indexOf('UnpActiveTasks')>-1 || url.indexOf('UnpIncidents') > -1 ) {
 			
@@ -382,7 +385,7 @@ function loadPageEx(url, target, menuitem, loadFooter, loadHeader, callback) {
 			
 		}
 
-		doKeyboardScrollFix();
+		//doKeyboardScrollFix();
 
 		$("img.lazy").lazy();
 
@@ -465,91 +468,29 @@ function openPage(url, target) {
 	document.location.href = url;
 }
 
-var scrollContent = null;
-var scrollMenu;
 function initiscroll() {
-	
-	if (unpluggedserver){
-		
-		document.addEventListener('touchmove', function(e) {
-			e.preventDefault()
-		});
-		// Initialise any iScroll that needs it
-		try {
-			pullUpEl = document.getElementById('pullUp');
-			pullUpOffset = pullUpEl.offsetHeight;
-		} catch (e) {
-		}
-		try {
-			scrollContent.destroy();
-			delete scrollContent;
-		} catch (e) {
-		}
 
-		try {
-			scrollMenu.destroy();
-			delete scrollMenu;
-		}catch(e){
-		}
-		try{
-			scrollMenu = new iScroll('#menuWrapper', {bounce: true, momentum: false});
-		}catch(e){}
-		
-		//if (!scrollContent) {
-		
-		$(".iscrollcontent")
-				.each(
-						function() {
-							scrollContent = new iScroll(
-									$(this).attr("id"),
-									{
-										useTransition : true,
-										onRefresh : function() {
-											if (pullUpEl) {
-												if (pullUpEl.className
-														.match('loading')) {
-													pullUpEl.className = '';
-													pullUpEl
-															.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
-												}
-											}
-										},
-										onScrollMove : function() {
-											if (pullUpEl) {
-												if (this.y < (this.maxScrollY - 5)
-														&& !pullUpEl.className
-																.match('flip')) {
-													pullUpEl.className = 'flip';
-													pullUpEl
-															.querySelector('.pullUpLabel').innerHTML = 'Release to refresh...';
-													this.maxScrollY = this.maxScrollY;
-												} else if (this.y > (this.maxScrollY + 5)
-														&& pullUpEl.className
-																.match('flip')) {
-													pullUpEl.className = '';
-													pullUpEl
-															.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
-													this.maxScrollY = pullUpOffset;
-												}
-											}
-										},
-										onScrollEnd : function() {
-											if (pullUpEl) {
-												if (pullUpEl.className
-														.match('flip')) {
-													pullUpEl.className = 'loading';
-													pullUpEl
-															.querySelector('.pullUpLabel').innerHTML = 'Loading...';
-													$(".loadmorebutton").click();
-												}
-											}
-										}
-									});
-						});
-		
-	}else{
-		//alert("Not on unplugged so no iScroll");
+	try {
+		pullUpEl = document.getElementById('pullUp');
+		pullUpOffset = pullUpEl.offsetHeight;
+	} catch (e) {
 	}
+	
+	$('.iscrollcontent').bind('scroll', function() {
+			
+		if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+			if (pullUpEl) {
+				pullUpEl.className = 'flip';
+				pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Release to refresh...';
+				if (pullUpEl.className.match('flip')) {
+					pullUpEl.className = 'loading';
+					pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading...';
+					$(".loadmorebutton").click();
+				}
+			}
+		}
+	});
+	
 }
 
 function openDialog(id){
@@ -650,8 +591,7 @@ function showListDetails(srcNode) {
 			if ( !$(this).is(":empty") ) {
 	
 				var $image = $(this).slideToggle(300, function() {
-					//refresh iscroll
-					scrollContent.refresh();
+					
 				}).siblings("img");
 			
 				if ($image.attr("src") == "unp/arrow-up.png") {
@@ -884,3 +824,32 @@ NoClickDelay.prototype = {
 
 }
 )(jQuery, window, document);
+
+
+/*
+ * Disable rubberbanding effect in iOS.
+ * Based on the 'Baking Soda Paste' technique written by Armagan Amcalar at
+ * http://blog.armaganamcalar.com/post/70847348271/baking-soda-paste
+ */
+unp.disableRubberBanding = function() {
+   document.body.addEventListener('touchstart', function() {
+        document.body.addEventListener('touchmove', function moveListener(e) {
+            document.body.removeEventListener('touchmove', moveListener);
+
+            var el = e.target;
+
+            do {
+
+                var h = parseInt(window.getComputedStyle(el, null).height, 10);
+                var sH = el.scrollHeight;
+
+                if (h < sH) {
+                    return;
+                }
+            } while (el != document.body && el.parentElement != document.body && (el = el.parentElement));
+
+            e.preventDefault();
+        });
+    });
+
+}

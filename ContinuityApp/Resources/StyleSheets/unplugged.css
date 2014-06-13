@@ -108,10 +108,31 @@ body {
 	box-flex:1;
 }
 
-.iscrollcontent, .iscrollmenu {
-	position:absolute;
-	top:0; bottom:0; left:0; right:0;
+.iscrollcontent {
+	position: fixed;
+	top: 60px;
+	bottom: 60px;
+	left: 0;
+	right: 0;
+	-webkit-overflow-scrolling:touch; 
+	overflow-y: auto;
+	overflow-x: hidden;
 }
+
+@media screen and (min-width: 701px) {
+  .iscrollcontent {
+    top: 60px;
+    bottom: 60px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .iscrollcontent {
+    top: 45px;
+    bottom: 45px;
+  }
+}
+
+
 
 /* HEADER & FOOTER */
 .iHeader {
@@ -662,11 +683,12 @@ body {
 }
 
 #contentScroller {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box; 
-	-o-box-sizing:border-box;
-	box-sizing:border-box;
-	padding:10px;	
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box; 
+	     -o-box-sizing: border-box;
+	        box-sizing: border-box;
+	padding: 10px;
+	height: 100%;
 }
 
 .workspace-header {
@@ -682,11 +704,15 @@ body {
 }
 
 #wscontent {
-	position:absolute;
+	position:fixed;
 	top:140px;
 	left:0;
 	width:100%;
+	height: 100%;
 	bottom:46px;
+	-webkit-overflow-scrolling:touch; 
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 @media screen and (min-width: 1001px) {
@@ -1044,11 +1070,40 @@ body {
 
 /** MENU **/
 
+@media screen and (min-width: 1001px) {
+  .iscrollcontent > div {
+    margin-left: 30%;
+  }
+}
+
 #menuPane {
-	z-index: 11;
-	padding-top: 9px;
-	background: transparent;
-		
+  z-index: 11;
+  background: transparent;
+  position: absolute;
+  left: -700px;
+  display: block;
+  padding: 10px 0 0 0;
+  -webkit-box-sizing: border-box;
+  width: 100%;
+}
+@media screen and (max-width: 700px) {
+  #menuPane {
+    top: 0;
+    bottom: 45px;
+  }
+}
+@media screen and (min-width: 701px) {
+  #menuPane {
+    top: 0;
+    bottom: 60px;
+  }
+}
+@media screen and (min-width: 1001px) {
+  #menuPane {
+    left: 0px !important;
+    width: 30%;
+    top: 0;
+  }
 }
 
 .icon {
@@ -1141,20 +1196,18 @@ body {
 
 
 @media screen and (max-width: 700px) {
-	#menu {
-		position:absolute;
-	}
+
 	.navScrollArea ul {
 		margin: 0 10px;
 	}
 
-	#menuPane {
+/*#menuPane {
 		position: absolute;
 		left: -700px;
 		display: block;
 		width: 100%;
 
-	}
+	}*/
 
 }
 
@@ -1582,11 +1635,6 @@ body {
 
 /* Top Info */
 
-.wsscroll {
-	height: 100%;
-	left: 0px;	
-}
-
 .workspace-header ul {
 	padding: 0;
 	margin:0;
@@ -1702,9 +1750,10 @@ body {
 @media screen and (min-width: 401px) and (max-width: 700px) {
 	.workspace-header {
 		height: 20px;
+		padding: 10px 0;
 	}
 	#wscontent {
-		top: 93px;
+		top: 85px;
 	}
 	.workspace-header .user-info li {
 		display: none;
@@ -2548,7 +2597,7 @@ img.dark {
 	float:left;
 	width: 140px;
 	text-align:center;
-	padding-top:5px;
+	/*padding-top:5px;*/
 	
 }
 
@@ -2564,13 +2613,19 @@ img.dark {
 	}
 }
 
+@media screen and (min-width: 701px) {
+	#tabfooter  {
+		padding-top: 8px;
+	}
+}
+
 .footerTabtext{
   color:white;
   font-size: 12px;
 }
 
 .tabSelected{
-	padding-bottom:10px;
+	/*padding-bottom:10px;*/
 }
 .tabSelected .footerTabtext {
 	font-weight: bold;	
