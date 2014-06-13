@@ -207,7 +207,17 @@ return out;}]]></xp:this.value>
 	</div>
 	
 	<script type="text/javascript"> 
-		$("input:text:visible:first").focus();
+	
+		$(document).ready( function() { 
+			
+			var f = $(":focus");
+			
+			if (f.length == 0) {
+				$("input:text:visible:first").focus();
+			}
+			
+		} );
+			
 	</script>
 
 </xp:view>
