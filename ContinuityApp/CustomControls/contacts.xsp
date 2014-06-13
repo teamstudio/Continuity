@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xp_1="http://www.ibm.com/xsp/coreex"
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xp_1="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
-	
-	<div class="section">
-		<div class="title">Contacts</div>
-		<div class="actions">
-			<xp:button value="Add contact" id="button1" icon="user_add.png">
+
+	<div
+		class="section">
+		<div
+			class="title">Contacts</div>
+		<div
+			class="actions">
+			<xp:button
+				value="Add contact"
+				id="button1"
+				icon="user_add.png">
 				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
-				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				<xp:eventHandler
+					event="onclick"
+					submit="true"
+					refreshMode="partial"
 					refreshId="facetMiddle">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactForm");}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
-			
-	&#160;
-			
-			<xp:button value="Import contacts" id="button2" icon="group_add.png">
+
+			&#160;
+
+			<xp:button
+				value="Import contacts"
+				id="button2"
+				icon="group_add.png">
 				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
-				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				<xp:eventHandler
+					event="onclick"
+					submit="true"
+					refreshMode="partial"
 					refreshId="facetMiddle">
 					<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("contactsImport");}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
-			
+
 		</div>
 	</div>
 
-	<div style="margin-bottom:10px;">
+	<div
+		style="margin-bottom:10px;">
 		<strong>Filter:</strong>
 		&#160;
-		<xp:comboBox id="comboBox1" value="#{viewScope.filter}" defaultValue="all">
+		<xp:comboBox
+			id="comboBox1"
+			value="#{viewScope.filter}"
+			defaultValue="all">
 			<xp:selectItems>
 				<xp:this.value><![CDATA[#{javascript:var options:java.util.ArrayList = new java.util.ArrayList();
 				
@@ -53,13 +74,17 @@ options.add(group1);
 return options;
 }]]></xp:this.value>
 			</xp:selectItems>
-			<xp:eventHandler event="onchange" submit="true" refreshMode="partial"
+			<xp:eventHandler
+				event="onchange"
+				submit="true"
+				refreshMode="partial"
 				refreshId="contactsList">
 			</xp:eventHandler>
 		</xp:comboBox>
 	</div>
 
-	<xp:div id="contactsList">
+	<xp:div
+		id="contactsList">
 
 		<xc:ccMessage>
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()==0}]]></xp:this.rendered>
@@ -68,15 +93,19 @@ return options;
 		" in the selected organisation unit" : 
 		"")}]]></xc:this.message>
 		</xc:ccMessage>
-	
-		
-		
-		
-		<xp:viewPanel rows="500" id="viewPanel1" var="row">
+
+
+
+
+		<xp:viewPanel
+			rows="500"
+			id="viewPanel1"
+			var="row">
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()>0}]]></xp:this.rendered>
 
 			<xp:this.data>
-				<xp:dominoView var="vwContacts">
+				<xp:dominoView
+					var="vwContacts">
 					<xp:this.categoryFilter><![CDATA[#{javascript:if ( !viewScope.containsKey("filter") || viewScope.filter=="all") {
 					return "all";
 					} else if (viewScope.filter=="none") {
@@ -87,11 +116,17 @@ return options;
 					<xp:this.viewName><![CDATA[#{javascript:'vwContactsByOrgUnitByLastName'}]]></xp:this.viewName>
 				</xp:dominoView>
 			</xp:this.data>
-			
-				<xp:viewColumn value="" id="viewColumn1">
-				<xp:viewColumnHeader value="Type" id="viewColumnHeader1"></xp:viewColumnHeader>
-				
-				<xp:image id="image1" title="#{javascript:this.getAlt()}">
+
+			<xp:viewColumn
+				value=""
+				id="viewColumn1">
+				<xp:viewColumnHeader
+					value="Type"
+					id="viewColumnHeader1"></xp:viewColumnHeader>
+
+				<xp:image
+					id="image1"
+					title="#{javascript:this.getAlt()}">
 					<xp:this.url><![CDATA[#{javascript:switch (row.getColumnValue("userType")) {
 	case "user":
 		return "user.png";
@@ -112,44 +147,72 @@ return options;
 }}]]></xp:this.alt>
 				</xp:image>
 			</xp:viewColumn>
-			
+
 			<!-- first name -->
-			<xp:viewColumn value="" id="viewColumn8">
-				<xp:viewColumnHeader value="First name" id="viewColumnHeader6"></xp:viewColumnHeader>
+			<xp:viewColumn
+				value=""
+				id="viewColumn8">
+				<xp:viewColumnHeader
+					value="First name"
+					id="viewColumnHeader6"></xp:viewColumnHeader>
 
-				<xp:link escape="true" id="link1" text="#{row.firstName}">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				<xp:link
+					escape="true"
+					id="link1"
+					text="#{row.firstName}">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
 						refreshId="dynamicContent1">
 						<xp:this.action>
-							<xp_1:changeDynamicContentAction facetName="contactForm"
+							<xp_1:changeDynamicContentAction
+								facetName="contactForm"
 								for="dynamicContent1">
 								<xp_1:this.parameters>
-									<xp:parameter name="documentId"
+									<xp:parameter
+										name="documentId"
 										value="#{javascript:row.getUniversalID()}">
 									</xp:parameter>
-									<xp:parameter name="action" value="openDocument"></xp:parameter>
+									<xp:parameter
+										name="action"
+										value="openDocument"></xp:parameter>
 								</xp_1:this.parameters>
 							</xp_1:changeDynamicContentAction>
 						</xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
 			</xp:viewColumn>
-			
+
 			<!-- last name -->
-			<xp:viewColumn value="" id="viewColumn3">
-				<xp:viewColumnHeader value="Last name" id="viewColumnHeader3"></xp:viewColumnHeader>
+			<xp:viewColumn
+				value=""
+				id="viewColumn3">
+				<xp:viewColumnHeader
+					value="Last name"
+					id="viewColumnHeader3"></xp:viewColumnHeader>
 
-				<xp:link escape="true" id="link2" text="#{row.lastName}">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
+				<xp:link
+					escape="true"
+					id="link2"
+					text="#{row.lastName}">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
 						refreshId="dynamicContent1">
 						<xp:this.action>
-							<xp_1:changeDynamicContentAction facetName="contactForm"
+							<xp_1:changeDynamicContentAction
+								facetName="contactForm"
 								for="dynamicContent1">
 								<xp_1:this.parameters>
-									<xp:parameter name="documentId"
+									<xp:parameter
+										name="documentId"
 										value="#{javascript:row.getUniversalID()}">
 									</xp:parameter>
-									<xp:parameter name="action" value="openDocument"></xp:parameter>
+									<xp:parameter
+										name="action"
+										value="openDocument"></xp:parameter>
 								</xp_1:this.parameters>
 							</xp_1:changeDynamicContentAction>
 						</xp:this.action>
@@ -157,43 +220,80 @@ return options;
 				</xp:link>
 			</xp:viewColumn>
 
-		
-			<xp:viewColumn columnName="jobTitle" id="viewColumn12">
-				<xp:viewColumnHeader value="Job title" id="viewColumnHeader11"></xp:viewColumnHeader>
+
+			<xp:viewColumn
+				columnName="jobTitle"
+				id="viewColumn12">
+				<xp:viewColumnHeader
+					value="Job title"
+					id="viewColumnHeader11"></xp:viewColumnHeader>
 			</xp:viewColumn>
-			<xp:viewColumn columnName="roleName" id="viewColumn13">
-				<xp:viewColumnHeader value="Role" id="viewColumnHeader12"></xp:viewColumnHeader>
+			<xp:viewColumn
+				columnName="roleName"
+				id="viewColumn13">
+				<xp:viewColumnHeader
+					value="Role"
+					id="viewColumnHeader12"></xp:viewColumnHeader>
 			</xp:viewColumn>
-			
-			<xp:viewColumn value="" id="viewColumn4">
-				<xp:text escape="true">
+
+			<xp:viewColumn
+				value=""
+				id="viewColumn4">
+				<xp:text
+					escape="true">
 					<xp:this.value><![CDATA[#{javascript:var isAlternate = row.getColumnValue("isAlternate").equals("yes");
 	(isAlternate ? " (alternate)" : "");}]]></xp:this.value>
 				</xp:text>
 			</xp:viewColumn>
 
-				<xp:viewColumn columnName="email" id="viewColumn11">
-				<xp:viewColumnHeader value="Email" id="viewColumnHeader10"></xp:viewColumnHeader>
+			<xp:viewColumn
+				columnName="email"
+				id="viewColumn11">
+				<xp:viewColumnHeader
+					value="Email"
+					id="viewColumnHeader10"></xp:viewColumnHeader>
 			</xp:viewColumn>
 
-				<xp:viewColumn value="" id="viewColumn2">
-					<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
-					
-					<xp:text escape="true" id="computedField1" value="#{row.lastLogin}">
-						<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("active")}]]></xp:this.rendered>
-						<xp:this.converter>
-							<xp:convertDateTime type="both" timeStyle="short"></xp:convertDateTime>
-						</xp:this.converter>
-					</xp:text>
-					
-					<xp:text escape="true" id="computedField3" value="deactivated">
-						<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("inactive")}]]></xp:this.rendered>
-					</xp:text>
-					<xp:text escape="true" id="computedField2" value="not activated">
-						<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("new") && !row.getColumnValue("userType").equals("none")}]]></xp:this.rendered>
-					</xp:text>
-					<xp:viewColumnHeader value="Last login" id="viewColumnHeader2"></xp:viewColumnHeader>
-				</xp:viewColumn>
+			<!-- last login -->
+			<xp:viewColumn
+				value=""
+				id="viewColumn2">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
+
+				<xp:text
+					escape="true"
+					id="computedField1"
+					value="#{row.lastLogin}">
+					<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("active")}]]></xp:this.rendered>
+					<xp:this.converter>
+						<xp:convertDateTime
+							type="both"
+							timeStyle="short"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+
+				<xp:text
+					disableTheme="true"
+					escape="false"
+					value="deactivated">
+					<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("inactive")}]]></xp:this.rendered>
+				</xp:text>
+				<xp:text
+					disableTheme="true"
+					escape="false"
+					value="not activated">
+					<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("status").equals("new") && !row.getColumnValue("userType").equals("none")}]]></xp:this.rendered>
+				</xp:text>
+				<xp:text
+					disableTheme="true"
+					escape="false"
+					value="n/a">
+					<xp:this.rendered><![CDATA[#{javascript:row.getColumnValue("userType").equals("none")}]]></xp:this.rendered>
+				</xp:text>
+				<xp:viewColumnHeader
+					value="Last login"
+					id="viewColumnHeader2"></xp:viewColumnHeader>
+			</xp:viewColumn>
 
 
 		</xp:viewPanel>
