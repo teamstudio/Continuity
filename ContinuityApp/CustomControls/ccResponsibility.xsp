@@ -51,7 +51,7 @@ docResp.getDocument().remove(true);
 
 currentUserBean.updateMenuOptionCounts();
 								
-getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
+getComponent("dynamicContent1").show("respList");}]]></xp:this.action>
 						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this responsibility?")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
@@ -59,7 +59,7 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 				<xp:link escape="true" text="Back to list" id="link1">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1"
 						immediate="true">
-						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
+						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("respList");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
 
