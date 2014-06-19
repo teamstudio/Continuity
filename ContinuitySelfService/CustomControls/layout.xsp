@@ -16,20 +16,7 @@
 		<xp:callback facetName="facetMiddle" id="facetMiddle"></xp:callback>
 		<xe:this.configuration>
 			<xe:oneuiApplication footer="false" titleBarName="Continuity - administration">
-				<xe:this.footerLinks>
-					<xe:basicContainerNode label="Container 1">
-						<xe:this.children>
-							<xe:basicLeafNode label="Link 1" href="/"></xe:basicLeafNode>
-							<xe:basicLeafNode label="Link 2" href="/"></xe:basicLeafNode>
-						</xe:this.children>
-					</xe:basicContainerNode>
-					<xe:basicContainerNode label="Container 2">
-						<xe:this.children>
-							<xe:basicLeafNode label="Link 1" href="/"></xe:basicLeafNode>
-							<xe:basicLeafNode label="Link 2" href="/"></xe:basicLeafNode>
-						</xe:this.children>
-					</xe:basicContainerNode>
-				</xe:this.footerLinks>
+				
 				<xe:this.bannerUtilityLinks>
 					<xe:userTreeNode>
 						<xe:this.label><![CDATA[#{javascript:@Name("[CN]", @UserName());}]]></xe:this.label>
