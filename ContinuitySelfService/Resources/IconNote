@@ -1,14 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
- replicaid='C1257AFA004179FC'>
-<noteinfo noteid='122' unid='A5259A9CEB7D4F9FC12577D0004A5086' sequence='69'>
+ maintenanceversion='1.0' replicaid='C1257AFA004179FC'>
+<noteinfo noteid='116' unid='A5259A9CEB7D4F9FC12577D0004A5086' sequence='1'>
 <created><datetime>20101103T143142,78+01</datetime></created>
-<modified><datetime>20130307T155641,68+01</datetime></modified>
-<revised><datetime>20130124T153157,03+01</datetime></revised>
-<lastaccessed><datetime>20130307T155641,68+01</datetime></lastaccessed>
-<addedtofile><datetime>20130307T155641,68+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name
->CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=TSPSDev</name></updatedby>
+<modified><datetime dst='true'>20140619T120649,77+02</datetime></modified>
+<revised><datetime dst='true'>20140619T120649,76+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140619T120649,76+02</datetime></lastaccessed>
+<addedtofile><datetime>20130121T125511,29+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <item name='IconBitmap' summary='true'>
 <rawitemdata type='6'>
 AiAgAQAA///////wD///gAH//gAAf/wAAD/4AAAf8AAAD+AAAAfgAAAHwAAAA8AAAAPAAAADgAAA
@@ -25,12 +24,12 @@ L2ZvgAAACMZmZmZmZmZmZmZmbIAAAACMZmZmZmZmZmZmZsgAAAAACMZmZmZmZmZmZmyAAAAAAACM
 AAAAUEECICABAAD/////+A4DgA==
 </rawitemdata></item>
 <item name='$DefaultClientXPage'><text>translations.xsp</text></item>
-<item name='$DefaultXPage'><text>redirect.xsp</text></item>
 <item name='$DBTheme'><text>continuity.theme</text></item>
-<item name='$Flags'><text>J7!zfn</text></item>
-<item name='$FlagsNoRefresh'><text/></item>
-<item name='$TITLE'><text>UHS - Config &amp; Self-service DEV
+<item name='$DefaultXPage'><text>redirect.xsp</text></item>
+<item name='$Flags'><text>fJz7n!</text></item>
+<item name='$FlagsNoRefresh'><text>rv</text></item>
+<item name='$Daos'><text>0</text></item>
+<item name='$TITLE'><text>Continuity - Config &amp; Self-service (DEV 1.4)
 Continuity
-#1UHS - Config &amp; Self-service DEV</text></item>
-<item name='$Daos'><text>0</text></item></note>
+#1UHS - Config &amp; Self-service DEV</text></item></note>
 

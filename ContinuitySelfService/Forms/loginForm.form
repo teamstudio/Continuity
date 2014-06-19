@@ -1,248 +1,270 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='292' unid='C05D0190BBB4F1FEC1257AFA00415E3A' sequence='53'>
+<form name='loginForm' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257AFA004179FC' nocompose='true' noquery='true' publicaccess='true'
+ designerversion='8.5.3'>
+<noteinfo noteid='24a' unid='C05D0190BBB4F1FEC1257AFA00415E3A' sequence='57'>
 <created><datetime>20130121T125359,62+01</datetime></created>
-<modified><datetime dst='true'>20130422T130349,07+02</datetime></modified>
-<revised><datetime dst='true'>20130422T130349,06+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130422T130349,07+02</datetime></lastaccessed>
-<addedtofile><datetime>20130307T155645,64+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T110507,85+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104149,50+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T110507,83+02</datetime></lastaccessed>
+<addedtofile><datetime>20130121T125514,54+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='OriginalModTime' sign='true'><datetime dst='true'>20050504T140639,65-04</datetime></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-+f8gAAAAAAAPAAQARwQAAAAAAAAAAAAAAAAAAAAAAADc/1oE+f9IBCBOAAAAAAAAAABmdW5jdGlv
-biBzZXRGb3JtRm9jdXMoKSB7DQl0cnkgew0JCXZhciB1ID0gZG9qby5ieUlkKCJ1c2VyLWlkIik7
-DQkJdS5mb2N1cygpOyANCQl1LnNlbGVjdCgpOw0JfSBjYXRjaCAoZSkgeyB9DX0NDWZ1bmN0aW9u
-IHZhbGlkYXRlKCkgew0JdmFyIHVzZXIgPSBkb2pvLmJ5SWQoJ3VzZXItaWQnKTsNCXZhciBwYXNz
-d29yZCA9IGRvam8uYnlJZCgncHctaWQnKTsNCWlmICh1c2VyLnZhbHVlPT0iIiB8fCBwYXNzd29y
-ZC52YWx1ZSA9PSIiKSB7DQkJZG9qby5ieUlkKCJyZXF1aXJlZCIpLnN0eWxlLmRpc3BsYXkgPSAi
-YmxvY2siOw0JCSh1c2VyLnZhbHVlPT0iIiA/IHVzZXIgOiBwYXNzd29yZCkuZm9jdXMoKTsNCQly
-ZXR1cm4gZmFsc2U7DQl9DQkNCS8vZGlzYWJsZSBzdWJtaXQgYnV0dG9uDQl2YXIgYnRuU3VibWl0
-ID0gZG9qby5ieUlkKCJidG5TdWJtaXQiKTsNCWRvam8uYWRkQ2xhc3MoYnRuU3VibWl0LCAibG90
-dXNCdG5EaXNhYmxlZCIpOw0JDQkvL3VwZGF0ZSByZWRpciB0bw0JdmFyIG9ialJlZGlyVG8gPSBk
-b2pvLmJ5SWQoJ3JlZGlyZWN0VG8nKTsNCQ0JcmV0dXJuIHRydWU7DX0NDS8vYXBwZW5kIHVzZXJu
-YW1lcyB0byBsaW5rcw1mdW5jdGlvbiBsb2dpbkxpbmsocCkgew0NCXZhciB1c2VySWQgPSBkb2pv
-LmJ5SWQoInVzZXItaWQiKS52YWx1ZTsNCQ0JaWYgKHVzZXJJZCAhPSAiIikgewkJLy91c2VybmFt
-ZSBlbnRlcmVkOiBhcHBlbmQgdG8gZXhpdGluZyBsaW5rDQkJaWYgKHAuaHJlZi5pbmRleE9mKCJm
-b3I9Iik+LTEpIHsNCQkJdmFyIGYgPSBwLmhyZWYuc3Vic3RyaW5nKHAuaHJlZi5pbmRleE9mKCJm
-b3I9IikrNCk7DQkJCWlmIChmLmluZGV4T2YoIiYiKT4tMSkgew0JCQkJZiA9IGYuc3Vic3RyaW5n
-KDAsIGYuaW5kZXhPZigiJiIpICk7DQkJCX0NCQkJcC5ocmVmID0gcC5ocmVmLnJlcGxhY2UoImZv
-cj0iICsgZiwgImZvcj0iICsgZW5jb2RlVVJJQ29tcG9uZW50KHVzZXJJZCkpOw0JCX0gZWxzZSB7
-DQkJCXAuaHJlZiArPSAoICAocC5ocmVmLmluZGV4T2YoIj8iKT09LTEgPyAiPyIgOiAiJiIpICsg
-ImZvcj0iICsgZW5jb2RlVVJJQ29tcG9uZW50KHVzZXJJZCkgKTsNCQl9DQl9DQlyZXR1cm4gdHJ1
-ZTsNfQCvX/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>loginForm</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAAAAAA
-</rawitemdata></item>
-<item name='$WindowTitle' sign='true'><formula>"Continuity | Sign in"</formula></item>
-<item name='$HTMLHeadTag' sign='true'><formula>"&lt;meta http-equiv='expires' content='0'&gt;" +
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='windowtitle'><formula
+>"Continuity | Sign in"</formula></code><code event='htmlbody'><formula>"class=\"lotusLogin2 lotusui\""</formula></code><code
+ event='htmlhead'><formula>"&lt;meta http-equiv='expires' content='0'&gt;" +
 "&lt;link rel=\"SHORTCUT ICON\" href=\"/" + @WebDbName + "/favicon.ico\"&gt;" + @NewLine +
 "&lt;meta name=\"viewport\" content=\"user-scalable=no, width=device-width\"/&gt;" + @NewLine +
 "&lt;link rel=stylesheet type='text/css' href='/oneuiv2.1/base/core.css'&gt;" + @NewLine +
 "&lt;link rel=stylesheet type='text/css' href='/oneuiv2.1/defaultTheme/defaultTheme.css'&gt;" + @NewLine +
 "&lt;script src=\"/xsp/.ibmxspres/dojoroot-1.6.1/dojo/dojo.js\" djConfig=\"locale: 'nl', parseOnLoad : true\" type=\"text/javascript\"&gt;&lt;/script&gt;" +
-"&lt;link rel=\"SHORTCUT ICON\" href=\"" + _path + "favicon.ico\"&gt;"</formula></item>
-<item name='$HTMLBodyTag' sign='true'><formula>"class=\"lotusLogin2 lotusui\""</formula></item>
-<item name='$Flags'><text>CD</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$Fonts'>
-<rawitemdata type='1'>
-i/8oAAEABTVDb3VyaWVyIE5ldwAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>$$LoginUserForm</text></item>
-<item name='Username' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='Password' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='RedirectTo' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='reasonType' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>ReasonType</text><text>$PublicAccess</text><text
->RedirectTo</text><text>Password</text><text>Username</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAzP8IAAAAAACF/ycAAQAACjxz
-Y3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4AgQKDBAEAhf8TAAEAAAogdmFyIGRiID0gJwDd
-BgAArf+p/zAAAQAYAAQAJAAkAAoABAAAABIAAQABAC8A+wAwASICAwAHAAwABQAJMVMyUwDdBgAA
-hf+F/wgAAQAECtIIAQAAAP8A3gYAAIX/qgLeBgAArgCF/woAAQAACic7gQKDBAEAhf8bAAEAAAog
-dmFyIHJlYXNvblR5cGUgPSAnAN0GAACt/6n/IgABABgABAAWABYAAAAUAAUACgBSZWFzb25UeXBl
-AwDdBgAAhf+F/wgAAQAECtIIAQAAAP8A3gYAAIX/qgLeBgAArgCF/woAAQAACic7gQKDBAEAhf8R
-AAEAAAo8L3NjcmlwdD4AgQKDBAEAhf8IAAEAAAiBAoMEAQCF/5AAAQAACDxkaXYgY2xhc3M9Imxv
-dHVzQmFubmVyIiBzdHlsZT0iaGVpZ2h0OiAxOHB4OyIgcm9sZT0iYmFubmVyIj48ZGl2IGNsYXNz
-PSJsb3R1c0xvZ28iPjxzcGFuIGNsYXNzPSJsb3R1c0FsdFRleHQiPiZuYnNwOzwvc3Bhbj48L2Rp
-dj48L2Rpdj6BAoMEAQCF/wgAAQAACoECgwQBAIX/IwABAAAKPGRpdiBjbGFzcz0ibG90dXNMb2dp
-bkJveCI+AIECgwQBAIX/CQABAAAKIACBAoL/WgACAAAAAAAAAAAAoAUAAKAFCADQAqAFcAhACxAO
-4BCwE4AWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAlISgBQoAoAUKAAAAZAABAAAABAAA
-AIMEAgCF/xwAAQAACDxkaXYgaWQ9ImxvZ2luRm9ybSI+gQKDBAIAhf8oAAEAAAggPGRpdiBjbGFz
-cz0ibG90dXNMb2dpbkNvbnRlbnQiPoECgwQCAIX/LwABAAAIPGRpdiBjbGFzcz0ibG90dXNMb2dp
-bkZvcm0gbG90dXNGb3JtMiI+AIECgwQCAIX/CAABAAAIgQKDBAIAhf8YAAEAAAgJPGRpdj48aW1n
-IHNyYz0i3QYAAK3/qf9QAAEAGAAEAEQARAAKAAQAAAAuAAEAAQAvAPsAMAEiAgEAFgAvY29udGlu
-dWl0eV80MDBAMngucG5nIgIDAAcAEAAJAAkxUzJTM1M0UwCF/wgAAQAACqoC3gYAAK4Ahf9gAAEA
-AAgiIGFsdD0iVGVhbXN0dWRpbyBDb250aW51aXR5IiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjM4IiBz
-dHlsZT0ibWFyZ2luOiAwIDAgMjBweDsiIC8+PC9kaXY+gQKDBAIAhf8IAAEAAAiBAoMEAQCF/zIA
-AQAACCAgICAgICAgICAgIDxoMT5XZWxjb21lIHRvIENvbnRpbnVpdHk8L2gxPoECgwQBAIX/TAAB
-AAAICTxkaXYgaWQ9ImVycm9yIiBjbGFzcz0ibG90dXNGb3JtRXJyb3IiIHN0eWxlPSJtYXJnaW4t
-Ym90dG9tOjEwcHg7Ij7N/wgAAAAAAN0GAACt/6n/6AYBABgABADcBtwGCgAEAAEAFAAIAHNEZWZh
-dWx0AQAAAAMABwAOAAcACTFTVFQyUwABAIoACgBzTm90RW5vdWdoAQAoACUxLCB5b3UgYXJlIG5v
-dCBhdXRob3JpemVkIHRvIGFjY2VzcyAlMi6KACICigAiAgEAPgBQbGVhc2Ugc2lnbiBpbiB3aXRo
-IGEgbmFtZSB3aGljaCBoYXMgc3VmZmljaWVudCBhY2Nlc3MgcmlnaHRzOiICAwAHABoAEwAJMFIx
-VDJTM1M0UzVTNlM3UzhTAAEAZgAIAHNJbnZhbGlkAQAtAFlvdSBwcm92aWRlZCBhbiBpbnZhbGlk
-IHVzZXJuYW1lIG9yIHBhc3N3b3JkLgCKACICigAiAgEAFQBQbGVhc2Ugc2lnbiBpbiBhZ2FpbjoA
-IgIDAAcAGgAUAAkwUjFUVDJTM1M0UzVTNlM3UzhTAQBCAAgAc0V4cGlyZWQBAC0AWW91ciBsb2dp
-biBoYXMgZXhwaXJlZC4gUGxlYXNlIHNpZ24gaW4gYWdhaW46AAMABwAOAAgACTBSMVRUMlMBAOQA
-CgBzT3V0T2ZTeW5jAQBRACUxLCB5b3VyIGxvZ2luIGhhcyBiZWVuIGludmFsaWRhdGVkIGR1ZSB0
-byBhIHRpbWluZyBpc3N1ZSB3aXRoIHRoZSBsb2dpbiBzZXJ2ZXJzLgCKACICigAiAgEASQAoVGhl
-IHNlcnZlcnMgbWF5IG5lZWQgdG8gaGF2ZSB0aGVpciBjbG9ja3Mgc3luY2hyb25pemVkIHRvIHJl
-c29sdmUgdGhpcy4pACICigAiAooAIgIBABUAUGxlYXNlIHNpZ24gaW4gYWdhaW46ACICAwAHACoA
-JAAJMFIxVDJTM1M0UzVTNlM3UzhTOVMxMFMxMVMxMlMxM1MxNFMBAIoAEABzTG9ja2VkT3JJbnZh
-bGlkAQBJAFlvdSBhcmUgbG9ja2VkIG91dCwgb3IgeW91IGhhdmUgcHJvdmlkZWQgYW4gaW52YWxp
-ZCB1c2VybmFtZSBvciBwYXNzd29yZC4AigAiAooAIgIBABUAUGxlYXNlIHNpZ24gaW4gYWdhaW46
-ACICAwAHABoAEwAJMFIxVDJTM1M0UzVTNlM3UzhTAAgAFAABAAkALS0tRE5ULS0tAAMABwAKAAQA
-CTBSUgEAHAAEAFVzZXICAAYAAAAAAAAA9AC0AmMBAwAHABAACgAJMFJSMVQyUzhTAQAiAAMAVVJM
-AAUACgByZWRpcmVjdFRvAQABAC8AYAIDAAcAEAAJAAkwUjFUMlM2UwABAEQAAwBVUkwABQADAFVS
-TAABAAEAPwBHAq8AJgAWAAUAAwBVUkwAAQABAD8AXwKuABAABQADAFVSTACuAAQAtQMDAAcAGAAS
-AAkwUjFUMlM4UzExUzE1UzE4UwEAHgAEAExpc3QFAAQAVXNlcgUAAwBVUkwAHwIDAAcADgAIAAkw
-UlIxVDJTCADIAAUAAQBuAAAAAAAAAAAA8D8JAgUAAQBuAAUABABMaXN0agEMAgUAAQBuAAUAAQBu
-AAAAAAAAAAAA8D8iAgkCBQAKAHNOb3RFbm91Z2gFAAoAc05vdEVub3VnaAEAAQAlAAUAAQBuAFYB
-IgIFAAQATGlzdAUAAQBuACAChAMJAgUACgBzT3V0T2ZTeW5jBQAKAHNPdXRPZlN5bmMBAAEAJQAF
-AAEAbgBWASICBQAEAExpc3QFAAEAbgAgAoQDCQL7BUgBAwAHAD4ANwAJMFI2UzEzUzE5UlMyMFMy
-MVMyNVMyNlMyN1MzMlMzOFJTMzlTNDBTNDRTNDVTNDZTNTFTNTZSAAAALAEFAAoAcmVhc29uVHlw
-ZQEAAQAwAAoCrwAOARIABQAIAHNEZWZhdWx0rgD8AAUACgByZWFzb25UeXBlAQABADEACgKvAOIA
-FAAFAAoAc05vdEVub3VnaK4AzgAFAAoAcmVhc29uVHlwZQEAAQAyAAoCrwC0ABIABQAIAHNJbnZh
-bGlkrgCiAAUACgByZWFzb25UeXBlAQABADMACgKvAIgAEgAFAAgAc0V4cGlyZWSuAHYABQAKAHJl
-YXNvblR5cGUBAAEANAAKAq8AXAAUAAUACgBzT3V0T2ZTeW5jrgBIAAUACgByZWFzb25UeXBlAQAB
-ADUACgKvAC4AGgAFABAAc0xvY2tlZE9ySW52YWxpZK4AFAAFAAgAc0RlZmF1bHSuAAQAtQ0DAAcA
-WABSAAkwUlIyVDNTNFM2UzhSVDlTMTBTMTJTMTRSVDE1UzE2UzE4UzIwUlQyMVMyMlMyNFMyNlJU
-MjdTMjhTMzBTMzJSVDMzUzM0UzM2UzM4UlQzOVKF/wgAAQAACqoC3gYAAK4AzP8IAAAAAACF/wgA
-AQAACN0GAACt/6n/fgEBABgABAByAXIBCgAEAAAALgH7AAUBAQADAFdlYgAKAgEACwBCcm93c2Vy
-VHlwZQD7ARABAQAJAE1pY3Jvc29mdAAKAhwCAQAHAFZlcnNpb24A+wEQAQAAAAAAAAAAIEAOAhwC
-rwDUAMgAAQC+ADxkaXYgc3R5bGU9ImNvbG9yOiMwMDk5MDA7Ij5JbXBvcnRhbnQ6IER1ZSB0byBz
-ZWN1cml0eSByZWFzb25zIHlvdXIgY3VycmVudCBicm93c2VyIGlzIE5PVCBzdXBwb3J0ZWQuIEZv
-ciBhbiBvcHRpbWFsIHVzZXIgZXhwZXJpZW5jZSwgd2UgcmVjb21tZW5kIHlvdSB1cGdyYWRlIHRv
-IGEgbW9yZSByZWNlbnQgYnJvd3Nlci48L2Rpdj6uAAwAAQAAAK4ABAC1AwMABwA+ADgACTJUM1M0
-UzVTNlJUVDEwUzExUzEyUzEzUlRUMTdTMThTMTlTMkUyMFJUVDIxUzIyUzIzUlRTMkWF/wgAAQAA
-CqoC3gYAAK4Ahf8OAAEAAAg8L2Rpdj6BAoMEAQCF/3oAAQAACAk8ZGl2IGNsYXNzPSJsb3R1c0Zv
-cm1FcnJvciIgaWQ9InJlcXVpcmVkIiBzdHlsZT0iZGlzcGxheTpub25lIj5QbGVhc2UgZW50ZXIg
-eW91ciBlbWFpbCBhZGRyZXNzIGFuZCBwYXNzd29yZDwvZGl2PoECgv9aAAMAAAAAAAAAAACgBQAA
-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
-AQABAC8A+wAwASICAQAaAC9hY2NvdW50LnhzcD90eXBlPWxvc3QmdG89IgIBAAUAdXRmLTgABQAD
-AF90bwD7AigBIgIFAAYAX2VtYWlsAQAAAAsCrwA2ACoAAQAFACZmb3I9AAEABQB1dGYtOAAFAAYA
-X2VtYWls+wIoASICrgAMAAEAAACuAAQAtQMiAgMABwA4ADIACTBSUjFTMlMzUzRTNVM2UzEwUzEy
-UzEzUjE1UlQxNlMxN1MxOVMyMFMyMVMyNVMyOFLdBgAAhf+F/wgAAQAECdIIAQAAAP8A3gYAAIX/
-qgLeBgAArgCF/1EAAQAACCIgb25DbGljaz0icmV0dXJuIGxvZ2luTGluayh0aGlzKSI+Rm9yZ290
-IHlvdXIgcGFzc3dvcmQ/PC9hPiZuYnNwO3wmbmJzcDsAgQKDBAUAhf8XAAEAAAggICAgICA8YSBo
-cmVmPSIA3QYAAK3/qf/iAgEAGAAEANYC1gIKAAQAAQAaAAYAX2VtYWlsAQADAGZvcgD7ATQBAwAH
-AA4ABwAJMVMyRTJTAAEAnAADAF90bwAFAAoAUmVkaXJlY3RUbwEABQAmZm9yPQBHAq8AdAAgAAUA
-CgBSZWRpcmVjdFRvAQAFACZmb3I9AF8CrgBUAAUACgBSZWRpcmVjdFRvAQAFAD9mb3I9AEcCrwA2
-ACAABQAKAFJlZGlyZWN0VG8BAAUAP2Zvcj0AXwKuABYABQAKAFJlZGlyZWN0VG+uAAQAtQUDAAcA
-LAAlAAkwUlIxUzJTNFJUVDhTMTFTMTVTMThSVFQyMlMyNVMyOVMzMlIAAQBSAAUAX3Jlc3QABQAK
-AFJlZGlyZWN0VG8BAAQAZm9yPUcCrwAqAB4ABQAKAFJlZGlyZWN0VG8BAAQAZm9yPWACrgAMAAEA
-AACuAAQAtQMDAAcAHAAWAAkwUlIxUzJTNFJUOFMxMVMxNVMxOFIBAE4ABQBfcmVzdAAFAAUAX3Jl
-c3QAAQABACYARwKvACwAIAABAAEAJgAFAAUAX3Jlc3QAAQABACYAYAIiAq4ADAABAAAArgAEALUD
-AwAHACIAHAAJMFJSMVMyUzRSVDhTMTFTMTJTMTNTMTdTMjBSAQAgAAMAX3RvAAUAAwBfdG8ABQAF
-AF9yZXN0ACICAwAHABIADAAJMFJSMVMyUzNTNFMAAJgAAQABAC8A+wAwASICAQAeAC9hY2NvdW50
-LnhzcD90eXBlPWFjdGl2YXRlJnRvPSICAQAFAHV0Zi04AAUAAwBfdG8A+wIoASICBQAGAF9lbWFp
-bAEAAAALAq8ANgAqAAEABQAmZm9yPQABAAUAdXRmLTgABQAGAF9lbWFpbPsCKAEiAq4ADAABAAAA
-rgAEALUDIgIDAAcAOAAyAAkwUlIxUzJTM1M0UzVTNlMxMFMxMlMxM1IxNVJUMTZTMTdTMTlTMjBT
-MjFTMjVTMjhS3QYAAIX/hf8IAAEABAnSCAEAAAD/AN4GAACF/6oC3gYAAK4Ahf9BAAEAAAgiIG9u
-Q2xpY2s9InJldHVybiBsb2dpbkxpbmsodGhpcykiPkFjY291bnQgYWN0aXZhdGlvbjwvYT4AgQKD
-BAUAhf8RAAEAAAggICA8L2Rpdj4AgQKDBAUAhf8JAAEAAAggAIECgwQFAIX/EAABAAAIICA8L2Rp
-dj6BAoL/WgAGAAAAAAAAAAAAoAUAAKAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAIEAAAAAlYSgBQAAoAUAAAAAAAABAAAABAAAAIMEBgCF/w8AAQAACCA8L2Rpdj4A
-gQKDBAIAhf8OAAEAAAg8L2Rpdj6BAoMEAgCF/w4AAQAACDwvZGl2PoECgwQCAIX/RgABAAAIPHRh
-YmxlIGNsYXNzPSJsb3R1c0xlZ2FsIiBjZWxsc3BhY2luZz0iMCIgcm9sZT0icHJlc2VudGF0aW9u
-Ij6BAoMEAgCF/wwAAQAACDx0cj6BAoMEAgCF/zwAAQAACDx0ZCBjbGFzcz0ibG90dXNMaWNlbnNl
-Ij4mY29weTsgVGVhbXN0dWRpbyAyMDEzPC90ZD6BAoMEAgCF/w0AAQAACDwvdHI+AIECgwQCAIX/
-EAABAAAIPC90YWJsZT6BAoMEAgCF/ycAAQAACDxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0
-Ij4AgQKDBAIAhf8oAAEAAAgJdmFyIHMgPSB3aW5kb3cubG9jYXRpb24uc2VhcmNoO4ECgwQCAIX/
-VQABAAAICWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKChzLmluZGV4T2YoImZvciIpPi0xID8gInB3
-LWlkIjogInVzZXItaWQiKSkuZm9jdXMoKTsAgQKDBAIAhf8JAAEAAAgJAIECgwQCAIX/IgABAAAI
-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
-</rawitemdata></item>
-<item name='$PublicAccess'><text>1</text></item></note>
+"&lt;link rel=\"SHORTCUT ICON\" href=\"" + _path + "favicon.ico\"&gt;"</formula></code><code
+ event='jsheader' for='web'><javascript>function setFormFocus() {
+	try {
+		var u = dojo.byId("user-id");
+		u.focus(); 
+		u.select();
+	} catch (e) { }
+}
+
+function validate() {
+	var user = dojo.byId('user-id');
+	var password = dojo.byId('pw-id');
+	if (user.value=="" || password.value =="") {
+		dojo.byId("required").style.display = "block";
+		(user.value=="" ? user : password).focus();
+		return false;
+	}
+	
+	//disable submit button
+	var btnSubmit = dojo.byId("btnSubmit");
+	dojo.addClass(btnSubmit, "lotusBtnDisabled");
+	
+	//update redir to
+	var objRedirTo = dojo.byId('redirectTo');
+	
+	return true;
+}
+
+//append usernames to links
+function loginLink(p) {
+
+	var userId = dojo.byId("user-id").value;
+	
+	if (userId != "") {		//username entered: append to exiting link
+		if (p.href.indexOf("for=")&gt;-1) {
+			var f = p.href.substring(p.href.indexOf("for=")+4);
+			if (f.indexOf("&amp;")&gt;-1) {
+				f = f.substring(0, f.indexOf("&amp;") );
+			}
+			p.href = p.href.replace("for=" + f, "for=" + encodeURIComponent(userId));
+		} else {
+			p.href += (  (p.href.indexOf("?")==-1 ? "?" : "&amp;") + "for=" + encodeURIComponent(userId) );
+		}
+	}
+	return true;
+}</javascript></code>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run html='true'>&lt;script type="text/javascript"&gt;</run></par>
+<par def='1'><run html='true'> var db = '</run><run html='true'><font color='blue'/><computedtext
+><code event='value'><formula>"/" + @WebDbName</formula></code></computedtext></run><run
+ html='true'>';</run></par>
+<par def='1'><run html='true'> var reasonType = '</run><run html='true'><font
+ color='blue'/><computedtext><code event='value'><formula>ReasonType</formula></code></computedtext></run><run
+ html='true'>';</run></par>
+<par def='1'><run html='true'>&lt;/script&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/></run></par>
+<par def='1'><run html='true'><font size='8pt'/>&lt;div class="lotusBanner" style="height: 18px;" role="banner"&gt;&lt;div class="lotusLogo"&gt;&lt;span class="lotusAltText"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</run></par>
+<par def='1'/>
+<par def='1'><run html='true'>&lt;div class="lotusLoginBox"&gt;</run></par>
+<par def='1'><run html='true'> </run></par>
+<pardef id='2' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='2'><run html='true'><font size='8pt'/>&lt;div id="loginForm"&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/> &lt;div class="lotusLoginContent"&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;div class="lotusLoginForm lotusForm2"&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/></run></par>
+<par def='2'><run html='true'><font size='8pt'/>	&lt;div&gt;&lt;img src="</run><run
+ html='true'><computedtext><code event='value'><formula>"/" + @WebDbName + "/continuity_400@2x.png"</formula></code></computedtext></run><run
+ html='true'><font size='8pt'/>" alt="Teamstudio Continuity" width="200" height="38" style="margin: 0 0 20px;" /&gt;&lt;/div&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/></run></par>
+<par def='1'><run html='true'><font size='8pt'/>            &lt;h1&gt;Welcome to Continuity&lt;/h1&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/>	&lt;div id="error" class="lotusFormError" style="margin-bottom:10px;"&gt;</run><computedtext
+><code event='value'><formula>sDefault 		:= "";
+sNotEnough	:= "%1, you are not authorized to access %2." + @NewLine + @NewLine + "Please sign in with a name which has sufficient access rights:";
+sInvalid		:= "You provided an invalid username or password." + @NewLine + @NewLine + "Please sign in again:";
+sExpired		:= "Your login has expired. Please sign in again:";
+sOutOfSync	:= "%1, your login has been invalidated due to a timing issue with the login servers." + @NewLine + @NewLine + "(The servers may need to have their clocks synchronized to resolve this.)" + @NewLine + @NewLine + "Please sign in again:";
+sLockedOrInvalid	:= "You are locked out, or you have provided an invalid username or password." + @NewLine + @NewLine + "Please sign in again:";
+
+"---DNT---";
+
+User	:= @ProperCase(@Name([CN]; @UserName));
+URL	:= @Right(redirectTo; "/");
+URL	:= @If(@Contains(URL; "?"); @Left(URL; "?"); URL);
+
+List	:= User:URL;
+@For(n:=1; n&lt;=@Elements(List); n:=n+1;
+ sNotEnough := @ReplaceSubstring(sNotEnough; "%" + @Text(n); List[n]);
+ sOutOfSync := @ReplaceSubstring(sOutOfSync; "%" + @Text(n); List[n])
+);
+
+@If(	reasonType = "0"; sDefault;
+	reasonType = "1"; sNotEnough;
+	reasonType = "2"; sInvalid;
+	reasonType = "3"; sExpired;
+	reasonType = "4"; sOutOfSync;
+	reasonType = "5"; sLockedOrInvalid;
+	sDefault
+)</formula></code></computedtext><run html='true'><font size='8pt'/></run><run
+ html='true'><computedtext><code event='value'><formula>@If(	@ClientType = "Web" &amp;
+		@BrowserInfo("BrowserType") = "Microsoft" &amp;
+		@BrowserInfo("Version") &lt; 8  ;
+		"&lt;div style=\"color:#009900;\"&gt;Important: Due to security reasons your current browser is NOT supported. For an optimal user experience, we recommend you upgrade to a more recent browser.&lt;/div&gt;" ; ""
+	  )</formula></code></computedtext></run><run html='true'><font size='8pt'/>&lt;/div&gt;</run></par>
+<par def='1'><run html='true'><font size='8pt'/>	&lt;div class="lotusFormError" id="required" style="display:none"&gt;Please enter your email address and password&lt;/div&gt;</run></par>
+<pardef id='3' leftmargin='1in'><code event='hidewhen' enabled='false'><formula
+>!(reasonType="1":"2":"3":"4":"5")</formula></code></pardef>
+<par def='3'><run html='true'><font size='8pt'/>	&lt;p class="lotusFormField"&gt;</run><run
+ html='true'>&lt;label for="u</run><run html='true'>ser-id"&gt;</run><run
+ html='true'>Email address:</run><run html='true'>&lt;/</run><run html='true'>label&gt;&lt;input type="text" name="Username" value=</run><run
+ html='true'>"</run><run html='true'><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30'/><field defaultfocus='true' usenotesstyle='false'
+ height='0.2500in' width='1in' multiline='true' borderstyle='single' type='text'
+ kind='computedwhencomposed' name='Username' htmlid='user-id' htmlclass='lotusText'><code
+ event='htmlattributes'><formula>"maxlength=50 autocomplete=off"</formula></code><code
+ event='defaultvalue'><formula>@UrlQueryString("for")</formula></code></field></run><run
+ html='true'>" class="lotusText" id="user-id" maxlength="255" /&gt; </run><run
+ html='true'>&lt;/p&gt;</run></par>
+<par def='3'><run html='true'><font size='8pt'/>            &lt;p class="lotusFormField"&gt;</run><run
+ html='true'>&lt;label for=</run><run html='true'>"pw-id"&gt;</run><run html='true'>Password:</run><run
+ html='true'>&lt;/</run><run html='true'>label</run><run html='true'><font
+ size='8pt'/>&gt;</run><run html='true'><font name='Courier New' pitch='fixed'
+ truetype='true' familyid='30'/><field type='password' usenotesstyle='false'
+ height='0.2500in' width='1in' multiline='true' borderstyle='single' kind='editable'
+ seal='true' name='Password' htmlid='pw-id' htmlclass='lotusText'><code event='htmlattributes'><formula
+>"maxlength=255 autocomplete=off"</formula></code></field></run><run html='true'>&lt;/p&gt;</run></par>
+<par def='3'><run html='true'><font size='8pt'/>            &lt;div class="lotusBtnContainer" style="margin-top:15px;"&gt;&lt;input id="btnSubmit" type="submit" onclick="return validate();" class="lotusFormButton" value="Sign in" style="margin-left: 0"&gt;&lt;/div&gt;</run></par>
+<par def='3'><run html='true'>&lt;!--</run> <button width='2in' widthtype='maximum'
+ maxlines='1' wraptext='true' bgcolor='system' htmlclass='lotusFormButton'>Sign in</button> <run
+ html='true'>--&gt;</run></par>
+<par def='3'/>
+<pardef id='4' align='center' leftmargin='1in'/>
+<par def='4'><run><font size='9pt'/><field type='text' kind='editable' name='RedirectTo'
+ htmlid='redirectTo' extrahtmlattrs='type=hidden'><code event='defaultvalue'><formula
+>"/"</formula></code></field></run><compositedata type='98' prevtype='65402'
+ nexttype='222' afterparcount='8' containertype='65418' aftercontainercount='2'
+ afterbegincount='4'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='3'/>
+<par def='3'><run html='true'><font size='8pt'/>&lt;/div&gt;</run></par>
+<par def='3'><run html='true'><font size='8pt'/>      &lt;/div&gt;</run></par>
+<pardef id='5' leftmargin='1in'/>
+<par def='5'><run html='true'><font size='8pt'/>   &lt;div class="lotusBtnContainer" style="margin-top:10px;"&gt;</run></par>
+<par def='5'><run html='true'><font size='8pt'/>      &lt;a href="</run><run
+ html='true'><font size='9pt' color='blue'/><computedtext><code event='value'><formula
+>_email  := @UrlQueryString("for");
+
+_to := @If(
+		@Contains(RedirectTo; "&amp;for="); @Left(RedirectTo; "&amp;for=");
+		@Contains(RedirectTo; "?for="); @Left(RedirectTo; "?for=");
+RedirectTo);
+
+_rest := @If(
+	@Contains(RedirectTo; "for="); @Right(RedirectTo; "for=");
+"");
+
+_rest := @If(
+	@Contains(_rest; "&amp;"); "&amp;" + @Right(_rest; "&amp;");
+"");
+
+_to := _to + _rest;
+
+"/" + @WebDbName + "/account.xsp?type=lost&amp;to=" + @URLEncode("utf-8"; _to) +
+@If(
+	_email != ""; "&amp;for=" + @URLEncode("utf-8"; _email);
+"")</formula></code></computedtext></run><run html='true'><font size='8pt'/>" onClick="return loginLink(this)"&gt;Forgot your password?&lt;/a&gt;&amp;nbsp;|&amp;nbsp;</run></par>
+<par def='5'><run html='true'><font size='8pt'/>      &lt;a href="</run><run
+ html='true'><font size='9pt' color='blue'/><computedtext><code event='value'><formula
+>_email  := @UrlQueryString("for");
+
+_to := @If(
+		@Contains(RedirectTo; "&amp;for="); @Left(RedirectTo; "&amp;for=");
+		@Contains(RedirectTo; "?for="); @Left(RedirectTo; "?for=");
+RedirectTo);
+
+_rest := @If(
+	@Contains(RedirectTo; "for="); @Right(RedirectTo; "for=");
+"");
+
+_rest := @If(
+	@Contains(_rest; "&amp;"); "&amp;" + @Right(_rest; "&amp;");
+"");
+
+_to := _to + _rest;
+
+"/" + @WebDbName + "/account.xsp?type=activate&amp;to=" + @URLEncode("utf-8"; _to) +
+@If(
+	_email != ""; "&amp;for=" + @URLEncode("utf-8"; _email);
+"")</formula></code></computedtext></run><run html='true'><font size='8pt'/>" onClick="return loginLink(this)"&gt;Account activation&lt;/a&gt;</run></par>
+<par def='5'><run html='true'><font size='8pt'/>   &lt;/div&gt;</run></par>
+<par def='5'><run html='true'><font size='8pt'/> </run></par>
+<par def='5'><run html='true'><font size='8pt'/>  &lt;/div&gt;</run></par>
+<pardef id='6' leftmargin='1in' hide='notes web'/>
+<par def='6'><run html='true'><font size='8pt'/> &lt;/div&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/div&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/div&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;table class="lotusLegal" cellspacing="0" role="presentation"&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;tr&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;td class="lotusLicense"&gt;&amp;copy; Teamstudio 2013&lt;/td&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/tr&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/table&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;script type="text/javascript"&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>	var s = window.location.search;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>	document.getElementById((s.indexOf("for")&gt;-1 ? "pw-id": "user-id")).focus();</run></par>
+<par def='2'><run html='true'><font size='8pt'/>	</run></par>
+<par def='2'><run html='true'><font size='8pt'/>	//store 'for' in username</run></par>
+<par def='2'><run html='true'><font size='8pt'/>	if (s.indexOf("for")&gt;-1) {</run></par>
+<par def='2'><run html='true'><font size='8pt'/>		var f = s.substring(s.indexOf("for=") + 4 );</run></par>
+<par def='2'><run html='true'><font size='8pt'/>		if (f.indexOf("&amp;")&gt;-1) { f=f.substring(0,f.indexOf("&amp;") ); }</run></par>
+<par def='2'><run html='true'><font size='8pt'/>		document.getElementById("user-id").value = decodeURIComponent(f);</run></par>
+<par def='2'><run html='true'><font size='8pt'/>	}</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;/script&gt;</run></par>
+<pardef id='7' align='center' leftmargin='1in' hide='notes web'/>
+<par def='7'/>
+<pardef id='8' leftmargin='1in' hide='notes web'/>
+<par def='8'><run><font size='8pt' color='red'/>Hidden:</run></par>
+<par def='8'><run><font size='8pt' color='red'/>$PublicAccess: </run><run
+><font size='8pt' color='red'/><field type='text' kind='editable' name='$PublicAccess'><code
+ event='defaultvalue'><formula>"1"</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='8pt'
+ color='red'/></run></par>
+<par def='8'><run><font size='8pt' color='red'/>ReasonType:</run><run><font
+ size='8pt' color='red'/><field type='text' kind='editable' name='ReasonType'><code
+ event='defaultvalue'><formula>"0"</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='8pt'
+ color='red'/></run></par>
+<par def='8'><run><font size='8pt' color='red'/>$$HTMLTagAttributes: </run><run
+><font size='8pt' color='red'/><field type='text' kind='computedfordisplay'
+ name='$$HTMLTagAttributes'><code event='defaultvalue'><formula>"lang=\"nl\""</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='8pt'
+ color='red'/></run></par>
+<par def='8'><run><font size='8pt' color='red'/>$$HTMLFrontMatter: </run><run
+><font size='8pt' color='red'/><field type='text' kind='computedfordisplay'
+ name='$$HTMLFrontMatter'><code event='defaultvalue'><formula>"&lt;!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"&gt;"</formula></code></field></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='9' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></richtext></body>
+<item name='OriginalModTime' sign='true'><datetime dst='true'>20050504T140639,65-04</datetime></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>$$LoginUserForm</text></item></form>
 

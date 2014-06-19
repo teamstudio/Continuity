@@ -1,120 +1,125 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='256' unid='A90D3E359AF8DC81C1257AD20043A588' sequence='28'>
+<form name='fOrganisation' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='C1257AFA004179FC' hide='web' publicaccess='false'
+ designerversion='8.5.3' renderpassthrough='true'>
+<noteinfo noteid='1fe' unid='A90D3E359AF8DC81C1257AD20043A588' sequence='32'>
 <created><datetime>20121212T131852,88+01</datetime></created>
-<modified><datetime dst='true'>20130529T160503,79+02</datetime></modified>
-<revised><datetime dst='true'>20130529T160503,78+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130529T160503,79+02</datetime></lastaccessed>
-<addedtofile><datetime>20130307T155645,34+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T110507,79+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104149,58+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T110507,77+02</datetime></lastaccessed>
+<addedtofile><datetime>20130121T125513,21+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>fOrganisation</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$WindowTitle' sign='true'><formula>@If(
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='windowtitle'><formula
+>@If(
 	@IsNewDoc; "New organisation";
-name)</formula></item>
-<item name='$Flags'><text>w</text></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$$ScriptName' summary='false' sign='true'><text>fOrganisation</text></item>
-<item name='name' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='alias' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='folder' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='continuityDbPath' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='adminFirstName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='adminLastName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='adminEmail' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='copyStarterLists' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>copyStarterLists</text><text>adminEmail</text><text
->adminLastName</text><text>adminFirstName</text><text>continuityDbPath</text><text
->folder</text><text>alias</text><text>name</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-AIX/CAABAAAK
-</rawitemdata></item>
-<item name='$V5ACTIONS' sign='true'>
-<rawitemdata type='1'>
-vRw/AAAAAQABAAAAAQAAAAAAAAAAAAAACAACAHn/bAABAPDw8AABAAAAAAAJAAAAAAABAPDw8AAA
-AB8AAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAC+/3IAAAABAAAAHwEAABIACgAAAAAAT3BlbiBjb250aW51
-aXR5IGRiQAAKAAQAAAAsAAIAvwsAAAAAAAD7AEUBBQAQAGNvbnRpbnVpdHlEYlBhdGgfAu0CAwAH
-AA4ABwAJNFM1UzZTAAoAAAAIAIkAAwA=
-</rawitemdata></item></note>
+name)</formula></code>
+<actionbar bgcolor='#f0f0f0' bordercolor='black'>
+<actionbuttonstyle bgcolor='#f0f0f0'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Open continuity db'><code event='click'><formula>@Command([FileOpenDatabase]; @ServerName : continuityDbPath)</formula></code><code
+ event='hidewhen'><formula>@IsNewDoc</formula></code></action></actionbar>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/>
+<par def='1'><run><font style='bold'/>Organisation</run></par>
+<par def='1'/>
+<par def='1'/>
+<table widthtype='fixedleft' refwidth='9.3264in'><tablecolumn width='1.9521in'/><tablecolumn
+ width='2.2639in'/><tablecolumn width='5.1104in'/>
+<tablerow>
+<tablecell>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font style='bold'/>name</run></par></tablecell>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'><field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>alias</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='alias'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'>used to create a unique username when registering users in this organisation</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>folder</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='folder'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>continuityDbPath</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='continuityDbPath'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'>path to this organisation's Continuity database</par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<pardef id='6' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font style='bold'/>copyStarterLists</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font style='bold'/></run><field type='text' kind='editable'
+ name='copyStarterLists'/><compositedata type='98' prevtype='65418' nexttype='222'
+ afterparcount='6' containertype='65418' aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run
+><font style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>adminFirstName</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='adminFirstName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>adminLastName</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='adminLastName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font style='bold'/>adminEmail</run></par></tablecell>
+<tablecell>
+<par def='4'><field type='text' kind='editable' name='adminEmail'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'/></tablecell></tablerow></table>
+<par def='1'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>fOrganisation</text></item></form>
 

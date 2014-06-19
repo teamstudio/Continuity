@@ -1,26 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note default='true' class='helpusingdocument' xmlns='http://www.lotus.com/dxl'
- version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='226' unid='36A43D1ED5092BF2C1257A250024E755' sequence='2'>
+<helpusingdocument xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257AFA004179FC' publicaccess='false' designerversion='8.5.3'
+ default='true' renderpassthrough='true'>
+<noteinfo noteid='1de' unid='36A43D1ED5092BF2C1257A250024E755' sequence='6'>
 <created><datetime dst='true'>20120622T084305,17+02</datetime></created>
-<modified><datetime>20130307T155645,09+01</datetime></modified>
-<revised><datetime dst='true'>20120622T084315,76+02</datetime></revised>
-<lastaccessed><datetime>20130307T155645,09+01</datetime></lastaccessed>
-<addedtofile><datetime>20130307T155645,09+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=CITC</name></updatedby>
-<wassignedby><name>CN=Mark Leusink/O=CITC</name></wassignedby>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-</rawitemdata></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$Flags'><text/></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAo=
-</rawitemdata></item></note>
+<modified><datetime dst='true'>20130725T110506,12+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104149,06+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T110506,10+02</datetime></lastaccessed>
+<addedtofile><datetime>20130121T125512,59+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'/></richtext></body></helpusingdocument>
 

@@ -1,20 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<view name='($all)' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'
- hide='web' showinmenu='false' publicaccess='false' designerversion='8.5.3'
- unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator' headers='beveled'
- opencollapsed='false' showresponsehierarchy='true' showmargin='true' shrinkrows='false'
- extendlastcolumn='false' showhierarchies='false' unreadcolor='black' rowlinecount='1'
- headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+<view name='($all)' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257AFA004179FC' hide='web' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
  totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
  allownewdocuments='false' allowcustomizations='false' hidemarginborder='false'
  marginwidth='0px' marginbgcolor='white' uniquekeys='false' indexdiscard='inactivebyinterval'
  indexdiscardinterval='336' initialbuildrestricted='false' noemptycategories='false'>
-<noteinfo noteid='2c6' unid='918FD0D283BB9728C1257B300046453D' sequence='9'>
+<noteinfo noteid='2fe' unid='918FD0D283BB9728C1257B300046453D' sequence='9'>
 <created><datetime>20130316T134732,45+01</datetime></created>
-<modified><datetime dst='true'>20130725T104149,03+02</datetime></modified>
+<modified><datetime dst='true'>20130725T110506,40+02</datetime></modified>
 <revised><datetime dst='true'>20130725T104149,02+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130725T104149,03+02</datetime></lastaccessed>
-<addedtofile><datetime>20130316T134733,54+01</datetime></addedtofile></noteinfo>
+<lastaccessed><datetime dst='true'>20140616T110657,25+02</datetime></lastaccessed>
+<addedtofile><datetime>20130316T134833,04+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
 >SELECT @All | @AllDescendants</formula></code>

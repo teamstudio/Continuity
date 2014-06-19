@@ -1,122 +1,136 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='C1257AFA004179FC'>
-<noteinfo noteid='25a' unid='3E3401B389108F8EC1257B1F003BFAA0' sequence='4'>
+<form name='LogEvent' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257AFA004179FC' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='2e2' unid='3E3401B389108F8EC1257B1F003BFAA0' sequence='8'>
 <created><datetime>20130227T115507,84+01</datetime></created>
-<modified><datetime dst='true'>20130410T160900,87+02</datetime></modified>
-<revised><datetime dst='true'>20130410T160900,86+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130410T160900,87+02</datetime></lastaccessed>
-<addedtofile><datetime>20130307T155645,36+01</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20130725T110506,99+02</datetime></modified>
+<revised><datetime dst='true'>20130725T104149,62+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20130725T110506,97+02</datetime></lastaccessed>
+<addedtofile><datetime>20130227T115508,14+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
-<item name='$Comment' sign='true'><text/></item>
-<item name='$HTMLCode' sign='true'>
-<rawitemdata type='1'>
-X/8QAAIADwAHAAAAAAAAAA==
-</rawitemdata></item>
-<item name='$TITLE'><text>LogEvent</text></item>
-<item name='$Info' sign='true'>
-<rawitemdata type='1'>
-hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
-</rawitemdata></item>
-<item name='$DesignerVersion'><text>8.5.3</text></item>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'><run><font size='9pt'/></run></par>
+<par def='1'><run><font size='12pt' style='bold'/>Event</run></par>
+<par def='1'><run><font size='9pt'/></run></par>
+<table widthtype='fixedleft' colorstyle='left' bgcolor='#bfbfff' altbgcolor='white'
+ rowspacing='0.0194in' columnspacing='0.0396in' refwidth='7.3069in'><tablecolumn
+ width='1.4208in'/><tablecolumn width='5.7278in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='3' keepwithnext='true' keeptogether='true'/>
+<par def='3'><run><font size='9pt' style='bold'/>LogMessage:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='4' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='4'><run><font size='9pt'/><field type='text' kind='editable' name='LogMessage'/></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='7' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='5' keepwithnext='true' keeptogether='true'/>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='7' rightmargin='1.2243in' keepwithnext='true' keeptogether='true'/>
+<par def='7'><run><font size='9pt' style='bold'/>LogEventType:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='8' keepwithnext='true' keeptogether='true'/>
+<par def='8'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='LogEventType'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='7' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='5'><run><font size='9pt' style='bold'/>LogEventTime:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/><field type='datetime' kind='editable'
+ name='LogEventTime'><datetimeformat show='date' date='yearmonthday' fourdigityearfor21stcentury='true'
+ zone='never' dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='-'
+ dateseparator3='-' timeseparator=':' timeformat24='true' preference='usersetting'/></field></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='5'><run><font size='9pt' style='bold'/>LogFromAgent:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='LogFromAgent'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='5'><run><font size='9pt' style='bold'/>LogUserName:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='names'
+ kind='editable' name='LogUserName'/></run><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='9' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'
+ keepwithnext='true' keeptogether='true'/>
+<par def='9'><run><font size='9pt' style='bold'/>LogUserRoles:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='LogUserRoles'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='9'><run><font size='9pt' style='bold'/>LogAccessLevel:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='LogAccessLevel'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='3'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='4'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='9'><run><font size='9pt' style='bold'/>LogErrorNumber:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='LogErrorNumber'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='5'><run><font size='9pt' style='bold'/>LogErrorLine:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='number'
+ kind='editable' name='LogErrorLine'><numberformat format='general' digits='2'
+ punctuated='false' parens='false' percent='false' bytes='false'/></field></run><run
+><font size='9pt'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='5'><run><font size='9pt' style='bold'/>LogStackTrace:</run></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='6'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
+ kind='editable' name='LogStackTrace'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow></table>
+<pardef id='2' firstlineleftmargin='1in'/>
+<par def='2'><run><font size='9pt'/></run></par></richtext></body>
 <item name='$$ScriptName' summary='false' sign='true'><text>LogEvent</text></item>
-<item name='LogEventType' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogEventTime' summary='false'>
-<rawitemdata type='400'>
-AAAAAAAAAAA=
-</rawitemdata></item>
-<item name='LogFromAgent' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogUserName' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogUserRoles' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogAccessLevel' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogErrorNumber' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogErrorLine' summary='false'><number>0</number></item>
-<item name='LogStackTrace' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='LogMessage' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>LogMessage</text><text>LogStackTrace</text><text
->LogErrorLine</text><text>LogErrorNumber</text><text>LogAccessLevel</text><text
->LogUserRoles</text><text>LogUserName</text><text>LogFromAgent</text><text
->LogEventTime</text><text>LogEventType</text></textlist></item>
-<item name='$Body' sign='true'>
-<rawitemdata type='1'>
-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
-</rawitemdata></item>
-<item name='$Flags'><text>w</text></item></note>
+<item name='LogErrorLine' summary='false'><number>0</number></item></form>
 
