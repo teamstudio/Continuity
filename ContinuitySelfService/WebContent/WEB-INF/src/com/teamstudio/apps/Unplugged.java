@@ -171,6 +171,94 @@ public class Unplugged {
 		
 	}
 	
+	public static void removeApplication( String appPath ) throws NotesException {
+		
+		Session session = null;
+		Database dbUnplugged = null;
+		
+		String correctedPath = appPath.replace("\\", "/");
+		
+		Logger.debug("Remove Unplugged application for app at " + correctedPath);
+		
+		Configuration config = Configuration.get();
+		
+		//open unplugged db
+		session = Utils.getCurrentSession();
+		dbUnplugged = session.getDatabase( config.getServerName(), config.getUnpluggedDbPath());
+						
+		//check if an app document for this app already exists and create it if not
+		DocumentCollection dcApp = dbUnplugged.search("Form=\"UserDatabase\" & Path=\"" + correctedPath + "\"" );
+		
+		if (dcApp.getCount()==0) {
+			Logger.warn("- Unplugged application document not found");
+			
+		} else if (dcApp.getCount() > 1) {
+			Logger.error("- Multiple Unplugged application documents found: not removed");
+			
+		} else {
+			
+			Logger.info("- Unplugged add configuration found");
+			
+			dcApp.getFirstDocument().remove(true);
+			Logger.info("- Unplugged app configuration removed");
+			
+		}
+			
+		
+	}
+public static void removeUsersAndDevices( String alias ) throws NotesException {
+		
+		Session session = null;
+		Database dbUnplugged = null;
+		
+		String alias1 = "/" + alias.toLowerCase();
+		String alias2 = "/o=" + alias.toLowerCase();
+		
+		Logger.debug("Remove Unplugged users and devices for alias \"" + alias + "\"");
+		
+		Configuration config = Configuration.get();
+		
+		//open unplugged db
+		session = Utils.getCurrentSession();
+		dbUnplugged = session.getDatabase( config.getServerName(), config.getUnpluggedDbPath());
+						
+		//check if an app document for this app already exists and create it if not
+		String q = "Form=\"User\":\"Device\" & ( @Contains(@LowerCase(UserName); \"" + alias1 + "\") | @Contains(@LowerCase(UserName); \"" + alias2 + "\") )" ;
+		DocumentCollection dcApp = dbUnplugged.search(q);
+		
+		Logger.info("- finding users and devices with query: " + q);
+		
+		if (dcApp.getCount()==0) {
+			Logger.info("- No Unplugged users/ devices found");
+			
+		} else {
+			
+			Logger.info("- found " + dcApp.getCount() + " users and/or devices");
+			
+			Document doc = dcApp.getFirstDocument();
+			while (null != doc) {
+				
+				Document t = dcApp.getNextDocument(doc);
+				
+				Logger.info("- removing " + doc.getItemValueString("form") + " for " + doc.getItemValueString("UserName") );
+				
+				doc.remove(true);
+				
+				try {
+					doc.recycle();
+				} catch (Exception e) {
+					
+				}
+				doc = t;
+			}
+			
+			
+		}
+			
+		
+	}
+	
+	
 	
 	//create an Unplugged user
 	private static void createUser( Database dbUnplugged, String userName, boolean isActive) {

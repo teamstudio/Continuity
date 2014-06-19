@@ -19,6 +19,7 @@
 		</xp:acl>
 	</xp:this.acl>
 
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:orgBean.setDocument( docOrg )}]]></xp:this.beforeRenderResponse>
 	<xc:layout>
 		<xp:this.facets>
 
@@ -77,18 +78,34 @@
 						</xp:td>
 					</xp:tr>
 					
-					<xp:tr>
+					<xp:tr rendered="#{javascript:!docOrg.isNewNote()}">
+						<xp:td>
+							<xp:label value="Continuity database:" id="label2"
+								for="alias1">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xp:text
+	escape="true">
+	<xp:this.value><![CDATA[#{docOrg.continuityDbPath}]]></xp:this.value>
+</xp:text>
+						</xp:td>
+					</xp:tr>
+					
+					<xp:tr rendered="#{javascript:docOrg.isNewNote()}">
 						<xp:td>&#160;</xp:td>
 						<xp:td>
 							<xp:checkBox
 								text="Copy starter lists (Hazards, Scenarios, Plans, Roles, Task Category, Help)"
-								id="checkBox1" value="#{docOrg.copyStarterLists}"
-								checkedValue="true" uncheckedValue="false">
+								id="checkBox1"
+								value="#{docOrg.copyStarterLists}"
+								checkedValue="true"
+								uncheckedValue="false">
 							</xp:checkBox>
 						</xp:td>
 					</xp:tr>
 
-</xp:table>
+			</xp:table>
 				<!--<xp:table>
 					<xp:tr>
 						<xp:td>
@@ -130,7 +147,7 @@
 				-->
 				
 				<xp:br></xp:br>
-				<xp:button value="Save" id="button1">
+				<xp:button value="Save" id="button1" rendered="#{javascript:docOrg.isEditable()}">
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="complete">
 						<xp:this.action><![CDATA[#{javascript:if ( orgBean.save(docOrg) ) {
@@ -139,14 +156,49 @@
 					</xp:eventHandler>
 				</xp:button>
 				
-				<xp:link escape="true" text="Cancel" id="link1">
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="complete" immediate="true">
+				<xp:button value="Delete" id="button2" rendered="#{javascript:!docOrg.isNewNote()}">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:if ( orgBean.remove() ) {
+	context.redirectToPage("organisations");
+}}]]></xp:this.action>
+
+
+						<xp:this.script><![CDATA[return confirm("This action will delete this Continuity instance:\n\n" +
+"- Continuity database\n" +
+"- Continuity users from the Directory\n" +
+"- Teamstudio Unplugged users, devices and configuration for this instance\n" +
+"\n" +
+"This action cannot be undone. Are you sure you want to continue?")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+				
+				<xp:link
+					escape="true"
+					text="Cancel"
+					id="link1"
+					rendered="#{javascript:docOrg.isNewNote()}">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="complete"
+						immediate="true">
 						<xp:this.action><![CDATA[#{javascript:context.redirectToPage("organisations");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
-				
-		</xp:div>
+
+				<xp:link
+					escape="true"
+					text="Back to list"
+					id="link2"
+					rendered="#{javascript:!docOrg.isNewNote()}"
+					value="organisations.xsp">
+
+				</xp:link>
+
+			</xp:div>
 	</xp:this.facets>
 	</xc:layout>
 	
