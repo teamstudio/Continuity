@@ -35,41 +35,69 @@
 				</div>
 
 				
-				<xp:viewPanel rows="500" id="viewPanel1" var="row">
-					
+				<xp:viewPanel
+					rows="500"
+					id="viewPanel1"
+					var="row"
+					pageName="/organisation.xsp">
+
 					<xp:this.data>
-						<xp:dominoView var="view1"
+						<xp:dominoView
+							var="view1"
 							viewName="#{javascript:'vwOrganisations'}">
 						</xp:dominoView>
 					</xp:this.data>
-					
-					<xp:viewColumn columnName="name" id="viewColumn2">
-						<xp:viewColumnHeader value="Name"
+
+					<xp:viewColumn
+						columnName="name"
+						id="viewColumn2"
+						displayAs="link"
+						openDocAsReadonly="true">
+						<xp:viewColumnHeader
+							value="Name"
 							id="viewColumnHeader2">
 						</xp:viewColumnHeader>
 					</xp:viewColumn>
-					
-					<xp:viewColumn columnName="alias"
+
+					<xp:viewColumn
+						columnName="alias"
 						id="viewColumn1">
-						<xp:viewColumnHeader value="Alias"
+						<xp:viewColumnHeader
+							value="Alias"
 							id="viewColumnHeader1">
 						</xp:viewColumnHeader>
 					</xp:viewColumn>
-					
-					<xp:viewColumn value=""
+
+					<xp:viewColumn
+						value=""
 						id="viewColumn4">
-						<xp:viewColumnHeader value="Continuity database"
+						<xp:viewColumnHeader
+							value="Continuity database"
 							id="viewColumnHeader4">
 						</xp:viewColumnHeader>
-						
-							<xp:link target="_blank" escape="true"
+
+						<xp:link
+							target="_blank"
+							escape="true"
 							text="#{javascript:row.getColumnValue('continuityDbPath')}"
 							id="link2">
 							<xp:this.value><![CDATA[#{javascript:"/.ibmxspres/domino/" + row.getColumnValue('continuityDbPath').replace("\\", "/");}]]></xp:this.value>
 						</xp:link>
 					</xp:viewColumn>
-					
-					
+
+					<xp:viewColumn
+						columnName="$3"
+						id="viewColumn3">
+						<xp:this.converter>
+							<xp:convertDateTime type="date"></xp:convertDateTime>
+						</xp:this.converter>
+						<xp:viewColumnHeader
+							value="Created"
+							id="viewColumnHeader3">
+						</xp:viewColumnHeader>
+					</xp:viewColumn>
+
+
 				</xp:viewPanel>
 
 
