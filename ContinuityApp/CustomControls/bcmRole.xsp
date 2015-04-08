@@ -136,7 +136,7 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 		
 		<xe:formRow id="formRow3">
 
-			<xp:checkBox text="User with this role can access all organisation units" id="checkBox1"
+			<xp:checkBox text="User with this role can access all organization units" id="checkBox1"
 				value="#{docRole.canAccessAllOrgUnits}" checkedValue="yes" uncheckedValue="no">
 			</xp:checkBox>
 			
@@ -166,7 +166,7 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 		
 		<!-- link to org unit(s) -->
 		<xe:formRow id="formRow5" for="checkBoxGroupOrgUnits">
-			<xe:this.label><![CDATA[Organisation units (optional):]]></xe:this.label>
+			<xe:this.label><![CDATA[Organization units (optional):]]></xe:this.label>
 		
 			<xc:ccSelectOrgUnits doc="#{docRole}"></xc:ccSelectOrgUnits>
 
@@ -205,7 +205,8 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 
 			</xp:div>
 
-			<xp:text escape="true" disableTheme="true" value="No assets selected">
+			<xp:text escape="true" disableTheme="true">
+				<xp:this.value><![CDATA[#{javascript:"No " + configBean.getLabel("assets").toLowerCase() + " selected"}]]></xp:this.value>
 				<xp:this.rendered><![CDATA[#{javascript://show in read mode when no options have been selected
 !docRole.isEditable() && @Text(docRole.getItemValue("siteIds"))==""}]]></xp:this.rendered>
 			</xp:text>

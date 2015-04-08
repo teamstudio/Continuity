@@ -112,7 +112,7 @@ row.getColumnValues().get(0).indexOf("- ") == -1}]]></xp:this.rendered>
 					</xp:text>
 			
 					<br />
-					<b>Checklists:</b>&#160;
+					<b>Plan Checklists:</b>&#160;
 					<xp:text escape="false" disableTheme="true">
 						<xp:this.value><![CDATA[#{javascript:if (row.getColumnValue("planNames").length==0) {
 				return "not allocated";

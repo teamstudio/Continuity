@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
-
+	
 	<xp:this.data>
 		<xp:dominoDocument var="docTask" formName="fTask"
 			action="openDocument" documentId="#{javascript:viewScope.taskId}"
@@ -25,7 +25,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 	<xp:div styleClass="section" rendered="#{javascript:compositeData.showTitle}">
 		<div class="title">Task</div>
 	</xp:div>
-
+	
 	<xe:formTable id="formTable1" disableErrorSummary="true">
 
 		<xp:this.facets>
@@ -67,6 +67,18 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 			</xp:panel>
 		</xp:this.facets>
+	
+		<!-- scenario selection (only when creating tasks from the 'tasks' menu option -->
+		<xe:formRow
+			id="formRow7"
+			label="Scenario:">
+			<xe:this.rendered><![CDATA[#{javascript:docTask.isNewNote() && (compositeData.parentId==null || compositeData.parentId.length==0)}]]></xe:this.rendered>
+			<xp:comboBox value="#{docTask.scenarioId}">
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:com.teamstudio.continuity.Scenarios.getGroupedComboboxOptions()}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>
+		</xe:formRow>
 
 		<xe:formRow id="formRow1" label="Title:">
 			<xp:inputText value="#{docTask.name}" id="inputTaskTitle"
@@ -165,7 +177,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 			
 		</xe:formRow>
 		
-		<xe:formRow id="formRow6" label="Checklists:">
+		<xe:formRow id="formRow6" label="Plan Checklists:">
 		
 			<xp:text escape="true" disableTheme="true"
 				value="Not allocated">

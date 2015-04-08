@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<view name='vwScenarios' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+<view name='vwScenarios' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.2'
  replicaid='C1257BB30029DCD4' hide='web' showinmenu='false' publicaccess='false'
  designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
  headers='beveled' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
@@ -8,11 +8,11 @@
  headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
  uniquekeys='false'>
-<noteinfo noteid='182' unid='FFDB2438CDD7D1A1C1257AA1004F5D54' sequence='56'>
+<noteinfo noteid='182' unid='FFDB2438CDD7D1A1C1257AA1004F5D54' sequence='58'>
 <created><datetime dst='true'>20121024T162652,36+02</datetime></created>
-<modified><datetime dst='true'>20130725T105611,48+02</datetime></modified>
-<revised><datetime dst='true'>20130725T104111,10+02</datetime></revised>
-<lastaccessed><datetime>20140313T085012,91+01</datetime></lastaccessed>
+<modified><datetime dst='true'>20150407T164157,65+02</datetime></modified>
+<revised><datetime dst='true'>20150407T164157,64+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150407T164157,64+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130725T093715,84+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
@@ -21,12 +21,15 @@
  separatemultiplevalues='true' sortnoaccent='false' sortnocase='true' showaslinks='false'
  categorized='true'><columnheader title='orgUnitNames'><font size='9pt' style='bold'/></columnheader><code
  event='value'><formula>@If(
-	orgUnitTarget="all"; "All organisation units";
+	orgUnitTarget="all"; "All organization units";
 orgUnitNames)</formula></code></column>
 <column sort='ascending' hidedetailrows='false' itemname='name' width='10'
  resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
  showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
 <column hidedetailrows='false' itemname='description' width='10' resizable='true'
  separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
- title='description'><font size='9pt' style='bold'/></columnheader></column></view>
+ title='description'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='id' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='id'><font size='9pt' style='bold'/></columnheader></column></view>
 

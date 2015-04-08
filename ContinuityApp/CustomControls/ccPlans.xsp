@@ -12,7 +12,7 @@
 
 		<div class="section">
 			<div class="title">
-				Checklists
+				Plan Checklists
 			</div>
 			<div class="actions">
 
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-		<xp:text value="No checklists found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
+		<xp:text value="No plan checklists found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
 
 		<!-- show a list of checklists -->
 		<xp:repeat id="repeat1" rows="100" var="rowEntry" disableOutputTag="true" value="#{vwPlans}" indexVar="rowIndex">
@@ -131,7 +131,7 @@
 							</xp:text>
 
 							<br />
-							<b>Checklists:</b>
+							<b>Plan Checklists:</b>
 							&#160;
 							<xp:text escape="false" disableTheme="true">
 								<xp:this.value><![CDATA[#{javascript:var checklists = taskEntry.getColumnValues().get(10);

@@ -395,7 +395,7 @@ public class Contact implements Serializable {
 					 * user's account document
 					 */
 
-					Logger.info("user's organisation (" + userOrg + ") matches current organisation's: " + currentOrgId
+					Logger.info("user's organization (" + userOrg + ") matches current organisation's: " + currentOrgId
 							+ ", remove account for " + userName);
 
 					//remove from all groups
@@ -406,7 +406,7 @@ public class Contact implements Serializable {
 
 				} else {
 
-					Logger.info("account not removed: user's organisation (" + userOrg + ") does not match the current organisation's: "
+					Logger.info("account not removed: user's organization (" + userOrg + ") does not match the current organisation's: "
 							+ currentOrgId);
 
 				}

@@ -149,7 +149,7 @@
 		<xe:formRow id="formRow14" labelPosition="none"
 			styleClass="formSection" disableTheme="true">
 			<xe:formColumn id="formColumn3" colSpan="3">
-				<span style="font-size:14px; font-weight: bold; padding: 10px 0;">Organisation details</span>
+				<span style="font-size:14px; font-weight: bold; padding: 10px 0;">Organization details</span>
 			</xe:formColumn>
 		</xe:formRow>
 
@@ -327,10 +327,10 @@
 			</xp:text>
 		</xe:formRow>
 
-		<xe:formRow id="formRow11" label="Organisation unit:" for="comboBox2">
+		<xe:formRow id="formRow11" label="Organization unit:" for="comboBox2">
 			
 			<xp:comboBox id="comboBox2" value="#{docContact.orgUnitId}" readonly="#{javascript:!sessionScope.isEditor}">
-				<xp:selectItem itemLabel="Select organisation unit" itemValue=""></xp:selectItem>
+				<xp:selectItem itemLabel="Select organization unit" itemValue=""></xp:selectItem>
 				<xp:selectItems id="selectItems2">
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
 				</xp:selectItems>

@@ -22,7 +22,7 @@ viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 
 	<div style="margin-bottom:10px; overflow:auto; width:100%">
 		<div style="float: left; width: 250px;">
-			<strong>Organisation unit:</strong>
+			<strong>Organization unit:</strong>
 			&#160;
 			<xp:comboBox id="comboBox1" value="#{sessionScope.callTreeOrgUnitId}"
 				defaultValue="#{javascript:sessionScope.callTreeOrgUnitId}">

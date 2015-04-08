@@ -95,7 +95,7 @@ public abstract class Authorizations {
 			
 			Configuration config = Configuration.get();
 			
-			Logger.info("removing " + userName + " from all groups for organisation " + config.getOrganisationId());
+			Logger.info("removing " + userName + " from all groups for organization " + config.getOrganisationId());
 			
 			dbDirectory = Utils.getDirectory();
 			dc = dbDirectory.search("Type=\"Group\" & @IsMember(\"" + userName + "\"; Members)");
@@ -219,7 +219,7 @@ public abstract class Authorizations {
 			docGroup = viewGroups.getDocumentByKey( groupName.getAbbreviated() );
 			
 			if (docGroup != null) {
-				Logger.debug("removing organisation group: " + groupName);
+				Logger.debug("removing organization group: " + groupName);
 				docGroup.remove(true);
 			}
 			

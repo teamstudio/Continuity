@@ -10,7 +10,7 @@
 	</xp:radio>
 	
 	<br />
-	<xp:radio text="Selected organisation units" id="radio4"
+	<xp:radio text="Selected organization units" id="radio4"
 		selectedValue="selected" groupName="rgOUs" value="#{compositeData.doc.orgUnitTarget}">
 		<xp:eventHandler event="onchange" submit="false">
 			<xp:this.script><![CDATA[dojo.style("#{id:cbOUs}", "display", "block")]]></xp:this.script>
@@ -37,7 +37,7 @@
 			<xp:this.value><![CDATA[#{javascript:var o = compositeData.doc.getItemValue("orgUnitNames");
 	
 	if ( o==null || o.length==0 ) {
-	return "No organisation units selected";
+	return "No organization units selected";
 	} else {
 		return @Implode(o, "<br />");
 	}}]]></xp:this.value>

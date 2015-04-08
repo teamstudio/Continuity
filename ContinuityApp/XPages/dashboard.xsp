@@ -43,7 +43,7 @@
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode submitValue="orgUnits">
-									<xe:this.label><![CDATA[#{javascript:"Organisation units (" + currentUserBean.numOrgUnits + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Organization units (" + currentUserBean.numOrgUnits + ")"}]]></xe:this.label>
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("orgUnits");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
@@ -58,13 +58,13 @@
 
 
 							</xe:this.children>
-							<xe:this.label><![CDATA[People & Places]]></xe:this.label>
+							<xe:this.label><![CDATA[Organization & Contacts]]></xe:this.label>
 						</xe:basicContainerNode>
 						
 						<xe:separatorTreeNode></xe:separatorTreeNode>
 
 						<xe:basicContainerNode enabled="false">
-							<xe:this.label><![CDATA[Responsibilities, Roles & Tasks]]></xe:this.label>
+							<xe:this.label><![CDATA[Other Entities]]></xe:this.label>
 							<xe:this.children>
 							
 								<xe:basicLeafNode
@@ -89,7 +89,7 @@
 								--><xe:basicLeafNode
 									submitValue="plansList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("plansList");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Checklists (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Plan Checklists (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode
@@ -193,10 +193,10 @@ getComponent("dynamicContent1").show(c);
 
 					<xp:this.facets>
 					
-						<xc:ccHelp xp:key="miniConfigGuide" helpTextId="miniConfigGuide">
-
-						</xc:ccHelp>
-						<xp:panel xp:key="scenariosList" id="scenariosList">
+							<xp:text escape="false" disableTheme="true"
+							xp:key="miniConfigGuide" value="#{javascript:configBean.getLabel('miniConfigGuide')}"></xp:text>
+					
+							<xp:panel xp:key="scenariosList" id="scenariosList">
 	
 							<div class="section">
 								<div class="title">Business scenarios</div>
@@ -226,7 +226,6 @@ getComponent("dynamicContent1").show(c);
 							</xc:ccScenario>
 						</xp:panel>
 						
-						<!-- TODO: FIX -->
 						<xc:ccScenariosByPlan xp:key="scenariosByPlan" id="scenariosByPlan"></xc:ccScenariosByPlan>
 						<xc:ccPlans xp:key="plansList"></xc:ccPlans>
 						<xc:ccPlan xp:key="planForm" />
@@ -266,6 +265,7 @@ getComponent("dynamicContent1").show(c);
 						<xc:ccQuickGuide xp:key="fileForm"></xc:ccQuickGuide>
 						
 						<xc:ccTasksCategorized id="tasks" xp:key="tasks"></xc:ccTasksCategorized>
+						
 						<xc:orgUnits id="orgUnits" xp:key="orgUnits"></xc:orgUnits>
 						<xc:orgUnit id="orgUnit" xp:key="orgUnit"></xc:orgUnit>
 						<xc:ccAssets xp:key="riskEntities"></xc:ccAssets>

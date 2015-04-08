@@ -4,7 +4,7 @@
 	<xp:panel style="margin-bottom: 10px">
 
 		<div class="section">
-			<div class="title">Organisation</div>
+			<div class="title">Organization</div>
 		</div>
 
 		<xp:this.data>
@@ -26,7 +26,7 @@
 					</xp:inputText>
 						&#160;
 						
-						<!-- save uses a full refresh in case the organisation name has changed (see the name in the header is also updated) -->
+						<!-- save uses a full refresh in case the organization name has changed (see the name in the header is also updated) -->
 						<xp:link text="Save" id="linkSave"
 							rendered="#{javascript:docSettings.isEditable()}" styleClass="lotusTiny">
 							<xp:eventHandler event="onclick" submit="true" refreshMode="complete">

@@ -176,7 +176,7 @@
 
 	if (currentUserBean.getNumOrgUnits()==0) {
 	
-		return msg + "one " + configBean.getLabel("asset").toLowerCase() + " and organisation unit.";
+		return msg + "one " + configBean.getLabel("asset").toLowerCase() + " and organization unit.";
 	
 	} else {
 	
@@ -187,7 +187,7 @@
 
 } else {
 
-	return msg + "one organisation unit";
+	return msg + "one organization unit";
 
 }
 

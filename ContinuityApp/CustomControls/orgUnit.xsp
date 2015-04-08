@@ -6,7 +6,7 @@
 	<div
 		class="section">
 		<div
-			class="title">Organisation Unit</div>
+			class="title">Organization Unit</div>
 	</div>
 
 	<xp:this.data>
@@ -141,7 +141,7 @@ if ( docOU.save() ) {
 							currentUserBean.updateMenuOptionCounts();
 							getComponent("dynamicContent1").show("orgUnits");
 						}}]]></xp:this.action>
-						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this organisation unit?")]]></xp:this.script>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to permanently remove this organization unit?")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
 

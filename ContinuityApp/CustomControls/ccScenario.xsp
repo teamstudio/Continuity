@@ -70,7 +70,7 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 		
 		<!-- link to org unit(s) -->
 		<xe:formRow id="formRow1" for="checkBoxGroupOrgUnits">
-			<xe:this.label><![CDATA[Organisation units (optional):]]></xe:this.label>
+			<xe:this.label><![CDATA[Organization units (optional):]]></xe:this.label>
 			<xc:ccSelectOrgUnits doc="#{docScenario}"></xc:ccSelectOrgUnits>
 		</xe:formRow>
 		

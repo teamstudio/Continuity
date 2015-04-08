@@ -9,9 +9,9 @@
 	<xc:ccSettingsForm></xc:ccSettingsForm>
 	
 	<div class="section">
-		<div class="title">Organisation units</div>
+		<div class="title">Organization units</div>
 		<div class="actions">
-			<xp:button value="Add organisation unit" id="button2" icon="chart_organisation_add.png" rendered="#{javascript:sessionScope.isEditor}">
+			<xp:button value="Add organization unit" id="button2" icon="chart_organisation_add.png" rendered="#{javascript:sessionScope.isEditor}">
 			<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
 				<xp:this.action>
 					<xe:changeDynamicContentAction facetName="orgUnit" for="dynamicContent1"></xe:changeDynamicContentAction>

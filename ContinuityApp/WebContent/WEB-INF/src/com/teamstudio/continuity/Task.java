@@ -41,6 +41,11 @@ public class Task implements Serializable {
 			if (isNew) {
 				
 				vwAllById = dbCurrent.getView("vwAllById");
+				
+				if (parentId == null || parentId.length()==0  ) {
+					parentId = docTaskUI.getItemValueString("scenarioId");
+				}
+				
 				docScenario = vwAllById.getDocumentByKey(parentId, true);
 				
 				if (null != docScenario) {

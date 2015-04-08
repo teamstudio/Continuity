@@ -8,7 +8,7 @@
 			</xp:eventHandler>
 		</xp:link>)
 
-	<xe:dialog id="dlgAssignTo" title="Allocate task to checklists">
+	<xe:dialog id="dlgAssignTo" title="Allocate task to plan checklists">
 									
 		<xp:panel>
 			<xp:this.data>

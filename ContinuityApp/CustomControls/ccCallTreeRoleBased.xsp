@@ -88,7 +88,7 @@
 										<div style="margin-bottom:15px">
 											Choose a contact from the&#160;<strong>"
 											<xp:text escape="false" disableTheme="true" value="#{ouRow.name}" />
-											"</strong>&#160;organisation unit and click "Ok" to add the&#160;
+											"</strong>&#160;organization unit and click "Ok" to add the&#160;
 											<strong><xp:text escape="false" disableTheme="true" value="#{roleRow.name}" /></strong>&#160;role.
 										</div>
 										

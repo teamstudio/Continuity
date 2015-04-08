@@ -65,7 +65,7 @@ var group1Items = new Array();
 for (var i=0; i<orgUnits.length; i++) {
 	group1Items.push( new javax.faces.model.SelectItem( "o-" + @Right(orgUnits[i], "|"), @Left(orgUnits[i], "|")) );
 }
-group1Items.push( new javax.faces.model.SelectItem( "o-" + "none", "- No organisation unit -") );
+group1Items.push( new javax.faces.model.SelectItem( "o-" + "none", "- No organization unit -") );
 
 group1.setSelectItems(group1Items);
 
@@ -90,7 +90,7 @@ return options;
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()==0}]]></xp:this.rendered>
 			<xc:this.message><![CDATA[#{javascript:"No contacts found" +
 	(viewScope.filter && !viewScope.filter.equals("all") ? 
-		" in the selected organisation unit" : 
+		" in the selected organization unit" : 
 		"")}]]></xc:this.message>
 		</xc:ccMessage>
 

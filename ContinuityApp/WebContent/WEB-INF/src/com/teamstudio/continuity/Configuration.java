@@ -36,7 +36,7 @@ public class Configuration implements Serializable {
 	
 	private String callTreeType;
 	
-	private static String APP_VERSION = "v1.4";		//current application version
+	private static String APP_VERSION = "v1.4.1";		//current application version
 	private static String DATA_VERSION = "105";			//data version (used for checking if a conversion is needed)
 	
 	private String serverName;
@@ -157,6 +157,9 @@ public class Configuration implements Serializable {
 					labels.put("incident", "Incident");
 				}
 				
+				labels.put("miniConfigGuide", getMiniConfigGuide() );
+				
+				
 			}
 			
 		} catch (Exception e) {
@@ -238,6 +241,103 @@ public class Configuration implements Serializable {
 
 	public String getSenderName() {
 		return senderName;
+	}
+	
+	private String getMiniConfigGuide() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<div class=\"section\"><div class=\"title\">Teamstudio Continuity Mini Configuration Guide v1.41</div></div>");
+
+		sb.append("<p>We recommend that Continuity should be configured in a 6 step process, in the sequence described below.</p>");
+
+		sb.append("<ol><li>Define the key Assets or Activities at risk</li>");
+		sb.append("<li>Define your Organization structure i.e. org units and contacts</li>");
+		sb.append("<li>Define your list of Business Scenarios</li>");
+		sb.append("<li>Define your list of Plan Checklists</li>");
+		sb.append("<li>Create the relevant Task sequences under each Scenario</li>");
+		sb.append("<li>Define Responsibilities</li></ol>");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 1. Define the key Assets or Activities at risk</p>");
+
+		sb.append("It is very important to understand which are the key Assets or Activities at risk in ");
+		sb.append("your organization, where a potential incident or crisis will have the greatest ");
+		sb.append("impact. You do this outside the Continuity system, as part of your Risk Assessment ");
+		sb.append("and Business Impact Analysis exercises.  Once you have identified these key Assets ");
+		sb.append("or Activities, they should be entered into the Assets/Activities screen in the ");
+		sb.append("Organization & Contacts section in the web console. (Note – you can set your system ");
+		sb.append("to use the term Assets or the alternative term Activities in the Terms screen in the Configuration section).</p>");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 2. Define your Organization structure</p>");
+
+		sb.append("<p>The Continuity system requires that at least one Organization Unit (Org Unit for ");
+		sb.append("short) is present for the system to work. Org Units are equivalent to Departments or ");
+		sb.append("Divisions within an organization. An organization may have multiple Org Units. Each ");
+		sb.append("individual user (Contact) in the Continuity system needs to be assigned to an Org Unit ");
+		sb.append("in their Contact profile. You can either create users (Contacts) in the Continuity ");
+		sb.append("system one by one or import them in bulk. Instructions to do so are provided within ");
+		sb.append("the Contacts section. This is also a good time to define some standard user Roles in ");
+		sb.append("your Organization, from within the Other Entities section of the web console.</p> ");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 3.  Define your list of Business Scenarios</p>");
+
+		sb.append("<p>For each Org Unit there will be a set of specific business Scenarios e.g Loss of ");
+		sb.append("Workplace and Loss of Communications. We provide an example list of Scenarios, ");
+		sb.append("but you may wish to customize these to your own particular situation. Go to the ");
+		sb.append("Business Scenarios screen in the Other Entities section of the web console to do this.</p>");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 4. Define your Plan Checklists </p>");
+
+		sb.append("<p>Plan Checklists provide a way of grouping your recovery Tasks (see Step 5 below) to ");
+		sb.append("align with your business continuity plan documents (e.g. Business Continuity Plan, ");
+		sb.append("Incident Management Plan, Crisis Communications Plan). File attachments can be ");
+		sb.append("added to each Checklist to provide more guidance to help with recovering from an ");
+		sb.append("Incident or Crisis. It is easier if you begin the configuration process with just a single ");
+		sb.append("Checklist and then add more Checklists later.  This will keep the starting ");
+		sb.append("configuration simple, which is important when you are learning how the system works. </p>");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 5. Create the relevant Task sequences under each Scenario</p>");
+
+		sb.append("<p>Now that you have created your list of Business Scenarios, click on the Tasks menu in ");
+		sb.append("the Other Entities section of the web console. Tasks are individual actions that need ");
+		sb.append("to be carried out as part of the business recovery during an incident or crisis. For each ");
+		sb.append("Scenario, set the sequence of Tasks that would need to be carried out to deal with that ");
+		sb.append("particular Scenario and categorize these between Initial Tasks, Ongoing Tasks, and ");
+		sb.append("Deactivation Tasks (i.e. Tasks that need to be completed before you can deactivate ");
+		sb.append("that particular business continuity plan). When you create each Task, you can link it to one or more Plan Checklists.</p>");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 6. Define Responsibilities </p>");
+
+		sb.append("<p>Now that you have created some lists of Tasks for each business Scenario, you need ");
+		sb.append("to allocate responsibilities to the people who will have to carry these Tasks out in the ");
+		sb.append("event of a business emergency. This is done through the Responsibility screen in the ");
+		sb.append("Other Entities section of the web console. First, run through the Tasks and allocate ");
+		sb.append("them to whichever of your Roles (created in Step 2) seems the most logical to carry ");
+		sb.append("out that Task.  Then, when you have got a good selection of individual Tasks under ");
+		sb.append("each Role, create a set of higher-level Responsibilities for each of your Roles ");
+		sb.append("(typically 2 to 6 per Role).  Finally, link each of your Tasks to each of these ");
+		sb.append("Responsibilities.  Review to check if you have any Tasks that are unallocated to Roles or Responsibilities. </p>");
+
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Syncing to mobile devices</p>");
+
+		sb.append("<p>Once you are happy with the preparation of your system using the web console user ");
+		sb.append("interface, you can test it out using the mobile app. The Unplugged mobile app needs ");
+		sb.append("to be downloaded from iTunes, or from Google’s Play store. Once downloaded, you ");
+		sb.append("then need to enter the server URL, a username and a password. Once this is done, ");
+		sb.append("and you then sync to the server, the Continuity app will be downloaded to your device ready to use.</p>");
+
+		sb.append("<p>For Apple devices go here to download Teamstudio Unplugged:<br />");
+		sb.append("<a href=\"https://itunes.apple.com/us/app/unplugged/id498245114?mt=8\" target=\"_blank\">https://itunes.apple.com/us/app/unplugged/id498245114?mt=8</a></p>");
+		sb.append("<p>For Android devices go here:<br />");
+		sb.append("<a href=\"https://play.google.com/store/apps/details?id=com.teamstudio.unplugged.platform.android&hl=en\" target=\"_blank\">https://play.google.com/store/apps/details?id=com.teamstudio.unplugged.platform.android&hl=en</a></p>");
+
+		sb.append("<p>You should then try out the mobile app for a small test group of users (between 3 and ");
+		sb.append("10) corresponding to different Roles. Send out email instructions to these users on ");
+		sb.append("how to download and configure the Continuity mobile app, together with their ");
+		sb.append("pplication credentials (user name and password). When you are satisfied with how ");
+		sb.append("the mobile app is working, then you can send out instructions to all your users.</p>");
+
+		return sb.toString();
+		
 	}
 		
 }
