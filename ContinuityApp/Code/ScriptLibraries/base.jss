@@ -196,6 +196,17 @@ function init() {
 	}
 }		//end init()
 
+function isEmpty( o ) {
+	
+	if ( typeof o == 'undefined' || o == null ) {
+		return true;
+	} else if (o.length == 0) {
+		return true;
+	}
+	
+	return false;
+}
+
 //check max alert level on all ou's, update if needed
 function checkMaxAlertLevels() {
 	
@@ -369,7 +380,7 @@ function loadAppConfig( forceUpdate:boolean ) {
 			var orgUnitChoices = [];				//array containing all org units in 'combobox select options' syntax (key|value)
 			var orgUnits = getMap();				//map of org unit id / names
 			var orgUnitUnids = getMap();			//map of org unit id / unids
-						
+			
 			while (null != veOrgUnit) {
 				
 				var colValues = veOrgUnit.getColumnValues();
