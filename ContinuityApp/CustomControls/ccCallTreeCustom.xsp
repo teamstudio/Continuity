@@ -3,13 +3,27 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	
-	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
-		if (!sessionScope.containsKey("callTreeOrgUnitId") ) {
-	sessionScope.put("callTreeOrgUnitId", sessionScope.orgUnitId);
-}
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+try {
 	
-viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
-viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+	//set default org unit id to use for the call tree (can be changed by the user)
+	if (!sessionScope.containsKey("callTreeOrgUnitId") ) {
+	
+		if ( !isEmpty( sessionScope.orgUnitId) ) { 
+			//current user's org unit
+			sessionScope.put("callTreeOrgUnitId", sessionScope.orgUnitId);
+		} else {	
+			//first org unit
+			var c = applicationScope.get("orgUnitChoices");
+			
+			if (c.length>0) {
+				sessionScope.put("callTreeOrgUnitId", @Right(c[0], "|") );
+			}
+		}
+	}
+		
+	viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+	viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 } catch (e) {
 	dBar.error(e);
 }}]]></xp:this.beforePageLoad>
@@ -25,15 +39,17 @@ viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 			<strong>Organization unit:</strong>
 			&#160;
 			<xp:comboBox id="comboBox1" value="#{sessionScope.callTreeOrgUnitId}"
-				defaultValue="#{javascript:sessionScope.callTreeOrgUnitId}">
+				defaultValue="#{sessionScope.callTreeOrgUnitId}">
 				<xp:selectItems>
 					<xp:this.value><![CDATA[#{javascript:return applicationScope.get("orgUnitChoices");
 	}]]></xp:this.value>
 				</xp:selectItems>
 				<xp:eventHandler event="onchange" submit="true"
-					refreshMode="partial" refreshId="callTree">
-					<xp:this.action><![CDATA[#{javascript:viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+					refreshMode="none">
+					<xp:this.action><![CDATA[#{javascript:
+					viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
 	viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+	facesContext.getExternalContext().redirect("dashboard.xsp#content=callTree");
 		}]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:comboBox>
@@ -87,12 +103,11 @@ viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 	
 	<xp:div styleClass="#{javascript:(sessionScope.callTreeOrientation=='vertical' ? 'callTreeVert' : 'callTree')}"
 		style="#{javascript:(sessionScope.callTreeOrientation=='vertical' ? '' : 'width: 1500px')}"  
-		loaded="${javascript:viewScope.callTreeObj != null}">
-		<ul>
+		loaded="${javascript:return !isEmpty( viewScope.callTreeObj);}">
+		<ul> 
 			<xc:ccCallTreeEntry entry="#{viewScope.callTreeObj}" />
 		</ul>
 	</xp:div>
-
 
 	<xe:dialog id="dlgChangeContacts"
 		title="Add contact to call tree">
