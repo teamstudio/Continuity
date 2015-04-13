@@ -89,7 +89,7 @@
 								--><xe:basicLeafNode
 									submitValue="plansList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("plansList");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Plan Checklists (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Plan checklists (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode
