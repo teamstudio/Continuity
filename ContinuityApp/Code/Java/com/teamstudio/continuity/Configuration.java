@@ -31,12 +31,13 @@ public class Configuration implements Serializable {
 	private String directoryDbPath;
 	private String unpluggedDbPath;
 	private String continuityDbPath;
+	private String continuityDbUrl;
 	private String senderEmail;
 	private String senderName;
 	
 	private String callTreeType;
 	
-	private static String APP_VERSION = "v1.4.1";		//current application version
+	private static String APP_VERSION = "v1.4.2";		//current application version
 	private static String DATA_VERSION = "105";			//data version (used for checking if a conversion is needed)
 	
 	private String serverName;
@@ -104,6 +105,7 @@ public class Configuration implements Serializable {
 
 				serverName = dbCurrent.getServer();
 				continuityDbPath = dbCurrent.getFilePath();
+				continuityDbUrl = "/" + continuityDbPath.replace("\\", "/");
 				
 				settingsUnid = docSettings.getUniversalID();
 				organisationName = docSettings.getItemValueString("organisationName");
@@ -158,7 +160,7 @@ public class Configuration implements Serializable {
 				}
 				
 				labels.put("miniConfigGuide", getMiniConfigGuide() );
-				
+				labels.put("contactsImportGuide", getContactsImportGuide());
 				
 			}
 			
@@ -241,6 +243,68 @@ public class Configuration implements Serializable {
 
 	public String getSenderName() {
 		return senderName;
+	}
+	
+	private String getContactsImportGuide() {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<div style=\"margin-top: 15px\">");
+
+		sb.append("<div><div>Continuity allows you to upload batch files to create contacts. Three file formats are supported: ");
+		sb.append("<strong>CSV</strong>, <strong>LDIF</strong> and <strong>XML</strong>.</div>");
+
+		sb.append("<div>");
+
+		sb.append("<div style=\"margin: 10px 0; font-weight: bold\">CSV</div>");
+		sb
+				.append("<p>A CSV files contains rows for every contact, the first (non-comment) row should be the (required) header row specifying the attribute names of the contact rows. ");
+		sb.append("<span>Microsoft's Active Directory comes with a program called &quot;csvde.exe&quot;. This allows you to create CSV files from (a subset of) Active Directory users. " +
+				"Continuity requires a batch-CSV file to be formatted using that format.</span></p>");
+		sb
+				.append("<p><a href=\"" + continuityDbUrl + "/Continuity%20-%20Data%20import%20sample.csv\" target=\"_blank\">Download sample CSV file</a></p>");
+
+		sb.append("<div style=\"margin: 10px 0; font-weight: bold\">LDIF</div>");
+		sb
+				.append("<p>An LDIF file contains 'block' of attribute names/ -values for every contact. A 'block' ends if an empty line is encountered. " +
+						"Every row in the block should have the syntax:</p>");
+		sb.append("<p>&lt;attribute name&gt;: &lt;attribute value&gt;</p>");
+		sb
+				.append("<p><span>Microsoft's Active Directory comes with a program called <strong>LDIFDE </strong>to create batch files that can be read by Continuity.</span></p>");
+		sb
+				.append("<p><a href=\"" + continuityDbUrl + "/Continuity%20-%20Data%20import%20sample.ldif\" target=\"_blank\">Download sample LDIF file</a></p>");
+
+		sb.append("<div style=\"margin: 10px 0; font-weight: bold\">XML</div>");
+		sb.append("<p>An XML file being uploaded should have the following structure:</p>");
+		sb
+				.append("<p>&lt;Employees&gt;<br clear=\"none\">  &lt;Employee id=&quot;unique identifier for this user&quot;&gt;<br clear=\"none\">" +
+						"   &lt;GivenName&gt;Mary&lt;/GivenName&gt;<br clear=\"none\">  &lt;/Employee&gt;<br clear=\"none\">&lt;/Employees&gt;</p>");
+		sb.append("<p>The required/ optional attributes are the same as with the other 2 file formats.</p>");
+		sb
+				.append("<p><a href=\"" + continuityDbUrl + "/Continuity%20-%20Data%20import%20sample.xml\" target=\"_blank\">Download sample XML file</a></p>");
+
+		sb.append("<div style=\"margin: 10px 0; font-weight: bold\">Attributes: required and optional</div>");
+
+		sb.append("<p>All three file formats support the same list of attributes:</p>");
+
+		sb
+				.append("<ul><li><strong>objectClass</strong> (required value for CSV/ LDIF imports: user or person, not used when reading XML files)</li>");
+		sb
+				.append("<li><strong>userPrincipalName</strong>, objectGUID or id (one of these required, contains a unique identifier for the user)</li>");
+		sb.append("<li><strong>givenName</strong> (required, first name)</li>");
+		sb.append("<li><strong>sn</strong> (required, last name)</li>");
+		sb.append("<li><strong>mail</strong> (required, email address)</li>");
+		sb.append("<li><strong>title</strong> (optional, job title)</li>");
+		sb.append("<li><strong>telephonenumber</strong> (optional, work phone number)</li>");
+		sb.append("</ul>");
+		sb.append("All other attributes in the files are skipped.");
+
+		sb.append("</div></div>");
+
+		sb.append("</div>");
+
+		return sb.toString();
+
 	}
 	
 	private String getMiniConfigGuide() {

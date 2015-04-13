@@ -71,8 +71,10 @@
 	<div style="margin-top:15px; display: none;" id="importHelp">
 	
 		<h4>Instructions</h4>
+		
+		<xp:text escape="false" disableTheme="true"
+			value="#{javascript:configBean.getLabel('contactsImportGuide')}"></xp:text>
 	
-		<xc:ccHelp helpTextId="contactsImportFormat"></xc:ccHelp>
 	</div>
 	
 	
