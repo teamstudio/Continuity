@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.2" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2a46" sequence="4" unid="D723C95B09739FF0C1257E2300288C60">
+<created><datetime dst="true">20150410T092253,76+02</datetime></created>
+<modified><datetime dst="true">20150410T092406,46+02</datetime></modified>
+<revised><datetime dst="true">20150410T092406,44+02</datetime></revised>
+<lastaccessed><datetime dst="true">20150410T092406,44+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20150410T092253,76+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>com/teamstudio/continuity/utils/ImageResizer.java</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/teamstudio/continuity/utils/ImageResizer.java</text></item>
+
+
+</note>

@@ -253,7 +253,7 @@ public class Configuration implements Serializable {
 		sb.append("<ol><li>Define the key Assets or Activities at risk</li>");
 		sb.append("<li>Define your Organization structure i.e. org units and contacts</li>");
 		sb.append("<li>Define your list of Business Scenarios</li>");
-		sb.append("<li>Define your list of Plan Checklists</li>");
+		sb.append("<li>Define your list of Plan checklists</li>");
 		sb.append("<li>Create the relevant Task sequences under each Scenario</li>");
 		sb.append("<li>Define Responsibilities</li></ol>");
 
@@ -285,9 +285,9 @@ public class Configuration implements Serializable {
 		sb.append("but you may wish to customize these to your own particular situation. Go to the ");
 		sb.append("Business Scenarios screen in the Other Entities section of the web console to do this.</p>");
 
-		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 4. Define your Plan Checklists </p>");
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 4. Define your Plan checklists </p>");
 
-		sb.append("<p>Plan Checklists provide a way of grouping your recovery Tasks (see Step 5 below) to ");
+		sb.append("<p>Plan checklists provide a way of grouping your recovery Tasks (see Step 5 below) to ");
 		sb.append("align with your business continuity plan documents (e.g. Business Continuity Plan, ");
 		sb.append("Incident Management Plan, Crisis Communications Plan). File attachments can be ");
 		sb.append("added to each Checklist to provide more guidance to help with recovering from an ");
@@ -303,7 +303,7 @@ public class Configuration implements Serializable {
 		sb.append("Scenario, set the sequence of Tasks that would need to be carried out to deal with that ");
 		sb.append("particular Scenario and categorize these between Initial Tasks, Ongoing Tasks, and ");
 		sb.append("Deactivation Tasks (i.e. Tasks that need to be completed before you can deactivate ");
-		sb.append("that particular business continuity plan). When you create each Task, you can link it to one or more Plan Checklists.</p>");
+		sb.append("that particular business continuity plan). When you create each Task, you can link it to one or more Plan checklists.</p>");
 
 		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 6. Define Responsibilities </p>");
 
@@ -330,12 +330,15 @@ public class Configuration implements Serializable {
 		sb.append("<p>For Android devices go here:<br />");
 		sb.append("<a href=\"https://play.google.com/store/apps/details?id=com.teamstudio.unplugged.platform.android&hl=en\" target=\"_blank\">https://play.google.com/store/apps/details?id=com.teamstudio.unplugged.platform.android&hl=en</a></p>");
 
-		sb.append("<p>You should then try out the mobile app for a small test group of users (between 3 and ");
-		sb.append("10) corresponding to different Roles. Send out email instructions to these users on ");
-		sb.append("how to download and configure the Continuity mobile app, together with their ");
-		sb.append("pplication credentials (user name and password). When you are satisfied with how ");
-		sb.append("the mobile app is working, then you can send out instructions to all your users.</p>");
-
+		sb.append("<p>You should then try out the mobile app for a small test group of users (between 3 and 10) corresponding to different Roles. ");
+		sb.append("These new users of Continuity can be created in the Contacts section with a Standard or Sys Admin account. ");
+		sb.append("Any user created there needs to set a password. ");
+		sb.append("They can do so by going to the Continuity login screen, clicking the 'Account activation' link at the bottom of the screen and entering their email address. ");
+		sb.append("An email will be send to them with instructions and a link to set a password. Once that is done, they can use that password, ");
+		sb.append("their username (email address) and server name to configure the Continuity mobile app (Unplugged).</p>");
+		
+		sb.append("<p>When you and your key users are satisfied with how the mobile app is working you can send out instructions to all your users using the same procedure.</p>");
+		
 		return sb.toString();
 		
 	}
