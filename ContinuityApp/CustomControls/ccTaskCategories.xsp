@@ -30,7 +30,7 @@
 
 	<xp:panel style="margin-bottom:10px" id="taskCategories">
 
-		<xp:repeat id="repeat1" rows="30" value="#{vwTaskCategories}" var="row" indexVar="rowIndex">
+		<xp:repeat id="repeat1" rows="1000" value="#{vwTaskCategories}" var="row" indexVar="rowIndex">
 
 			<xp:this.facets>
 				<xp:text xp:key="header" escape="false" disableTheme="true">

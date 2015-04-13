@@ -12,7 +12,7 @@
 	<!--  no items found message -->
 	<xp:text value="#{javascript:(compositeData.noItemsFoundMsg == null ? 'No tasks found' : compositeData.noItemsFoundMsg)}" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
 
-	<xp:repeat id="repeatTasks" rows="500" value="#{vwTasks}" var="row" indexVar="rowIndex">
+	<xp:repeat id="repeatTasks" rows="1000" value="#{vwTasks}" var="row" indexVar="rowIndex">
 
 		<xp:this.facets>
 			<xp:text escape="false" disableTheme="true"
@@ -32,12 +32,15 @@
 			
 				<h4>
 					<xp:text escape="false" disableTheme="true"
-					value="#{javascript:row.getColumnValues().get(0)}">
-				</xp:text>
+						value="#{javascript:row.getColumnValues().get(0)}">
+					</xp:text>
+					
+					<!-- Show an extra text in the category if a task was assigned to a role (e.g. BCM Coordinator, but no a specific -->
+					<!-- responsibility of that role: in the latter, roleNames contains a value with the syntax <role name> - <responsibility> -->
 					<xp:text escape="false" disableTheme="true" value=" (uncategorised tasks)">
-					<xp:this.rendered><![CDATA[#{javascript:compositeData.viewName=='vwTasksByResponsibility' &&
+						<xp:this.rendered><![CDATA[#{javascript:compositeData.viewName=='vwTasksByResponsibility' &&
 row.getColumnValues().get(0).indexOf("- ") == -1}]]></xp:this.rendered>
-				</xp:text>
+					</xp:text>
 				
 				</h4>
 				

@@ -145,11 +145,8 @@ getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
 		<xe:formRow id="formRow2" label="Ordering number:"
 			style="white-space:noWrap">
 			<xp:inputText value="#{docRole.order}" id="inputText1"
-				required="true" styleClass="number" maxlength="3">
+				styleClass="number" maxlength="3">
 				<xp:this.validators>
-					<xp:validateRequired
-						message="Enter a number for this roles' order">
-					</xp:validateRequired>
 					<xp:validateLongRange maximum="999"
 						message="Ordering number must be a (positive) number"
 						minimum="0">

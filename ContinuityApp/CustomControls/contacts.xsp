@@ -98,7 +98,7 @@ return options;
 
 
 		<xp:viewPanel
-			rows="500"
+			rows="1000"
 			id="viewPanel1"
 			var="row">
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()>0}]]></xp:this.rendered>
