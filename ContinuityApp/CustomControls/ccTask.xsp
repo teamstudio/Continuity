@@ -91,7 +91,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow2" label="Priority:">
+		<xe:formRow id="formRow2" label="Task category:">
 			<xp:radioGroup id="radioGroup2"
 				value="#{docTask.categoryId}">
 				<xp:selectItems id="selectItems2">
