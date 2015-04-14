@@ -38,11 +38,9 @@ try {
 		<div style="float: left; width: 250px;">
 			<strong>Organization unit:</strong>
 			&#160;
-			<xp:comboBox id="comboBox1" value="#{sessionScope.callTreeOrgUnitId}"
-				defaultValue="#{sessionScope.callTreeOrgUnitId}">
+			<xp:comboBox id="comboBox1" value="#{sessionScope.callTreeOrgUnitId}">
 				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:return applicationScope.get("orgUnitChoices");
-	}]]></xp:this.value>
+					<xp:this.value><![CDATA[#{javascript:return applicationScope.get("orgUnitChoices");}]]></xp:this.value>
 				</xp:selectItems>
 				<xp:eventHandler event="onchange" submit="true"
 					refreshMode="none">
@@ -85,19 +83,13 @@ try {
 		</xp:text>
 		<br />
 
-		<xp:button value="Start a call tree" id="link1" style="margin-top: 10px" rendered="#{javascript:!isEmpty(viewScope.contactOptions)}">
-
+		<xp:button value="Start a call tree" id="link1" style="margin-top: 10px">
 			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="partial" refreshId="dlgChangeContacts"
-				>
+				refreshMode="partial" refreshId="dlgChangeContacts">
 				<xp:this.action><![CDATA[#{javascript:viewScope.put("calledBy", null);
 				getComponent("dlgChangeContacts").show();}]]></xp:this.action>
 			</xp:eventHandler>
 		</xp:button>
-		
-		<xp:text tagName="div" style="margin-top:10px" escape="true" id="computedField2" rendered="#{javascript:isEmpty(viewScope.contactOptions)}">
-			<xp:this.value><![CDATA[#{javascript:"(cannot start a call tree: no contacts found)"}]]></xp:this.value>
-		</xp:text>
 
 	</xp:div>
 	
@@ -115,11 +107,31 @@ try {
 		<xp:panel style="padding: 15px;">
 
 			<div style="margin-bottom:15px">
-				Choose a contact to add to the call tree.
+				<xp:text escape="false">
+					<xp:this.value><![CDATA[#{javascript:"Choose a contact to add to the call tree for organization unit <b>" + applicationScope.get('orgUnits')[sessionScope.callTreeOrgUnitId] + '</b>.'}]]></xp:this.value>
+				</xp:text>
+			</div>
+			
+			<div style="margin-bottom:10px">
+			
+				<strong>Organization unit:</strong>
+				&#160;
+				<xp:comboBox id="comboBox2" value="#{viewScope.addContactOrgUnitId}" defaultValue="#{sessionScope.callTreeOrgUnitId}">
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript:return applicationScope.get("orgUnitChoices");}]]></xp:this.value>
+					</xp:selectItems>
+					<xp:eventHandler event="onchange" submit="true"
+						refreshMode="partial" refreshId="whoCallsWho">
+						<xp:this.action><![CDATA[#{javascript:
+						viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+			}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:comboBox>
+			
 			</div>
 
-			<xp:div style="margin-bottom:10px;">
-			
+			<xp:div style="margin-bottom:10px;" id="whoCallsWho">
+				
 				<xp:comboBox id="cbCalledBy" style="white-space:nowrap"
 					rendered="#{javascript:viewScope.calledBy == null}">
 					<xp:selectItem itemLabel="- select a contact -"
@@ -137,14 +149,20 @@ try {
 				<span style="padding: 0 15px;">calls</span>
 
 				<xp:comboBox id="cbCalls" style="white-space:nowrap">
-					<xp:selectItem itemLabel="- select a contact -"
-						itemValue="">
-					</xp:selectItem>
 					<xp:selectItems>
-						<xp:this.value><![CDATA[#{javascript:viewScope.get('contactOptions');}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:var lu = @DbLookup( @DbName() , "vwBCUsersByOrgUnit", ( !isEmpty(viewScope.addContactOrgUnitId) ?  viewScope.addContactOrgUnitId : sessionScope.callTreeOrgUnitId), 3, "[FailSilent]");
+						
+						
+						if (!isEmpty(lu) ) {
+							var o = ['- select a contact -|'];
+							return o.concat(lu);
+						} else {
+							return ['No contacts found|'];
+						}
+						}]]></xp:this.value>
 					</xp:selectItems>
 				</xp:comboBox>
-
+				
 				<div style="margin: 5px 0">
 					<xp:message id="errorMsg" for="dlgChangeContacts" style="margin:0; padding:0;"></xp:message>
 				</div>
@@ -186,8 +204,6 @@ try {
 	var calledBy = (viewScope.calledBy != null ? viewScope.calledBy.unid : getComponent("cbCalledBy").getValue() );
 	var calls = getComponent("cbCalls").getValue();
 	
-	dBar.debug("user "  + calledBy + " calls " + calls + ", root? " + isRoot);
-	
 	var id = getComponent("dlgChangeContacts").getClientId(facesContext);
 	
 	viewScope.errorCode = "1";
@@ -217,15 +233,17 @@ try {
 	var calledById = docCalledBy.getItemValueString("id");
 	
 	var docCalls = database.getDocumentByUNID( calls) ;
-	var callsId = docCalls.getItemValueString("id");
+	var callsId = sessionScope.callTreeOrgUnitId + "-" + docCalls.getItemValueString("id");
 	
-	//check if this user isn't somewhere in this call tree yet
+	dBar.debug("find with: " + callsId);
+	
+	//check if this user isn't somewhere in this call tree yet (as an entry that calls someone or is called by someone)
 	var dc = database.search("Form=\"fContact\" & (@IsMember(\"" + callsId + "\"; callTreeContacts) | @IsMember(\"" + callsId + "\"; callTreeCalledBy))" );
 	
 	if (dc.getCount()>0) {
 	
 		dBar.debug("error 3");
-		var msg = docCalls.getItemValueString("name") + " is already in this call tree. A contact cannot be listed twice.";
+		var msg = docCalls.getItemValueString("name") + " is already in this call tree. A contact cannot be listed twice in the same call tree.";
 		facesContext.addMessage( id, 
 			new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg, msg) );
 		return;
@@ -236,20 +254,23 @@ try {
 	if( currentContacts.size()==1 && currentContacts.get(0)=="") {
 	
 		docCalledBy.replaceItemValue("callTreeContacts", callsId);
-		docCalledBy.replaceItemValue("callTreeRoot", isRoot);
+		docCalledBy.replaceItemValue("callTreeRoot", sessionScope.callTreeOrgUnitId + "-" + isRoot);
 		docCalledBy.save();
 		
 	} else if ( currentContacts.size()==0 || !currentContacts.contains(calls) ) {
 	
 		currentContacts.add(callsId);
 		docCalledBy.replaceItemValue("callTreeContacts", currentContacts);
-		docCalledBy.replaceItemValue("callTreeRoot", isRoot);
+		docCalledBy.replaceItemValue("callTreeRoot", sessionScope.callTreeOrgUnitId + "-" + isRoot);
 		docCalledBy.save();
 	
 	}
 	
 	//get the 'called' contact and add the id of the user that calls him
-	docCalls.replaceItemValue("callTreeCalledBy", calledById );
+	var current = docCalls.getItemValue("callTreeCalledBy");
+	current.push(sessionScope.callTreeOrgUnitId + "-" + calledById);
+	
+	docCalls.replaceItemValue("callTreeCalledBy", current );
 	docCalls.save();
 	
 	//update call tree in the viewScope object

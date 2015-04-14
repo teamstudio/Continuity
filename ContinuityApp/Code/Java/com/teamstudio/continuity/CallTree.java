@@ -16,12 +16,12 @@ import com.teamstudio.continuity.utils.Utils;
 public class CallTree implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private transient View vwAllById;
 
-	//remove a contact (and all children) from a calltree
+	//remove a contact from a calltree, including all children
 	@SuppressWarnings("unchecked")
-	public boolean removeContact(String unid) {
+	public boolean removeContact(String orgUnitId, String unid) {
 
 		boolean succes = false;
 		Document docToRemove = null;
@@ -31,97 +31,119 @@ public class CallTree implements Serializable {
 
 			Database dbCurrent = ExtLibUtil.getCurrentDatabase();
 			vwAllById = dbCurrent.getView("vwAllById");
-			
+
 			//document of the contact to remove
 			docToRemove = dbCurrent.getDocumentByUNID(unid);
+			if (docToRemove == null) {
+				throw (new Exception("invalid unid"));
+			}
+
 			String id = docToRemove.getItemValueString("id");
 			String name = docToRemove.getItemValueString("name");
 
-			//find 'parent' contact (if any)
-			// Logger.debug("remove user: " + compositeData.entry.userName + // " with id" + compositeData.entry.id);
-			String q = "Form=\"fContact\" & @IsMember( \"" + id	+ "\"; callTreeContacts)";
+			Logger.debug("- removing " + name + " from calltree");
+
+			//find 'parent' contact (if any) and remove the current user (the contact that this user should be called by)
+			String q = "Form=\"fContact\" & @IsMember( \"" + orgUnitId + "-" + id + "\"; callTreeContacts)";
 			DocumentCollection dc = ExtLibUtil.getCurrentDatabase().search(q);
 
 			Logger.debug("found " + dc.getCount() + " docs (query: " + q + ")");
 
 			if (dc.getCount() > 0) {
-				
-				Document doc = dc.getFirstDocument();
 
-				Logger.debug("- removing " + name + " " + id + " from contacts of " + doc.getItemValueString("name") );
-				if ( Utils.removeItemValue(doc, "callTreeContacts", id) ) {
-					doc.save();
-				}
-			
-				doc.recycle();
-				dc.recycle();
+				Document docParent = dc.getFirstDocument();
+				CallTree.removeByPrefix(orgUnitId + "-" + id , docParent, "callTreeContacts");
+				docParent.save();
+				Utils.recycle(docParent, dc);
+
 			}
 
-			// remove 'parent' contact from callTreeCalledBy field
-			if (docToRemove != null) {
-				
-				Logger.debug("- removing " + name + " from calltree");
-				
-				Vector<String> childContacts = docToRemove.getItemValue("callTreeContacts");
-				
-				CallTree.saveRemoveItem(docToRemove, "callTreeCalledBy");
-				CallTree.saveRemoveItem(docToRemove, "callTreeContacts");
-				CallTree.saveRemoveItem(docToRemove, "callTreeRoot");
+			//find all child contacts (contacts that this user needs to call) and 
+			//remove him/her from the callTreeCalledBy field,
+			//also removing any children of any contact found (the rest of the call tree starting from this user and based on
+			//the call tree for a specific org unit	
+			Vector<String> childContacts = docToRemove.getItemValue("callTreeContacts");
 
-				docToRemove.save();
-				docToRemove.recycle();
-				
-				removeChildrenFromCallTree(childContacts);
-			}
+			CallTree.removeByPrefix(orgUnitId + "-", docToRemove, "callTreeCalledBy");
+			CallTree.removeByPrefix(orgUnitId + "-", docToRemove, "callTreeContacts");
+			CallTree.removeByPrefix(orgUnitId + "-", docToRemove, "callTreeRoot");
+
+			docToRemove.save();
+			docToRemove.recycle();
+
+			removeFromCallTree(orgUnitId, childContacts);
 
 		} catch (Exception e) {
 			Logger.error(e);
 		} finally {
-			
+
 			Utils.recycle(docToRemove);
 		}
 
 		return succes;
 
 	}
-	
-	//remove all children from the call tree, function is caled recursively
+
 	@SuppressWarnings("unchecked")
-	private void removeChildrenFromCallTree(Vector<String> contacts) {
-		
-		try {
-			
-			for(String contactId : contacts) {
-				
-				Document docContact = vwAllById.getDocumentByKey(contactId, true);
-				if (null != docContact) {
-					
+	private static boolean removeByPrefix(String prefix, Document doc, String fieldName) throws NotesException {
+
+		Vector<String> currentEntries = doc.getItemValue(fieldName);
+		Vector<String> newEntries = new Vector<String>();
+
+		boolean removed = false;
+
+		for (int i = 0; i < currentEntries.size(); i++) {
+
+			if (currentEntries.get(i).startsWith(prefix)) {
+				removed = true;
+			} else {
+				newEntries.add(currentEntries.get(i));
+			}
+
+		}
+
+		if (removed) {
+			doc.replaceItemValue(fieldName, newEntries);
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	//remove all children from the call tree, function is called recursively
+	@SuppressWarnings("unchecked")
+	private void removeFromCallTree(String orgUnitId, Vector<String> callTreeEntries) throws NotesException {
+
+		for (String callTreeEntry : callTreeEntries) {
+
+			String[] comps = callTreeEntry.split("-");
+			String _orgUnitId = comps[0];
+			String _contactId = comps[1];
+
+			if (_orgUnitId.equalsIgnoreCase(orgUnitId)) {
+
+				Document docContact = vwAllById.getDocumentByKey(_contactId, true);
+
+				if (docContact != null) {
+
 					Logger.debug("- removing " + docContact.getItemValueString("name") + " from calltree");
-					
-					Vector<String> childContacts = docContact.getItemValue("callTreeContacts");
-					
-					CallTree.saveRemoveItem(docContact, "callTreeCalledBy");
-					CallTree.saveRemoveItem(docContact, "callTreeContacts");
-					CallTree.saveRemoveItem(docContact, "callTreeRoot");
+
+					Vector<String> childEntries = docContact.getItemValue("callTreeContacts");
+
+					CallTree.removeByPrefix(orgUnitId + "-", docContact, "callTreeCalledBy");
+					CallTree.removeByPrefix(orgUnitId + "-", docContact, "callTreeContacts");
+					CallTree.removeByPrefix(orgUnitId + "-", docContact, "callTreeRoot");
+
 					docContact.save();
 					docContact.recycle();
-					
-					removeChildrenFromCallTree(childContacts);
-					
+
+					removeFromCallTree(orgUnitId, childEntries);
 				}
-				
+
 			}
-		} catch (NotesException e) {
-			Logger.error(e);
 		}
-		
-	}
-	
-	private static void saveRemoveItem(Document doc, String itemName) throws NotesException {
-		if (doc.hasItem(itemName)) {
-			doc.removeItem(itemName);
-		}
-	
+
 	}
 
 }

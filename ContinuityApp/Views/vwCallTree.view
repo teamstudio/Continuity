@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <view name='vwCallTree' alias='unpCallTree' xmlns='http://www.lotus.com/dxl'
- version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ version='9.0' maintenanceversion='1.2' replicaid='C1257BB30029DCD4' hide='web'
  showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
  onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
  showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
@@ -9,19 +9,19 @@
  headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
  uniquekeys='false'>
-<noteinfo noteid='7c2' unid='DE5D5FE2378F682FC1257B80006F9F18' sequence='23'>
+<noteinfo noteid='7c2' unid='DE5D5FE2378F682FC1257B80006F9F18' sequence='24'>
 <created><datetime dst='true'>20130604T221912,24+02</datetime></created>
-<modified><datetime dst='true'>20140514T144245,13+02</datetime></modified>
-<revised><datetime dst='true'>20140514T144245,12+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20140603T143700,13+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150413T151641,71+02</datetime></modified>
+<revised><datetime dst='true'>20150413T151641,70+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150413T171511,47+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130725T093723,22+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
 >SELECT Form="fContact" &amp; callTreeCalledBy != ""</formula></code>
-<column sort='ascending' hidedetailrows='false' itemname='category' width='13.6250'
- resizable='true' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
- showaslinks='false' categorized='true'><font size='9pt'/><columnheader title='orgUnitId + callTreeCalledBy'><font
- size='9pt' style='bold'/></columnheader><code event='value'><formula>orgUnitId + "-" + callTreeCalledBy</formula></code></column>
+<column sort='ascending' hidedetailrows='false' itemname='callTreeCalledBy'
+ width='13.6250' resizable='true' separatemultiplevalues='true' sortnoaccent='false'
+ sortnocase='true' showaslinks='false' categorized='true'><font size='9pt'/><columnheader
+ title='callTreeCalledBy'><font size='9pt' style='bold'/></columnheader></column>
 <column sort='ascending' hidedetailrows='false' itemname='name' width='15'
  resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
  showaslinks='false'><font size='9pt'/><columnheader title='name'><font size='9pt'

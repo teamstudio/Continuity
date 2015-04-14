@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<form name='fContact' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+<form name='fContact' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.2'
  replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
  renderpassthrough='true' conflictaction='mergeconflicts'>
-<noteinfo noteid='606' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='21'>
+<noteinfo noteid='606' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='23'>
 <created><datetime dst='true'>20130405T100132,18+02</datetime></created>
-<modified><datetime dst='true'>20140505T163059,43+02</datetime></modified>
-<revised><datetime dst='true'>20140505T160717,78+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20140505T163059,42+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150414T100514,74+02</datetime></modified>
+<revised><datetime dst='true'>20150414T100514,72+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150414T100514,72+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130725T093721,28+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -259,6 +259,13 @@ Yg4BAIQAAAAAAAAAAAA=
 <par def='5'><run><font size='9pt'/>true, false</run></par></tablecell></tablerow>
 <tablerow>
 <tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
 <par def='3'><run><font size='9pt' style='bold'/>callTreeContacts</run></par></tablecell>
 <tablecell>
 <par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
@@ -270,28 +277,40 @@ Yg4BAIQAAAAAAAAAAAA=
 </compositedata><run><font size='9pt'
  style='bold'/></run></par></tablecell>
 <tablecell>
-<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<par def='5'><run><font size='9pt'/>List of contacts to be called by this user. Every entry has the syntax:</run></par>
+<par def='5'><run><font size='9pt'/>&lt;calltree org unit id&gt;-&lt;id of the contact to call&gt;. Can be multi-value.</run></par></tablecell></tablerow>
 <tablerow>
 <tablecell>
 <par def='3'><run><font size='9pt' style='bold'/>callTreeCalledBy</run></par></tablecell>
 <tablecell>
-<par def='4'><run><font size='9pt'/><field type='text' kind='editable' name='callTreeCalledBy'/></run><compositedata
- type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
- aftercontainercount='1' afterbegincount='3'>
+<par def='4'><run><font size='9pt'/><field type='text' allowmultivalues='true'
+ kind='editable' name='callTreeCalledBy' listinputseparators='comma semicolon'
+ listdisplayseparator='semicolon'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata></par></tablecell>
 <tablecell>
-<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<par def='5'><run><font size='9pt'/>List of contacts by whom this contact is called. Every entry has the syntax:</run></par>
+<par def='5'><run><font size='9pt'/>&lt;calltree org unit id&gt;-&lt;id of the contact that calls&gt;. Can be multi-value.</run></par></tablecell></tablerow>
 <tablerow>
 <tablecell>
 <par def='3'><run><font size='9pt' style='bold'/>callTreeRoot</run></par></tablecell>
 <tablecell>
 <par def='4'><run><font size='9pt' style='bold'/></run><run><font size='9pt'/><field
- type='text' kind='editable' name='callTreeRoot'/></run><compositedata type='98'
- prevtype='65418' nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
+ type='text' allowmultivalues='true' kind='editable' name='callTreeRoot' listinputseparators='comma semicolon'
+ listdisplayseparator='semicolon'/></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
  afterbegincount='3'>
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt'/>Indicates if this contact is the 'root' of a call tree for a specific org unit. Syntax: &lt;calltree org unit id&gt;-&lt;true/ false&gt;. Can be multi-value.</run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
+<par def='3'><run><font size='9pt' style='bold'/></run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt' style='bold'/></run></par></tablecell>
 <tablecell>
 <par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
 <tablerow>

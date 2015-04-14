@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <view name='vwCallTreeRoot' alias='unpCallTreeRoot' xmlns='http://www.lotus.com/dxl'
- version='9.0' maintenanceversion='1.0' replicaid='C1257BB30029DCD4' hide='web'
+ version='9.0' maintenanceversion='1.2' replicaid='C1257BB30029DCD4' hide='web'
  showinmenu='false' publicaccess='false' designerversion='8.5.3' unreadmarks='none'
  onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
  showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
@@ -9,18 +9,18 @@
  boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
  uniquekeys='false'>
-<noteinfo noteid='7be' unid='4F4D2C1DDD10FC18C1257B80006EA3EC' sequence='24'>
+<noteinfo noteid='7be' unid='4F4D2C1DDD10FC18C1257B80006EA3EC' sequence='25'>
 <created><datetime dst='true'>20130604T220829,24+02</datetime></created>
-<modified><datetime dst='true'>20140514T144245,01+02</datetime></modified>
-<revised><datetime dst='true'>20140514T144244,99+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20140514T144244,99+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150413T152817,86+02</datetime></modified>
+<revised><datetime dst='true'>20150413T152817,85+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150413T152817,85+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130725T093723,21+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
->SELECT Form="fContact" &amp; callTreeRoot = "true"</formula></code>
-<column sort='ascending' hidedetailrows='false' itemname='orgUnitId' width='22.6250'
+>SELECT Form="fContact" &amp; @Contains(@Implode(callTreeRoot; ""); "-true")</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='callTreeRoot' width='22.6250'
  resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
- showaslinks='false'><columnheader title='orgUntId'><font size='9pt' style='bold'/></columnheader></column>
+ showaslinks='false'><columnheader title='callTreeRoot'><font size='9pt' style='bold'/></columnheader></column>
 <column sort='ascending' hidedetailrows='false' itemname='id' width='10' resizable='true'
  separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
  title='id'><font size='9pt' style='bold'/></columnheader></column></view>

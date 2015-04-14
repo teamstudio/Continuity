@@ -25,7 +25,7 @@
 					event="onclick"
 					submit="true"
 					refreshMode="norefresh">
-					<xp:this.action><![CDATA[#{javascript:if ( callTreeBean.removeContact(compositeData.entry.unid) ) {
+					<xp:this.action><![CDATA[#{javascript:if ( callTreeBean.removeContact(sessionScope.callTreeOrgUnitId, compositeData.entry.unid) ) {
 					viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 					}
 }]]></xp:this.action>

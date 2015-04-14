@@ -471,7 +471,7 @@ function getCallTree( orgUnitId:String ) {
 		dBar.debug("get call tree for org unit: " + orgUnitId);
 		
 		//get root user
-		var dcRoot = database.search("Form=\"fContact\" & callTreeRoot=\"true\" & orgUnitId=\"" + orgUnitId + "\"");
+		var dcRoot = database.search("Form=\"fContact\" & callTreeRoot=\"" + orgUnitId + "-true\"");
 		
 		dBar.debug("found " + dcRoot.getCount() + " root user(s) for org unit " + orgUnitId);
 		
@@ -486,6 +486,7 @@ function getCallTree( orgUnitId:String ) {
 		} else {
 			
 			return null;
+			
 		}
 	} catch (e) {
 		
@@ -509,7 +510,11 @@ function getCallTreeDetails( toCall, level, vwCallTree:NotesView ) {
 	var result = [];
 	
 	for (var i=0; i<toCall.length; i++) {
-		result.push( getCallTreeEntry( toCall[i], level, vwCallTree ));
+		var contactId = @Right(toCall[i], "-");
+		var entry = getCallTreeEntry( contactId, level, vwCallTree );
+		if (entry != null) {
+			result.push( entry);
+		}
 	}
 	
 	return result;
@@ -519,14 +524,14 @@ function getCallTreeDetails( toCall, level, vwCallTree:NotesView ) {
 function getCallTreeEntry( contactId, level, vwCallTree:NotesView ) {
 	
 	var entry = {};
-
+	
 	//dBar.debug("get for " + contactId + ", level: " + level);
 	
 	var doc = vwCallTree.getDocumentByKey(contactId, true);
 	
 	if (doc == null) {  //end of call tree
 		
-		//dBar.debug("no result");
+		dBar.warn("call tree entry for " + contactId + " not found");
 		return null;	
 	}
 
@@ -568,11 +573,11 @@ function getCallTreeRootUser( orgUnitId:String ) {
 	
 	var root = sessionScope.get("callTreeRoot");
 	
-	if ( !sessionScope.containsKey("callTreeRoot") || root[orgUnitId] == null ) {
+	if ( root == null || root[orgUnitId] == null ) {
 
 		//get root contact for this OU from database
 		var vwRoot = database.getView("vwCallTreeRoot");
-		var veRoot = vwRoot.getEntryByKey( orgUnitId, true);
+		var veRoot = vwRoot.getEntryByKey( orgUnitId + "-true", true);
 
 		var rootUser = "";
 		
