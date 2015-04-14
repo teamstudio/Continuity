@@ -2,11 +2,11 @@
 <form name='fContact' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.2'
  replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
  renderpassthrough='true' conflictaction='mergeconflicts'>
-<noteinfo noteid='606' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='23'>
+<noteinfo noteid='606' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='24'>
 <created><datetime dst='true'>20130405T100132,18+02</datetime></created>
-<modified><datetime dst='true'>20150414T100514,74+02</datetime></modified>
-<revised><datetime dst='true'>20150414T100514,72+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20150414T100514,72+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150414T134422,74+02</datetime></modified>
+<revised><datetime dst='true'>20150414T134422,73+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150414T134422,73+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20130725T093721,28+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -105,10 +105,19 @@ Yg4BAIQAAAAAAAAAAAA=
 <par def='5'><run><font size='9pt'/></run></par></tablecell></tablerow>
 <tablerow>
 <tablecell>
-<par def='3'><run><font size='9pt' style='bold'/></run></par>
+<par def='3'><run><font size='9pt' style='bold'/>address</run></par></tablecell>
+<tablecell>
+<par def='4'><run><font size='9pt'/><field type='text' kind='editable' name='address'/></run><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell>
+<tablecell>
+<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
+<tablerow>
+<tablecell>
 <par def='3'><run><font size='9pt' style='bold'/>phoneMobile	</run></par></tablecell>
 <tablecell>
-<par def='4'><run><font size='9pt'/></run></par>
 <par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
  kind='editable' name='phoneMobile'/></run><compositedata type='98' prevtype='65418'
  nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'

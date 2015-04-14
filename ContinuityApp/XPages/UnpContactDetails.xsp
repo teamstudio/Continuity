@@ -91,6 +91,15 @@ if ( t.equals("Vendor") || t.equals("Legal") || t.equals("Advisor") || t.equals(
 								</xp:link>
 							</span>
 						</li>
+						
+						<xp:panel tagName="li">
+							<xp:this.rendered><![CDATA[#{javascript:docContact.getItemValueString("address").length>0}]]></xp:this.rendered>
+							<xp:label value="Address" id="label5" for="address1" />
+							<xp:text 
+								value="#{docContact.address}">
+							</xp:text>
+						</xp:panel>
+						
 						<li>
 							<xp:label value="Work" id="label3" for="workPhone" />
 

@@ -360,6 +360,11 @@
 				</xp:this.validators>
 			</xp:inputText>
 		</xe:formRow>
+		
+		<xe:formRow id="formRow15" for="inputAddress1" label="Address:">
+			<xp:inputText value="#{docContact.address}" id="inputAddress1">
+			</xp:inputText>
+		</xe:formRow>
 
 		<xe:formRow id="formRow2" for="phoneMobile1"
 			label="Phone - mobile:">
