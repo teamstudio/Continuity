@@ -1,17 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<form name='loginForm' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+<form name='loginForm' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.2'
  replicaid='C1257AFA004179FC' nocompose='true' noquery='true' publicaccess='true'
  designerversion='8.5.3'>
-<noteinfo noteid='24a' unid='C05D0190BBB4F1FEC1257AFA00415E3A' sequence='57'>
+<noteinfo noteid='24a' unid='C05D0190BBB4F1FEC1257AFA00415E3A' sequence='59'>
 <created><datetime>20130121T125359,62+01</datetime></created>
-<modified><datetime dst='true'>20130725T110507,85+02</datetime></modified>
-<revised><datetime dst='true'>20130725T104149,50+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20130725T110507,83+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150415T103712,12+02</datetime></modified>
+<revised><datetime dst='true'>20150415T103712,10+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150415T103712,10+02</datetime></lastaccessed>
 <addedtofile><datetime>20130121T125514,54+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='windowtitle'><formula
 >"Continuity | Sign in"</formula></code><code event='htmlbody'><formula>"class=\"lotusLogin2 lotusui\""</formula></code><code
- event='htmlhead'><formula>"&lt;meta http-equiv='expires' content='0'&gt;" +
+ event='htmlhead'><formula>"&lt;meta http-equiv='expires' content='0'&gt;" + @NewLine +
+"&lt;meta charset=\"UTF-8\"&gt;" + @NewLine +
+"&lt;meta name=\"google\" content=\"notranslate\"&gt;" + @NewLine +
+"&lt;meta http-equiv=\"Content-Language\" content=\"en\"&gt;" + @NewLine +
 "&lt;link rel=\"SHORTCUT ICON\" href=\"/" + @WebDbName + "/favicon.ico\"&gt;" + @NewLine +
 "&lt;meta name=\"viewport\" content=\"user-scalable=no, width=device-width\"/&gt;" + @NewLine +
 "&lt;link rel=stylesheet type='text/css' href='/oneuiv2.1/base/core.css'&gt;" + @NewLine +
@@ -216,7 +219,7 @@ _to := _to + _rest;
 <par def='2'><run html='true'><font size='8pt'/>&lt;/div&gt;</run></par>
 <par def='2'><run html='true'><font size='8pt'/>&lt;table class="lotusLegal" cellspacing="0" role="presentation"&gt;</run></par>
 <par def='2'><run html='true'><font size='8pt'/>&lt;tr&gt;</run></par>
-<par def='2'><run html='true'><font size='8pt'/>&lt;td class="lotusLicense"&gt;&amp;copy; Teamstudio 2013&lt;/td&gt;</run></par>
+<par def='2'><run html='true'><font size='8pt'/>&lt;td class="lotusLicense"&gt;&amp;copy; Teamstudio 2013-2015&lt;/td&gt;</run></par>
 <par def='2'><run html='true'><font size='8pt'/>&lt;/tr&gt;</run></par>
 <par def='2'><run html='true'><font size='8pt'/>&lt;/table&gt;</run></par>
 <par def='2'><run html='true'><font size='8pt'/>&lt;script type="text/javascript"&gt;</run></par>
