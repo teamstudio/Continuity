@@ -362,7 +362,7 @@ public class Configuration implements Serializable {
 	private String getMiniConfigGuide() {
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("<div class=\"section\"><div class=\"title\">Teamstudio Continuity Mini Configuration Guide v1.41</div></div>");
+		sb.append("<div class=\"section\"><div class=\"title\">Teamstudio Continuity Mini Configuration Guide " + APP_VERSION + "</div></div>");
 
 		sb.append("<p>We recommend that Continuity should be configured in a 6 step process, in the sequence described below.</p>");
 
