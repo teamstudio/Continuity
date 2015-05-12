@@ -72,7 +72,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 		<xe:formRow
 			id="formRow7"
 			label="Scenario:">
-			<xe:this.rendered><![CDATA[#{javascript:docTask.isNewNote() && (compositeData.parentId==null || compositeData.parentId.length==0)}]]></xe:this.rendered>
+			<xe:this.rendered><![CDATA[#{javascript:docTask.isEditable() && (compositeData.parentId==null || compositeData.parentId.length==0)}]]></xe:this.rendered>
 			<xp:comboBox value="#{docTask.scenarioId}">
 				<xp:selectItems>
 					<xp:this.value><![CDATA[#{javascript:com.teamstudio.continuity.Scenarios.getGroupedComboboxOptions()}]]></xp:this.value>

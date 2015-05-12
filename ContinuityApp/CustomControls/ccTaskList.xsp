@@ -31,8 +31,12 @@
 			<th colspan="2">
 			
 				<h4>
-					<xp:text escape="false" disableTheme="true"
-						value="#{javascript:row.getColumnValues().get(0)}">
+					<xp:text
+						escape="false"
+						disableTheme="true">
+						<xp:this.value><![CDATA[#{javascript:var v = row.getColumnValues();
+				
+						return (v.size() == 0 ? 'No scenario allocated' : v.get(0) );}]]></xp:this.value>
 					</xp:text>
 				</h4>
 				
