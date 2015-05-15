@@ -63,7 +63,7 @@ return "Updated: " + rep;}]]></xp:this.value>
 			<!-- version -->
 			<xp:div styleClass="version">
 				<xp:this.rendered><![CDATA[#{javascript:compositeData.showVersion == true}]]></xp:this.rendered>
-				v1.4.2
+				v1.4.3
 			</xp:div>
 			
 			<!-- new button -->
