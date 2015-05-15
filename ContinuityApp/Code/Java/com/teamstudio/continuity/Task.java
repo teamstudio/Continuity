@@ -3,6 +3,7 @@ package com.teamstudio.continuity;
 import java.io.Serializable;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.teamstudio.continuity.utils.Authorizations;
 import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
 
@@ -34,44 +35,56 @@ public class Task implements Serializable {
 			dbCurrent = session.getCurrentDatabase();
 			
 			Document docTask = docTaskUI.getDocument(true);
-				
-			View vwAllById = dbCurrent.getView("vwAllById");
 			
 			if (parentId == null || parentId.length()==0  ) {
 				parentId = docTaskUI.getItemValueString("scenarioId");
 			}
 			
-			docScenario = vwAllById.getDocumentByKey(parentId, true);
-			
-			if (null != docScenario) {
-			
-				//copy owner from parent
-				if (docScenario.hasItem("owner")) {
-					docTask.copyItem(docScenario.getFirstItem("owner"));
-				}
-				//copy authors from parent
-				if (docScenario.hasItem("docAuthors")) {
-					docTask.copyItem(docScenario.getFirstItem("docAuthors"));
+			if (parentId.length()==0 ) {
+				
+				//no scenario assigned: set authors if needed
+				
+				if (!docTask.hasItem("docAuthors")) {
+					Utils.setAuthors(docTask, Authorizations.ROLE_EDITOR );
 				}
 				
-				//link to scenario
-				docTask.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
-				docTask.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
-				
-				//copy org unit settings
-				docTask.replaceItemValue("orgUnitIds", docScenario.getItemValue("orgUnitIds"));
-				docTask.replaceItemValue("orgUnitNames", docScenario.getItemValue("orgUnitNames"));
-				docTask.replaceItemValue("orgUnitTarget", docScenario.getItemValueString("orgUnitTarget") );
-				
-				docScenario.recycle();
-
 			} else {
+				
+				View vwAllById = dbCurrent.getView("vwAllById");
 			
-				Logger.warn("parent document not found with id " + parentId);
-			
+				docScenario = vwAllById.getDocumentByKey(parentId, true);
+				
+				if (null != docScenario) {
+				
+					//copy owner from parent
+					if (docScenario.hasItem("owner")) {
+						docTask.copyItem(docScenario.getFirstItem("owner"));
+					}
+					//copy authors from parent
+					if (docScenario.hasItem("docAuthors")) {
+						docTask.copyItem(docScenario.getFirstItem("docAuthors"));
+					}
+					
+					//link to scenario
+					docTask.replaceItemValue("scenarioId", docScenario.getItemValueString("id"));
+					docTask.replaceItemValue("scenarioName", docScenario.getItemValueString("name"));
+					
+					//copy org unit settings
+					docTask.replaceItemValue("orgUnitIds", docScenario.getItemValue("orgUnitIds"));
+					docTask.replaceItemValue("orgUnitNames", docScenario.getItemValue("orgUnitNames"));
+					docTask.replaceItemValue("orgUnitTarget", docScenario.getItemValueString("orgUnitTarget") );
+					
+					docScenario.recycle();
+	
+				} else {
+				
+					Logger.warn("parent document not found with id " + parentId);
+				
+				}
+				
+				vwAllById.recycle();
+				
 			}
-			
-			vwAllById.recycle();
 			
 			//store categoryName and categoryOrder
 			TaskCategory taskCat = TaskCategory.get( docTask.getItemValueString("categoryId") );
