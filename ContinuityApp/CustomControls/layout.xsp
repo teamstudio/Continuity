@@ -26,6 +26,17 @@
 		<div class="lotusBanner" role="banner">
 			<div class="lotusRightCorner">
 				<div class="lotusInner">
+				
+					<!-- loading -->
+					<div id="loading" class="loading">
+
+						<xp:image
+						url="/ajax-loader.gif"
+						id="image3">
+					</xp:image>
+					</div>
+					
+
 					<!-- app logo -->
 					<span class="logo"
 						style="float:left;vertical-align:middle;margin-right: 5px;">
@@ -200,5 +211,5 @@
 
 		</xp:div>
 	</div>
-
+	
 </xp:view>
