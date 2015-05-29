@@ -127,6 +127,10 @@ function showLoading() {
 		dojo.style( 'loading', 'display', 'block');
 	}
 }
+function hideLoading() {
+	doShowLoading = false;
+	dojo.style( 'loading', 'display', 'none');	   
+}
 
 function enableLoadingIndicator() {
 	try{
@@ -137,12 +141,12 @@ function enableLoadingIndicator() {
 		
 		} );
 		dojo.subscribe( 'partialrefresh-complete', null, function( method, form, refreshId ){
-			doShowLoading = false;
-			dojo.style( 'loading', 'display', 'none');	   
+			hideLoading();
 		} );
 		
 		dojo.subscribe( 'partialrefresh-error', null, function( method, form, refreshId ){
-		  alert("An error occurred...");
+		  alert("Sorry, the request could not be processed.");
+		  hideLoading();
 		} );
 	}catch(e){
 		console.log(e)
