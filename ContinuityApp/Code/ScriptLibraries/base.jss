@@ -481,7 +481,7 @@ function getCallTree( orgUnitId:String ) {
 			
 			var rootUserId = docContact.getItemValueString("id");
 			var vwCallTree:NotesView = database.getView("vwAllById");
-			return getCallTreeEntry( rootUserId, 1, vwCallTree );
+			return getCallTreeEntry( rootUserId, 1, vwCallTree, orgUnitId );
 			
 		} else {
 			
@@ -496,7 +496,7 @@ function getCallTree( orgUnitId:String ) {
 	
 }
 
-function getCallTreeDetails( toCall, level, vwCallTree:NotesView ) {
+function getCallTreeDetails( toCall, level, vwCallTree:NotesView, orgUnitId ) {
 
 	if (typeof toCall == 'string') { 
 	
@@ -511,7 +511,7 @@ function getCallTreeDetails( toCall, level, vwCallTree:NotesView ) {
 	
 	for (var i=0; i<toCall.length; i++) {
 		var contactId = @Right(toCall[i], "-");
-		var entry = getCallTreeEntry( contactId, level, vwCallTree );
+		var entry = getCallTreeEntry( contactId, level, vwCallTree, orgUnitId );
 		if (entry != null) {
 			result.push( entry);
 		}
@@ -521,7 +521,7 @@ function getCallTreeDetails( toCall, level, vwCallTree:NotesView ) {
 }
 
 //retrieve an entry for the call tree for a specific user
-function getCallTreeEntry( contactId, level, vwCallTree:NotesView ) {
+function getCallTreeEntry( contactId, level, vwCallTree:NotesView, orgUnitId ) {
 	
 	var entry = {};
 	
@@ -537,7 +537,17 @@ function getCallTreeEntry( contactId, level, vwCallTree:NotesView ) {
 
 	var userName = doc.getItemValueString("userName");
 	var name = doc.getItemValueString("name");
-	var calls = doc.getItemValue("callTreeContacts");
+	
+	var _calls = doc.getItemValue("callTreeContacts");
+	var _it:java.util.Iterator = _calls.iterator();
+	
+	var calls = new java.util.Vector();
+	while (_it.hasNext()) {
+		var c = _it.next();
+		if ( @Begins(c, orgUnitId) ) {
+			calls.add(c);
+		}
+	}
 	
 	var phoneTypePrimary = doc.getItemValueString("phoneTypePrimary");
 	if (phoneTypePrimary.length==0) {
@@ -561,7 +571,7 @@ function getCallTreeEntry( contactId, level, vwCallTree:NotesView ) {
 		"userName" : userName,
 		"name" : name, 
 		"phoneNumber" : phoneNumber,
-		"calls" : getCallTreeDetails(calls, newLevel, vwCallTree)
+		"calls" : getCallTreeDetails(calls, newLevel, vwCallTree, orgUnitId)
 	};
 
 
