@@ -17,7 +17,7 @@
       <property-name>taskUnid</property-name>
       <property-class>string</property-class>
       <property-extension>
-        <required>true</required>
+        <required>false</required>
       </property-extension>
     </property>
     <property>
@@ -29,6 +29,22 @@
         </designer-extension>
         <required>true</required>
       </property-extension>
+    </property>
+    <property>
+      <property-name>source</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>list&#xd;
+document</editor-parameter>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>doc</property-name>
+      <property-class>com.ibm.xsp.model.domino.DominoDocumentData</property-class>
     </property>
   </composite-component>
 </faces-config>

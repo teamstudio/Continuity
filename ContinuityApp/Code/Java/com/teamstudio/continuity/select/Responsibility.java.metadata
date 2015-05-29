@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.3" replicaid="C1257BB30029DCD4" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2b46" sequence="23" unid="4208BEA8BEB39652C1257E4C0036E31D">
+<created><datetime dst="true">20150521T115930,85+02</datetime></created>
+<modified><datetime dst="true">20150529T094649,15+02</datetime></modified>
+<revised><datetime dst="true">20150521T132419,30+02</datetime></revised>
+<lastaccessed><datetime dst="true">20150529T094649,13+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20150521T115930,87+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
+<wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>com/teamstudio/continuity/select/Responsibility.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/teamstudio/continuity/select/Responsibility.java</text></item>
+
+</note>

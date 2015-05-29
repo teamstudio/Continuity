@@ -1,196 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	&#160;
-	(<xp:link escape="true" text="change" id="link1">
-		<xp:eventHandler event="onclick" submit="false">
-			<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
-		</xp:eventHandler>
-	</xp:link>)
+	<!--show different interface based on selection from a view/list or document-->
+	<xp:panel
+		disableOutputTag="true"
+		rendered="#{javascript:compositeData.source=='list'}">
 
-	<xe:dialog id="dlgAssignTo" title="Allocate task to roles/ responsibilities">
-									
+		&#160;
+		(
+		<xp:link
+			escape="true"
+			text="change"
+			id="link1">
+			<xp:eventHandler
+				event="onclick"
+				submit="false">
+				<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:link>
+		)
+	</xp:panel>
+	<xp:panel
+		disableOutputTag="true"
+		rendered="#{javascript:compositeData.source=='document'}">
+		<xp:link
+			escape="true"
+			text="Select"
+			id="link2">
+			<xp:eventHandler
+				event="onclick"
+				submit="false">
+				<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:link>
+	</xp:panel>
+
+	<xe:dialog
+		id="dlgAssignTo"
+		title="Allocate task to roles/ responsibilities">
+		<xe:this.dojoAttributes>
+			<xp:dojoAttribute
+				name="autofocus"
+				value="false">
+			</xp:dojoAttribute>
+		</xe:this.dojoAttributes>
+
 		<xp:panel>
-			<xp:this.data>
+
+		<xp:this.data>
 				<xp:dominoDocument
-					var="docTarget" formName="fTask" action="editDocument"
+					var="docTarget"
+					formName="fTask"
+					action="editDocument"
 					documentId="#{javascript:compositeData.taskUnid}"
 					ignoreRequestParams="true">
 				</xp:dominoDocument>
-				<xp:dominoView var="vwRoles"
-							viewName="vwRoles">
-				</xp:dominoView>
-				<xp:dominoView var="vwResponsibilitiesByRole" viewName="vwResponsibilitiesByRole"></xp:dominoView>
 			</xp:this.data>
-			
-			<xp:div id="assignTo" style="padding:15px;">
-				
-				<!-- show all roles and responsibilities -->
-				
-				
-				<xp:repeat id="repeatRoles" rows="100"
-					value="#{vwRoles}" var="roleRow" indexVar="rowIndex" styleClass="showScrollbar" style="height: 350px; overflow-y:auto; overflow-x:hidden;">
 
-					<div style="width: 500px; border-bottom: 1px solid silver; margin-bottom: 3px;">
-					
-						<xp:div>
-							<xp:this.style><![CDATA[#{javascript:"margin-bottom:5px;" + (rowIndex>0 ? "margin-top:10px;" : "")}]]></xp:this.style>
-							
-							<h4>
-						
-								<label>
-									<xp:text escape="false" disableTheme="true">
-										<xp:this.value><![CDATA[#{javascript:var checked = false;
-										var id = "role-" + roleRow.getColumnValue("id");
-										if (docTarget.hasItem("responsibilityIds") ) {
-											checked = @IsMember( id, docTarget.getItemValue("responsibilityIds") );
-										}
-										
-										"<input type=\"checkbox\" class=\"respIds\" " + (checked ? "checked " : "") + "value=\"" + id + "\" />"}]]></xp:this.value>
-									</xp:text>
-								</label>
-								
-								<xp:text escape="false" disableTheme="true" value="#{roleRow.name}"> </xp:text>
-							
-							</h4>
-						</xp:div>
-						
-					</div>
-
-					<xp:text disableTheme="true" escape="false"
-						value="No responsibilities defined for this role yet">
-						<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResp").getRowCount()==0}]]></xp:this.rendered>
-					</xp:text>
-
-					<xp:repeat id="repeatResp" rows="100" var="respRow">
-						<xp:this.value><![CDATA[#{javascript:vwResponsibilitiesByRole.getAllEntriesByKey(roleRow.getColumnValue("id"), true);}]]></xp:this.value>
-						
-						<label>
-							<xp:text escape="false" disableTheme="true">
-								<xp:this.value><![CDATA[#{javascript:var checked = false;
-								var id = respRow.getColumnValues().get(4);
-								if (docTarget.hasItem("responsibilityIds") ) {
-									checked = @IsMember( id, docTarget.getItemValue("responsibilityIds") );
-								}
-								
-								"<input type=\"checkbox\" class=\"respIds\" " + (checked ? "checked " : "") + "value=\"" + id + "\" />" + respRow.getColumnValues().get(2)}]]></xp:this.value>
-							</xp:text>
-						</label>
-							
-						<br />
-
-					</xp:repeat>
-
-				</xp:repeat>
-				
-				<xp:inputHidden id="selectedResponsibilityIds" multipleSeparator="," multipleTrim="true"></xp:inputHidden>
-
+			<xp:div
+				id="assignTo"
+				style="padding:15px;">
+				<xp:this.rendered><![CDATA[#{javascript:var sourceDoc = ( compositeData.source == 'list' ? docTarget : compositeData.doc);
+				viewScope.put("selectedResponsibilityIds", sourceDoc.getItemValue("responsibilityIds") );
+return true;}]]></xp:this.rendered>
+				<xc:ccListResponsibilities></xc:ccListResponsibilities>
 			</xp:div>
-			
-			<xe:dialogButtonBar id="dialogButtonBar1">
 
-			<xp:button value="Ok" id="button1">
-				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="partial" refreshId="#{javascript:compositeData.refreshId}">
-					<xp:this.action><![CDATA[#{javascript:try {
-					//update tasks
-					var selected = getComponent("selectedResponsibilityIds").getValue();
+		<xe:dialogButtonBar
+				id="dialogButtonBar1">
 
-					if (typeof selected == 'string') { selected = [selected]; }
+				<xp:button
+					value="Ok"
+					id="button1">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="#{javascript:compositeData.refreshId}">
+						<xp:this.action><![CDATA[#{javascript:var selected = getComponent("selectedResponsibilityIds").getValue();
 					
-					//dBar.debug("assigned to resp ids:");
-					//dBar.dump( selected);
+					var sel = new java.util.Vector();
 					
-					docTarget.replaceItemValue("responsibilityIds", selected);
-					
-					var respNames = [];
-					var roleIds = [];
-					var roleNames = [];
-					
-					if (selected != null) {
-					
-						var vwAllById = database.getView("vwAllById");
-							
+					if (typeof selected == 'string') { 
+						sel.add( selected);
+					} else {
 						for (var i=0; i<selected.length; i++) {
-							if (selected[i].length>0 ) {
-							
-								if (selected[i].indexOf("role")==0) {
-									
-									//assigned to a role
-									var roleId = selected[i].substring(5);
-									
-									var ve = vwAllById.getEntryByKey( roleId, true );
-									if (null != ve) {
-									
-										var roleName = ve.getColumnValues().get(1);
-									
-										roleIds.push(roleId);
-										roleNames.push( roleName );
-										
-										respNames.push( roleName );
-										
-										ve.recycle();
-									}
-								
-								} else {
-								
-									//assigned to a responsibility		
-									var ve = vwAllById.getEntryByKey( selected[i], true );
-									if (null != ve) {
-										var docResp = ve.getDocument();
-										
-										var roleId = docResp.getItemValueString("roleId");
-										var roleName = docResp.getItemValueString("roleName");
-										
-										if ( @IsNotMember( roleId, roleIds ) ) {
-											roleIds.push( roleId );
-											roleNames.push( roleName );
-										}
-										
-										respNames.push( roleName + " - " + docResp.getItemValueString("name") );
-										
-										docResp.recycle();
-										ve.recycle();
-									}
-								}
-							}
+							sel.add( selected[i] );
 						}
 					}
 					
-	
-	docTarget.replaceItemValue("roleIds", roleIds);
-	docTarget.replaceItemValue("roleNames", roleNames);
-	docTarget.replaceItemValue("responsibilityNames", respNames );
-	
-	docTarget.save();
-	
-	//update tasks by plan view to immediately reflect changes in 'plans' menu option
-	var v = database.getView("vwTasksByPlanId");
-	v.refresh();
-
+					var fromList = (compositeData.source == "list");
+					var sourceDoc = (fromList ? docTarget : compositeData.doc);
+					
+if ( com.teamstudio.continuity.select.Responsibility.saveToDocument(fromList, sourceDoc, sel) ) {
 	getComponent("dlgAssignTo").hide();
-} catch (e) {
-	dBar.error(e);
-}}]]></xp:this.action>
-<xp:this.script><![CDATA[var ids = [];
+}	
+					}]]></xp:this.action>
+						<xp:this.script><![CDATA[var ids = [];
 			
 			dojo.query('input.respIds:checked', '#{id:assignTo}').forEach( function(cb) {
 				ids.push( cb.value);
 			});
 			
 			dojo.byId("#{id:selectedResponsibilityIds}").value = ids.join(",");]]></xp:this.script>
-				</xp:eventHandler>
-			</xp:button>
+					</xp:eventHandler>
+				</xp:button>
 
-			<xp:link escape="true" text="Cancel" id="link3">
-				<xp:eventHandler event="onclick" submit="false" immediate="true" refreshMode="partial" refreshId="dlgAssignTo">
-					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgAssignTo}")]]></xp:this.script>
-				</xp:eventHandler></xp:link>
-			
+				<xp:link
+					escape="true"
+					text="Cancel"
+					id="link3">
+					<xp:eventHandler
+						event="onclick"
+						submit="false"
+						immediate="true"
+						refreshMode="partial"
+						refreshId="dlgAssignTo">
+						<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgAssignTo}")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+
 			</xe:dialogButtonBar>
 		</xp:panel>
 	</xe:dialog>
 
 </xp:view>
-
-

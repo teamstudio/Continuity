@@ -114,7 +114,9 @@
 							</xp:text>
 
 							<!-- dialog to change assignment -->
-							<xc:ccAssignToResponsibility refreshId="dynamicContent1" taskUnid="#{javascript:taskEntry.getUniversalID()}">
+							<xc:ccAssignToResponsibility refreshId="dynamicContent1" 
+							taskUnid="#{javascript:taskEntry.getUniversalID()}"
+							source="list">
 								<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
 							</xc:ccAssignToResponsibility>
 
@@ -146,7 +148,8 @@
 							</xp:text>
 
 							<!-- checklists -->
-							<xc:ccAssignToPlans refreshId="dynamicContent1" taskUnid="#{javascript:taskEntry.getUniversalID()}">
+							<xc:ccAssignToPlans refreshId="dynamicContent1" taskUnid="#{javascript:taskEntry.getUniversalID()}"
+								source="list">
 								<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
 							</xc:ccAssignToPlans>
 

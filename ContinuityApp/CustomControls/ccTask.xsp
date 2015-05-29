@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xe="http://www.ibm.com/xsp/coreex">
-	
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
 	<xp:this.data>
-		<xp:dominoDocument var="docTask" formName="fTask"
-			action="openDocument" documentId="#{javascript:viewScope.taskId}"
+		<xp:dominoDocument
+			var="docTask"
+			formName="fTask"
+			action="openDocument"
+			documentId="#{javascript:viewScope.taskId}"
 			ignoreRequestParams="true">
-		<xp:this.postOpenDocument><![CDATA[#{javascript:
+			<xp:this.postOpenDocument><![CDATA[#{javascript:
 if (docTask.isNewNote() ) {
 
 var vwPlans = database.getView("vwPlans");
@@ -19,42 +24,70 @@ if ( vwPlans.getEntryCount()==1 ) {
 	docTask.replaceItemValue("planNames", docPlan.getItemValueString("name") );
 	
 }
-	}	}]]></xp:this.postOpenDocument></xp:dominoDocument>
+	}	}]]></xp:this.postOpenDocument>
+		</xp:dominoDocument>
 	</xp:this.data>
 
-	<xp:div styleClass="section" rendered="#{javascript:compositeData.showTitle}">
-		<div class="title">Task</div>
+	<xp:div
+		styleClass="section"
+		rendered="#{javascript:compositeData.showTitle}">
+		<div
+			class="title">Task</div>
 	</xp:div>
-	
-	<xe:formTable id="formTable1" disableErrorSummary="true">
+
+	<xe:formTable
+		id="formTable1"
+		disableErrorSummary="true">
 
 		<xp:this.facets>
-			<xp:panel xp:key="footer" id="panel1">
-			
-				<xp:button value="Edit" id="button1" icon="pencil.png">
+			<xp:panel
+				xp:key="footer"
+				id="panel1">
+
+				<xp:button
+					value="Edit"
+					id="button1"
+					icon="pencil.png">
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docTask.isEditable()}]]></xp:this.rendered>
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynContTasks">
-							<xp:this.action>
-								<xp:changeDocumentMode mode="edit"
-									var="docTask">
-								</xp:changeDocumentMode>
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="dynContTasks">
+						<xp:this.action>
+							<xp:changeDocumentMode
+								mode="edit"
+								var="docTask">
+							</xp:changeDocumentMode>
 						</xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
-			
-				<xp:button value="Save task" id="button3"
-					icon="disk.png" rendered="#{javascript:docTask.isEditable()}">
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="lotusMain">
+
+				<xp:button
+					value="Save task"
+					id="button3"
+					icon="disk.png"
+					rendered="#{javascript:docTask.isEditable()}">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="lotusMain">
 						<xp:this.action><![CDATA[#{javascript:taskBean.save(docTask, compositeData.parentId);
 	getComponent("dynContTasks").show("tasks")}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 
-				<xp:link escape="true" text="Back to list" id="link2">
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dynContTasks" immediate="true">
+				<xp:link
+					escape="true"
+					text="Back to list"
+					id="link2">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="dynContTasks"
+						immediate="true">
 						<xp:this.action>
 							<xp:actionGroup>
 								<xp:executeScript>
@@ -67,127 +100,213 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 			</xp:panel>
 		</xp:this.facets>
-	
+
 		<!-- scenario selection (only when creating tasks from the 'tasks' menu option -->
 		<xe:formRow
 			id="formRow7"
 			label="Scenario:">
 			<xe:this.rendered><![CDATA[#{javascript:docTask.isEditable() && (compositeData.parentId==null || compositeData.parentId.length==0)}]]></xe:this.rendered>
-			<xp:comboBox value="#{docTask.scenarioId}">
+			<xp:comboBox
+				value="#{docTask.scenarioId}">
 				<xp:selectItems>
 					<xp:this.value><![CDATA[#{javascript:com.teamstudio.continuity.Scenarios.getGroupedComboboxOptions()}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:comboBox>
 		</xe:formRow>
 
-		<xe:formRow id="formRow1" label="Title:">
-			<xp:inputText value="#{docTask.name}" id="inputTaskTitle"
-				required="true" maxlength="50">
+		<xe:formRow
+			id="formRow1"
+			label="Title:">
+			<xp:inputText
+				value="#{docTask.name}"
+				id="inputTaskTitle"
+				required="true"
+				maxlength="50">
 				<xp:this.validators>
 					<xp:validateRequired
-						message="Enter a title for this task">
-					</xp:validateRequired>
+						message="Enter a title for this task"></xp:validateRequired>
 				</xp:this.validators>
 			</xp:inputText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow2" label="Task category:">
-			<xp:radioGroup id="radioGroup2"
+		<xe:formRow
+			id="formRow2"
+			label="Task category:">
+			<xp:radioGroup
+				id="radioGroup2"
 				value="#{docTask.categoryId}">
-				<xp:selectItems id="selectItems2">
+				<xp:selectItems
+					id="selectItems2">
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwTaskCategories", 2);}]]></xp:this.value>
 				</xp:selectItems>
 			</xp:radioGroup>
 		</xe:formRow>
 
-		<xe:formRow id="formRow3" label="Description:"
+		<xe:formRow
+			id="formRow3"
+			label="Description:"
 			for="inputDescription">
-			<xp:inputTextarea style="height:50px" id="inputDescription"
+			<xp:inputTextarea
+				style="height:50px"
+				id="inputDescription"
 				value="#{docTask.description}">
 			</xp:inputTextarea>
 		</xe:formRow>
-		
-		<xe:formRow id="formRow4" label="Type:">
 
-			<xp:radioGroup id="radioGroup1" defaultValue="one-time"
-				value="#{docTask.type}" layout="lineDirection">
-				<xp:selectItem itemLabel="Specific Task"
+		<xe:formRow
+			id="formRow4"
+			label="Type:">
+
+			<xp:radioGroup
+				id="radioGroup1"
+				defaultValue="one-time"
+				value="#{docTask.type}"
+				layout="lineDirection">
+				<xp:selectItem
+					itemLabel="Specific Task"
 					itemValue="one-time">
 				</xp:selectItem>
-				<xp:selectItem itemLabel="Background Task"
+				<xp:selectItem
+					itemLabel="Background Task"
 					itemValue="ongoing">
 				</xp:selectItem>
 			</xp:radioGroup>
 
 		</xe:formRow>
 
-		<xe:formRow id="formRow5" label="Step number:"
-			for="inputOrder" style="white-space:noWrap">
-			<xp:inputText value="#{docTask.order}" id="inputOrder"
-				required="true" styleClass="number" maxlength="3"
+		<xe:formRow
+			id="formRow5"
+			label="Step number:"
+			for="inputOrder"
+			style="white-space:noWrap">
+			<xp:inputText
+				value="#{docTask.order}"
+				id="inputOrder"
+				required="true"
+				styleClass="number"
+				maxlength="3"
 				defaultValue="1">
 				<xp:this.validators>
 					<xp:validateRequired
-						message="Enter a step number for this task">
-					</xp:validateRequired>
-					<xp:validateLongRange maximum="999"
-						message="Step number must be a (positive) number" minimum="0">
+						message="Enter a step number for this task"></xp:validateRequired>
+					<xp:validateLongRange
+						maximum="999"
+						message="Step number must be a (positive) number"
+						minimum="0">
 					</xp:validateLongRange>
 				</xp:this.validators>
 				<xp:this.converter>
-					<xp:convertNumber type="number"
+					<xp:convertNumber
+						type="number"
 						integerOnly="true">
 					</xp:convertNumber>
 				</xp:this.converter>
 			</xp:inputText>
 
 		</xe:formRow>
-		
-		<xe:formRow id="formRow10" label="File:">
-		
-			<xe:djextListTextBox displayLabel="true"
-				id="djextListTextBoxQG" value="#{docTask.quickGuideIds}"
-				readOnly="#{javascript:!docTask.isEditable()}" styleClass="asBlock">
+
+		<xe:formRow
+			id="formRow10"
+			label="File:">
+
+			<xe:djextListTextBox
+				displayLabel="true"
+				id="djextListTextBoxQG"
+				value="#{docTask.quickGuideIds}"
+				readOnly="#{javascript:!docTask.isEditable()}"
+				styleClass="asBlock">
 				<xe:this.title><![CDATA[#{javascript:(!docTask.isEditable() ? "" : "Click to remove")}]]></xe:this.title>
 			</xe:djextListTextBox>
-			
-			<xe:valuePicker id="valuePicker2" for="djextListTextBoxQG"
-				pickerText="Select" dialogTitle="Select a file">
+
+			<xe:valuePicker
+				id="valuePicker2"
+				for="djextListTextBoxQG"
+				pickerText="Select"
+				dialogTitle="Select a file">
 				<xe:this.dataProvider>
-					<xe:simpleValuePicker labelSeparator="|"
+					<xe:simpleValuePicker
+						labelSeparator="|"
 						valueListSeparator=",">
 						<xe:this.valueList><![CDATA[#{javascript:@Implode(database.getView("vwQuickGuides").getColumnValues(2), ",")}]]></xe:this.valueList>
 					</xe:simpleValuePicker>
 				</xe:this.dataProvider>
 			</xe:valuePicker>
-			
+
 		</xe:formRow>
 
-		<xe:formRow id="formRowAssignTask" label="Responsible:">
-		
-			<xp:text escape="true" disableTheme="true"
-				value="Not allocated">
-				<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResponsibilities").getRowCount()==0}]]></xp:this.rendered>
-			</xp:text>
-		
-			<xp:repeat id="repeatResponsibilities" rows="50" value="#{docTask.responsibilityNames}" var="name">
-				<xp:text escape="false" disableTheme="true" value="#{name}"></xp:text>
-				<br />
-			</xp:repeat>
-			
-		</xe:formRow>
-		
-		<xe:formRow id="formRow6" label="Plan checklists:">
-		
-			<xp:text escape="true" disableTheme="true"
-				value="Not allocated">
-				<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatPlans").getRowCount()==0}]]></xp:this.rendered>
-			</xp:text>
+		<xe:formRow
+			id="formRowAssignTask"
+			label="Responsible:">
 
-			<xp:repeat id="repeatPlans" rows="50" value="#{docTask.planNames}" var="name">
-				<xp:text escape="false" disableTheme="true" value="#{name}"></xp:text>
-				<br />
-			</xp:repeat>
+			<xp:div
+				id="responsible">
+
+				<xp:text
+					escape="true"
+					disableTheme="true"
+					value="Not allocated">
+					<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatResponsibilities").getRowCount()==0}]]></xp:this.rendered>
+				</xp:text>
+
+				<xp:repeat
+					id="repeatResponsibilities"
+					rows="50"
+					value="#{docTask.responsibilityNames}"
+					var="name">
+					<xp:text
+						escape="false"
+						disableTheme="true"
+						value="#{name}">
+					</xp:text>
+					<br />
+				</xp:repeat>
+			</xp:div>
+
+			<xc:ccAssignToResponsibility
+				refreshId="responsible"
+				doc="#{docTask}"
+				source="document">
+				<xc:this.rendered><![CDATA[#{javascript:docTask.isEditable()}]]></xc:this.rendered>
+			</xc:ccAssignToResponsibility>
+
+		</xe:formRow>
+
+		<xe:formRow
+			id="formRow6"
+			label="Plan checklists:">
+
+			<xp:div
+				id="planChecklists">
+
+				<xp:text
+					escape="true"
+					disableTheme="true"
+					value="Not allocated">
+					<xp:this.rendered><![CDATA[#{javascript:getComponent("repeatPlans").getRowCount()==0}]]></xp:this.rendered>
+				</xp:text>
+
+				<xp:repeat
+					id="repeatPlans"
+					rows="50"
+					value="#{docTask.planNames}"
+					var="name">
+					<xp:text
+						escape="false"
+						disableTheme="true"
+						value="#{name}">
+					</xp:text>
+					<br />
+				</xp:repeat>
+
+			</xp:div>
+
+			<!-- checklists -->
+			<xc:ccAssignToPlans
+				refreshId="planChecklists"
+				source="document"
+				doc="#{docTask}">
+				<xc:this.rendered><![CDATA[#{javascript:docTask.isEditable()}]]></xc:this.rendered>
+			</xc:ccAssignToPlans>
 
 		</xe:formRow>
 

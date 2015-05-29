@@ -88,28 +88,10 @@ context.setDocumentMode("readOnly");}]]></xp:this.action>
 
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docRole.isNewNote()}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 						refreshId="lotusMain" immediate="true">
-						<xp:this.action><![CDATA[#{javascript:var dcResp = database.search("Form=\"fResponsibility\" & roleId=\"" + docRole.getItemValueString("id") + "\"");
-						
-						var docTemp:NotesDocument = null;
-						
-						var docResp:NotesDocument = dcResp.getFirstDocument();
-						while (docResp != null) {
-							docTemp = dcResp.getNextDocument(docResp);
-						
-							dBar.info("removing responsibility: " + docResp.getItemValueString("name") );
-							docResp.remove(true);
-							docResp.recycle();
-						
-							docResp = docTemp;
-						}
-						
-						dBar.debug("removing role " + docRole.getItemValueString("name"));
-						docRole.getDocument().remove(true);
-						
-						com.teamstudio.continuity.User.get().updateMenuOptionCounts();
-								
-getComponent("dynamicContent1").show("rolesList");}]]></xp:this.action>
-						<xp:this.script><![CDATA[return confirm("Removing this role will also remove all related responsibilities.\n\nAre you sure?")]]></xp:this.script>
+						<xp:this.action><![CDATA[#{javascript:if ( com.teamstudio.continuity.Role.remove( docRole ) ) {
+getComponent("dynamicContent1").show("rolesList");
+}}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Removing this role will also remove all related responsibilities. It will also remove this role (and related responsibilities) from any tasks.\n\nAre you sure?")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
 

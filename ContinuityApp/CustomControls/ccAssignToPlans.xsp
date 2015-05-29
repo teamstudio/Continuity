@@ -1,96 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
-&#160;
-	(<xp:link escape="true" text="change" id="link1">
-			<xp:eventHandler event="onclick" submit="false">
+	<!--show different interface based on selection from a view/list or document-->
+	<xp:panel
+		disableOutputTag="true"
+		rendered="#{javascript:compositeData.source=='list'}">
+
+		&#160;
+		(
+		<xp:link
+			escape="true"
+			text="change"
+			id="link1">
+			<xp:eventHandler
+				event="onclick"
+				submit="false">
 				<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
 			</xp:eventHandler>
-		</xp:link>)
+		</xp:link>
+		)
+	</xp:panel>
+	<xp:panel
+		disableOutputTag="true"
+		rendered="#{javascript:compositeData.source=='document'}">
+		<xp:link
+			escape="true"
+			text="Select"
+			id="link2">
+			<xp:eventHandler
+				event="onclick"
+				submit="false">
+				<xp:this.script><![CDATA[XSP.openDialog("#{id:dlgAssignTo}");]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:link>
+	</xp:panel>
 
-	<xe:dialog id="dlgAssignTo" title="Allocate task to plan checklists">
-									
+	<xe:dialog
+		id="dlgAssignTo"
+		title="Allocate task to plan checklists">
+		<xe:this.dojoAttributes>
+			<xp:dojoAttribute
+				name="autofocus"
+				value="false">
+			</xp:dojoAttribute>
+		</xe:this.dojoAttributes>
+		
+
 		<xp:panel>
 			<xp:this.data>
 				<xp:dominoDocument
-					var="docTarget" formName="fTask" action="editDocument"
+					var="docTarget"
+					formName="fTask"
+					action="editDocument"
 					documentId="#{javascript:compositeData.taskUnid}"
 					ignoreRequestParams="true">
 				</xp:dominoDocument>
 			</xp:this.data>
-			
-			<div class="showScrollbar" style="padding:15px;height: 250px; overflow-y:auto; overflow-x:hidden">
-			
+
+			<div
+				class="showScrollbar"
+				style="padding:15px;height: 250px; overflow-y:auto; overflow-x:hidden">
+
 				Select one or more checklists to allocate this task to.
-				
-				<div style="margin-top:10px">
-				
-				<xp:checkBoxGroup id="checkBoxGroup1"
-					value="#{docTarget.planIds}" layout="pageDirection">
-					<xp:selectItems>
-						<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwPlans", 3)}]]></xp:this.value>
-					</xp:selectItems>
-				</xp:checkBoxGroup>
-				
-				</div>
+
+				<xp:div
+					style="margin-top:10px">
+					<xp:this.rendered><![CDATA[#{javascript:var sourceDoc = ( compositeData.source == 'list' ? docTarget : compositeData.doc);
+				viewScope.put("selectedPlanIds", sourceDoc.getItemValue("planIds") );
+return true;}]]></xp:this.rendered>
+
+					<xp:checkBoxGroup
+						id="checkBoxGroup1"
+						value="#{viewScope.selectedPlanIds}"
+						layout="pageDirection">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwPlans", 3)}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:checkBoxGroup>
+
+				</xp:div>
 			</div>
-			
-			<xe:dialogButtonBar id="dialogButtonBar1">
 
-			<xp:button value="Ok" id="button1">
-				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="#{javascript:compositeData.refreshId}">
-					<xp:this.action><![CDATA[#{javascript:try {
-					//update tasks
-var assignedTo = getComponent("checkBoxGroup1").getValue();
+			<xe:dialogButtonBar
+				id="dialogButtonBar1">
 
-dBar.debug("assigned to checklist id: " + assignedTo);
-
-//get plan names
-
-var planNames = [];
-
-if (assignedTo != null) {
-
-	var vwAllById = database.getView("vwAllById");
-	
-	for (var i=0; i<assignedTo.length; i++) {
-		var planId = assignedTo[i];
-		var vePlan = vwAllById.getEntryByKey(planId, true);
-		
-		var planName = "error: can't find plan";
-		
-		if (vePlan != null) {
-			planName = vePlan.getColumnValues().get(1);
-		}
-		
-		planNames.push(planName);
-	}
-}
-
-	docTarget.replaceItemValue("planNames", planNames);
-	docTarget.save();
-
-	//stamp all scenarios	
-	com.teamstudio.continuity.Scenario.stampWithPlans();
-	
-	//clear cached session scope variable: gets re-added when opening the plans section
-	sessionScope.remove("plans");
-	
-	//update tasks by plan view to immediately reflect changes in 'plans' menu option
-	var v = database.getView("vwTasksByPlanId");
-	v.refresh();
-
+				<xp:button
+					value="Ok"
+					id="button1">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="#{javascript:compositeData.refreshId}">
+						<xp:this.action><![CDATA[#{javascript:var selected = viewScope.selectedPlanIds;
+					
+					var sel = new java.util.Vector();
+					
+					if (typeof selected == 'string') { 
+						sel.add( selected);
+					} else {
+						for (var i=0; i<selected.length; i++) {
+							sel.add( selected[i] );
+						}
+					}
+					
+					var fromList = (compositeData.source == "list");
+					var sourceDoc = (fromList ? docTarget : compositeData.doc);
+					
+if ( com.teamstudio.continuity.select.Checklist.saveToDocument(fromList, sourceDoc, sel) ) {
 	getComponent("dlgAssignTo").hide();
-} catch (e) {
-	dBar.error(e);
-}}]]></xp:this.action>
-				</xp:eventHandler></xp:button>
+}
+						}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
 
-			<xp:link escape="true" text="Cancel" id="link3">
-				<xp:eventHandler event="onclick" submit="false" immediate="true" refreshMode="partial" refreshId="dlgAssignTo">
-					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgAssignTo}")]]></xp:this.script>
-				</xp:eventHandler></xp:link>
-			
+				<xp:link
+					escape="true"
+					text="Cancel"
+					id="link3">
+					<xp:eventHandler
+						event="onclick"
+						submit="false"
+						immediate="true"
+						refreshMode="partial"
+						refreshId="dlgAssignTo">
+						<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgAssignTo}")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+
 			</xe:dialogButtonBar>
 		</xp:panel>
 	</xe:dialog>

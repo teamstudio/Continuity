@@ -46,13 +46,10 @@
 					<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && !docResp.isNewNote()}]]></xp:this.rendered>
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="lotusMain"
 						immediate="true">
-						<xp:this.action><![CDATA[#{javascript:dBar.info("remove responsibility: " & docResp.getItemValueString("name") );
-docResp.getDocument().remove(true);
-
-currentUserBean.updateMenuOptionCounts();
-								
-getComponent("dynamicContent1").show("respList");}]]></xp:this.action>
-						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this responsibility?")]]></xp:this.script>
+						<xp:this.action><![CDATA[#{javascript:if ( com.teamstudio.continuity.Responsibility.remove( docResp ) ) {			
+getComponent("dynamicContent1").show("respList");
+}}]]></xp:this.action>
+						<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this responsibility?\n\nThis action will also remove the responsibility from any tasks.")]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
 

@@ -92,7 +92,8 @@
 			
 					<!-- dialog to change assignment -->
 					<xc:ccAssignToResponsibility refreshId="repeatTasks"
-						taskUnid="#{javascript:row.getUniversalID()}">
+						taskUnid="#{javascript:row.getUniversalID()}"
+						source="list">
 						<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
 					</xc:ccAssignToResponsibility>
 			
@@ -122,7 +123,8 @@
 			
 					<!-- plan(s) -->
 					<xc:ccAssignToPlans refreshId="repeatTasks"
-						taskUnid="#{javascript:row.getUniversalID()}">
+						taskUnid="#{javascript:row.getUniversalID()}"
+						source="list">
 						<xc:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xc:this.rendered>
 					</xc:ccAssignToPlans>
 				
