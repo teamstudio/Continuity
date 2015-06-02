@@ -21,7 +21,9 @@
 						<xp:inputText value="#{docSettings.organisationName}" id="organisationName1"
 					required="true">
 					<xp:this.validators>
-						<xp:validateRequired message="Name is required"></xp:validateRequired>
+						<xp:validateExpression message="Name is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 					</xp:this.validators>
 					</xp:inputText>
 						&#160;

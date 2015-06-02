@@ -27,9 +27,9 @@
 					<xp:inputText id="inputText1" value="#{docFile.name}"
 				required="true" maxlength="32">
 				<xp:this.validators>
-						<xp:validateRequired
-							message="Enter a title">
-						</xp:validateRequired>
+						<xp:validateExpression message="Enter a title">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 					</xp:this.validators>
 				</xp:inputText>
 				</td>

@@ -98,7 +98,9 @@ if ( docAsset.save() ) {
 			<xp:inputText value="#{docAsset.name}" id="name"
 				required="true">
 				<xp:this.validators>
-					<xp:validateRequired message="Name is required"></xp:validateRequired>
+					<xp:validateExpression message="Name is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 				</xp:this.validators>
 			</xp:inputText>
 		</xe:formRow>

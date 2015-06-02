@@ -180,8 +180,11 @@
 					for="inputName">
 					<xp:inputTextarea value="#{docHazard.name}" id="inputName" required="true">
 					<xp:this.validators>
-						<xp:validateRequired message="Enter a name"></xp:validateRequired>
-					</xp:this.validators></xp:inputTextarea>
+						<xp:validateExpression message="Name is required">
+							<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+						</xp:validateExpression>
+					</xp:this.validators>
+					</xp:inputTextarea>
 				</xe:formRow>
 				
 				<xe:formRow id="formRow1" label="Hazard type:" for="comboBox1">

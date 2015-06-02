@@ -47,7 +47,9 @@ if( docUpdate.save()) {
 					<xp:validateLength maximum="140"
 						message="Message length cannot exceed 140 characters">
 					</xp:validateLength>
-					<xp:validateRequired message="Message is required"></xp:validateRequired>
+					<xp:validateExpression message="Message is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 				</xp:this.validators>
 			</xp:inputTextarea>
 		</xe:formRow>

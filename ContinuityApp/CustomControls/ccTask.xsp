@@ -123,9 +123,12 @@ if ( vwPlans.getEntryCount()==1 ) {
 				required="true"
 				maxlength="50">
 				<xp:this.validators>
-					<xp:validateRequired
-						message="Enter a title for this task"></xp:validateRequired>
+				
+						<xp:validateExpression message="Enter a title for this task">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 				</xp:this.validators>
+				
 			</xp:inputText>
 		</xe:formRow>
 
@@ -187,8 +190,9 @@ if ( vwPlans.getEntryCount()==1 ) {
 				maxlength="3"
 				defaultValue="1">
 				<xp:this.validators>
-					<xp:validateRequired
-						message="Enter a step number for this task"></xp:validateRequired>
+					<xp:validateExpression message="Enter a step number for this task">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 					<xp:validateLongRange
 						maximum="999"
 						message="Step number must be a (positive) number"

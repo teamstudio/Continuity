@@ -47,9 +47,9 @@
 			<xp:inputText value="#{docContact.lastName}" id="lastName1"
 				required="true">
 				<xp:this.validators>
-					<xp:validateRequired
-						message="Lastname is required">
-					</xp:validateRequired>
+										<xp:validateExpression message="Lastname is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 				</xp:this.validators>
 			</xp:inputText>
 		</xe:formRow>
@@ -350,9 +350,9 @@
 			<xp:inputText value="#{docContact.email}" id="email1"
 				required="true">
 				<xp:this.validators>
-					<xp:validateRequired
-						message="Email address is required">
-					</xp:validateRequired>
+					<xp:validateExpression message="Email address is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 					<xp:validateConstraint
 						message="Enter a valid email address">
 						<xp:this.regex><![CDATA[^([0-9a-zA-Z-!\'%&\*\+\/=\?^`{}\|$~]([-.!\'%&\*\+\/=\?^`{}\|$~\w]*[0-9a-zA-Z\-!\'%&\*\+\/=\?^`{}\|$~])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z]{2,9})$]]></xp:this.regex>

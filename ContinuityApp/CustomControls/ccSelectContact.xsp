@@ -6,9 +6,10 @@
 		required="true" title=""
 		disableValidators="#{javascript:!compositeData.required}">
 		<xe:this.validators>
-			<xp:validateRequired
-				message="Select a contact from the list">
-			</xp:validateRequired>
+		
+			<xp:validateExpression message="Select a contact from the list">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 		</xe:this.validators>
 
 	</xe:djextListTextBox>

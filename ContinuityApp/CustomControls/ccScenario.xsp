@@ -62,8 +62,11 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 			<xp:inputText value="#{docScenario.name}" id="name1"
 				required="true" maxlength="50">
 				<xp:this.validators>
-					<xp:validateRequired message="Name is required"></xp:validateRequired>
+					<xp:validateExpression message="Name is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 				</xp:this.validators>
+				
 			</xp:inputText>
 		</xe:formRow>
 		

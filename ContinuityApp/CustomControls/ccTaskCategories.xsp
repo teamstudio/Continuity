@@ -78,8 +78,12 @@ c.toggle()
 											<xp:inputText value="#{docTaskCat.name}" id="firstName1"
 												required="true" disableClientSideValidation="true">
 											<xp:this.validators>
-												<xp:validateRequired message="Name is required"></xp:validateRequired>
-											</xp:this.validators></xp:inputText>
+												
+												<xp:validateExpression message="Name is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
+											</xp:this.validators>
+											</xp:inputText>
 										</xp:td>
 									</xp:tr>
 									<xp:tr>
@@ -197,7 +201,9 @@ getComponent("inPlaceForm1").hide()}]]></xp:this.script>
 					<xp:td>
 						<xp:inputText value="#{docTaskCat.name}" id="name1" required="true">
 							<xp:this.validators>
-								<xp:validateRequired message="Name is required"></xp:validateRequired>
+								<xp:validateExpression message="Name is required">
+						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
+					</xp:validateExpression>
 							</xp:this.validators></xp:inputText>
 					</xp:td>
 				</xp:tr>
