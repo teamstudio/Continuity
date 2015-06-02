@@ -33,8 +33,8 @@
 	<xp:div
 		id="cbAppOptions" styleClass="#{javascript:(compositeData.doc.isEditable() ? '' : 'appOptions')}">
 		<xp:this.rendered><![CDATA[#{javascript:compositeData.doc.isEditable() || compositeData.doc.getItemValueString("appMenuOptions") == "selected"}]]></xp:this.rendered>
-		<xp:this.style><![CDATA[#{javascript:var o = compositeData.doc.getItemValueString("appMenuOptions");
-		"margin-left: 20px; display: " + (o=="all" || o=="" ? "none" : "block" )}]]></xp:this.style>
+		<xp:this.style><![CDATA[#{javascript:var r = getComponent('radio3'); var v = r.getValue() || r.getSubmittedValue(); 
+		"margin-left: 20px; display: " + (v==null || v=="all" || v=="" ? "none" : "block" )}]]></xp:this.style>
 
 		<xp:checkBoxGroup
 			id="cbGroupAppOptions"

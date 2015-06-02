@@ -19,7 +19,7 @@
 	<br />
 
 	<xp:div id="cbOUs" rendered="#{javascript:compositeData.doc.isEditable()}">
-		<xp:this.style><![CDATA[#{javascript:"margin-left: 20px; display: " + (compositeData.doc.getItemValueString("orgUnitTarget").equals("all") || compositeData.doc.getItemValueString("orgUnitTarget").equals("") ? "none" : "block" )}]]></xp:this.style>
+		<xp:this.style><![CDATA[#{javascript:var r = getComponent('radio4'); var v = r.getValue() || r.getSubmittedValue(); "margin-left: 20px; display: " + (v==null || v=='all' || v=='' ? "none" : "block" )}]]></xp:this.style>
 
 		<xp:checkBoxGroup id="checkBoxGroupOrgUnits" value="#{compositeData.doc.orgUnitIds}">
 			<xp:selectItems>
