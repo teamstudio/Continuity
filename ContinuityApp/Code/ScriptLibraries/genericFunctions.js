@@ -145,11 +145,11 @@ function enableLoadingIndicator() {
 		} );
 		
 		dojo.subscribe( 'partialrefresh-error', null, function( method, form, refreshId ){
-		  alert("Sorry, the request could not be processed.");
+			alert("Sorry, the request could not be processed.");
 		  hideLoading();
 		} );
 	}catch(e){
-		console.log(e)
+		console.log(e);
 	}
 }
 
