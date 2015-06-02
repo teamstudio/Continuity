@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dialog
+		id="dlgChangeContacts"
+		title="Add contact to call tree">
+
+		<xp:panel
+			style="padding: 15px;">
+
+			<div
+				style="margin-bottom:15px">
+				<xp:text
+					escape="false">
+					<xp:this.value><![CDATA[#{javascript:"Choose a contact to add to the call tree for the organization unit <b>" + applicationScope.get('orgUnits')[sessionScope.callTreeOrgUnitId] + '</b>.'}]]></xp:this.value>
+				</xp:text>
+			</div>
+
+			<xp:div
+				style="margin-bottom:10px;"
+				id="whoCallsWho">
+
+				<table>
+					<tbody>
+
+						<tr
+							style="vertical-align: bottom">
+							<td style="vertical-align:middle;">
+
+								<xp:comboBox
+									id="cbCalledBy"
+									style="white-space:nowrap"
+									rendered="#{javascript:viewScope.calledBy == null}">
+									<xp:selectItem
+										itemLabel="- select a contact -"
+										itemValue="">
+									</xp:selectItem>
+									<xp:selectItems>
+										<xp:this.value><![CDATA[#{javascript:viewScope.get('contactOptions');}]]></xp:this.value>
+									</xp:selectItems>
+								</xp:comboBox>
+
+								<xp:text
+									value="#{viewScope.calledBy.name}"
+									style="font-weight: bold"
+									rendered="#{javascript:viewScope.calledBy != null}" />
+
+							</td>
+							<td style="vertical-align:middle;">
+
+								<span
+									style="padding: 0 15px;">calls</span>
+
+							</td>
+							<td>
+
+								<table>
+									<tbody>
+										<tr>
+
+											<td
+												style="vertical-align:middle; text-align: right">organization unit:</td>
+											<td>
+												<xp:comboBox
+													id="comboBox2"
+													value="#{viewScope.addContactOrgUnitId}"
+													defaultValue="#{sessionScope.callTreeOrgUnitId}">
+													<xp:selectItems>
+														<xp:this.value><![CDATA[#{javascript:return applicationScope.get("orgUnitChoices");}]]></xp:this.value>
+													</xp:selectItems>
+													<xp:eventHandler
+														event="onchange"
+														submit="true"
+														refreshMode="partial"
+														refreshId="whoCallsWho">
+														<xp:this.action><![CDATA[#{javascript:
+						viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+			}]]></xp:this.action>
+													</xp:eventHandler>
+												</xp:comboBox>
+
+											</td>
+
+										</tr>
+										<tr>
+											<td
+												style="vertical-align:middle; text-align: right">name:</td>
+											<td>
+
+												<xp:comboBox
+													id="cbCalls"
+													style="white-space:nowrap">
+													<xp:selectItems>
+														<xp:this.value><![CDATA[#{javascript:var lu = @DbLookup( @DbName() , "vwBCUsersByOrgUnit", ( !isEmpty(viewScope.addContactOrgUnitId) ?  viewScope.addContactOrgUnitId : sessionScope.callTreeOrgUnitId), 3, "[FailSilent]");
+						
+						
+						if (!isEmpty(lu) ) {
+							var o = ['- select a contact -|'];
+							return o.concat(lu);
+						} else {
+							return ['No contacts found|'];
+						}
+						}]]></xp:this.value>
+													</xp:selectItems>
+												</xp:comboBox>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div
+					style="margin: 5px 0">
+					<xp:message
+						id="errorMsg"
+						for="dlgChangeContacts"
+						style="margin:0; padding:0;"></xp:message>
+				</div>
+
+
+			</xp:div>
+
+
+			<!--
+
+				<div style="margin-bottom:15px"> <xp:checkBox id="cbAlternate" checkedValue="yes" uncheckedValue="no">
+				<xp:this.text><![CDATA[#{javascript:"This contact is an alternate for the " + roleRow.getColumnValue("name") + " role within " +
+				ouRow.getColumnValue("name") }]]></xp:this.text> </xp:checkBox> </div>
+			-->
+		</xp:panel>
+
+		<xe:dialogButtonBar
+			id="dialogButtonBar1">
+
+			<xp:button
+				value="Ok"
+				id="button1">
+				<xp:eventHandler
+					event="onclick"
+					submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:try {
+					
+					var isRoot = "false";
+					
+					if (viewScope.calledBy == null) {
+						isRoot = "true";
+					} else if (viewScope.calledBy.level == 1) {
+						isRoot = "true";
+					}
+
+//determine caller and callee
+	var calledBy = (viewScope.calledBy != null ? viewScope.calledBy.unid : getComponent("cbCalledBy").getValue() );
+	var calls = getComponent("cbCalls").getValue();
+	
+	var id = getComponent("dlgChangeContacts").getClientId(facesContext);
+	
+	viewScope.errorCode = "1";
+	
+	if (calledBy == "" || calls == "" ) {
+	
+		//no caller or callee: abort with error
+		dBar.debug("error 1");
+		var msg = "Please select 2 contacts";
+		facesContext.addMessage( id, 
+		new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg,msg ) );
+		return;
+		
+	} else if (calledBy == calls ) { 
+	
+		//caller is the same as the callee: abort with error
+		dBar.debug("error 2");
+		var msg = "Please select 2 different contacts";
+		facesContext.addMessage( id, 
+			new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg, msg ) );
+		return;
+		
+	}
+	
+	//get contact that calls and add the user he/she calls
+	var docCalledBy = database.getDocumentByUNID(calledBy );
+	var calledById = docCalledBy.getItemValueString("id");
+	
+	var docCalls = database.getDocumentByUNID( calls) ;
+	var callsId = sessionScope.callTreeOrgUnitId + "-" + docCalls.getItemValueString("id");
+	
+	dBar.debug("find with: " + callsId);
+	
+	//check if this user isn't somewhere in this call tree yet (as an entry that calls someone or is called by someone)
+	var dc = database.search("Form=\"fContact\" & (@IsMember(\"" + callsId + "\"; callTreeContacts) | @IsMember(\"" + callsId + "\"; callTreeCalledBy))" );
+	
+	if (dc.getCount()>0) {
+	
+		dBar.debug("error 3");
+		var msg = docCalls.getItemValueString("name") + " is already in this call tree. A contact cannot be listed twice in the same call tree.";
+		facesContext.addMessage( id, 
+			new javax.faces.application.FacesMessage( javax.faces.application.FacesMessage.SEVERITY_INFO, msg, msg) );
+		return;
+	}
+	
+	var currentContacts = docCalledBy.getItemValue("callTreeContacts");
+	
+	if( currentContacts.size()==1 && currentContacts.get(0)=="") {
+	
+		docCalledBy.replaceItemValue("callTreeContacts", callsId);
+		docCalledBy.replaceItemValue("callTreeRoot", sessionScope.callTreeOrgUnitId + "-" + isRoot);
+		docCalledBy.save();
+		
+	} else if ( currentContacts.size()==0 || !currentContacts.contains(calls) ) {
+	
+		currentContacts.add(callsId);
+		docCalledBy.replaceItemValue("callTreeContacts", currentContacts);
+		docCalledBy.replaceItemValue("callTreeRoot", sessionScope.callTreeOrgUnitId + "-" + isRoot);
+		docCalledBy.save();
+	
+	}
+	
+	//get the 'called' contact and add the id of the user that calls him
+	var current = docCalls.getItemValue("callTreeCalledBy");
+	current.push(sessionScope.callTreeOrgUnitId + "-" + calledById);
+	
+	docCalls.replaceItemValue("callTreeCalledBy", current );
+	docCalls.save();
+	
+	//update call tree in the viewScope object
+	viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+	
+getComponent("dlgChangeContacts").hide();
+
+} catch (e) {
+	dBar.error(e);
+}
+}]]></xp:this.action>
+
+					<xp:this.onComplete><![CDATA[//refresh call tree if no errors found
+					if (dojo.byId("#{id:errorMsg}") == null) {
+						XSP.showContent("#{id:dynamicContent1}","callTree");
+					}]]></xp:this.onComplete>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:link
+				escape="true"
+				text="Cancel"
+				id="link3">
+				<xp:eventHandler
+					event="onclick"
+					submit="false"
+					immediate="true">
+					<xp:this.script><![CDATA[XSP.closeDialog("#{id:dlgChangeContacts}")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+
+		</xe:dialogButtonBar>
+	</xe:dialog>
+
+</xp:view>
