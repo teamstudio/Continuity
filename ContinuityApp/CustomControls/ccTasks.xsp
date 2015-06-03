@@ -13,7 +13,7 @@
 					<xp:div styleClass="section" rendered="#{javascript:compositeData.showTitle}">
 						<div class="title">Tasks</div>
 						<div class="actions">
-							<xp:button value="Add task" id="button1"
+							<xp:button value="Add Task" id="button1"
 								icon="to_do_list_cheked_all.png">
 								<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && compositeData.allowAdd}]]></xp:this.rendered><xp:eventHandler event="onclick"
 									submit="true" refreshMode="partial" refreshId="dynContTasks">

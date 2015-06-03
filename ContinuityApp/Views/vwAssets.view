@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<view name='vwAssets' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+<view name='vwAssets' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.3'
  replicaid='C1257BB30029DCD4' hide='web' showinmenu='false' publicaccess='false'
  designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
  headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
@@ -8,18 +8,19 @@
  headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
  uniquekeys='false'>
-<noteinfo noteid='5fe' unid='CF344DC21EA9980FC1257B44002C4039' sequence='22'>
+<noteinfo noteid='7fe' unid='CF344DC21EA9980FC1257B44002C4039' sequence='27'>
 <created><datetime dst='true'>20130405T100320,25+02</datetime></created>
-<modified><datetime dst='true'>20140514T144245,89+02</datetime></modified>
-<revised><datetime dst='true'>20140514T144245,88+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20140514T144245,88+02</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130725T093721,24+02</datetime></addedtofile></noteinfo>
+<modified><datetime dst='true'>20150602T151327,90+02</datetime></modified>
+<revised><datetime dst='true'>20150602T151327,89+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150602T151327,89+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20150413T094526,09+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='selection'><formula
 >SELECT Form="fSite"</formula></code>
-<column sort='ascending' hidedetailrows='false' itemname='name' width='16.1250'
+<column sort='ascending' hidedetailrows='false' itemname='$1' width='16.1250'
  resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
- showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+ showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@If(@Trim(name)=""; "(no name)"; name)</formula></code></column>
 <column hidedetailrows='false' itemname='$0' width='38.7500' resizable='true'
  separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
  title='name id'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
