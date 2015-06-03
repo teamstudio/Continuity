@@ -96,11 +96,33 @@
 		
 											<xp:comboBox id="comboBoxSelectedContact"
 												style="white-space:nowrap">
-												<xp:selectItem itemLabel="- select a contact -"
-													itemValue="">
-												</xp:selectItem>
 												<xp:selectItems>
-													<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName() , "vwContactsByOrgUnit", ouRow.getColumnValue("id"), 2);}]]></xp:this.value>
+													<xp:this.value><![CDATA[#{javascript:try {
+													var lu = @DbLookup( @DbName() , "vwContactsByOrgUnit", ouRow.getColumnValue("id"), 2);
+													if (typeof lu == 'string') { lu = [lu]; }
+													var res = [];
+													
+													var res = new java.util.Vector();
+													
+													if (lu.length == 0) {
+														return ['No contacts found|'];
+													}
+													
+													res.add('- select a contact -|');
+													
+													
+													for (var i=0; i<lu.length; i++) {
+														if ( @Right(lu[i], "|").length>0 ) {
+															res.add(lu[i]);
+														}
+													}
+													
+													return res;
+													
+} catch (e) {
+	dBar.error(e);
+}
+}]]></xp:this.value>
 												</xp:selectItems>
 											</xp:comboBox>
 
@@ -126,9 +148,7 @@
 												//update contact with new role
 var userName = getComponent("comboBoxSelectedContact").getValue();
 var isAlternate = getComponent("cbAlternate").getValue();
-
-//dBar.debug("user: " + userName +", alternate?" + isAlternate);
-												
+											
 var docContact = database.getView("vwContactsByUsername").getDocumentByKey( userName, true);
 
 var currentRoleId = docContact.getItemValueString("roleId");
