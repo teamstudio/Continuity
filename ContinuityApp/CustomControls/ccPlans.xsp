@@ -59,6 +59,19 @@
 
 					<xp:div id="rowDetails" style="display:none; margin-top:5px; margin-bottom:5px;">
 						<xp:text escape="false" id="computedField3" value="#{rowEntry.description}"></xp:text>
+						<xp:text escape="false" tagName="div" style="margin-top:5px">
+
+							<xp:this.value><![CDATA[#{javascript:var o = rowEntry.getColumnValue("orgUnitNames");
+							var d = "All";
+							
+							if ( (typeof o == 'string' && o.length>0) ) {
+								d = o;
+							} else if (o.length > 0) {
+								d = @Implode(o, ", ");
+							}
+
+"<b>Organization units:</b> " + d;}]]></xp:this.value>
+						</xp:text>
 					</xp:div>
 
 				</td>

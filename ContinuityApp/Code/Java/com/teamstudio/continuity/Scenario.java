@@ -44,33 +44,8 @@ public class Scenario implements Serializable {
 					xspDocScenario.replaceItemValue("id", "s" + doc.getUniversalID().toLowerCase() );
 				}
 			}
-			
-			HashMap<String,String> orgUnits = (HashMap<String, String>) ExtLibUtil.getApplicationScope().get("orgUnits");
-			Vector<String> orgUnitIds = new Vector<String>( orgUnits.keySet() );
-			Vector<String> orgUnitNames = new Vector<String>( orgUnits.keySet() );
-			
-			String orgUnitTarget = xspDocScenario.getItemValueString("orgUnitTarget");
-			
-			if (orgUnitTarget.equals("all") ) {
-				
-				xspDocScenario.replaceItemValue("orgUnitIds", orgUnitIds );
-				xspDocScenario.replaceItemValue("orgUnitNames", orgUnitNames );
-			
-			} else {
-			
-				orgUnitIds.clear();
-				orgUnitNames.clear();
-				
-				orgUnitIds = xspDocScenario.getItemValue("orgUnitIds");
-				
-				for(String orgUnitId : orgUnitIds ) {
 					
-					orgUnitNames.add( OrganisationUnit.getName(orgUnitId));
-					
-				}
-				
-				xspDocScenario.replaceItemValue("orgUnitNames", orgUnitNames);
-			}
+			OrganisationUnit.saveOrgUnits(xspDocScenario, false);
 			
 			//save contents of rich text field as string
 			doc = xspDocScenario.getDocument(true);
@@ -98,9 +73,9 @@ public class Scenario implements Serializable {
 				DocumentCollection dcTasks = ExtLibUtil.getCurrentDatabase().search( "Form=\"fTask\" & scenarioId=\"" + scenarioId + "\"");
 				
 				if (dcTasks.getCount()>0) {
-					dcTasks.stampAll( "orgUnitIds", orgUnitIds );
-					dcTasks.stampAll( "orgUnitNames", orgUnitNames );
-					dcTasks.stampAll( "orgUnitTarget", orgUnitTarget );
+					dcTasks.stampAll( "orgUnitIds", doc.getItemValue("orgUnitIds") );
+					dcTasks.stampAll( "orgUnitNames", doc.getItemValue("orgUnitNames") );
+					dcTasks.stampAll( "orgUnitTarget", doc.getItemValue("orgUnitTarget") );
 				}
 			}
 

@@ -37,39 +37,9 @@
 						<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docPlan.isEditable()
 	}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true"
 							refreshMode="partial" refreshId="lotusMain">
-							<xp:this.action><![CDATA[#{javascript:try {
-							var blnIsNew = docPlan.isNewNote();
-							if ( blnIsNew ) {
-							
-								//set the owners: [bcEditor] and owner
-								docPlan.replaceItemValue("docAuthors", "[bcEditor]");
-							
-								var docBE = docPlan.getDocument(true);
-								docBE.getFirstItem("docAuthors").setAuthors(true);
-								docBE.getFirstItem("owner").setAuthors(true);
-				
-								docPlan.replaceItemValue("id", "p" + docPlan.getDocument().getUniversalID().toLowerCase() );
-								
-							} 
-		
-		docPlan.save();
-		
-		if (blnIsNew) {
-			
-			currentUserBean.updateMenuOptionCounts();
-		
-		
-		} else {
-									
-								//replace this name everywhere
-								com.teamstudio.continuity.utils.Utils.fieldValueChange("planIds", docPlan.getItemValueString("id"), "planNames", docPlan.getItemValueString("name") );
-		}
-		
-		context.setDocumentMode("readOnly");
-		
-	} catch (e) {
-		dBar.error(e);
-	}
+							<xp:this.action><![CDATA[#{javascript:if ( com.teamstudio.continuity.Plan.save(docPlan) ) {
+								context.setDocumentMode("readOnly");
+							}			
 	}]]></xp:this.action>
 						</xp:eventHandler>
 					</xp:button>
@@ -125,6 +95,12 @@
 				<xp:inputTextarea style="height:50px" id="inputDescription"
 					value="#{docPlan.description}">
 				</xp:inputTextarea>
+			</xe:formRow>
+			
+			<!-- link to org unit(s) -->
+			<xe:formRow id="formRow1" for="checkBoxGroupOrgUnits">
+				<xe:this.label><![CDATA[Organization units (optional):]]></xe:this.label>
+				<xc:ccSelectOrgUnits doc="#{docPlan}"></xc:ccSelectOrgUnits>
 			</xe:formRow>
 			
 			<xe:formRow id="formRow10" label="File:">
