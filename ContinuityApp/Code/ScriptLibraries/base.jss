@@ -43,6 +43,15 @@ function init() {
 			sessionScope.put("configLoadedAt", (new Date()).getTime() );
 			sessionScope.put("userName", currentUser);
 			
+			//set current/ default org unit
+			sessionScope.put("currentOrgUnitId", "");
+			sessionScope.put("currentOrgUnitName", "");
+			if (applicationScope.get("orgUnitChoices")) {
+				var _first = applicationScope.get("orgUnitChoices")[0];
+				sessionScope.put("currentOrgUnitId", @Right( _first, "|"));
+				sessionScope.put("currentOrgUnitName", @Left( _first, "|"));
+			}
+			
 			//retrieve information from user's profile
 			var vwContacts:NotesView = database.getView("vwContactsByUsername");
 			var docUser:NotesDocument = vwContacts.getDocumentByKey( currentUser, true);
@@ -110,7 +119,13 @@ function init() {
 			
 			sessionScope.put("isPhoneSupported", !@Contains( ua, "ipad") && !@Contains( ua, "ipod") );
 			
-			if (null != docUser) {
+			if (null == docUser) {
+				
+				dBar.debug("user settings not found");
+				var nm:NotesName = session.createName(currentUser);
+				sessionScope.put("name", nm.getCommon() );
+				
+			} else {
 				
 				//retrieve settings from the user's profile
 				
@@ -132,9 +147,12 @@ function init() {
 				sessionScope.put("appMenuOptions", docUser.getItemValueString("appMenuOptions"));
 				sessionScope.put("appMenuOptionsActive", docUser.getItemValue("appMenuOptionsActive"));
 					
-				//get user's org unit
-				sessionScope.put("orgUnitId", docUser.getItemValueString("orgUnitId"));
-				sessionScope.put("orgUnitName", docUser.getItemValueString("orgUnitName"));
+				//get user's org unit(s)
+				sessionScope.put("userOrgUnitIds", docUser.getItemValue("orgUnitIds"));
+				sessionScope.put("userOrgUnitNames", docUser.getItemValue("orgUnitNames"));
+				
+				sessionScope.put("currentOrgUnitId", (sessionScope.get("userOrgUnitIds").length>0 ? sessionScope.get("userOrgUnitIds")[0] : "" ));
+				sessionScope.put("currentOrgUnitName", (sessionScope.get("userOrgUnitNames").length>0 ? sessionScope.get("userOrgUnitNames")[0] : "" ));
 				
 				//get number of new updates for this user
 				var numNewUpdates = getNumNewItems( docUser.getItemValueString("lastViewedUpdate"), "vwUpdates" )
@@ -152,28 +170,24 @@ function init() {
 				//profile photo
 				sessionScope.put("profilePhotoUrl", getProfilePhotoUrl(currentUser) );
 				
-				//get org unit's alert level
-				var orgUnitId = sessionScope.get("orgUnitId");
+				//get current org unit's alert level
+				var orgUnitId = sessionScope.get("currentOrgUnitId");
 				if (orgUnitId.length>0) {
 					
 					var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
 					var docOrgUnit = database.getDocumentByUNID( _unid );
 					
 					if (docOrgUnit != null) {
-						sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
+						sessionScope.put("currentOrgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 					}
 					
 				}
 				
-			} else {
-				
-				var nm = session.createName(currentUser);
-				sessionScope.put("name", nm.getCommon() );
-				
 			}
 			
-			//get number of open tasks, assigned to the current user (based on bc role)
-			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+			//get number of open tasks, assigned to the current user (based on bc role and org units)
+			//sessionScope.put( "numAssignedTasks", getNumAssignedTasks( sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
+			
 			
 			if (!isUnplugged() ) {
 				
@@ -244,19 +258,30 @@ function getMap() {
 }
 
 //get number of open tasks, assigned to the current user (based on bc role)
-function getNumAssignedTasks(orgUnitId, roleId) {
+function getNumAssignedTasks(orgUnitIds, roleId) {
 	
 	//dBar.debug("get num assigned...")
 	
 	var numAssignedTasks = 0;
 	
+	if (orgUnitIds == null) {
+		dBar.debug("no org units - 0 assigned tasks");
+		return numAssignedTasks;
+	}
+
 	try {
-	
-		var vwTasks = database.getView("vwTasksAssignedByRoleId");
-		var key = orgUnitId + "-" + roleId;
 		
-		var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
-		numAssignedTasks = vec.getCount();
+		var vwTasks = database.getView("vwTasksAssignedByRoleId");
+		
+		for (var i=0; i<orgUnitIds.length; i++) {
+		
+			var key = orgUnitIds[i] + "-" + roleId;
+		
+			var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
+			numAssignedTasks += vec.getCount();
+			vec.recycle();
+			
+		}
 		
 		//dBar.debug("found " + numAssignedTasks + " assigned tasks for ou " + orgUnitId + " and role " + roleId);
 		
@@ -1312,7 +1337,7 @@ function assignTasks( docIncident, docScenario ) {
 		dBar.debug("all tasks have been created");
 		
 		//update number of open tasks, assigned to the current user (based on bc role)
-		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
 		
 		dBar.debug("number of assigned tasks updated to " + sessionScope.get("numAssignedTasks") );
 		

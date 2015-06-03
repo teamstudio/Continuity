@@ -3,7 +3,7 @@
 
 	<xp:this.data>
 		<xp:dominoView var="vwCallTree" viewName="vwCallTree">
-			<xp:this.categoryFilter><![CDATA[#{javascript:return sessionScope.get("orgUnitId") + "-" + viewScope.forUser}]]></xp:this.categoryFilter>
+			<xp:this.categoryFilter><![CDATA[#{javascript:return sessionScope.get("currentOrgUnitId") + "-" + viewScope.forUser}]]></xp:this.categoryFilter>
 		</xp:dominoView>
 	</xp:this.data>
 	
@@ -15,7 +15,7 @@ viewScope.put("hasCallTree", true);
 if ( isEmpty(forUser) ) {
 
 	//default starting point for the call tree: user who the current user (I) should call
-	var rootUser = getCallTreeRootUser( sessionScope.get("orgUnitId") );
+	var rootUser = getCallTreeRootUser( sessionScope.get("currentOrgUnitId") );
 	
 	if (isEmpty(rootUser)) {
 		viewScope.put("hasCallTree", false);

@@ -327,14 +327,18 @@
 			</xp:text>
 		</xe:formRow>
 
-		<xe:formRow id="formRow11" label="Organization unit:" for="comboBox2">
+		<xe:formRow id="formRow11" label="Organization unit:" for="cbOrgUnits">
 			
-			<xp:comboBox id="comboBox2" value="#{docContact.orgUnitId}" readonly="#{javascript:!sessionScope.isEditor}">
-				<xp:selectItem itemLabel="Select organization unit" itemValue=""></xp:selectItem>
+			<xp:checkBoxGroup
+				id="cbOrgUnits"
+				value="#{docContact.orgUnitIds}">
+				<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor && docContact.isEditable()}]]></xp:this.rendered>
 				<xp:selectItems id="selectItems2">
 					<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwOrgUnits", 2);}]]></xp:this.value>
 				</xp:selectItems>
-			</xp:comboBox>
+			</xp:checkBoxGroup>
+
+			<xp:text value="#{javascript:@Implode( docContact.getItemValue('orgUnitNames'), ', ')}" rendered="#{javascript:!docContact.isEditable() || !sessionScope.isEditor}"/>
 
 		</xe:formRow>
 

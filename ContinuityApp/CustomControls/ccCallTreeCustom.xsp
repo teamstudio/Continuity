@@ -9,9 +9,9 @@ try {
 	//set default org unit id to use for the call tree (can be changed by the user)
 	if (!sessionScope.containsKey("callTreeOrgUnitId") ) {
 	
-		if ( !isEmpty( sessionScope.orgUnitId) ) { 
+		if ( !isEmpty( sessionScope.get("currentOrgUnitId") ) ) { 
 			//current user's org unit
-			sessionScope.put("callTreeOrgUnitId", sessionScope.orgUnitId);
+			sessionScope.put("callTreeOrgUnitId", sessionScope.get("currentOrgUnitId") );
 		} else {	
 			//first org unit
 			var c = applicationScope.get("orgUnitChoices");
@@ -21,8 +21,9 @@ try {
 			}
 		}
 	}
-		
-	viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+	
+	viewScope.put( "contactOptions", @DbLookup( @DbName() , "vwContactsByOrgUnit", sessionScope.callTreeOrgUnitId, 12, "[FailSilent]") );
+	viewScope.put( "contactOptions-" + sessionScope.callTreeOrgUnitId, viewScope.get("contactOptions") );
 	viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 } catch (e) {
 	dBar.error(e);
@@ -45,7 +46,7 @@ try {
 					<xp:eventHandler event="onchange" submit="true"
 						refreshMode="none">
 						<xp:this.action><![CDATA[#{javascript:
-						viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+						viewScope.put("contactOptions", @DbLookup( @DbName() , "vwContactsByOrgUnit", sessionScope.callTreeOrgUnitId, 12, "[FailSilent]") );
 		viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
 		facesContext.getExternalContext().redirect("dashboard.xsp#content=callTree");
 			}]]></xp:this.action>

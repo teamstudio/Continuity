@@ -40,9 +40,9 @@ if ( sessionScope.isEditor && !isEmpty(orgUnid) ) {
 				
 	if (docOrgUnit != null) {
 	
-		sessionScope.put("orgUnitId", docOrgUnit.getItemValueString("id"));
-		sessionScope.put("orgUnitName", docOrgUnit.getItemValueString("name") );
-		sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
+		sessionScope.put("currentOrgUnitId", docOrgUnit.getItemValueString("id"));
+		sessionScope.put("currentOrgUnitName", docOrgUnit.getItemValueString("name") );
+		sessionScope.put("currentOrgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 	}
 
 }

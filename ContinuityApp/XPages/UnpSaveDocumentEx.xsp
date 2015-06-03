@@ -155,9 +155,11 @@ try{
 				if ( isTask ) {		//saving a new task
 				
 					doSync = true;
+					
+					//save in the current org unit
 				
 					doc.replaceItemValue("status", "assigned" );
-					orgUnitId = sessionScope.orgUnitId;
+					orgUnitId = sessionScope.currentOrgUnitId;
 					doc.replaceItemValue("orgUnitId", orgUnitId );
 					
 					//find incident name
@@ -233,7 +235,7 @@ try{
 				if ( alertLevel.equals("high") ) {
 					maxAlertLevel = "high";
 				} else {
-					maxAlertLevel = getMaxAlertLevel( sessionScope.get("orgUnitId") );
+					maxAlertLevel = getMaxAlertLevel( sessionScope.get("currentOrgUnitId") );
 				}
 				
 				docOU.replaceItemValue("alertLevel", maxAlertLevel);
@@ -257,8 +259,8 @@ try{
 			if (isIncident) {
 			
 				//ML: update alert level in session scope (if new incident was registered for current OU)
-				if (orgUnitId == sessionScope.get("orgUnitId") ) {
-					sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
+				if (orgUnitId == sessionScope.get("currentOrgUnitId") ) {
+					sessionScope.put("currentOrgUnitAlertLevel", maxAlertLevel);
 				}
 		
 				if (isNew) {

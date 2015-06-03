@@ -49,7 +49,7 @@ public class Contact implements Serializable {
 	private String noteId;
 
 	private String roleId;
-	private String orgUnitId;
+	private Vector<String> orgUnitIds;
 	private String status;
 
 	private UploadedFile photo;
@@ -68,6 +68,7 @@ public class Contact implements Serializable {
 	}
 
 	//save the current contact document
+	@SuppressWarnings("unchecked")
 	public boolean save(com.ibm.xsp.model.domino.wrapped.DominoDocument xspDocContact) {
 
 		boolean success = false;
@@ -161,8 +162,12 @@ public class Contact implements Serializable {
 			docContact.replaceItemValue("appMenuOptionsActive", role.getAppMenuOptionsActive());
 
 			//store org unit name
-			orgUnitId = docContact.getItemValueString("orgUnitId");
-			docContact.replaceItemValue("orgUnitName", OrganisationUnit.getName(orgUnitId));
+			orgUnitIds = docContact.getItemValue("orgUnitIds");
+			Vector<String> orgUnitNames = new Vector<String>();
+			for(String ouId : orgUnitIds) {
+				orgUnitNames.add( OrganisationUnit.getName(ouId) );
+			}
+			docContact.replaceItemValue("orgUnitNames", orgUnitNames);
 
 			docContact.save();
 

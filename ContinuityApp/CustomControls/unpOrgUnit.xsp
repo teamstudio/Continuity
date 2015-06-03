@@ -13,7 +13,7 @@
 				styleClass="headeritem" tagName="li">
 			</xp:text>
 			<xp:text escape="false" id="computedField3" styleClass="headeritem" tagName="li">
-				<xp:this.value><![CDATA[#{javascript:(sessionScope.isEditor ? "<a href=\"UnpSwitchOrgUnit.xsp\" onclick=\"$.blockUI()\">" + sessionScope.get("orgUnitName") + "</a>" : sessionScope.get("orgUnitName") ) +
+				<xp:this.value><![CDATA[#{javascript:(sessionScope.isEditor ? "<a href=\"UnpSwitchOrgUnit.xsp\" onclick=\"$.blockUI()\">" + sessionScope.get("currentOrgUnitName") + "</a>" : sessionScope.get("currentOrgUnitName") ) +
 				(applicationScope.isReadOnlyMode ? " (R/O)" : "") +
 				(sessionScope.isDebug ? " (debug)" : "");}]]></xp:this.value>
 			</xp:text>
@@ -23,21 +23,21 @@
 
 			<xp:text tagName="li" value="High">
 				<xp:this.styleClass><![CDATA[#{javascript:var out = "high";
-if (sessionScope.get("orgUnitAlertLevel") == "high"){
+if (sessionScope.get("currentOrgUnitAlertLevel") == "high"){
 	out += " active";
 }
 return out;}]]></xp:this.styleClass>
 			</xp:text>
 			<xp:text tagName="li" value="Elevated">
 				<xp:this.styleClass><![CDATA[#{javascript:var out = "elevated";
-if (sessionScope.get("orgUnitAlertLevel") == "elevated"){
+if (sessionScope.get("currentOrgUnitAlertLevel") == "elevated"){
 	out += " active";
 }
 return out;}]]></xp:this.styleClass>
 			</xp:text>
 			<xp:text tagName="li" value="Normal">
 				<xp:this.styleClass><![CDATA[#{javascript:var out = "normal";
-if (sessionScope.get("orgUnitAlertLevel") == "normal"){
+if (sessionScope.get("currentOrgUnitAlertLevel") == "normal"){
 	out += " active";
 }
 return out;}]]></xp:this.styleClass>

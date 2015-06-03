@@ -34,13 +34,19 @@
 									id="cbCalledBy"
 									style="white-space:nowrap"
 									rendered="#{javascript:viewScope.calledBy == null}">
-									<xp:selectItem
-										itemLabel="- select a contact -"
-										itemValue="">
-									</xp:selectItem>
 									<xp:selectItems>
-										<xp:this.value><![CDATA[#{javascript:viewScope.get('contactOptions');}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:
+var lu = viewScope.get("contactOptions-" + sessionScope.callTreeOrgUnitId);
+					
+if (!isEmpty(lu) ) {
+	var o = ['- select a contact -|'];
+	return o.concat(lu);
+} else {
+	return ['No contacts found|'];
+}
+						}]]></xp:this.value>
 									</xp:selectItems>
+
 								</xp:comboBox>
 
 								<xp:text
@@ -77,7 +83,7 @@
 														refreshMode="partial"
 														refreshId="whoCallsWho">
 														<xp:this.action><![CDATA[#{javascript:
-						viewScope.put("contactOptions", @DbLookup( @DbName() , "vwBCUsersByOrgUnit", sessionScope.callTreeOrgUnitId, 3, "[FailSilent]") );
+						viewScope.put("contactOptions", @DbLookup( @DbName() , "vwContactsByOrgUnit", sessionScope.callTreeOrgUnitId, 12, "[FailSilent]") );
 			}]]></xp:this.action>
 													</xp:eventHandler>
 												</xp:comboBox>
@@ -94,7 +100,7 @@
 													id="cbCalls"
 													style="white-space:nowrap">
 													<xp:selectItems>
-														<xp:this.value><![CDATA[#{javascript:var lu = @DbLookup( @DbName() , "vwBCUsersByOrgUnit", ( !isEmpty(viewScope.addContactOrgUnitId) ?  viewScope.addContactOrgUnitId : sessionScope.callTreeOrgUnitId), 3, "[FailSilent]");
+														<xp:this.value><![CDATA[#{javascript:var lu = @DbLookup( @DbName() , "vwContactsByOrgUnit", ( !isEmpty(viewScope.addContactOrgUnitId) ?  viewScope.addContactOrgUnitId : sessionScope.callTreeOrgUnitId), 12, "[FailSilent]");
 						
 						
 						if (!isEmpty(lu) ) {

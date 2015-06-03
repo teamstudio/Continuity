@@ -17,8 +17,8 @@
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
 				<xp:this.action><![CDATA[#{javascript:var thisOrgName = orgUnits.getDocument().getItemValueString("name");
-sessionScope.put("orgUnitName", thisOrgUnit);
-sessionScope.put("orgUnitId", orgUnits.getDocument().getItemValueString("id"));
+sessionScope.put("currentOrgUnitName", thisOrgUnit);
+sessionScope.put("currentOrgUnitId", orgUnits.getDocument().getItemValueString("id"));
 }]]></xp:this.action>
 			</xp:eventHandler></xp:viewColumn><xp:viewColumn columnName="alertLevel" id="viewColumn1">
 			<xp:this.facets>

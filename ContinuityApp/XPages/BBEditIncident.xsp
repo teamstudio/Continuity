@@ -192,8 +192,8 @@ else {
 		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
 	}
 	doc.replaceItemValue("orgUnitName", orgName);
-	sessionScope.put("orgUnitName", orgName);
-	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
+	sessionScope.put("currentOrgUnitName", orgName);
+	sessionScope.put("currentOrgUnitId", doc.getItemValueString("orgUnitId"));
 	
 	doc.replaceItemValue("formname", "fIncident");
 	
@@ -294,8 +294,8 @@ else {
 		orgName = (DBOrgNameResult.constructor == Array) ? DBOrgNameResult : [ DBOrgNameResult ];
 	}
 	doc.replaceItemValue("orgUnitName", orgName);
-	sessionScope.put("orgUnitName", orgName);
-	sessionScope.put("orgUnitId", doc.getItemValueString("orgUnitId"));
+	sessionScope.put("currentOrgUnitName", orgName);
+	sessionScope.put("currentOrgUnitId", doc.getItemValueString("orgUnitId"));
 	
 	doc.replaceItemValue("formname", "fIncident");
 	

@@ -46,7 +46,7 @@
 
 }
 											
-											return "<select id=\"incidentId\" name=\"incidentId\" class=\"xspComboBox xspListBox required\">" + getOpenIncidentOptions(sessionScope.get("orgUnitId"), selected) + "</select>";
+											return "<select id=\"incidentId\" name=\"incidentId\" class=\"xspComboBox xspListBox required\">" + getOpenIncidentOptions(sessionScope.get("currentOrgUnitId"), selected) + "</select>";
 											}]]>							
 											</xp:this.value>
 										</xp:text>

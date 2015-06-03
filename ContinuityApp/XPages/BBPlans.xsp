@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Plans">
 	<xp:this.data>
 		<xp:dominoView var="viewScenarios" viewName="BBvwScenarios">
-			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId");}]]></xp:this.categoryFilter>
+			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("currentOrgUnitId");}]]></xp:this.categoryFilter>
 		</xp:dominoView>
 	</xp:this.data>
 

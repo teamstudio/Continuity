@@ -12,7 +12,7 @@
 		
 		<xp:repeat id="repeat3" rows="50" var="plan" disableOutputTag="true">
 
-			<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(sessionScope.get("orgUnitId"))}]]></xp:this.value>
+			<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(sessionScope.get("currentOrgUnitId"))}]]></xp:this.value>
 			
 			<li class="categoryRowFixed">
 			

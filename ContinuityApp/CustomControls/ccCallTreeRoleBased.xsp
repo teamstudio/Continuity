@@ -100,7 +100,7 @@
 													itemValue="">
 												</xp:selectItem>
 												<xp:selectItems>
-													<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName() , "vwBCUsersByOrgUnit", ouRow.getColumnValue("id"), 2);}]]></xp:this.value>
+													<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName() , "vwContactsByOrgUnit", ouRow.getColumnValue("id"), 2);}]]></xp:this.value>
 												</xp:selectItems>
 											</xp:comboBox>
 

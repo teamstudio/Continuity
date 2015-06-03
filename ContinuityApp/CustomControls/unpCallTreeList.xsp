@@ -5,7 +5,7 @@
 	<xp:this.data>
 		<xp:dominoView var="view2"
 			viewName="vwContactsByRole">
-			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId") + "-" + viewScope.get("roleId")}]]></xp:this.categoryFilter>
+			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("currentOrgUnitId") + "-" + viewScope.get("roleId")}]]></xp:this.categoryFilter>
 		</xp:dominoView>
 	</xp:this.data>
 

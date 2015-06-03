@@ -75,15 +75,15 @@ if (!applicationScope.isReadOnlyMode) {
 			docOU.recycle();
 			
 			//ML: update alert level in session scope (if new incident was registered for current OU)
-			if (orgUnitId == sessionScope.get("orgUnitId") ) {
-				sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
+			if (orgUnitId == sessionScope.get("currentOrgUnitId") ) {
+				sessionScope.put("currentOrgUnitAlertLevel", maxAlertLevel);
 			}
 			
 		}
 		
 		
 		//ML: update number of assigned tasks
-		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
 		
 		//ML: create update item for this deactivation
 		var incidentDesc = doc.getItemValueString("description")
@@ -152,7 +152,7 @@ if (!applicationScope.isReadOnlyMode) {
 	}
 	
 	//update number of open tasks for this user
-	sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+	sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
 	
 }
 

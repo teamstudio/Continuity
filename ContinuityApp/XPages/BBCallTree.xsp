@@ -3,7 +3,7 @@
 	<xp:this.data>
 		<xp:dominoView var="viewContacts" viewName="BBvwContactsOrg">
 
-			<xp:this.keys><![CDATA[#{javascript:var thisKey = [sessionScope.get("orgUnitId"), sessionScope.get("thisRole")];
+			<xp:this.keys><![CDATA[#{javascript:var thisKey = [sessionScope.get("currentOrgUnitId"), sessionScope.get("thisRole")];
 return thisKey;}]]></xp:this.keys>
 		</xp:dominoView>
 	</xp:this.data>
@@ -34,7 +34,7 @@ return thisKey;}]]></xp:this.keys>
 	}]]></xp:this.beforePageLoad>
 
 	
-	<xp:this.pageTitle><![CDATA[#{javascript:"Call Tree: " + sessionScope.get("orgUnitName");}]]></xp:this.pageTitle>
+	<xp:this.pageTitle><![CDATA[#{javascript:"Call Tree: " + sessionScope.get("currentOrgUnitName");}]]></xp:this.pageTitle>
 	<xp:table>
 		<xp:tr>
 			<xp:td>

@@ -25,10 +25,15 @@ function configApp() {
 			var isEditor = userType.equals("editor");
 			sessionScope.put("isEditor", isEditor);
 			sessionScope.put("roleName", userDoc.getItemValueString("roleName"));			
-			sessionScope.put("roleId", userDoc.getItemValueString("roleId"));			
-			sessionScope.put("orgUnitName", userDoc.getItemValueString("orgUnitName"));			
-			var orgUnitId = userDoc.getItemValueString("orgUnitId");
-			sessionScope.put("orgUnitId", orgUnitId);			
+			sessionScope.put("roleId", userDoc.getItemValueString("roleId"));
+		
+			sessionScope.put("userOrgUnitNames", userDoc.getItemValueString("orgUnitNames"));			
+			var orgUnitIds = userDoc.getItemValue("orgUnitIds");
+			sessionScope.put("userOrgUnitIds", orgUnitIds);	
+			
+			sessionScope.put("currentOrgUnitId", (orgUnitIds.length>0 ? orgUnitIds[0] : "" ));
+			sessionScope.put("currentOrgUnitName", (sessionScope.get("userOrgUnitNames").length>0 ? sessionScope.get("userOrgUnitNames")[0] : "" ));
+			
 			
 			//Set up settings
 			var vwAllByType:NotesView = database.getView("BBvwAllByType");
@@ -88,7 +93,7 @@ function configApp() {
 				var docOrgUnit = vwOrgUnits.getDocumentByKey( orgUnitId, true);
 			
 				if (docOrgUnit != null) {
-					sessionScope.put("orgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
+					sessionScope.put("currentOrgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
 				}
 			}*/
 			//Build views for use later (performace)
@@ -205,18 +210,22 @@ function setCallTreeLevels(){
 	if (DBLResultIds != undefined){
 		var roleIds = (DBLResultIds.constructor == Array) ? DBLResultIds : [ DBLResultIds ];
 	}
-	//Get roles for users OrgUnit
-	var vc = database.getView("BBvwContactsOrg").getAllEntriesByKey(sessionScope.get("orgUnitId"), true);
-	var ve = vc.getFirstEntry();
-	var roleName = "";
-	var orgRoles = [];
-	while (null != ve) {
-		
+	//Get roles for users OrgUnit(s)
+	var ous = sessionScope.get("userOrgUnitIds"); 
+	for (var i=0; i< ous.length; i++) {
+		var orgUnitId = ous[i];
+		var vc = database.getView("BBvwContactsOrg").getAllEntriesByKey(orgUnitId, true);
+		var ve = vc.getFirstEntry();
+		var roleName = "";
+		var orgRoles = [];
+		while (null != ve) {
+			
 			roleName = ve.getColumnValues()[1];
 			if(orgRoles.indexOf(roleName) == -1){
 				orgRoles.push(roleName);
 			}
 			ve = vc.getNextEntry();
+		}
 	}
 	
 	print("No of Roles: " + orgRoles.length);
@@ -334,11 +343,11 @@ function processOUAlertLevel(doc){
 				maxAlertLevel = "high";
 			} else {
 				//Question ML about this line
-				maxAlertLevel = getMaxAlertLevel( sessionScope.get("orgUnitId") );
+				maxAlertLevel = getMaxAlertLevel( sessionScope.get("currentOrgUnitId") );
 			}
 				
-			if (orgUnitId == sessionScope.get("orgUnitId") ) {
-				sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
+			if (orgUnitId == sessionScope.get("currentOrgUnitId") ) {
+				sessionScope.put("currentOrgUnitAlertLevel", maxAlertLevel);
 			}
 			docOU.replaceItemValue("alertLevel", maxAlertLevel);
 			docOU.replaceItemValue("activeScenarioId", scenarioId );
@@ -430,8 +439,8 @@ function deactivateIncident(doc){
 					docOU.save();
 				}
 				//ML: update alert level in session scope (if new incident was registered for current OU)
-				if (orgUnitId == sessionScope.get("orgUnitId") ) {
-					sessionScope.put("orgUnitAlertLevel", maxAlertLevel);
+				if (orgUnitId == sessionScope.get("currentOrgUnitId") ) {
+					sessionScope.put("currentOrgUnitAlertLevel", maxAlertLevel);
 				}
 			}
 			catch(e){
@@ -439,7 +448,7 @@ function deactivateIncident(doc){
 			}
 
 			//ML: update number of assigned tasks
-			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
 			
 			//ML: create update item for this deactivation
 			var incidentDesc = doc.getItemValueString("description")				
@@ -473,17 +482,22 @@ function deactivateIncident(doc){
 		}
 	}		
 //get number of open tasks, assigned to the current user (based on bc role)
-function getNumAssignedTasks(orgUnitId, roleId) {
+function getNumAssignedTasks(orgUnitIds, roleId) {
 	
 	var numAssignedTasks = 0;
 	
 	try {
 	
 		var vwTasks = database.getView("vwTasksAssignedByRoleId");
-		var key = orgUnitId + "-" + roleId;
+		for (var i=0; i<orgUnitIds.length; i++) {
+			var key = orgUnitIds[i] + "-" + roleId;
 		
-		var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
-		numAssignedTasks = vec.getCount();
+			var vec:NotesViewEntryCollection = vwTasks.getAllEntriesByKey(key, true);
+			numAssignedTasks += vec.getCount();
+			vec.recycle();
+			
+		}
+		
 	} catch (e) {
 		print("ERROR ASSIGN # TASKS:" + e);	
 	}
@@ -567,7 +581,7 @@ function assignTasksToIncident(docIncident) {
 
 			//update number of open tasks, assigned to the current user (based on bc role)
 			//IS THIS NEEDED FOR BB VERSION?
-			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+			sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
 
 			//print("Num Assigned Tasks = " + sessionScope.get("numAssignedTasks"));
 		}
@@ -602,7 +616,7 @@ function processTask(docUnid, status){
 
 		print("UPDATING NUM TASKS");
 		//update number of open tasks for this user
-		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("orgUnitId"), sessionScope.get("roleId")) );
+		sessionScope.put( "numAssignedTasks", getNumAssignedTasks(sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
   	}
 	print("DOC MUST BE NULL!! Unid = " + docUnid );  
   }

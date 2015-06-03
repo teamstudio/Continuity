@@ -48,7 +48,7 @@
 			<xp:this.data>
 				<xp:dominoView var="viewContacts"
 					viewName="vwContactsByOrgUnit">
-					<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("orgUnitId");}]]></xp:this.categoryFilter>
+					<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.get("currentOrgUnitId");}]]></xp:this.categoryFilter>
 				</xp:dominoView>
 			</xp:this.data>
 			<xp:viewColumn columnName="email" id="viewColumn1">
@@ -82,7 +82,7 @@ else {
 
 var contactList = new Array;		
 var vwContacts = database.getView("vwContactsByOrgUnit");
-var entryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("orgUnitId"), true);
+var entryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("currentOrgUnitId"), true);
 var entry = entryCollection.getFirstEntry();
 		
 while (null != entry) {

@@ -47,7 +47,7 @@
 										<xp:selectItem
 											itemLabel="#{javascript:'- Select an ' + applicationScope.labels['incident'].toLowerCase() + ' -'}"></xp:selectItem>
 										<xp:selectItems>
-											<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwIncidentsOpen", sessionScope.get("orgUnitId"), 3, "[FAILSILENT]")}]]></xp:this.value>
+											<xp:this.value><![CDATA[#{javascript:@DbLookup( @DbName(), "vwIncidentsOpen", sessionScope.get("currentOrgUnitId"), 3, "[FAILSILENT]")}]]></xp:this.value>
 										</xp:selectItems>
 									</xp:comboBox>
 

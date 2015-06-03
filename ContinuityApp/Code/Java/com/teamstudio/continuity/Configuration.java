@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Vector;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.teamstudio.continuity.utils.Logger;
 import com.teamstudio.continuity.utils.Utils;
@@ -39,7 +40,7 @@ public class Configuration implements Serializable {
 	private String callTreeType;
 	
 	private static String APP_VERSION = "v1.5.0";		//current application version
-	private static String DATA_VERSION = "106";			//data version (used for checking if a conversion is needed)
+	private static String DATA_VERSION = "145";			//data version (used for checking if a conversion is needed)
 	
 	private String serverName;
 	
@@ -61,7 +62,6 @@ public class Configuration implements Serializable {
 	/*
 	 * Reload the application configuration by reading the settings document
 	 */
-	@SuppressWarnings("unchecked")
 	public void reload() {
 	
 		Database dbCurrent = null;
@@ -86,72 +86,7 @@ public class Configuration implements Serializable {
 				
 				if ( !dataVersion.equals(DATA_VERSION) ) {
 					
-					DebugToolbar.get().info("start conversion: role > appMenuOptions");
-					DocumentCollection dc;
-					dc = dbCurrent.search("form=\"fRole\" & @IsUnavailable(appMenuOptions)");
-					if (dc.getCount()>0) {
-						dc.stampAll("appMenuOptions", "all");
-					}
-					
-					dc = dbCurrent.search("form=\"fContact\"");
-					if (dc.getCount()>0) {
-						
-						boolean changed = false;
-						
-						Document doc = dc.getFirstDocument();
-						while (null != doc) {
-							
-							changed = false;
-							
-							if (!doc.hasItem("appMenuOptions") ) {
-								doc.replaceItemValue("appMenuOptions", "all");
-								changed = true;
-							}
-							
-							String callTreeRoot = doc.getItemValueString("callTreeRoot");
-							Vector<String> callTreeCalledBy = doc.getItemValue("callTreeCalledBy");
-							Vector<String> callTreeContacts = doc.getItemValue("callTreeContacts");
-							String orgUnitId = doc.getItemValueString("orgUnitId");
-							
-							if (callTreeRoot.length() > 0 && callTreeRoot.indexOf("-") == -1) {
-								doc.replaceItemValue("callTreeRoot", orgUnitId + "-" + callTreeRoot );
-								changed =true;
-							}
-							
-							for (int i = 0; i < callTreeCalledBy.size(); i++) {
-								String _this = callTreeCalledBy.get(i);
-								if (_this.length()>0 && _this.indexOf("-")==-1) {
-									callTreeCalledBy.set(i, orgUnitId + "-" + _this);
-									changed = true;
-								}
-							}
-							
-							for (int i = 0; i < callTreeContacts.size(); i++) {
-								String _this = callTreeContacts.get(i);
-								if (_this.length()>0 && _this.indexOf("-")==-1) {
-									callTreeContacts.set(i, orgUnitId + "-" + _this);
-									changed = true;
-								}
-							}
-							
-							if (changed) {
-								doc.replaceItemValue("callTreeCalledBy", callTreeCalledBy);
-								doc.replaceItemValue("callTreeContacts", callTreeContacts);
-								doc.save();
-							}
-							
-							Document tmp = dc.getNextDocument(doc);
-							doc.recycle();
-							doc = tmp;
-						}
-						
-						dc.stampAll("appMenuOptions", "all");
-					}
-										
-					//update version in settings document
-					docSettings = vwAllByType.getDocumentByKey("fSettings", true);
-					docSettings.replaceItemValue("dataVersion", DATA_VERSION);
-					docSettings.save();
+					convert(dataVersion, DATA_VERSION, dbCurrent, vwAllByType, docSettings);
 					
 				}
 
@@ -224,6 +159,121 @@ public class Configuration implements Serializable {
 			
 		}
 	
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void convert(String dataVersion, String DATA_VERSION, Database dbCurrent, View vwAllByType, Document docSettings) {
+		
+		try {
+			DebugToolbar.get().info("Start conversion (current data version: " + dataVersion + ", update to " + DATA_VERSION +")");
+			
+			DebugToolbar.get().info("- convert role > appMenuOptions");
+			
+			DocumentCollection dc;
+			dc = dbCurrent.search("form=\"fRole\" & @IsUnavailable(appMenuOptions)");
+			if (dc.getCount()>0) {
+				dc.stampAll("appMenuOptions", "all");
+			}
+			
+			DebugToolbar.get().info("- convert contacts (app menu options, org units, org unit in call tree)");
+			
+			dc = dbCurrent.search("form=\"fContact\"");
+			if (dc.getCount()>0) {
+				
+				boolean changed = false;
+				
+				Document doc = dc.getFirstDocument();
+				while (null != doc) {
+					
+					changed = false;
+					
+					//create app menu options field
+					if (!doc.hasItem("appMenuOptions") ) {
+						doc.replaceItemValue("appMenuOptions", "all");
+						changed = true;
+					}
+					
+					String callTreeRoot = doc.getItemValueString("callTreeRoot");
+					Vector<String> callTreeCalledBy = doc.getItemValue("callTreeCalledBy");
+					Vector<String> callTreeContacts = doc.getItemValue("callTreeContacts");
+				
+					String orgUnitId = null;
+					
+					if (doc.hasItem("orgUnitId") ) {
+						orgUnitId = doc.getItemValueString("orgUnitId");
+					} else {
+						Vector<String> o = doc.getItemValue("orgUnitIds");
+						if (o.size()>0) {
+							orgUnitId = o.get(0);
+						}
+					}
+					
+					boolean callTreeChanged = false;
+					
+					if ( StringUtil.isNotEmpty(orgUnitId) ) {
+						
+						if (callTreeRoot.length() > 0 && callTreeRoot.indexOf("-") == -1) {
+							doc.replaceItemValue("callTreeRoot", orgUnitId + "-" + callTreeRoot );
+							callTreeChanged =true;
+						}
+						
+						for (int i = 0; i < callTreeCalledBy.size(); i++) {
+							String _this = callTreeCalledBy.get(i);
+							if (_this.length()>0 && _this.indexOf("-")==-1) {
+								callTreeCalledBy.set(i, orgUnitId + "-" + _this);
+								callTreeChanged = true;
+							}
+						}
+						
+						for (int i = 0; i < callTreeContacts.size(); i++) {
+							String _this = callTreeContacts.get(i);
+							if (_this.length()>0 && _this.indexOf("-")==-1) {
+								callTreeContacts.set(i, orgUnitId + "-" + _this);
+								callTreeChanged = true;
+							}
+						}
+						
+						if ( callTreeChanged) {
+							changed = true;
+							doc.replaceItemValue("callTreeCalledBy", callTreeCalledBy);
+							doc.replaceItemValue("callTreeContacts", callTreeContacts);
+						}
+						
+					}
+					
+					//convert org unit to multi-value name
+					if (doc.hasItem("orgUnitId") ) {
+						doc.replaceItemValue("orgUnitIds", doc.getItemValueString("orgUnitId"));
+						doc.removeItem("orgUnitId");
+						changed = true;
+					}
+					if (doc.hasItem("orgUnitName") ) {
+						doc.replaceItemValue("orgUnitNames", doc.getItemValueString("orgUnitName"));
+						doc.removeItem("orgUnitName"); 
+						changed = true;
+					}
+						
+					if (changed) {
+						doc.save();
+					}
+					
+					Document tmp = dc.getNextDocument(doc);
+					doc.recycle();
+					doc = tmp;
+				}
+				
+				dc.stampAll("appMenuOptions", "all");
+			}
+						
+			DebugToolbar.get().info("Conversion finished - update data version");
+			
+			//update version in settings document
+			docSettings = vwAllByType.getDocumentByKey("fSettings", true);		//re-retrieve here using signer access
+			docSettings.replaceItemValue("dataVersion", DATA_VERSION);
+			docSettings.save();
+		} catch (Exception e) {
+			DebugToolbar.get().error(e);
+		}
 	}
 	
 	public String getCallTreeType() {

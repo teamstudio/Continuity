@@ -17,7 +17,7 @@
 		//dBar.debug("get selected");
 		
 		var vwContacts:NotesView = database.getView("vwContactsByOrgUnit");
-		var vec:NotesViewEntryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("orgUnitId"), true);
+		var vec:NotesViewEntryCollection = vwContacts.getAllEntriesByKey( sessionScope.get("currentOrgUnitId"), true);
 		var ve:NotesViewEntry = vec.getFirstEntry();
 		
 		while (null != ve) {

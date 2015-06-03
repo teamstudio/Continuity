@@ -67,7 +67,7 @@
 						<li>
 							<xp:label value="Org unit" id="label4" for="orgUnitId"></xp:label>
 							<xp:comboBox id="orgUnitId" value="#{docIncident.orgUnitId}"
-								styleClass="xspListBox" defaultValue="#{javascript:sessionScope.orgUnitId}" rendered="#{javascript:docIncident.isNewNote()}">
+								styleClass="xspListBox" defaultValue="#{javascript:sessionScope.currentOrgUnitId}" rendered="#{javascript:docIncident.isNewNote()}">
 								<xp:selectItems value="#{javascript:applicationScope.orgUnitChoices}">
 								</xp:selectItems>
 							</xp:comboBox>
@@ -86,7 +86,7 @@
 							
 							<xp:text disableTheme="true" escape="false" style="padding:0; display:inline; margin:0" rendered="#{javascript:docIncident.isNewNote()}">
 								<xp:this.value>
-								<![CDATA[#{javascript:var plans = getScenariosByPlan(sessionScope.get("orgUnitId"));
+								<![CDATA[#{javascript:var plans = getScenariosByPlan(sessionScope.get("currentOrgUnitId"));
 								
 								var options = [];
 								
