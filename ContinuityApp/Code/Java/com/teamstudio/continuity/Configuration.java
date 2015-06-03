@@ -419,7 +419,7 @@ public class Configuration implements Serializable {
 		sb.append("<ol><li>Define the key Assets or Activities at risk</li>");
 		sb.append("<li>Define your Organization structure i.e. org units and contacts</li>");
 		sb.append("<li>Define your list of Business Scenarios</li>");
-		sb.append("<li>Define your list of Plan checklists</li>");
+		sb.append("<li>Define your list of Plan Types</li>");
 		sb.append("<li>Create the relevant Task sequences under each Scenario</li>");
 		sb.append("<li>Define Responsibilities</li></ol>");
 
@@ -451,9 +451,9 @@ public class Configuration implements Serializable {
 		sb.append("but you may wish to customize these to your own particular situation. Go to the ");
 		sb.append("Business Scenarios screen in the Other Entities section of the web console to do this.</p>");
 
-		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 4. Define your Plan checklists </p>");
+		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 4. Define your Plan Types </p>");
 
-		sb.append("<p>Plan checklists provide a way of grouping your recovery Tasks (see Step 5 below) to ");
+		sb.append("<p>Plan Types provide a way of grouping your recovery Tasks (see Step 5 below) to ");
 		sb.append("align with your business continuity plan documents (e.g. Business Continuity Plan, ");
 		sb.append("Incident Management Plan, Crisis Communications Plan). File attachments can be ");
 		sb.append("added to each Checklist to provide more guidance to help with recovering from an ");
@@ -469,7 +469,7 @@ public class Configuration implements Serializable {
 		sb.append("Scenario, set the sequence of Tasks that would need to be carried out to deal with that ");
 		sb.append("particular Scenario and categorize these between Initial Tasks, Ongoing Tasks, and ");
 		sb.append("Deactivation Tasks (i.e. Tasks that need to be completed before you can deactivate ");
-		sb.append("that particular business continuity plan). When you create each Task, you can link it to one or more Plan checklists.</p>");
+		sb.append("that particular business continuity plan). When you create each Task, you can link it to one or more Plan Types.</p>");
 
 		sb.append("<p style=\"margin: 20px 0 5px 0; font-weight: bold\">Step 6. Define Responsibilities </p>");
 

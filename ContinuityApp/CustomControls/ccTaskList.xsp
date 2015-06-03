@@ -110,7 +110,7 @@
 					</xp:text>
 			
 					<br />
-					<b>Plan checklists:</b>&#160;
+					<b>Plan Types:</b>&#160;
 					<xp:text escape="false" disableTheme="true">
 						<xp:this.value><![CDATA[#{javascript:if (row.getColumnValue("planNames").length==0) {
 				return "not allocated";

@@ -39,7 +39,7 @@
 
 	<xe:dialog
 		id="dlgAssignTo"
-		title="Allocate task to plan checklists">
+		title="Allocate task to Plan Types">
 		<xe:this.dojoAttributes>
 			<xp:dojoAttribute
 				name="autofocus"

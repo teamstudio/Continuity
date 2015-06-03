@@ -56,7 +56,7 @@ if (inputTitleNode) {
 					partialRefresh="true"
 					refreshId="dynamicContent1">
 					<xp:tabPanel
-						label="By scenario"
+						label="By Scenario"
 						id="tabPanel1">
 						<xp:eventHandler
 							event="onclick"
@@ -71,7 +71,7 @@ if (inputTitleNode) {
 					</xp:tabPanel>
 
 					<xp:tabPanel
-						label="By plan checklist"
+						label="By Plan Type"
 						id="tabPanel2">
 						<xp:eventHandler
 							event="onclick"
@@ -85,7 +85,7 @@ if (inputTitleNode) {
 					</xp:tabPanel>
 
 					<xp:tabPanel
-						label="By plan checklist (unallocated)"
+						label="By Plan Type (unallocated)"
 						id="tabPanel3">
 						<xp:eventHandler
 							event="onclick"
@@ -99,7 +99,7 @@ if (inputTitleNode) {
 					</xp:tabPanel>
 
 					<xp:tabPanel
-						label="By responsibility"
+						label="By Responsibility"
 						id="tabPanel4">
 						<xp:eventHandler
 							event="onclick"

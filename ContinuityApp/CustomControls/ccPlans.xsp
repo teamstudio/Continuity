@@ -12,19 +12,27 @@
 
 		<div class="section">
 			<div class="title">
-				Plan Checklists
+				Plan Types
 			</div>
 			<div class="actions">
 
-				<xp:button value="Add checklist" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
-					<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicContent1">
+				<xp:button
+					value="Add Plan Type"
+					id="button1"
+					icon="page_add.png"
+					rendered="#{javascript:sessionScope.isEditor}">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="dynamicContent1">
 						<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("planForm");}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 			</div>
 		</div>
 
-		<xp:text value="No plan checklists found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
+		<xp:text value="No Plan Types found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
 
 		<!-- show a list of checklists -->
 		<xp:repeat id="repeat1" rows="100" var="rowEntry" disableOutputTag="true" value="#{vwPlans}" indexVar="rowIndex">
@@ -146,7 +154,7 @@
 							</xp:text>
 
 							<br />
-							<b>Plan Checklists:</b>
+							<b>Plan Types:</b>
 							&#160;
 							<xp:text escape="false" disableTheme="true">
 								<xp:this.value><![CDATA[#{javascript:var checklists = taskEntry.getColumnValues().get(10);

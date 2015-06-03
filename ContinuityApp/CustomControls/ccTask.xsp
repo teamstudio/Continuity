@@ -277,7 +277,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 		<xe:formRow
 			id="formRow6"
-			label="Plan checklists:">
+			label="Plan Types:">
 
 			<xp:div
 				id="planChecklists">
