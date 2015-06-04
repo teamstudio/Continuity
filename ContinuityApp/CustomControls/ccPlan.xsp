@@ -12,7 +12,7 @@
 				
 		<div class="section">
 			<div class="title">
-				Checklist
+				Plan Type
 			</div>		
 		</div>
 	
@@ -55,7 +55,7 @@
 	} catch (e) {
 		dBar.error(e);
 	}}]]></xp:this.action>
-							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this checklist?")]]></xp:this.script>
+							<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this Plan Type?")]]></xp:this.script>
 						</xp:eventHandler>
 					</xp:button>
 					
@@ -74,7 +74,7 @@
 				<xp:inputText id="inputText1" value="#{docPlan.name}"
 					required="true">
 					<xp:this.validators>
-						<xp:validateExpression message="Enter a name for this checklist">
+						<xp:validateExpression message="Enter a name for this Plan Type">
 						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
 					</xp:validateExpression>
 					</xp:this.validators>
