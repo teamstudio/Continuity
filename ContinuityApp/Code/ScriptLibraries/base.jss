@@ -210,6 +210,23 @@ function init() {
 	}
 }		//end init()
 
+function setOrgUnit( orgUnitId:string) {
+	
+	sessionScope.put("currentOrgUnitId", orgUnitId );
+	sessionScope.put("currentOrgUnitName", applicationScope.get("orgUnits")[orgUnitId] );
+	
+	//get  org unit's alert level	
+	var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
+	var docOrgUnit = database.getDocumentByUNID( _unid );
+	
+	if (docOrgUnit != null) {
+		sessionScope.put("currentOrgUnitAlertLevel", docOrgUnit.getItemValueString("alertLevel") );
+	} else {
+		sessionScope.put("currentOrgUnitAlertLevel", "" );
+	}
+	
+}
+
 function isEmpty( o ) {
 	
 	if ( typeof o == 'undefined' || o == null ) {
@@ -1362,9 +1379,14 @@ function isEmpty( input ) {
 	return false;
 }
 
-//retrieve an object containing information about the plans for a specific org unit
-//results are cached in the sessionScope
-function getScenariosByPlan( orgUnit ) {
+/*
+ * Retrieve a JSON object containing information about the plans for a specific org unit.
+ * 
+ * Note that a task can only be assigned to 1 scenario
+ * 
+ * Results are cached in the sessionScope
+ */
+function getScenariosByPlan( orgUnitId ) {
 	
 	var orgUnitPlans = [];
 	
@@ -1376,138 +1398,216 @@ function getScenariosByPlan( orgUnit ) {
 			plans = getMap();
 		}
 		
-		if ( plans[orgUnit] != null ) {
-			return plans[orgUnit];
+		if ( plans[orgUnitId] != null ) {
+			return plans[orgUnitId];
 		}
-		
-		dBar.debug("retrieving plans for org unit " + orgUnit + "...");
-		
-		//create an array of all plans for the current orgUnit, with in every plan an array of all scenario's in that plan
-		var vwScenariosByOrgUnitId:NotesView = database.getView("vwScenariosByOrgUnitId");
-		var nav:NotesViewNavigator = vwScenariosByOrgUnitId.createViewNavFromCategory( orgUnit );
-		
-		//dBar.debug("found " + nav.getCount() + "nav entries");
 		
 		var vwPlans:NotesView = database.getView("vwPlansById");
-		
-		var _plan = null;
-		
-		var ve:NotesViewEntry = nav.getFirst();
-		while (null != ve) {
-		
-			var colValues = ve.getColumnValues();
-		
-			if (ve.isCategory() ) {
-		
-				if (_plan != null) { orgUnitPlans.push( _plan ); }
-				
-				var planName = colValues.get(1);
-				
-				_plan = {
-					"name" : colValues.get(1),
-					"fileId" : null,
-					"scenarios" : [],
-					"addedIds" : []
-				};
-		
-			} else {
-		
-				var scenarioId = colValues.get(3);
-		
-				//dBar.debug("add scenario: " + colValues.get(2));
-		
-				var alreadyAdded = false;
-		
-				for (var i=0; i< _plan.addedIds.length && !alreadyAdded; i++) {
-					if ( _plan.addedIds[i].equals( scenarioId ) ) {
-						//dBar.debug("already added...");
-						alreadyAdded = true;
-					}
-				}
-				
-				if ( !alreadyAdded ) {
-					
-					var scenarioName = colValues.get(2);
-					var ouTarget = colValues.get(4)
-					
-					//dBar.debug("adding scenario: " + scenarioName);
-		
-					_plan.addedIds.push(scenarioId);
+		var numPlans = vwPlans.getEntryCount();
 			
-					_plan.scenarios.push( {
-						"name": scenarioName,
-						"id" : scenarioId,
-						"orgUnitTarget" : ouTarget,
-						"numTasks" : 1
-					} );
-				} else {
-				
-					_plan.scenarios[ _plan.scenarios.length-1 ].numTasks = _plan.scenarios[ _plan.scenarios.length-1 ].numTasks + 1;
-				
-				}
-				
-				if ( _plan.fileId == null ) {		//get plan's file details
-					
-					//dBar.debug("get deatils for " + _plan.name );
-					
-					//get plan id
-					var doc = ve.getDocument();
-					var planIds = doc.getItemValue("planIds");
-					var planNames = doc.getItemValue("planNames");
-					
-					var fileId = "";
-					var planId = "";
-					
-					for (var i=0; i<planNames.length; i++) {
-						if (planNames[i] == _plan.name) {
-							//dBar.debug("plan id found");
-							planId = planIds[i];
-							//dBar.debug("id = " + planId);
-
-							var vePlan = vwPlans.getEntryByKey( planId, true);
-							if (null != vePlan) {
-								
-								//dBar.debug("found plan entry");
-								
-								fileId = vePlan.getColumnValues().get(1);
-								
-								//dBar.debug("id = " + fileId);
-							
-							}
-							
-							break;
-						}
-					
-					}
-					
-					_plan.fileId = fileId;
-					_plan.planId = planId;
-					
-				}
-				
+		var vwScenariosByOrgUnitId:NotesView = database.getView("vwScenariosByOrgUnitId");
+		
+		//add scenarios
+		getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlans, vwPlans);
+		
+		//sort the results list
+		var sortByName = function(a,b) {
+			if (a.name.toLowerCase() < b.name.toLowerCase())
+				return -1;
+			if (a.name.toLowerCase() > b.name.toLowerCase())
+				return 1;
+			return 0;
 			
-			}
-			
-			ve = nav.getNext();
 		}
-			
-		if (_plan != null) { orgUnitPlans.push( _plan ); }
 		
-		nav.recycle();
-		vwScenariosByOrgUnitId.recycle();
+		//sort the plans and scenarios by name
+
+		orgUnitPlans.sort( sortByName);
+		
+		for (var i=0; i<orgUnitPlans.length; i++) {
+			var p = orgUnitPlans[i];
+			p.scenarios.sort( sortByName );
+		}
 		
 		//cache in sessionScope
-		plans[orgUnit] = orgUnitPlans;
+		plans[orgUnitId] = orgUnitPlans;
 		sessionScope.put("plans", plans);
 		
-		//dBar.debug("finished");
 		
 	} catch (e) {
-		dBar.error(e);	
+		dBar.error(e);
+	}
+	
+	return orgUnitPlans;
 
+}
+
+/*
+ * Create an array of all plans for the current orgUnit (and all org units), with in every plan an array of all scenario's in that plan
+ * 
+ * A scenario belongs to a plan if there are tasks (from that scenario) set up that have been linked to that plan.
+ * 
+ * Note: if a scenario is set to all Org Units: all org unit ids are copied to the task document, so we only need
+ * to process the category for the org unit id
+ */
+function getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlans, vwPlans) {
+	
+	if (sessionScope.get("isDebug")) dBar.debug("retrieving plans for org unit " + orgUnitId + "...");
+	
+	var _plan = null;
+	
+	//add scenario for org unit
+	var nav:NotesViewNavigator = vwScenariosByOrgUnitId.createViewNavFromCategory( orgUnitId );
+		
+	var veTask:NotesViewEntry = nav.getFirst();
+	while (null != veTask) {
+		
+		var colValues = veTask.getColumnValues();
+	
+		if (veTask.isCategory() ) {
+			
+			//new category: check if we need to add the already created plan object to the results array
+			_addPlanToList( _plan, orgUnitPlans);	
+			
+			_plan = _getPlanObject(colValues.get(1));		//init new plan object
+			
+		} else {
+	
+			var scenarioId = colValues.get(3);
+			var scenarioName = colValues.get(2);
+	
+			//if (sessionScope.get("isDebug")) dBar.debug("add scenario (id: " + scenarioId + ", name: " + scenarioName + ")");
+	
+			var scenIdx = _arrayGetIndex(_plan.addedScenarioIds, scenarioId);
+			var alreadyAdded = ( scenIdx > -1);
+			
+			if ( !alreadyAdded ) {
+		
+				if (sessionScope.get("isDebug")) dBar.debug("scenario not added yet: " + colValues.get(2));
+				
+				_plan.addedScenarioIds.push(scenarioId);
+				_plan.scenarios.push( _getScenarioObject( scenarioId, colValues.get(2), colValues.get(4) ) );
+				
+			} else {
+			
+				_plan.scenarios[ scenIdx ].numTasks = _plan.scenarios[ scenIdx ].numTasks + 1;
+			
+			}
+		
+			_setPlanDetails( vwPlans, veTask.getDocument(), _plan);				
+		
+		}
+		
+		veTask = nav.getNext();
 	}
 		
-	return orgUnitPlans;
+	_addPlanToList( _plan, orgUnitPlans);
+		
+	if (sessionScope.get("isDebug")) { dBar.debug("finished for " + orgUnitId); }
+
+	nav.recycle();
+	vwScenariosByOrgUnitId.recycle();
+	
+}
+
+function _addPlanToList( _plan, orgUnitPlans) {
+	if (_plan == null) { return; }
+	
+	for (var i=0; i<orgUnitPlans.length; i++) {
+		
+		if (orgUnitPlans[i].planName == _plan.planName) {
+			
+			for (var j=0; j<_plan.scenarios.length; j++) {
+				orgUnitPlans[i].scenarios.push( _plan.scenarios[j] );
+			}
+			for (var j=0; j<_plan.addedScenarioIds.length; j++) {
+				orgUnitPlans[i].addedScenarioIds.push( _plan.addedScenarioIds[j] );
+			}
+			return;
+		}
+		
+	}
+	
+	orgUnitPlans.push( _plan );
+	
+}
+
+//checks if a value exists in an array of value
+function _arrayGetIndex( arrIn, checkValue) {
+	
+	//dBar.debug("check already added with : " + checkValue);
+	
+	var idx = -1;
+	
+	for (var i=0; i< arrIn.length && idx==-1; i++) {
+		if ( arrIn[i].equals( checkValue ) ) {
+			idx = i;
+		}
+	}
+	
+	//dBar.debug("ret: " + idx);
+	
+	return idx;
+}
+
+
+function _getPlanObject(planName) {
+	
+	if (sessionScope.get("isDebug")) dBar.debug("init plan: " + planName);
+	
+	return 	{
+		"name" : planName,
+		"planId" : null,
+		"fileId" : null,
+		"scenarios" : [],
+		"addedScenarioIds" : []
+	};
+}
+
+function _getScenarioObject(scenarioId, scenarioName, ouTarget) {
+	
+	if (sessionScope.get("isDebug")) dBar.debug("adding scenario: " + scenarioName);
+	
+	return {
+			"name": scenarioName,
+			"id" : scenarioId,
+			"orgUnitTarget" : ouTarget,
+			"numTasks" : 1
+		};
+	
+}
+
+function _setPlanDetails( vwPlans:NotesView , docTask:NotesDocument , _plan) {
+	
+	//if (sessionScope.get("isDebug")) dBar.debug("get details for " + _plan.name );
+	
+	var planIds = docTask.getItemValue("planIds");
+	var planNames = docTask.getItemValue("planNames");
+	
+	var found = false;
+	
+	for ( var i=0; i<planNames.length && !found; i++ ) {
+		
+		if ( planNames[i] == _plan.name ) {
+			found = true;
+			
+			_plan.planId = planIds[i];
+			_plan.planName = _plan.name;
+			
+			var vePlan = vwPlans.getEntryByKey( _plan.planId, true);
+			
+			if (null != vePlan) {		
+				var _colValues = vePlan.getColumnValues();
+				_plan.fileId = _colValues.get(1);
+			}
+		}
+	
+	}
+	
+	if (!found) {
+		dBar.warn("plan id not found for " + _plan.name);
+	}
+	
 }
 
 function getOpenIncidentOptions(orgUnitId, selected) {

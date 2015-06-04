@@ -78,18 +78,18 @@
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
 
 									<xe:this.label><![CDATA[#{javascript:"Business scenarios (" + currentUserBean.numScenarios + ")"}]]></xe:this.label>
-								</xe:basicLeafNode><!--
-								
-								<xe:basicLeafNode
-									submitValue="scenariosByPlan">
-									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosByPlan");}]]></xe:this.selected>
-									<xe:this.label><![CDATA[#{javascript:"Checklists (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
-								
-								--><xe:basicLeafNode
+						
+								<xe:basicLeafNode
 									submitValue="plansList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("plansList");}]]></xe:this.selected>
 									<xe:this.label><![CDATA[#{javascript:"Plan Types (" + currentUserBean.numPlans + ")"}]]></xe:this.label>
+								</xe:basicLeafNode>
+								
+								<xe:basicLeafNode
+									submitValue="checklists">
+									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("checklists");}]]></xe:this.selected>
+									<xe:this.label><![CDATA[#{javascript:"Checklists"}]]></xe:this.label>
 								</xe:basicLeafNode>
 								
 								<xe:basicLeafNode
@@ -226,7 +226,7 @@ getComponent("dynamicContent1").show(c);
 							</xc:ccScenario>
 						</xp:panel>
 						
-						<xc:ccScenariosByPlan xp:key="scenariosByPlan" id="scenariosByPlan"></xc:ccScenariosByPlan>
+						<xc:ccChecklists xp:key="checklists" id="checklists"></xc:ccChecklists>
 						<xc:ccPlans xp:key="plansList"></xc:ccPlans>
 						<xc:ccPlan xp:key="planForm" />
 						

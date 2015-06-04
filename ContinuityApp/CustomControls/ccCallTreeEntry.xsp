@@ -25,8 +25,8 @@
 					event="onclick"
 					submit="true"
 					refreshMode="norefresh">
-					<xp:this.action><![CDATA[#{javascript:if ( callTreeBean.removeContact(sessionScope.callTreeOrgUnitId, compositeData.entry.unid) ) {
-					viewScope.put( "callTreeObj", getCallTree(sessionScope.callTreeOrgUnitId) );
+					<xp:this.action><![CDATA[#{javascript:if ( callTreeBean.removeContact(sessionScope.currentOrgUnitId, compositeData.entry.unid) ) {
+					viewScope.put( "callTreeObj", getCallTree(sessionScope.currentOrgUnitId) );
 					}
 }]]></xp:this.action>
 					<xp:this.script><![CDATA[return confirm("Are you sure you want to remove this contact from the call tree?");]]></xp:this.script>

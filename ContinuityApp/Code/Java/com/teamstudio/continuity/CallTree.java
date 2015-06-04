@@ -41,7 +41,7 @@ public class CallTree implements Serializable {
 			String id = docToRemove.getItemValueString("id");
 			String name = docToRemove.getItemValueString("name");
 
-			Logger.debug("- removing " + name + " from calltree");
+			Logger.debug("- removing " + name + " from calltree for org unit " + orgUnitId);
 
 			//find 'parent' contact (if any) and remove the current user (the contact that this user should be called by)
 			String q = "Form=\"fContact\" & @IsMember( \"" + orgUnitId + "-" + id + "\"; callTreeContacts)";
