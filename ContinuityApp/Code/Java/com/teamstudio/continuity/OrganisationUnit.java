@@ -46,7 +46,7 @@ public class OrganisationUnit {
 		
 		HashMap<String,String> orgUnits = (HashMap<String, String>) ExtLibUtil.getApplicationScope().get("orgUnits");
 		Vector<String> orgUnitIds = new Vector<String>( orgUnits.keySet() );
-		Vector<String> orgUnitNames = new Vector<String>( orgUnits.keySet() );
+		Vector<String> orgUnitNames = new Vector<String>( orgUnits.values() );
 		
 		String orgUnitTarget = xspDoc.getItemValueString("orgUnitTarget");
 		
