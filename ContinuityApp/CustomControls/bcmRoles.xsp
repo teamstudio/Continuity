@@ -12,7 +12,7 @@
 	<div class="section">
 		<div class="title">Responsibilities</div>
 		<div class="actions">
-			<xp:button value="Add role" id="button1" icon="page_add.png"
+			<xp:button value="Add Role" id="button1" icon="page_add.png"
 				rendered="#{javascript:sessionScope.isEditor}">
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1">
@@ -36,7 +36,7 @@
 
 					<!-- action to add a responsibility -->
 					<div style="float: right; margin: 0 5px" class="lotusTiny">
-						<xp:link escape="true" text="add responsibility"
+						<xp:link escape="true" text="Add Responsibility"
 							style="font-weight:normal" styleClass="lotusTiny" id="link2"
 							rendered="#{javascript:sessionScope.isEditor}">
 							<xp:eventHandler event="onclick" submit="true"

@@ -11,7 +11,7 @@
 		<div
 			class="actions">
 			<xp:button
-				value="Add contact"
+				value="Add Contact"
 				id="button1"
 				icon="user_add.png">
 				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
@@ -27,7 +27,7 @@
 			&#160;
 
 			<xp:button
-				value="Import contacts"
+				value="Import Contacts"
 				id="button2"
 				icon="group_add.png">
 				<xp:this.rendered><![CDATA[#{javascript:sessionScope.get("isEditor")}]]></xp:this.rendered>
@@ -88,7 +88,7 @@ return options;
 
 		<xc:ccMessage>
 			<xp:this.rendered><![CDATA[#{javascript:getComponent("viewPanel1").getRowCount()==0}]]></xp:this.rendered>
-			<xc:this.message><![CDATA[#{javascript:"No contacts found" +
+			<xc:this.message><![CDATA[#{javascript:"No Contacts found" +
 	(viewScope.filter && !viewScope.filter.equals("all") ? 
 		" in the selected organization unit" : 
 		"")}]]></xc:this.message>

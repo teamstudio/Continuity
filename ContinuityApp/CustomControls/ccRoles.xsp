@@ -7,7 +7,7 @@
 			<div class="section">
 		<div class="title">Roles</div>
 		<div class="actions">
-			<xp:button value="Add role" id="button1" icon="page_add.png"
+			<xp:button value="Add Role" id="button1" icon="page_add.png"
 					rendered="#{javascript:sessionScope.isEditor}">
 					<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 						refreshId="dynamicContent1">
@@ -21,7 +21,7 @@
 				<xp:dominoView var="vwRoles" viewName="vwRoles"></xp:dominoView>
 			</xp:this.data>
 			
-			<xp:text value="No roles found" rendered="#{javascript:getComponent('repeatRoles').getRowCount()==0}" />
+			<xp:text value="No Roles found" rendered="#{javascript:getComponent('repeatRoles').getRowCount()==0}" />
 			
 			<!-- repeat over the BC roles in the system -->	
 			<xp:repeat id="repeatRoles" rows="100" value="#{vwRoles}" 

@@ -10,7 +10,7 @@
 		<div class="actions">
 			<xp:button id="button2" icon="building_add.png"
 				rendered="#{javascript:sessionScope.isEditor}">
-				<xp:this.value><![CDATA[#{javascript:"Add " + configBean.getLabel("asset").toLowerCase()}]]></xp:this.value>
+				<xp:this.value><![CDATA[#{javascript:"Add " + configBean.getLabel("asset")}]]></xp:this.value>
 				<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 					refreshId="dynamicContent1">
 					<xp:this.action>

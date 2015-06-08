@@ -29,7 +29,7 @@
 
 	<xp:div styleClass="box">
 		<xp:this.rendered><![CDATA[#{javascript:viewScope.hasTasks == false && !compositeData.showDeactivationTask}]]></xp:this.rendered>
-		<div class="content">No tasks found</div>
+		<div class="content">No Tasks found</div>
 	</xp:div>
 
 	<div>

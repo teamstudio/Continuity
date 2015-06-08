@@ -81,7 +81,7 @@
 										</xp:eventHandler></xp:link>
 								</div>
 	
-								<xe:dialog id="dlgChangeContacts" title="Add role to contact">
+								<xe:dialog id="dlgChangeContacts" title="Add Role to Contact">
 									
 									<xp:panel style="padding: 15px;">
 									
@@ -105,10 +105,10 @@
 													var res = new java.util.Vector();
 													
 													if (lu.length == 0) {
-														return ['No contacts found|'];
+														return ['No Contacts found|'];
 													}
 													
-													res.add('- select a contact -|');
+													res.add('- select a Contact -|');
 													
 													
 													for (var i=0; i<lu.length; i++) {

@@ -20,7 +20,7 @@
 		<div class="actions">
 			
 			
-				<xp:button value="Add hazard" id="button1" rendered="#{javascript:sessionScope.isEditor}" icon="page_add.png" >
+				<xp:button value="Add Hazard" id="button1" rendered="#{javascript:sessionScope.isEditor}" icon="page_add.png" >
 					<xp:eventHandler event="onclick" submit="true"
 						refreshMode="partial" refreshId="dynContentHazards">
 						<xp:this.action><![CDATA[#{javascript:getComponent("dynContentHazards").show("hazardForm");}]]></xp:this.action>
@@ -30,7 +30,7 @@
 			</div>
 			</div>
 			
-			<xp:text value="No hazards found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
+			<xp:text value="No Hazards found" rendered="#{javascript:getComponent('repeat1').getRowCount()==0}" />
 	
 			<xp:repeat id="repeat1" rows="100" value="#{vwHazards}" var="rowEntry"
 				indexVar="rowIndex">

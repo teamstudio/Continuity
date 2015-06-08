@@ -47,13 +47,13 @@
 									<xp:this.value><![CDATA[#{javascript:var assets = @DbLookup("", "vwAllByType", "fSite", 4);
 									
 									if (assets == null || typeof assets == 'undefined') {
-										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+										assets = "- No " + applicationScope.labels['assets'] + " found -|";
 									} else if (typeof assets == 'string') {
 										if ( assets.length == 0 ) {
-											assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+											assets = "- No " + applicationScope.labels['assets'] + " found -|";
 										}
 									} else if (assets.length == 0) {
-										assets = "- No " + applicationScope.labels['assets'].toLowerCase() + " found -|";
+										assets = "- No " + applicationScope.labels['assets'] + " found -|";
 									} else {
 										assets.sort();
 									}

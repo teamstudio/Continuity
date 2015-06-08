@@ -42,7 +42,7 @@ if (!isEmpty(lu) ) {
 	var o = ['- select a contact -|'];
 	return o.concat(lu);
 } else {
-	return ['No contacts found|'];
+	return ['No Contacts found|'];
 }
 						}]]></xp:this.value>
 									</xp:selectItems>
@@ -108,7 +108,7 @@ if (!isEmpty(lu) ) {
 							var o = ['- select a contact -|'];
 							return o.concat(lu);
 						} else {
-							return ['No contacts found|'];
+							return ['No Contacts found|'];
 						}
 						}]]></xp:this.value>
 													</xp:selectItems>

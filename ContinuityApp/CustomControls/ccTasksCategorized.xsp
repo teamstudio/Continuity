@@ -23,7 +23,7 @@
 		<div
 			class="actions">
 			<xp:button
-				value="Add task"
+				value="Add Task"
 				id="button1"
 				icon="to_do_list_cheked_all.png">
 				<xp:this.rendered><![CDATA[#{javascript:sessionScope.isEditor}]]></xp:this.rendered>

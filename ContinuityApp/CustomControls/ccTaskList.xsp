@@ -10,7 +10,7 @@
 	</xp:this.data>
 	
 	<!--  no items found message -->
-	<xp:text value="#{javascript:(compositeData.noItemsFoundMsg == null ? 'No tasks found' : compositeData.noItemsFoundMsg)}" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
+	<xp:text value="#{javascript:(compositeData.noItemsFoundMsg == null ? 'No Tasks found' : compositeData.noItemsFoundMsg)}" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
 
 	<xp:repeat id="repeatTasks" rows="1000" value="#{vwTasks}" var="row" indexVar="rowIndex">
 
@@ -99,7 +99,7 @@
 			
 					<!-- type -->
 					<span class="lotusDivider">|</span>
-					<b>Type:</b>&#160;
+					<b>Task type:</b>&#160;
 					<xp:text escape="false" disableTheme="true"
 						value="#{row.type}">
 					</xp:text>
