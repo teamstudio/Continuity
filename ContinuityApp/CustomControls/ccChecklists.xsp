@@ -48,7 +48,7 @@
 		<xp:div
 			rendered="#{javascript:getComponent('repeat1').getRowCount()==0}">
 			<xp:text
-				value="No plans found"
+				value="No Checklists found"
 				escape="true" />
 		</xp:div>
 
