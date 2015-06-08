@@ -105,7 +105,7 @@ getComponent(compositeData.dynContentId).show("scenariosList");}]]></xp:this.act
 			</xp:inputRichText>
 		</xe:formRow>
 
-		<xe:formRow id="formRow10" label="File:">
+		<xe:formRow id="formRow10" label="File attachment:">
 			
 			<xe:djextListTextBox displayLabel="true"
 				id="djextListTextBoxQG" value="#{docScenario.quickGuideIds}"

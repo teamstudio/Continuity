@@ -103,7 +103,7 @@
 				<xc:ccSelectOrgUnits doc="#{docPlan}"></xc:ccSelectOrgUnits>
 			</xe:formRow>
 			
-			<xe:formRow id="formRow10" label="File:">
+			<xe:formRow id="formRow10" label="File attachment:">
 			
 				<xe:djextListTextBox displayLabel="true"
 					id="djextListTextBoxQG" value="#{docPlan.quickGuideIds}"

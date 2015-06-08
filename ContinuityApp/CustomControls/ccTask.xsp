@@ -100,20 +100,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 			</xp:panel>
 		</xp:this.facets>
-
-		<!-- scenario selection (only when creating tasks from the 'tasks' menu option -->
-		<xe:formRow
-			id="formRow7"
-			label="Scenario:">
-			<xe:this.rendered><![CDATA[#{javascript:docTask.isEditable() && (compositeData.parentId==null || compositeData.parentId.length==0)}]]></xe:this.rendered>
-			<xp:comboBox
-				value="#{docTask.scenarioId}">
-				<xp:selectItems>
-					<xp:this.value><![CDATA[#{javascript:com.teamstudio.continuity.Scenarios.getGroupedComboboxOptions()}]]></xp:this.value>
-				</xp:selectItems>
-			</xp:comboBox>
-		</xe:formRow>
-
+		
 		<xe:formRow
 			id="formRow1"
 			label="Title:">
@@ -123,13 +110,30 @@ if ( vwPlans.getEntryCount()==1 ) {
 				required="true"
 				maxlength="50">
 				<xp:this.validators>
-				
+				<xp:validateRequired message="Enter a title for this task"></xp:validateRequired>
 						<xp:validateExpression message="Enter a title for this task">
 						<xp:this.expression><![CDATA[#{javascript:@Trim(value)!=""}]]></xp:this.expression>
 					</xp:validateExpression>
 				</xp:this.validators>
 				
 			</xp:inputText>
+		</xe:formRow>
+
+		<!-- scenario selection (only when creating tasks from the 'tasks' menu option -->
+		<xe:formRow
+			id="formRow7"
+			label="Scenario:">
+			<xe:this.rendered><![CDATA[#{javascript:docTask.isEditable() && (compositeData.parentId==null || compositeData.parentId.length==0)}]]></xe:this.rendered>
+			<xp:comboBox
+				value="#{docTask.scenarioId}"
+				required="true">
+				<xp:this.validators>
+					<xp:validateRequired message="Select a scenario"></xp:validateRequired>
+				</xp:this.validators>
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:com.teamstudio.continuity.Scenarios.getGroupedComboboxOptions()}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>
 		</xe:formRow>
 
 		<xe:formRow
@@ -158,7 +162,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 		<xe:formRow
 			id="formRow4"
-			label="Type:">
+			label="Task type:">
 
 			<xp:radioGroup
 				id="radioGroup1"
@@ -211,7 +215,7 @@ if ( vwPlans.getEntryCount()==1 ) {
 
 		<xe:formRow
 			id="formRow10"
-			label="File:">
+			label="File attachment:">
 
 			<xe:djextListTextBox
 				displayLabel="true"
