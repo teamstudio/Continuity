@@ -10,19 +10,26 @@
 
 	<ul id="summaryList">
 		
-		<xp:repeat id="repeat3" rows="50" var="plan" disableOutputTag="true">
+		<xp:repeat id="repeat3" rows="100" var="plan" disableOutputTag="true" indexVar="planIdx">
 
 			<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(sessionScope.get("currentOrgUnitId"))}]]></xp:this.value>
 			
-			<li class="categoryRowFixed">
-			
-				<!-- file image & link -->	
-				<xp:image id="image2" styleClass="pull-right link" style="margin-top: -3px; margin-right: -4px">
+			<xp:panel
+				tagName="li"
+				styleClass="categoryRowFixed">
+				<xp:this.rendered><![CDATA[#{javascript://don't render if this is the first plan (category) and it's empty
+return (planIdx==0 && plan.name.length==0 ? false : true);}]]></xp:this.rendered>
+
+				<!-- file image & link -->
+				<xp:image
+					id="image2"
+					styleClass="pull-right link"
+					style="margin-top: -3px; margin-right: -4px">
 					<xp:this.rendered><![CDATA[#{javascript:var id = plan.fileId
 					viewScope.put("fileId", id); 
 					var fileInfo = getFileInfo( id );
 	return fileInfo.valid;}]]></xp:this.rendered>
-				
+
 					<xp:this.attrs>
 						<xp:attr name="onClick">
 							<xp:this.value>
@@ -30,18 +37,21 @@
 							</xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-					
+
 					<xp:this.url><![CDATA[#{javascript:var file = getFileInfo( viewScope.fileId );
 	applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
 				</xp:image>
 
-				<xp:text escape="false" id="t">
+				<xp:text
+					escape="false"
+					id="t">
 					<xp:this.value><![CDATA[#{javascript:plan.name}]]></xp:this.value>
 				</xp:text>
-				
-			</li>
-			
-			<xp:repeat id="repeat1" rows="30"
+
+			</xp:panel>
+
+
+			<xp:repeat id="repeat1" rows="100"
 			value="#{javascript:plan.scenarios}" var="scenario" disableOutputTag="true">
 			
 				<xp:panel tagName="li" styleClass="data-row">

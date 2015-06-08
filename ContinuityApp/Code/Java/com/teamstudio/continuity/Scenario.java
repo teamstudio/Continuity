@@ -2,7 +2,6 @@ package com.teamstudio.continuity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Vector;
 
@@ -25,7 +24,6 @@ public class Scenario implements Serializable {
 	
 	public Scenario() { }
 	
-	@SuppressWarnings("unchecked")
 	public boolean save( DominoDocument xspDocScenario ) {
 
 		boolean saved = false;

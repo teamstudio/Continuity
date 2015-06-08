@@ -10,7 +10,7 @@
 	</xp:link>
 
 	<xe:dialog id="dlgSelectHazards"
-		title="Select one or more hazards">
+		title="Select one or more Hazards">
 
 		<xp:panel style="padding:15px">
 		

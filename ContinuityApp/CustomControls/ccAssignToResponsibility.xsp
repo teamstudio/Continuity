@@ -108,6 +108,24 @@ if ( com.teamstudio.continuity.select.Responsibility.saveToDocument(fromList, so
 			dojo.byId("#{id:selectedResponsibilityIds}").value = ids.join(",");]]></xp:this.script>
 					</xp:eventHandler>
 				</xp:button>
+				
+					<xp:button
+					value="Remove all"
+					id="button2">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="#{javascript:compositeData.refreshId}">
+						<xp:this.action><![CDATA[#{javascript:var fromList = (compositeData.source == "list");
+					var sourceDoc = (fromList ? docTarget : compositeData.doc);
+					
+if ( com.teamstudio.continuity.select.Responsibility.saveToDocument(fromList, sourceDoc, null) ) {
+	getComponent("dlgAssignTo").hide();
+}	
+					}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
 
 				<xp:link
 					escape="true"

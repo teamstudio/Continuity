@@ -12,7 +12,7 @@
 	<!--  no items found message -->
 	<xp:text value="#{javascript:(compositeData.noItemsFoundMsg == null ? 'No Tasks found' : compositeData.noItemsFoundMsg)}" rendered="#{javascript:getComponent('repeatTasks').getRowCount()==0}"></xp:text>
 
-	<xp:repeat id="repeatTasks" rows="1000" value="#{vwTasks}" var="row" indexVar="rowIndex">
+	<xp:repeat id="repeatTasks" rows="2500" value="#{vwTasks}" var="row" indexVar="rowIndex">
 
 		<xp:this.facets>
 			<xp:text escape="false" disableTheme="true"
@@ -36,7 +36,7 @@
 						disableTheme="true">
 						<xp:this.value><![CDATA[#{javascript:var v = row.getColumnValues();
 				
-						return (v.size() == 0 ? 'No scenario allocated' : v.get(0) );}]]></xp:this.value>
+						return (v.size() == 0 ? ( compositeData.viewName == 'vwTasksByScenario' ? 'No Organization Unit allocated' : 'No Scenario allocated') : v.get(0) );}]]></xp:this.value>
 					</xp:text>
 				</h4>
 				
@@ -49,7 +49,21 @@
 			
 			<th colspan="2" style="font-weight: bold; padding-left: 10px">
 				<xp:text disableTheme="true" escape="false"
+					id='cfScen'
+					tagName="#{javascript:(compositeData.viewName == 'vwTasksByScenario' ? 'h4' : '')}"
 					value="#{javascript:row.getColumnValues().get(1)}">
+				</xp:text>
+
+			</th>
+
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:this.rendered><![CDATA[#{javascript:row.getIndentLevel()==2 && row.isCategory()}]]></xp:this.rendered>
+			
+			<th colspan="2" style="padding-left: 20px">
+				<xp:text disableTheme="true" escape="false"
+					value="#{javascript:row.getColumnValues().get(2)}">
 				</xp:text>
 
 			</th>
@@ -59,7 +73,7 @@
 		<xp:tr rendered="#{javascript:!row.isCategory()}">
 			<xp:this.styleClass><![CDATA[#{javascript:(rowIndex==0 ? "lotusFirst" : "")}]]></xp:this.styleClass>
 		
-			<td style="padding-left: 20px; width:100%">
+			<td style="padding-left: 30px; width:100%">
 				
 				<h4>
 					<xp:link escape="false" id="link4" disableTheme="true"

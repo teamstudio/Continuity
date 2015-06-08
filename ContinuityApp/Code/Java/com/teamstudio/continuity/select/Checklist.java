@@ -23,6 +23,10 @@ public class Checklist {
 			Database database = docTarget.getParentDatabase();
 
 			//get plan names
+			
+			if (planIds == null) {
+				planIds = new Vector<String>();
+			}
 
 			Vector<String> planNames = new Vector<String>();
 
@@ -31,10 +35,10 @@ public class Checklist {
 			for (String planId : planIds) {
 
 				if (StringUtil.isNotEmpty(planId)) {
-
+				
 					ViewEntry vePlan = vwAllById.getEntryByKey(planId, true);
 
-					String planName = "error: can't find plan";
+					String planName = "";
 
 					if (vePlan != null) {
 						planName = (String) vePlan.getColumnValues().get(1);

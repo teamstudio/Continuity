@@ -63,7 +63,7 @@
 				class="showScrollbar"
 				style="padding:15px;height: 250px; overflow-y:auto; overflow-x:hidden">
 
-				Select one or more checklists to allocate this task to.
+				Select one or more Plan Types to allocate this task to.
 
 				<xp:div
 					style="margin-top:10px">
@@ -75,10 +75,22 @@ return true;}]]></xp:this.rendered>
 						id="checkBoxGroup1"
 						value="#{viewScope.selectedPlanIds}"
 						layout="pageDirection">
+						<xp:this.rendered><![CDATA[#{javascript:var lu = @DbColumn( @DbName(), 'vwPlans', 3);
+if (typeof lu == 'string' && lu.length>0) {
+return true;
+} else if (lu.length>0) {
+return true;
+} else {
+return false;
+}}]]></xp:this.rendered>
 						<xp:selectItems>
 							<xp:this.value><![CDATA[#{javascript:@DbColumn( @DbName(), "vwPlans", 3)}]]></xp:this.value>
 						</xp:selectItems>
 					</xp:checkBoxGroup>
+					
+					<xp:div rendered="#{javascript:!getComponent('checkBoxGroup1').isRendered()}">
+						- No Plan Types found -
+					</xp:div>
 
 				</xp:div>
 			</div>
@@ -99,10 +111,10 @@ return true;}]]></xp:this.rendered>
 					var sel = new java.util.Vector();
 					
 					if (typeof selected == 'string') { 
-						sel.add( selected);
+						if (selected.length>0) { sel.add( selected); }
 					} else {
 						for (var i=0; i<selected.length; i++) {
-							sel.add( selected[i] );
+							if (selected[i].length>0) { sel.add( selected[i] ); }
 						}
 					}
 					
@@ -115,6 +127,27 @@ if ( com.teamstudio.continuity.select.Checklist.saveToDocument(fromList, sourceD
 						}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
+				
+				<xp:button
+					value="Remove all"
+					id="button2">
+					<xp:eventHandler
+						event="onclick"
+						submit="true"
+						refreshMode="partial"
+						refreshId="#{javascript:compositeData.refreshId}">
+						<xp:this.action><![CDATA[#{javascript:
+						
+							var fromList = (compositeData.source == "list");
+					var sourceDoc = (fromList ? docTarget : compositeData.doc);
+						
+if ( com.teamstudio.continuity.select.Checklist.saveToDocument(fromList, sourceDoc, null) ) {
+	getComponent("dlgAssignTo").hide();
+}
+						}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				
 
 				<xp:link
 					escape="true"
