@@ -43,7 +43,7 @@
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode submitValue="orgUnits">
-									<xe:this.label><![CDATA[#{javascript:"Organization units (" + currentUserBean.numOrgUnits + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Organization Units (" + currentUserBean.numOrgUnits + ")"}]]></xe:this.label>
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("orgUnits");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
@@ -77,7 +77,7 @@
 								<xe:basicLeafNode submitValue="scenariosList">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("scenariosList");}]]></xe:this.selected>
 
-									<xe:this.label><![CDATA[#{javascript:"Business scenarios (" + currentUserBean.numScenarios + ")"}]]></xe:this.label>
+									<xe:this.label><![CDATA[#{javascript:"Business Scenarios (" + currentUserBean.numScenarios + ")"}]]></xe:this.label>
 								</xe:basicLeafNode>
 						
 								<xe:basicLeafNode
@@ -130,7 +130,7 @@
 								</xe:basicLeafNode>
 
 								<xe:basicLeafNode submitValue="auditLog"
-									label="Audit log" loaded="${sessionScope.isEditor}">
+									label="Audit Log" loaded="${sessionScope.isEditor}">
 									<xe:this.selected><![CDATA[#{javascript:sessionScope.selectedMenu.equals("auditLog");}]]></xe:this.selected>
 								</xe:basicLeafNode>
 
@@ -199,10 +199,10 @@ getComponent("dynamicContent1").show(c);
 							<xp:panel xp:key="scenariosList" id="scenariosList">
 	
 							<div class="section">
-								<div class="title">Business scenarios</div>
+								<div class="title">Business Scenarios</div>
 								<div class="actions">
 						
-									<xp:button value="Add scenario" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
+									<xp:button value="Add Business Scenario" id="button1" icon="page_add.png" rendered="#{javascript:sessionScope.isEditor}">
 										<xp:eventHandler event="onclick" submit="true" refreshMode="partial"
 											refreshId="dynamicContent1">
 											<xp:this.action><![CDATA[#{javascript:getComponent("dynamicContent1").show("scenarioForm");}]]></xp:this.action>
@@ -219,7 +219,7 @@ getComponent("dynamicContent1").show(c);
 							xp:key="scenarioForm">
 							
 							<div class="section">
-								<div class="title">Business scenario</div>
+								<div class="title">Business Scenario</div>
 							</div>
 						
 							<xc:ccScenario dynContentId="dynamicContent1">
