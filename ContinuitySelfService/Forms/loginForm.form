@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<form name='loginForm' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.2'
+<form name='loginForm' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.3'
  replicaid='C1257AFA004179FC' nocompose='true' noquery='true' publicaccess='true'
  designerversion='8.5.3'>
-<noteinfo noteid='24a' unid='C05D0190BBB4F1FEC1257AFA00415E3A' sequence='59'>
+<noteinfo noteid='24a' unid='C05D0190BBB4F1FEC1257AFA00415E3A' sequence='60'>
 <created><datetime>20130121T125359,62+01</datetime></created>
-<modified><datetime dst='true'>20150415T103712,12+02</datetime></modified>
-<revised><datetime dst='true'>20150415T103712,10+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20150415T103712,10+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150610T094616,17+02</datetime></modified>
+<revised><datetime dst='true'>20150610T094616,15+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150610T094616,15+02</datetime></lastaccessed>
 <addedtofile><datetime>20130121T125514,54+01</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby><code event='windowtitle'><formula
@@ -19,8 +19,7 @@
 "&lt;meta name=\"viewport\" content=\"user-scalable=no, width=device-width\"/&gt;" + @NewLine +
 "&lt;link rel=stylesheet type='text/css' href='/oneuiv2.1/base/core.css'&gt;" + @NewLine +
 "&lt;link rel=stylesheet type='text/css' href='/oneuiv2.1/defaultTheme/defaultTheme.css'&gt;" + @NewLine +
-"&lt;script src=\"/xsp/.ibmxspres/dojoroot-1.6.1/dojo/dojo.js\" djConfig=\"locale: 'nl', parseOnLoad : true\" type=\"text/javascript\"&gt;&lt;/script&gt;" +
-"&lt;link rel=\"SHORTCUT ICON\" href=\"" + _path + "favicon.ico\"&gt;"</formula></code><code
+"&lt;script src=\"/xsp/.ibmxspres/dojoroot-1.6.1/dojo/dojo.js\" djConfig=\"locale: 'nl', parseOnLoad : true\" type=\"text/javascript\"&gt;&lt;/script&gt;"</formula></code><code
  event='jsheader' for='web'><javascript>function setFormFocus() {
 	try {
 		var u = dojo.byId("user-id");
