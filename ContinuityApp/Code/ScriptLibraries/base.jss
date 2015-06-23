@@ -454,46 +454,46 @@ function cacheOrgUnits( vwAllByType:NotesView ) {
 	
 	dBar.debug("- caching org units");
 
-			var veTemp:NotesViewEntry = null;
-				
+	var veTemp:NotesViewEntry = null;
+		
 	var vec:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fOrgUnit", true);
 	var ve:NotesViewEntry = vec.getFirstEntry();
-		
-			var orgUnitChoices = [];				//array containing all org units in 'combobox select options' syntax (key|value)
-			var orgUnits = getMap();				//map of org unit id / names
-			var orgUnitUnids = getMap();			//map of org unit id / unids
-			
+
+	var orgUnitChoices = [];				//array containing all org units in 'combobox select options' syntax (key|value)
+	var orgUnits = getMap();				//map of org unit id / names
+	var orgUnitUnids = getMap();			//map of org unit id / unids
+	
 	while (null != ve) {
-				
+		
 		var colValues = ve.getColumnValues();
-				
-				var id = colValues.get(1);
-				var name = colValues.get(2);
+		
+		var id = colValues.get(1);
+		var name = colValues.get(2);
 		var unid = ve.getUniversalID();
-				
-				orgUnitChoices.push( colValues.get(3) );
-				
-				orgUnits[id] = name;
-				orgUnitUnids[id] = unid;
-				
+		
+		orgUnitChoices.push( colValues.get(3) );
+		
+		orgUnits[id] = name;
+		orgUnitUnids[id] = unid;
+		
 		veTemp = vec.getNextEntry();
 		ve.recycle();
 		ve = veTemp;
-			}
-			
-			orgUnitChoices.sort();
-			
-			applicationScope.put("orgUnitChoices", orgUnitChoices);
-			applicationScope.put("orgUnits", orgUnits);
-			applicationScope.put("orgUnitUnids", orgUnitUnids);
-			
+	}
+	
+	orgUnitChoices.sort();
+	
+	applicationScope.put("orgUnitChoices", orgUnitChoices);
+	applicationScope.put("orgUnits", orgUnits);
+	applicationScope.put("orgUnitUnids", orgUnitUnids);
+
 }
-			
+
 //read all bc roles and cache the in the appScope
 function cacheRoles( vwAllByType:NotesView ) {
-			
+	
 	dBar.debug("- caching roles");
-		
+	
 	var veTemp:NotesViewEntry = null;
 	
 	var vec:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
@@ -1529,7 +1529,12 @@ function getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlan
 			//new category: check if we need to add the already created plan object to the results array
 			_addPlanToList( _plan, orgUnitPlans);	
 			
-			_plan = _getPlanObject(colValues.get(1));		//init new plan object
+			var planName = "";
+			if (colValues.length > 0 ) {
+				planName = colValues.get(1);
+			}
+			
+			_plan = _getPlanObject(planName);		//init new plan object
 			
 		} else {
 	
@@ -1610,7 +1615,9 @@ function _arrayGetIndex( arrIn, checkValue) {
 	return idx;
 }
 
-
+/*
+ * Creates and empty Plan JSON object for use in the Checklists view
+ */
 function _getPlanObject(planName) {
 	
 	if (sessionScope.get("isDebug")) dBar.debug("init plan: " + planName);
@@ -1624,6 +1631,9 @@ function _getPlanObject(planName) {
 	};
 }
 
+/*
+ * Creates an empty Scenario JSON object for use in the Checklists view
+ */
 function _getScenarioObject(scenarioId, scenarioName, ouTarget) {
 	
 	if (sessionScope.get("isDebug")) dBar.debug("adding scenario: " + scenarioName);
@@ -1637,9 +1647,18 @@ function _getScenarioObject(scenarioId, scenarioName, ouTarget) {
 	
 }
 
+/*
+ * Retrieve the details (id, name, attached file) for a plan, based on its name
+ */
 function _setPlanDetails( vwPlans:NotesView , docTask:NotesDocument , _plan) {
 	
 	//if (sessionScope.get("isDebug")) dBar.debug("get details for " + _plan.name );
+	
+	if (_plan.name == null || _plan.name.length ==0 ) {
+		_plan.planId = "";
+		_plan.planName = "";
+		return;
+	}
 	
 	var planIds = docTask.getItemValue("planIds");
 	var planNames = docTask.getItemValue("planNames");
