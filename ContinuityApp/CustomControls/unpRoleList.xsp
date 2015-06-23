@@ -79,13 +79,33 @@
 								</xp:attr>
 							</xp:this.attrs>
 					
-						<xp:this.rendered><![CDATA[#{javascript:var vw = database.getView("vwTasksByRespId");
-						var vec = vw.getAllEntriesByKey( "role-" + sessionScope.roleId, true);
-						var numNotCategorisedTasks = vec.getCount();
+						<xp:this.rendered><![CDATA[#{javascript://count number of uncategorised tasks
 						
-						viewScope.put("numNotCategorisedTasks", numNotCategorisedTasks );
+						var numNotCategorisedTasks = 0;
 						
-						return (numNotCategorisedTasks > 0);}]]></xp:this.rendered>
+						try {
+					
+var vw:NotesView = database.getView("vwTasksByRespId");
+var nav = vw.createViewNavFromCategory( "role-" + sessionScope.roleId);
+var added = [];
+
+var ve:NotesViewEntry = nav.getFirst();
+while (null != ve) {
+	if (!ve.isCategory() && @IsNotMember(ve.getNoteID(), added ) ) {
+		added.push( ve.getNoteID() );
+		numNotCategorisedTasks++;
+	}
+	
+	ve = nav.getNext();
+}
+
+viewScope.put("numNotCategorisedTasks", numNotCategorisedTasks );
+
+} catch (e) {
+dBar.error(e);
+}
+
+return numNotCategorisedTasks>0;}]]></xp:this.rendered>
 						
 							<xp:image
 								url="/unp/right-arrow-circle.png" id="image2"
