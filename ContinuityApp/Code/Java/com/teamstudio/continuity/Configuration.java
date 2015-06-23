@@ -187,9 +187,13 @@ public class Configuration implements Serializable {
 
 					changed = false;
 
-					//create app menu options field
-					if (!doc.hasItem("appMenuOptions")) {
-						doc.replaceItemValue("appMenuOptions", "all");
+					//remove app menu options field
+					if (doc.hasItem("appMenuOptions")) {
+						doc.removeItem("appMenuOptions");
+						changed = true;
+					}
+					if (doc.hasItem("appMenuOptionsActive")) {
+						doc.removeItem("appMenuOptionsActive");
 						changed = true;
 					}
 

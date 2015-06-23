@@ -2,8 +2,7 @@ function init() {
 	
 	try {
 		
-		//load the application configuration
-		loadAppConfig(false);
+		var forceAppConfigUpdate = false;
 
 		/*
 		 * The sessionScope needs to be initialised/ updated if:
@@ -19,13 +18,18 @@ function init() {
 			var lastSyncMs = session.getEnvironmentString("ro.last.sync", true)
 			
 			if (lastSyncMs > sessionScope.get("configLoadedAt") ) {
-				sessionScope.put("configLoaded", null);
-				sessionScope.put("configLoadedAt", null);
+				
+				//user synced after the config was loaded: force to load it again
+				forceAppConfigUpdate = true;
+				
 			}
 		
 		}
 		
-		if ( !sessionScope.configLoaded || sessionScope.get("userName") != currentUser) {
+		//load the application configuration
+		loadAppConfig(forceAppConfigUpdate);
+		
+		if ( forceAppConfigUpdate || !sessionScope.configLoaded || sessionScope.get("userName") != currentUser) {
 			
 			dBar.debug("load sessionScope for " + currentUser);
 			
@@ -143,9 +147,8 @@ function init() {
 				sessionScope.put("roleId", docUser.getItemValueString("roleId"));
 				sessionScope.put("roleName", docUser.getItemValueString("roleName"));
 				
-				//get active menu options
-				sessionScope.put("appMenuOptions", docUser.getItemValueString("appMenuOptions"));
-				sessionScope.put("appMenuOptionsActive", docUser.getItemValue("appMenuOptionsActive"));
+				//get active menu options from the role document
+				readAppMenuOptions();
 					
 				//get user's org unit(s)
 				sessionScope.put("userOrgUnitIds", docUser.getItemValue("orgUnitIds"));
@@ -209,6 +212,26 @@ function init() {
 
 	}
 }		//end init()
+
+function readAppMenuOptions() {
+	
+	var roleUnid = applicationScope.get("roleUnids")[ sessionScope.get("roleId") ];
+	
+	var appMenuOptions = "";
+	var appMenuOptionsActive = [];
+	
+	var docRole = database.getDocumentByUNID(roleUnid);
+	
+	if (null != docRole) {
+		
+		appMenuOptions = docRole.getItemValueString("appMenuOptions");
+		appMenuOptionsActive = docRole.getItemValue("appMenuOptionsActive");
+	}
+	
+	sessionScope.put("appMenuOptions", appMenuOptions);
+	sessionScope.put("appMenuOptionsActive", appMenuOptionsActive);
+	
+}
 
 function setOrgUnit( orgUnitId:string) {
 	
@@ -412,40 +435,8 @@ function loadAppConfig( forceUpdate:boolean ) {
 				
 			}
 			
-			//get all ou's
-			var veTemp:NotesViewEntry = null;
-				
-			//store a list of all org units in the application scope
-			var vecOrgUnits:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fOrgUnit", true);
-			var veOrgUnit:NotesViewEntry = vecOrgUnits.getFirstEntry();
-		
-			var orgUnitChoices = [];				//array containing all org units in 'combobox select options' syntax (key|value)
-			var orgUnits = getMap();				//map of org unit id / names
-			var orgUnitUnids = getMap();			//map of org unit id / unids
-			
-			while (null != veOrgUnit) {
-				
-				var colValues = veOrgUnit.getColumnValues();
-				
-				var id = colValues.get(1);
-				var name = colValues.get(2);
-				var unid = veOrgUnit.getUniversalID();
-				
-				orgUnitChoices.push( colValues.get(3) );
-				
-				orgUnits[id] = name;
-				orgUnitUnids[id] = unid;
-				
-				veTemp = vecOrgUnits.getNextEntry();
-				veOrgUnit.recycle();
-				veOrgUnit = veTemp;
-			}
-			
-			orgUnitChoices.sort();
-			
-			applicationScope.put("orgUnitChoices", orgUnitChoices);
-			applicationScope.put("orgUnits", orgUnits);
-			applicationScope.put("orgUnitUnids", orgUnitUnids);
+			cacheOrgUnits(vwAllByType);
+			cacheRoles(vwAllByType);
 			
 		} else {
 			
@@ -456,6 +447,76 @@ function loadAppConfig( forceUpdate:boolean ) {
 	} catch (e) {
 		dBar.error( e.toString() );
 	}
+	
+}
+
+//read all orgunits and cache the in the appScope
+function cacheOrgUnits( vwAllByType:NotesView ) {
+	
+	dBar.debug("- caching org units");
+
+			var veTemp:NotesViewEntry = null;
+				
+	var vec:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fOrgUnit", true);
+	var ve:NotesViewEntry = vec.getFirstEntry();
+		
+			var orgUnitChoices = [];				//array containing all org units in 'combobox select options' syntax (key|value)
+			var orgUnits = getMap();				//map of org unit id / names
+			var orgUnitUnids = getMap();			//map of org unit id / unids
+			
+	while (null != ve) {
+				
+		var colValues = ve.getColumnValues();
+				
+				var id = colValues.get(1);
+				var name = colValues.get(2);
+		var unid = ve.getUniversalID();
+				
+				orgUnitChoices.push( colValues.get(3) );
+				
+				orgUnits[id] = name;
+				orgUnitUnids[id] = unid;
+				
+		veTemp = vec.getNextEntry();
+		ve.recycle();
+		ve = veTemp;
+			}
+			
+			orgUnitChoices.sort();
+			
+			applicationScope.put("orgUnitChoices", orgUnitChoices);
+			applicationScope.put("orgUnits", orgUnits);
+			applicationScope.put("orgUnitUnids", orgUnitUnids);
+			
+}
+			
+//read all bc roles and cache the in the appScope
+function cacheRoles( vwAllByType:NotesView ) {
+			
+	dBar.debug("- caching roles");
+		
+	var veTemp:NotesViewEntry = null;
+	
+	var vec:NotesViewEntryCollection = vwAllByType.getAllEntriesByKey("fRole", true);
+	var ve:NotesViewEntry = vec.getFirstEntry();
+	
+	var roleUnids = getMap();			//map of role id / unids
+	
+	while (null != ve) {
+		
+		var colValues = ve.getColumnValues();
+		
+		var id = colValues.get(1);
+		var unid = ve.getUniversalID();
+		
+		roleUnids[id] = unid;
+		
+		veTemp = vec.getNextEntry();
+		ve.recycle();
+		ve = veTemp;
+	}
+	
+	applicationScope.put("roleUnids", roleUnids);
 	
 }
 

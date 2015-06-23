@@ -102,13 +102,6 @@ public class Role implements Serializable {
 			this.appMenuOptions = xspDocRole.getItemValueString("appMenuOptions");
 			this.appMenuOptionsActive = xspDocRole.getItemValue("appMenuOptionsActive");
 
-			//find contacts for this role: update menuOptions
-			DocumentCollection dc = xspDocRole.getParentDatabase().search("Form=\"fContact\" & roleId=\"" + id + "\"");
-			if (dc.getCount() > 0) {
-				dc.stampAll("appMenuOptions", this.appMenuOptions);
-				dc.stampAll("appMenuOptionsActive", this.appMenuOptionsActive);
-			}
-
 			//update role name in all documents that use this role (e.g. contacts)
 			Utils.fieldValueChange("roleId", id, "roleName", name);
 

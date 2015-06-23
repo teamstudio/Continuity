@@ -2,11 +2,11 @@
 <form name='fContact' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.3'
  replicaid='C1257BB30029DCD4' hide='web' publicaccess='false' designerversion='8.5.3'
  renderpassthrough='true' conflictaction='mergeconflicts'>
-<noteinfo noteid='7ee' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='25'>
+<noteinfo noteid='7ee' unid='E54E8BE6E0DF87AAC1257B44002C1602' sequence='26'>
 <created><datetime dst='true'>20130405T100132,18+02</datetime></created>
-<modified><datetime dst='true'>20150603T095710,85+02</datetime></modified>
-<revised><datetime dst='true'>20150603T095710,83+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20150603T095710,83+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20150623T115256,06+02</datetime></modified>
+<revised><datetime dst='true'>20150612T100338,46+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20150623T115256,05+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20150413T094526,02+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Mark Leusink/O=LinQed</name></updatedby>
 <wassignedby><name>CN=Mark Leusink/O=LinQed</name></wassignedby>
@@ -316,39 +316,7 @@ Yg4BAIQAAAAAAAAAAAA=
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata><run><font size='9pt' style='bold'/></run></par></tablecell>
 <tablecell>
-<par def='5'><run><font size='9pt'/>Indicates if this contact is the 'root' of a call tree for a specific org unit. Syntax: &lt;calltree org unit id&gt;-&lt;true/ false&gt;. Can be multi-value.</run></par></tablecell></tablerow>
-<tablerow>
-<tablecell>
-<par def='3'><run><font size='9pt' style='bold'/></run></par></tablecell>
-<tablecell>
-<par def='4'><run><font size='9pt' style='bold'/></run></par></tablecell>
-<tablecell>
-<par def='5'><run><font size='9pt' style='bold'/></run></par></tablecell></tablerow>
-<tablerow>
-<tablecell>
-<par def='3'><run><font size='9pt' style='bold'/>appMenuOptions</run></par></tablecell>
-<tablecell>
-<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
- kind='editable' name='appMenuOptions'/></run><compositedata type='98' prevtype='65418'
- nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
- afterbegincount='3'>
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata><run><font size='9pt'/></run></par></tablecell>
-<tablecell>
-<par def='5'><run><font size='9pt'/>Note: copied from fRole on saving.</run></par></tablecell></tablerow>
-<tablerow>
-<tablecell>
-<par def='3'><run><font size='9pt' style='bold'/>appMenuOptionsActive</run></par></tablecell>
-<tablecell>
-<par def='4'><run><font size='9pt'/></run><run><font size='9pt'/><field type='text'
- allowmultivalues='true' kind='editable' name='appMenuOptionsActive' listinputseparators='comma semicolon'
- listdisplayseparator='semicolon'/></run><compositedata type='98' prevtype='65418'
- nexttype='222' afterparcount='6' containertype='65418' aftercontainercount='1'
- afterbegincount='3'>
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata><run><font size='9pt'/></run></par></tablecell>
-<tablecell>
-<par def='5'><run><font size='9pt'/>Note: copied from fRole on saving.</run></par></tablecell></tablerow></table>
+<par def='5'><run><font size='9pt'/>Indicates if this contact is the 'root' of a call tree for a specific org unit. Syntax: &lt;calltree org unit id&gt;-&lt;true/ false&gt;. Can be multi-value.</run></par></tablecell></tablerow></table>
 <par def='1'><run><font size='9pt'/></run></par>
 <par def='1'><run><font size='9pt'/>Debug mode? </run><run><font size='9pt'/><field
  borderstyle='none' lookupeachchar='false' lookupaddressonrefresh='false'

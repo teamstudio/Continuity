@@ -158,9 +158,7 @@ public class Contact implements Serializable {
 
 			docContact.replaceItemValue("roleId", role.getId());
 			docContact.replaceItemValue("roleName", role.getName());
-			docContact.replaceItemValue("appMenuOptions", role.getAppMenuOptions());
-			docContact.replaceItemValue("appMenuOptionsActive", role.getAppMenuOptionsActive());
-
+		
 			//store org unit name
 			orgUnitIds = docContact.getItemValue("orgUnitIds");
 			Vector<String> orgUnitNames = new Vector<String>();
