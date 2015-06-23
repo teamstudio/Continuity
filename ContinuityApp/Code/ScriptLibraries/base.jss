@@ -189,8 +189,7 @@ function init() {
 			}
 			
 			//get number of open tasks, assigned to the current user (based on bc role and org units)
-			//sessionScope.put( "numAssignedTasks", getNumAssignedTasks( sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
-			
+			sessionScope.put( "numAssignedTasks", getNumAssignedTasks( sessionScope.get("userOrgUnitIds"), sessionScope.get("roleId")) );
 			
 			if (!isUnplugged() ) {
 				
