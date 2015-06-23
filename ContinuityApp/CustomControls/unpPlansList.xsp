@@ -12,7 +12,7 @@
 		
 		<xp:repeat id="repeat3" rows="100" var="plan" disableOutputTag="true" indexVar="planIdx">
 
-			<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(sessionScope.get("currentOrgUnitId"))}]]></xp:this.value>
+			<xp:this.value><![CDATA[#{javascript:return getScenariosByPlan(sessionScope.get("currentOrgUnitId"), compositeData.filterByResponsibilities)}]]></xp:this.value>
 			
 			<xp:panel
 				tagName="li"
@@ -57,7 +57,8 @@ return (planIdx==0 && plan.name.length==0 ? false : true);}]]></xp:this.rendered
 				<xp:panel tagName="li" styleClass="data-row">
 					<xp:this.attrs>
 						<xp:attr name="onClick">
-							<xp:this.value><![CDATA[#{javascript:"loadPageEx('" + getDbPath() + "/UnpPlan.xsp?id=" + scenario.id + "', 'contentwrapper', 0, false, true);"}]]></xp:this.value>
+							<xp:this.value><![CDATA[#{javascript:var p = ( compositeData.filterByResponsibilities ? 'UnpRoleTasks.xsp' : 'UnpPlan.xsp');
+							"loadPageEx('" + getDbPath() + "/" + p + "?id=" + scenario.id + "', 'contentwrapper', 0, false, true);"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
 
@@ -68,12 +69,10 @@ return (planIdx==0 && plan.name.length==0 ? false : true);}]]></xp:this.rendered
 						<xp:this.value><![CDATA[#{javascript:scenario.name}]]></xp:this.value>
 					</xp:label>
 
+					<!-- number of tasks for this scenario (filtered by role) -->
 					<xp:label id="label3"
 						styleClass="viewlistdetail">
-						<xp:this.value><![CDATA[#{javascript:var ve = vwTasksByParent.getAllEntriesByKey( scenario.id, true);
-						var numTasks = ve.getCount();
-						
-						@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
+						<xp:this.value><![CDATA[#{javascript:scenario.numTasks + ( scenario.numTasks >1 || scenario.numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
 					</xp:label>
 
 				</xp:panel>

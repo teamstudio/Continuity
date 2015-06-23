@@ -2,16 +2,6 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="Continuity"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xp:this.data>
-		<xp:dominoView var="viewList"
-			viewName="vwResponsibilitiesByRole">
-			<xp:this.categoryFilter><![CDATA[#{javascript:sessionScope.roleId}]]></xp:this.categoryFilter>
-		</xp:dominoView>
-		<xp:dominoView var="vwTasksByParent"
-			viewName="vwTasksByParent">
-		</xp:dominoView>
-	</xp:this.data>
-
 	<xp:panel disableOutputTag="true">
 
 		<xp:div styleClass="box"
@@ -27,113 +17,9 @@
 
 		<xp:div styleClass="mTop">
 
-			<div id="results">
-						
-				<ul id="summaryList">
-
-					<xp:text escape="false" tagName="li"
-						styleClass="categoryRowFixed" value="My responsibilities">
-					</xp:text>
-
-					<xp:repeat id="repeat4"
-						var="thisRowData" value="#{viewList}" disableOutputTag="true" rows="250">
-
-						<xp:panel tagName="li"
-							id="datarow" styleClass="data-row">
-							<xp:this.attrs>
-								<xp:attr
-									name="onClick">
-									<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/UnpRoleTasks.xsp?respId=" + thisRowData.getColumnValue("id") + "', 'contentwrapper');"
-	}]]></xp:this.value>
-								</xp:attr>
-							</xp:this.attrs>
-
-							<xp:image
-								url="/unp/right-arrow-circle.png" id="image1"
-								styleClass="multiLineIcon">
-							</xp:image>
-							<xp:label id="label2"
-								value="#{javascript:thisRowData.getColumnValue('name');}"
-								styleClass="viewlistsummary two-lines">
-							</xp:label>
-							<div>
-								<xp:label id="label1"
-									styleClass="viewlistdetail">
-									<xp:this.value><![CDATA[#{javascript:var ve = vwTasksByParent.getAllEntriesByKey( thisRowData.getColumnValue("id"), true);
-									
-									var numTasks = ve.getCount();
-					
-					@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
-								</xp:label>
-							</div>
-						</xp:panel>
-					</xp:repeat>
-					
-					<!-- Uncategorised tasks (only shown if there are tasks that are assigned to this role, but not a responsibility -->
-					<xp:panel tagName="li" styleClass="data-row">
-						<xp:this.attrs>
-								<xp:attr
-									name="onClick">
-									<xp:this.value><![CDATA[#{javascript:return "loadPageEx('" + getDbPath() + "/UnpRoleTasks.xsp?respId=role-" + sessionScope.roleId + "', 'contentwrapper');"
-	}]]></xp:this.value>
-								</xp:attr>
-							</xp:this.attrs>
-					
-						<xp:this.rendered><![CDATA[#{javascript://count number of uncategorised tasks
-						
-						var numNotCategorisedTasks = 0;
-						
-						try {
-					
-var vw:NotesView = database.getView("vwTasksByRespId");
-var nav = vw.createViewNavFromCategory( "role-" + sessionScope.roleId);
-var added = [];
-
-var ve:NotesViewEntry = nav.getFirst();
-while (null != ve) {
-	if (!ve.isCategory() && @IsNotMember(ve.getNoteID(), added ) ) {
-		added.push( ve.getNoteID() );
-		numNotCategorisedTasks++;
-	}
-	
-	ve = nav.getNext();
-}
-
-viewScope.put("numNotCategorisedTasks", numNotCategorisedTasks );
-
-} catch (e) {
-dBar.error(e);
-}
-
-return numNotCategorisedTasks>0;}]]></xp:this.rendered>
-						
-							<xp:image
-								url="/unp/right-arrow-circle.png" id="image2"
-								styleClass="multiLineIcon">
-							</xp:image>
-							
-							<xp:label id="label3" value="Uncategorised tasks" styleClass="viewlistsummary wrap">
-							</xp:label>
-							
-						<div>
-								<xp:label id="label4"
-									styleClass="viewlistdetail">
-									<xp:this.value><![CDATA[#{javascript:var numTasks = viewScope.numNotCategorisedTasks;
-					
-					@Text(@Round(numTasks)) + ( numTasks >1 || numTasks==0 ? " tasks" : " task");}]]></xp:this.value>
-								</xp:label>
-							</div>
-							
-					</xp:panel>
-					
-					
-					
-				</ul>
-				<div class="summaryDataRow"></div>
-
-			</div>
-
+			<xc:unpPlansList filterByResponsibilities="true" />
 		</xp:div>
 	</xp:panel>
-
+	
 </xp:view>
+

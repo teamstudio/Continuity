@@ -249,7 +249,9 @@ var isRegistrator = @IsMember( sessionScope.userName, a);
 
 				<div class="mTop">
 
-					<xc:unpTasksList showDeactivationTask="false" showAssignedTo="true" allowMarkComplete="false" showStatus="true" viewName="vwTasksByIncident">
+					<xc:unpTasksList 
+						filterByResponsibilities="false"
+					showDeactivationTask="false" showAssignedTo="true" allowMarkComplete="false" showStatus="true" viewName="vwTasksByIncident">
 						<xc:this.categoryFilter><![CDATA[#{javascript:docIncident.getItemValueString("id")}]]></xc:this.categoryFilter>
 						<xc:this.parentUrl><![CDATA[#{javascript:"UnpIncident_1.xsp?documentId=" + param.get("documentId")}]]></xc:this.parentUrl>
 					</xc:unpTasksList>

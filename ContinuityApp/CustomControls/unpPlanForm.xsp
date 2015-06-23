@@ -56,7 +56,9 @@ applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
 
 		<!-- list of tasks -->
 		<div class="mTop">
-			<xc:unpTasksList showDeactivationTask="false" showAssignedTo="false"
+			<xc:unpTasksList 
+				filterByResponsibilities="false"
+			showDeactivationTask="false" showAssignedTo="false"
 				allowMarkComplete="false" viewName="vwTasksByParentByTaskCat"
 				categoryFilter="#{javascript:docScenario.getItemValueString('id')}">
 				<xc:this.parentUrl><![CDATA[#{javascript:"UnpPlan_1.xsp?id=" + param.get('id')}]]></xc:this.parentUrl>

@@ -39,7 +39,7 @@ public class Configuration implements Serializable {
 
 	private String callTreeType;
 
-	private static String APP_VERSION = "v1.5.1"; //current application version
+	private static String APP_VERSION = "v1.5.2"; //current application version
 	private static String DATA_VERSION = "145"; //data version (used for checking if a conversion is needed)
 
 	private String serverName;

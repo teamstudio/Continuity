@@ -5,7 +5,7 @@
 	<xc:unpLayout showMenu="true" pageTitle="Checklists" showVersion="true">
 		<xp:this.facets>
 
-			<xc:unpPlansList xp:key="contents" />
+			<xc:unpPlansList filterByResponsibilities="false" xp:key="contents" />
 		
 		</xp:this.facets>
 	</xc:unpLayout>

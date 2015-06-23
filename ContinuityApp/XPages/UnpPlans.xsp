@@ -6,7 +6,7 @@
 	
 		<xp:this.facets>
 
-			<xc:unpPlansList xp:key="contents" />
+			<xc:unpPlansList filterByResponsibilities="false" xp:key="contents" />
 		
 		</xp:this.facets>
 	</xc:unpLayoutBasic>

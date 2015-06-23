@@ -51,6 +51,7 @@ viewScope.put("numOpenTasks", numOpenTasks);
 		class="mTop">
 
 		<xc:unpTasksList
+			filterByResponsibilities="false"
 			showAssignedTo="false"
 			allowMarkComplete="true"
 			showStatus="true"

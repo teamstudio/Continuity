@@ -63,18 +63,43 @@ viewScope.put("cat", catLabel );
 					<xp:this.value><![CDATA[#{javascript:viewScope.cat}]]></xp:this.value>
 				</xp:text>
 
-				<xp:panel rendered="#{javascript:!row.isCategory()}" tagName="li" styleClass="data-row" style="padding: 10px">
+				<xp:panel
+					tagName="li"
+					styleClass="data-row"
+					style="padding: 10px">
 					<xp:this.attrs>
 						<xp:attr name="onclick">
 							<xp:this.value><![CDATA[#{javascript:"showListDetails( $(event.srcElement || event.target) ); event.stopPropagation();"}]]></xp:this.value>
 						</xp:attr>
 					</xp:this.attrs>
-					
-					<xp:div id="markDone" styleClass="pull-right">
+
+					<xp:this.rendered><![CDATA[#{javascript:try {
+if (row.isCategory()) {
+	return false;
+}
+	
+if (compositeData.filterByResponsibilities) {
+
+  var respIds = @Explode(row.getColumnValue("$1"), ",");
+  var _is = isUserResponsibleForTask(respIds);
+  return (_is == true);
+ 
+} else {
+  return true;
+}
+} catch (e) {
+	dBar.error(e);
+}
+}]]></xp:this.rendered>
+					<xp:div
+						id="markDone"
+						styleClass="pull-right">
 						<xp:this.rendered><![CDATA[#{javascript:( (compositeData.allowMarkComplete=="true" || compositeData.allowMarkComplete==true) && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("assigned") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
 
-						<xp:link id="cb" styleClass="unp-icon unp-checkbox-off">
+						<xp:link
+							id="cb"
+							styleClass="unp-icon unp-checkbox-off">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
 									<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
@@ -88,11 +113,15 @@ viewScope.put("cat", catLabel );
 						</xp:link>
 					</xp:div>
 
-					<xp:div id="markUndone" styleClass="pull-right">
+					<xp:div
+						id="markUndone"
+						styleClass="pull-right">
 						<xp:this.rendered><![CDATA[#{javascript:( (compositeData.allowMarkComplete=="true" || compositeData.allowMarkComplete==true) && !isEmpty( row.getColumnValue("status")) && row.getColumnValue("type").equals("one-time") && row.getColumnValue("$9").indexOf( sessionScope.roleId ) > -1 )}]]></xp:this.rendered>
 						<xp:this.style><![CDATA[#{javascript:"margin-left: 5px; margin-top: 1px; display:" + (row.getColumnValue('status').equals("complete") ? "block;" : "none;") + "margin-right:0;"}]]></xp:this.style>
-					
-						<xp:link id="span1" styleClass="unp-icon unp-checkbox-on">	
+
+						<xp:link
+							id="span1"
+							styleClass="unp-icon unp-checkbox-on">
 							<xp:this.attrs>
 								<xp:attr name="onclick">
 									<xp:this.value><![CDATA[#{javascript:if (applicationScope.isReadOnlyMode) {
@@ -103,28 +132,42 @@ viewScope.put("cat", catLabel );
 								</xp:attr>
 							</xp:this.attrs>
 						</xp:link>
-						
+
 					</xp:div>
-							
-					<xp:image rendered="#{javascript:(row.getColumnValue('description').length > 0) || (row.getColumnValue('quickGuideIds').length > 0) || compositeData.showAssignedTo == 'true'}" 
+
+					<xp:image
+						rendered="#{javascript:(row.getColumnValue('description').length > 0) || (row.getColumnValue('quickGuideIds').length > 0) || compositeData.showAssignedTo == 'true'}"
 						url="/unp/arrow-down.png"
-						id="image1"	
+						id="image1"
 						styleClass="multilineIcon"
-						style="float: left; margin-top:7px;"></xp:image>
+						style="float: left; margin-top:7px;">
+					</xp:image>
 
 					<!-- name -->
-					<xp:label id="label2" styleClass="viewlistsummary two-lines" style="margin-left: 24px">
+					<xp:label
+						id="label2"
+						styleClass="viewlistsummary two-lines"
+						style="margin-left: 24px">
 						<xp:this.value><![CDATA[#{javascript:row.getColumnValue("name") + (compositeData.showStatus != null && compositeData.showStatus && row.getColumnValue("status").equals("complete") ? " (completed)" : "")}]]></xp:this.value>
 					</xp:label>
-					
-					<xp:div styleClass="taskDetails" style="display:none; margin-left: 24px">
+
+					<xp:div
+						styleClass="taskDetails"
+						style="display:none; margin-left: 24px">
 
 						<!-- description -->
-						<xp:text tagName="div" value="#{row.description}" escape="false" style="line-height:normal" 
+						<xp:text
+							tagName="div"
+							value="#{row.description}"
+							escape="false"
+							style="line-height:normal"
 							rendered="#{javascript:(row.getColumnValue('description').length > 0)}" />
 
 						<!-- assigned to -->
-						<xp:text tagName="div" escape="false" style="margin: 5px 0; line-height: normal;">
+						<xp:text
+							tagName="div"
+							escape="false"
+							style="margin: 5px 0; line-height: normal;">
 							<xp:this.rendered><![CDATA[#{javascript:compositeData.showAssignedTo == "true"}]]></xp:this.rendered>
 							<xp:this.value><![CDATA[#{javascript:var r = row.getColumnValue('roleNames');
 							
@@ -137,11 +180,14 @@ viewScope.put("cat", catLabel );
 						</xp:text>
 
 						<!-- file link -->
-						<xp:image id="image2" style="margin-top:5px;" styleClass="link dark">
+						<xp:image
+							id="image2"
+							style="margin-top:5px;"
+							styleClass="link dark">
 							<xp:this.rendered><![CDATA[#{javascript:var id = row.getColumnValue('quickGuideIds');
 							var fileInfo = getFileInfo( id );
 return fileInfo.valid;}]]></xp:this.rendered>
-						
+
 							<xp:this.attrs>
 								<xp:attr name="onClick">
 									<xp:this.value>
@@ -153,11 +199,11 @@ return fileInfo.valid;}]]></xp:this.rendered>
 
 							<xp:this.url><![CDATA[#{javascript:var file = getFileInfo( row.getColumnValue('quickGuideIds') );
 		applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
-							
+
 						</xp:image>
 
 					</xp:div>
-					
+
 				</xp:panel>
 
 			</xp:repeat>

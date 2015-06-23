@@ -1,25 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-	
-	<xp:div styleClass="box" style="margin-bottom: 10px"
-		rendered="#{javascript:sessionScope.roleName != ''}">
-		<div class="content">
-			<xp:text style="font-weight:bold" escape="true" id="computedField1">
-				<xp:this.value><![CDATA[#{javascript:var respId = param.get("respId");
-				
-				if (respId.indexOf("role") == 0 ) {
-					"Uncategorised tasks";
-				} else {
-					"Responsibility: " + @DbLookup( @DbName(), "vwAllById", respId, 2);
-				}}]]></xp:this.value>
-			</xp:text>
-		</div>
-	</xp:div>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
 
-	<xc:unpTasksList showDeactivationTask="false" showAssignedTo="false" allowMarkComplete="false"
-		viewName="vwTasksByRespId">
-		<xc:this.categoryFilter><![CDATA[#{javascript:param.get("respId")}]]></xc:this.categoryFilter>
-		<xc:this.parentUrl><![CDATA[#{javascript:"UnpRoleTasks_1.xsp?respId=" + param.get("respId")}]]></xc:this.parentUrl>
-	</xc:unpTasksList>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:try {
+	
+	viewScope.put("hasDescription", (docScenario.getItemValueString("description").length > 0) );
+	
+	} catch (e) {
+		dBar.error(e);
+	}
+	}]]></xp:this.beforePageLoad>
+
+	<xp:this.data>
+		<xp:dominoDocument var="docScenario" action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript:database.getView("vwAllById").getEntryByKey( param.get("id"), true).getUniversalID()}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:panel disableOutputTag="true">
+
+		<!-- checklist (plan) name  & description -->
+		<div class="box">
+			
+			<!-- file image & link -->	
+			<xp:image id="image1" styleClass="pull-right link dark" style="margin-top: 6px; margin-right: 13px;">
+				<xp:this.rendered><![CDATA[#{javascript:var id = docScenario.getItemValueString('quickGuideIds');
+				viewScope.put("fileId", id); 
+				var fileInfo = getFileInfo( id );
+return fileInfo.valid;}]]></xp:this.rendered>
+			
+				<xp:this.attrs>
+					<xp:attr name="onClick">
+						<xp:this.value>
+							<![CDATA[#{javascript:"$.blockUI(); var back = 'UnpPlan_1.xsp?id=" + param.get('id') + "'; window.location.href='" + getDbPath() + "/UnpFile.xsp?id=" + viewScope.fileId + "&back=' + encodeURIComponent(back); return false;"}]]>
+						</xp:this.value>
+					</xp:attr>
+				</xp:this.attrs>
+				
+				<xp:this.url><![CDATA[#{javascript:var file = getFileInfo( viewScope.fileId );
+applicationScope.get("thisDbUrl") + "/" + file.image;}]]></xp:this.url>
+			</xp:image>
+
+			<xp:text tagName="h2" escape="false" id="computedField2"
+				value="#{docScenario.name}" />
+			<div class="content">
+				<xp:text escape="false" id="computedField8"
+					value="#{docScenario.descriptionHtml}"
+					rendered="#{javascript:viewScope.hasDescription}" />
+				<xp:text escape="false" id="computedField3"
+					value="(no description entered)"
+					rendered="#{javascript:!viewScope.hasDescription}" />
+			</div>
+
+		</div>
+
+		<!-- list of tasks -->
+		<div class="mTop">
+			<xc:unpTasksList 
+				filterByResponsibilities="true"
+			showDeactivationTask="false" showAssignedTo="false"
+				allowMarkComplete="false" viewName="vwTasksByParentByTaskCat"
+				categoryFilter="#{javascript:docScenario.getItemValueString('id')}">
+				<xc:this.parentUrl><![CDATA[#{javascript:"UnpPlan_1.xsp?id=" + param.get('id')}]]></xc:this.parentUrl>
+			</xc:unpTasksList>
+		</div>
+	</xp:panel>
 
 </xp:view>

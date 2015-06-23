@@ -47,6 +47,8 @@ function init() {
 			sessionScope.put("configLoadedAt", (new Date()).getTime() );
 			sessionScope.put("userName", currentUser);
 			
+			sessionScope.plans = null;
+			
 			//set current/ default org unit
 			sessionScope.put("currentOrgUnitId", "");
 			sessionScope.put("currentOrgUnitName", "");
@@ -147,6 +149,9 @@ function init() {
 				sessionScope.put("roleId", docUser.getItemValueString("roleId"));
 				sessionScope.put("roleName", docUser.getItemValueString("roleName"));
 				
+				//get a list of all responsibilities that belong to the current user's roleId
+				sessionScope.put("roleRespIds", getResponsibilities( sessionScope.get("roleId") ));
+				
 				//get active menu options from the role document
 				readAppMenuOptions();
 					
@@ -211,6 +216,28 @@ function init() {
 
 	}
 }		//end init()
+
+function getResponsibilities( roleId:String) {
+	
+	var vwResponsibilitiesByRole:NotesView = database.getView("vwResponsibilitiesByRole");
+	var nav = vwResponsibilitiesByRole.createViewNavFromCategory(roleId);
+	
+	var respIds = [];
+	
+	var ve:NotesViewEntry = nav.getFirst();
+	while (null != ve) {
+		
+		var colValues = ve.getColumnValues();
+		var respId = colValues.get(4);
+		
+		respIds.push(respId);
+		
+		ve = nav.getNext();
+	}
+	
+	return respIds;
+	
+}
 
 function readAppMenuOptions() {
 	
@@ -1440,17 +1467,22 @@ function isEmpty( input ) {
 }
 
 /*
- * Retrieve a JSON object containing information about the plans for a specific org unit.
+ * Retrieve a JSON object containing information about the Plans for a specific Org Unit.
  * 
- * Note that a task can only be assigned to 1 scenario
+ * Note that a task can only be assigned to 1 scenario. The returned list is optionally filtered with only tasks that
+ * have been assigned to the current user's role/ responsibility.
  * 
  * Results are cached in the sessionScope
  */
-function getScenariosByPlan( orgUnitId ) {
+function getScenariosByPlan( orgUnitId, filterByResponsibilities ) {
 	
 	var orgUnitPlans = [];
 	
 	try {
+		
+		var cacheKey = orgUnitId + "-" + filterByResponsibilities;
+		
+		dBar.debug("getScenariosByPlan for " + orgUnitId + ", filter? " + filterByResponsibilities );
 		
 		var plans = sessionScope.plans;
 		
@@ -1458,17 +1490,17 @@ function getScenariosByPlan( orgUnitId ) {
 			plans = getMap();
 		}
 		
-		if ( plans[orgUnitId] != null ) {
-			return plans[orgUnitId];
+		if ( plans[cacheKey] != null ) {
+			return plans[cacheKey];
 		}
 		
 		var vwPlans:NotesView = database.getView("vwPlansById");
-		var numPlans = vwPlans.getEntryCount();
+		//var numPlans = vwPlans.getEntryCount();
 			
 		var vwScenariosByOrgUnitId:NotesView = database.getView("vwScenariosByOrgUnitId");
 		
 		//add scenarios
-		getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlans, vwPlans);
+		getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlans, vwPlans, filterByResponsibilities);
 		
 		//sort the results list
 		var sortByName = function(a,b) {
@@ -1490,7 +1522,7 @@ function getScenariosByPlan( orgUnitId ) {
 		}
 		
 		//cache in sessionScope
-		plans[orgUnitId] = orgUnitPlans;
+		plans[cacheKey] = orgUnitPlans;
 		sessionScope.put("plans", plans);
 		
 		
@@ -1510,7 +1542,7 @@ function getScenariosByPlan( orgUnitId ) {
  * Note: if a scenario is set to all Org Units: all org unit ids are copied to the task document, so we only need
  * to process the category for the org unit id
  */
-function getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlans, vwPlans) {
+function getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlans, vwPlans, filterByResponsibilities) {
 	
 	if (sessionScope.get("isDebug")) dBar.debug("retrieving plans for org unit " + orgUnitId + "...");
 	
@@ -1540,26 +1572,51 @@ function getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlan
 	
 			var scenarioId = colValues.get(3);
 			var scenarioName = colValues.get(2);
-	
-			//if (sessionScope.get("isDebug")) dBar.debug("add scenario (id: " + scenarioId + ", name: " + scenarioName + ")");
-	
-			var scenIdx = _arrayGetIndex(_plan.addedScenarioIds, scenarioId);
-			var alreadyAdded = ( scenIdx > -1);
 			
-			if ( !alreadyAdded ) {
-		
-				if (sessionScope.get("isDebug")) dBar.debug("scenario not added yet: " + colValues.get(2));
+			/*
+			 * responsibilityIds in a Task is a multi-value list that contains the roles and responsibilities
+			 * to which a task is assigned:
+			 * - roles have the syntax role-<roleId>
+			 * - responsibilities have the syntax <responsibilityId.
+			 */
+			
+			//for some reason this returns 'null', so we @Implode it in the view column and @explode it here
+			var taskRespIds = @Explode( colValues.get(5) );
+			
+			var include = false;
+			
+			if (filterByResponsibilities) {
 				
-				_plan.addedScenarioIds.push(scenarioId);
-				_plan.scenarios.push( _getScenarioObject( scenarioId, colValues.get(2), colValues.get(4) ) );
-				
+				include = isUserResponsibleForTask(taskRespIds);
+			
 			} else {
-			
-				_plan.scenarios[ scenIdx ].numTasks = _plan.scenarios[ scenIdx ].numTasks + 1;
-			
+				include = true;
 			}
-		
-			_setPlanDetails( vwPlans, veTask.getDocument(), _plan);				
+	
+			if (include) {
+	
+				//if (sessionScope.get("isDebug")) dBar.debug("add scenario (id: " + scenarioId + ", name: " + scenarioName + ")");
+	
+				var scenIdx = _arrayGetIndex(_plan.addedScenarioIds, scenarioId);
+				var alreadyAdded = ( scenIdx > -1);
+				
+				if ( !alreadyAdded ) {
+			
+					if (sessionScope.get("isDebug")) dBar.debug("scenario not added yet: " + colValues.get(2));
+					
+					_plan.addedScenarioIds.push(scenarioId);
+					_plan.scenarios.push( _getScenarioObject( scenarioId, colValues.get(2), colValues.get(4) ) );
+					
+				} else {
+				
+					_plan.scenarios[ scenIdx ].numTasks = _plan.scenarios[ scenIdx ].numTasks + 1;
+				
+				}
+			
+				_setPlanDetails( vwPlans, veTask.getDocument(), _plan);	
+				
+				//figure out the number of tasks
+			}
 		
 		}
 		
@@ -1573,6 +1630,26 @@ function getScenariosForChecklist(orgUnitId, vwScenariosByOrgUnitId, orgUnitPlan
 	nav.recycle();
 	vwScenariosByOrgUnitId.recycle();
 	
+}
+
+//checks if the current user is responsible for a task (based on the responsibility ids set in the task)
+function isUserResponsibleForTask(taskRespIds) {
+	
+	if (typeof taskRespIds == 'string') { taskRespIds = [taskRespIds] }
+	
+	var res = @IsMember( "role-" + sessionScope.get("roleId"), taskRespIds);
+	
+	//if (res) { dBar.debug("contains role"); }
+	
+	var roleRespIds = sessionScope.get("roleRespIds")
+
+	//if the role isn't found: check the user's responsibilities
+	for (var i=0; i<roleRespIds.length && !res; i++) {
+		res = @IsMember( roleRespIds[i], taskRespIds);
+		//if (res) { dBar.debug("contains resp"); }
+	}
+	
+	return res;
 }
 
 function _addPlanToList( _plan, orgUnitPlans) {
