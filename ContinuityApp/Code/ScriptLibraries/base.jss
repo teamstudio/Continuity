@@ -47,12 +47,14 @@ function init() {
 			sessionScope.put("configLoadedAt", (new Date()).getTime() );
 			sessionScope.put("userName", currentUser);
 			
+			sessionScope.put("selectedMenu", "miniConfigGuide");		//default
+			
 			sessionScope.plans = null;
 			
 			//set current/ default org unit
 			sessionScope.put("currentOrgUnitId", "");
 			sessionScope.put("currentOrgUnitName", "");
-			if (applicationScope.get("orgUnitChoices")) {
+			if (applicationScope.get("orgUnitChoices") && applicationScope.get("orgUnitChoices").length>0) {
 				var _first = applicationScope.get("orgUnitChoices")[0];
 				sessionScope.put("currentOrgUnitId", @Right( _first, "|"));
 				sessionScope.put("currentOrgUnitName", @Left( _first, "|"));
@@ -180,7 +182,7 @@ function init() {
 				
 				//get current org unit's alert level
 				var orgUnitId = sessionScope.get("currentOrgUnitId");
-				if (orgUnitId.length>0) {
+				if (orgUnitId != null && orgUnitId.length>0) {
 					
 					var _unid = applicationScope.get("orgUnitUnids")[orgUnitId];
 					var docOrgUnit = database.getDocumentByUNID( _unid );
@@ -241,21 +243,34 @@ function getResponsibilities( roleId:String) {
 
 function readAppMenuOptions() {
 	
-	var roleUnid = applicationScope.get("roleUnids")[ sessionScope.get("roleId") ];
+	try {
 	
-	var appMenuOptions = "";
-	var appMenuOptionsActive = [];
-	
-	var docRole = database.getDocumentByUNID(roleUnid);
-	
-	if (null != docRole) {
+		var unids = applicationScope.get("roleUnids");
 		
-		appMenuOptions = docRole.getItemValueString("appMenuOptions");
-		appMenuOptionsActive = docRole.getItemValue("appMenuOptionsActive");
+		if (unids != null && unids.length>0) {
+		
+			var roleUnid = unids[ sessionScope.get("roleId") ];
+			
+			var appMenuOptions = "";
+			var appMenuOptionsActive = [];
+			
+			var docRole = database.getDocumentByUNID(roleUnid);
+			
+			if (null != docRole) {
+				
+				appMenuOptions = docRole.getItemValueString("appMenuOptions");
+				appMenuOptionsActive = docRole.getItemValue("appMenuOptionsActive");
+			}
+			
+			sessionScope.put("appMenuOptions", appMenuOptions);
+			sessionScope.put("appMenuOptionsActive", appMenuOptionsActive);
+		
+		}
+	} catch (e) {
+		dBar.error("could not read menu options:");
+		dBar.error(e);
+		
 	}
-	
-	sessionScope.put("appMenuOptions", appMenuOptions);
-	sessionScope.put("appMenuOptionsActive", appMenuOptionsActive);
 	
 }
 
