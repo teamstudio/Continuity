@@ -137,7 +137,7 @@ function init() {
 				
 				//retrieve settings from the user's profile
 				
-				//dBar.debug("init: found user doc");
+				dBar.debug("init: found user doc");
 				
 				var name:string = docUser.getItemValueString("firstName") + " " + docUser.getItemValueString("lastName");
 			
@@ -244,13 +244,12 @@ function getResponsibilities( roleId:String) {
 function readAppMenuOptions() {
 	
 	try {
-	
+		
 		var unids = applicationScope.get("roleUnids");
 		
-		if (unids != null && unids.length>0) {
-		
-			var roleUnid = unids[ sessionScope.get("roleId") ];
+		if (unids != null) {
 			
+			var roleUnid = unids[ sessionScope.get("roleId") ];		
 			var appMenuOptions = "";
 			var appMenuOptionsActive = [];
 			
